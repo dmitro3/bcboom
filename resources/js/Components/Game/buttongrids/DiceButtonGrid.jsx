@@ -13,9 +13,9 @@ const DiceButtonGrid = ({ playDeter }) => {
     const { wallet } = useSelector((state) => state.wallet);
     const { gameData, playing } = useSelector((state) => state.game);
     const { user } = useSelector((state) => state.auth);
-    const [play, { stop, isPlaying }] = useSound(BetSound, {
-        volume: 1,
-    });
+    // const [play, { stop, isPlaying }] = useSound(BetSound, {
+    //     volume: 1,
+    // });
 
     function userCanPlay() {
         if (playing) return false;
