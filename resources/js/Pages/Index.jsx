@@ -5,6 +5,8 @@ export default function Welcome(props) {
         <>
             <Head title="Welcome" />
            <div>he world</div>
+            <Link href="/about">About</Link>
+           
         </>
     );
 }
