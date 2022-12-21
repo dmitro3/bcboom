@@ -11,11 +11,11 @@ const PageLayout = styled("div")(({ theme }) => ({
 }));
 
 const PageBody = styled("div")(({ theme }) => ({
-    background: "rgb(39,44,75)",
     height: "100%",
     width: "100%",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
+    paddingRight: "58px",
 }));
 
 export default function GuestLayout({ children }) {

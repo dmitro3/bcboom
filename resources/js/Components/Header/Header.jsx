@@ -16,6 +16,7 @@ import language from "../../../../public/images/svg/language.svg";
 import { useState } from "react";
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
+    marginBottom: "12px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
