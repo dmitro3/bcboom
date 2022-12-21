@@ -1,16 +1,36 @@
+import Footer from "@/Components/Footer/Footer";
 import { styled } from "@mui/system";
+import Header from "../Components/Header/Header";
+import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import LayoutTheme from "./theme";
+
+const PageLayout = styled("div")(({ theme }) => ({
+    color: "white",
+    backgroundColor: "#000000",
+    height: "100vh",
+    fontfamily: "Montserrat, sans-serif",
+}));
+
+const PageBody = styled("div")(({ theme }) => ({
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    paddingRight: "58px",
+    background: "#000000",
+}));
 
 export default function GuestLayout({ children }) {
     return (
         <LayoutTheme>
-            <PageLayout>{children}</PageLayout>
+            <PageLayout>
+                <Header />
+                <PageBody>
+                    <SimpleSidebar />
+                    {children}
+                </PageBody>
+                <Footer />
+            </PageLayout>
         </LayoutTheme>
     );
 }
-
-const PageLayout = styled("div")(({ theme }) => ({
-    color: 'white',
-    backgroundColor: "#000000",
-    height: "100vh",
-}));

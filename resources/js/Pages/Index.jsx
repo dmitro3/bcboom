@@ -1,13 +1,13 @@
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Link, Head } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/inertia-react";
+import PageTemplate from "@/Layouts/templates/PageTemplate";
 
-export default function Welcome(props) {
+export default function Homepage(props) {
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Homepage " />
             <GuestLayout>
-                <div>he world</div>
-                <Link href="/about">About</Link>
+                <PageTemplate innerHeader={true} />
             </GuestLayout>
         </>
     );
