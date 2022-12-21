@@ -4,10 +4,9 @@ import { Link, Head } from "@inertiajs/inertia-react";
 export default function Welcome(props) {
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Homepage " />
             <GuestLayout>
-                <div>he world</div>
-                <Link href="/about">About</Link>
+                <div>hello world</div>
             </GuestLayout>
         </>
     );

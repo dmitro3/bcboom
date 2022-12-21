@@ -9,7 +9,7 @@ import { Provider } from "react-redux/es/exports";
 import store from "./redux/store";
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+    window.document.getElementsByTagName("title")[0]?.innerText || "BcBoom Casino";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
