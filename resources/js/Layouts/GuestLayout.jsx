@@ -1,3 +1,4 @@
+import Footer from "@/Components/Footer/Footer";
 import { styled } from "@mui/system";
 import Header from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
@@ -16,6 +17,7 @@ const PageBody = styled("div")(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
     paddingRight: "58px",
+    background: "#000000",
 }));
 
 export default function GuestLayout({ children }) {
@@ -27,6 +29,7 @@ export default function GuestLayout({ children }) {
                     <SimpleSidebar />
                     {children}
                 </PageBody>
+                <Footer />
             </PageLayout>
         </LayoutTheme>
     );
