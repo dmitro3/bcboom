@@ -50,6 +50,8 @@ const HeaderItems = styled("div")(() => ({
         marginTop: "3px",
         fontSize: "12px",
         color: "#8990AE",
+        fontWeight: "700",
+        fontFamily: "Montserrat, sans-serif",
     },
 }));
 

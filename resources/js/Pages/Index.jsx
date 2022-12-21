@@ -1,5 +1,5 @@
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Link, Head } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/inertia-react";
 
 export default function Welcome(props) {
     return (
