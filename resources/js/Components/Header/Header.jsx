@@ -20,6 +20,7 @@ const HeaderWrapper = styled("div")(() => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    position: "relative",
 }));
 const styles = (gap) => {
     return {
@@ -36,7 +37,7 @@ const HeaderPlatformStats = styled("div")(({ gap }) => ({
     ...styles(gap),
 }));
 const HeaderPlatformLinks = styled("div")(() => ({
-    ...styles('12px')
+    ...styles("12px"),
 }));
 const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),

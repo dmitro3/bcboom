@@ -14,7 +14,7 @@ const PageLayout = styled("div")(({ theme }) => ({
 const PageBody = styled("div")(({ theme }) => ({
     height: "100%",
     width: "100%",
-    display: "flex",
+    display: "flex", 
     flexDirection: "row",
     paddingRight: "58px",
     background: "#000000",

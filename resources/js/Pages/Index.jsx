@@ -5,9 +5,9 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 export default function Homepage(props) {
     return (
         <>
-            <Head title="Homepage " />
+            <Head title="Homepage" />
             <GuestLayout>
-                <PageTemplate innerHeader={true} />
+                <PageTemplate innerHeader={true} homeCarousel />
             </GuestLayout>
         </>
     );
