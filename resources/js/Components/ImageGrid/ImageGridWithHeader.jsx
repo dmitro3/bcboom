@@ -1,9 +1,8 @@
 import { styled } from "@mui/system";
 import React from "react";
 import titleBg from "../../../../public/images/svg/titlebg.svg";
-const GridWrapper = styled("div")(({}) => ({
-   
-}));
+import leftcut from "../../../../public/images/others/leftcut.svg";
+const GridWrapper = styled("div")(({}) => ({}));
 
 const GridItems = styled("div")(({}) => ({
     display: "grid",
@@ -17,6 +16,8 @@ const GridItems = styled("div")(({}) => ({
     "@media (max-width: 300px)": {
         gridTemplateColumns: "repeat(1, minmax(100px, 1fr))",
     },
+    position: "relative",
+    zIndex: 400,
 }));
 
 const SectionWrapper = styled("div")(({}) => ({
@@ -38,23 +39,36 @@ const GridItemImage = styled("img")(({ height, width }) => ({
         transition: "all 0.3s ease-in-out",
     },
 }));
+const GridLeftCut = styled("div")(({}) => ({
+    position: "absolute",
+    top: "-22px",
+    left: "0",
+    background: `url(${leftcut})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    zIndex: 200,
+    height: "160px",
+    width: "340px",
+}));
 const GridItemTitle = styled("div")(({}) => ({
     position: "absolute",
     top: "0px",
     left: "0px",
+    zIndex: 300,
     // background: "#1D2036",
     background: `url(${titleBg})`,
+    backgroundRepeat: "no-repeat",
     display: "flex",
     height: "50px",
     width: "250px",
     alignItems: "center",
     paddingLeft: "20px",
     "& img": {
-        height: "20px",
+        height: "15px",
     },
     "& p": {
         color: "#fff",
-        fontSize: "20px",
+        fontSize: "14px",
         fontWeight: "bold",
         marginLeft: "10px",
     },
@@ -78,6 +92,7 @@ const ImageGridWithHeader = ({ gridItems }) => {
         <GridWrapper>
             {gridItems.map((item, index) => (
                 <SectionWrapper key={index}>
+                    <GridLeftCut />
                     <GridItemTitle>
                         <img src={item?.icon} alt="" />
                         <p>{item?.title}</p>
