@@ -1,6 +1,10 @@
 import { styled } from "@mui/system";
 
 export const StyledWrapper = styled("div")((props) => ({
+    "&:focus-visible": {
+        outline: "none",
+        border: "none",
+    },
     ".slick-list": {
         overflow: props.overflow ? "visible" : "hidden",
     },
@@ -19,12 +23,10 @@ export const StyledWrapper = styled("div")((props) => ({
         touchAction: "pan-y",
         WebkitTapHighlightColor: "transparent",
     },
-    // ".slick-list": {
-    //     position: "relative",
-    //     display: "block",
-    //     margin: "0",
-    //     padding: "0",
-    // },
+    ".testimoni--wrapper ": {
+        paddingRight: "50px",
+        outline: "none",
+    },
     ".slick-list:focus": { outline: "none" },
     ".slick-list.dragging": { cursor: ["pointer", "hand"] },
     ".slick-slider .slick-track, .slick-slider .slick-list": {
@@ -151,10 +153,9 @@ export const StyledWrapper = styled("div")((props) => ({
     ".slick-dots li button:hover, .slick-dots li button:focus": {
         outline: "none",
     },
-    ".slick-dots li button:hover:before, .slick-dots li button:focus:before":
-        {
-            opacity: 1,
-        },
+    ".slick-dots li button:hover:before, .slick-dots li button:focus:before": {
+        opacity: 1,
+    },
     ".slick-dots li button:before": {
         fontFamily: '"slick"',
         fontSize: "6px",
@@ -184,22 +185,35 @@ export const StyledWrapper = styled("div")((props) => ({
         position: "relative",
     },
     ".slick-dots .slick-active": {
-        width: "56px",
+        width: "30px",
         transition: "width 0.3s ease-in-out",
     },
     ".slick-dots .slick-active .ft-slick__dots--custom": {
-        width: "56px",
-        top: "0px",
+        width: "30px",
+        top: "-1.5px",
         overflow: "hidden",
         ".loading": {
             height: "8px",
             animation: "loading 5s ease-in",
-            backgroundImage: "linear-gradient(270deg, #4fd15a, #03ac0e)",
+            backgroundImage: "linear-gradient(270deg, #8990AE, #3586FF)",
             display: "inline-block",
             position: "absolute",
             top: "0",
             left: "0",
             borderRadius: "4px",
+        },
+    },
+    img: {
+        width: "100%",
+        paddingBottom: "10px",
+        "-khtml-user-select": "none",
+        "-o-user-select": "none",
+        "-moz-user-select": "none",
+        "-webkit-user-select": "none",
+        "user-select": "none",
+        "&:focus": {
+            outline: "none",
+            border: "none",
         },
     },
 }));

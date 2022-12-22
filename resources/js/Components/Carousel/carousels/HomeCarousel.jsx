@@ -6,29 +6,35 @@ const HomeCarousel = () => {
     return (
         <div>
             <CustomCarousel>
-                {/* <div className="testimoni--wrapper">
-                <img src={carouseImage1} alt="carousel image" />
+                <div className="testimoni--wrapper">
+                    <img src={carouseImage1} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                <img src={carouseImage2} alt="carousel image" />
-            </div> */}
-                <div className="testimoni--wrapper" style={{ color: "red" }}>
-                    <p>Testimoni One</p>
+                    <img src={carouseImage2} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                    <p>Testimoni Two</p>
+                    <img src={carouseImage1} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                    <p>Testimoni Three</p>
+                    <img src={carouseImage2} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                    <p>Testimoni 4</p>
+                    <img src={carouseImage1} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                    <p>Testimoni 5</p>
+                    <img src={carouseImage2} alt="carousel image" />
                 </div>
                 <div className="testimoni--wrapper">
-                    <p>Testimoni 6</p>
+                    <img src={carouseImage1} alt="carousel image" />
+                </div>
+                <div className="testimoni--wrapper">
+                    <img src={carouseImage2} alt="carousel image" />
+                </div>
+                <div className="testimoni--wrapper">
+                    <img src={carouseImage1} alt="carousel image" />
+                </div>
+                <div className="testimoni--wrapper">
+                    <img src={carouseImage2} alt="carousel image" />
                 </div>
             </CustomCarousel>
         </div>
