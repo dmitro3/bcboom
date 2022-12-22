@@ -24,7 +24,7 @@ export const StyledWrapper = styled("div")((props) => ({
         WebkitTapHighlightColor: "transparent",
     },
     ".testimoni--wrapper ": {
-        paddingRight: "50px",
+        paddingRight: "20px",
         outline: "none",
     },
     ".slick-list:focus": { outline: "none" },
@@ -205,12 +205,14 @@ export const StyledWrapper = styled("div")((props) => ({
     },
     img: {
         width: "100%",
+        cursor: "move",
+        height:'300px',
         paddingBottom: "10px",
-        "-khtml-user-select": "none",
-        "-o-user-select": "none",
-        "-moz-user-select": "none",
-        "-webkit-user-select": "none",
-        "user-select": "none",
+        KhtmlUserSelect: "none",
+        OUserSelect: "none",
+        MozUserSelect: "none",
+        WebkitUserSelect: "none",
+        userSelect: "none",
         "&:focus": {
             outline: "none",
             border: "none",

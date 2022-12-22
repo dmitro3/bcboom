@@ -12,11 +12,11 @@ const PageLayout = styled("div")(({ theme }) => ({
 }));
 
 const PageBody = styled("div")(({ theme }) => ({
-    height: "100%",
+    height: "fit-content",
     width: "100%",
     display: "flex", 
     flexDirection: "row",
-    paddingRight: "58px",
+    paddingRight: "68px",
     background: "#000000",
 }));
 

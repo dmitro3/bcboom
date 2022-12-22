@@ -7,7 +7,7 @@ const HomeCarousel = () => {
         <div>
             <CustomCarousel>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img src={carouseImage1} alt="carousel image"  />
                 </div>
                 <div className="testimoni--wrapper">
                     <img src={carouseImage2} alt="carousel image" />
