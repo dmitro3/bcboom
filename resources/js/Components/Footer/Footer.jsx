@@ -22,6 +22,7 @@ const FooterWrapper = styled("div")(({}) => ({
     padding: "30px",
     fontFamily: "Montserrat, sans-serif",
     color: "white",
+    paddingTop: "40px",
 }));
 const FooterLinks = styled("div")(({}) => ({
     display: "flex",
@@ -29,6 +30,8 @@ const FooterLinks = styled("div")(({}) => ({
     fontSize: "16px",
     color: "#8990AE",
     fontWeight: "700",
+    position: "relative",
+    zIndex: "101",
 }));
 const FooterLinkItem = styled("p")(({}) => ({
     cursor: "pointer",
