@@ -1,7 +1,9 @@
+import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
 import MobileFooter from "@/Components/Footer/MobileFooter";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
+import { useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import LayoutTheme from "./theme";
@@ -24,9 +26,11 @@ const PageBody = styled("div")(({ isMobile }) => ({
 
 export default function GuestLayout({ children }) {
     const { isMobile } = useScreenResolution();
+    const { drawerState } = useSelector((state) => state.app);
     if (isMobile) {
         return (
             <LayoutTheme>
+                {drawerState?.open && <Sidedrawer />}
                 <PageLayout>
                     <MobileHeader />
                     <PageBody isMobile={isMobile}>{children}</PageBody>

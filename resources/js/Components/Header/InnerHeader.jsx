@@ -12,7 +12,7 @@ import Button from "../Button/Button";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
-    padding: "15px 20px",
+    padding: isMobile ? '20px 20px 0 20px' : "15px 20px",
     display: "flex",
     justifyContent: "space-between",
     overflowX: "auto",
@@ -29,6 +29,7 @@ const InnerHeaderItems = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     gap: isMobile ? "50px" : "20px",
+    minWidth: 'max-content',
 }));
 const InnerHeaderItem = styled("div")(({ active }) => ({
     display: "flex",
