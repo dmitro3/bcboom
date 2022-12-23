@@ -22,6 +22,7 @@ import bclogo from "../../../../public/images/brand/bcboom.svg";
 import { useState } from "react";
 // import Dropdown from "../Dropdown/Dropdown";
 import { Dropdown as AntDDropdown } from "antd";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -96,7 +97,7 @@ const Menu = ({ data, setValue }) => {
         </div>
     );
 };
-const Header = () => {
+const DesktopHeader = () => {
     const [statsItems] = useState([
         {
             id: 1,
@@ -176,6 +177,11 @@ const Header = () => {
         { text: "us", icon: us },
         { text: "malta", icon: malta },
     ];
+    const { isMobile } = useScreenResolution();
+    if (isMobile) {
+        return <div>hi am mobile</div>;
+    }
+
     return (
         <HeaderWrapper>
             <HeaderPlatformStats>
@@ -220,14 +226,18 @@ const Header = () => {
                         />
                     </>
                 </AntDDropdown>
-                
-                    <SocialIcons>
-                        <img src={socials[socials.length - 1].icon} alt={`${socials.id}`} />
-                    </SocialIcons>
-               
+
+                <SocialIcons>
+                    <img
+                        src={socials[socials.length - 1].icon}
+                        alt={`${socials.id}`}
+                    />
+                </SocialIcons>
             </HeaderPlatformLinks>
         </HeaderWrapper>
     );
 };
 
-export default Header;
+export const MobileHeader = () => {}
+
+export default DesktopHeader;

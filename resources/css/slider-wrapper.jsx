@@ -26,6 +26,8 @@ export const StyledWrapper = styled("div")((props) => ({
     ".testimoni--wrapper ": {
         paddingRight: "20px",
         outline: "none",
+        // minWidth: "250px",
+        // marginRight: "50px",
     },
     ".slick-list:focus": { outline: "none" },
     ".slick-list.dragging": { cursor: ["pointer", "hand"] },
@@ -206,13 +208,14 @@ export const StyledWrapper = styled("div")((props) => ({
     img: {
         width: "100%",
         cursor: "move",
-        height:'300px',
+        height: "300px",
         paddingBottom: "10px",
         KhtmlUserSelect: "none",
         OUserSelect: "none",
         MozUserSelect: "none",
         WebkitUserSelect: "none",
         userSelect: "none",
+
         "&:focus": {
             outline: "none",
             border: "none",
