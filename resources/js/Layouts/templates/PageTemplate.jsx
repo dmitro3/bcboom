@@ -6,11 +6,13 @@ const PageTemplateWrapper = styled("div")(() => ({
     width: "100%",
     height: "100%",
     borderRadius: "10px",
+    paddingBottom: "55px",
 }));
-const PageTemplate = ({ innerHeader }) => {
+const PageTemplate = ({ innerHeader, children }) => {
     return (
         <PageTemplateWrapper>
             {innerHeader && <InnerHeader />}
+            {children}
         </PageTemplateWrapper>
     );
 };
