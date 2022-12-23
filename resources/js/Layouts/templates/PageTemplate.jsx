@@ -33,7 +33,7 @@ const PageTemplate = ({ innerHeader, homeCarousel, gridWithHeader }) => {
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
-            <FooterCutImage />
+           {!isMobile &&  <FooterCutImage /> }
         </PageTemplateWrapper>
     );
 };
