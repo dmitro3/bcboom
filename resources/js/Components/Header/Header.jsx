@@ -13,6 +13,7 @@ import telegram from "../../../../public/images/svg/telegram.svg";
 import volume from "../../../../public/images/svg/volume.svg";
 import twitter from "../../../../public/images/svg/twitter.svg";
 import language from "../../../../public/images/svg/language.svg";
+import bclogo from "../../../../public/images/brand/bcboom.svg";
 import { useState } from "react";
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -20,6 +21,7 @@ const HeaderWrapper = styled("div")(() => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    position: "relative",
 }));
 const styles = (gap) => {
     return {
@@ -36,7 +38,7 @@ const HeaderPlatformStats = styled("div")(({ gap }) => ({
     ...styles(gap),
 }));
 const HeaderPlatformLinks = styled("div")(() => ({
-    ...styles('12px')
+    ...styles("12px"),
 }));
 const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),
@@ -55,7 +57,14 @@ const HeaderItems = styled("div")(() => ({
         fontFamily: "Montserrat, sans-serif",
     },
 }));
-
+const LogoWrapper = styled("div")(() => ({
+    position: "absolute",
+    left: "48%",
+    transform: "translateX(-50%)",
+    top: "-63%",
+    marginLeft: "20px",
+    paddingTop: "40px",
+}));
 const Header = () => {
     const [statsItems] = useState([
         {
@@ -138,6 +147,9 @@ const Header = () => {
                     </HeaderItems>
                 ))}
             </HeaderPlatformStats>
+            <LogoWrapper>
+                <img src={bclogo} alt="bcboom" />
+            </LogoWrapper>
             <HeaderPlatformLinks>
                 <HeaderPlatformLinkItems>
                     {links.map((item) => (

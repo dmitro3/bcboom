@@ -15,7 +15,7 @@ import turbor from "../../../../public/images/svg/turbor.svg";
 const SidebarWrapper = styled("div")(() => ({
     backgroundColor: "#000000",
     height: "100%",
-    width: "58px",
+    width: "78px",
     padding: "10px 20px",
     paddingTop: "30px",
 }));
