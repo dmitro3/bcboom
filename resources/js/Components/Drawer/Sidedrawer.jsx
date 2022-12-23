@@ -1,7 +1,7 @@
 import { setDrawerState } from "@/redux/app-state/app-slice";
 import Drawer from "@mui/material/Drawer";
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import close from "../../../../public/images/svg/close.svg";
 import bcboom from "../../../../public/images/brand/bcboom.svg";
@@ -10,8 +10,17 @@ import limbo from "../../../../public/images/others/drawerlimbo.png";
 import dice from "../../../../public/images/others/drawerdice.png";
 import mines from "../../../../public/images/others/drawermines.png";
 import keno from "../../../../public/images/others/drawerkeno.png";
+import facebook from "../../../../public/images/svg/facebook.svg";
+import instagram from "../../../../public/images/svg/instagram.svg";
+import telegram from "../../../../public/images/svg/telegram.svg";
+import twitter from "../../../../public/images/svg/twitter.svg";
+import volume from "../../../../public/images/svg/volume.svg";
+import us from "../../../../public/images/flags/us.svg";
+import portugal from "../../../../public/images/flags/portugal.svg";
+
 import { miscNavLinks, navlinks } from "@/data";
 import { Divider } from "../Divider/Divider";
+import CustomSelect from "../Dropdown/Select";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
     // height: "100%",
@@ -80,7 +89,7 @@ const NavItem = styled("div")(({ active }) => ({
         fontFamily: "Montserrat, sans-serif",
         whiteSpace: "nowrap",
     },
-    '&:last-child': {
+    "&:last-child": {
         marginBottom: 0,
     },
 }));
@@ -89,10 +98,29 @@ const NavLinks = styled("div")(() => ({
     padding: "10px",
     width: "100%",
 }));
+
+const FooterSocialIcon = styled("div")(({}) => ({}));
+const OtherSocialIcons = styled("div")(({}) => ({
+    display: "flex",
+    gap: "30px",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "30px 0",
+}));
+const VolumeIcon = styled("div")(({}) => ({
+    background: "#2A3050",
+    borderRadius: "10px",
+    width: "85px",
+    height: "44px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+}));
 const Sidedrawer = () => {
     const { drawerState } = useSelector((state) => state.app);
-    console.log("drawerState", drawerState);
+    const otherSocials = [facebook, instagram, telegram, twitter];
     const dispatcher = useDispatch();
+    const [currentLanguage, setCurrentLanguage] = useState("english");
     return (
         <Drawer
             anchor={"left"}
@@ -136,6 +164,38 @@ const Sidedrawer = () => {
                     ))}
                 </NavLinks>
                 <Divider bg="#8990ae78" />
+                <br />
+                <CustomSelect
+                    items={[
+                        { value: "english", label: "English", icon: us },
+                        {
+                            value: "portuguese",
+                            label: "Brazil",
+                            icon: portugal,
+                        },
+                    ]}
+                    value={currentLanguage}
+                    setValue={setCurrentLanguage}
+                />
+                <br />
+
+                <VolumeIcon>
+                    <img src={volume} alt="" style={{ height: "22px" }} />
+                </VolumeIcon>
+                <Divider bg="#8990ae78" />
+                <OtherSocialIcons>
+                    {otherSocials.map((item, index) => {
+                        return (
+                            <FooterSocialIcon key={index}>
+                                <img
+                                    src={item}
+                                    alt="social-icon"
+                                    style={{ height: "20px" }}
+                                />
+                            </FooterSocialIcon>
+                        );
+                    })}
+                </OtherSocialIcons>
             </DrawerWrapper>
         </Drawer>
     );
