@@ -12,17 +12,17 @@ const Wrapper = styled("div")(({ theme }) => ({
     width: "100%",
     overflow: "hidden",
 }));
-const CustomCarousel = ({ children }) => {
+const CustomCarousel = ({ children, rowPerCount }) => {
     const settings = {
         dots: true,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 5000,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
         speed: 500,
-        slidesPerRow: 2,
+        slidesPerRow: rowPerCount,
         arrows: false,
         adaptiveHeight: true,
         accessibility: true,

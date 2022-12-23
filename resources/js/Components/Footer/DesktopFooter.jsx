@@ -44,7 +44,7 @@ const FooterSocialIcons = styled("div")(({}) => ({
     marginTop: "30px",
 }));
 const FooterSocialIcon = styled("div")(({}) => ({}));
-const Footer = () => {
+const DesktopFooter = () => {
     const footerItems = [
         {
             text: "Terms of Service",
@@ -97,4 +97,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default DesktopFooter;
