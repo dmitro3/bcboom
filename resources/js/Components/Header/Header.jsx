@@ -12,9 +12,17 @@ import instagram from "../../../../public/images/svg/instagram.svg";
 import telegram from "../../../../public/images/svg/telegram.svg";
 import volume from "../../../../public/images/svg/volume.svg";
 import twitter from "../../../../public/images/svg/twitter.svg";
-import language from "../../../../public/images/svg/language.svg";
+import us from "../../../../public/images/flags/us.svg";
+import malta from "../../../../public/images/flags/us.svg";
+import portugal from "../../../../public/images/flags/us.svg";
+import brazil from "../../../../public/images/flags/us.svg";
+import china from "../../../../public/images/flags/us.svg";
+import russia from "../../../../public/images/flags/us.svg";
 import bclogo from "../../../../public/images/brand/bcboom.svg";
 import { useState } from "react";
+// import Dropdown from "../Dropdown/Dropdown";
+import { Dropdown as AntDDropdown } from "antd";
+
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
     marginBottom: "12px",
@@ -44,7 +52,13 @@ const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),
     marginRight: "15px",
 }));
-
+const Wrapper = styled("div")(() => ({
+    height: "100px",
+    width: "100px",
+    overflowY: "auto",
+    borderRadius: "20px",
+    bacgkround: "red",
+}));
 const HeaderItems = styled("div")(() => ({
     display: "flex",
     cursor: "pointer",
@@ -65,6 +79,23 @@ const LogoWrapper = styled("div")(() => ({
     marginLeft: "20px",
     paddingTop: "40px",
 }));
+
+const Menu = ({ data, setValue }) => {
+    return (
+        <div>
+            {data?.map((v, i) => (
+                <div
+                    onClick={() => {
+                        setValue(v);
+                    }}
+                    key={i}
+                >
+                    <img src={v.icon} alt="" />
+                </div>
+            ))}
+        </div>
+    );
+};
 const Header = () => {
     const [statsItems] = useState([
         {
@@ -127,16 +158,24 @@ const Header = () => {
             id: 4,
             icon: twitter,
         },
-        {
-            id: 6,
-            icon: language,
-        },
+        // {
+        //     id: 6,
+        //     icon: language,
+        // },
         {
             id: 5,
             icon: volume,
         },
     ]);
-
+    const [currentCountryIndex, setCurrentCountryIndex] = useState("us");
+    const countries = [
+        { text: "china", icon: china },
+        { text: "russia", icon: russia },
+        { text: "portugal", icon: portugal },
+        { text: "brazil", icon: brazil },
+        { text: "us", icon: us },
+        { text: "malta", icon: malta },
+    ];
     return (
         <HeaderWrapper>
             <HeaderPlatformStats>
@@ -159,11 +198,33 @@ const Header = () => {
                         </HeaderItems>
                     ))}
                 </HeaderPlatformLinkItems>
-                {socials.map((item) => (
+                {socials.slice(0, socials.length - 1).map((item) => (
                     <SocialIcons key={item.id}>
                         <img src={item.icon} alt={`${item.id}`} />
                     </SocialIcons>
                 ))}
+                <AntDDropdown
+                    trigger={["click"]}
+                    menu={<Menu countries={countries} />}
+                    placement="bottomLeft"
+                    className="w-full"
+                >
+                    <>
+                        <img
+                            src={
+                                countries.find(
+                                    (el) => el.text === currentCountryIndex
+                                ).icon
+                            }
+                            alt="United States"
+                        />
+                    </>
+                </AntDDropdown>
+                
+                    <SocialIcons>
+                        <img src={socials[socials.length - 1].icon} alt={`${socials.id}`} />
+                    </SocialIcons>
+               
             </HeaderPlatformLinks>
         </HeaderWrapper>
     );
