@@ -23,15 +23,16 @@ import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
-    // height: "100%",
+    height: "100%",
     background: "#1C2036!important",
     padding: "0 20px",
     position: "relative",
 }));
 const CloseIcon = styled("div")(({}) => ({
     position: "absolute",
-    top: "10px",
-    right: " 10px",
+    top: "20px",
+    right: "20px",
+    cursor: "pointer",
 }));
 const Logo = styled("div")(() => ({
     display: "flex",
