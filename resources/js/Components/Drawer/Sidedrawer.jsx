@@ -23,7 +23,7 @@ import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
-    height: "100%",
+    // height: "100%",
     background: "#1C2036!important",
     padding: "0 20px",
     position: "relative",
@@ -47,8 +47,8 @@ const DrawerImages = styled("div")(() => ({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
     gridTemplateColumns: "1fr 1fr",
-    gap: "20px",
-    padding: "20px",
+    gap: "10px",
+    padding: "5px",
 }));
 const DrawerImage = styled("img")(({ index }) => ({
     width: "100%",
