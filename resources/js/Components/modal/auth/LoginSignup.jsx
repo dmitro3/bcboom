@@ -1,4 +1,4 @@
-import CustomTabs from "@/Components/Tabs/Tab";
+import CustomTabs, { NewCustomTabs } from "@/Components/Tabs/Tab";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { styled } from "@mui/system";
 import React from "react";
@@ -39,7 +39,20 @@ const LoginSignupModal = () => {
                     <img src={close} alt="" />
                 </CloseIcon>
                 <TabComponent>
-                    <CustomTabs
+                    {/* <CustomTabs
+                        tabItems={[
+                            {
+                                value: "login",
+                                content: <div>login</div>,
+                            },
+                            {
+                                label: "Sign Up",
+                                value: "signup",
+                                content: <div>signup</div>,
+                            },
+                        ]}
+                    /> */}
+                    <NewCustomTabs
                         tabItems={[
                             {
                                 value: "login",
