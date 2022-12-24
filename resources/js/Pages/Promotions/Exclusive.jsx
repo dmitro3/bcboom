@@ -152,7 +152,7 @@ const Exclusive = () => {
                         <Box
                             sx={{
                                 width: "85%",
-                                height: "37rem",
+                                height: "36.1rem",
                                 display: "flex",
                                 justifyContent: "center",
                                 marginTop: "2.1875rem",
@@ -170,6 +170,12 @@ const Exclusive = () => {
                                     textAlign: "center",
                                     justifyContent: "center",
                                 },
+
+                                "& .MuiDataGrid-columnHeaderTitleContainerContent":
+                                    {
+                                        fontWeight: "700",
+                                        fontSize: "1.125rem",
+                                    },
 
                                 "& .MuiDataGrid-footerContainer": {
                                     display: "flex",

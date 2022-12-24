@@ -23,7 +23,12 @@ const FooterCutImage = styled("div")(({ theme }) => ({
     bottom: "-70px",
     zIndex: 100,
 }));
-const PageTemplate = ({ innerHeader, homeCarousel, gridWithHeader }) => {
+const PageTemplate = ({
+    innerHeader,
+    homeCarousel,
+    gridWithHeader,
+    children,
+}) => {
     return (
         <PageTemplateWrapper>
             {innerHeader && <InnerHeader />}
@@ -31,6 +36,7 @@ const PageTemplate = ({ innerHeader, homeCarousel, gridWithHeader }) => {
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
+            {children}
             <FooterCutImage />
         </PageTemplateWrapper>
     );
