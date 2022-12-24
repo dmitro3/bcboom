@@ -9,17 +9,27 @@ import promotion from "../../../../public/images/svg/promotion.svg";
 import vip from "../../../../public/images/svg/vip.svg";
 import { styled } from "@mui/system";
 import Button from "../Button/Button";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
-const InnerHeaderWrapper = styled("div")(() => ({
-    padding: "15px 20px",
+const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
+    padding: isMobile ? '20px 20px 0 20px' : "15px 20px",
     display: "flex",
     justifyContent: "space-between",
+    overflowX: "auto",
+    gap: isMobile && "50px",
+    "-ms-overflow-style": "none" /* IE and Edge */,
+    "scrollbar-width": "none",
+    "&::-webkit-scrollbar": {
+        display: "none",
+    },
+    background: isMobile && "#191D3A",
 }));
 
-const InnerHeaderItems = styled("div")(() => ({
+const InnerHeaderItems = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
-    gap: "20px",
+    gap: isMobile ? "50px" : "20px",
+    minWidth: 'max-content',
 }));
 const InnerHeaderItem = styled("div")(({ active }) => ({
     display: "flex",
@@ -33,6 +43,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
         color: active ? "#3586FF" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
+        whiteSpace: "nowrap",
     },
 }));
 const InnerHeader = () => {
@@ -79,10 +90,10 @@ const InnerHeader = () => {
             link: "/vip",
         },
     ];
-
+    const { isMobile } = useScreenResolution();
     return (
-        <InnerHeaderWrapper>
-            <InnerHeaderItems>
+        <InnerHeaderWrapper isMobile={isMobile}>
+            <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(0, 4).map((item, index) => (
                     <InnerHeaderItem key={index} active={item.active}>
                         <img src={item.icon} alt={item.name} />
@@ -90,24 +101,25 @@ const InnerHeader = () => {
                     </InnerHeaderItem>
                 ))}
             </InnerHeaderItems>
-            <InnerHeaderItems>
+            <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(4, 7).map((item, index) => (
                     <InnerHeaderItem key={index} active={item.active}>
                         <img src={item.icon} alt={item.name} />
                         <p>{item.name}</p>
                     </InnerHeaderItem>
                 ))}
-                {[
-                    { text: "Login", link: "/login", bg: "#3586FF" },
-                    { text: "Sign up", link: "/signup", bg: "#F93C56" },
-                ].map((item, index) => (
-                    <Button
-                        text={item.text}
-                        onSubmit={null}
-                        key={index}
-                        background={item.bg}
-                    />
-                ))}
+                {!isMobile &&
+                    [
+                        { text: "Login", link: "/login", bg: "#3586FF" },
+                        { text: "Sign up", link: "/signup", bg: "#F93C56" },
+                    ].map((item, index) => (
+                        <Button
+                            text={item.text}
+                            onSubmit={null}
+                            key={index}
+                            background={item.bg}
+                        />
+                    ))}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );

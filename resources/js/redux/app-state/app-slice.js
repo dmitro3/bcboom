@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const appStateSlice = createSlice({
-    name: 'appState',
+    name: "appState",
     initialState: {
         isAppLoading: false,
         isAppError: false,
-        appErrorMessage: '',
+        appErrorMessage: "",
+        drawerState: { open: false },
     },
     reducers: {
         setIsAppLoading: (state, action) => {
             state.isAppLoading = action.payload;
-        }
-    }
+        },
+        setDrawerState: (state, action) => {
+            state.drawerState = action.payload;
+        },
+    },
 });
 
-
-export const { setIsAppLoading } = appStateSlice.actions;
-export const AppState =  appStateSlice.reducer;
+export const { setIsAppLoading, setDrawerState } = appStateSlice.actions;
+export const AppState = appStateSlice.reducer;

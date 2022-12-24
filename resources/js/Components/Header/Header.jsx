@@ -20,8 +20,13 @@ import china from "../../../../public/images/flags/us.svg";
 import russia from "../../../../public/images/flags/us.svg";
 import bclogo from "../../../../public/images/brand/bcboom.svg";
 import { useState } from "react";
+import menu from "../../../../public/images/svg/menu.svg";
 // import Dropdown from "../Dropdown/Dropdown";
 import { Dropdown as AntDDropdown } from "antd";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import Button from "../Button/Button";
+import { setDrawerState } from "@/redux/app-state/app-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -51,13 +56,6 @@ const HeaderPlatformLinks = styled("div")(() => ({
 const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),
     marginRight: "15px",
-}));
-const Wrapper = styled("div")(() => ({
-    height: "100px",
-    width: "100px",
-    overflowY: "auto",
-    borderRadius: "20px",
-    bacgkround: "red",
 }));
 const HeaderItems = styled("div")(() => ({
     display: "flex",
@@ -96,7 +94,7 @@ const Menu = ({ data, setValue }) => {
         </div>
     );
 };
-const Header = () => {
+const DesktopHeader = () => {
     const [statsItems] = useState([
         {
             id: 1,
@@ -176,6 +174,11 @@ const Header = () => {
         { text: "us", icon: us },
         { text: "malta", icon: malta },
     ];
+    const { isMobile } = useScreenResolution();
+    if (isMobile) {
+        return <div>hi am mobile</div>;
+    }
+
     return (
         <HeaderWrapper>
             <HeaderPlatformStats>
@@ -220,14 +223,65 @@ const Header = () => {
                         />
                     </>
                 </AntDDropdown>
-                
-                    <SocialIcons>
-                        <img src={socials[socials.length - 1].icon} alt={`${socials.id}`} />
-                    </SocialIcons>
-               
+
+                <SocialIcons>
+                    <img
+                        src={socials[socials.length - 1].icon}
+                        alt={`${socials.id}`}
+                    />
+                </SocialIcons>
             </HeaderPlatformLinks>
         </HeaderWrapper>
     );
 };
 
-export default Header;
+const MobileHeaderWrapper = styled("div")(() => ({
+    display: "flex",
+    padding: "10px 20px",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "10px",
+}));
+const MoreIconWrapper = styled("div")(() => ({}));
+const Logo = styled("div")(() => ({}));
+const ButtonComponents = styled("div")(() => ({
+    display: "flex",
+    gap: "10px",
+}));
+export const MobileHeader = () => {
+    const dispatcher = useDispatch();
+    const { drawerState } = useSelector((state) => state.app);
+    return (
+        <MobileHeaderWrapper>
+            <MoreIconWrapper
+                onClick={() =>
+                    dispatcher(setDrawerState({ open: !drawerState.open }))
+                }
+            >
+                <img src={menu} alt="menu" style={{ height: "35px" }} />
+            </MoreIconWrapper>
+            <Logo>
+                <img
+                    src={bclogo}
+                    alt="bcboom logo"
+                    style={{ height: "35px" }}
+                />
+            </Logo>
+            <ButtonComponents>
+                {[
+                    { text: "Login", link: "/login", bg: "#3586FF" },
+                    { text: "Sign up", link: "/signup", bg: "#F93C56" },
+                ].map((item, index) => (
+                    <Button
+                        text={item.text}
+                        onSubmit={null}
+                        key={index}
+                        background={item.bg}
+                    />
+                ))}
+            </ButtonComponents>
+        </MobileHeaderWrapper>
+    );
+};
+
+export default DesktopHeader;

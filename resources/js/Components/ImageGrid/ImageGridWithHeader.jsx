@@ -2,6 +2,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import titleBg from "../../../../public/images/svg/titlebg.svg";
 import leftcut from "../../../../public/images/others/leftcut.svg";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 const GridWrapper = styled("div")(({}) => ({}));
 
 const GridItems = styled("div")(({}) => ({
@@ -20,10 +21,10 @@ const GridItems = styled("div")(({}) => ({
     zIndex: 400,
 }));
 
-const SectionWrapper = styled("div")(({}) => ({
+const SectionWrapper = styled("div")(({ isMobile }) => ({
     height: "fit-content",
     overflow: "hidden",
-    padding: "25px",
+    padding: isMobile ? "20px 10px" : "25px",
     margin: "25px",
     background: "#1D2036",
     borderRadius: "10px",
@@ -87,11 +88,11 @@ const GridItemTitle = styled("div")(({}) => ({
 }));
 
 const ImageGridWithHeader = ({ gridItems }) => {
-    console.log("grid: items", gridItems);
+    const {isMobile} = useScreenResolution();
     return (
         <GridWrapper>
             {gridItems.map((item, index) => (
-                <SectionWrapper key={index}>
+                <SectionWrapper key={index} isMobile={isMobile}>
                     <GridLeftCut />
                     <GridItemTitle>
                         <img src={item?.icon} alt="" />

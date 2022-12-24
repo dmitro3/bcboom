@@ -1,6 +1,10 @@
-import Footer from "@/Components/Footer/Footer";
+import Sidedrawer from "@/Components/Drawer/Sidedrawer";
+import DesktopFooter from "@/Components/Footer/DesktopFooter";
+import MobileFooter from "@/Components/Footer/MobileFooter";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
-import Header from "../Components/Header/Header";
+import { useSelector } from "react-redux";
+import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import LayoutTheme from "./theme";
 
@@ -11,25 +15,39 @@ const PageLayout = styled("div")(({ theme }) => ({
     fontfamily: "Montserrat, sans-serif",
 }));
 
-const PageBody = styled("div")(({ theme }) => ({
+const PageBody = styled("div")(({ isMobile }) => ({
     height: "fit-content",
     width: "100%",
-    display: "flex", 
+    display: "flex",
     flexDirection: "row",
-    paddingRight: "68px",
+    paddingRight: !isMobile && "68px",
     background: "#000000",
 }));
 
 export default function GuestLayout({ children }) {
+    const { isMobile } = useScreenResolution();
+    const { drawerState } = useSelector((state) => state.app);
+    if (isMobile) {
+        return (
+            <LayoutTheme>
+                {drawerState?.open && <Sidedrawer />}
+                <PageLayout>
+                    <MobileHeader />
+                    <PageBody isMobile={isMobile}>{children}</PageBody>
+                    <MobileFooter />
+                </PageLayout>
+            </LayoutTheme>
+        );
+    }
     return (
         <LayoutTheme>
             <PageLayout>
-                <Header />
-                <PageBody>
+                <DesktopHeader />
+                <PageBody isMobile={isMobile}>
                     <SimpleSidebar />
                     {children}
                 </PageBody>
-                <Footer />
+                <DesktopFooter />
             </PageLayout>
         </LayoutTheme>
     );

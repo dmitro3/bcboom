@@ -4,9 +4,10 @@ import { styled } from "@mui/system";
 import InnerHeader from "../../Components/Header/InnerHeader";
 import mainBg from "../../../../public/images/others/mainBg.svg";
 import footercut from "../../../../public/images/others/footercut.png";
-const PageTemplateWrapper = styled("div")(() => ({
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+const PageTemplateWrapper = styled("div")(({ isMobile }) => ({
     background: `url(${mainBg})`,
-    width: "95%",
+    width: isMobile ? "100%" : "95%",
     height: "fit-content",
     borderRadius: "10px",
     backgroundRepeat: "no-repeat",
@@ -29,15 +30,16 @@ const PageTemplate = ({
     gridWithHeader,
     children,
 }) => {
+    const { isMobile } = useScreenResolution();
     return (
-        <PageTemplateWrapper>
+        <PageTemplateWrapper isMobile={isMobile}>
             {innerHeader && <InnerHeader />}
             {homeCarousel && <HomeCarousel />}
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
             {children}
-            <FooterCutImage />
+            {!isMobile && <FooterCutImage />}
         </PageTemplateWrapper>
     );
 };
