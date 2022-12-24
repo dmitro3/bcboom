@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import live from "../../../../public/images/svg/live.svg";
 import race from "../../../../public/images/svg/race.svg";
 import slots from "../../../../public/images/svg/slots.svg";
@@ -54,7 +54,6 @@ const InnerHeader = () => {
             name: "Home",
             icon: homeSvg,
             link: "/",
-            active: true,
         },
         {
             name: "Games",
@@ -94,12 +93,29 @@ const InnerHeader = () => {
     ];
     const { isMobile } = useScreenResolution();
     const dispatcher = useDispatch();
+    console.log("window: ", window.location.pathname.split("/"));
+    const location =
+        typeof window !== undefined
+            ? window.location.pathname.split("/")[1]
+            : "";
+
+    // useEffect(() => {
+    //     const location =
+    //         typeof window !== undefined ? window.location.pathname : "";
+    //     setLocation(location);
+    // }, []);
+
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(0, 4).map((item, index) => (
                     <Link href={item.link}>
-                        <InnerHeaderItem key={index} active={item.active}>
+                        <InnerHeaderItem
+                            key={index}
+                            active={location.includes(
+                                item.link.replace("/", "")
+                            )}
+                        >
                             <img src={item.icon} alt={item.name} />
                             <p>{item.name}</p>
                         </InnerHeaderItem>
@@ -109,7 +125,10 @@ const InnerHeader = () => {
             <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(4, 7).map((item, index) => (
                     <Link href={item.link}>
-                        <InnerHeaderItem key={index} active={item.active}>
+                        <InnerHeaderItem
+                            key={index}
+                            active={location.includes(item.link)}
+                        >
                             <img src={item.icon} alt={item.name} />
                             <p>{item.name}</p>
                         </InnerHeaderItem>{" "}

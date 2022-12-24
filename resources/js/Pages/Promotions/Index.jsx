@@ -4,6 +4,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import img from "../../../../public/images/others/promotionheader.png";
+import imgmobile from "../../../../public/images/others/promotionheadermobile.png";
 import gift from "../../../../public/images/svg/gift.svg";
 import wealth from "../../../../public/images/promotions/wealth.png";
 import distributors from "../../../../public/images/promotions/distributors.png";
@@ -11,6 +12,7 @@ import bonus from "../../../../public/images/promotions/bonus.png";
 import vipexclusive from "../../../../public/images/promotions/vipexclusive.png";
 import off from "../../../../public/images/promotions/off.png";
 import weekend from "../../../../public/images/promotions/weekend.png";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const PromotionPageWrapper = styled("div")(() => ({
     marginLeft: "auto",
@@ -20,32 +22,32 @@ const PromotionPageWrapper = styled("div")(() => ({
     height: "100%",
 }));
 
-const PromotionImageHeader = styled("div")(() => ({
-    background: ` url(${img})`,
+const PromotionImageHeader = styled("div")(({ isMobile }) => ({
+    background: `url(${isMobile ? imgmobile : img})`,
+    borderRadius: "10px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat, no-repeat",
-    padding: "4.125rem",
-    paddingLeft: "4.125rem",
+    padding: isMobile ? "1.25rem" : "4.125rem",
+    paddingLeft: isMobile ? "1.25rem" : "4.125rem",
 
     "& p": {
         color: "#fff",
-        fontSize: "1.5rem",
         lineHeight: "2.25rem",
         fontWeight: "900",
         "&:nth-child(1)": {
-            fontSize: "2.25rem",
-            paddingBottom: "1.5rem",
+            fontSize: isMobile ? "1.4rem" : "2.25rem",
+            paddingBottom: isMobile ? ".5rem" : "1.5rem",
         },
         "&:nth-child(2)": {
-            fontSize: "3.5rem",
-            paddingBottom: "2rem",
+            fontSize: isMobile ? "1.4rem" : "3.5rem",
+            paddingBottom: isMobile ? ".5rem" : "2rem",
             color: "#5AA2FF",
         },
         "&:nth-child(3)": {
-            fontSize: ".9rem",
+            fontSize: isMobile ? ".6rem" : ".9rem",
             lineHeight: "1.2rem",
-            fontWeight: "normal",
-            color: "#9BA6D4",
+            fontWeight: "medium",
+            color: "white",
         },
     },
 }));
@@ -57,7 +59,7 @@ const PromotionIndex = () => {
             imageWidth: "534px",
             imageHeight: "175px",
             perColumn: 3,
-            hoverEffect: 'overlay',
+            hoverEffect: "overlay",
             images: [
                 {
                     image: wealth,
@@ -98,13 +100,14 @@ const PromotionIndex = () => {
             ],
         },
     ];
+    const { isMobile } = useScreenResolution();
     return (
         <>
             <Head title="Promotions" />
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
-                        <PromotionImageHeader>
+                        <PromotionImageHeader isMobile={isMobile}>
                             <p>BCBOOM</p>
                             <p>PROMOTIONS</p>
                             <p>

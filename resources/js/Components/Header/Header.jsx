@@ -28,6 +28,7 @@ import Button from "../Button/Button";
 import { setDrawerState } from "@/redux/app-state/app-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { Link } from "@inertiajs/inertia-react";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -191,7 +192,9 @@ const DesktopHeader = () => {
                 ))}
             </HeaderPlatformStats>
             <LogoWrapper>
-                <img src={bclogo} alt="bcboom" />
+                <Link href="/">
+                    <img src={bclogo} alt="bcboom" />
+                </Link>
             </LogoWrapper>
             <HeaderPlatformLinks>
                 <HeaderPlatformLinkItems>
@@ -262,11 +265,13 @@ export const MobileHeader = () => {
                 <img src={menu} alt="menu" style={{ height: "35px" }} />
             </MoreIconWrapper>
             <Logo>
-                <img
-                    src={bclogo}
-                    alt="bcboom logo"
-                    style={{ height: "35px" }}
-                />
+                <Link href="/">
+                    <img
+                        src={bclogo}
+                        alt="bcboom logo"
+                        style={{ height: "35px" }}
+                    />
+                </Link>
             </Logo>
             <ButtonComponents>
                 {[
