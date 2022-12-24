@@ -11,7 +11,7 @@ import LayoutTheme from "./theme";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
-    height: "100vh",
+    minHeight: "100vh",
     fontfamily: "Montserrat, sans-serif",
 }));
 
