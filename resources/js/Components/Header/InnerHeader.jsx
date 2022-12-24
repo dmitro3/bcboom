@@ -83,12 +83,12 @@ const InnerHeader = () => {
         {
             name: "Bonus",
             icon: bonus,
-            link: "/bonus",
+            link: "/promotions/bonus_everyday",
         },
         {
             name: "VIP",
             icon: vip,
-            link: "/vip",
+            link: "/promotions/exclusive",
         },
     ];
     const { isMobile } = useScreenResolution();
