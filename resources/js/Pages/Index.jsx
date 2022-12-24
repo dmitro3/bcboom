@@ -41,6 +41,8 @@ export default function Homepage(props) {
             icon: game,
             imageWidth: "534px",
             imageHeight: "175px",
+            margin: "25px",
+            perColumn: 5,
             images: [
                 { image: crash, link: "/crash", addon: null, addonColor: null },
                 { image: dice, link: "/dice", addon: null, addonColor: null },
@@ -74,6 +76,8 @@ export default function Homepage(props) {
             icon: s777,
             imageWidth: "534px",
             imageHeight: "175px",
+            margin: "25px",
+            perColumn: 5,
             images: [
                 {
                     image: greatRhyno,
@@ -142,6 +146,8 @@ export default function Homepage(props) {
             icon: liveCasino,
             imageWidth: "534px",
             imageHeight: "175px",
+            margin: "25px",
+            perColumn: 5,
             images: [
                 {
                     image: crazycoin,

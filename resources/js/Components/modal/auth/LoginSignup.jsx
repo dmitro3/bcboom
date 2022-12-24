@@ -41,7 +41,7 @@ const SignupFormWrapper = styled("div")(({isMobile}) => ({
     flexDirection: "column",
     marginTop: "40px",
     gap: "20px",
-    width: isMobile ? "100%" : "380px",
+    width: isMobile ? "100%" : "480px",
 }));
 const SignupForm = ({isMobile}) => {
     const onRecaptchaChange = (value) => {
@@ -85,7 +85,7 @@ const SignupForm = ({isMobile}) => {
                     }
                 />
             </p>
-            <div style={{ transform: !isMobile &&"scaleX(1.27)", transformOrigin: "0 0" }}>
+            <div style={{ transform: !isMobile &&"scaleX(1.6)", transformOrigin: "0 0" }}>
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
                     onChange={onRecaptchaChange}
