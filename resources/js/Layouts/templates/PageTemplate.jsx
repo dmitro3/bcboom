@@ -20,7 +20,7 @@ const FooterCutImage = styled("div")(({ theme }) => ({
     position: "absolute",
     background: `url(${footercut})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
+    backgroundSize: "cover",
     bottom: "-70px",
     zIndex: 100,
 }));

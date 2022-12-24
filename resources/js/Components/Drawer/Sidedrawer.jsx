@@ -30,8 +30,9 @@ const DrawerWrapper = styled("div")(({}) => ({
 }));
 const CloseIcon = styled("div")(({}) => ({
     position: "absolute",
-    top: "10px",
-    right: " 10px",
+    top: "20px",
+    right: "20px",
+    cursor: "pointer",
 }));
 const Logo = styled("div")(() => ({
     display: "flex",
@@ -46,8 +47,8 @@ const DrawerImages = styled("div")(() => ({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
     gridTemplateColumns: "1fr 1fr",
-    gap: "20px",
-    padding: "20px",
+    gap: "10px",
+    padding: "5px",
 }));
 const DrawerImage = styled("img")(({ index }) => ({
     width: "100%",

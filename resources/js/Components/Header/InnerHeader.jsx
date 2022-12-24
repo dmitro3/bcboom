@@ -10,9 +10,11 @@ import vip from "../../../../public/images/svg/vip.svg";
 import { styled } from "@mui/system";
 import Button from "../Button/Button";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { useDispatch } from "react-redux";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
 
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
-    padding: isMobile ? '20px 20px 0 20px' : "15px 20px",
+    padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
     display: "flex",
     justifyContent: "space-between",
     overflowX: "auto",
@@ -29,7 +31,7 @@ const InnerHeaderItems = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     gap: isMobile ? "50px" : "20px",
-    minWidth: 'max-content',
+    minWidth: "max-content",
 }));
 const InnerHeaderItem = styled("div")(({ active }) => ({
     display: "flex",
@@ -91,6 +93,7 @@ const InnerHeader = () => {
         },
     ];
     const { isMobile } = useScreenResolution();
+    const dispatcher = useDispatch();
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
@@ -115,7 +118,14 @@ const InnerHeader = () => {
                     ].map((item, index) => (
                         <Button
                             text={item.text}
-                            onSubmit={null}
+                            onSubmit={() =>
+                                dispatcher(
+                                    setAuthModalState({
+                                        open: true,
+                                        type: item.link.replace("/", ""),
+                                    })
+                                )
+                            }
                             key={index}
                             background={item.bg}
                         />
@@ -123,6 +133,6 @@ const InnerHeader = () => {
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
-};
+}
 
 export default InnerHeader;

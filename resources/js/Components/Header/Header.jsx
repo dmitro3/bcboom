@@ -27,6 +27,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import Button from "../Button/Button";
 import { setDrawerState } from "@/redux/app-state/app-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -274,9 +275,16 @@ export const MobileHeader = () => {
                 ].map((item, index) => (
                     <Button
                         text={item.text}
-                        onSubmit={null}
                         key={index}
                         background={item.bg}
+                        onSubmit={() =>
+                            dispatcher(
+                                setAuthModalState({
+                                    open: true,
+                                    type: item.link.replace("/", ""),
+                                })
+                            )
+                        }
                     />
                 ))}
             </ButtonComponents>
