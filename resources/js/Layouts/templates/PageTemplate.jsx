@@ -24,7 +24,12 @@ const FooterCutImage = styled("div")(({ theme }) => ({
     bottom: "-70px",
     zIndex: 100,
 }));
-const PageTemplate = ({ innerHeader, homeCarousel, gridWithHeader }) => {
+const PageTemplate = ({
+    innerHeader,
+    homeCarousel,
+    gridWithHeader,
+    children,
+}) => {
     const { isMobile } = useScreenResolution();
     return (
         <PageTemplateWrapper isMobile={isMobile}>
@@ -33,7 +38,8 @@ const PageTemplate = ({ innerHeader, homeCarousel, gridWithHeader }) => {
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
-           {!isMobile &&  <FooterCutImage /> }
+            {children}
+            {!isMobile && <FooterCutImage />}
         </PageTemplateWrapper>
     );
 };

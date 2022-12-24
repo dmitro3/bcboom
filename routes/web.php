@@ -21,6 +21,41 @@ Route::get('/{path?}', function () {
    
 });
 
+Route::get('/promotions/exclusive', function () {
+    return Inertia::render('Promotions/Exclusive');
+   
+});
+
+Route::get('/promotions/deposit', function () {
+    return Inertia::render('Promotions/Deposit');
+   
+});
+
+Route::get('/promotions/bonus', function () {
+    return Inertia::render('Promotions/Bonus');
+   
+});
+
+Route::get('/promotions/bonus_everyday', function () {
+    return Inertia::render('Promotions/BonusEveryday');
+   
+});
+
+Route::get('/promotions/full_bonus', function () {
+    return Inertia::render('Promotions/FullBonus');
+   
+});
+
+Route::get('/promotions/distributor', function () {
+    return Inertia::render('Promotions/Distributor');
+   
+});
+
+Route::get('/promotions/invite', function () {
+    return Inertia::render('Promotions/Invite');
+   
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
