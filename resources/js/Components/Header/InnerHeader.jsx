@@ -133,6 +133,6 @@ const InnerHeader = () => {
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
-};
+}
 
 export default InnerHeader;

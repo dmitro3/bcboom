@@ -1,11 +1,8 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "../Button/Button";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { styled } from "@mui/system";
+import * as React from "react";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -18,7 +15,7 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box>{children}</Box>}
         </div>
     );
 }
@@ -77,20 +74,30 @@ export default CustomTabs;
 const TabWrapper = styled("div")(({}) => ({
     borderRadius: "20px",
     color: "#fff",
+    padding: "20px 30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
 }));
 const TabButtons = styled("div")(({}) => ({
     background: "#464F85",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "20px 30px",
+    // padding: "20px 30px",
+    width: "250px",
+    borderRadius: "20px",
 }));
 const TabButton = styled("div")(({ active }) => ({
     cursor: "pointer",
     padding: "10px 20px",
     borderRadius: "20px",
     background: active ? "#3586FF" : "transparent",
+    textAlign: "center",
     color: "#fff",
+    width: "100%",
+    whiteSpace: "nowrap",
 }));
 
 export const NewCustomTabs = ({ tabItems }) => {
