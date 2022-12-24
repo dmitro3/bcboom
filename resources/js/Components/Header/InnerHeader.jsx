@@ -12,7 +12,7 @@ import Button from "../Button/Button";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { useDispatch } from "react-redux";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
-
+import { Link } from "@inertiajs/inertia-react";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
     padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
     display: "flex",
@@ -98,18 +98,22 @@ const InnerHeader = () => {
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(0, 4).map((item, index) => (
-                    <InnerHeaderItem key={index} active={item.active}>
-                        <img src={item.icon} alt={item.name} />
-                        <p>{item.name}</p>
-                    </InnerHeaderItem>
+                    <Link href={item.link}>
+                        <InnerHeaderItem key={index} active={item.active}>
+                            <img src={item.icon} alt={item.name} />
+                            <p>{item.name}</p>
+                        </InnerHeaderItem>
+                    </Link>
                 ))}
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(4, 7).map((item, index) => (
-                    <InnerHeaderItem key={index} active={item.active}>
-                        <img src={item.icon} alt={item.name} />
-                        <p>{item.name}</p>
-                    </InnerHeaderItem>
+                    <Link href={item.link}>
+                        <InnerHeaderItem key={index} active={item.active}>
+                            <img src={item.icon} alt={item.name} />
+                            <p>{item.name}</p>
+                        </InnerHeaderItem>{" "}
+                    </Link>
                 ))}
                 {!isMobile &&
                     [
@@ -133,6 +137,6 @@ const InnerHeader = () => {
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
-}
+};
 
 export default InnerHeader;

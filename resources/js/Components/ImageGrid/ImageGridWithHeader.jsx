@@ -3,12 +3,13 @@ import React from "react";
 import titleBg from "../../../../public/images/svg/titlebg.svg";
 import leftcut from "../../../../public/images/others/leftcut.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { Link } from "@inertiajs/inertia-react";
 const GridWrapper = styled("div")(({}) => ({}));
 
-const GridItems = styled("div")(({}) => ({
+const GridItems = styled("div")(({ perColumn }) => ({
     display: "grid",
     gridGap: "10px",
-    gridTemplateColumns: "repeat(5, minmax(100px, 1fr))",
+    gridTemplateColumns: `repeat(${perColumn}, minmax(100px, 1fr))`,
     marginTop: "60px",
     // width: "100%",
     "@media (max-width: 700px)": {
@@ -30,13 +31,14 @@ const SectionWrapper = styled("div")(({ isMobile }) => ({
     borderRadius: "10px",
     position: "relative",
 }));
-const GridItemImage = styled("img")(({ height, width }) => ({
+const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
     height: height || "100px",
     width: width || "100px",
     cursor: "pointer",
     borderRadius: "10px",
+    position: "relative",
     "&:hover": {
-        transform: "scale(1.05)",
+        transform: hoverEffect !== "overlay" && "scale(1.05)",
         transition: "all 0.3s ease-in-out",
     },
 }));
@@ -73,39 +75,65 @@ const GridItemTitle = styled("div")(({}) => ({
         fontWeight: "bold",
         marginLeft: "10px",
     },
-
-    // "&::after": {
-    //     content: '""',
-    //     position: "absolute",
-    //     top: "20px",
-    //     left: "0",
-    //     display: "inline-block",
-    //     clipPath: "polygon(0 0, 100% 0, 83% 31%, 0 33%)",
-    //     background: "white",
-    //     height: "150px",
-    //     width: "350px",
-    // },
 }));
 
+const SeeMore = ({ link }) => {
+    return (
+        <div
+            style={{
+                position: "absolute",
+                bottom: "0",
+                right: "0",
+                height: "100%",
+                width: "100%",
+                background: "#1D2036",
+                padding: "5px 10px",
+                borderRadius: "10px",
+                cursor: "pointer",
+            }}
+        >
+            <Link href={link}>
+                <p
+                    style={{
+                        color: "#fff",
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        textDecoration: "none",
+                    }}
+                >
+                    See More
+                </p>
+            </Link>
+        </div>
+    );
+};
+
 const ImageGridWithHeader = ({ gridItems }) => {
-    const {isMobile} = useScreenResolution();
+    const { isMobile } = useScreenResolution();
     return (
         <GridWrapper>
             {gridItems.map((item, index) => (
-                <SectionWrapper key={index} isMobile={isMobile}>
+                <SectionWrapper
+                    key={index}
+                    isMobile={isMobile}
+                    margin={item.margin}
+                >
                     <GridLeftCut />
                     <GridItemTitle>
                         <img src={item?.icon} alt="" />
                         <p>{item?.title}</p>
                     </GridItemTitle>
-                    <GridItems>
+                    <GridItems perColumn={item.perColumn}>
                         {item.images.map((image, index) => (
-                            <GridItemImage
-                                key={index}
-                                src={image.image}
-                                width={item?.imageWidth}
-                                height={item?.imageHeight}
-                            />
+                            <Link href={image.link}>
+                                <GridItemImage
+                                    key={index}
+                                    src={image.image}
+                                    width={item?.imageWidth}
+                                    height={item?.imageHeight}
+                                    hoverEffect={item?.hoverEffect}
+                                />
+                            </Link>
                         ))}
                     </GridItems>
                 </SectionWrapper>

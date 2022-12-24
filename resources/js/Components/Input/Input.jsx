@@ -27,7 +27,7 @@ const InputWrapper = styled("div")(({ addon }) => ({
     },
 }));
 const InputItem = styled("input")(({ addon, isMobile }) => ({
-    // width: isMobile ? '100%' : "380px",
+    width: isMobile ? '100%' : "380px",
     padding: addon ? "12px 50px" : "12px 20px",
     border: "none",
     background: "transparent",

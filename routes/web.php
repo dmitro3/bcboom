@@ -16,14 +16,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/{path?}', function () {
+Route::get('/', function () {
     return Inertia::render('Index');
    
 });
 
 Route::get('/promotions/exclusive', function () {
     return Inertia::render('Promotions/Exclusive');
-   
+});
+Route::get('/promotions', function () {
+    return Inertia::render('Promotions/Index');
 });
 
 Route::get('/promotions/deposit', function () {
