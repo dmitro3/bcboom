@@ -51,8 +51,14 @@ Route::get('/promotions/distributor', function () {
    
 });
 
+
 Route::get('/promotions/invite', function () {
     return Inertia::render('Promotions/Invite');
+   
+});
+
+Route::get('/games/dinosaur', function () {
+    return Inertia::render('Game/Dinosaur');
    
 });
 
