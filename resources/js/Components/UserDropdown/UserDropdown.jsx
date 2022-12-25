@@ -16,17 +16,18 @@ import { Dropdown as AntDropdown, Space } from "antd";
 import { styled } from "@mui/system";
 import Text from "../Text/Text";
 import { Link } from "@inertiajs/inertia-react";
-const CurrencyWrapper = styled("div")(({}) => ({
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     background: "#3586FF",
     borderRadius: "50%",
-    width: "35px",
-    height: "35px",
+    width: isMobile ? "32px" : "35px",
+    height: isMobile ? "32px" : "35px",
     filter: "drop-shadow(0px 2px 8px rgba(53, 134, 255, 0.39))",
 }));
-const CurrentBalance = styled("div")(({}) => ({
+const CurrentBalance = styled("div")(({ isMobile }) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
@@ -34,7 +35,7 @@ const CurrentBalance = styled("div")(({}) => ({
     // lineHeight: 1,
     marginBottom: "3px",
     "& p": {
-        fontSize: "23px",
+        fontSize: isMobile ? "20px" : "23px",
         fontWeight: "bold",
         "&:first-child": {
             color: "white",
@@ -189,6 +190,7 @@ const UserDropdown = ({
 }) => {
     const dispatcher = useDispatch();
     const [mouseOver, setMouseOver] = useState(false);
+    const { isMobile } = useScreenResolution();
     if (!isLoggedIn)
         return (
             <>
@@ -218,20 +220,24 @@ const UserDropdown = ({
             alignItems="flex-start"
             style={{ fontFamily: "Montserrat, sans-serif" }}
         >
-            <CurrencyWrapper>
+            <CurrencyWrapper isMobile={isMobile}>
                 <img
                     src={brazillianreal}
                     alt="brazillianreal"
-                    style={{ height: "18px" }}
+                    style={{ height: isMobile ? "12px" : "18px" }}
                 />
             </CurrencyWrapper>
             <div>
-                <CurrentBalance>
+                <CurrentBalance isMobile={isMobile}>
                     <p>{user.balance.split(".")[0]}.</p>
                     <p>{user.balance.split(".")[1] || "00"}</p>
                 </CurrentBalance>
                 <Wallet>
-                    <img src={wallet} alt="wallet" style={{ height: "20px" }} />
+                    <img
+                        src={wallet}
+                        alt="wallet"
+                        style={{ height: isMobile ? "18px" : "20px" }}
+                    />
                     <p>Wallet</p>
                 </Wallet>
             </div>
@@ -242,11 +248,11 @@ const UserDropdown = ({
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage>
+                        <UserImage size={isMobile ? '40px' : '45px'}>
                             <img
                                 src={user.avatar}
                                 alt="useravatar"
-                                style={{ height: "100%", cursor: "pointer" }}
+                                style={{ height:  "100%", cursor: "pointer" }}
                             />
                         </UserImage>
                         <Chevron>

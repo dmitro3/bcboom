@@ -2,19 +2,18 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import Button from "@/Components/Button/Button";
 import Input from "@/Components/Input/Input";
-import CustomTabs, { NewCustomTabs } from "@/Components/Tabs/Tab";
+import { NewCustomTabs } from "@/Components/Tabs/Tab";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { FormControlLabel } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/system";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import close from "../../../../../public/images/svg/closeModal.svg";
-import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import lock from "../../../../../public/images/svg/lock.svg";
+import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import user from "../../../../../public/images/svg/user.svg";
 import CustomModal from "../Modal";
-import Checkbox from "@mui/material/Checkbox";
-import { FormControlLabel } from "@mui/material";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
 const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
     background: "#272C4B",
     position: "relative",

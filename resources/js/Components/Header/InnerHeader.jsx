@@ -1,3 +1,4 @@
+import { navlinks } from "@/data";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
@@ -46,48 +47,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-    const innerHeaderItems = [
-        {
-            name: "Home",
-            icon: homeSvg,
-            link: "/",
-        },
-        {
-            name: "Games",
-            icon: games,
-            link: "/games",
-        },
-        {
-            name: "Slots",
-            icon: slots,
-            link: "/slots",
-        },
-        {
-            name: "Race",
-            icon: race,
-            link: "/race",
-        },
-        {
-            name: "Live Casino",
-            icon: live,
-            link: "/live",
-        },
-        {
-            name: "Promotions",
-            icon: promotion,
-            link: "/promotions",
-        },
-        {
-            name: "Bonus",
-            icon: bonus,
-            link: "/promotions/bonus_everyday",
-        },
-        {
-            name: "VIP",
-            icon: vip,
-            link: "/promotions/exclusive",
-        },
-    ];
+
     const { isMobile } = useScreenResolution();
     const location =
         typeof window !== undefined
@@ -99,19 +59,27 @@ const InnerHeader = () => {
     //         typeof window !== undefined ? window.location.pathname : "";
     //     setLocation(location);
     // }, []);
-
+    const navItems = ['/', 'slots', 'games' ,'live-casino', 'race', 'promotion', 'promotions/bonus_everyday', 'promotions/exclusive']
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(0, 5).map((item, index) => {
-                    console.log("location2", item.link);
+                {navlinks.slice(0, 5).map((item, index) => {
                     return (
                         <Link href={item.link}>
                             <InnerHeaderItem
                                 key={index}
                                 active={location == item.link.replace("/", "")}
                             >
-                                <img src={item.icon} alt={item.name} />
+                                <img
+                                    src={item.icon}
+                                    alt={item.name}
+                                    style={{
+                                        filter:
+                                            location ==
+                                                item.link.replace("/", "") &&
+                                            "invert(41%) sepia(83%) saturate(2321%) hue-rotate(203deg) brightness(104%) contrast(103%)",
+                                    }}
+                                />
                                 <p>{item.name}</p>
                             </InnerHeaderItem>
                         </Link>
@@ -119,7 +87,7 @@ const InnerHeader = () => {
                 })}
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(5, 8).map((item, index) => (
+                {navlinks.slice(5, 8).map((item, index) => (
                     <Link href={item.link}>
                         <InnerHeaderItem
                             key={index}

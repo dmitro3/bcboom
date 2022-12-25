@@ -81,6 +81,7 @@ export default function Homepage(props) {
             perColumn: 5,
             page: "home",
             countOnMobile: 4,
+            urlForMore: "/slots",
             images: [
                 {
                     image: greatRhyno,
@@ -153,6 +154,7 @@ export default function Homepage(props) {
             perColumn: 5,
             page: "home",
             countOnMobile: 4,
+            urlForMore: "/live-casino",
             images: [
                 {
                     image: crazycoin,

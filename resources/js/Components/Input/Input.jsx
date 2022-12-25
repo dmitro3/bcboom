@@ -4,9 +4,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
-const InputWrapper = styled("div")(({ addon }) => ({
+const InputWrapper = styled("div")(({ br }) => ({
     background: "transparent",
-    borderRadius: "32px",
+    borderRadius: br || "32px",
     border: "1px solid #464F85",
     position: "relative",
     "& label": {
@@ -26,11 +26,12 @@ const InputWrapper = styled("div")(({ addon }) => ({
         color: "#fff",
     },
 }));
-const InputItem = styled("input")(({ addon, isMobile }) => ({
-    width: isMobile ? '100%' : "380px",
+const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
+    width: isMobile ? "100%" : "380px",
     padding: addon ? "12px 50px" : "12px 20px",
     border: "none",
-    background: "transparent",
+    borderRadius: br || "32px",
+    background: bg || "transparent",
     color: "#fff",
     fontSize: "14px",
     outline: "none",
@@ -51,11 +52,20 @@ const PasswordToggler = styled("div")(({}) => ({
     right: "20px",
     cursor: "pointer",
 }));
-const Input = ({ label, addon, type, placeholder, value, onChange }) => {
+const Input = ({
+    label,
+    addon,
+    type,
+    placeholder,
+    value,
+    onChange,
+    bg,
+    br,
+}) => {
     const [showPassword, setShowPassword] = useState(false);
-    const {isMobile} = useScreenResolution();
+    const { isMobile } = useScreenResolution();
     return (
-        <InputWrapper>
+        <InputWrapper br={br}>
             <label>{label}</label>
             {addon && <small>{addon}</small>}
             <InputItem
@@ -72,6 +82,8 @@ const Input = ({ label, addon, type, placeholder, value, onChange }) => {
                 autoComplete="off"
                 addon={addon}
                 isMobile={isMobile}
+                bg={bg}
+                br={br}
             />
             {type === "password" && (
                 <PasswordToggler onClick={() => setShowPassword(!showPassword)}>

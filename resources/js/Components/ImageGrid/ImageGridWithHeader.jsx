@@ -5,6 +5,7 @@ import leftcut from "../../../../public/images/others/leftcut.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
 import Button from "../Button/Button";
+import { Inertia } from "@inertiajs/inertia";
 const GridWrapper = styled("div")(({}) => ({}));
 
 const GridItems = styled("div")(({ perColumn, page }) => ({
@@ -157,6 +158,13 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                 <Button
                                     text="See more"
                                     background={"#3586FF"}
+                                    styles={{
+                                        padding: "10px 30px",
+                                        borderRadius: "15px",
+                                    }}
+                                    onSubmit={() => {
+                                        Inertia.visit(item.urlForMore);
+                                    }}
                                 />
                             </div>
                         )}
