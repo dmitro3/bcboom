@@ -246,6 +246,7 @@ const MobileHeaderWrapper = styled("div")(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
+    background: "#1E2443",
 }));
 const MoreIconWrapper = styled("div")(() => ({}));
 const Logo = styled("div")(() => ({}));
@@ -275,7 +276,7 @@ export const MobileHeader = () => {
                 </Link>
             </Logo>
             <ButtonComponents>
-                <UserDropdown isLoggedIn={false}/>
+                <UserDropdown isLoggedIn={true}/>
             </ButtonComponents>
         </MobileHeaderWrapper>
     );
