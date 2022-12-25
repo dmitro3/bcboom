@@ -26,10 +26,20 @@ import riseofolympus from "../../../../public/images/games/riseofolympus.png";
 import spinNspell from "../../../../public/images/games/spinNspell.png";
 import sweetbonanza from "../../../../public/images/games/sweetbonanza.png";
 import s777 from "../../../../public/images/svg/777.svg";
-// import searchI from "../../../../public/images/svg/search.svg";
+import searchI from "../../../../public/images/svg/search.svg";
 
-const ProviderAndTypeWrapper = styled("div")(() => ({}));
-const FilterSection = styled("div")(() => ({}));
+const FilterSection = styled("div")(() => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "20px 0",
+    padding: "0 20px",
+}));
+const ProviderAndTypeWrapper = styled("div")(() => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "20px",
+}));
 const SearchSection = styled("div")(() => ({}));
 
 export default function Homepage(props) {
@@ -168,6 +178,7 @@ export default function Homepage(props) {
             ],
         },
     ];
+    const [componentItems, setComponentItems] = useState(gridItems);
     const [currentProvider, setCurrentProvider] = useState("Game Provider");
     return (
         <>
@@ -176,16 +187,19 @@ export default function Homepage(props) {
                 <PageTemplate
                     innerHeader={true}
                     homeCarousel
-                    gridWithHeader={gridItems}
+                    gridWithHeader={componentItems}
                 >
                     <FilterSection>
                         <ProviderAndTypeWrapper>
                             <CustomSelect
                                 items={[
-                                    { value: "english", label: "English" },
                                     {
-                                        value: "portuguese",
-                                        label: "Brazil",
+                                        value: "Game Provider",
+                                        label: "Game Provider",
+                                    },
+                                    {
+                                        value: "I dont know",
+                                        label: "Neither do I",
                                     },
                                 ]}
                                 value={currentProvider}
@@ -193,10 +207,13 @@ export default function Homepage(props) {
                             />
                             <CustomSelect
                                 items={[
-                                    { value: "english", label: "English" },
                                     {
-                                        value: "portuguese",
-                                        label: "Brazil",
+                                        value: "Game Provider",
+                                        label: "Game Provider",
+                                    },
+                                    {
+                                        value: "I dont know",
+                                        label: "Neither do I",
                                     },
                                 ]}
                                 value={currentProvider}
@@ -205,9 +222,32 @@ export default function Homepage(props) {
                         </ProviderAndTypeWrapper>
                         <SearchSection>
                             <Input
-                                // addon={searchI}
+                                addon={<img src={searchI} alt="search" />}
                                 type="phone"
                                 placeholder="Search for games"
+                                bg="#3A4072"
+                                br="10px"
+                                onChange={(e) => {
+                                    const newItems = gridItems.map((item) => {
+                                        return {
+                                            ...item,
+                                            images: item.images.filter(
+                                                (i) =>
+                                                    i.link
+                                                        .toLowerCase()
+                                                        .includes(
+                                                            e.target.value.toLowerCase()
+                                                        ) ||
+                                                    i.image
+                                                        .toLowerCase()
+                                                        .includes(
+                                                            e.target.value.toLowerCase()
+                                                        )
+                                            ),
+                                        };
+                                    });
+                                    setComponentItems(newItems);
+                                }}
                             />
                         </SearchSection>
                     </FilterSection>
