@@ -43,6 +43,7 @@ export default function Homepage(props) {
             imageHeight: "175px",
             margin: "25px",
             perColumn: 5,
+            page: "home",
             images: [
                 { image: crash, link: "/crash", addon: null, addonColor: null },
                 { image: dice, link: "/dice", addon: null, addonColor: null },
@@ -78,6 +79,8 @@ export default function Homepage(props) {
             imageHeight: "175px",
             margin: "25px",
             perColumn: 5,
+            page: "home",
+            countOnMobile: 4,
             images: [
                 {
                     image: greatRhyno,
@@ -148,6 +151,8 @@ export default function Homepage(props) {
             imageHeight: "175px",
             margin: "25px",
             perColumn: 5,
+            page: "home",
+            countOnMobile: 4,
             images: [
                 {
                     image: crazycoin,

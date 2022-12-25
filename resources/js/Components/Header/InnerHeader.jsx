@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
-import live from "../../../../public/images/svg/live.svg";
-import race from "../../../../public/images/svg/race.svg";
-import slots from "../../../../public/images/svg/slots.svg";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { Link } from "@inertiajs/inertia-react";
+import { styled } from "@mui/system";
+import bonus from "../../../../public/images/svg/bonus.svg";
 import games from "../../../../public/images/svg/games.svg";
 import homeSvg from "../../../../public/images/svg/homeSvg.svg";
-import bonus from "../../../../public/images/svg/bonus.svg";
+import live from "../../../../public/images/svg/live.svg";
 import promotion from "../../../../public/images/svg/promotion.svg";
+import race from "../../../../public/images/svg/race.svg";
+import slots from "../../../../public/images/svg/slots.svg";
 import vip from "../../../../public/images/svg/vip.svg";
-import { styled } from "@mui/system";
-import Button from "../Button/Button";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { useDispatch } from "react-redux";
-import { setAuthModalState } from "@/redux/auth/auth-slice";
-import { Link } from "@inertiajs/inertia-react";
 import UserDropdown from "../UserDropdown/UserDropdown";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
     padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
@@ -42,7 +38,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     p: {
         marginLeft: "5px",
         marginTop: "3px",
-        fontSize: "12px",
+        fontSize: "14px",
         color: active ? "#3586FF" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
@@ -93,13 +89,11 @@ const InnerHeader = () => {
         },
     ];
     const { isMobile } = useScreenResolution();
-    const dispatcher = useDispatch();
-    console.log("window: ", window.location.pathname.split("/"));
     const location =
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
             : "";
-
+    console.log("location", location);
     // useEffect(() => {
     //     const location =
     //         typeof window !== undefined ? window.location.pathname : "";
@@ -109,33 +103,34 @@ const InnerHeader = () => {
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(0, 4).map((item, index) => (
-                    <Link href={item.link}>
-                        <InnerHeaderItem
-                            key={index}
-                            active={location.includes(
-                                item.link.replace("/", "")
-                            )}
-                        >
-                            <img src={item.icon} alt={item.name} />
-                            <p>{item.name}</p>
-                        </InnerHeaderItem>
-                    </Link>
-                ))}
+                {innerHeaderItems.slice(0, 5).map((item, index) => {
+                    console.log("location2", item.link);
+                    return (
+                        <Link href={item.link}>
+                            <InnerHeaderItem
+                                key={index}
+                                active={location == item.link.replace("/", "")}
+                            >
+                                <img src={item.icon} alt={item.name} />
+                                <p>{item.name}</p>
+                            </InnerHeaderItem>
+                        </Link>
+                    );
+                })}
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(4, 7).map((item, index) => (
+                {innerHeaderItems.slice(5, 8).map((item, index) => (
                     <Link href={item.link}>
                         <InnerHeaderItem
                             key={index}
-                            active={location.includes(item.link)}
+                            active={location == item.link.replace("/", "")}
                         >
                             <img src={item.icon} alt={item.name} />
                             <p>{item.name}</p>
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && <UserDropdown isLoggedIn={false} />}
+                {!isMobile && <UserDropdown isLoggedIn={true} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );

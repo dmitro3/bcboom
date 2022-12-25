@@ -55,7 +55,10 @@ Route::get('/promotions/distributor', function () {
 
 Route::get('/promotions/invite', function () {
     return Inertia::render('Promotions/Invite');
-   
+});
+
+Route::get('/games', function () {
+    return Inertia::render('Games/Index');
 });
 
 Route::get('/dashboard', function () {
