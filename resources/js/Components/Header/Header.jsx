@@ -29,6 +29,7 @@ import { setDrawerState } from "@/redux/app-state/app-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { Link } from "@inertiajs/inertia-react";
+import UserDropdown from "../UserDropdown/UserDropdown";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -274,24 +275,7 @@ export const MobileHeader = () => {
                 </Link>
             </Logo>
             <ButtonComponents>
-                {[
-                    { text: "Login", link: "/login", bg: "#3586FF" },
-                    { text: "Sign up", link: "/signup", bg: "#F93C56" },
-                ].map((item, index) => (
-                    <Button
-                        text={item.text}
-                        key={index}
-                        background={item.bg}
-                        onSubmit={() =>
-                            dispatcher(
-                                setAuthModalState({
-                                    open: true,
-                                    type: item.link.replace("/", ""),
-                                })
-                            )
-                        }
-                    />
-                ))}
+                <UserDropdown isLoggedIn={false}/>
             </ButtonComponents>
         </MobileHeaderWrapper>
     );

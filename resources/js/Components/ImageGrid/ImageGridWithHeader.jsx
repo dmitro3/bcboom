@@ -4,9 +4,10 @@ import titleBg from "../../../../public/images/svg/titlebg.svg";
 import leftcut from "../../../../public/images/others/leftcut.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
+import Button from "../Button/Button";
 const GridWrapper = styled("div")(({}) => ({}));
 
-const GridItems = styled("div")(({ perColumn }) => ({
+const GridItems = styled("div")(({ perColumn, page }) => ({
     display: "grid",
     gridGap: "10px",
     gridTemplateColumns: `repeat(${perColumn}, minmax(100px, 1fr))`,
@@ -16,7 +17,7 @@ const GridItems = styled("div")(({ perColumn }) => ({
         gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
     "@media (max-width: 500px)": {
-        gridTemplateColumns: "repeat(1, minmax(100px, 1fr))",
+        gridTemplateColumns: page !== "home" && "repeat(1, minmax(100px, 1fr))",
     },
     position: "relative",
     zIndex: 400,
@@ -123,19 +124,43 @@ const ImageGridWithHeader = ({ gridItems }) => {
                         <img src={item?.icon} alt="" />
                         <p>{item?.title}</p>
                     </GridItemTitle>
-                    <GridItems perColumn={item.perColumn}>
-                        {item.images.map((image, index) => (
-                            <Link href={image.link}>
-                                <GridItemImage
-                                    key={index}
-                                    src={image.image}
-                                    width={item?.imageWidth}
-                                    height={item?.imageHeight}
-                                    hoverEffect={item?.hoverEffect}
+                    <>
+                        <GridItems perColumn={item.perColumn} page={item.page}>
+                            {item.images
+                                .slice(
+                                    0,
+                                    isMobile && item.page === "home"
+                                        ? item.countOnMobile
+                                        : item?.images.length
+                                )
+                                .map((image, index) => (
+                                    <Link href={image.link}>
+                                        <GridItemImage
+                                            key={index}
+                                            src={image.image}
+                                            width={item?.imageWidth}
+                                            height={item?.imageHeight}
+                                            hoverEffect={item?.hoverEffect}
+                                        />
+                                    </Link>
+                                ))}
+                        </GridItems>
+                        {item.page === "home" && item.countOnMobile === 4 && (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    marginTop: "30px",
+                                }}
+                            >
+                                <Button
+                                    text="See more"
+                                    background={"#3586FF"}
                                 />
-                            </Link>
-                        ))}
-                    </GridItems>
+                            </div>
+                        )}
+                    </>
                 </SectionWrapper>
             ))}
         </GridWrapper>
