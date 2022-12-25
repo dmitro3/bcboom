@@ -35,10 +35,10 @@ const PageTemplate = ({
         <PageTemplateWrapper isMobile={isMobile}>
             {innerHeader && <InnerHeader />}
             {homeCarousel && <HomeCarousel />}
+            {children}
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
-            {children}
             {!isMobile && <FooterCutImage />}
         </PageTemplateWrapper>
     );
