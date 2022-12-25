@@ -13,6 +13,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { useDispatch } from "react-redux";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { Link } from "@inertiajs/inertia-react";
+import UserDropdown from "../UserDropdown/UserDropdown";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
     padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
     display: "flex",
@@ -134,25 +135,7 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile &&
-                    [
-                        { text: "Login", link: "/login", bg: "#3586FF" },
-                        { text: "Sign up", link: "/signup", bg: "#F93C56" },
-                    ].map((item, index) => (
-                        <Button
-                            text={item.text}
-                            onSubmit={() =>
-                                dispatcher(
-                                    setAuthModalState({
-                                        open: true,
-                                        type: item.link.replace("/", ""),
-                                    })
-                                )
-                            }
-                            key={index}
-                            background={item.bg}
-                        />
-                    ))}
+                {!isMobile && <UserDropdown isLoggedIn={false} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
