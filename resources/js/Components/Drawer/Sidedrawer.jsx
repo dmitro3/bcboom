@@ -21,6 +21,7 @@ import portugal from "../../../../public/images/flags/portugal.svg";
 import { miscNavLinks, navlinks } from "@/data";
 import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
+import { Link } from "@inertiajs/inertia-react";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
     // height: "100%",
@@ -122,6 +123,9 @@ const Sidedrawer = () => {
     const otherSocials = [facebook, instagram, telegram, twitter];
     const dispatcher = useDispatch();
     const [currentLanguage, setCurrentLanguage] = useState("english");
+    function closeDrawer(){
+        dispatcher(setDrawerState({ open: !drawerState.open }))
+    }
     return (
         <Drawer
             anchor={"left"}
@@ -151,7 +155,9 @@ const Sidedrawer = () => {
                     {navlinks.map((nav, i) => (
                         <NavItem key={i} active={nav.active}>
                             <img src={nav.icon} alt={nav.name} />
-                            <p>{nav.name}</p>
+                            <Link href={nav.link} onClick={closeDrawer}>
+                                <p>{nav.name}</p>
+                            </Link>
                         </NavItem>
                     ))}
                 </NavLinks>
@@ -160,7 +166,9 @@ const Sidedrawer = () => {
                     {miscNavLinks.map((nav, i) => (
                         <NavItem key={i} active={nav.active}>
                             <img src={nav.icon} alt={nav.name} />
-                            <p>{nav.name}</p>
+                            <Link href={nav.link} onClick={closeDrawer}>
+                                <p>{nav.name}</p>
+                            </Link>
                         </NavItem>
                     ))}
                 </NavLinks>

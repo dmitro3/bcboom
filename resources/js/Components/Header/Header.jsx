@@ -248,7 +248,9 @@ const MobileHeaderWrapper = styled("div")(() => ({
     gap: "10px",
     background: "#1E2443",
 }));
-const MoreIconWrapper = styled("div")(() => ({}));
+const MoreIconWrapper = styled("div")(() => ({
+    cursor: "pointer",
+}));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
     display: "flex",
@@ -271,7 +273,7 @@ export const MobileHeader = () => {
                     <img
                         src={bclogo}
                         alt="bcboom logo"
-                        style={{ height: "35px" }}
+                        style={{ height: "62px" }}
                     />
                 </Link>
             </Logo>

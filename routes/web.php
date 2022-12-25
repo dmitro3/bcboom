@@ -60,6 +60,9 @@ Route::get('/promotions/invite', function () {
 Route::get('/games', function () {
     return Inertia::render('Games/Index');
 });
+Route::get('/slots', function () {
+    return Inertia::render('Slots/Index');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
