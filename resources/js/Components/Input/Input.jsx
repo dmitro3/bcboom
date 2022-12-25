@@ -40,7 +40,7 @@ const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
         color: "#fff",
     },
     "&:focus": {
-        color: "#3586FF",
+        // color: "#3586FF",
         outline: "none",
         border: "none",
         boxShadow: "none",

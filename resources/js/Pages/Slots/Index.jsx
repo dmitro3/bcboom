@@ -1,5 +1,7 @@
-import CustomSelect from "@/Components/Dropdown/Select";
+// import { SelectWithDropdown } from "@/Components/Dropdown/Select";
+import SelectWithDropdown from "@/Components/Dropdown/Select";
 import Input from "@/Components/Input/Input";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
@@ -28,19 +30,24 @@ import sweetbonanza from "../../../../public/images/games/sweetbonanza.png";
 import s777 from "../../../../public/images/svg/777.svg";
 import searchI from "../../../../public/images/svg/search.svg";
 
-const FilterSection = styled("div")(() => ({
+const FilterSection = styled("div")(({ isMobile }) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    flexDirection: isMobile ? "column" : "row",
     margin: "20px 0",
     padding: "0 20px",
 }));
-const ProviderAndTypeWrapper = styled("div")(() => ({
+const ProviderAndTypeWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     gap: "20px",
+    width: isMobile ? "100%" : "auto",
+    marginBottom: isMobile && "20px",
 }));
-const SearchSection = styled("div")(() => ({}));
+const SearchSection = styled("div")(({ isMobile }) => ({
+    width: isMobile && "100%",
+}));
 
 export default function Homepage(props) {
     const gridItems = [
@@ -180,6 +187,8 @@ export default function Homepage(props) {
     ];
     const [componentItems, setComponentItems] = useState(gridItems);
     const [currentProvider, setCurrentProvider] = useState("Game Provider");
+    const [currentType, setCurrentType] = useState("Game Type");
+    const { isMobile } = useScreenResolution();
     return (
         <>
             <Head title="Homepage" />
@@ -189,38 +198,45 @@ export default function Homepage(props) {
                     homeCarousel
                     gridWithHeader={componentItems}
                 >
-                    <FilterSection>
-                        <ProviderAndTypeWrapper>
-                            <CustomSelect
+                    <FilterSection isMobile={isMobile}>
+                        <ProviderAndTypeWrapper isMobile={isMobile}>
+                            <SelectWithDropdown
                                 items={[
-                                    {
-                                        value: "Game Provider",
-                                        label: "Game Provider",
-                                    },
-                                    {
-                                        value: "I dont know",
-                                        label: "Neither do I",
-                                    },
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Game Provider",
                                 ]}
                                 value={currentProvider}
                                 setValue={setCurrentProvider}
                             />
-                            <CustomSelect
+                            <SelectWithDropdown
                                 items={[
-                                    {
-                                        value: "Game Provider",
-                                        label: "Game Provider",
-                                    },
-                                    {
-                                        value: "I dont know",
-                                        label: "Neither do I",
-                                    },
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Game Type",
                                 ]}
-                                value={currentProvider}
-                                setValue={setCurrentProvider}
+                                value={currentType}
+                                setValue={setCurrentType}
                             />
                         </ProviderAndTypeWrapper>
-                        <SearchSection>
+                        <SearchSection isMobile={isMobile}>
                             <Input
                                 addon={<img src={searchI} alt="search" />}
                                 type="phone"
