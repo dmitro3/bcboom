@@ -12,10 +12,10 @@ const GridItems = styled("div")(({ perColumn }) => ({
     gridTemplateColumns: `repeat(${perColumn}, minmax(100px, 1fr))`,
     marginTop: "60px",
     // width: "100%",
-    "@media (max-width: 700px)": {
+    "@media (max-width: 800px)": {
         gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
-    "@media (max-width: 300px)": {
+    "@media (max-width: 500px)": {
         gridTemplateColumns: "repeat(1, minmax(100px, 1fr))",
     },
     position: "relative",
@@ -26,7 +26,7 @@ const SectionWrapper = styled("div")(({ isMobile, margin }) => ({
     height: "fit-content",
     overflow: "hidden",
     padding: isMobile ? "20px 10px" : "25px",
-    margin: margin ? '25px' : '0 0 25px 0',
+    margin: margin ? "25px" : "0 25px 25px 25px",
     background: "#1D2036",
     borderRadius: "10px",
     position: "relative",
@@ -42,7 +42,7 @@ const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
         transition: "all 0.3s ease-in-out",
     },
 }));
-const GridLeftCut = styled("div")(({}) => ({
+const GridLeftCut = styled("div")(({ isMobile }) => ({
     position: "absolute",
     top: "-22px",
     left: "0",
@@ -50,7 +50,7 @@ const GridLeftCut = styled("div")(({}) => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     zIndex: 200,
-    height: "160px",
+    height: isMobile ? "153px" : "160px",
     width: "340px",
 }));
 const GridItemTitle = styled("div")(({}) => ({
@@ -118,7 +118,7 @@ const ImageGridWithHeader = ({ gridItems }) => {
                     isMobile={isMobile}
                     margin={item.margin}
                 >
-                    <GridLeftCut />
+                    <GridLeftCut isMobile={isMobile} />
                     <GridItemTitle>
                         <img src={item?.icon} alt="" />
                         <p>{item?.title}</p>
