@@ -15,7 +15,7 @@ const Wrapper = styled("div")(({ theme }) => ({
 const CustomCarousel = ({ children, rowPerCount }) => {
     const settings = {
         dots: true,
-        // autoplay: true,
+        autoplay: true,
         autoplaySpeed: 5000,
         infinite: true,
         slidesToShow: 1,
