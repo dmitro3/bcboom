@@ -29,6 +29,7 @@ const PromotionImageHeader = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat, no-repeat",
     padding: isMobile ? "1.25rem" : "4.125rem",
     paddingLeft: isMobile ? "1.25rem" : "4.125rem",
+    margin: '0 25px',
 
     "& p": {
         color: "#fff",
