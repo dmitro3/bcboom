@@ -22,11 +22,11 @@ const GridItems = styled("div")(({ perColumn }) => ({
     zIndex: 400,
 }));
 
-const SectionWrapper = styled("div")(({ isMobile }) => ({
+const SectionWrapper = styled("div")(({ isMobile, margin }) => ({
     height: "fit-content",
     overflow: "hidden",
     padding: isMobile ? "20px 10px" : "25px",
-    margin: "25px",
+    margin: margin ? '25px' : '0 0 25px 0',
     background: "#1D2036",
     borderRadius: "10px",
     position: "relative",
