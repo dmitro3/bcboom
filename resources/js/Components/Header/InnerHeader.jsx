@@ -93,7 +93,7 @@ const InnerHeader = () => {
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
             : "";
-
+    console.log("location", location);
     // useEffect(() => {
     //     const location =
     //         typeof window !== undefined ? window.location.pathname : "";
@@ -103,26 +103,27 @@ const InnerHeader = () => {
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(0, 5).map((item, index) => (
-                    <Link href={item.link}>
-                        <InnerHeaderItem
-                            key={index}
-                            active={location.includes(
-                                item.link.replace("/", "")
-                            )}
-                        >
-                            <img src={item.icon} alt={item.name} />
-                            <p>{item.name}</p>
-                        </InnerHeaderItem>
-                    </Link>
-                ))}
+                {innerHeaderItems.slice(0, 5).map((item, index) => {
+                    console.log("location2", item.link);
+                    return (
+                        <Link href={item.link}>
+                            <InnerHeaderItem
+                                key={index}
+                                active={location == item.link.replace("/", "")}
+                            >
+                                <img src={item.icon} alt={item.name} />
+                                <p>{item.name}</p>
+                            </InnerHeaderItem>
+                        </Link>
+                    );
+                })}
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
                 {innerHeaderItems.slice(5, 8).map((item, index) => (
                     <Link href={item.link}>
                         <InnerHeaderItem
                             key={index}
-                            active={location.includes(item.link)}
+                            active={location == item.link.replace("/", "")}
                         >
                             <img src={item.icon} alt={item.name} />
                             <p>{item.name}</p>
