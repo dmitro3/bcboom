@@ -17,6 +17,7 @@ import { styled } from "@mui/system";
 import Text from "../Text/Text";
 import { Link } from "@inertiajs/inertia-react";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setWalletModalState } from "@/redux/wallet/wallet-slice";
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
@@ -53,6 +54,7 @@ const Wallet = styled("div")(({}) => ({
     marginLeft: "10px",
     fontSize: "18px",
     fontWeight: "bold",
+    cursor: "pointer",
 }));
 const UserAvatar = styled("div")(({}) => ({
     display: "flex",
@@ -232,7 +234,11 @@ const UserDropdown = ({
                     <p>{user.balance.split(".")[0]}.</p>
                     <p>{user.balance.split(".")[1] || "00"}</p>
                 </CurrentBalance>
-                <Wallet>
+                <Wallet
+                    onClick={() =>
+                        dispatcher(setWalletModalState({ open: true }))
+                    }
+                >
                     <img
                         src={wallet}
                         alt="wallet"
@@ -248,11 +254,11 @@ const UserDropdown = ({
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage size={isMobile ? '40px' : '45px'}>
+                        <UserImage size={isMobile ? "40px" : "45px"}>
                             <img
                                 src={user.avatar}
                                 alt="useravatar"
-                                style={{ height:  "100%", cursor: "pointer" }}
+                                style={{ height: "100%", cursor: "pointer" }}
                             />
                         </UserImage>
                         <Chevron>
