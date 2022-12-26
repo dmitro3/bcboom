@@ -38,13 +38,13 @@ Route::get('/promotions/bonus', function () {
    
 });
 
-Route::get('/promotions/bonus_everyday', function () {
-    return Inertia::render('Promotions/BonusEveryday');
+Route::get('/bonus/bonus-everyday', function () {
+    return Inertia::render('Bonus/BonusEveryday');
    
 });
 
-Route::get('/promotions/full_bonus', function () {
-    return Inertia::render('Promotions/FullBonus');
+Route::get('/bonus/full-bonus', function () {
+    return Inertia::render('Bonus/FullBonus');
    
 });
 
@@ -68,6 +68,12 @@ Route::get('/race', function () {
 });
 Route::get('/live-casino', function () {
     return Inertia::render('LiveCasino/Index');
+});
+Route::get('/bonus', function () {
+    return Inertia::render('Bonus/Index');
+});
+Route::get('/vip', function () {
+    return Inertia::render('VIP/Index');
 });
 
 Route::get('/dashboard', function () {

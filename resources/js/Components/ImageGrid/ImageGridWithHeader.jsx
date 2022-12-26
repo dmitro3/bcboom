@@ -80,7 +80,7 @@ const GridItemTitle = styled("div")(({}) => ({
     },
 }));
 
-const OverLay = ({ item, visible }) => {
+const OverLay = ({ item, parent, visible }) => {
     return (
         <div
             style={{
@@ -107,20 +107,33 @@ const OverLay = ({ item, visible }) => {
                     alignItems: "center",
                 }}
             >
-                <p
-                    style={{
-                        color: "#fff",
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                        textDecoration: "none",
-                    }}
-                >
-                    {item?.title}
-                </p>
-                <Link href={item.link}>
-                    <img src={play} alt="" style={{ height: "50px" }} />
-                </Link>
-                <p>Pragmatic play</p>
+                {parent.hoverText ? (
+                    <div style={{margin: 'auto 0'}}>
+                        <Button
+                            text={parent.hoverText}
+                            onSubmit={() => Inertia.visit(item.link)}
+                            background="#3586FF"
+                            styles={{padding: '10px 20px', borderRadius: '15px'}}
+                        />
+                    </div>
+                ) : (
+                    <>
+                        <p
+                            style={{
+                                color: "#fff",
+                                fontSize: "18px",
+                                fontWeight: "bold",
+                                textDecoration: "none",
+                            }}
+                        >
+                            {item?.title}
+                        </p>
+                        <Link href={item.link}>
+                            <img src={play} alt="" style={{ height: "50px" }} />
+                        </Link>
+                        <p>Pragmatic play</p>
+                    </>
+                )}
             </div>
         </div>
     );
@@ -170,6 +183,7 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                                 <>
                                                     <OverLay
                                                         item={image}
+                                                        parent={item}
                                                         visible={
                                                             showOverlay ===
                                                                 index &&

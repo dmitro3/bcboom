@@ -47,7 +47,6 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-
     const { isMobile } = useScreenResolution();
     const location =
         typeof window !== undefined
@@ -59,7 +58,16 @@ const InnerHeader = () => {
     //         typeof window !== undefined ? window.location.pathname : "";
     //     setLocation(location);
     // }, []);
-    const navItems = ['/', 'slots', 'games' ,'live-casino', 'race', 'promotion', 'promotions/bonus_everyday', 'promotions/exclusive']
+    const navItems = [
+        "/",
+        "slots",
+        "games",
+        "live-casino",
+        "race",
+        "promotion",
+        "promotions/bonus_everyday",
+        "promotions/exclusive",
+    ];
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
@@ -93,7 +101,16 @@ const InnerHeader = () => {
                             key={index}
                             active={location == item.link.replace("/", "")}
                         >
-                            <img src={item.icon} alt={item.name} />
+                            <img
+                                src={item.icon}
+                                alt={item.name}
+                                style={{
+                                    filter:
+                                        location ==
+                                            item.link.replace("/", "") &&
+                                        "invert(41%) sepia(83%) saturate(2321%) hue-rotate(203deg) brightness(104%) contrast(103%)",
+                                }}
+                            />
                             <p>{item.name}</p>
                         </InnerHeaderItem>{" "}
                     </Link>
