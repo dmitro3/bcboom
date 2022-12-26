@@ -20,8 +20,9 @@ const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
     borderRadius: "20px",
     border: "transparent",
     padding: "20px 30px",
-    width: isMobile ? "85%" : "600px",
+    width: isMobile ? "100%" : "600px",
     margin: isMobile && '0 auto',
+
 }));
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
@@ -174,7 +175,7 @@ const LoginSignupModal = () => {
                     <NewCustomTabs
                         tabItems={[
                             {
-                                value: "logsin",
+                                value: "login",
                                 label: "Log In",
                                 content: <LoginForm isMobile={isMobile}/>,
                             },

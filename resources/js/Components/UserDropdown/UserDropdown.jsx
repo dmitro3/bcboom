@@ -229,16 +229,15 @@ const UserDropdown = ({
                     style={{ height: isMobile ? "12px" : "18px" }}
                 />
             </CurrencyWrapper>
-            <div>
+            <div
+                onClick={() => dispatcher(setWalletModalState({ open: true }))}
+                style={{ cursor: "pointer" }}
+            >
                 <CurrentBalance isMobile={isMobile}>
                     <p>{user.balance.split(".")[0]}.</p>
                     <p>{user.balance.split(".")[1] || "00"}</p>
                 </CurrentBalance>
-                <Wallet
-                    onClick={() =>
-                        dispatcher(setWalletModalState({ open: true }))
-                    }
-                >
+                <Wallet>
                     <img
                         src={wallet}
                         alt="wallet"
