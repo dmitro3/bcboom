@@ -1,1 +1,0 @@
-import{a as t}from"./app-f1289513.js";import{B as o}from"./GuestLayout-be192c7a.js";const m=({customStyles:e,children:r})=>t(o,{sx:{width:"48%",height:"12.75rem",borderRadius:"1.25rem",display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center",flexDirection:"column",padding:"2rem",...e},children:r});export{m as P};
