@@ -54,6 +54,10 @@ const DiceButtonGrid = ({ playDeter }) => {
         }
         return true;
     }
+
+ 
+ 
+ 
     return (
         <Box
             sx={{
@@ -260,7 +264,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                         );
                         dispatch(setGameIsOn(true));
                     }
-                }}   
+                }}
             >
                 {playing ? "..." : "Play"}
             </Button>
