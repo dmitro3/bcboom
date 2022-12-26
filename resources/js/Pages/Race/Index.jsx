@@ -85,7 +85,7 @@ const RaceIndex = () => {
                 },
                 {
                     title: "weekly card",
-                    cardColors: ["#32CCEE, #3586FF"],
+                    cardColors: ["#32CCEE", "#3586FF"],
                 },
                 {
                     title: "weekly tournament",
@@ -101,7 +101,7 @@ const RaceIndex = () => {
                 },
                 {
                     title: "weekly card",
-                    cardColors: ["#32CCEE, #3586FF"],
+                    cardColors: ["#32CCEE", "#3586FF"],
                 },
                 {
                     title: "weekly tournament",

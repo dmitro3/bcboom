@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import cup from "../../../../public/images/svg/cup.svg";
 import batch from "../../../../public/images/svg/batch.svg";
 import users from "../../../../public/images/svg/users.svg";
@@ -69,9 +69,9 @@ const JumboStats = styled("div")(() => ({
 const Toppers = styled("div")(() => ({
     padding: "10px 20px",
 
-    '& > *': {
-        margin: '10px 0'
-    }
+    "& > *": {
+        margin: "10px 0",
+    },
 }));
 const Topper = styled("div")(() => ({}));
 
@@ -112,88 +112,111 @@ const Stats = ({ icon, text, count }) => {
         </div>
     );
 };
+const OverLay = styled("div")(({ visible }) => ({
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    background: "rgba(0,0,0,0.5)",
+    borderRadius: "10px",
+    zIndex: 2,
+    display: visible ? "block" : "none",
+}));
 
-const GamesCarouseCard = ({ card }) => {
+const GamesCarouseCard = ({ card, index }) => {
+    const [mouseOver, setMouseOver] = useState(-1);
     return (
-        <CardWrapper color={card.cardColors}>
-            <Flex alignItems="center">
-                <GameCount color={card.cardColors}>
-                    <img
-                        src={cup}
-                        alt=""
-                        style={{ width: "25px", marginTop: "5px" }}
+        <>
+            {/* <OverLay visible={mouseOver === index} /> */}
+            <CardWrapper
+                color={card.cardColors}
+                onMouseEnter={() => setMouseOver(index)}
+                onMouseLeave={() => setMouseOver(-1)}
+            >
+                <Flex alignItems="center">
+                    <GameCount color={card.cardColors}>
+                        <img
+                            src={cup}
+                            alt=""
+                            style={{ width: "25px", marginTop: "5px" }}
+                        />
+                        <span>2000</span>
+                    </GameCount>
+                    <CountdownTimer />
+                </Flex>
+                <JumboText>
+                    <Text
+                        type="p"
+                        text={card.title.split(" ")[0]}
+                        fontSize="123%"
                     />
-                    <span>2000</span>
-                </GameCount>
-                <CountdownTimer />
-            </Flex>
-            <JumboText>
-                <Text
-                    type="p"
-                    text={card.title.split(" ")[0]}
-                    fontSize="123%"
-                />
 
-                <Text
-                    type="p"
-                    text={card.title.split(" ").slice(1, 4).join(" ")}
-                    fontSize="190%"
-                    whiteSpace="nowrap"
-                />
-            </JumboText>
-            <JumboStats>
-                {[
-                    { icon: users, text: "Members", count: 100 },
-                    { icon: batch, text: "price Places", count: 20 },
-                ].map((item, key) => (
-                    <Stats
-                        key={key}
-                        icon={item.icon}
-                        count={item.count}
-                        text={item.text}
+                    <Text
+                        type="p"
+                        text={card.title.split(" ").slice(1, 4).join(" ")}
+                        fontSize="190%"
+                        whiteSpace="nowrap"
                     />
-                ))}
-            </JumboStats>
-            <Toppers>
-                {Array.from({ length: 5 }).map((key) => (
-                    <Flex
-                        key={key}
-                        alignItems="center"
-                        justifyContent="space-between"
-                    >
-                        <Flex alignItems="center">
-                            <img
-                                src={asianman}
-                                alt=""
-                                style={{
-                                    height: "40px",
-                                    width: "40px",
-                                    padding: "2px",
-                                    borderRadius: "50%",
-                                }}
-                            />
-                            <Text
-                                type="p"
-                                text="execubeweb"
-                                color="#A6AFE0"
-                                fontSize="13px"
-                                paddingLeft="10px"
-                            />
+                </JumboText>
+                <JumboStats>
+                    {[
+                        { icon: users, text: "Members", count: 100 },
+                        { icon: batch, text: "price Places", count: 20 },
+                    ].map((item, key) => (
+                        <Stats
+                            key={key}
+                            icon={item.icon}
+                            count={item.count}
+                            text={item.text}
+                        />
+                    ))}
+                </JumboStats>
+                <Toppers>
+                    {Array.from({ length: 5 }).map((key) => (
+                        <Flex
+                            key={key}
+                            alignItems="center"
+                            justifyContent="space-between"
+                        >
+                            <Flex alignItems="center">
+                                <img
+                                    src={asianman}
+                                    alt=""
+                                    style={{
+                                        height: "40px",
+                                        width: "40px",
+                                        padding: "2px",
+                                        borderRadius: "50%",
+                                    }}
+                                />
+                                <Text
+                                    type="p"
+                                    text="execubeweb"
+                                    color="#A6AFE0"
+                                    fontSize="13px"
+                                    paddingLeft="10px"
+                                />
+                            </Flex>
+                            <Flex>
+                                <img
+                                    src={real}
+                                    alt=""
+                                    style={{ height: "30px" }}
+                                />
+                                <Text
+                                    type="p"
+                                    text="2430.00"
+                                    color="#A6AFE0"
+                                    fontSize="12px"
+                                    fontWeight="bold"
+                                />
+                            </Flex>
                         </Flex>
-                        <Flex>
-                            <img src={real} alt="" style={{ height: "30px" }} />
-                            <Text
-                                type="p"
-                                text="2430.00"
-                                color="#A6AFE0"
-                                fontSize="12px"
-                                fontWeight="bold"
-                            />
-                        </Flex>
-                    </Flex>
-                ))}
-            </Toppers>
-        </CardWrapper>
+                    ))}
+                </Toppers>
+            </CardWrapper>
+        </>
     );
 };
 

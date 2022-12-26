@@ -17,6 +17,7 @@ const CustomCarousel = ({
     rowPerCount,
     autoplay = true,
     paging = true,
+    prevArrow, nextArrow
 }) => {
     const settings = {
         dots: true,
@@ -28,9 +29,11 @@ const CustomCarousel = ({
         initialSlide: 0,
         speed: 2000,
         slidesPerRow: rowPerCount,
-        arrows: false,
         adaptiveHeight: true,
         accessibility: true,
+        prevArrow: prevArrow,
+        nextArrow: nextArrow,
+        arrows: !!prevArrow,
         appendDots: (dots) => <ul>{dots}</ul>,
         ...(paging && {
             customPaging: (i) => (
