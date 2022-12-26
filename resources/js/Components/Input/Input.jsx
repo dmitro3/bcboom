@@ -9,6 +9,7 @@ const InputWrapper = styled("div")(({ br }) => ({
     borderRadius: br || "32px",
     border: "1px solid #464F85",
     position: "relative",
+    width: "100%",
     "& label": {
         position: "absolute",
         top: "-10px",
@@ -35,7 +36,8 @@ const InputWrapper = styled("div")(({ br }) => ({
     },
 }));
 const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
-    width: isMobile ? "100%" : "380px",
+    // width: isMobile ? "100%" : "380px",
+    width: "100%",
     padding: addon ? "12px 50px" : "12px 20px",
     border: "none",
     borderRadius: br || "32px",

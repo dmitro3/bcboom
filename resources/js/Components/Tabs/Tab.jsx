@@ -14,6 +14,7 @@ function TabPanel(props) {
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
             {...other}
+            style={{ flexGrow: 1 , width: "100%"}}
         >
             {value === index && <Box>{children}</Box>}
         </div>

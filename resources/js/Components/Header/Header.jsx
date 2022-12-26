@@ -278,7 +278,7 @@ export const MobileHeader = () => {
                 </Link>
             </Logo>
             <ButtonComponents>
-                <UserDropdown isLoggedIn={true}/>
+                <UserDropdown isLoggedIn={false}/>
             </ButtonComponents>
         </MobileHeaderWrapper>
     );
