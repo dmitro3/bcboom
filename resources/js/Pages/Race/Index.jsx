@@ -66,42 +66,54 @@ const RaceIndex = () => {
             imageHeight: "175px",
             perColumn: 3,
             // hoverEffect: "",
-            images: [
+            cards: [
                 {
-                    image: wealth,
-                    link: "/promotions/invite",
-                    addon: null,
-                    addonColor: null,
+                    title: "weekly card",
+                    cardColors: ["#32CCEE", "#3586FF"],
                 },
                 {
-                    image: distributors,
-                    link: "/promotions/distributor",
-                    addon: null,
-                    addonColor: null,
+                    title: "weekly tournament",
+                    cardColors: ["#F9AD3C", "#F93C56"],
                 },
                 {
-                    image: bonus,
-                    link: "/promotions/full_bonus",
-                    addon: null,
-                    addonColor: null,
+                    title: "tournament of the month",
+                    cardColors: ["#3CF97C", "#16B5D8"],
                 },
                 {
-                    image: vipexclusive,
-                    link: "/promotions/exclusive",
-                    addon: null,
-                    addonColor: null,
+                    title: "tournament of the day",
+                    cardColors: ["#A63CF9", "#6D3CF9"],
                 },
                 {
-                    image: off,
-                    link: "/promotions/deposit",
-                    addon: null,
-                    addonColor: null,
+                    title: "weekly card",
+                    cardColors: ["#32CCEE, #3586FF"],
                 },
                 {
-                    image: weekend,
-                    link: "/promotions/bonus",
-                    addon: null,
-                    addonColor: null,
+                    title: "weekly tournament",
+                    cardColors: ["#F9AD3C", "#F93C56"],
+                },
+                {
+                    title: "tournament of the month",
+                    cardColors: ["#3CF97C", "#16B5D8"],
+                },
+                {
+                    title: "tournament of the day",
+                    cardColors: ["#A63CF9", "#6D3CF9"],
+                },
+                {
+                    title: "weekly card",
+                    cardColors: ["#32CCEE, #3586FF"],
+                },
+                {
+                    title: "weekly tournament",
+                    cardColors: ["#F9AD3C", "#F93C56"],
+                },
+                {
+                    title: "tournament of the month",
+                    cardColors: ["#3CF97C", "#16B5D8"],
+                },
+                {
+                    title: "tournament of the day",
+                    cardColors: ["#A63CF9", "#6D3CF9"],
                 },
             ],
         },
@@ -115,7 +127,7 @@ const RaceIndex = () => {
                     <PromotionPageWrapper>
                         <PromotionImageHeader isMobile={isMobile}>
                             <p>WEEKLY</p>
-                            <p>TOUORNAMENTS</p>
+                            <p>TOURNAMENTS</p>
                             <p>
                                 Participate in numerous tournaments and complete
                                 againts other players for a hefty{" "}

@@ -81,7 +81,7 @@ const BonusIndex = () => {
                 },
                 {
                     image: welcomeowl,
-                    link: "/bonus/full_bonus",
+                    link: "/bonus/full-bonus",
                     addon: null,
                     addonColor: null,
                 },

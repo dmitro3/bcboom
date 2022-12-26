@@ -37,6 +37,10 @@ Route::get('/promotions/bonus', function () {
     return Inertia::render('Promotions/Bonus');
    
 });
+Route::get('/promotions/full-bonus', function () {
+    return Inertia::render('Bonus/FullBonus');
+   
+});
 
 Route::get('/bonus/bonus-everyday', function () {
     return Inertia::render('Bonus/BonusEveryday');

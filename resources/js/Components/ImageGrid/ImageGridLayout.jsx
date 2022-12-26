@@ -1,6 +1,7 @@
 import React from "react";
 import titleBg from "../../../../public/images/svg/titlebg.svg";
 import leftcut from "../../../../public/images/others/leftcut.svg";
+import gridbg from "../../../../public/images/others/gridbg.png";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
@@ -41,6 +42,7 @@ const GridLeftCut = styled("div")(({ isMobile }) => ({
 }));
 
 const SectionWrapper = styled("div")(({ isMobile, margin }) => ({
+    // background: `url(${gridbg})`,
     height: "fit-content",
     overflow: "hidden",
     padding: isMobile ? "20px 10px" : "25px",

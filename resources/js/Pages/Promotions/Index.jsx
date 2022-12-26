@@ -76,7 +76,7 @@ const PromotionIndex = () => {
                 },
                 {
                     image: bonus,
-                    link: "/promotions/full_bonus",
+                    link: "/promotions/full-bonus",
                     addon: null,
                     addonColor: null,
                 },
