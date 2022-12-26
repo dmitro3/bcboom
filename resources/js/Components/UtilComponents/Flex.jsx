@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 
-export const Flex = styled('div')(
+export const Flex = styled("div")(
     ({
         direction,
         wrap,
@@ -23,6 +23,8 @@ export const Flex = styled('div')(
         borderTop,
         borderBottom,
         gap,
+        borderRadius,
+        cursor
     }) => ({
         display: "flex",
         flexDirection: direction || "",
@@ -46,6 +48,8 @@ export const Flex = styled('div')(
         borderTop: borderTop || "",
         borderBottom: borderBottom || "",
         gap: gap || "",
+        borderRadius: borderRadius || "",
+        cursor: cursor || "",
     })
 );
 

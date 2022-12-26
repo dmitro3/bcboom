@@ -37,14 +37,18 @@ Route::get('/promotions/bonus', function () {
     return Inertia::render('Promotions/Bonus');
    
 });
-
-Route::get('/promotions/bonus_everyday', function () {
-    return Inertia::render('Promotions/BonusEveryday');
+Route::get('/promotions/full-bonus', function () {
+    return Inertia::render('Bonus/FullBonus');
    
 });
 
-Route::get('/promotions/full_bonus', function () {
-    return Inertia::render('Promotions/FullBonus');
+Route::get('/bonus/bonus-everyday', function () {
+    return Inertia::render('Bonus/BonusEveryday');
+   
+});
+
+Route::get('/bonus/full-bonus', function () {
+    return Inertia::render('Bonus/FullBonus');
    
 });
 
@@ -64,8 +68,23 @@ Route::get('/games', function () {
 Route::get('/slots', function () {
     return Inertia::render('Slots/Index');
 });
+Route::get('/race', function () {
+    return Inertia::render('Race/Index');
+});
+Route::get('/live-casino', function () {
+    return Inertia::render('LiveCasino/Index');
+});
+Route::get('/bonus', function () {
+    return Inertia::render('Bonus/Index');
+});
+Route::get('/vip', function () {
+    return Inertia::render('Bonus/BonusEveryday');
+});
+// Route::get('/vip', function () {
+//     return Inertia::render('VIP/Index');
+// });
 
-Route::get('/games/dinosaur', function () {
+Route::get('/games/crash', function () {
     return Inertia::render('Game/Dinosaur');
    
 });
@@ -90,7 +109,7 @@ Route::get('/games/wheel', function () {
    
 });
 
-Route::get('/games/coin', function () {
+Route::get('/games/coin-flip', function () {
     return Inertia::render('Game/CoinFlip');
    
 });
@@ -100,12 +119,12 @@ Route::get('/games/tower', function () {
    
 });
 
-Route::get('/games/stair', function () {
+Route::get('/games/stairs', function () {
     return Inertia::render('Game/Stair');
    
 });
 
-Route::get('/games/ring', function () {
+Route::get('/games/roulette', function () {
     return Inertia::render('Game/Ring');
    
 });

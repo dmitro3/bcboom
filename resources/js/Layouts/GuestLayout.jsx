@@ -2,6 +2,7 @@ import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
 import MobileFooter from "@/Components/Footer/MobileFooter";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
+import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
 import { useSelector } from "react-redux";
@@ -29,6 +30,8 @@ export default function GuestLayout({ children }) {
     const { isMobile } = useScreenResolution();
     const { drawerState } = useSelector((state) => state.app);
     const { modalState } = useSelector((state) => state.auth);
+    const { modalState: walletModalState } = useSelector((state) => state.wallet);
+
     // if (isMobile) {
     //     return (
     //         <LayoutTheme>
@@ -45,6 +48,7 @@ export default function GuestLayout({ children }) {
         <LayoutTheme>
             {isMobile && drawerState?.open && <Sidedrawer />}
             {modalState?.open && <LoginSignupModal />}
+            {walletModalState?.open && <WalletModal />}
             <PageLayout>
                 {isMobile ? <MobileHeader /> : <DesktopHeader />}
                 <PageBody isMobile={isMobile}>

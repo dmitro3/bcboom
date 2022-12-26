@@ -9,6 +9,7 @@ const InputWrapper = styled("div")(({ br }) => ({
     borderRadius: br || "32px",
     border: "1px solid #464F85",
     position: "relative",
+    width: "100%",
     "& label": {
         position: "absolute",
         top: "-10px",
@@ -25,9 +26,18 @@ const InputWrapper = styled("div")(({ br }) => ({
         transform: "translateY(-50%)",
         color: "#fff",
     },
+    "& p": {
+        position: "absolute",
+        top: "50%",
+        right: "20px",
+        transform: "translateY(-50%)",
+        color: "#4F95FF",
+        fontWeight: "bold",
+    },
 }));
 const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
-    width: isMobile ? "100%" : "380px",
+    // width: isMobile ? "100%" : "380px",
+    width: "100%",
     padding: addon ? "12px 50px" : "12px 20px",
     border: "none",
     borderRadius: br || "32px",
@@ -35,15 +45,19 @@ const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
     color: "#fff",
     fontSize: "14px",
     outline: "none",
-
+    
     "&::placeholder": {
         color: "#fff",
     },
     "&:focus": {
-        color: "#3586FF",
+        // color: "#3586FF",
         outline: "none",
         border: "none",
         boxShadow: "none",
+    },
+    "&::-webkit-outer-spin-button,&::-webkit-inner-spin-button": {
+        "-webkit-appearance": "none",
+        margin: "0",
     },
 }));
 const PasswordToggler = styled("div")(({}) => ({
@@ -61,6 +75,8 @@ const Input = ({
     onChange,
     bg,
     br,
+    afterInputText,
+    disabled
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const { isMobile } = useScreenResolution();
@@ -84,7 +100,9 @@ const Input = ({
                 isMobile={isMobile}
                 bg={bg}
                 br={br}
+                disabled={disabled}
             />
+            {afterInputText && <p>{afterInputText}</p>}
             {type === "password" && (
                 <PasswordToggler onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? (

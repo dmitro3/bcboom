@@ -12,10 +12,16 @@ const Wrapper = styled("div")(({ theme }) => ({
     width: "100%",
     overflow: "hidden",
 }));
-const CustomCarousel = ({ children, rowPerCount }) => {
+const CustomCarousel = ({
+    children,
+    rowPerCount,
+    autoplay = true,
+    paging = true,
+    prevArrow, nextArrow
+}) => {
     const settings = {
         dots: true,
-        autoplay: true,
+        autoplay: autoplay,
         autoplaySpeed: 4300,
         infinite: true,
         slidesToShow: 1,
@@ -23,15 +29,19 @@ const CustomCarousel = ({ children, rowPerCount }) => {
         initialSlide: 0,
         speed: 2000,
         slidesPerRow: rowPerCount,
-        arrows: false,
         adaptiveHeight: true,
         accessibility: true,
+        prevArrow: prevArrow,
+        nextArrow: nextArrow,
+        arrows: !!prevArrow,
         appendDots: (dots) => <ul>{dots}</ul>,
-        customPaging: (i) => (
-            <div className="ft-slick__dots--custom">
-                <div className="loading" />
-            </div>
-        ),
+        ...(paging && {
+            customPaging: (i) => (
+                <div className="ft-slick__dots--custom">
+                    <div className="loading" />
+                </div>
+            ),
+        }),
     };
     return (
         <Wrapper>

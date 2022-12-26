@@ -17,6 +17,7 @@ import { styled } from "@mui/system";
 import Text from "../Text/Text";
 import { Link } from "@inertiajs/inertia-react";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setWalletModalState } from "@/redux/wallet/wallet-slice";
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
@@ -35,7 +36,7 @@ const CurrentBalance = styled("div")(({ isMobile }) => ({
     // lineHeight: 1,
     marginBottom: "3px",
     "& p": {
-        fontSize: isMobile ? "20px" : "23px",
+        fontSize: isMobile ? "17px" : "20px",
         fontWeight: "bold",
         "&:first-child": {
             color: "white",
@@ -53,6 +54,7 @@ const Wallet = styled("div")(({}) => ({
     marginLeft: "10px",
     fontSize: "18px",
     fontWeight: "bold",
+    cursor: "pointer",
 }));
 const UserAvatar = styled("div")(({}) => ({
     display: "flex",
@@ -227,7 +229,10 @@ const UserDropdown = ({
                     style={{ height: isMobile ? "12px" : "18px" }}
                 />
             </CurrencyWrapper>
-            <div>
+            <div
+                onClick={() => dispatcher(setWalletModalState({ open: true }))}
+                style={{ cursor: "pointer" }}
+            >
                 <CurrentBalance isMobile={isMobile}>
                     <p>{user.balance.split(".")[0]}.</p>
                     <p>{user.balance.split(".")[1] || "00"}</p>
@@ -238,7 +243,7 @@ const UserDropdown = ({
                         alt="wallet"
                         style={{ height: isMobile ? "18px" : "20px" }}
                     />
-                    <p>Wallet</p>
+                    <p style={{fontSize: '15px'}}>Wallet</p>
                 </Wallet>
             </div>
             <UserAvatar>
@@ -248,11 +253,11 @@ const UserDropdown = ({
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage size={isMobile ? '40px' : '45px'}>
+                        <UserImage size={isMobile ? "40px" : "45px"}>
                             <img
                                 src={user.avatar}
                                 alt="useravatar"
-                                style={{ height:  "100%", cursor: "pointer" }}
+                                style={{ height: "100%", cursor: "pointer" }}
                             />
                         </UserImage>
                         <Chevron>
