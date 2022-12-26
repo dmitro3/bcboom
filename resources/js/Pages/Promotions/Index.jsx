@@ -60,7 +60,7 @@ const PromotionIndex = () => {
             imageWidth: "534px",
             imageHeight: "175px",
             perColumn: 3,
-            hoverEffect: "overlay",
+            // hoverEffect: "",
             images: [
                 {
                     image: wealth,

@@ -44,7 +44,7 @@ export default function Homepage(props) {
             margin: "25px",
             perColumn: 5,
             page: "home",
-            iconSize: "18px",
+            iconSize: '18px',
             images: [
                 { image: crash, link: "/crash", addon: null, addonColor: null },
                 { image: dice, link: "/dice", addon: null, addonColor: null },
@@ -157,7 +157,7 @@ export default function Homepage(props) {
             countOnMobile: 4,
             urlForMore: "/live-casino",
             images: [
-                {
+                               {
                     image: crazycoin,
                     link: "/games/great-rhyno",
                     addon: "New",
@@ -169,14 +169,14 @@ export default function Homepage(props) {
                     link: "/games/aztech-magic",
                     addon: "HOT",
                     addonColor: "#F9C43C",
-                    title: "Aztech Magic",
+                    title: 'Aztech Magic'
                 },
                 {
                     image: casinohold,
                     link: "/games/sweet-bonanza",
                     addon: null,
                     addonColor: null,
-                    title: "Sweet Bonanza",
+                    title: 'Sweet Bonanza'
                 },
 
                 {
@@ -184,56 +184,49 @@ export default function Homepage(props) {
                     link: "/games/keno",
                     addon: null,
                     addonColor: null,
-                    title: "Keno",
+                    title: 'Keno'
                 },
                 {
                     image: goldbar,
                     link: "/games/limbo",
                     addon: null,
                     addonColor: null,
-                    title: "Limbo",
+                    title: 'Limbo'
                 },
                 {
                     image: goldenwealth,
                     link: "/games/roulette",
                     addon: null,
                     addonColor: null,
-                    title: "Roulette",
+                    title: 'Roulette'
                 },
                 {
                     image: dragontiger,
                     link: "/games/wheel",
                     addon: null,
                     addonColor: null,
-                    title: "Dragon Tiger Live",
+                    title: 'Dragon Tiger Live'
                 },
                 {
                     image: betonnumber,
                     link: "/games/bet-on-number",
                     addon: null,
                     addonColor: null,
-                    title: "Bet on Number",
+                    title: 'Bet on Number'
                 },
                 {
                     image: ultimate,
                     link: "/games/ultimate-sic-bo",
                     addon: null,
                     addonColor: null,
-                    title: "Ultimate Sic Bo",
-                },
-                {
-                    image: goldblackjack,
-                    link: "/games/goldblackjack",
-                    addon: null,
-                    addonColor: null,
-                    title: "Gold Blackjack",
+                    title: 'Ultimate Sic Bo'
                 },
                 {
                     image: Thirty2cards,
                     link: "/stairs",
                     addon: null,
                     addonColor: null,
-                    title: "32 Cards",
+                    title: '32 Cards'
                 },
             ],
         },

@@ -46,12 +46,12 @@ export const navlinks = [
         {
             name: "Bonus",
             icon: bonus,
-            link: "/promotions/bonus_everyday",
+            link: "/bonus",
         },
         {
             name: "VIP",
             icon: vip,
-            link: "/promotions/exclusive",
+            link: "/vip",
         },
 ];
 

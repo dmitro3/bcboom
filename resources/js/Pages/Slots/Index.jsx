@@ -60,7 +60,7 @@ export default function Homepage(props) {
             perColumn: 5,
             page: "home",
             countOnMobile: 4,
-
+            hoverEffect: 'overlay',
             images: [
                 {
                     image: greatRhyno,

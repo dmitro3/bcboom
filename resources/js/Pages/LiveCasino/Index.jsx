@@ -57,7 +57,7 @@ export default function LiveCasino(props) {
             perColumn: 5,
             page: "home",
             countOnMobile: 4,
-            hoverEffect: 'overlay',
+            hoverEffect: "overlay",
             images: [
                 {
                     image: crazycoin,
@@ -71,92 +71,92 @@ export default function LiveCasino(props) {
                     link: "/games/aztech-magic",
                     addon: "HOT",
                     addonColor: "#F9C43C",
-                    title: 'Aztech Magic'
+                    title: "Blackjack Magic",
                 },
                 {
                     image: casinohold,
                     link: "/games/sweet-bonanza",
                     addon: null,
                     addonColor: null,
-                    title: 'Sweet Bonanza'
+                    title: "Casino Hold'em",
                 },
 
                 {
                     image: lightning,
-                    link: "/games/keno",
+                    link: "/games/lightning-blackjck",
                     addon: null,
                     addonColor: null,
-                    title: 'Keno'
+                    title: "Lightning Blackjack",
                 },
                 {
                     image: goldbar,
-                    link: "/games/limbo",
+                    link: "/games/goldbar-roulette",
                     addon: null,
                     addonColor: null,
-                    title: 'Limbo'
+                    title: "Goldbar Roulette",
                 },
                 {
                     image: goldenwealth,
-                    link: "/games/roulette",
+                    link: "/games/golden-wealth",
                     addon: null,
                     addonColor: null,
-                    title: 'Roulette'
+                    title: "Golden Wealth",
                 },
                 {
                     image: dragontiger,
                     link: "/games/wheel",
                     addon: null,
                     addonColor: null,
-                    title: 'Dragon Tiger Live'
+                    title: "Dragon Tiger Live",
                 },
                 {
                     image: betonnumber,
                     link: "/games/bet-on-number",
                     addon: null,
                     addonColor: null,
-                    title: 'Bet on Number'
+                    title: "Bet on Number",
                 },
                 {
                     image: ultimate,
                     link: "/games/ultimate-sic-bo",
                     addon: null,
                     addonColor: null,
-                    title: 'Ultimate Sic Bo'
+                    title: "Ultimate Sic Bo",
                 },
                 {
                     image: goldblackjack,
                     link: "/games/goldblackjack",
                     addon: null,
                     addonColor: null,
-                    title: 'Gold Blackjack'
+                    title: "Gold Blackjack",
                 },
                 {
                     image: Thirty2cards,
                     link: "/stairs",
                     addon: null,
                     addonColor: null,
-                    title: '32 Cards'
+                    title: "32 Cards",
                 },
                 {
                     image: ruletika,
                     link: "/games/ruletika",
                     addon: null,
                     addonColor: null,
-                    title: 'Ruletika'
+                    title: "Ruletika",
                 },
                 {
                     image: andarbar,
                     link: "/games/andarbar",
                     addon: null,
                     addonColor: null,
-                    title: 'Andar Bahar'
+                    title: "Andar Bahar",
                 },
                 {
                     image: blackjcklive,
                     link: "/games/blackjcklive",
                     addon: null,
                     addonColor: null,
-                    title: 'Blackjack Live'
+                    title: "Blackjack Live",
                 },
 
                 {
@@ -164,35 +164,35 @@ export default function LiveCasino(props) {
                     link: "/games/goldblackjack",
                     addon: null,
                     addonColor: null,
-                    title: 'Gold Blackjack'
+                    title: "Gold Blackjack",
                 },
                 {
                     image: craps,
                     link: "/games/craps",
                     addon: null,
                     addonColor: null,
-                    title: 'Craps'
+                    title: "Craps",
                 },
                 {
                     image: sniondrive,
                     link: "/games/sniondrive",
                     addon: null,
                     addonColor: null,
-                    title: 'Snion Drive'
+                    title: "Snion Drive",
                 },
                 {
                     image: casinohold,
                     link: "/sweet-bonanza",
                     addon: null,
                     addonColor: null,
-                    title: 'Sweet Bonanza'
+                    title: "Sweet Bonanza",
                 },
                 {
                     image: dragontigerlive,
                     link: "/games/dragontigerlive",
                     addon: null,
                     addonColor: null,
-                    title: 'Dragon Tiger Live'
+                    title: "Dragon Tiger Live",
                 },
 
                 {
@@ -200,7 +200,7 @@ export default function LiveCasino(props) {
                     link: "/games/ultimatesicbo",
                     addon: null,
                     addonColor: null,
-                    title: 'Ultimate Sic Bo'
+                    title: "Ultimate Sic Bo",
                 },
             ],
         },

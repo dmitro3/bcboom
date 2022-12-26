@@ -95,8 +95,7 @@ const OverLay = ({ item, visible }) => {
                 borderRadius: "10px",
                 cursor: "pointer",
                 zIndex: 500,
-                transition:
-                    "visibility 0.3s linear,opacity 0.3s linear;",
+                transition: "visibility 0.3s linear,opacity 0.3s linear;",
             }}
         >
             <div
@@ -129,6 +128,7 @@ const OverLay = ({ item, visible }) => {
 
 const ImageGridWithHeader = ({ gridItems }) => {
     const { isMobile } = useScreenResolution();
+    const [showOverlay, setShowOverlay] = useState(-1);
     return (
         <GridWrapper>
             {gridItems.map((item, index) => (
@@ -156,32 +156,54 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                         : item?.images.length
                                 )
                                 .map((image, index) => {
-                                    const [showOverlay, setShowOverlay] =
-                                        useState(false);
-
                                     return (
                                         <div
                                             style={{ position: "relative" }}
                                             onMouseEnter={() =>
-                                                setShowOverlay(true)
+                                                setShowOverlay(index)
                                             }
                                             onMouseLeave={() =>
-                                                setShowOverlay(false)
+                                                setShowOverlay(-1)
                                             }
                                         >
-                                            <OverLay
-                                                item={image}
-                                                visible={showOverlay}
-                                            />
-                                            {/* <Link href={image.link}> */}
-                                            <GridItemImage
-                                                key={index}
-                                                src={image.image}
-                                                width={item?.imageWidth}
-                                                height={item?.imageHeight}
-                                                hoverEffect={item?.hoverEffect}
-                                            />
-                                            {/* </Link> */}
+                                            {item.hoverEffect === "overlay" ? (
+                                                <>
+                                                    <OverLay
+                                                        item={image}
+                                                        visible={
+                                                            showOverlay ===
+                                                                index &&
+                                                            item.hoverEffect ===
+                                                                "overlay"
+                                                        }
+                                                    />
+                                                    <GridItemImage
+                                                        key={index}
+                                                        src={image.image}
+                                                        width={item?.imageWidth}
+                                                        height={
+                                                            item?.imageHeight
+                                                        }
+                                                        hoverEffect={
+                                                            item?.hoverEffect
+                                                        }
+                                                    />
+                                                </>
+                                            ) : (
+                                                <Link href={image.link}>
+                                                    <GridItemImage
+                                                        key={index}
+                                                        src={image.image}
+                                                        width={item?.imageWidth}
+                                                        height={
+                                                            item?.imageHeight
+                                                        }
+                                                        hoverEffect={
+                                                            item?.hoverEffect
+                                                        }
+                                                    />
+                                                </Link>
+                                            )}
                                         </div>
                                     );
                                 })}
