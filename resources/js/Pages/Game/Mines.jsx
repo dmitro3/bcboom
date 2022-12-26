@@ -1,11 +1,11 @@
-import GuestLayout from "@/Layouts/GuestLayout";
-import PageTemplate from "@/Layouts/templates/PageTemplate";
-import { Head } from "@inertiajs/inertia-react";
 import React from "react";
 import { styled } from "@mui/system";
+import GuestLayout from "@/Layouts/GuestLayout";
+import PageTemplate from "@/Layouts/templates/PageTemplate";
 import GameLayout from "@/Components/Game/layout/GameLayout";
-import DinosaurButtonGrids from "@/Components/Game/buttongrids/DinosaurButtonGrids";
-import DinosaurFrame from "@/Components/Game/frames/DinosaurFrame";
+import { Head } from "@inertiajs/inertia-react";
+import MinesFrame from "@/Components/Game/frames/MinesFrame";
+import MinesGrids from "@/Components/Game/buttongrids/MinesGrids";
 
 const GamesPageWrapper = styled("div")(() => ({
     background: "#1D2036",
@@ -21,17 +21,22 @@ const GamesPageWrapper = styled("div")(() => ({
     position: "relative",
 }));
 
-const Dinosaur = () => {
+const Mines = () => {
     return (
         <div>
-            <Head title=" Game Dinosaur " />
+            <Head title="Game Mines" />
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
-                            ButtonGrid={DinosaurButtonGrids}
-                            GameFrameText={"Crash"}
-                            GameFrame={DinosaurFrame}
+                            GameFrame={MinesFrame}
+                            GameFrameText={"Mines"}
+                            ButtonGrid={MinesGrids}
+                            customFrameStyles={{
+                                background: "#1D234F",
+                                paddingBottom: 0,
+                                paddingLeft: 0,
+                            }}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
@@ -40,4 +45,4 @@ const Dinosaur = () => {
     );
 };
 
-export default Dinosaur;
+export default Mines;

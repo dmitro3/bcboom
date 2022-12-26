@@ -476,3 +476,34 @@ export const gamesTableRows = [
         profit: "Betting",
     },
 ];
+
+export const minesBettingData = [
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+    {
+        multiplier: 1.15,
+        hits: 13,
+    },
+];

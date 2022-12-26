@@ -1,11 +1,11 @@
+import CoinFlipButtonGrid from "@/Components/Game/buttongrids/CoinFlipButtonGrid";
+import CoinFlipFrame from "@/Components/Game/frames/CoinFlipFrame";
+import GameLayout from "@/Components/Game/layout/GameLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import React from "react";
 import { styled } from "@mui/system";
-import GameLayout from "@/Components/Game/layout/GameLayout";
-import DinosaurButtonGrids from "@/Components/Game/buttongrids/DinosaurButtonGrids";
-import DinosaurFrame from "@/Components/Game/frames/DinosaurFrame";
+import React from "react";
 
 const GamesPageWrapper = styled("div")(() => ({
     background: "#1D2036",
@@ -21,17 +21,18 @@ const GamesPageWrapper = styled("div")(() => ({
     position: "relative",
 }));
 
-const Dinosaur = () => {
+const CoinFlip = () => {
     return (
         <div>
-            <Head title=" Game Dinosaur " />
+            <Head title="Game Coin Flip" />
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
-                            ButtonGrid={DinosaurButtonGrids}
-                            GameFrameText={"Crash"}
-                            GameFrame={DinosaurFrame}
+                            GameFrameText={"Coin Flip"}
+                            GameFrame={CoinFlipFrame}
+                            ButtonGrid={CoinFlipButtonGrid}
+                            displayPanel={false}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
@@ -40,4 +41,4 @@ const Dinosaur = () => {
     );
 };
 
-export default Dinosaur;
+export default CoinFlip;

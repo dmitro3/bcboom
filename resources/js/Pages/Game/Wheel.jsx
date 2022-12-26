@@ -1,11 +1,11 @@
+import WheelButtonGrid from "@/Components/Game/buttongrids/WheelButtonGrid";
+import WheelFrame from "@/Components/Game/frames/WheelFrame";
+import GameLayout from "@/Components/Game/layout/GameLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import React from "react";
 import { styled } from "@mui/system";
-import GameLayout from "@/Components/Game/layout/GameLayout";
-import DinosaurButtonGrids from "@/Components/Game/buttongrids/DinosaurButtonGrids";
-import DinosaurFrame from "@/Components/Game/frames/DinosaurFrame";
+import React from "react";
 
 const GamesPageWrapper = styled("div")(() => ({
     background: "#1D2036",
@@ -21,17 +21,18 @@ const GamesPageWrapper = styled("div")(() => ({
     position: "relative",
 }));
 
-const Dinosaur = () => {
+const Wheel = () => {
     return (
         <div>
-            <Head title=" Game Dinosaur " />
+            <Head title="Game Wheel" />
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
-                            ButtonGrid={DinosaurButtonGrids}
-                            GameFrameText={"Crash"}
-                            GameFrame={DinosaurFrame}
+                            GameFrameText={"Wheel"}
+                            GameFrame={WheelFrame}
+                            ButtonGrid={WheelButtonGrid}
+                            displayPanel={false}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
@@ -40,4 +41,4 @@ const Dinosaur = () => {
     );
 };
 
-export default Dinosaur;
+export default Wheel;

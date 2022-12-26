@@ -21,12 +21,18 @@ const GameFrameHeaderIcon = styled("img")(() => ({
     cursor: "pointer",
 }));
 
-const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
+const GameLayout = ({
+    GameFrame,
+    ButtonGrid,
+    GameFrameText,
+    displayPanel = true,
+    customFrameStyles,
+}) => {
     return (
         <div>
             <Box
                 sx={{
-                    width: "8rem",
+                    width: "9rem",
                     height: "7.1875rem",
                     borderTopLeftRadius: "0.625rem",
                     background:
@@ -40,6 +46,7 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     textAlign: "center",
+                    //px: ".3rem",
                 }}
             >
                 <Typography
@@ -49,6 +56,7 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                         fontWeight: "500",
                         fontSize: "1.5rem",
                         position: "absolute",
+
                         top: "4px",
                         left: "1rem",
                     }}
@@ -85,7 +93,7 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                         left: "1rem",
                     }}
                 >
-                    Crash
+                    {GameFrameText}
                 </Typography>
             </Box>
             <Box
@@ -112,6 +120,7 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                             flexDirection: "column",
                             background: "#2E3565",
                             padding: "1.12rem",
+                            ...customFrameStyles,
                         }}
                     >
                         <Box
@@ -126,7 +135,7 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                             <Box
                                 sx={{
                                     display: "flex",
-                                    width: "40%",
+                                    width: "18%",
                                 }}
                             >
                                 <GameFrameHeaderIconContainer>
@@ -151,8 +160,8 @@ const GameLayout = ({ GameFrame, ButtonGrid, GameFrameText }) => {
                             {GameFrame ? GameFrame() : null}
                         </Box>
                     </Box>
-                    {ButtonGrid()}
-                    <GameTab />
+                    {ButtonGrid ? ButtonGrid() : null}
+                    {displayPanel && <GameTab />}
                 </Box>
 
                 <Box

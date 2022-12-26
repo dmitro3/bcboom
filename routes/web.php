@@ -62,6 +62,46 @@ Route::get('/games/dinosaur', function () {
    
 });
 
+Route::get('/games/dice', function () {
+    return Inertia::render('Game/Dice');
+   
+});
+
+Route::get('/games/mines', function () {
+    return Inertia::render('Game/Mines');
+   
+});
+
+Route::get('/games/keno', function () {
+    return Inertia::render('Game/Keno');
+   
+});
+
+Route::get('/games/wheel', function () {
+    return Inertia::render('Game/Wheel');
+   
+});
+
+Route::get('/games/coin', function () {
+    return Inertia::render('Game/CoinFlip');
+   
+});
+
+Route::get('/games/tower', function () {
+    return Inertia::render('Game/Tower');
+   
+});
+
+Route::get('/games/stair', function () {
+    return Inertia::render('Game/Stair');
+   
+});
+
+Route::get('/games/ring', function () {
+    return Inertia::render('Game/Ring');
+   
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

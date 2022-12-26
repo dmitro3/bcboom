@@ -4,8 +4,8 @@ import { styled } from "@mui/system";
 
 const Frame = styled("img")(() => ({}));
 
-const DinosaurFrames = () => {
+const DinosaurFrame = () => {
     return <Frame src={dinosaur} />;
 };
 
-export default DinosaurFrames;
+export default DinosaurFrame;
