@@ -273,6 +273,10 @@ const Distributor = () => {
                                 "& .MuiDataGrid-virtualScroller": {
                                     backgroundColor: "#3B4271",
                                 },
+
+                                "&  .MuiDataGrid-columnSeparator": {
+                                    visibility: "hidden",
+                                },
                             }}
                         >
                             <DataGrid
