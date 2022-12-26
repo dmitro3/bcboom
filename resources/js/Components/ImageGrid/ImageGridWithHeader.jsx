@@ -1,7 +1,8 @@
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import titleBg from "../../../../public/images/svg/titlebg.svg";
 import leftcut from "../../../../public/images/others/leftcut.svg";
+import play from "../../../../public/images/svg/overlayplay.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
 import Button from "../Button/Button";
@@ -79,33 +80,49 @@ const GridItemTitle = styled("div")(({}) => ({
     },
 }));
 
-const SeeMore = ({ link }) => {
+const OverLay = ({ item, visible }) => {
     return (
         <div
             style={{
+                visibility: visible ? "visible" : "hidden",
                 position: "absolute",
                 bottom: "0",
                 right: "0",
                 height: "100%",
                 width: "100%",
-                background: "#1D2036",
+                background: "rgba(43, 41, 86, 0.8)",
                 padding: "5px 10px",
                 borderRadius: "10px",
                 cursor: "pointer",
+                zIndex: 500,
+                transition:
+                    "visibility 0.3s linear,opacity 0.3s linear;",
             }}
         >
-            <Link href={link}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    height: "100%",
+                    alignItems: "center",
+                }}
+            >
                 <p
                     style={{
                         color: "#fff",
-                        fontSize: "12px",
+                        fontSize: "18px",
                         fontWeight: "bold",
                         textDecoration: "none",
                     }}
                 >
-                    See More
+                    {item?.title}
                 </p>
-            </Link>
+                <Link href={item.link}>
+                    <img src={play} alt="" style={{ height: "50px" }} />
+                </Link>
+                <p>Pragmatic play</p>
+            </div>
         </div>
     );
 };
@@ -138,17 +155,36 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                         ? item.countOnMobile
                                         : item?.images.length
                                 )
-                                .map((image, index) => (
-                                    <Link href={image.link}>
-                                        <GridItemImage
-                                            key={index}
-                                            src={image.image}
-                                            width={item?.imageWidth}
-                                            height={item?.imageHeight}
-                                            hoverEffect={item?.hoverEffect}
-                                        />
-                                    </Link>
-                                ))}
+                                .map((image, index) => {
+                                    const [showOverlay, setShowOverlay] =
+                                        useState(false);
+
+                                    return (
+                                        <div
+                                            style={{ position: "relative" }}
+                                            onMouseEnter={() =>
+                                                setShowOverlay(true)
+                                            }
+                                            onMouseLeave={() =>
+                                                setShowOverlay(false)
+                                            }
+                                        >
+                                            <OverLay
+                                                item={image}
+                                                visible={showOverlay}
+                                            />
+                                            {/* <Link href={image.link}> */}
+                                            <GridItemImage
+                                                key={index}
+                                                src={image.image}
+                                                width={item?.imageWidth}
+                                                height={item?.imageHeight}
+                                                hoverEffect={item?.hoverEffect}
+                                            />
+                                            {/* </Link> */}
+                                        </div>
+                                    );
+                                })}
                         </GridItems>
                         {item.page === "home" && item.countOnMobile === 4 && (
                             <div
