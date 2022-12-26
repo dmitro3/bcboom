@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 import React from "react";
-const ButtonWrapper = styled("button")(({ color, background }) => ({
+const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
     background: background,
     color: color || "#fff",
     border: "none",
@@ -15,10 +15,16 @@ const ButtonWrapper = styled("button")(({ color, background }) => ({
         background: "#3586FF",
         color: "#fff",
     },
+    ...styles,
 }));
-const Button = ({ text, color, background, onSubmit }) => {
+const Button = ({ text, color, background, onSubmit, styles }) => {
     return (
-        <ButtonWrapper color={color} background={background} onClick={onSubmit}>
+        <ButtonWrapper
+            color={color}
+            background={background}
+            styles={styles}
+            onClick={onSubmit}
+        >
             {text}
         </ButtonWrapper>
     );

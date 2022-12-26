@@ -21,6 +21,7 @@ import portugal from "../../../../public/images/flags/portugal.svg";
 import { miscNavLinks, navlinks } from "@/data";
 import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
+import { Link } from "@inertiajs/inertia-react";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
     // height: "100%",
@@ -30,8 +31,9 @@ const DrawerWrapper = styled("div")(({}) => ({
 }));
 const CloseIcon = styled("div")(({}) => ({
     position: "absolute",
-    top: "10px",
-    right: " 10px",
+    top: "20px",
+    right: "20px",
+    cursor: "pointer",
 }));
 const Logo = styled("div")(() => ({
     display: "flex",
@@ -46,8 +48,8 @@ const DrawerImages = styled("div")(() => ({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
     gridTemplateColumns: "1fr 1fr",
-    gap: "20px",
-    padding: "20px",
+    gap: "10px",
+    padding: "5px",
 }));
 const DrawerImage = styled("img")(({ index }) => ({
     width: "100%",
@@ -121,6 +123,9 @@ const Sidedrawer = () => {
     const otherSocials = [facebook, instagram, telegram, twitter];
     const dispatcher = useDispatch();
     const [currentLanguage, setCurrentLanguage] = useState("english");
+    function closeDrawer(){
+        dispatcher(setDrawerState({ open: !drawerState.open }))
+    }
     return (
         <Drawer
             anchor={"left"}
@@ -150,7 +155,9 @@ const Sidedrawer = () => {
                     {navlinks.map((nav, i) => (
                         <NavItem key={i} active={nav.active}>
                             <img src={nav.icon} alt={nav.name} />
-                            <p>{nav.name}</p>
+                            <Link href={nav.link} onClick={closeDrawer}>
+                                <p>{nav.name}</p>
+                            </Link>
                         </NavItem>
                     ))}
                 </NavLinks>
@@ -159,7 +166,9 @@ const Sidedrawer = () => {
                     {miscNavLinks.map((nav, i) => (
                         <NavItem key={i} active={nav.active}>
                             <img src={nav.icon} alt={nav.name} />
-                            <p>{nav.name}</p>
+                            <Link href={nav.link} onClick={closeDrawer}>
+                                <p>{nav.name}</p>
+                            </Link>
                         </NavItem>
                     ))}
                 </NavLinks>

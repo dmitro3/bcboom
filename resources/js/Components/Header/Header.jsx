@@ -27,6 +27,9 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import Button from "../Button/Button";
 import { setDrawerState } from "@/redux/app-state/app-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { Link } from "@inertiajs/inertia-react";
+import UserDropdown from "../UserDropdown/UserDropdown";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -190,7 +193,9 @@ const DesktopHeader = () => {
                 ))}
             </HeaderPlatformStats>
             <LogoWrapper>
-                <img src={bclogo} alt="bcboom" />
+                <Link href="/">
+                    <img src={bclogo} alt="bcboom" />
+                </Link>
             </LogoWrapper>
             <HeaderPlatformLinks>
                 <HeaderPlatformLinkItems>
@@ -241,8 +246,11 @@ const MobileHeaderWrapper = styled("div")(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
+    background: "#1E2443",
 }));
-const MoreIconWrapper = styled("div")(() => ({}));
+const MoreIconWrapper = styled("div")(() => ({
+    cursor: "pointer",
+}));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
     display: "flex",
@@ -261,24 +269,16 @@ export const MobileHeader = () => {
                 <img src={menu} alt="menu" style={{ height: "35px" }} />
             </MoreIconWrapper>
             <Logo>
-                <img
-                    src={bclogo}
-                    alt="bcboom logo"
-                    style={{ height: "35px" }}
-                />
+                <Link href="/">
+                    <img
+                        src={bclogo}
+                        alt="bcboom logo"
+                        style={{ height: "62px" }}
+                    />
+                </Link>
             </Logo>
             <ButtonComponents>
-                {[
-                    { text: "Login", link: "/login", bg: "#3586FF" },
-                    { text: "Sign up", link: "/signup", bg: "#F93C56" },
-                ].map((item, index) => (
-                    <Button
-                        text={item.text}
-                        onSubmit={null}
-                        key={index}
-                        background={item.bg}
-                    />
-                ))}
+                <UserDropdown isLoggedIn={true}/>
             </ButtonComponents>
         </MobileHeaderWrapper>
     );

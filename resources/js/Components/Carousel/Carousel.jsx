@@ -15,13 +15,13 @@ const Wrapper = styled("div")(({ theme }) => ({
 const CustomCarousel = ({ children, rowPerCount }) => {
     const settings = {
         dots: true,
-        // autoplay: true,
-        autoplaySpeed: 5000,
+        autoplay: true,
+        autoplaySpeed: 4300,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
-        speed: 500,
+        speed: 2000,
         slidesPerRow: rowPerCount,
         arrows: false,
         adaptiveHeight: true,

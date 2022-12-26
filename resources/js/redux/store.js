@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { AppState } from "./app-state/app-slice";
 import thunk from "redux-thunk";
+import { AppState } from "./app-state/app-slice";
+import { AuthState } from "./auth/auth-slice";
 
 const rootReducer = combineReducers({
     app: AppState,
+    auth: AuthState,
 });
 const env = (key) => `{{ env(${key})  }}`;
 const store = configureStore({

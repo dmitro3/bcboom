@@ -20,7 +20,7 @@ const FooterCutImage = styled("div")(({ theme }) => ({
     position: "absolute",
     background: `url(${footercut})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
+    backgroundSize: "cover",
     bottom: "-70px",
     zIndex: 100,
 }));
@@ -35,10 +35,10 @@ const PageTemplate = ({
         <PageTemplateWrapper isMobile={isMobile}>
             {innerHeader && <InnerHeader />}
             {homeCarousel && <HomeCarousel />}
+            {children}
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
-            {children}
             {!isMobile && <FooterCutImage />}
         </PageTemplateWrapper>
     );

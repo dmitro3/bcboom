@@ -16,14 +16,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/{path?}', function () {
+Route::get('/', function () {
     return Inertia::render('Index');
    
 });
 
 Route::get('/promotions/exclusive', function () {
     return Inertia::render('Promotions/Exclusive');
-   
+});
+Route::get('/promotions', function () {
+    return Inertia::render('Promotions/Index');
 });
 
 Route::get('/promotions/deposit', function () {
@@ -54,7 +56,13 @@ Route::get('/promotions/distributor', function () {
 
 Route::get('/promotions/invite', function () {
     return Inertia::render('Promotions/Invite');
-   
+});
+
+Route::get('/games', function () {
+    return Inertia::render('Games/Index');
+});
+Route::get('/slots', function () {
+    return Inertia::render('Slots/Index');
 });
 
 Route::get('/games/dinosaur', function () {

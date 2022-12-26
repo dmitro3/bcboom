@@ -1,18 +1,18 @@
-import React from "react";
-import live from "../../../../public/images/svg/live.svg";
-import race from "../../../../public/images/svg/race.svg";
-import slots from "../../../../public/images/svg/slots.svg";
+import { navlinks } from "@/data";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { Link } from "@inertiajs/inertia-react";
+import { styled } from "@mui/system";
+import bonus from "../../../../public/images/svg/bonus.svg";
 import games from "../../../../public/images/svg/games.svg";
 import homeSvg from "../../../../public/images/svg/homeSvg.svg";
-import bonus from "../../../../public/images/svg/bonus.svg";
+import live from "../../../../public/images/svg/live.svg";
 import promotion from "../../../../public/images/svg/promotion.svg";
+import race from "../../../../public/images/svg/race.svg";
+import slots from "../../../../public/images/svg/slots.svg";
 import vip from "../../../../public/images/svg/vip.svg";
-import { styled } from "@mui/system";
-import Button from "../Button/Button";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
-
+import UserDropdown from "../UserDropdown/UserDropdown";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
-    padding: isMobile ? '20px 20px 0 20px' : "15px 20px",
+    padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
     display: "flex",
     justifyContent: "space-between",
     overflowX: "auto",
@@ -29,7 +29,7 @@ const InnerHeaderItems = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     gap: isMobile ? "50px" : "20px",
-    minWidth: 'max-content',
+    minWidth: "max-content",
 }));
 const InnerHeaderItem = styled("div")(({ active }) => ({
     display: "flex",
@@ -39,7 +39,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     p: {
         marginLeft: "5px",
         marginTop: "3px",
-        fontSize: "12px",
+        fontSize: "14px",
         color: active ? "#3586FF" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
@@ -47,79 +47,58 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-    const innerHeaderItems = [
-        {
-            name: "Home",
-            icon: homeSvg,
-            link: "/",
-            active: true,
-        },
-        {
-            name: "Games",
-            icon: games,
-            link: "/games",
-        },
-        {
-            name: "Slots",
-            icon: slots,
-            link: "/slots",
-        },
-        {
-            name: "Race",
-            icon: race,
-            link: "/race",
-        },
-        {
-            name: "Live Casino",
-            icon: live,
-            link: "/live",
-        },
-        {
-            name: "Promotions",
-            icon: promotion,
-            link: "/promotions",
-        },
-        {
-            name: "Bonus",
-            icon: bonus,
-            link: "/bonus",
-        },
-        {
-            name: "VIP",
-            icon: vip,
-            link: "/vip",
-        },
-    ];
+
     const { isMobile } = useScreenResolution();
+    const location =
+        typeof window !== undefined
+            ? window.location.pathname.split("/")[1]
+            : "";
+    console.log("location", location);
+    // useEffect(() => {
+    //     const location =
+    //         typeof window !== undefined ? window.location.pathname : "";
+    //     setLocation(location);
+    // }, []);
+    const navItems = ['/', 'slots', 'games' ,'live-casino', 'race', 'promotion', 'promotions/bonus_everyday', 'promotions/exclusive']
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(0, 4).map((item, index) => (
-                    <InnerHeaderItem key={index} active={item.active}>
-                        <img src={item.icon} alt={item.name} />
-                        <p>{item.name}</p>
-                    </InnerHeaderItem>
-                ))}
+                {navlinks.slice(0, 5).map((item, index) => {
+                    return (
+                        <Link href={item.link}>
+                            <InnerHeaderItem
+                                key={index}
+                                active={location == item.link.replace("/", "")}
+                            >
+                                <img
+                                    src={item.icon}
+                                    alt={item.name}
+                                    style={{
+                                        filter:
+                                            location ==
+                                                item.link.replace("/", "") &&
+                                            "invert(41%) sepia(83%) saturate(2321%) hue-rotate(203deg) brightness(104%) contrast(103%)",
+                                    }}
+                                />
+                                <p>{item.name}</p>
+                            </InnerHeaderItem>
+                        </Link>
+                    );
+                })}
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
-                {innerHeaderItems.slice(4, 7).map((item, index) => (
-                    <InnerHeaderItem key={index} active={item.active}>
-                        <img src={item.icon} alt={item.name} />
-                        <p>{item.name}</p>
-                    </InnerHeaderItem>
-                ))}
-                {!isMobile &&
-                    [
-                        { text: "Login", link: "/login", bg: "#3586FF" },
-                        { text: "Sign up", link: "/signup", bg: "#F93C56" },
-                    ].map((item, index) => (
-                        <Button
-                            text={item.text}
-                            onSubmit={null}
+                {navlinks.slice(5, 8).map((item, index) => (
+                    <Link href={item.link}>
+                        <InnerHeaderItem
                             key={index}
-                            background={item.bg}
-                        />
-                    ))}
+                            active={location == item.link.replace("/", "")}
+                        >
+                            <img src={item.icon} alt={item.name} />
+                            <p>{item.name}</p>
+                        </InnerHeaderItem>{" "}
+                    </Link>
+                ))}
+                {!isMobile && <UserDropdown isLoggedIn={true} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
