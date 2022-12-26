@@ -36,7 +36,7 @@ export const navlinks = [
         {
             name: "Live Casino",
             icon: live,
-            link: "/live",
+            link: "/live-casino",
         },
         {
             name: "Promotions",

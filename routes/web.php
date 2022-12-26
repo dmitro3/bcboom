@@ -63,6 +63,12 @@ Route::get('/games', function () {
 Route::get('/slots', function () {
     return Inertia::render('Slots/Index');
 });
+Route::get('/race', function () {
+    return Inertia::render('Race/Index');
+});
+Route::get('/live-casino', function () {
+    return Inertia::render('LiveCasino/Index');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

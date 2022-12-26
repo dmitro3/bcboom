@@ -1,8 +1,9 @@
 import { styled } from "@mui/system";
 import chevronup from "../../../../public/images/svg/chevronup.svg";
 import chevrondown from "../../../../public/images/svg/chevrondown.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 // const useStyles = makeStyles({
 //     customOutline: {
 //         "& .MuiOutlinedInput-notchedOutline": {
@@ -124,6 +125,8 @@ const DrawerItem = styled("div")(({}) => ({
 }));
 export const SelectWithDropdown = ({ setValue, value, items, label }) => {
     const [openDrawer, setOpenDrawer] = useState(false);
+    const dropdownRef = useRef(null);
+    useOnClickOutside(dropdownRef, () => setOpenDrawer(false));
     return (
         <SelectWithDropdownWrapper>
             <label htmlFor={value}>{label}</label>
@@ -136,13 +139,16 @@ export const SelectWithDropdown = ({ setValue, value, items, label }) => {
                     <img src={chevrondown} alt="" />
                 </Paragraph>
                 {openDrawer && (
-                    <DropdownDrawer>
+                    <DropdownDrawer ref={dropdownRef}>
                         <Divider margin="0" bg="#dedee366" />
                         <div style={{ padding: "10px 20px" }}>
                             {items.map((provider, i) => (
                                 <DrawerItem
                                     key={i}
-                                    onClick={() => setValue(provider)}
+                                    onClick={() => {
+                                        setOpenDrawer(!openDrawer);
+                                        setValue(provider);
+                                    }}
                                 >
                                     {provider}
                                 </DrawerItem>
