@@ -1,274 +1,133 @@
-// import { SelectWithDropdown } from "@/Components/Dropdown/Select";
-import SelectWithDropdown from "@/Components/Dropdown/Select";
-import Input from "@/Components/Input/Input";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
+import ImageGridWithHeader from "@/Components/ImageGrid/ImageGridWithHeader";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
-import { useState } from "react";
-import aztecbonanza from "../../../../public/images/games/aztecbonanza.png";
-import aztechmagic from "../../../../public/images/games/aztechmagic.png";
-import bigbass from "../../../../public/images/games/bigbass.png";
-import bonanzabillion from "../../../../public/images/games/bonanzabillion.png";
-import bookofra from "../../../../public/images/games/bookofra.png";
-import bookoftut from "../../../../public/images/games/bookoftut.png";
-import digdigger from "../../../../public/images/games/digdigger.png";
-import doghouse from "../../../../public/images/games/doghouse.png";
-import dragonygold from "../../../../public/images/games/dragongold.png";
-import fortuneMouse from "../../../../public/images/games/fortuneMouse.png";
-import goblin from "../../../../public/images/games/goblin.png";
-import greatRhyno from "../../../../public/images/games/greatRhyno.png";
-import johnhunter from "../../../../public/images/games/johnhunter.png";
-import luckydrama from "../../../../public/images/games/luckydrama.png";
-import madame from "../../../../public/images/games/madame.png";
-import manekigold from "../../../../public/images/games/manekigold.png";
-import mysticcheif from "../../../../public/images/games/mysticcheif.png";
-import riseofolympus from "../../../../public/images/games/riseofolympus.png";
-import spinNspell from "../../../../public/images/games/spinNspell.png";
-import sweetbonanza from "../../../../public/images/games/sweetbonanza.png";
-import s777 from "../../../../public/images/svg/777.svg";
-import searchI from "../../../../public/images/svg/search.svg";
+import img from "../../../../public/images/race/raceheader.png";
+import imgmobile from "../../../../public/images/race/raceheadermobile.png";
+import goldencup from "../../../../public/images/svg/goldencup.svg";
+import wealth from "../../../../public/images/promotions/wealth.png";
+import distributors from "../../../../public/images/promotions/distributors.png";
+import bonus from "../../../../public/images/promotions/bonus.png";
+import vipexclusive from "../../../../public/images/promotions/vipexclusive.png";
+import off from "../../../../public/images/promotions/off.png";
+import weekend from "../../../../public/images/promotions/weekend.png";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import CardCoursel from "@/Components/Carousel/carousels/CardCoursel";
 
-const FilterSection = styled("div")(({ isMobile }) => ({
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: isMobile ? "column" : "row",
-    margin: "20px 0",
-    padding: "0 20px",
-}));
-const ProviderAndTypeWrapper = styled("div")(({ isMobile }) => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "20px",
-    width: isMobile ? "100%" : "auto",
-    marginBottom: isMobile && "20px",
-}));
-const SearchSection = styled("div")(({ isMobile }) => ({
-    width: isMobile && "100%",
+const PromotionPageWrapper = styled("div")(() => ({
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingTop: "2.125rem",
+    width: "100%",
+    height: "100%",
 }));
 
-export default function Homepage(props) {
+const PromotionImageHeader = styled("div")(({ isMobile }) => ({
+    background: `url(${isMobile ? imgmobile : img})`,
+    borderRadius: "10px",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat, no-repeat",
+    padding: isMobile ? "1.25rem" : "4.125rem",
+    paddingLeft: isMobile ? "1.25rem" : "4.125rem",
+    margin: "0 25px",
+
+    "& p": {
+        color: "#fff",
+        lineHeight: "2.25rem",
+        fontWeight: "900",
+        "&:nth-child(1)": {
+            fontSize: isMobile ? "1.4rem" : "2.25rem",
+            paddingBottom: isMobile ? ".5rem" : "1.5rem",
+        },
+        "&:nth-child(2)": {
+            fontSize: isMobile ? "1.4rem" : "3.5rem",
+            paddingBottom: isMobile ? ".5rem" : "2rem",
+            color: "#5AA2FF",
+        },
+        "&:nth-child(3)": {
+            fontSize: isMobile ? ".7rem" : ".9rem",
+            lineHeight: "1.2rem",
+            fontWeight: "medium",
+            color: "#9BA6D4",
+            width: isMobile ? "70%" : "30%",
+            "& span": {
+                color: "#FFEF61",
+            },
+        },
+    },
+}));
+const RaceIndex = () => {
     const gridItems = [
         {
-            title: "Race",
-            icon: s777,
+            title: "Active Races",
+            icon: goldencup,
             imageWidth: "534px",
             imageHeight: "175px",
-            margin: "25px",
-            perColumn: 5,
-            page: "home",
-            countOnMobile: 4,
-
+            perColumn: 3,
+            // hoverEffect: "",
             images: [
                 {
-                    image: greatRhyno,
-                    link: "/great-rhyno",
-                    addon: "New",
-                    addonColor: "#F93C56",
-                },
-                {
-                    image: aztechmagic,
-                    link: "/aztech-magic",
-                    addon: "HOT",
-                    addonColor: "#F9C43C",
-                },
-                {
-                    image: sweetbonanza,
-                    link: "/sweet-bonanza",
+                    image: wealth,
+                    link: "/promotions/invite",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: johnhunter,
-                    link: "/keno",
+                    image: distributors,
+                    link: "/promotions/distributor",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: mysticcheif,
-                    link: "/limbo",
+                    image: bonus,
+                    link: "/promotions/full_bonus",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: fortuneMouse,
-                    link: "/roulette",
+                    image: vipexclusive,
+                    link: "/promotions/exclusive",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: bookofra,
-                    link: "/wheel",
+                    image: off,
+                    link: "/promotions/deposit",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: madame,
-                    link: "/coinflip",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: bookoftut,
-                    link: "/tower",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: digdigger,
-                    link: "/stairs",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: spinNspell,
-                    link: "/spin-n-spell",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: bigbass,
-                    link: "/big-bass",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: goblin,
-                    link: "/goblin",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: bonanzabillion,
-                    link: "/bonanza-billion",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: doghouse,
-                    link: "/dog-house",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: riseofolympus,
-                    link: "/rise-of-olympus",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: aztecbonanza,
-                    link: "/aztec-bonanza",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: luckydrama,
-                    link: "/lucky-drama",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: dragonygold,
-                    link: "/dragon-gold",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: manekigold,
-                    link: "/maneki-gold",
+                    image: weekend,
+                    link: "/promotions/bonus",
                     addon: null,
                     addonColor: null,
                 },
             ],
         },
     ];
-    const [componentItems, setComponentItems] = useState(gridItems);
-    const [currentProvider, setCurrentProvider] = useState("Game Provider");
-    const [currentType, setCurrentType] = useState("Game Type");
     const { isMobile } = useScreenResolution();
     return (
         <>
-            <Head title="Homepage" />
+            <Head title="Promotions" />
             <GuestLayout>
-                <PageTemplate
-                    innerHeader={true}
-                    homeCarousel
-                    gridWithHeader={componentItems}
-                >
-                    <FilterSection isMobile={isMobile}>
-                        <ProviderAndTypeWrapper isMobile={isMobile}>
-                            <SelectWithDropdown
-                                items={[
-                                    "Pragmatic Play",
-                                    "Evolution Gaming",
-                                    "Amatic Gaming",
-                                    "Pragmatic Play",
-                                    "Evolution Gaming",
-                                    "Amatic Gaming",
-                                    "Pragmatic Play",
-                                    "Evolution Gaming",
-                                    "Amatic Gaming",
-                                    "Game Provider",
-                                ]}
-                                value={currentProvider}
-                                setValue={setCurrentProvider}
-                            />
-                            <SelectWithDropdown
-                                items={[
-                                    "Bacakrat",
-                                    "Roulette",
-                                    "Poker",
-                                    "Bacakrat",
-                                    "Roulette",
-                                    "Poker",
-                                    "Bacakrat",
-                                    "Roulette",
-                                    "Poker",
-                                    "Bacakrat",
-                                    "Roulette",
-                                    "Poker",
-                                    "Game Type",
-                                ]}
-                                value={currentType}
-                                setValue={setCurrentType}
-                            />
-                        </ProviderAndTypeWrapper>
-                        <SearchSection isMobile={isMobile}>
-                            <Input
-                                addon={<img src={searchI} alt="search" />}
-                                type="phone"
-                                placeholder="Search for games"
-                                bg="#3A4072"
-                                br="10px"
-                                onChange={(e) => {
-                                    const newItems = gridItems.map((item) => {
-                                        return {
-                                            ...item,
-                                            images: item.images.filter(
-                                                (i) =>
-                                                    i.link
-                                                        .toLowerCase()
-                                                        .includes(
-                                                            e.target.value.toLowerCase()
-                                                        ) ||
-                                                    i.image
-                                                        .toLowerCase()
-                                                        .includes(
-                                                            e.target.value.toLowerCase()
-                                                        )
-                                            ),
-                                        };
-                                    });
-                                    setComponentItems(newItems);
-                                }}
-                            />
-                        </SearchSection>
-                    </FilterSection>
+                <PageTemplate innerHeader={true}>
+                    <PromotionPageWrapper>
+                        <PromotionImageHeader isMobile={isMobile}>
+                            <p>WEEKLY</p>
+                            <p>TOUORNAMENTS</p>
+                            <p>
+                                Participate in numerous tournaments and complete
+                                againts other players for a hefty{" "}
+                                <span>Prize Pool</span>
+                            </p>
+                        </PromotionImageHeader>
+                    </PromotionPageWrapper>
+                    <CardCoursel cardItems={gridItems} />
                 </PageTemplate>
             </GuestLayout>
         </>
     );
-}
+};
+
+export default RaceIndex;

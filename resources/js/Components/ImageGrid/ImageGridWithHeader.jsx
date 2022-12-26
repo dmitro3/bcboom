@@ -1,12 +1,12 @@
 import { styled } from "@mui/system";
 import React, { useState } from "react";
-import titleBg from "../../../../public/images/svg/titlebg.svg";
-import leftcut from "../../../../public/images/others/leftcut.svg";
+
 import play from "../../../../public/images/svg/overlayplay.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
 import Button from "../Button/Button";
 import { Inertia } from "@inertiajs/inertia";
+import ImageGridLayout from "./ImageGridLayout";
 const GridWrapper = styled("div")(({}) => ({}));
 
 const GridItems = styled("div")(({ perColumn, page }) => ({
@@ -19,21 +19,13 @@ const GridItems = styled("div")(({ perColumn, page }) => ({
         gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
     "@media (max-width: 500px)": {
-        gridTemplateColumns: page !== "home" && "repeat(1, minmax(100px, 1fr))",
+        gridTemplateColumns: !['home', 'games'].includes(page) && "repeat(1, minmax(100px, 1fr))",
     },
     position: "relative",
     zIndex: 400,
 }));
 
-const SectionWrapper = styled("div")(({ isMobile, margin }) => ({
-    height: "fit-content",
-    overflow: "hidden",
-    padding: isMobile ? "20px 10px" : "25px",
-    margin: margin ? "25px" : "0 25px 25px 25px",
-    background: "#1D2036",
-    borderRadius: "10px",
-    position: "relative",
-}));
+
 const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
     height: height || "100px",
     width: width || "100px",
@@ -45,40 +37,8 @@ const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
         transition: "all 0.3s ease-in-out",
     },
 }));
-const GridLeftCut = styled("div")(({ isMobile }) => ({
-    position: "absolute",
-    top: "-22px",
-    left: "0",
-    background: `url(${leftcut})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    zIndex: 200,
-    height: isMobile ? "153px" : "160px",
-    width: "340px",
-}));
-const GridItemTitle = styled("div")(({}) => ({
-    position: "absolute",
-    top: "0px",
-    left: "0px",
-    zIndex: 300,
-    // background: "#1D2036",
-    background: `url(${titleBg})`,
-    backgroundRepeat: "no-repeat",
-    display: "flex",
-    height: "50px",
-    width: "250px",
-    alignItems: "center",
-    paddingLeft: "20px",
-    "& img": {
-        height: "25px",
-    },
-    "& p": {
-        color: "#fff",
-        fontSize: "16px",
-        fontWeight: "bold",
-        marginLeft: "10px",
-    },
-}));
+
+
 
 const OverLay = ({ item, parent, visible }) => {
     return (
@@ -108,12 +68,15 @@ const OverLay = ({ item, parent, visible }) => {
                 }}
             >
                 {parent.hoverText ? (
-                    <div style={{margin: 'auto 0'}}>
+                    <div style={{ margin: "auto 0" }}>
                         <Button
                             text={parent.hoverText}
                             onSubmit={() => Inertia.visit(item.link)}
                             background="#3586FF"
-                            styles={{padding: '10px 20px', borderRadius: '15px'}}
+                            styles={{
+                                padding: "10px 20px",
+                                borderRadius: "15px",
+                            }}
                         />
                     </div>
                 ) : (
@@ -136,7 +99,7 @@ const OverLay = ({ item, parent, visible }) => {
                 )}
             </div>
         </div>
-    );
+    )
 };
 
 const ImageGridWithHeader = ({ gridItems }) => {
@@ -145,26 +108,13 @@ const ImageGridWithHeader = ({ gridItems }) => {
     return (
         <GridWrapper>
             {gridItems.map((item, index) => (
-                <SectionWrapper
-                    key={index}
-                    isMobile={isMobile}
-                    margin={item.margin}
-                >
-                    <GridLeftCut isMobile={isMobile} />
-                    <GridItemTitle>
-                        <img
-                            src={item?.icon}
-                            alt=""
-                            style={{ height: item.iconSize }}
-                        />
-                        <p>{item?.title}</p>
-                    </GridItemTitle>
+                <ImageGridLayout key={index} item={item} index={index}>
                     <>
                         <GridItems perColumn={item.perColumn} page={item.page}>
                             {item.images
                                 .slice(
                                     0,
-                                    isMobile && item.page === "home"
+                                    isMobile && ['home'].includes(item.page)
                                         ? item.countOnMobile
                                         : item?.images.length
                                 )
@@ -245,7 +195,7 @@ const ImageGridWithHeader = ({ gridItems }) => {
                             </div>
                         )}
                     </>
-                </SectionWrapper>
+                </ImageGridLayout>
             ))}
         </GridWrapper>
     );

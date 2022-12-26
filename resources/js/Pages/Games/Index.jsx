@@ -30,11 +30,12 @@ const GameImageHeader = styled("div")(({ isMobile }) => ({
     background: `url(${isMobile ? imgmobile : img})`,
     borderRadius: "10px",
     backgroundSize: "cover",
-    backgroundRepeat: "no-repeat, no-repeat",
+    backgroundRepeat: "no-repeat",
+    // backgroundPosition: "center",
     padding:  "4.125rem",
     paddingLeft: isMobile ? "1.25rem" : "4.125rem",
     margin: "0 25px",
-
+    width: isMobile && "100%",
 
     "& p": {
         color: "#fff",
@@ -45,10 +46,10 @@ const GameImageHeader = styled("div")(({ isMobile }) => ({
             paddingBottom: isMobile ? ".5rem" : "1.5rem",
         },
         "&:nth-child(2)": {
-            fontSize: isMobile ? "1.4rem" : "1rem",
+            fontSize: isMobile ? ".8rem" : "1rem",
             paddingBottom: isMobile ? ".5rem" : "2rem",
             color: "#FFEF61",
-            width:  isMobile ? '50%' : '30%'
+            width:  isMobile ? '70%' : '30%'
         },
     },
 }));
@@ -61,29 +62,31 @@ const GamesPageIndex = () => {
             imageHeight: "175px",
             perColumn: 5,
             hoverEffect: "overlay",
+            page:'games',
+            countOnMobile: 2,
             images: [
-                { image: crash, link: "/crash", addon: null, addonColor: null },
-                { image: dice, link: "/dice", addon: null, addonColor: null },
-                { image: mines, link: "/mines", addon: null, addonColor: null },
-                { image: keno, link: "/keno", addon: null, addonColor: null },
-                { image: limbo, link: "/limbo", addon: null, addonColor: null },
+                { image: crash, link: "/games/crash", addon: null, addonColor: null },
+                { image: dice, link: "/games/dice", addon: null, addonColor: null },
+                { image: mines, link: "/games/mines", addon: null, addonColor: null },
+                { image: keno, link: "/games/keno", addon: null, addonColor: null },
+                { image: limbo, link: "/games/limbo", addon: null, addonColor: null },
                 {
                     image: roulette,
-                    link: "/roulette",
+                    link: "/games/roulette",
                     addon: null,
                     addonColor: null,
                 },
-                { image: wheel, link: "/wheel", addon: null, addonColor: null },
+                { image: wheel, link: "/games/wheel", addon: null, addonColor: null },
                 {
                     image: conflip,
-                    link: "/coinflip",
+                    link: "/games/coinflip",
                     addon: null,
                     addonColor: null,
                 },
-                { image: tower, link: "/tower", addon: null, addonColor: null },
+                { image: tower, link: "/games/tower", addon: null, addonColor: null },
                 {
                     image: stairs,
-                    link: "/stairs",
+                    link: "/games/stairs",
                     addon: null,
                     addonColor: null,
                 },
