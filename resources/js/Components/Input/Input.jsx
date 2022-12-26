@@ -45,7 +45,7 @@ const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
     color: "#fff",
     fontSize: "14px",
     outline: "none",
-
+    
     "&::placeholder": {
         color: "#fff",
     },
@@ -76,6 +76,7 @@ const Input = ({
     bg,
     br,
     afterInputText,
+    disabled
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const { isMobile } = useScreenResolution();
@@ -99,6 +100,7 @@ const Input = ({
                 isMobile={isMobile}
                 bg={bg}
                 br={br}
+                disabled={disabled}
             />
             {afterInputText && <p>{afterInputText}</p>}
             {type === "password" && (

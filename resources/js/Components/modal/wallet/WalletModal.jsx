@@ -17,6 +17,7 @@ import { Flex } from "@/Components/UtilComponents/Flex";
 import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
 import { currencyFormatter } from "@/utils/util";
 import CustomCarousel from "@/Components/Carousel/Carousel";
+import Button from "@/Components/Button/Button";
 
 const WalletWrapper = styled("div")(({ isMobile }) => ({
     background: "#464F85",
@@ -49,7 +50,7 @@ const WalletContentWrapper = styled("div")(({ isMobile }) => ({
     borderRadius: "0 0 20px 20px",
 }));
 const TabComponent = styled("div")(({}) => ({}));
-const DepositWrapper = styled("div")(({}) => ({
+const TabWrapper = styled("div")(({}) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "40px",
@@ -65,11 +66,12 @@ const AmountOptions = styled("div")(({}) => ({
     marginTop: "20px",
 }));
 
-const DepositButton = styled("button")(({}) => ({
+const DepositButton = styled("button")(({fontSize}) => ({
     width: "100%",
     background: "#3586FF",
     borderRadius: "10px",
     padding: "10px",
+    fontSize: fontSize,
 }));
 
 const Disclaimer = styled("div")(({}) => ({
@@ -87,7 +89,7 @@ const DepositCarousel = styled("div")(({}) => ({
 const Deposit = () => {
     const [value, setValue] = useState(100);
     return (
-        <DepositWrapper>
+        <TabWrapper>
             <Flex alignItems="center" gap="10px" width="100%">
                 <Text type="p" text="Deposit Amount" />
                 <Tag text="TRC20" bg="#3A4380" />
@@ -185,11 +187,108 @@ const Deposit = () => {
                     />
                 ))}
             </Disclaimer>
-        </DepositWrapper>
+        </TabWrapper>
     );
 };
 const Withdraw = () => {
-    return <div>withdraw here</div>;
+    const [value, setValue] = useState(0);
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [pix, setPix] = useState("");
+    const [whatsapp, setWhatsapp] = useState("");
+    return (
+        <TabWrapper>
+            <Flex alignItems="center" gap="10px" width="100%">
+                <Text type="p" text="Withdraw Amount" />
+                <Tag text="TRC20" bg="#3A4380" />
+                <Tag text="PIX" bg="#3A4380" />
+                <Tag text="Picpay" bg="#3A4380" />
+            </Flex>
+
+            <Text type="p" text="Amount to withdraw:" />
+            <Input
+                addon={<img src={currency} alt="" />}
+                type="number"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                br="10px"
+            />
+            <Text type="p" text="Cardholder name:" />
+            <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter name of card holder"
+                br="10px"
+            />
+            <Flex alignItems="center" gap='10px'>
+                <div style={{width: '50%'}}>
+                    <Text type="p" text="CPF:" />
+                    <Input
+                        type="text"
+                        value={cpf}
+                        onChange={(e) => setCpf(e.target.value)}
+                        placeholder="Enter CPF"
+                        br="10px"
+                    />
+                </div>
+                <div style={{width: '50%'}}>
+                    <Text type="p" text="WhatsApp:" />
+                    <Input
+                        type="text"
+                        value={whatsapp}
+                        onChange={(e) => setWhatsapp(e.target.value)}
+                        placeholder="Enter WhatsApp number"
+                        br="10px"
+                    />
+                </div>
+            </Flex>
+            <Flex alignItems="center" gap='10px'>
+                <div style={{width: '50%'}}>
+                    <Text type="p" text="PIX Type:" />
+                    <Input type="text" value={"CPF"} br="10px" disabled />
+                </div>
+                <div style={{width: '50%'}}>
+                    <Text type="p" text="Change PIX:" />
+                    <Input
+                        type="text"
+                        value={pix}
+                        onChange={(e) => setPix(e.target.value)}
+                        placeholder="Change PIX"
+                        br="10px"
+                    />
+                </div>
+            </Flex>
+            <Disclaimer>
+                <Text
+                    type="p"
+                    text="Withdrawal Instructions"
+                    fontSize="18px"
+                    color="white"
+                    textIndent="-17px"
+                />
+                {Array.from([
+                    "Number of withdrawal at Current VIP level",
+                    "Withdrawal fee: 2.1%",
+                    "Free monthly withdrawal amount: R$ 100.00",
+                    "Minimum withdrawal order: R$ 100.00",
+                    "Maximum withdrawal order: R$ 500.00",
+                    "Pickup time: 11:00 - 19:00",
+                    "Payment time: from 5 - 24 hours",
+                ]).map((item, i) => (
+                    <Text
+                        type="li"
+                        text={item}
+                        key={i}
+                        fontSize="12px"
+                        color="#B2B9E3"
+                        padding="3px 0"
+                    />
+                ))}
+            </Disclaimer>
+            <DepositButton fontSize='20px'>Withdraw</DepositButton>
+        </TabWrapper>
+    );
 };
 
 const WalletModal = () => {
