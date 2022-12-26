@@ -7,28 +7,25 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useState } from "react";
-import aztecbonanza from "../../../../public/images/games/aztecbonanza.png";
-import aztechmagic from "../../../../public/images/games/aztechmagic.png";
-import bigbass from "../../../../public/images/games/bigbass.png";
-import bonanzabillion from "../../../../public/images/games/bonanzabillion.png";
-import bookofra from "../../../../public/images/games/bookofra.png";
-import bookoftut from "../../../../public/images/games/bookoftut.png";
-import digdigger from "../../../../public/images/games/digdigger.png";
-import doghouse from "../../../../public/images/games/doghouse.png";
-import dragonygold from "../../../../public/images/games/dragongold.png";
-import fortuneMouse from "../../../../public/images/games/fortuneMouse.png";
-import goblin from "../../../../public/images/games/goblin.png";
-import greatRhyno from "../../../../public/images/games/greatRhyno.png";
-import johnhunter from "../../../../public/images/games/johnhunter.png";
-import luckydrama from "../../../../public/images/games/luckydrama.png";
-import madame from "../../../../public/images/games/madame.png";
-import manekigold from "../../../../public/images/games/manekigold.png";
-import mysticcheif from "../../../../public/images/games/mysticcheif.png";
-import riseofolympus from "../../../../public/images/games/riseofolympus.png";
-import spinNspell from "../../../../public/images/games/spinNspell.png";
-import sweetbonanza from "../../../../public/images/games/sweetbonanza.png";
-import s777 from "../../../../public/images/svg/777.svg";
+import crazycoin from "../../../../public/images/games/crazycoin.png";
+import blackjack from "../../../../public/images/games/blackjack.png";
+import casinohold from "../../../../public/images/games/casinohold.png";
+import lightning from "../../../../public/images/games/lightning.png";
+import goldbar from "../../../../public/images/games/goldbar.png";
+import goldenwealth from "../../../../public/images/games/goldenwealth.png";
+import dragontiger from "../../../../public/images/games/dragontiger.png";
+import betonnumber from "../../../../public/images/games/betonnumber.png";
+import ultimate from "../../../../public/images/games/ultimate.png";
+import Thirty2cards from "../../../../public/images/games/32cards.png";
+import live from "../../../../public/images/svg/liveCasino.svg";
 import searchI from "../../../../public/images/svg/search.svg";
+import ruletika from "../../../../public/images/games/ruletika.png";
+import andarbar from "../../../../public/images/games/andarbar.png";
+import blackjcklive from "../../../../public/images/games/blackjcklive.png";
+import goldblackjack from "../../../../public/images/games/goldblackjack.png";
+import craps from "../../../../public/images/games/craps.png";
+import sniondrive from "../../../../public/images/games/sniondrive.png";
+import dragontigerlive from "../../../../public/images/games/dragontigerlive.png";
 
 const FilterSection = styled("div")(({ isMobile }) => ({
     display: "flex",
@@ -52,8 +49,8 @@ const SearchSection = styled("div")(({ isMobile }) => ({
 export default function LiveCasino(props) {
     const gridItems = [
         {
-            title: "Race",
-            icon: s777,
+            title: "Live Casino",
+            icon: live,
             imageWidth: "534px",
             imageHeight: "175px",
             margin: "25px",
@@ -63,122 +60,124 @@ export default function LiveCasino(props) {
 
             images: [
                 {
-                    image: greatRhyno,
+                    image: crazycoin,
                     link: "/great-rhyno",
                     addon: "New",
                     addonColor: "#F93C56",
                 },
                 {
-                    image: aztechmagic,
+                    image: blackjack,
                     link: "/aztech-magic",
                     addon: "HOT",
                     addonColor: "#F9C43C",
                 },
                 {
-                    image: sweetbonanza,
+                    image: casinohold,
                     link: "/sweet-bonanza",
                     addon: null,
                     addonColor: null,
                 },
+
                 {
-                    image: johnhunter,
+                    image: lightning,
                     link: "/keno",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: mysticcheif,
+                    image: goldbar,
                     link: "/limbo",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: fortuneMouse,
+                    image: goldenwealth,
                     link: "/roulette",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: bookofra,
+                    image: dragontiger,
                     link: "/wheel",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: madame,
+                    image: betonnumber,
                     link: "/coinflip",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: bookoftut,
+                    image: ultimate,
                     link: "/tower",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: digdigger,
+                    image: goldblackjack,
+                    link: "/games/goldblackjack",
+                    addon: null,
+                    addonColor: null,
+                },
+                {
+                    image: Thirty2cards,
                     link: "/stairs",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: spinNspell,
-                    link: "/spin-n-spell",
+                    image: ruletika,
+                    link: "/games/ruletika",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: bigbass,
-                    link: "/big-bass",
+                    image: andarbar,
+                    link: "/games/andarbar",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: goblin,
-                    link: "/goblin",
+                    image: blackjcklive,
+                    link: "/games/blackjcklive",
+                    addon: null,
+                    addonColor: null,
+                },
+
+                {
+                    image: goldblackjack,
+                    link: "/games/goldblackjack",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: bonanzabillion,
-                    link: "/bonanza-billion",
+                    image: craps,
+                    link: "/games/craps",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: doghouse,
-                    link: "/dog-house",
+                    image: sniondrive,
+                    link: "/games/sniondrive",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: riseofolympus,
-                    link: "/rise-of-olympus",
+                    image: casinohold,
+                    link: "/sweet-bonanza",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: aztecbonanza,
-                    link: "/aztec-bonanza",
+                    image: dragontigerlive,
+                    link: "/games/dragontigerlive",
                     addon: null,
                     addonColor: null,
                 },
                 {
-                    image: luckydrama,
-                    link: "/lucky-drama",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: dragonygold,
-                    link: "/dragon-gold",
-                    addon: null,
-                    addonColor: null,
-                },
-                {
-                    image: manekigold,
-                    link: "/maneki-gold",
+                    image: ultimate,
+                    link: "/games/ultimatesicbo",
                     addon: null,
                     addonColor: null,
                 },
@@ -191,7 +190,7 @@ export default function LiveCasino(props) {
     const { isMobile } = useScreenResolution();
     return (
         <>
-            <Head title="Homepage" />
+            <Head title="Live Casino" />
             <GuestLayout>
                 <PageTemplate
                     innerHeader={true}

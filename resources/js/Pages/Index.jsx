@@ -44,6 +44,7 @@ export default function Homepage(props) {
             margin: "25px",
             perColumn: 5,
             page: "home",
+            iconSize: '18px',
             images: [
                 { image: crash, link: "/crash", addon: null, addonColor: null },
                 { image: dice, link: "/dice", addon: null, addonColor: null },

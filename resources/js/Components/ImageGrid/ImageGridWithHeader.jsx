@@ -69,11 +69,11 @@ const GridItemTitle = styled("div")(({}) => ({
     alignItems: "center",
     paddingLeft: "20px",
     "& img": {
-        height: "15px",
+        height: "25px",
     },
     "& p": {
         color: "#fff",
-        fontSize: "14px",
+        fontSize: "16px",
         fontWeight: "bold",
         marginLeft: "10px",
     },
@@ -122,7 +122,11 @@ const ImageGridWithHeader = ({ gridItems }) => {
                 >
                     <GridLeftCut isMobile={isMobile} />
                     <GridItemTitle>
-                        <img src={item?.icon} alt="" />
+                        <img
+                            src={item?.icon}
+                            alt=""
+                            style={{ height: item.iconSize }}
+                        />
                         <p>{item?.title}</p>
                     </GridItemTitle>
                     <>
