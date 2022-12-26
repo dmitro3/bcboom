@@ -25,6 +25,14 @@ const InputWrapper = styled("div")(({ br }) => ({
         transform: "translateY(-50%)",
         color: "#fff",
     },
+    "& p": {
+        position: "absolute",
+        top: "50%",
+        right: "20px",
+        transform: "translateY(-50%)",
+        color: "#4F95FF",
+        fontWeight: "bold",
+    },
 }));
 const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
     width: isMobile ? "100%" : "380px",
@@ -45,6 +53,10 @@ const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
         border: "none",
         boxShadow: "none",
     },
+    "&::-webkit-outer-spin-button,&::-webkit-inner-spin-button": {
+        "-webkit-appearance": "none",
+        margin: "0",
+    },
 }));
 const PasswordToggler = styled("div")(({}) => ({
     position: "absolute",
@@ -61,6 +73,7 @@ const Input = ({
     onChange,
     bg,
     br,
+    afterInputText,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const { isMobile } = useScreenResolution();
@@ -85,6 +98,7 @@ const Input = ({
                 bg={bg}
                 br={br}
             />
+            {afterInputText && <p>{afterInputText}</p>}
             {type === "password" && (
                 <PasswordToggler onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? (

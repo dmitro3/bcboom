@@ -1,13 +1,15 @@
 import Text from "@/Components/Text/Text";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setWalletModalState } from "@/redux/wallet/wallet-slice";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomModal from "../Modal";
 import close from "../../../../../public/images/svg/closeModal.svg";
+import currency from "../../../../../public/images/currencies/currency.svg";
 import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import { styled } from "@mui/system";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
+import Input from "@/Components/Input/Input";
 
 const WalletWrapper = styled("div")(({ isMobile }) => ({
     background: "#464F85",
@@ -45,9 +47,18 @@ const DepositWrapper = styled("div")(({}) => ({
     gap: "20px",
 }));
 const Deposit = () => {
-    return <DepositWrapper>
-        
-    </DepositWrapper>;
+    const [value, setValue] = useState(100);
+    return (
+        <DepositWrapper>
+            <Input
+                addon={<img src={currency} alt="" />}
+                type="number"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                afterInputText="Extra + G$20"
+            />
+        </DepositWrapper>
+    );
 };
 const Withdraw = () => {
     return <div>withdraw here</div>;
