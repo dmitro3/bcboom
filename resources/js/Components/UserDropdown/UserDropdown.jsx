@@ -36,7 +36,7 @@ const CurrentBalance = styled("div")(({ isMobile }) => ({
     // lineHeight: 1,
     marginBottom: "3px",
     "& p": {
-        fontSize: isMobile ? "20px" : "23px",
+        fontSize: isMobile ? "17px" : "20px",
         fontWeight: "bold",
         "&:first-child": {
             color: "white",
@@ -243,7 +243,7 @@ const UserDropdown = ({
                         alt="wallet"
                         style={{ height: isMobile ? "18px" : "20px" }}
                     />
-                    <p>Wallet</p>
+                    <p style={{fontSize: '15px'}}>Wallet</p>
                 </Wallet>
             </div>
             <UserAvatar>

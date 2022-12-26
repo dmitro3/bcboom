@@ -78,10 +78,13 @@ Route::get('/bonus', function () {
     return Inertia::render('Bonus/Index');
 });
 Route::get('/vip', function () {
-    return Inertia::render('VIP/Index');
+    return Inertia::render('Bonus/BonusEveryday');
 });
+// Route::get('/vip', function () {
+//     return Inertia::render('VIP/Index');
+// });
 
-Route::get('/games/dinosaur', function () {
+Route::get('/games/crash', function () {
     return Inertia::render('Game/Dinosaur');
    
 });
@@ -106,7 +109,7 @@ Route::get('/games/wheel', function () {
    
 });
 
-Route::get('/games/coin', function () {
+Route::get('/games/coin-flip', function () {
     return Inertia::render('Game/CoinFlip');
    
 });
@@ -116,12 +119,12 @@ Route::get('/games/tower', function () {
    
 });
 
-Route::get('/games/stair', function () {
+Route::get('/games/stairs', function () {
     return Inertia::render('Game/Stair');
    
 });
 
-Route::get('/games/ring', function () {
+Route::get('/games/roulette', function () {
     return Inertia::render('Game/Ring');
    
 });
