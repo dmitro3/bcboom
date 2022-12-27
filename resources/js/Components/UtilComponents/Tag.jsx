@@ -13,6 +13,7 @@ const Tag = ({ text, bg }) => {
             color="#4F95FF"
             fontWeight="bold"
             fontSize="14px"
+            cursor='pointer'
         />
     );
 };
