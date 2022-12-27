@@ -2,7 +2,7 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games24.svg";
+import img from "../../../assets/promotions/distributor_pro_background.svg";
 import activity from "../../../assets/promotions/activity.svg";
 import bonus from "../../../assets/promotions/bonus.svg";
 import info from "../../../assets/promotions/info.svg";

@@ -110,6 +110,12 @@ Route::get('/games/ring', function () {
    
 });
 
+Route::get('/games/limbo', function () {
+    return Inertia::render('Game/Limbo');
+   
+});
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

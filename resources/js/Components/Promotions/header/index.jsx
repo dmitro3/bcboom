@@ -12,20 +12,20 @@ const PromotionsHeader = ({
         <Box
             sx={{
                 height: {
-                    md: "18.25rem",
-                    lg: "18.25rem",
-                    xl: "31.25rem",
+                    md: "14rem",
+                    lg: "14rem",
+                    xl: "14rem",
                 },
-                background: `linear-gradient(95.62deg, #3971E8 11.91%, #377EEC 60.57%, rgba(58, 124, 234, 0) 100% ), url(${imgUrl})`,
+                background: `url(${imgUrl})`,
                 backgroundSize: {
-                    md: "70%, cover",
-                    lg: "70%, cover",
-                    xl: "70%, cover",
+                    md: "100%",
+                    lg: "100%",
+                    xl: "100%",
                 },
-                backgroundRepeat: "no-repeat, no-repeat",
-                backgroundPosition: "left, right",
+                backgroundRepeat: "no-repeat",
                 borderRadius: "10px",
                 display: "flex",
+
                 ...customImageStyles,
             }}
         >
@@ -37,11 +37,13 @@ const PromotionsHeader = ({
                     paddingLeft: "2%",
                     textAlign: "left",
                     borderRight: "none",
+
                     width: {
                         md: "50%",
                         lg: "60%",
                         xl: "60%",
                     },
+                    height: "100%",
                     ...customStyles,
                 }}
             >

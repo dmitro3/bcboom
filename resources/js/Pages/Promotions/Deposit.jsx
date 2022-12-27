@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/inertia-react";
 import React from "react";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";
-import img from "../../../assets/promotions/games4.svg";
+import img from "../../../assets/promotions/deposit_pro_background.svg";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import PromotionsHeader from "@/Components/Promotions/header";
 import GreyText from "@/Components/Promotions/Typography/GreyText";

@@ -1,7 +1,7 @@
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games11.svg";
+import img from "../../../assets/promotions/full_bonus_pro_background.svg";
 import { styled } from "@mui/system";
 import React from "react";
 import PromotionsHeader from "@/Components/Promotions/header";

@@ -2,7 +2,7 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games6.svg";
+import img from "../../../assets/promotions/bonus_pro_background.svg";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";

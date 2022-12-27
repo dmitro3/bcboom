@@ -2,7 +2,7 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games2.svg";
+import img from "../../../assets/promotions/pro_invite_background.svg";
 import { styled } from "@mui/system";
 import React from "react";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
