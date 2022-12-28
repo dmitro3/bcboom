@@ -78,7 +78,7 @@ Route::get('/bonus', function () {
     return Inertia::render('Bonus/Index');
 });
 Route::get('/vip', function () {
-    return Inertia::render('Bonus/BonusEveryday');
+    return Inertia::render('VIP/Index');
 });
 // Route::get('/vip', function () {
 //     return Inertia::render('VIP/Index');
