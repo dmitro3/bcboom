@@ -26,7 +26,7 @@ const VIPIndex = () => {
                                 position: "relative",
                             }}
                         >
-                            <Flex>
+                            <Flex alignItems='normal' justifyContent='stretch' gap='40px'>
                                 <MyVIPLevel />
                                 <FullVIPBonus />
                             </Flex>
