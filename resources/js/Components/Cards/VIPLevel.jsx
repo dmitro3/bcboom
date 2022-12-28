@@ -67,8 +67,9 @@ const VipLevelCard = styled("div")(() => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat, no-repeat",
     textAlign: "center",
-    width: "40%",
+    width: "35%",
     padding: "1.5rem",
+    borderRadius: "10px",
 }));
 
 const MyVIPLevel = () => {
@@ -209,8 +210,37 @@ const MyVIPLevel = () => {
                     fontWeight="bold"
                 />
             </div>
-            <Flex>
-
+            <Flex justifyContent='center' alignItems='center' gap='30px' margin='20px 0 20px 0'>
+                    <div style={{ background: "#121539", padding: "14px 45px", borderRadius: '20px' }}>
+                    <Text
+                        type="p"
+                        text="Bet"
+                        fontSize="17px"
+                        fontWeight="bold"
+                    />
+                    <Text
+                        type="p"
+                        text="R$ 800"
+                        fontSize="17px"
+                        fontWeight="bold"
+                        color="#3586FF"
+                    />
+                </div>
+                <div style={{ background: "#121539", padding: "14px 45px", borderRadius: '20px' }}>
+                    <Text
+                        type="p"
+                        text="Deposit"
+                        fontSize="17px"
+                        fontWeight="bold"
+                    />
+                    <Text
+                        type="p"
+                        text="R$ 100"
+                        fontSize="17px"
+                        fontWeight="bold"
+                        color="#3586FF"
+                    />
+                </div>
             </Flex>
         </VipLevelCard>
     );
