@@ -97,8 +97,10 @@ const FairnessImageHeader = styled("div")(({ isMobile }) => ({
 }));
 
 const FairnessContentWrapper = styled("div")(({isMobile}) => ({
-    marginTop:  isMobile ? '0px' : "80px",
+    marginTop:  isMobile ? '-40px' : "80px",
     textAlign: "center",
+    position: "relative",
+    zIndex: 2000,
 }));
 
 const Accordion = ({ isMobile }) => {

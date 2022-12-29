@@ -94,6 +94,11 @@ const NavItem = styled("div")(({ active }) => ({
     "&:last-child": {
         marginBottom: 0,
     },
+    "& img": {
+        filter:
+            active &&
+            "invert(41%) sepia(83%) saturate(2321%) hue-rotate(203deg) brightness(104%) contrast(103%)",
+    },
 }));
 const NavLinks = styled("div")(() => ({
     background: "#1C2036",
@@ -123,9 +128,13 @@ const Sidedrawer = () => {
     const otherSocials = [facebook, instagram, telegram, twitter];
     const dispatcher = useDispatch();
     const [currentLanguage, setCurrentLanguage] = useState("english");
-    function closeDrawer(){
-        dispatcher(setDrawerState({ open: !drawerState.open }))
+    function closeDrawer() {
+        dispatcher(setDrawerState({ open: !drawerState.open }));
     }
+    const location =
+        typeof window !== undefined
+            ? window.location.pathname.split("/")[1]
+            : "";
     return (
         <Drawer
             anchor={"left"}
@@ -153,7 +162,10 @@ const Sidedrawer = () => {
                 <Divider bg="#8990ae78" />
                 <NavLinks>
                     {navlinks.map((nav, i) => (
-                        <NavItem key={i} active={nav.active}>
+                        <NavItem
+                            key={i}
+                            active={location == nav.link.replace("/", "")}
+                        >
                             <img src={nav.icon} alt={nav.name} />
                             <Link href={nav.link} onClick={closeDrawer}>
                                 <p>{nav.name}</p>
@@ -164,7 +176,10 @@ const Sidedrawer = () => {
                 <Divider bg="#8990ae78" />
                 <NavLinks>
                     {miscNavLinks.map((nav, i) => (
-                        <NavItem key={i} active={nav.active}>
+                        <NavItem
+                            key={i}
+                            active={location == nav.link.replace("/", "")}
+                        >
                             <img src={nav.icon} alt={nav.name} />
                             <Link href={nav.link} onClick={closeDrawer}>
                                 <p>{nav.name}</p>
