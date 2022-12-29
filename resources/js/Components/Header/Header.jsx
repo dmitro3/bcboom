@@ -60,14 +60,14 @@ const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),
     marginRight: "15px",
 }));
-const HeaderItems = styled("div")(() => ({
+const HeaderItems = styled("div")(({active}) => ({
     display: "flex",
     cursor: "pointer",
     p: {
         marginLeft: "5px",
         marginTop: "3px",
         fontSize: "12px",
-        color: "#8990AE",
+         color: active ? "#3586FF" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
     },
@@ -210,7 +210,10 @@ const DesktopHeader = () => {
                 <HeaderPlatformLinkItems>
                     {links.map((item) => (
                         <Link href={item.link}>
-                            <HeaderItems key={item.id}>
+                            <HeaderItems
+                                key={item.id}
+                                active={location == item.link.replace("/", "")}
+                            >
                                 <img
                                     src={item.icon}
                                     alt={`${item.text}`}

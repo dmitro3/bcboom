@@ -18,6 +18,9 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Index');
+});
+Route::get('/fairness', function () {
+    return Inertia::render('Fairness/Index');
    
 });
 
@@ -128,6 +131,7 @@ Route::get('/games/roulette', function () {
     return Inertia::render('Game/Ring');
    
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

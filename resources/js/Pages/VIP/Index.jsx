@@ -90,12 +90,12 @@ const useStyles = makeStyles((theme) => ({
         "&:before": {
             border: "1px solid white",
         },
-        color: "red",
+        color: "#1D2036",
     },
     tooltip: {
-        backgroundColor: "red",
+        backgroundColor: "#1D2036",
         border: "1px solid #E6E8ED",
-        color: "#4A4A4A",
+        color: "white",
     },
 }));
 const VIPIndex = () => {
