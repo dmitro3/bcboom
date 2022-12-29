@@ -85,14 +85,14 @@ const FullVIPBonus = () => {
                 </Flex>
                 <RangeInput
                     style={{ width: "80%", marginTop: "30px" }}
-                    value={25}
+                    value={28}
                 >
                     <div>
                         <input
                             type="range"
                             max={100}
                             min={0}
-                            value={25}
+                            value={30}
                             style={{ width: "100%" }}
                         />
                         <Text
