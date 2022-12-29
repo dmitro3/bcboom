@@ -9,18 +9,23 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
+import { Tooltip } from "@mui/material";
+import { styled as MuiStyle } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
+import faq from "../../../../public/images/svg/faq.svg";
 import goldencup from "../../../../public/images/svg/goldencup.svg";
 import target from "../../../../public/images/svg/target.svg";
-const DividerStats = styled("div")(() => ({
+
+const DividerStats = styled("div")(({ isMobile }) => ({
     background: "linear-gradient(119.77deg, #262C55 2.99%, #454BCC 100%)",
     borderRadius: "10px",
     width: "100%",
-    height: "100px",
+    height: isMobile ? "fit-content" : "100px",
     marginTop: "50px",
 }));
 
-const BgWithText = styled("div")(({color}) => ({
+const BgWithText = styled("div")(({ color }) => ({
     background: "#2D3058",
     borderRadius: "10px",
     padding: "20px",
@@ -33,14 +38,13 @@ const BgWithText = styled("div")(({color}) => ({
             fontWeight: "bold",
             lineHeight: "100px",
             fontFamily: 'Montserrat, "Helvetica", "Arial", sans-serif',
-            background:
-                `linear-gradient(127.1deg, #58FFEB 17.29%, ${color} 87.58%)`,
+            background: `linear-gradient(127.1deg, #58FFEB 17.29%, ${color} 87.58%)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             textFillColor: "transparent",
         },
-        "&:last-child": {
+        "&:nth-child(2)": {
             fontSize: "12px",
             color: "white",
         },
@@ -60,9 +64,42 @@ const BgWithText = styled("div")(({color}) => ({
         opacity: "0.8",
         zIndex: 1,
     },
-}));
 
+    "& img": {
+        position: "absolute",
+        top: "5%",
+        right: "5%",
+    },
+}));
+const BcTooltip = MuiStyle(({ className, ...props }) => (
+    <Tooltip
+        {...props}
+        componentsProps={{ tooltip: { className: className } }}
+    />
+))(`
+    color: white;
+    background-color: #181E46;
+    font-size: 11px;
+    font-family: Montserrat;
+    padding: 15px;
+    line-height: 2;
+`);
+
+const useStyles = makeStyles((theme) => ({
+    arrow: {
+        "&:before": {
+            border: "1px solid white",
+        },
+        color: "red",
+    },
+    tooltip: {
+        backgroundColor: "red",
+        border: "1px solid #E6E8ED",
+        color: "#4A4A4A",
+    },
+}));
 const VIPIndex = () => {
+    let classes = useStyles();
     const { isMobile } = useScreenResolution();
     return (
         <>
@@ -72,6 +109,7 @@ const VIPIndex = () => {
                     <ImageGridLayout
                         item={{ title: "VIP Rank System", icon: goldencup }}
                         index={0}
+                        page="vip"
                     >
                         <div
                             style={{
@@ -83,15 +121,16 @@ const VIPIndex = () => {
                             <Flex
                                 alignItems="normal"
                                 justifyContent="stretch"
+                                direction={isMobile ? "column" : "row"}
                                 gap="40px"
                             >
                                 <MyVIPLevel />
                                 <FullVIPBonus />
                             </Flex>
                         </div>
-                        <DividerStats>
+                        <DividerStats isMobile={isMobile}>
                             <Flex
-                                alignItems="flex-start"
+                                alignItems={isMobile ? "stretch" : "flex-start"}
                                 justifyContent="space-between"
                                 padding="10px 5%"
                             >
@@ -99,16 +138,27 @@ const VIPIndex = () => {
                                     <img
                                         src={target}
                                         alt=""
-                                        style={{ marginTop: "-36px" }}
+                                        style={{
+                                            marginTop: !isMobile && "-36px",
+                                            width: isMobile && "150px",
+                                        }}
                                     />
                                 </div>
-                                <Flex alignItems="center" gap="20px">
+                                <Flex
+                                    alignItems="center"
+                                    gap="20px"
+                                    direction={isMobile ? "column" : "row"}
+                                >
                                     <TextWithBg
                                         bg="#4F5DFE"
                                         primaryText="Original Games"
                                         secondaryText={"R$ 0"}
+                                        primaryTextSize={isMobile && "12px"}
+                                        padding={isMobile && "5px 20px"}
                                     />
                                     <TextWithBg
+                                        primaryTextSize={isMobile && "12px"}
+                                        padding={isMobile && "5px 20px"}
                                         bg={"#4F5DFE"}
                                         primaryText="Accumulated Deposit Amount"
                                         secondaryText={"R$ 100"}
@@ -127,6 +177,7 @@ const VIPIndex = () => {
                             <Flex
                                 alignItems="center"
                                 gap="50px"
+                                direction={isMobile ? "column" : "row"}
                                 margin="100px 0 50px 0"
                             >
                                 {[
@@ -144,11 +195,32 @@ const VIPIndex = () => {
                                         count: "03",
                                         text: "The more you play, the higher your money back, for example your [VIP1] cumulative level bet of €10,000 will bring you a €20 back bonus. (The return for vip10 is R$50)",
                                         color: "#FA3D5F",
+                                        tooltip: true,
                                     },
                                 ].map((item, index) => (
                                     <BgWithText key={index} color={item.color}>
                                         <Text type="p" text={item.count} />
                                         <Text type="p" text={item.text} />
+                                        {item.tooltip && (
+                                            <BcTooltip
+                                                title="60% of Betfiery users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
+                                                placement="bottom-start"
+                                                arrow
+                                                classes={{
+                                                    arrow: classes.arrow,
+                                                    tooltip: classes.tooltip,
+                                                }}
+                                            >
+                                                <img
+                                                    src={faq}
+                                                    alt="tooltip"
+                                                    style={{
+                                                        marginLeft: "10px",
+                                                        cursor: "pointer",
+                                                    }}
+                                                />
+                                            </BcTooltip>
+                                        )}
                                     </BgWithText>
                                 ))}
                             </Flex>

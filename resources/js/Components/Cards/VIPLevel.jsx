@@ -9,6 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { styled as MuiStyle } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const BcTooltip = MuiStyle(({ className, ...props }) => (
     <Tooltip
@@ -62,20 +63,21 @@ const RangeInput = styled("div")(() => ({
     },
 }));
 
-const VipLevelCard = styled("div")(() => ({
+const VipLevelCard = styled("div")(({ isMobile }) => ({
     background: `url(${levelBg})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat, no-repeat",
     textAlign: "center",
-    width: "35%",
+    width: isMobile ? "100%" : "35%",
     padding: "1.5rem",
     borderRadius: "10px",
 }));
 
 const MyVIPLevel = () => {
     let classes = useStyles();
+    const { isMobile } = useScreenResolution();
     return (
-        <VipLevelCard>
+        <VipLevelCard isMobile={isMobile}>
             <Flex
                 alignItems="center"
                 textAlign="center"
@@ -206,37 +208,54 @@ const MyVIPLevel = () => {
                 <Text
                     type="p"
                     text="Upgrading to VIP 1 also requires:"
-                    fontSize="17px"
+                    fontSize={isMobile ? "12px" : "17px"}
                     fontWeight="bold"
                 />
             </div>
-            <Flex justifyContent='center' alignItems='center' gap='30px' margin='20px 0 20px 0'>
-                    <div style={{ background: "#121539", padding: "14px 45px", borderRadius: '20px' }}>
+            <Flex
+                justifyContent="center"
+                alignItems="center"
+                gap="30px"
+                margin="20px 0 20px 0"
+            >
+                <div
+                    style={{
+                        background: "#121539",
+                        padding: isMobile ? "10px 30px" : "14px 45px",
+                        borderRadius: "20px",
+                    }}
+                >
                     <Text
                         type="p"
                         text="Bet"
-                        fontSize="17px"
+                        fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                     />
                     <Text
                         type="p"
                         text="R$ 800"
-                        fontSize="17px"
+                        fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
                     />
                 </div>
-                <div style={{ background: "#121539", padding: "14px 45px", borderRadius: '20px' }}>
+                <div
+                    style={{
+                        background: "#121539",
+                        padding: "14px 45px",
+                        borderRadius: "20px",
+                    }}
+                >
                     <Text
                         type="p"
                         text="Deposit"
-                        fontSize="17px"
+                        fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                     />
                     <Text
                         type="p"
                         text="R$ 100"
-                        fontSize="17px"
+                        fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
                     />

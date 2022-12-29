@@ -41,22 +41,28 @@ const GridLeftCut = styled("div")(({ isMobile }) => ({
     width: "340px",
 }));
 
-const SectionWrapper = styled("div")(({ isMobile, margin }) => ({
+const SectionWrapper = styled("div")(({ isMobile, margin, page }) => ({
     // background: `url(${gridbg})`,
     height: "fit-content",
     overflow: "hidden",
     padding: isMobile ? "20px 10px" : "25px",
     margin: margin ? "25px" : "0 25px 25px 25px",
+    marginTop: page === "vip" && "50px",
     background: "#1D2036",
     borderRadius: "10px",
     position: "relative",
 }));
 
-const ImageGridLayout = ({ item, index, children }) => {
+const ImageGridLayout = ({ item, page, index, children }) => {
     const { isMobile } = useScreenResolution();
 
     return (
-        <SectionWrapper key={index} isMobile={isMobile} margin={item.margin}>
+        <SectionWrapper
+            key={index}
+            isMobile={isMobile}
+            margin={item.margin}
+            page={page}
+        >
             <GridLeftCut isMobile={isMobile} />
             <GridItemTitle>
                 <img

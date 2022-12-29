@@ -1,3 +1,4 @@
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
 import React from "react";
 import fullbg from "../../../../public/images/vip/fullbg.png";
@@ -9,12 +10,12 @@ import level4 from "../../../../public/images/vip/levels04.svg";
 import Text from "../Text/Text";
 import { Flex } from "../UtilComponents/Flex";
 
-const FullVipBonusWrapper = styled("div")(({}) => ({
+const FullVipBonusWrapper = styled("div")(({ isMobile }) => ({
     background: `url(${fullbg})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat, no-repeat",
     textAlign: "center",
-    width: "75%",
+    width: isMobile ? "100%" : "75%",
     padding: "1.5rem",
     borderRadius: "10px",
 }));
@@ -55,8 +56,9 @@ const BonusLevels = styled("div")(({}) => ({
 }));
 
 const FullVIPBonus = () => {
+    const { isMobile } = useScreenResolution();
     return (
-        <FullVipBonusWrapper>
+        <FullVipBonusWrapper isMobile={isMobile}>
             <Text
                 type="p"
                 text="FULL VIP BONUS"
@@ -78,7 +80,7 @@ const FullVIPBonus = () => {
                                 src={level}
                                 alt=""
                                 key={index}
-                                // style={{ width: "25" }}
+                                style={{ width: "12%" }}
                             />
                         )
                     )}
@@ -107,26 +109,28 @@ const FullVIPBonus = () => {
                         <Flex
                             justifyContent="center"
                             alignItems="center"
-                            gap="30px"
+                            gap={isMobile ? '10px' : "30px"}
                             margin="20px 0 20px 0"
                         >
                             <div
                                 style={{
                                     background: "#121539",
-                                    padding: "14px 45px",
+                                    padding: isMobile
+                                        ? "10px 30px"
+                                        : "14px 45px",
                                     borderRadius: "20px",
                                 }}
                             >
                                 <Text
                                     type="p"
                                     text="Accumulated Bet Amount"
-                                    fontSize="17px"
+                                    fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                 />
                                 <Text
                                     type="p"
                                     text="R$ 0"
-                                    fontSize="17px"
+                                    fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                     color="#3586FF"
                                 />
@@ -134,20 +138,22 @@ const FullVIPBonus = () => {
                             <div
                                 style={{
                                     background: "#121539",
-                                    padding: "14px 45px",
+                                    padding: isMobile
+                                        ? "10px 30px"
+                                        : "14px 45px",
                                     borderRadius: "20px",
                                 }}
                             >
                                 <Text
                                     type="p"
                                     text="Accumulated Deposit Amount"
-                                    fontSize="17px"
+                                    fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                 />
                                 <Text
                                     type="p"
                                     text="R$ 100"
-                                    fontSize="17px"
+                                    fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                     color="#3586FF"
                                 />
