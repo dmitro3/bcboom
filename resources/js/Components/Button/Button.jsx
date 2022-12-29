@@ -17,7 +17,7 @@ const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
     },
     ...styles,
 }));
-const Button = ({ text, color, background, onSubmit, styles }) => {
+const Button = ({ text, color, background, onSubmit, ...styles }) => {
     return (
         <ButtonWrapper
             color={color}

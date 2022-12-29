@@ -1,0 +1,54 @@
+import { styled } from "@mui/system";
+import React from "react";
+import link from "../../../../public/images/svg/link.svg";
+const Wrapper = styled("div")(({ splitted }) => ({
+    border: "1px solid #ABB7E2",
+    borderRadius: "10px",
+    position: "relative",
+    height: "40px",
+    "& p": {
+        overflow: "hidden",
+        padding: "6px 50px 1px 3px",
+
+        "& span": {
+            "&:nth-child(1)": {
+                color: splitted && "#F93C56",
+            },
+        },
+    },
+}));
+const CopyableLink = ({ text, addon }) => {
+    const newText = text.split("_");
+    return (
+        <Wrapper splitted={newText[1]}>
+            {/* <input type="text"  */}
+            <p>
+                <span>{newText[0]}</span>
+                <span style={{ color: "#4792FF" }}>_</span>
+                <span>{newText[1]}</span>
+            </p>
+            {/* disabled /> */}
+            {addon && (
+                <div
+                    style={{
+                        background: "#4792FF",
+                        position: "absolute",
+                        top: 0,
+                        right: "0",
+                        height: "100%",
+                        width: "50px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "0px 10px 10px 0px",
+                        cursor: "pointer",
+                    }}
+                >
+                    <img src={link} alt="" />
+                </div>
+            )}
+        </Wrapper>
+    );
+};
+
+export default CopyableLink;
