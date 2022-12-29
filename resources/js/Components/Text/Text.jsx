@@ -6,7 +6,7 @@ const StyledPTag = styled("p")(({ tagStyles }) => ({
 }));
 const StyledListItem = styled("li")(({ tagStyles }) => ({
     fontFamily: 'Montserrat , "sans-serif"',
-    textIndent: '-17px',
+    textIndent: "-17px",
     ...tagStyles,
 }));
 const Text = ({ type, text, ...styles }) => {
@@ -20,7 +20,11 @@ const Text = ({ type, text, ...styles }) => {
         return <StyledListItem tagStyles={styles}>{text}</StyledListItem>;
     }
     if (type === "p") {
-        return <StyledPTag tagStyles={styles}>{text}</StyledPTag>;
+        return (
+            <StyledPTag tagStyles={styles}>
+                {text}
+            </StyledPTag>
+        );
     }
     return <div>{text}</div>;
 };

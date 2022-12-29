@@ -52,7 +52,6 @@ const InnerHeader = () => {
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
             : "";
-    console.log("location", location);
     // useEffect(() => {
     //     const location =
     //         typeof window !== undefined ? window.location.pathname : "";
