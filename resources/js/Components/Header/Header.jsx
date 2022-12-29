@@ -125,21 +125,25 @@ const DesktopHeader = () => {
             id: 1,
             text: "Cashback",
             icon: cashback,
+            link: "/cashback",
         },
         {
             id: 2,
             text: "Fairness",
             icon: fairness,
+            link: "/fairness",
         },
         {
             id: 4,
             text: "Referral",
             icon: referral,
+            link: "/referral",
         },
         {
             id: 3,
             text: "Help",
             icon: help,
+            link: "/help",
         },
     ]);
     const [socials] = useState([
@@ -181,15 +185,20 @@ const DesktopHeader = () => {
     if (isMobile) {
         return <div>hi am mobile</div>;
     }
-
+    const location =
+        typeof window !== undefined
+            ? window.location.pathname.split("/")[1]
+            : "";
     return (
         <HeaderWrapper>
             <HeaderPlatformStats>
                 {statsItems.map((item) => (
-                    <HeaderItems key={item.id}>
-                        <img src={item.icon} alt={`${item.text}`} />
-                        <p>{item.text}</p>
-                    </HeaderItems>
+                    <Link href={item.link}>
+                        <HeaderItems key={item.id}>
+                            <img src={item.icon} alt={`${item.text}`} />
+                            <p>{item.text}</p>
+                        </HeaderItems>
+                    </Link>
                 ))}
             </HeaderPlatformStats>
             <LogoWrapper>
@@ -200,10 +209,21 @@ const DesktopHeader = () => {
             <HeaderPlatformLinks>
                 <HeaderPlatformLinkItems>
                     {links.map((item) => (
-                        <HeaderItems key={item.id}>
-                            <img src={item.icon} alt={`${item.text}`} />
-                            <p>{item.text}</p>
-                        </HeaderItems>
+                        <Link href={item.link}>
+                            <HeaderItems key={item.id}>
+                                <img
+                                    src={item.icon}
+                                    alt={`${item.text}`}
+                                    style={{
+                                        filter:
+                                            location ==
+                                                item.link.replace("/", "") &&
+                                            "invert(41%) sepia(83%) saturate(2321%) hue-rotate(203deg) brightness(104%) contrast(103%)",
+                                    }}
+                                />
+                                <p>{item.text}</p>
+                            </HeaderItems>
+                        </Link>
                     ))}
                 </HeaderPlatformLinkItems>
                 {socials.slice(0, socials.length - 1).map((item) => (
@@ -278,7 +298,7 @@ export const MobileHeader = () => {
                 </Link>
             </Logo>
             <ButtonComponents>
-                <UserDropdown isLoggedIn={false}/>
+                <UserDropdown isLoggedIn={false} />
             </ButtonComponents>
         </MobileHeaderWrapper>
     );
