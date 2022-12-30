@@ -25,6 +25,9 @@ Route::get('/fairness', function () {
 Route::get('/personal-center', function () {
     return Inertia::render('UserPages/PersonalCenter');
 });
+Route::get('/referral', function () {
+    return Inertia::render('UserPages/Referral');
+});
 
 Route::get('/promotions/exclusive', function () {
     return Inertia::render('Promotions/Exclusive');
