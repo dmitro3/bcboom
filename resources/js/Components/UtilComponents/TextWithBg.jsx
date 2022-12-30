@@ -7,6 +7,7 @@ const TextWithBg = ({
     secondaryText,
     primaryTextSize,
     secondaryTextSize,
+    primaryColor,
     secondaryColor,
     padding,
 }) => {
@@ -25,6 +26,7 @@ const TextWithBg = ({
                 text={primaryText}
                 fontSize={primaryTextSize || "17px"}
                 fontWeight="bold"
+                color={primaryColor || "white"}
             />
             <Text
                 type="p"
