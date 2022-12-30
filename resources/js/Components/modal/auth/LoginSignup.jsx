@@ -185,6 +185,7 @@ const LoginSignupModal = () => {
                                 content: <SignupForm isMobile={isMobile} />,
                             },
                         ]}
+                        width={isMobile ? "100%" : "350px"}
                     />
                 </TabComponent>
             </LoginSignupModalWrapper>

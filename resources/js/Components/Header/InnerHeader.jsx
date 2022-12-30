@@ -114,7 +114,7 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && <UserDropdown isLoggedIn={true} />}
+                {!isMobile && <UserDropdown isLoggedIn={false} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
