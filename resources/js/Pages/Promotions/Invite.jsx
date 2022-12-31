@@ -2,11 +2,13 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games2.svg";
+import img from "../../../assets/promotions/pro_invite_background.svg";
+import network from "../../../assets/promotions/netowkr.svg";
+import img_sm from "../../../assets/promotions/pro_invite_sm.svg";
 import { styled } from "@mui/system";
 import React from "react";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 
 const PromotionPageWrapper = styled("div")(() => ({
@@ -32,6 +34,7 @@ const Invite = () => {
                     <PromotionPageWrapper>
                         <PromotionsHeader
                             imgUrl={img}
+                            imgUrL_sm={img_sm}
                             headerText={HEADER_TEXT}
                         />
                         <Box
@@ -39,6 +42,7 @@ const Invite = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                             }}
                         >
                             <SemiBoldText>
@@ -106,13 +110,51 @@ const Invite = () => {
                         >
                             <Box
                                 sx={{
-                                    height: "47.25rem",
+                                    height: { xl: "57.25rem" },
                                     width: "80%",
                                     padding: "2.3125rem",
                                     backgroundColor: "#2E3665",
                                     borderRadius: "0.625rem",
+                                    justifySelf: "center",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    flexDirection: "column",
                                 }}
-                            ></Box>
+                            >
+                                <img src={network} />
+                                <Box
+                                    sx={{
+                                        width: "70%",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        textAlign: "center",
+                                        mt: "2.3125rem",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Montserrat",
+                                            fontWeight: 600,
+                                            fontSize: "1.125rem",
+                                        }}
+                                    >
+                                        Get a Unique Referral Code
+                                    </Typography>
+                                </Box>
+                                <Button
+                                    sx={{
+                                        mt: "1.875rem",
+                                        backgroundColor: "#3586FF",
+                                        color: "white",
+                                        fontWeight: 600,
+                                        fontSize: "1rem",
+                                        width: "9.25rem",
+                                    }}
+                                >
+                                    Copy Code
+                                </Button>
+                            </Box>
                         </Box>
                         <Box
                             sx={{
@@ -250,8 +292,16 @@ const Invite = () => {
                         >
                             <Box
                                 sx={{
-                                    height: "8.1875rem",
-                                    width: "80%",
+                                    height: {
+                                        md: "9.1875rem",
+                                        lg: "8.1875rem",
+                                        xl: "8.1875rem",
+                                    },
+                                    width: {
+                                        md: "90%",
+                                        lg: "80%",
+                                        xl: "80%",
+                                    },
                                     padding: "1rem",
                                     backgroundColor: "#2E3665",
                                     borderRadius: "0.625rem",

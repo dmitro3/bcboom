@@ -122,13 +122,23 @@ Route::get('/games/tower', function () {
    
 });
 
-Route::get('/games/stairs', function () {
+Route::get('/games/plinko', function () {
+    return Inertia::render('Game/Plinko');
+   
+});
+
+Route::get('/games/stair', function () {
     return Inertia::render('Game/Stair');
    
 });
 
 Route::get('/games/roulette', function () {
     return Inertia::render('Game/Ring');
+   
+});
+
+Route::get('/games/limbo', function () {
+    return Inertia::render('Game/Limbo');
    
 });
 

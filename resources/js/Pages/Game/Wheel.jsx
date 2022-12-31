@@ -33,6 +33,7 @@ const Wheel = () => {
                             GameFrame={WheelFrame}
                             ButtonGrid={WheelButtonGrid}
                             displayPanel={false}
+                            customFrameHeader={true}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

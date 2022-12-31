@@ -3,7 +3,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import img from "../../../assets/promotions/games3.svg";
+import img from "../../../assets/promotions/exclusive_pro_background.svg";
 import activity from "../../../assets/promotions/promotion_activity.svg";
 import { promotionsTableColumns, promotionsTableRows } from "@/data/promotions";
 import { DataGrid } from "@mui/x-data-grid";
@@ -43,6 +43,7 @@ const Exclusive = () => {
                                 marginTop: "35px",
                                 display: "flex",
                                 justifyContent: "center",
+                                alignItems: "center",
                             }}
                         >
                             <SemiBoldText>

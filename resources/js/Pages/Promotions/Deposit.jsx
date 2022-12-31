@@ -4,7 +4,8 @@ import { Head } from "@inertiajs/inertia-react";
 import React from "react";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";
-import img from "../../../assets/promotions/games4.svg";
+import img from "../../../assets/promotions/deposit_pro_background.svg";
+import img_sm from "../../../assets/promotions/pro_deposit_sm.svg";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import PromotionsHeader from "@/Components/Promotions/header";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
@@ -33,6 +34,7 @@ const Deposit = () => {
                     <PromotionPageWrapper>
                         <PromotionsHeader
                             imgUrl={img}
+                            imgUrL_sm={img_sm}
                             headerText={HEADER_TEXT}
                         />
                         <Box
@@ -94,10 +96,14 @@ const Deposit = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+                                    flexDirection: {
+                                        xs: "column",
+                                        md: "row",
+                                    },
                                 }}
                             >
                                 <PromotionCard
@@ -161,7 +167,7 @@ const Deposit = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
@@ -187,7 +193,7 @@ const Deposit = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",

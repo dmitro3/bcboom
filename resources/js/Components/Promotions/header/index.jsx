@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 
 const PromotionsHeader = ({
     imgUrl,
+    imgUrL_sm,
     headerText,
     customStyles,
     customImageStyles,
@@ -12,20 +13,29 @@ const PromotionsHeader = ({
         <Box
             sx={{
                 height: {
-                    md: "18.25rem",
-                    lg: "18.25rem",
-                    xl: "31.25rem",
+                    sm: "17rem",
+                    md: "10rem",
+                    lg: "12rem",
+                    xl: "17rem",
                 },
-                background: `linear-gradient(95.62deg, #3971E8 11.91%, #377EEC 60.57%, rgba(58, 124, 234, 0) 100% ), url(${imgUrl})`,
+                background: {
+                    xs: `url(${imgUrL_sm})`,
+                    sm: `url(${imgUrL_sm})`,
+                    md: `url(${imgUrl})`,
+                    lg: `url(${imgUrl})`,
+                    xl: `url(${imgUrl})`,
+                },
                 backgroundSize: {
-                    md: "70%, cover",
-                    lg: "70%, cover",
-                    xl: "70%, cover",
+                    sm: "100%",
+                    md: "100%",
+                    lg: "100%",
+                    xl: "100%",
                 },
-                backgroundRepeat: "no-repeat, no-repeat",
-                backgroundPosition: "left, right",
+                backgroundRepeat: "no-repeat",
                 borderRadius: "10px",
                 display: "flex",
+                alignItems: "center",
+
                 ...customImageStyles,
             }}
         >
@@ -37,11 +47,16 @@ const PromotionsHeader = ({
                     paddingLeft: "2%",
                     textAlign: "left",
                     borderRight: "none",
+                    justifySelf: "left",
+
                     width: {
+                        xs: "40%",
+                        sm: "60%",
                         md: "50%",
                         lg: "60%",
                         xl: "60%",
                     },
+                    //height: "100%",
                     ...customStyles,
                 }}
             >

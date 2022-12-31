@@ -55,7 +55,7 @@ const PrettoSlider = styled(Slider)({
 
 const DiceFrame = () => {
     return (
-        <Box sx={{ width: "100%", mt: ".625rem" }}>
+        <Box sx={{ width: "98%", mt: ".625rem" }}>
             <Box
                 sx={{
                     width: "100%",

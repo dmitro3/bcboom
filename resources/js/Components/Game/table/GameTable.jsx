@@ -8,15 +8,46 @@ import {
 import { gamesTableColumns, gamesTableRows } from "@/data/games";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import candidates from "../../../../assets/games/candidates.svg";
+import ellipsis from "../../../../assets/games/Ellipse 93.svg";
 
 const GameTable = () => {
-    const [height, setHeight] = React.useState("26.4rem");
+    const [height, setHeight] = React.useState("36.4rem");
     const [showMore, setShowMore] = React.useState(true);
 
     function CustomFooter() {
         return (
             <GridFooterContainer>
-                <GridPagination />
+                <Box
+                    sx={{
+                        display: "flex",
+                        height: "1rem",
+                        width: "120px",
+                        mr: "7.4375rem",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <img src={ellipsis} style={{ marginRight: ".2rem" }} />
+                        <img src={candidates} />
+                    </Box>
+                    <Box
+                        sx={{
+                            fontSize: "0.875rem",
+                            color: "#A6B0DA",
+                            fontWeight: "600",
+                        }}
+                    >
+                        0/50 Players
+                    </Box>
+                </Box>
                 <Button
                     endIcon={showMore ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                     sx={{
@@ -29,9 +60,9 @@ const GameTable = () => {
                     onClick={() => {
                         setShowMore(!showMore);
                         if (showMore) {
-                            setHeight("39.4rem");
+                            setHeight("52rem");
                         } else {
-                            setHeight("27.4rem");
+                            setHeight("36.4rem");
                         }
                     }}
                 >

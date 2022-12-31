@@ -12,7 +12,7 @@ const RingButtonGrid = () => {
             }}
         >
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={6} md={6}>
                     {" "}
                     <Button
                         endIcon={<ExpandMoreIcon sx={{ fontSize: "1rem" }} />}
@@ -58,7 +58,7 @@ const RingButtonGrid = () => {
                         </Box>
                     </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} md={6}>
                     {" "}
                     <Button
                         endIcon={<ExpandMoreIcon sx={{ fontSize: "1rem" }} />}
@@ -104,7 +104,7 @@ const RingButtonGrid = () => {
                         </Box>
                     </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={8} md={6}>
                     <Box
                         sx={{
                             width: "100%",
@@ -229,7 +229,7 @@ const RingButtonGrid = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4} md={6}>
                     <Button
                         sx={{
                             width: "100%",

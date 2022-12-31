@@ -1,7 +1,8 @@
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games11.svg";
+import img from "../../../assets/promotions/full_bonus_pro_background.svg";
+import img_sm from "../../../assets/promotions/fullbonus_pro_sm.svg";
 import { styled } from "@mui/system";
 import React from "react";
 import PromotionsHeader from "@/Components/Promotions/header";
@@ -33,6 +34,7 @@ const FullBonus = () => {
                     <PromotionPageWrapper>
                         <PromotionsHeader
                             imgUrl={img}
+                            imgUrL_sm={img_sm}
                             headerText={HEADER_TEXT}
                         />
                         <Box
@@ -95,10 +97,18 @@ const FullBonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: {
+                                        xs: "100%",
+                                        md: "80%",
+                                    },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+
+                                    flexDirection: {
+                                        xs: "column",
+                                        md: "row",
+                                    },
                                 }}
                             >
                                 <PromotionCard
@@ -162,7 +172,7 @@ const FullBonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "100%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
@@ -188,7 +198,7 @@ const FullBonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "100%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
