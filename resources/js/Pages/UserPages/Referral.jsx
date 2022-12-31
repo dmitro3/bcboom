@@ -14,6 +14,14 @@ import dollarValue from "../../../../public/images/user/dollarValue.png";
 import bank from "../../../../public/images/user/bank.png";
 import idea from "../../../../public/images/user/idea.png";
 import discount from "../../../../public/images/user/discount.png";
+import refnetwork from "../../../../public/images/user/refnetwork.svg";
+import network from "../../../../public/images/user/network.svg";
+import incomecalculatorbg from "../../../../public/images/user/incomecalculatorbg.svg";
+import whowonbg from "../../../../public/images/user/whowonbg.svg";
+import leaderboardbg from "../../../../public/images/user/leaderboardbg.svg";
+import user1 from "../../../../public/images/user/user1.png";
+import user2 from "../../../../public/images/user/user2.png";
+import user3 from "../../../../public/images/user/user3.png";
 import form from "../../../../public/images/user/form.svg";
 import target from "../../../../public/images/svg/target.svg";
 import faq from "../../../../public/images/svg/faq.svg";
@@ -23,6 +31,8 @@ import Text from "@/Components/Text/Text";
 import CopyableLink from "@/Components/UtilComponents/CopyableLink";
 import { Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useState } from "react";
+import { currencyFormatter } from "@/utils/util";
 const PersonalCenterPageWrapper = styled("div")(() => ({
     marginLeft: "auto",
     marginRight: "auto",
@@ -48,7 +58,7 @@ const InvitationCard = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat",
     padding: "20px",
     borderRadius: "10px",
-    width: "35%",
+    width: isMobile ? '100%' : "35%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
@@ -62,7 +72,7 @@ const MonthlyRevenue = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat",
     // padding: "20px",
     borderRadius: "10px",
-    width: "65%",
+    width: isMobile ? '100%' : "65%",
     // textAlign: "center",
 }));
 
@@ -86,6 +96,59 @@ const MonthlyBody = styled("div")(() => ({
     gap: "15%",
     alignItems: "center",
 }));
+
+const RefNetwork = styled("div")(({ isMobile }) => ({
+    width: isMobile ? "100%" : "50%",
+    background: `url(${refnetwork})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px 0",
+    borderRadius: "10px",
+}));
+const IncomeCalculator = styled("div")(({ isMobile, rangeVal }) => ({
+    width: isMobile ? "100%" : "50%",
+    background: `url(${incomecalculatorbg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    textAlign: "center",
+
+    borderRadius: "10px",
+
+    "input[type='range']": {
+        marginTop: "40px",
+        width: "75%",
+        height: "12px",
+        WebkitAppearance: "none",
+        background: `#7E8FCA`,
+        borderRadius: "10px",
+        position: "relative",
+        // overflow: "hidden",
+    },
+    "input[type='range']::-webkit-slider-runnable-track": {
+        height: "20px",
+        WebkitAppearance: "none",
+        color: "#13bba4",
+        marginTop: "-1px",
+    },
+    "input[type='range']::-webkit-slider-thumb": {
+        width: "20px",
+        WebkitAppearance: "none",
+        height: "20px",
+        borderRadius: "50%",
+        cursor: "ew-resize",
+        background: "#64A2FF",
+        // boxShadow: "-280px 0 0 280px #43e5f7",
+        position: "absolute",
+        top: "-4px",
+        left: `${rangeVal}%`,
+    },
+}));
+
 const BcTooltip = MuiStyle(({ className, ...props }) => (
     <Tooltip
         {...props}
@@ -134,11 +197,48 @@ const HowReferralWorksContent = styled("div")(() => ({
     padding: "20px",
 }));
 
-const Invite = (isMobile) => {
+const LeaderBoard = styled("div")(({ isMobile }) => ({
+    background: `url(${leaderboardbg})`,
+    width: isMobile ? "100%" : "50%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "50px 0",
+    borderRadius: "10px",
+}));
+
+const LeaderBoardUsers = styled("div")(() => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "0 auto",
+    gap: "60px",
+}));
+const WhoWon = styled("div")(({ isMobile }) => ({
+    background: `url(${whowonbg})`,
+    width: isMobile ? "100%" : "50%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    padding: "20px 0",
+    borderRadius: "10px",
+}));
+
+const Invite = ({ isMobile }) => {
     const classes = useStyles();
+    const [rangeVal, setRangeVal] = useState(0);
+    console.log("isMobile: ", isMobile);
     return (
         <TabWrapper>
-            <Flex alignItems="stretch" gap="20px">
+            <Flex alignItems="stretch" gap="20px" direction={`${isMobile ? 'column': 'row'}`}>
                 <InvitationCard isMobile={isMobile}>
                     <Text
                         type="p"
@@ -541,7 +641,9 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                 fontWeight="bold"
                                 fontSize="24px"
                             />
-                            <div style={{fontWeight:'600', fontSize:'14px'}}>
+                            <div
+                                style={{ fontWeight: "600", fontSize: "14px" }}
+                            >
                                 <p>
                                     The invite ratio is A invite B, B invite C,
                                     C invite D, D invite E. When E bets
@@ -558,6 +660,206 @@ subordinates, where the bonus amount lower level user betting depends on the val
                         </div>
                     </Flex>
                 </TextWithImage>
+            </Flex>
+
+            <Flex alignItems="stretch" gap="20px">
+                <RefNetwork isMobile={isMobile}>
+                    <img src={network} alt="" />
+                </RefNetwork>
+                <IncomeCalculator isMobile={isMobile} rangeVal={rangeVal}>
+                    <Flex
+                        alignItems="center"
+                        justifyContent="center"
+                        padding="20px 0"
+                    >
+                        <Text
+                            type="p"
+                            text="Income Calculator"
+                            fontSize="20px"
+                            fontWeight="bold"
+                        />
+                        <BcTooltip
+                            title="The estimated value is derived from the average of all user earnings guests within the platform. Your winnings consist of 2 parts, the bonus for inviting Users deposited, the commission for user betting discounts subordinates, where the bonus amount lower level user betting depends on the value of your bets lower level user, the more Who your accumulated stake value, greater will be your earnings."
+                            arrow
+                            classes={{
+                                arrow: classes.arrow,
+                                tooltip: classes.tooltip,
+                            }}
+                        >
+                            <img
+                                src={faq}
+                                alt="tooltip"
+                                style={{
+                                    marginLeft: "10px",
+                                    cursor: "pointer",
+                                }}
+                            />
+                        </BcTooltip>
+                    </Flex>
+
+                    <Text
+                        type="p"
+                        text={`R$ ${currencyFormatter
+                            .format(rangeVal * 5.544)
+                            .replace("$", "")}`}
+                        color="#64A2FF"
+                        fontSize="25px"
+                        fontWeight="bold"
+                        padding="15px 0"
+                    />
+
+                    <Text
+                        type="p"
+                        text={`Invite ${rangeVal} Users assets Expected annual income to be earned`}
+                        color="#64A2FF"
+                        fontSize="15px"
+                        fontWeight="bold"
+                        padding="15px 0"
+                        textAlign="center"
+                        width="50%"
+                        margin="0 auto"
+                    />
+                    <div>
+                        <input
+                            max={100}
+                            min={0}
+                            value={rangeVal}
+                            type="range"
+                            onChange={(e) => setRangeVal(e.target.value)}
+                        />
+                    </div>
+                </IncomeCalculator>
+            </Flex>
+
+            <Flex alignItems="stretch" gap="20px">
+                <LeaderBoard isMobile={isMobile}>
+                    <Text
+                        type="p"
+                        text="Leaderboard"
+                        fontSize="20px"
+                        fontWeight="bold"
+                        color="#64A2FF"
+                        paddingBottom="20px"
+                    />
+                    <LeaderBoardUsers>
+                        {[
+                            {
+                                position: 2,
+                                icon: user2,
+                                name: "User820769654",
+                                amount: "R$ 8413570",
+                                border: "#3179E5",
+                            },
+                            {
+                                position: 1,
+                                icon: user1,
+                                name: "User720769654",
+                                amount: "R$ 17201880",
+                                border: "#00E0FF",
+                            },
+                            {
+                                position: 3,
+                                icon: user3,
+                                name: "User820769654",
+                                amount: "R$ 8413570",
+                                border: "#E531DE",
+                            },
+                        ].map((item, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    textAlign: "center",
+                                    marginTop: index === 1 ? "-20px" : "80px",
+                                }}
+                            >
+                                <Text
+                                    type="p"
+                                    text={"TOP" + item.position}
+                                    color="#31C5E5"
+                                    fontSize="16px"
+                                    fontWeight="bold"
+                                />
+                                <img
+                                    src={item.icon}
+                                    alt=""
+                                    style={{
+                                        margin: "10px auto",
+                                        border: `1px solid ${item.border}`,
+                                        padding: "5px",
+                                        borderRadius: "50%",
+                                    }}
+                                />
+                                <Text
+                                    type="p"
+                                    text={item.name}
+                                    fontSize="12px"
+                                    fontWeight="bold"
+                                    paddingTop="10px"
+                                />
+                                <Text
+                                    type="p"
+                                    text={item.amount}
+                                    fontSize="10px"
+                                    fontWeight="bold"
+                                />
+                            </div>
+                        ))}
+                    </LeaderBoardUsers>
+                </LeaderBoard>
+                <WhoWon>
+                    <Text
+                        type="p"
+                        text="Who won the prize"
+                        fontSize="20px"
+                        fontWeight="bold"
+                        color="#64A2FF"
+                        paddingBottom="20px"
+                        textTransform="capitalize"
+                    />
+                    {[
+                        { name: "User820769654", amount: "R$ 11" },
+                        { name: "User820769654", amount: "R$ 11" },
+                        { name: "User820769654", amount: "R$ 11" },
+                    ].map((item, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                background: "#140E37",
+                                width: "80%",
+                                margin: "10px 0",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            <Flex
+                                alignItems="center"
+                                justifyContent="space-between"
+                                padding="20px"
+                            >
+                                <Text
+                                    type="p"
+                                    text={item.name}
+                                    color="#9AA4CF"
+                                    fontSize="15px"
+                                    fontWeight="medium"
+                                />
+                                <Text
+                                    type="p"
+                                    text="Receive and Invite Bonus"
+                                    color="#9AA4CF"
+                                    fontSize="15px"
+                                    fontWeight="medium"
+                                />
+                                <Text
+                                    type="p"
+                                    text={item.amount}
+                                    color="#64A2FF"
+                                    fontSize="15px"
+                                    fontWeight="medium"
+                                />
+                            </Flex>
+                        </div>
+                    ))}
+                </WhoWon>
             </Flex>
         </TabWrapper>
     );
@@ -593,7 +895,9 @@ const ReferralIndex = () => {
                                                 value: "toInvite",
                                                 label: "To Invite",
                                                 content: (
-                                                    <Invite>hi worl</Invite>
+                                                    <Invite
+                                                        isMobile={isMobile}
+                                                    />
                                                 ),
                                                 icon: invite,
                                             },

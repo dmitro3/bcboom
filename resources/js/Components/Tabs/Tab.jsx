@@ -72,10 +72,11 @@ const CustomTabs = ({ tabItems }) => {
 
 export default CustomTabs;
 
-const TabWrapper = styled("div")(({}) => ({
+const TabWrapper = styled("div")(({ padding, marginTop }) => ({
     borderRadius: "20px",
     color: "#fff",
-    padding: "20px 30px",
+    padding: padding || "20px 30px",
+    marginTop: marginTop,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -101,10 +102,10 @@ const TabButton = styled("div")(({ active }) => ({
     whiteSpace: "nowrap",
 }));
 
-export const NewCustomTabs = ({ tabItems, width }) => {
+export const NewCustomTabs = ({ tabItems, width, padding, marginTop }) => {
     const [value, setValue] = React.useState(0);
     return (
-        <TabWrapper>
+        <TabWrapper padding={padding} marginTop={marginTop}>
             <TabButtons width={width}>
                 {tabItems.map((item, index) => {
                     return (
