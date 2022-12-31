@@ -19,15 +19,16 @@ const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
     position: "relative",
     borderRadius: "20px",
     border: "transparent",
-    padding: "20px 30px",
-    width: isMobile ? "85%" : "600px",
+    padding: !isMobile && "20px 30px",
+    width: isMobile ? "90vw" : "600px",
     margin: isMobile && '0 auto',
+
 }));
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
-    top: isMobile ? "-18px" : "20px",
-    right: isMobile ? "-18px" : "20px",
+    top: isMobile ? "2%" : "20px",
+    right: isMobile ? "25px" : "20px",
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
@@ -129,7 +130,7 @@ const LoginForm = ({isMobile}) => {
             >
                 Forgot your password?
             </p>
-            <div style={{ transform: !isMobile && "scaleX(1.27)", transformOrigin: "0 0" }}>
+            <div style={{ transform: !isMobile && "scaleX(1.6)", transformOrigin: "0 0" }}>
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
                     onChange={onRecaptchaChange}
@@ -174,7 +175,7 @@ const LoginSignupModal = () => {
                     <NewCustomTabs
                         tabItems={[
                             {
-                                value: "logsin",
+                                value: "login",
                                 label: "Log In",
                                 content: <LoginForm isMobile={isMobile}/>,
                             },

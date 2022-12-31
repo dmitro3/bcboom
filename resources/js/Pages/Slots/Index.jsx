@@ -1,5 +1,7 @@
-import CustomSelect from "@/Components/Dropdown/Select";
+// import { SelectWithDropdown } from "@/Components/Dropdown/Select";
+import SelectWithDropdown from "@/Components/Dropdown/Select";
 import Input from "@/Components/Input/Input";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
@@ -28,19 +30,24 @@ import sweetbonanza from "../../../../public/images/games/sweetbonanza.png";
 import s777 from "../../../../public/images/svg/777.svg";
 import searchI from "../../../../public/images/svg/search.svg";
 
-const FilterSection = styled("div")(() => ({
+const FilterSection = styled("div")(({ isMobile }) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    flexDirection: isMobile ? "column" : "row",
     margin: "20px 0",
     padding: "0 20px",
 }));
-const ProviderAndTypeWrapper = styled("div")(() => ({
+const ProviderAndTypeWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
     gap: "20px",
+    width: isMobile ? "100%" : "auto",
+    marginBottom: isMobile && "20px",
 }));
-const SearchSection = styled("div")(() => ({}));
+const SearchSection = styled("div")(({ isMobile }) => ({
+    width: isMobile && "100%",
+}));
 
 export default function Homepage(props) {
     const gridItems = [
@@ -53,133 +60,155 @@ export default function Homepage(props) {
             perColumn: 5,
             page: "home",
             countOnMobile: 4,
-
+            hoverEffect: 'overlay',
             images: [
                 {
                     image: greatRhyno,
-                    link: "/great-rhyno",
+                    link: "/games/great-rhyno",
                     addon: "New",
                     addonColor: "#F93C56",
+                    title: "Great Rhyno",
                 },
                 {
                     image: aztechmagic,
-                    link: "/aztech-magic",
+                    link: "/games/aztech-magic",
                     addon: "HOT",
                     addonColor: "#F9C43C",
+                    title: "Aztech Magic",
                 },
                 {
                     image: sweetbonanza,
-                    link: "/sweet-bonanza",
+                    link: "/games/sweet-bonanza",
                     addon: null,
                     addonColor: null,
+                    title: "Sweet Bonanza",
                 },
                 {
                     image: johnhunter,
-                    link: "/keno",
+                    link: "/games/keno",
                     addon: null,
                     addonColor: null,
+                    title: "John Hunter",
                 },
                 {
                     image: mysticcheif,
-                    link: "/limbo",
+                    link: "/games/limbo",
                     addon: null,
                     addonColor: null,
+                    title: "Mystic Chief",
                 },
                 {
                     image: fortuneMouse,
-                    link: "/roulette",
+                    link: "/games/roulette",
                     addon: null,
                     addonColor: null,
+                    title: "Fortune Mouse",
                 },
                 {
                     image: bookofra,
-                    link: "/wheel",
+                    link: "/games/wheel",
                     addon: null,
                     addonColor: null,
+                    title: "Book of Ra",
                 },
                 {
                     image: madame,
-                    link: "/coinflip",
+                    link: "/games/coinflip",
                     addon: null,
                     addonColor: null,
+                    title: "Madame Destiny",
                 },
                 {
                     image: bookoftut,
-                    link: "/tower",
+                    link: "/games/tower",
                     addon: null,
                     addonColor: null,
+                    title: "Book of Tut",
                 },
                 {
                     image: digdigger,
-                    link: "/stairs",
+                    link: "/games/stairs",
                     addon: null,
                     addonColor: null,
+                    title: "Dig Digger",
                 },
                 {
                     image: spinNspell,
-                    link: "/spin-n-spell",
+                    link: "/games/spin-n-spell",
                     addon: null,
                     addonColor: null,
+                    title: "Spin N Spell",
                 },
                 {
                     image: bigbass,
-                    link: "/big-bass",
+                    link: "/games/big-bass",
                     addon: null,
                     addonColor: null,
+                    title: "Big Bass",
                 },
                 {
                     image: goblin,
-                    link: "/goblin",
+                    link: "/games/goblin",
                     addon: null,
                     addonColor: null,
+                    title: "Goblin",
                 },
                 {
                     image: bonanzabillion,
-                    link: "/bonanza-billion",
+                    link: "/games/bonanza-billion",
                     addon: null,
                     addonColor: null,
+                    title: "Bonanza Billion",
                 },
                 {
                     image: doghouse,
-                    link: "/dog-house",
+                    link: "/games/dog-house",
                     addon: null,
                     addonColor: null,
+                    title: "Dog House",
                 },
                 {
                     image: riseofolympus,
-                    link: "/rise-of-olympus",
+                    link: "/games/rise-of-olympus",
                     addon: null,
                     addonColor: null,
+                    title: "Rise of Olympus",
                 },
                 {
                     image: aztecbonanza,
-                    link: "/aztec-bonanza",
+                    link: "/games/aztec-bonanza",
                     addon: null,
                     addonColor: null,
+                    title: "Aztec Bonanza",
                 },
                 {
                     image: luckydrama,
-                    link: "/lucky-drama",
+                    link: "/games/lucky-drama",
                     addon: null,
                     addonColor: null,
+                    title: "Lucky Drama",
                 },
                 {
                     image: dragonygold,
-                    link: "/dragon-gold",
+                    link: "/games/dragon-gold",
                     addon: null,
                     addonColor: null,
+                    title: "Dragon Gold",
                 },
                 {
                     image: manekigold,
-                    link: "/maneki-gold",
+                    link: "/games/maneki-gold",
                     addon: null,
                     addonColor: null,
+                    title: "Maneki Gold",
                 },
             ],
         },
     ];
     const [componentItems, setComponentItems] = useState(gridItems);
     const [currentProvider, setCurrentProvider] = useState("Game Provider");
+    const [currentType, setCurrentType] = useState("Game Type");
+    const { isMobile } = useScreenResolution();
     return (
         <>
             <Head title="Homepage" />
@@ -189,38 +218,45 @@ export default function Homepage(props) {
                     homeCarousel
                     gridWithHeader={componentItems}
                 >
-                    <FilterSection>
-                        <ProviderAndTypeWrapper>
-                            <CustomSelect
+                    <FilterSection isMobile={isMobile}>
+                        <ProviderAndTypeWrapper isMobile={isMobile}>
+                            <SelectWithDropdown
                                 items={[
-                                    {
-                                        value: "Game Provider",
-                                        label: "Game Provider",
-                                    },
-                                    {
-                                        value: "I dont know",
-                                        label: "Neither do I",
-                                    },
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Pragmatic Play",
+                                    "Evolution Gaming",
+                                    "Amatic Gaming",
+                                    "Game Provider",
                                 ]}
                                 value={currentProvider}
                                 setValue={setCurrentProvider}
                             />
-                            <CustomSelect
+                            <SelectWithDropdown
                                 items={[
-                                    {
-                                        value: "Game Provider",
-                                        label: "Game Provider",
-                                    },
-                                    {
-                                        value: "I dont know",
-                                        label: "Neither do I",
-                                    },
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Bacakrat",
+                                    "Roulette",
+                                    "Poker",
+                                    "Game Type",
                                 ]}
-                                value={currentProvider}
-                                setValue={setCurrentProvider}
+                                value={currentType}
+                                setValue={setCurrentType}
                             />
                         </ProviderAndTypeWrapper>
-                        <SearchSection>
+                        <SearchSection isMobile={isMobile}>
                             <Input
                                 addon={<img src={searchI} alt="search" />}
                                 type="phone"

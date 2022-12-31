@@ -14,45 +14,54 @@ import help from "../../public/images/svg/help.svg";
 
 export const navlinks = [
     {
-            name: "Home",
-            icon: homeSvg,
-            link: "/",
-        },
-        {
-            name: "Games",
-            icon: games,
-            link: "/games",
-        },
-        {
-            name: "Slots",
-            icon: slots,
-            link: "/slots",
-        },
-        {
-            name: "Race",
-            icon: race,
-            link: "/race",
-        },
-        {
-            name: "Live Casino",
-            icon: live,
-            link: "/live",
-        },
-        {
-            name: "Promotions",
-            icon: promotion,
-            link: "/promotions",
-        },
-        {
-            name: "Bonus",
-            icon: bonus,
-            link: "/promotions/bonus_everyday",
-        },
-        {
-            name: "VIP",
-            icon: vip,
-            link: "/promotions/exclusive",
-        },
+        name: "Home",
+        icon: homeSvg,
+        link: "/",
+    },
+    {
+        name: "Games",
+        icon: games,
+        link: "/games",
+    },
+    {
+        name: "Slots",
+        icon: slots,
+        link: "/slots",
+    },
+    {
+        name: "Race",
+        icon: race,
+        link: "/race",
+    },
+    {
+        name: "Live Casino",
+        icon: live,
+        link: "/live-casino",
+    },
+    {
+        name: "Promotions",
+        icon: promotion,
+        link: "/promotions",
+    },
+    {
+        name: "Bonus",
+        icon: bonus,
+        link: "/bonus",
+    },
+    {
+        name: "VIP",
+        icon: vip,
+        link: "/vip",
+    },
+    // {
+    //     name: "Bonus",
+    //     link: "/promotions/bonus_everyday",
+    // },
+    // {
+    //     name: "VIP",
+    //     icon: vip,
+    //     link: "/promotions/exclusive",
+    // },
 ];
 
 

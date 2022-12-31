@@ -9,6 +9,7 @@ const style = {
     border: "2px solid #000",
     boxShadow: 24,
     borderRadius: "20px",
+    outline: "none",
     // bordre: "transparent",
 
     // "&:before": {

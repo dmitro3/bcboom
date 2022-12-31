@@ -76,8 +76,8 @@ export const StyledWrapper = styled("div")((props) => ({
         position: "absolute",
         top: "50%",
         display: "block",
-        width: "20px",
-        height: "20px",
+        width: "40px",
+        height: "40px",
         padding: "0",
         WebkitTransform: "translate(0, -50%)",
         msTransform: "translate(0, -50%)",
@@ -86,6 +86,7 @@ export const StyledWrapper = styled("div")((props) => ({
         color: "transparent",
         border: "none",
         outline: "none",
+        zIndex: 30,
         background: "transparent",
     },
     ".slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus":
