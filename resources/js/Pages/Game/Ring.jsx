@@ -32,6 +32,7 @@ const Ring = () => {
                             GameFrameText={"Ring"}
                             GameFrame={RingFrame}
                             ButtonGrid={RingButtonGrid}
+                            customFrameHeader={true}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

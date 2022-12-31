@@ -100,6 +100,11 @@ Route::get('/games/tower', function () {
    
 });
 
+Route::get('/games/plinko', function () {
+    return Inertia::render('Game/Plinko');
+   
+});
+
 Route::get('/games/stair', function () {
     return Inertia::render('Game/Stair');
    

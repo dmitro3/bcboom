@@ -32,6 +32,8 @@ const Mines = () => {
                             GameFrame={MinesFrame}
                             GameFrameText={"Mines"}
                             ButtonGrid={MinesGrids}
+                            customFrameHeader={true}
+                            innerHeader={true}
                             customFrameStyles={{
                                 background: "#1D234F",
                                 paddingBottom: 0,

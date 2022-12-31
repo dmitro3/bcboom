@@ -12,7 +12,7 @@ const KenoButtonGrid = () => {
             }}
         >
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={8} md={6}>
                     <Box
                         sx={{
                             width: "100%",
@@ -137,7 +137,7 @@ const KenoButtonGrid = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4} md={6}>
                     <Button
                         sx={{
                             width: "100%",
@@ -153,13 +153,13 @@ const KenoButtonGrid = () => {
                         BET
                     </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} md={6}>
                     {" "}
                     <Button
                         endIcon={<ExpandMoreIcon sx={{ fontSize: "1rem" }} />}
                         sx={{
                             width: "100%",
-                            height: "3rem",
+                            height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
                             fontSize: ".875rem",
@@ -174,12 +174,12 @@ const KenoButtonGrid = () => {
                         Mines:1
                     </Button>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={6} md={3}>
                     {" "}
                     <Button
                         sx={{
                             width: "100%",
-                            height: "3rem",
+                            height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
                             fontSize: ".875rem",
@@ -191,7 +191,7 @@ const KenoButtonGrid = () => {
                         Auto Pick
                     </Button>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={3} sx={{ display: { xs: "none", md: "block" } }}>
                     {" "}
                     <Button
                         sx={{

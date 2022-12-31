@@ -32,6 +32,11 @@ const Dice = () => {
                             GameFrameText={"Dice"}
                             GameFrame={DiceFrame}
                             ButtonGrid={DiceButtonGrid}
+                            customFrameHeader={true}
+                            innerHeader={true}
+                            customFrameBoxStyles={{
+                                height: "23.25rem",
+                            }}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

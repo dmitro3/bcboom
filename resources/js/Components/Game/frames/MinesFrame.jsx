@@ -46,9 +46,12 @@ let carouselSettings = {
 };
 
 const Frame = styled("div")(() => ({
-    height: "23.25rem",
+    height: { xs: "22rem", md: "23.25rem" },
     width: "100%",
     display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
 }));
 
 const Item = styled("div")(() => ({
@@ -77,10 +80,14 @@ const MinesFrame = () => {
         <Frame>
             <Box
                 sx={{
-                    width: "20%",
+                    width: { xs: "13%", sm: "24%", md: "20%" },
                     height: "100%",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: {
+                        xs: "flex-start",
+                        sm: "center",
+                        md: "center",
+                    },
                     alignItems: "center",
                 }}
             >
@@ -118,12 +125,13 @@ const MinesFrame = () => {
             </Box>
             <Box
                 sx={{
-                    width: "60%",
-                    height: "calc(100% + 2.5rem)",
+                    width: { xs: "74%", sm: "52%", md: "60%" },
+                    height: { xs: "100%", md: "100%" },
                     position: "relative",
-                    top: "-2.5rem",
+                    top: { xs: 0, md: "-1.5rem" },
                     backgroundColor: "#333965",
                     py: "1rem",
+                    px: ".5rem",
                     display: "flex",
                     //justifyContent: "center",
                     flexDirection: "column",
@@ -145,7 +153,13 @@ const MinesFrame = () => {
                         })}
                     </Grid>
                 </Box>
-                <Box sx={{ mt: "2.8125rem", width: "80%" }}>
+                <Box
+                    sx={{
+                        display: { xs: "none", md: "block" },
+                        mt: "2.8125rem",
+                        width: "80%",
+                    }}
+                >
                     <Slider {...carouselSettings}>
                         {minesBettingData?.map((data, index) => (
                             <BettingBox
@@ -159,10 +173,14 @@ const MinesFrame = () => {
             </Box>
             <Box
                 sx={{
-                    width: "20%",
+                    width: { xs: "13%", sm: "24%", md: "20%" },
                     height: "100%",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: {
+                        xs: "flex-end",
+                        sm: "center",
+                        md: "center",
+                    },
                     alignItems: "center",
                 }}
             >
@@ -197,6 +215,23 @@ const MinesFrame = () => {
                         3
                     </Typography>
                 </Box>
+            </Box>
+            <Box
+                sx={{
+                    display: { xs: "block", md: "none" },
+                    mt: "2.8125rem",
+                    width: { xs: "50%", sm: "60%", md: "80%" },
+                }}
+            >
+                <Slider {...carouselSettings}>
+                    {minesBettingData?.map((data, index) => (
+                        <BettingBox
+                            key={index}
+                            multiplier={data.multiplier}
+                            hits={data.hits}
+                        />
+                    ))}
+                </Slider>
             </Box>
         </Frame>
     );
