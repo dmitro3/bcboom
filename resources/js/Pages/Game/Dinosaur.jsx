@@ -32,6 +32,7 @@ const Dinosaur = () => {
                             ButtonGrid={DinosaurButtonGrids}
                             GameFrameText={"Crash"}
                             GameFrame={DinosaurFrame}
+                            customFrameHeader={true}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

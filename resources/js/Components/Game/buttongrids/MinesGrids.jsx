@@ -12,7 +12,7 @@ const MinesGrids = () => {
             }}
         >
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item md={6} xs={8}>
                     <Box
                         sx={{
                             width: "100%",
@@ -137,7 +137,7 @@ const MinesGrids = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item md={6} xs={4}>
                     <Button
                         sx={{
                             width: "100%",
@@ -159,7 +159,7 @@ const MinesGrids = () => {
                         endIcon={<ExpandMoreIcon sx={{ fontSize: "1rem" }} />}
                         sx={{
                             width: "100%",
-                            height: "3rem",
+                            height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
                             fontSize: ".875rem",
@@ -174,12 +174,12 @@ const MinesGrids = () => {
                         Mines:1
                     </Button>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={6} md={3}>
                     {" "}
                     <Button
                         sx={{
                             width: "100%",
-                            height: "3rem",
+                            height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
                             fontSize: ".875rem",
@@ -191,7 +191,7 @@ const MinesGrids = () => {
                         Auto Pick
                     </Button>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={3} sx={{ display: { xs: "none", md: "block" } }}>
                     {" "}
                     <Button
                         sx={{

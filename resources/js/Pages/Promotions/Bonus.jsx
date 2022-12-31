@@ -2,7 +2,8 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
-import img from "../../../assets/promotions/games6.svg";
+import img from "../../../assets/promotions/bonus_pro_background.svg";
+import img_sm from "../../../assets/promotions/pro_bonus_sm.svg";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
@@ -34,6 +35,7 @@ const Bonus = () => {
                         <PromotionsHeader
                             headerText={HEADER_TEXT}
                             imgUrl={img}
+                            imgUrL_sm={img_sm}
                             customStyles={{
                                 paddingLeft: "2rem",
                             }}
@@ -92,10 +94,14 @@ const Bonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+                                    flexDirection: {
+                                        xs: "column",
+                                        md: "row",
+                                    },
                                 }}
                             >
                                 <PromotionCard
@@ -165,7 +171,7 @@ const Bonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
@@ -191,7 +197,7 @@ const Bonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",

@@ -33,6 +33,7 @@ const Tower = () => {
                             GameFrame={TowerFrame}
                             ButtonGrid={TowerButtonGrid}
                             displayPanel={false}
+                            customFrameHeader={true}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

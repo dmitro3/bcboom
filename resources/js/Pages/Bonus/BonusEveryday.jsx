@@ -123,6 +123,7 @@ const BonusEveryday = () => {
                             <Box
                                 sx={{
                                     width: {
+                                        xs: "100%",
                                         md: "98%",
                                         lg: "98%",
                                         xl: "80%",
@@ -130,13 +131,17 @@ const BonusEveryday = () => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+                                    flexDirection: {
+                                        xs: "column",
+                                        md: "row",
+                                    },
                                 }}
                             >
                                 <PromotionCard
                                     customStyles={{
                                         backgroundImage:
                                             "linear-gradient( 100.65deg, #3971E8 2.29%, #5846C7 100%)",
-                                        width: "32%",
+                                        width: { xs: "100%", md: "32%" },
                                     }}
                                 >
                                     <SemiBoldText
@@ -176,7 +181,7 @@ const BonusEveryday = () => {
                                             "linear-gradient( 99.2deg, #3971E8 4.19%, #5848C8 108.12%)",
                                         paddingLeft: "0.4rem",
                                         paddingRight: "0.4rem",
-                                        width: "32%",
+                                        width: { xs: "100%", md: "32%" },
                                     }}
                                 >
                                     <SemiBoldText
@@ -216,7 +221,7 @@ const BonusEveryday = () => {
                                             "linear-gradient( 99.2deg, #3971E8 4.19%, #5848C8 108.12%)",
                                         paddingLeft: "0.4rem",
                                         paddingRight: "0.4rem",
-                                        width: "32%",
+                                        width: { xs: "100%", md: "32%" },
                                     }}
                                 >
                                     <SemiBoldText
@@ -255,7 +260,10 @@ const BonusEveryday = () => {
                             sx={{
                                 display: "flex",
                                 width: "100%",
-                                justifyContent: "center",
+                                justifyContent: {
+                                    xs: "flex-start",
+                                    md: "center",
+                                },
                                 alignItems: "center",
                                 marginTop: "1.5625rem",
                             }}

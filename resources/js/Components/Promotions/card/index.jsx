@@ -5,7 +5,10 @@ const PromotionCard = ({ customStyles, children }) => {
     return (
         <Box
             sx={{
-                width: "48%",
+                width: {
+                    xs: "100%",
+                    md: "48%",
+                },
                 height: "12.75rem",
                 borderRadius: "1.25rem",
                 display: "flex",
@@ -14,6 +17,10 @@ const PromotionCard = ({ customStyles, children }) => {
                 textAlign: "center",
                 flexDirection: "column",
                 padding: "2rem",
+                mb: {
+                    xs: "1rem",
+                    md: "0",
+                },
                 ...customStyles,
             }}
         >

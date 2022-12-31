@@ -6,8 +6,8 @@ const BettingBox = ({ multiplier, hits }) => {
         <Box
             sx={{
                 borderRadius: "0.3125rem",
-                background: "#1D234F",
-                width: "4.25rem",
+                background: { xs: "#2E3665", md: "#1D234F" },
+                width: { xs: "4.25rem", sm: "4.25rem", md: "4.25rem" },
                 height: "2rem",
                 display: "flex",
                 justifyContent: "center",

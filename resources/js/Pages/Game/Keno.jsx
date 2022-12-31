@@ -32,6 +32,15 @@ const Keno = () => {
                             GameFrameText={"Keno"}
                             GameFrame={KenoFrame}
                             ButtonGrid={KenoButtonGrid}
+                            customFrameHeader={true}
+                            customFrameBoxStyles={{
+                                height: {
+                                    xs: "23.25rem",
+                                    md: "15rem",
+                                    lg: "20rem",
+                                },
+                                mb: { xs: 0, md: "5rem" },
+                            }}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

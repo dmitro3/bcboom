@@ -8,7 +8,13 @@ const BoldText = ({ weight, children, customStyles }) => {
                 fontFamily: "Montserrat",
                 fontStyle: "normal",
                 fontWeight: `${weight ? weight : 900}`,
-                fontSize: "2.5rem",
+                fontSize: {
+                    xs: "1.5rem",
+                    sm: "2rem",
+                    md: "2rem",
+                    lg: "2.5rem",
+                    xl: "2.5rem",
+                },
                 color: "#FFF96A",
                 ...customStyles,
             }}

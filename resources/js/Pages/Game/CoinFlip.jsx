@@ -33,6 +33,7 @@ const CoinFlip = () => {
                             GameFrame={CoinFlipFrame}
                             ButtonGrid={CoinFlipButtonGrid}
                             displayPanel={false}
+                            customFrameHeader={true}
                         />
                     </GamesPageWrapper>
                 </PageTemplate>

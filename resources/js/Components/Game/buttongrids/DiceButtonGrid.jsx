@@ -14,7 +14,7 @@ const DiceButtonGrid = () => {
         >
             <Box
                 sx={{
-                    width: "49%",
+                    width: { xs: "59%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
                     background: "#333965",
@@ -137,7 +137,7 @@ const DiceButtonGrid = () => {
             </Box>
             <Button
                 sx={{
-                    width: "49%",
+                    width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
                     background: "#333965",
