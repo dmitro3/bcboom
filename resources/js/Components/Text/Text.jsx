@@ -9,7 +9,7 @@ const StyledListItem = styled("li")(({ tagStyles }) => ({
     textIndent: "-17px",
     ...tagStyles,
 }));
-const Text = ({ type, text, ...styles }) => {
+const Text = ({ type, text, pre, ...styles }) => {
     if (type === "h1") {
         return <h1>{text}</h1>;
     }
@@ -20,6 +20,11 @@ const Text = ({ type, text, ...styles }) => {
         return <StyledListItem tagStyles={styles}>{text}</StyledListItem>;
     }
     if (type === "p") {
+        // text = String(text);
+        // const specialStrings = text.slice(text.indexOf("{{"), text.indexOf("}}") + 2);
+        // text = text.replace(/{{/g, "");
+        // text = text.replace(/}}/g, "");
+        // console.log('sdfsdf: ', specialStrings)
         return (
             <StyledPTag tagStyles={styles}>
                 {text}

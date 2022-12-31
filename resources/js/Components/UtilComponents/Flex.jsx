@@ -24,7 +24,8 @@ export const Flex = styled("div")(
         borderBottom,
         gap,
         borderRadius,
-        cursor
+        cursor,
+        
     }) => ({
         display: "flex",
         flexDirection: direction || "",

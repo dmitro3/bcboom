@@ -1,5 +1,6 @@
 import { styled } from "@mui/system";
 import React from "react";
+import { Flex } from "../UtilComponents/Flex";
 const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
     background: background,
     color: color || "#fff",
@@ -17,7 +18,7 @@ const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
     },
     ...styles,
 }));
-const Button = ({ text, color, background, onSubmit, styles }) => {
+const Button = ({ text, color, background, addon, onSubmit, ...styles }) => {
     return (
         <ButtonWrapper
             color={color}
@@ -25,7 +26,10 @@ const Button = ({ text, color, background, onSubmit, styles }) => {
             styles={styles}
             onClick={onSubmit}
         >
-            {text}
+            <Flex justifyContent="center" alignItems="center">
+                {addon && <img src={addon} alt="" style={{paddingRight: '10px'}} />}
+                {text}
+            </Flex>
         </ButtonWrapper>
     );
 };

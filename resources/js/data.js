@@ -70,20 +70,24 @@ export const miscNavLinks = [
         id: 1,
         name: "Cashback",
         icon: cashback,
+        link: '/cashback'
     },
     {
         id: 2,
         name: "Fairness",
         icon: fairness,
+        link: '/fairness'
     },
     {
         id: 4,
         name: "Referral",
         icon: referral,
+        link: '/referral'
     },
     {
         id: 3,
         name: "Help",
         icon: help,
+        link: '/help'
     },
 ];
