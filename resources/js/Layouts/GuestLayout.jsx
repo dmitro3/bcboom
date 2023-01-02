@@ -1,6 +1,7 @@
 import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
 import MobileFooter from "@/Components/Footer/MobileFooter";
+import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
 import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
