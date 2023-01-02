@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useScreenResolution = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
     //   const [islarge, setIsLarge] = useState(false);
 
     function getWindowSize() {
@@ -10,6 +11,7 @@ export const useScreenResolution = () => {
     }
 
     const setResolution = (screenWidth) => {
+        setWidth(screenWidth);
         setIsMobile(Boolean(screenWidth <= 768));
     };
 
@@ -25,5 +27,5 @@ export const useScreenResolution = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { isMobile };
+    return { isMobile, width };
 };

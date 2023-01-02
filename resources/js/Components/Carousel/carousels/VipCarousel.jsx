@@ -1,6 +1,6 @@
 import GamesCarouseCard from "@/Components/Cards/GamesCarouseCard";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomCarousel from "../Carousel";
 import next from "../../../../../public/images/vip/next.svg";
 import prev from "../../../../../public/images/vip/prev.svg";
@@ -25,7 +25,7 @@ const CarouselCard = styled("div")(({ color, isMobile }) => ({
     background: `url(${levelBg})`,
     // background: "#2E335A",
     backgroundSize: isMobile ? "cover" : "contain",
-    // backgroundPosition: "center",
+    backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     position: "relative",
     borderRadius: "10px",
@@ -187,7 +187,21 @@ const VipCarouselCard = ({ item }) => {
 };
 
 const VipCarousel = () => {
-    const { isMobile } = useScreenResolution();
+    const { isMobile, width } = useScreenResolution();
+    console.log("widthsdf: ", width);
+    const [slidesToShow, setSlidesToShow] = useState(4);
+    useEffect(() => {
+        if (width < 768) {
+            setSlidesToShow(1);
+        } else if (width < 1024) {
+            setSlidesToShow(2);
+        } else if (width < 1480) {
+            setSlidesToShow(3);
+        } else {
+            setSlidesToShow(4);
+        }
+    }, [width]);
+
     const vipLevels = [
         {
             icon: level10,
@@ -386,7 +400,7 @@ const VipCarousel = () => {
         <div>
             <CustomCarousel
                 autoplay={false}
-                rowPerCount={isMobile ? 1 : 4}
+                rowPerCount={slidesToShow}
                 paging={false}
                 prevArrow={<img src={prev} alt="prev" />}
                 nextArrow={<img src={next} alt="next" />}
