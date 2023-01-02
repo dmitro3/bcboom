@@ -27,7 +27,7 @@ const BcButton = ({ text, color, background, addon, onSubmit, ...styles }) => {
         ...styles,
     };
     return (
-        <div>
+        <div onClick={onSubmit}>
             <Button sx={{ ...Btnstyles }}>
                 <Flex justifyContent="center" alignItems="center">
                     {addon && (
