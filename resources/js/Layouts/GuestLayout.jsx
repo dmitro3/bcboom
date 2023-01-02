@@ -1,5 +1,6 @@
 import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
+import FooterActions from "@/Components/Footer/FooterActions";
 import MobileFooter from "@/Components/Footer/MobileFooter";
 import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
@@ -59,6 +60,7 @@ export default function GuestLayout({ children }) {
                     {children}
                 </PageBody>
                 {isMobile && <MobileNav />}
+                {!isMobile &&  <FooterActions/>}
                 {isMobile ? <MobileFooter /> : <DesktopFooter />}
             </PageLayout>
         </LayoutTheme>
