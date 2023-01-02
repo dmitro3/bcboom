@@ -7,10 +7,10 @@ import Text from "../Text/Text";
 import { Inertia } from "@inertiajs/inertia";
 const FooterActionsWrapper = styled("div")(({}) => ({
     position: "relative",
-    width: "90%",
+    width: "97%",
     zIndex: 20000,
     margin: "0 auto",
-    paddinbBottom: "50px",
+    padding: "10px 0",
 }));
 
 const FooterActions = () => {

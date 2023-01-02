@@ -60,7 +60,6 @@ export default function GuestLayout({ children }) {
                     {children}
                 </PageBody>
                 {isMobile && <MobileNav />}
-                {!isMobile &&  <FooterActions/>}
                 {isMobile ? <MobileFooter /> : <DesktopFooter />}
             </PageLayout>
         </LayoutTheme>

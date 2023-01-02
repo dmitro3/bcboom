@@ -56,7 +56,7 @@ const VipCarouselCard = ({ item }) => {
             <div style={{ position: "absolute", top: "0", left: "46%" }}>
                 <img src={item.icon} alt="level1" style={{ height: "60px" }} />
             </div>
-            <div style={{zIndex: 200}}>
+            <div style={{ zIndex: 200 }}>
                 <Text
                     type="p"
                     text={`VIP ${item.level}`}
@@ -392,11 +392,10 @@ const VipCarousel = () => {
                 nextArrow={<img src={next} alt="next" />}
             >
                 {vipLevels.map((item, index) => (
-                    <div style={{margin: '20px!important'}}>
-
-                    <div className="testimoni--wrapper" key={index}>
-                        <VipCarouselCard item={item} />
-                    </div>
+                    <div style={{ margin: "20px!important" }}>
+                        <div className="testimoni--wrapper" key={index}>
+                            <VipCarouselCard item={item} />
+                        </div>
                     </div>
                 ))}
             </CustomCarousel>
