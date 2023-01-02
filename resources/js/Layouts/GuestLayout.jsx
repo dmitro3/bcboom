@@ -30,7 +30,9 @@ export default function GuestLayout({ children }) {
     const { isMobile } = useScreenResolution();
     const { drawerState } = useSelector((state) => state.app);
     const { modalState } = useSelector((state) => state.auth);
-    const { modalState: walletModalState } = useSelector((state) => state.wallet);
+    const { modalState: walletModalState } = useSelector(
+        (state) => state.wallet
+    );
 
     // if (isMobile) {
     //     return (
@@ -55,6 +57,7 @@ export default function GuestLayout({ children }) {
                     {!isMobile && <SimpleSidebar />}
                     {children}
                 </PageBody>
+                {isMobile && <MobileNav />}
                 {isMobile ? <MobileFooter /> : <DesktopFooter />}
             </PageLayout>
         </LayoutTheme>

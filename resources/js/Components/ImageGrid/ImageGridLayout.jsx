@@ -46,7 +46,7 @@ const SectionWrapper = styled("div")(({ isMobile, margin, page }) => ({
     height: "fit-content",
     overflow: "hidden",
     padding: isMobile ? "20px 10px" : "25px",
-    margin: margin ? "25px" : "0 25px 25px 25px",
+    margin: margin ? "10px" : "0 25px 25px 25px",
     marginTop: page === "vip" && "50px",
     background: "#1D2036",
     borderRadius: "10px",

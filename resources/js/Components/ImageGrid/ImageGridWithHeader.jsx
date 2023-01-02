@@ -19,12 +19,13 @@ const GridItems = styled("div")(({ perColumn, page }) => ({
         gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
     "@media (max-width: 500px)": {
-        gridTemplateColumns: !['home', 'games'].includes(page) && "repeat(1, minmax(100px, 1fr))",
+        gridTemplateColumns:
+            !["home", "games"].includes(page) &&
+            "repeat(1, minmax(100px, 1fr))",
     },
     position: "relative",
     zIndex: 400,
 }));
-
 
 const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
     height: height || "100px",
@@ -37,8 +38,6 @@ const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
         transition: "all 0.3s ease-in-out",
     },
 }));
-
-
 
 const OverLay = ({ item, parent, visible }) => {
     return (
@@ -99,7 +98,7 @@ const OverLay = ({ item, parent, visible }) => {
                 )}
             </div>
         </div>
-    )
+    );
 };
 
 const ImageGridWithHeader = ({ gridItems }) => {
@@ -114,7 +113,7 @@ const ImageGridWithHeader = ({ gridItems }) => {
                             {item.images
                                 .slice(
                                     0,
-                                    isMobile && ['home'].includes(item.page)
+                                    isMobile && ["home"].includes(item.page)
                                         ? item.countOnMobile
                                         : item?.images.length
                                 )
@@ -184,10 +183,10 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                 <Button
                                     text="See more"
                                     background={"#3586FF"}
-                                    styles={{
-                                        padding: "10px 30px",
-                                        borderRadius: "15px",
-                                    }}
+                                    // styles={{
+                                    padding="10px 30px"
+                                    borderRadius="15px"
+                                    // }}
                                     onSubmit={() => {
                                         Inertia.visit(item.urlForMore);
                                     }}
