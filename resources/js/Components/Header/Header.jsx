@@ -266,6 +266,7 @@ const MobileHeaderWrapper = styled("div")(() => ({
 }));
 const MoreIconWrapper = styled("div")(() => ({
     cursor: "pointer",
+    display: 
 }));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
