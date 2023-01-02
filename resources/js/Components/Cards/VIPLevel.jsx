@@ -223,6 +223,7 @@ const MyVIPLevel = () => {
                         background: "#121539",
                         padding: isMobile ? "10px 30px" : "14px 45px",
                         borderRadius: "20px",
+                        width: "50%",
                     }}
                 >
                     <Text
@@ -237,13 +238,16 @@ const MyVIPLevel = () => {
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
+                        whiteSpace="nowrap"
                     />
                 </div>
                 <div
                     style={{
                         background: "#121539",
-                        padding: "14px 45px",
+                        padding: isMobile ? "10px 30px" : "14px 45px",
+
                         borderRadius: "20px",
+                        width: "50%",
                     }}
                 >
                     <Text

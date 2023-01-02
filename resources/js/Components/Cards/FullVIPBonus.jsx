@@ -16,7 +16,7 @@ const FullVipBonusWrapper = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat, no-repeat",
     textAlign: "center",
     width: isMobile ? "100%" : "75%",
-    padding: "1.5rem",
+    padding: !isMobile && "1.5rem",
     borderRadius: "10px",
 }));
 
@@ -86,15 +86,15 @@ const FullVIPBonus = () => {
                     )}
                 </Flex>
                 <RangeInput
-                    style={{ width: "80%", marginTop: "30px" }}
-                    value={28}
+                    style={{ width: "80%", marginTop: "70px" }}
+                    value={22}
                 >
                     <div>
                         <input
                             type="range"
                             max={100}
                             min={0}
-                            value={30}
+                            value={2}
                             style={{ width: "100%" }}
                         />
                         <Text
@@ -104,7 +104,7 @@ const FullVIPBonus = () => {
                             fontSize="14px"
                             fontWeight="medium"
                             textAlign="left"
-                            paddingTop="40px"
+                            paddingTop="20px"
                         />
                         <Flex
                             justifyContent="center"
@@ -123,9 +123,16 @@ const FullVIPBonus = () => {
                             >
                                 <Text
                                     type="p"
-                                    text="Accumulated Bet Amount"
+                                    text="Accumulated"
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
+                                />
+                                <Text
+                                    type="p"
+                                    text="Bet Amount"
+                                    fontSize={isMobile ? "12px" : "17px"}
+                                    fontWeight="bold"
+                                    whiteSpace="nowrap"
                                 />
                                 <Text
                                     type="p"
@@ -146,9 +153,16 @@ const FullVIPBonus = () => {
                             >
                                 <Text
                                     type="p"
-                                    text="Accumulated Deposit Amount"
+                                    text="Accumulated"
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
+                                />
+                                <Text
+                                    type="p"
+                                    text="Deposit Amount"
+                                    fontSize={isMobile ? "12px" : "17px"}
+                                    fontWeight="bold"
+                                    whiteSpace="nowrap"
                                 />
                                 <Text
                                     type="p"

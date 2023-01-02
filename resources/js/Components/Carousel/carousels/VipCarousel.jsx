@@ -23,14 +23,15 @@ import { Divider } from "@/Components/Divider/Divider";
 const CarouselCard = styled("div")(({ color, isMobile }) => ({
     // background: `#2E335A`,
     background: `url(${levelBg})`,
+    // background: "#2E335A",
     backgroundSize: isMobile ? "cover" : "contain",
-    backgroundPosition: "center",
+    // backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     position: "relative",
     borderRadius: "10px",
     width: "fit-content",
     padding: "32px",
-    margin: "0 auto",
+    margin: isMobile && "0 auto",
     textAlign: "center",
 
     "&::before": {
@@ -55,125 +56,132 @@ const VipCarouselCard = ({ item }) => {
             <div style={{ position: "absolute", top: "0", left: "46%" }}>
                 <img src={item.icon} alt="level1" style={{ height: "60px" }} />
             </div>
-            <Text
-                type="p"
-                text={`VIP ${item.level}`}
-                color="#FFD338"
-                fontSize="16px"
-                fontWeight="bold"
-                marginTop="40px"
-            />
-            <Text
-                type="p"
-                text="Update Conditions"
-                fontSize="16px"
-                fontWeight="bold"
-            />
-            <Flex alignItems="center" gap="5px" margin="20px 0 20px 0">
-                <TextWithBg
-                    bg="#121539"
-                    primaryText="Total deposits"
-                    secondaryText={item.totalDesposit}
-                    primaryTextSize="14px"
-                    secondaryTextSize="11px"
-                    secondaryColor="#3586FF"
-                    padding="10px 25px"
+            <div style={{zIndex: 200}}>
+                <Text
+                    type="p"
+                    text={`VIP ${item.level}`}
+                    color="#FFD338"
+                    fontSize="16px"
+                    fontWeight="bold"
+                    marginTop="40px"
                 />
-                <TextWithBg
-                    padding="10px 25px"
-                    bg="#121539"
-                    primaryText="Total bets"
-                    primaryTextSize="14px"
-                    secondaryTextSize="11px"
-                    secondaryText={item.totalBet}
-                    secondaryColor="#3586FF"
+                <Text
+                    type="p"
+                    text="Update Conditions"
+                    fontSize="16px"
+                    fontWeight="bold"
                 />
-            </Flex>
-            <Text
-                type="p"
-                text="LEVEL PROTECTION"
-                color="#FFD338"
-                fontSize="16px"
-                fontWeight="bold"
-                paddingTop="10px"
-            />
-            <Text
-                type="p"
-                text={`DEPOSIT R$ ${item.levelProtection}/MONTH`}
-                fontSize="14px"
-                fontWeight="bold"
-            />
-            <Divider margin="20px" bg="#6A72B2" />
-            <Text
-                type="p"
-                text="WITHDRAWAL PRIVILEGES"
-                color="#FFD338"
-                fontSize="16px"
-                fontWeight="bold"
-                paddingTop="10px"
-            />
-            <Text
-                type="p"
-                text={`Number of withdrawals.: ${item.numOfWithdraw} /day`}
-                fontSize="14px"
-            />
-            <Text
-                type="p"
-                text={`Maximum withdrawals: R$${item.maximumWithdraw}.000`}
-                fontSize="14px"
-            />
-            <Text
-                type="p"
-                text={`Withdrawal fee: ${item.withFee}%`}
-                fontSize="14px"
-            />
-            <Text
-                type="p"
-                text={`Free withdrawal amount: R$${item.withAmount}.000`}
-                fontSize="14px"
-            />
+                <Flex
+                    alignItems="center"
+                    gap="5px"
+                    margin="20px 0 20px 0"
+                    style={{ zIndex: 20000 }}
+                >
+                    <TextWithBg
+                        bg="#121539"
+                        primaryText="Total deposits"
+                        secondaryText={item.totalDesposit}
+                        primaryTextSize="14px"
+                        secondaryTextSize="11px"
+                        secondaryColor="#3586FF"
+                        padding="10px 25px"
+                    />
+                    <TextWithBg
+                        padding="10px 25px"
+                        bg="#121539"
+                        primaryText="Total bets"
+                        primaryTextSize="14px"
+                        secondaryTextSize="11px"
+                        secondaryText={item.totalBet}
+                        secondaryColor="#3586FF"
+                    />
+                </Flex>
+                <Text
+                    type="p"
+                    text="LEVEL PROTECTION"
+                    color="#FFD338"
+                    fontSize="16px"
+                    fontWeight="bold"
+                    paddingTop="10px"
+                />
+                <Text
+                    type="p"
+                    text={`DEPOSIT R$ ${item.levelProtection}/MONTH`}
+                    fontSize="14px"
+                    fontWeight="bold"
+                />
+                <Divider margin="20px" bg="#6A72B2" />
+                <Text
+                    type="p"
+                    text="WITHDRAWAL PRIVILEGES"
+                    color="#FFD338"
+                    fontSize="16px"
+                    fontWeight="bold"
+                    paddingTop="10px"
+                />
+                <Text
+                    type="p"
+                    text={`Number of withdrawals.: ${item.numOfWithdraw} /day`}
+                    fontSize="14px"
+                />
+                <Text
+                    type="p"
+                    text={`Maximum withdrawals: R$${item.maximumWithdraw}.000`}
+                    fontSize="14px"
+                />
+                <Text
+                    type="p"
+                    text={`Withdrawal fee: ${item.withFee}%`}
+                    fontSize="14px"
+                />
+                <Text
+                    type="p"
+                    text={`Free withdrawal amount: R$${item.withAmount}.000`}
+                    fontSize="14px"
+                />
 
-            <Divider margin="20px" bg="#6A72B2" />
-            <Text
-                type="p"
-                text="CashBack"
-                color="#FFD338"
-                fontSize="16px"
-                fontWeight="bold"
-                paddingTop="10px"
-            />
-            <Flex alignItems="center" justifyContent="space-between">
+                <Divider margin="20px" bg="#6A72B2" />
                 <Text
                     type="p"
-                    text={`DICE: ${item.dice}`}
-                    fontSize="12px"
-                    color="white"
+                    text="CashBack"
+                    color="#FFD338"
+                    fontSize="16px"
+                    fontWeight="bold"
+                    paddingTop="10px"
                 />
-                <Text
-                    type="p"
-                    text={`CRASH: ${item.crash}`}
-                    fontSize="12px"
-                    color="white"
-                />
-            </Flex>
-            <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                margin="0 0 0 0"
-            >
-                <Text
-                    type="p"
-                    text={`PLINKO: ${item.plimko}`}
-                    fontSize="12px"
-                    color="white"
-                />
-                <Text
-                    type="p"
-                    text={`Limbo: ${item.limbo}`}
-                    fontSize="12px"
-                    color="white"
-                />
-            </Flex>
+                <Flex alignItems="center" justifyContent="space-between">
+                    <Text
+                        type="p"
+                        text={`DICE: ${item.dice}`}
+                        fontSize="12px"
+                        color="white"
+                    />
+                    <Text
+                        type="p"
+                        text={`CRASH: ${item.crash}`}
+                        fontSize="12px"
+                        color="white"
+                    />
+                </Flex>
+                <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    margin="0 0 0 0"
+                >
+                    <Text
+                        type="p"
+                        text={`PLINKO: ${item.plimko}`}
+                        fontSize="12px"
+                        color="white"
+                    />
+                    <Text
+                        type="p"
+                        text={`Limbo: ${item.limbo}`}
+                        fontSize="12px"
+                        color="white"
+                    />
+                </Flex>
+            </div>
         </CarouselCard>
     );
 };
@@ -384,8 +392,11 @@ const VipCarousel = () => {
                 nextArrow={<img src={next} alt="next" />}
             >
                 {vipLevels.map((item, index) => (
+                    <div style={{margin: '20px!important'}}>
+
                     <div className="testimoni--wrapper" key={index}>
                         <VipCarouselCard item={item} />
+                    </div>
                     </div>
                 ))}
             </CustomCarousel>

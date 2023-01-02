@@ -28,6 +28,7 @@ const DrawerWrapper = styled("div")(({}) => ({
     background: "#1C2036!important",
     padding: "0 20px",
     position: "relative",
+    
 }));
 const CloseIcon = styled("div")(({}) => ({
     position: "absolute",

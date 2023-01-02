@@ -13,7 +13,7 @@ const MobieNavWrapper = styled("div")(() => ({
     position: "fixed",
     bottom: 0,
     left: 0,
-    zIndex: 1000,
+    zIndex: 100000,
 }));
 
 const InnerHeaderItem = styled("div")(({ active }) => ({
@@ -40,7 +40,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
 const MobileDivider = styled("div")(() => ({
     position: "absolute",
     bottom: "10px",
-    left: "30%",
+    left: "32%",
     // display: 'flex',
     height: "2px",
     borderRadius: "50px",

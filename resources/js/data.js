@@ -1,7 +1,8 @@
 import live from "../../public/images/svg/live.svg";
 import race from "../../public/images/svg/race.svg";
 import slots from "../../public/images/svg/slots.svg";
-import vip from "../../public/images/user/vipicon.svg";
+import vip from "../../public/images/svg/vip.svg";
+import mobilevip from "../../public/images/user/vipicon.svg";
 import mobilenav from "../../public/images/user/mobilehamgurger.svg";
 import share from "../../public/images/user/share.svg";
 import games from "../../public/images/svg/games.svg";
@@ -75,7 +76,7 @@ export const mobileNavLinks = [
     },
     {
         name: "VIP",
-        icon: vip,
+        icon: mobilevip,
         link: "/vip",
         navigatable: true
     },
