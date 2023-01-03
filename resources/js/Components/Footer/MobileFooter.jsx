@@ -17,6 +17,7 @@ import instagram from "../../../../public/images/svg/instagram.svg";
 import telegram from "../../../../public/images/svg/telegram.svg";
 import twitter from "../../../../public/images/svg/twitter.svg";
 import { Divider } from "../Divider/Divider";
+import { Link } from "@inertiajs/inertia-react";
 
 const FooterWrapper = styled("div")(({}) => ({
     backgroundColor: "#191D3A",
@@ -81,7 +82,7 @@ const MobileFooter = () => {
         },
         {
             text: "VIP Rank",
-            link: "/vip-rank",
+            link: "/vip",
         },
     ];
     const socials = [
@@ -104,7 +105,11 @@ const MobileFooter = () => {
             <FooterLinks>
                 {footerItems.map((item, index) => {
                     return (
-                        <FooterLinkItem key={index}>{item.text}</FooterLinkItem>
+                        <Link href={item.link}>
+                            <FooterLinkItem key={index}>
+                                {item.text}
+                            </FooterLinkItem>
+                        </Link>
                     );
                 })}
             </FooterLinks>

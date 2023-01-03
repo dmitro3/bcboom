@@ -21,6 +21,8 @@ const FairnessPageWrapper = styled("div")(() => ({
     paddingTop: "0em",
     width: "100%",
     height: "100%",
+    position: "relative",
+    zIndex: 10,
 }));
 
 const BgWithText = styled("div")(({ color, isMobile }) => ({
