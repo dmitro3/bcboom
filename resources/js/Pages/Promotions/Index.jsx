@@ -60,6 +60,7 @@ const PromotionIndex = () => {
             imageWidth: "534px",
             imageHeight: "175px",
             perColumn: 3,
+            margin: '10px',
             // hoverEffect: "",
             images: [
                 {
