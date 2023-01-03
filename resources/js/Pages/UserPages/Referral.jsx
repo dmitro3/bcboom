@@ -7,6 +7,7 @@ import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import referral from "../../../../public/images/user/referral.svg";
 import stats from "../../../../public/images/user/stats.svg";
+import profitbox from "../../../../public/images/user/profitbox.png";
 import invite from "../../../../public/images/user/invite.svg";
 import invitebg from "../../../../public/images/user/inviteBg.png";
 import monthlyBg from "../../../../public/images/user/monthlyBg.png";
@@ -15,6 +16,7 @@ import bank from "../../../../public/images/user/bank.png";
 import idea from "../../../../public/images/user/idea.png";
 import discount from "../../../../public/images/user/discount.png";
 import refnetwork from "../../../../public/images/user/refnetwork.svg";
+import profitTodaybg from "../../../../public/images/user/profittoday.svg";
 import network from "../../../../public/images/user/network.svg";
 import incomecalculatorbg from "../../../../public/images/user/incomecalculatorbg.svg";
 import whowonbg from "../../../../public/images/user/whowonbg.svg";
@@ -33,6 +35,14 @@ import { Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { currencyFormatter } from "@/utils/util";
+import {
+    Cell,
+    Label,
+    Legend,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+} from "recharts";
 const ReferralPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -85,13 +95,14 @@ const MonthlyRevenue = styled("div")(({ isMobile }) => ({
     // textAlign: "center",
 }));
 
-const MonthlyHeader = styled("div")(({ isMobile }) => ({
+const MonthlyHeader = styled("div")(({ isMobile, justify, gap }) => ({
     background: "#1A2150",
     width: "100%",
     padding: isMobile ? "10px 2px" : "10px 20px",
     borderRadius: "10px 10px 0 0",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: justify || "space-between",
+    gap: gap,
     alignItems: "center",
     textAlign: "center",
 }));
@@ -243,14 +254,34 @@ const WhoWon = styled("div")(({ isMobile }) => ({
     borderRadius: "10px",
 }));
 
-const HeaderStats = ({ isMobile }) => (
-    <MonthlyHeader isMobile={isMobile}>
-        {[
-            { text: "Guest Users", count: 0 },
-            { text: "Deposited Users", count: 0 },
-            { text: "Bonus Today", count: "R$0" },
-            { text: "Yesterday Bonus", count: "R$0" },
-        ].map((item, index) => (
+const ProfitToday = styled("div")(({ isMobile }) => ({
+    background: `url(${profitTodaybg})`,
+    width: isMobile ? "100%" : "35%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    padding: "20px",
+    borderRadius: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+}));
+
+const ProfitTodayBox = styled("div")(({ isMobile }) => ({
+    background: "#2E3159",
+    width: isMobile ? "100%" : "35%",
+    padding: "20px",
+    borderRadius: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+}));
+
+const HeaderStats = ({ isMobile, stats, justify, gap, wrap }) => (
+    <MonthlyHeader isMobile={isMobile} justify={justify} gap={gap}>
+        {stats.map((item, index) => (
             <div key={index}>
                 <Text
                     type="p"
@@ -258,7 +289,7 @@ const HeaderStats = ({ isMobile }) => (
                     color="#3586FF"
                     fontWeight="bold"
                     fontSize={isMobile ? "10px" : "16px"}
-                    whiteSpace="nowrap"
+                    whiteSpace={wrap || "nowrap"}
                 />
                 <Text
                     type="p"
@@ -285,7 +316,17 @@ const Invite = ({ isMobile }) => {
                 direction={`${isMobile ? "column" : "row"}`}
             >
                 <div style={{ width: isMobile ? "100%" : "35%" }}>
-                    {isMobile && <HeaderStats isMobile={isMobile} />}
+                    {isMobile && (
+                        <HeaderStats
+                            isMobile={isMobile}
+                            stats={[
+                                { text: "Guest Users", count: 0 },
+                                { text: "Deposited Users", count: 0 },
+                                { text: "Bonus Today", count: "R$0" },
+                                { text: "Yesterday Bonus", count: "R$0" },
+                            ]}
+                        />
+                    )}
                     <InvitationCard isMobile={isMobile}>
                         <Text
                             type="p"
@@ -330,7 +371,16 @@ const Invite = ({ isMobile }) => {
                 </div>
 
                 <MonthlyRevenue isMobile={isMobile}>
-                    {!isMobile && <HeaderStats />}
+                    {!isMobile && (
+                        <HeaderStats
+                            stats={[
+                                { text: "Guest Users", count: 0 },
+                                { text: "Deposited Users", count: 0 },
+                                { text: "Bonus Today", count: "R$0" },
+                                { text: "Yesterday Bonus", count: "R$0" },
+                            ]}
+                        />
+                    )}
                     <Flex
                         justifyContent="center"
                         alignItems="center"
@@ -930,8 +980,212 @@ subordinates, where the bonus amount lower level user betting depends on the val
         </TabWrapper>
     );
 };
-const Form = () => {
-    return <TabWrapper>this is referral form</TabWrapper>;
+const Form = ({ isMobile }) => {
+    const profits = [
+        {
+            name: "Group A",
+            value: 50,
+        },
+        {
+            name: "Group B",
+            value: 50,
+        },
+    ];
+    const CustomLabel = ({ viewBox, labelText1, labelText2 }) => {
+        const { cx, cy } = viewBox;
+        return (
+            <g fontSize="60px!important">
+                <text
+                    x={cx}
+                    y={cy}
+                    className="recharts-text recharts-label"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    alignmentBaseline="middle"
+                    fontSize="15"
+                >
+                    {labelText1}
+                </text>
+                {/* <text
+                    x={cx}
+                    y={cy}
+                    className="recharts-text recharts-label"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    alignmentBaseline="middle"
+                    fontSize="15"
+                >
+                    {labelText2}
+                </text> */}
+            </g>
+        );
+    };
+
+    const COLORS = ["#7BFFEF", "#FF7285"];
+
+    return (
+        <TabWrapper>
+            <Flex
+                alignItems="stretch"
+                gap="20px"
+                direction={`${isMobile ? "column" : "row"}`}
+            >
+                <ProfitToday isMobile={isMobile}>
+                    <Text
+                        type="p"
+                        text="PROFIT TODAY"
+                        fontWeight="bold"
+                        fontSize="18px"
+                    />
+                    <div
+                        style={{
+                            height: "fit-content",
+                            // transform: "rotate(90deg)",
+                        }}
+                    >
+                        {/* <ResponsiveContainer> */}
+                        <PieChart width={730} height={250}>
+                            <Pie
+                                data={profits}
+                                dataKey="value"
+                                cx={370}
+                                cy={120}
+                                innerRadius={80}
+                                outerRadius={110}
+                            >
+                                {profits.map((entry, index) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={COLORS[index % COLORS.length]}
+                                    />
+                                ))}
+                                <Label
+                                    content={
+                                        <CustomLabel
+                                            labelText1="Invitation Bonus"
+                                            labelText2="Betting commission"
+                                        />
+                                    }
+                                    position="center"
+                                />
+                            </Pie>
+                        </PieChart>
+                        {/* </ResponsiveContainer> */}
+                    </div>
+
+                    <Text
+                        type="p"
+                        text="R$ 0"
+                        color="#5C9DFF"
+                        fontSize="20px"
+                        fontWeight="bold"
+                    />
+                    <Text type="p" text="Profit Today" />
+                </ProfitToday>
+                <MonthlyRevenue isMobile={isMobile}>
+                    {isMobile && (
+                        <HeaderStats
+                            stats={[
+                                { text: "Betting Commision", count: "R$ 0" },
+                                { text: "Invitation Bonus", count: "R$ 0" },
+                            ]}
+                            justify="center"
+                            gap={isMobile ? "20px" : "0"}
+                        />
+                    )}
+                    <Flex
+                        justifyContent="center"
+                        direction="column"
+                        alignItems="center"
+                        height="100%"
+                        padding={isMobile ? "0 20px 30px" : "0 60px 60px"}
+                    >
+                        <Text
+                            type="p"
+                            text="Your profit will consist of three components namely [Invitation Bonus][Betting Commission]"
+                            fontSize="17px"
+                            padding="20px 0"
+                        />
+                        <ul
+                            style={{
+                                listStyle: "disc",
+                                marginLeft: isMobile ? "10px" : "50px",
+                            }}
+                        >
+                            <li style={{ paddingBottom: "20px" }}>
+                                Betting Commission: This will be your main
+                                income and you will receive a different
+                                percentage of each bet you invite players to
+                                make as a commission."
+                            </li>
+                            <li>
+                                Invite Bonus: The user you invite to deposit for
+                                the first time will receive a cash bonus of R$8
+                            </li>
+                        </ul>
+                    </Flex>
+                </MonthlyRevenue>
+            </Flex>
+
+            <Flex
+                alignItems="stretch"
+                gap="20px"
+                direction={`${isMobile ? "column" : "row"}`}
+            >
+                <ProfitTodayBox isMobile={isMobile}>
+                    <Text
+                        type="p"
+                        text="PROFIT TODAY"
+                        fontWeight="bold"
+                        fontSize="18px"
+                    />
+                    <div>
+                        <img src={profitbox} alt="" />
+                    </div>
+                    <Text
+                        type="p"
+                        text="R$ 0"
+                        color="#5C9DFF"
+                        fontSize="20px"
+                        fontWeight="bold"
+                    />
+                    <Text type="p" text="Profit Today" />
+                </ProfitTodayBox>
+
+                <MonthlyRevenue isMobile={isMobile}>
+                    {isMobile && (
+                        <HeaderStats
+                            stats={[
+                                { text: "Betting Commision", count: "R$ 0" },
+                                { text: "Invitation Bonus", count: "R$ 0" },
+                                { text: "Achievement Bonus", count: "R$ 0" },
+                                { text: "Deposited Users", count: "R$ 0" },
+                            ]}
+                            isMobile={isMobile}
+                            wrap={isMobile ? "wrap" : "nowrap"}
+                            // justify="center"
+                        />
+                    )}
+                    <Flex
+                        justifyContent="center"
+                        direction="column"
+                        alignItems="center"
+                        height="100%"
+                        padding={isMobile ? "0 20px 30px" : "0 60px 60px"}
+                    >
+                        <Text
+                            type="p"
+                            text="You receive a commission for every bet you invite users to make, win or lose.
+So all you have to do is improve your gaming skills, think about how to win the game and share it with everyone to help more people win with your method.
+We want all players to have fun at Betfiery, whether it's the fun of winning bets or the game itself!"
+                            fontSize="17px"
+                            padding="20px 0"
+                        />
+                    </Flex>
+                </MonthlyRevenue>
+            </Flex>
+        </TabWrapper>
+    );
 };
 const Stats = () => {
     return <TabWrapper>this is referral stats</TabWrapper>;
@@ -971,7 +1225,9 @@ const ReferralIndex = () => {
                                             {
                                                 label: "Forms",
                                                 value: "forms",
-                                                content: <Form>hi form</Form>,
+                                                content: (
+                                                    <Form isMobile={isMobile} />
+                                                ),
                                                 icon: form,
                                             },
                                             {
