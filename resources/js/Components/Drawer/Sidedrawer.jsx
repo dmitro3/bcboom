@@ -28,7 +28,7 @@ const DrawerWrapper = styled("div")(({}) => ({
     background: "#1C2036!important",
     padding: "0 20px",
     position: "relative",
-    display: 'block',
+    display: "block",
     zIndex: 110000,
 }));
 const CloseIcon = styled("div")(({}) => ({
@@ -157,8 +157,16 @@ const Sidedrawer = () => {
                     <img src={bcboom} alt="" />
                 </Logo>
                 <DrawerImages>
-                    {[crash, mines, dice, limbo, keno].map((img, i) => (
-                        <DrawerImage key={i} src={img} index={i} />
+                    {[
+                        { link: "/games/crash", icon: crash },
+                        { link: "games/mines", icon: mines },
+                        { link: "/games/dice", icon: dice },
+                        { link: "/games/limbo", icon: limbo },
+                        { link: "/games/keno", icon: keno },
+                    ].map((item, i) => (
+                        <Link href={item.link}>
+                            <DrawerImage key={i} src={item.icon} index={i} />{" "}
+                        </Link>
                     ))}
                 </DrawerImages>
                 <Divider bg="#8990ae78" />
