@@ -4,6 +4,7 @@ import chevrondown from "../../../../public/images/svg/chevrondown.svg";
 import { useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { Flex } from "../UtilComponents/Flex";
 // const useStyles = makeStyles({
 //     customOutline: {
 //         "& .MuiOutlinedInput-notchedOutline": {
@@ -47,16 +48,17 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
 const SelectWithDropdownWrapper = styled("div")(({}) => ({
     position: "relative",
-    width: "100%",
+    // width: "100%",
     "& label": {
         color: "#8990ae",
     },
 }));
-const SelectDropdownComponent = styled("div")(({}) => ({
-    background: "#3A4072",
+const SelectDropdownComponent = styled("div")(({ background, border }) => ({
+    background: background || "#3A4072",
+    border: border,
     borderRadius: "10px",
     cursor: "pointer",
-    width: "100%",
+    // width: "100%",
     padding: "0",
     "&:hover": {
         background: "#747DB6",
@@ -123,14 +125,21 @@ const DrawerItem = styled("div")(({}) => ({
         color: "white",
     },
 }));
-export const SelectWithDropdown = ({ setValue, value, items, label }) => {
+export const SelectWithDropdown = ({
+    setValue,
+    value,
+    items,
+    label,
+    background,
+    border
+}) => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setOpenDrawer(false));
     return (
         <SelectWithDropdownWrapper>
             <label htmlFor={value}>{label}</label>
-            <SelectDropdownComponent>
+            <SelectDropdownComponent background={background} border={border}>
                 <Paragraph
                     onClick={() => setOpenDrawer(!openDrawer)}
                     opened={openDrawer}
@@ -147,10 +156,15 @@ export const SelectWithDropdown = ({ setValue, value, items, label }) => {
                                     key={i}
                                     onClick={() => {
                                         setOpenDrawer(!openDrawer);
-                                        setValue(provider);
+                                        setValue(provider.label || provider);
                                     }}
                                 >
-                                    {provider}
+                                    <Flex alignItems="center" gap="10px">
+                                        {provider?.icon && (
+                                            <img src={provider.icon} />
+                                        )}
+                                        {provider.label || provider}
+                                    </Flex>
                                 </DrawerItem>
                             ))}
                         </div>

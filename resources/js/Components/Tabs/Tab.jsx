@@ -121,7 +121,7 @@ export const NewCustomTabs = ({ tabItems, width, padding, marginTop }) => {
                                 alignItems="center"
                                 gap="10px"
                             >
-                                {item.icon && <img src={item.icon} alt="" />}
+                                {item.icon && <img src={item.icon} alt="" style={{filter: index === value && 'brightness(0) invert(1)'}} />}
                                 {item.label}
                             </Flex>
                         </TabButton>

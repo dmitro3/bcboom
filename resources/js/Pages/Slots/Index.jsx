@@ -56,7 +56,7 @@ export default function Homepage(props) {
             icon: s777,
             imageWidth: "534px",
             imageHeight: "175px",
-            margin: "25px",
+            margin: "10px",
             perColumn: 5,
             page: "home",
             countOnMobile: 4,

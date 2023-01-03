@@ -18,13 +18,13 @@ const SidebarWrapper = styled("div")(() => ({
     height: "100%",
     width: "78px",
     padding: "10px 20px",
-    paddingTop: "30px",
+    // paddingTop: "30px",
 }));
 const SidebarItems = styled("div")(() => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    gap: "30px",
+    gap: "10px",
 }));
 const SidebarItem = styled("div")(({ active }) => ({
     cursor: "pointer",
