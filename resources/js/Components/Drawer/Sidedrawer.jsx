@@ -22,6 +22,7 @@ import { miscNavLinks, navlinks } from "@/data";
 import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
 import { Link } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
     // height: "100%",
@@ -164,9 +165,15 @@ const Sidedrawer = () => {
                         { link: "/games/limbo", icon: limbo },
                         { link: "/games/keno", icon: keno },
                     ].map((item, i) => (
-                        <Link href={item.link}>
-                            <DrawerImage key={i} src={item.icon} index={i} />{" "}
-                        </Link>
+                        <DrawerImage
+                            key={i}
+                            src={item.icon}
+                            index={i}
+                            onClick={() => {
+                                closeDrawer();
+                                Inertia.visit(item.link);
+                            }}
+                        />
                     ))}
                 </DrawerImages>
                 <Divider bg="#8990ae78" />
