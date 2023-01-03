@@ -27,8 +27,8 @@ const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
-    top: isMobile ? "2%" : "20px",
-    right: isMobile ? "25px" : "20px",
+    top: isMobile ? "-1%" : "20px",
+    right: isMobile ? "-10px" : "20px",
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
