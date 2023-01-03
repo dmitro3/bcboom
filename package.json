@@ -1,0 +1,46 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@headlessui/react": "^1.4.2",
+        "@inertiajs/inertia": "^0.11.0",
+        "@inertiajs/inertia-react": "^0.8.1",
+        "@inertiajs/progress": "^0.2.6",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-react": "^3.0.0",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.1.2",
+        "babel-plugin-styled-components": "^2.0.7",
+        "laravel-vite-plugin": "^0.7.2",
+        "lodash": "^4.17.19",
+        "postcss": "^8.4.18",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.2.1",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@material-ui/core": "^4.12.4",
+        "@material-ui/icons": "^4.11.3",
+        "@mui/icons-material": "^5.11.0",
+        "@mui/material": "^5.11.1",
+        "@mui/styles": "^5.11.1",
+        "@mui/x-data-grid": "^5.17.16",
+        "@reduxjs/toolkit": "^1.9.1",
+        "antd": "^5.1.0",
+        "date-fns": "^2.29.3",
+        "dayjs": "^1.11.7",
+        "react-google-recaptcha": "^2.1.0",
+        "react-redux": "^8.0.5",
+        "react-slick": "^0.29.0",
+        "redux-thunk": "^2.4.2",
+        "slick-carousel": "^1.8.1",
+        "styled-components": "^5.3.6"
+    }
+}

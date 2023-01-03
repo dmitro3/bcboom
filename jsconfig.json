@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"]
+        },
+        "target": "ES2015",
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": true
+    },
+
+    "exclude": [
+        "node_modules",
+        "bower_components",
+        "jspm_packages",
+        "public",
+        "tmp",
+        "temp"
+    ]
+}
