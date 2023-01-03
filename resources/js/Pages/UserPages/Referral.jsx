@@ -33,21 +33,30 @@ import { Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import { currencyFormatter } from "@/utils/util";
-const PersonalCenterPageWrapper = styled("div")(() => ({
-    marginLeft: "auto",
-    marginRight: "auto",
+const ReferralPageWrapper = styled("div")(({ isMobile }) => ({
+    margin: "0 auto",
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
+    marginTop: isMobile ? "-10px" : "0",
 }));
 
-const ReferralWrapper = styled("div")(() => ({}));
+const ReferralWrapper = styled("div")(({ isMobile }) => ({
+    marginTop: isMobile && "70px",
+    position: "relative",
+    zIndex: 200,
+    padding: 0,
+}));
 
-const TabComponent = styled("div")(({}) => ({}));
-const TabWrapper = styled("div")(({}) => ({
+const TabComponent = styled("div")(({}) => ({
+    position: "relative",
+    zIndex: 200,
+    padding: 0,
+}));
+const TabWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     flexDirection: "column",
-    marginTop: "70px",
+    marginTop: isMobile ? "20px" : "70px",
     gap: "20px",
 }));
 
@@ -58,10 +67,10 @@ const InvitationCard = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat",
     padding: "20px",
     borderRadius: "10px",
-    width: isMobile ? '100%' : "35%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
+    height: "100%",
     // textAlign: "center",
 }));
 
@@ -72,28 +81,29 @@ const MonthlyRevenue = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat",
     // padding: "20px",
     borderRadius: "10px",
-    width: isMobile ? '100%' : "65%",
+    width: isMobile ? "100%" : "65%",
     // textAlign: "center",
 }));
 
-const MonthlyHeader = styled("div")(() => ({
+const MonthlyHeader = styled("div")(({ isMobile }) => ({
     background: "#1A2150",
     width: "100%",
-    padding: "10px 20px",
+    padding: isMobile ? "10px 2px" : "10px 20px",
     borderRadius: "10px 10px 0 0",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    textAlign: "center",
 }));
 
-const MonthlyBody = styled("div")(() => ({
+const MonthlyBody = styled("div")(({ isMobile }) => ({
     background: "linear-gradient(123.42deg, #172273 1.75%, #2D315A 90.41%)",
     borderRadius: "10px",
     width: "90%",
-    padding: "45px",
+    padding: isMobile ? "15px" : "45px",
     display: "flex",
     // justifyContent: "space-between",
-    gap: "15%",
+    gap: isMobile ? "5%" : "15%",
     alignItems: "center",
 }));
 
@@ -111,6 +121,7 @@ const RefNetwork = styled("div")(({ isMobile }) => ({
 }));
 const IncomeCalculator = styled("div")(({ isMobile, rangeVal }) => ({
     width: isMobile ? "100%" : "50%",
+    paddingBottom: isMobile && "40px",
     background: `url(${incomecalculatorbg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -184,17 +195,17 @@ const TextWithImage = styled("div")(({ width }) => ({
     width: width,
 }));
 
-const HowReferralWorks = styled("div")(() => ({
+const HowReferralWorks = styled("div")(({ isMobile }) => ({
     background: "linear-gradient(119.77deg, #262C55 2.99%, #454BCC 100%)",
     borderRadius: "10px",
-    padding: "20px",
+    padding: isMobile ? "20px 0px" : "20px",
 }));
-const HowReferralWorksContent = styled("div")(() => ({
+const HowReferralWorksContent = styled("div")(({ isMobile }) => ({
     background: "#140E37",
     borderRadius: "10px",
     margin: "0 auto",
     width: "90%",
-    padding: "20px",
+    padding: isMobile ? "10px" : "20px",
 }));
 
 const LeaderBoard = styled("div")(({ isMobile }) => ({
@@ -211,12 +222,12 @@ const LeaderBoard = styled("div")(({ isMobile }) => ({
     borderRadius: "10px",
 }));
 
-const LeaderBoardUsers = styled("div")(() => ({
+const LeaderBoardUsers = styled("div")(({ isMobile }) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     margin: "0 auto",
-    gap: "60px",
+    gap: !isMobile && "60px",
 }));
 const WhoWon = styled("div")(({ isMobile }) => ({
     background: `url(${whowonbg})`,
@@ -232,90 +243,105 @@ const WhoWon = styled("div")(({ isMobile }) => ({
     borderRadius: "10px",
 }));
 
+const HeaderStats = ({ isMobile }) => (
+    <MonthlyHeader isMobile={isMobile}>
+        {[
+            { text: "Guest Users", count: 0 },
+            { text: "Deposited Users", count: 0 },
+            { text: "Bonus Today", count: "R$0" },
+            { text: "Yesterday Bonus", count: "R$0" },
+        ].map((item, index) => (
+            <div key={index}>
+                <Text
+                    type="p"
+                    text={item.text}
+                    color="#3586FF"
+                    fontWeight="bold"
+                    fontSize={isMobile ? "10px" : "16px"}
+                    whiteSpace="nowrap"
+                />
+                <Text
+                    type="p"
+                    text={item.count}
+                    fontWeight="bold"
+                    fontSize={isMobile ? "10px" : "16px"}
+                    color="#7B88C1"
+                    textAlign="center"
+                />
+            </div>
+        ))}
+    </MonthlyHeader>
+);
+
 const Invite = ({ isMobile }) => {
     const classes = useStyles();
     const [rangeVal, setRangeVal] = useState(0);
     console.log("isMobile: ", isMobile);
     return (
-        <TabWrapper>
-            <Flex alignItems="stretch" gap="20px" direction={`${isMobile ? 'column': 'row'}`}>
-                <InvitationCard isMobile={isMobile}>
-                    <Text
-                        type="p"
-                        text="Invite a partner"
-                        textAlign="center"
-                        fontSize="18px"
-                        fontWeight="bold"
-                    />
-                    <div>
-                        <div style={{ margin: "10px 0" }}>
-                            <Text
-                                type="p"
-                                text="Invite URL"
-                                fontWeight="bold"
-                                fontSize="12px"
-                                padding="10px 0"
-                            />
-                            <CopyableLink
-                                addon={true}
-                                text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
-                                size="6px"
-                                background="#1A2150"
-                            />
-                        </div>
+        <TabWrapper isMobile={isMobile}>
+            <Flex
+                alignItems="stretch"
+                gap="20px"
+                direction={`${isMobile ? "column" : "row"}`}
+            >
+                <div style={{ width: isMobile ? "100%" : "35%" }}>
+                    {isMobile && <HeaderStats isMobile={isMobile} />}
+                    <InvitationCard isMobile={isMobile}>
+                        <Text
+                            type="p"
+                            text="Invite a partner"
+                            textAlign="center"
+                            fontSize="18px"
+                            fontWeight="bold"
+                        />
                         <div>
-                            <Text
-                                type="p"
-                                text="Invite URL"
-                                fontWeight="bold"
-                                fontSize="12px"
-                                padding="10px 0"
-                            />
-                            <CopyableLink
-                                addon={true}
-                                text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
-                                size="6px"
-                                background="#1A2150"
-                            />
-                        </div>
-                    </div>
-                </InvitationCard>
-
-                <MonthlyRevenue isMobile={isMobile}>
-                    <MonthlyHeader>
-                        {[
-                            { text: "Guest Users", count: 0 },
-                            { text: "Deposited Users", count: 0 },
-                            { text: "Bonus Today", count: "R$0" },
-                            { text: "Yesterday Bonus", count: "R$0" },
-                        ].map((item, index) => (
+                            <div style={{ margin: "10px 0" }}>
+                                <Text
+                                    type="p"
+                                    text="Invite URL"
+                                    fontWeight="bold"
+                                    fontSize="12px"
+                                    padding="10px 0"
+                                />
+                                <CopyableLink
+                                    addon={true}
+                                    text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
+                                    size="6px"
+                                    background="#1A2150"
+                                />
+                            </div>
                             <div>
                                 <Text
                                     type="p"
-                                    text={item.text}
-                                    color="#3586FF"
+                                    text="Invite URL"
                                     fontWeight="bold"
+                                    fontSize="12px"
+                                    padding="10px 0"
                                 />
-                                <Text
-                                    type="p"
-                                    text={item.count}
-                                    fontWeight="bold"
-                                    fontSize="14px"
-                                    color="#7B88C1"
-                                    textAlign="center"
+                                <CopyableLink
+                                    addon={true}
+                                    text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
+                                    size="6px"
+                                    background="#1A2150"
                                 />
                             </div>
-                        ))}
-                    </MonthlyHeader>
+                        </div>
+                    </InvitationCard>
+                </div>
+
+                <MonthlyRevenue isMobile={isMobile}>
+                    {!isMobile && <HeaderStats />}
                     <Flex
                         justifyContent="center"
                         alignItems="center"
                         width="100%"
-                        padding="20px"
+                        padding={isMobile ? "10px" : "20px"}
                     >
-                        <MonthlyBody>
+                        <MonthlyBody isMobile={isMobile}>
                             <div>
-                                <div style={{ width: "90%" }}>
+                                <div
+                                    style={{ width: isMobile ? "100%" : "90%" }}
+                                >
                                     <p
                                         style={{
                                             color: "#64A2FF",
@@ -324,7 +350,10 @@ const Invite = ({ isMobile }) => {
                                             fontSize: "27px",
                                             lineHeight: "27px",
                                             paddingBottom: "15px",
+                                            // display: isMobile ? 'flex' : 'inline-block',
                                             display: "inline-block",
+                                            // width: isMobile && 'min-content',
+                                            // gap: '2px'
                                         }}
                                     >
                                         Monthly Revenue Goals
@@ -359,7 +388,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                     fontWeight="400"
                                     fontSize="12px"
                                     // lineHeight="27px"
-                                    width="50%"
+                                    width={!isMobile && "50%"}
                                 />
                             </div>
                             <div>
@@ -378,11 +407,12 @@ subordinates, where the bonus amount lower level user betting depends on the val
                 gap="20px"
                 width="100%"
                 justifyContent="space-between"
+                direction={isMobile ? "column" : "row"}
             >
-                <TextWithImage width={"50%"}>
+                <TextWithImage width={isMobile ? "100%" : "50%"}>
                     <Flex
                         alignItems="center"
-                        padding="0 30px"
+                        padding={!isMobile && "0 30px"}
                         justifyContent="space-between"
                     >
                         <div>
@@ -411,10 +441,10 @@ subordinates, where the bonus amount lower level user betting depends on the val
                     </Flex>
                 </TextWithImage>
 
-                <TextWithImage width={"50%"}>
+                <TextWithImage width={isMobile ? "100%" : "50%"}>
                     <Flex
                         alignItems="center"
-                        padding="0 30px"
+                        padding={!isMobile && "0 30px"}
                         justifyContent="space-between"
                     >
                         <div>
@@ -457,13 +487,18 @@ subordinates, where the bonus amount lower level user betting depends on the val
                     text="Each deposit user can receive at least R$8 for each invite. The more people you invite, the greater the invite bonus for the corresponding level. For specific rules, see the table below"
                     color="#9AA4CF"
                     fontSize="16px"
-                    padding="5px 20%"
+                    padding={!isMobile && "5px 20%"}
                 />
             </div>
-            <HowReferralWorks>
-                <HowReferralWorksContent>
-                    <Flex direction="column" gap="20px">
-                        <Flex justifyContent="space-betwee" gap="20px">
+            <HowReferralWorks isMobile={isMobile}>
+                <HowReferralWorksContent isMobile={isMobile}>
+                    <Flex direction={isMobile ? "row" : "column"} gap="20px">
+                        <Flex
+                            justifyContent="space-betwee"
+                            gap="20px"
+                            direction={isMobile ? "column" : "row"}
+                            width={isMobile && "100%"}
+                        >
                             {[
                                 "Cumulative Deposit Users",
                                 "0-999 People",
@@ -479,16 +514,16 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                         justifyContent: "center",
                                         flexDirection: "column",
                                         alignItems: "center",
-                                        width: "20%",
+                                        width: isMobile ? "100%" : "20%",
                                         height: "50px",
                                         borderRadius: "10px",
                                         color: index === 0 ? "#64A2FF" : "#fff",
+                                        fontSize: isMobile ? "12px" : "16px",
                                         fontWeight: "bold",
                                     }}
                                 >
                                     <Text
                                         type="p"
-                                        fontSize="14px"
                                         text={item.slice(
                                             0,
                                             item.lastIndexOf(" ")
@@ -496,7 +531,6 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                     />
                                     <Text
                                         type="p"
-                                        fontSize="14px"
                                         text={item.slice(
                                             item.lastIndexOf(" "),
                                             item.length
@@ -505,7 +539,12 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                 </div>
                             ))}
                         </Flex>
-                        <Flex justifyContent="space-betwee" gap="20px">
+                        <Flex
+                            justifyContent="space-betwee"
+                            gap="20px"
+                            direction={isMobile ? "column" : "row"}
+                            width={isMobile && "100%"}
+                        >
                             {[
                                 "Bonus ",
                                 "R$ 9 Per People",
@@ -521,7 +560,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                         justifyContent: "center",
                                         flexDirection: "column",
                                         alignItems: "center",
-                                        width: "20%",
+                                        width: isMobile ? "100%" : "20%",
                                         height: "50px",
                                         borderRadius: "10px",
                                         color: index === 0 ? "#64A2FF" : "#fff",
@@ -571,7 +610,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                     text="This will be your long-term income and you will receive a different percentage of commission each time a player you invite places a bet."
                     color="#9AA4CF"
                     fontSize="16px"
-                    padding="5px 20%"
+                    padding={!isMobile && "5px 20%"}
                 />
             </div>
 
@@ -579,12 +618,13 @@ subordinates, where the bonus amount lower level user betting depends on the val
                 alignItems="stretch"
                 gap="20px"
                 width="100%"
+                direction={isMobile ? "column" : "row"}
                 justifyContent="space-between"
             >
-                <TextWithImage width={"50%"}>
+                <TextWithImage width={isMobile ? "100%" : "50%"}>
                     <Flex
                         alignItems="center"
-                        padding="0 30px"
+                        padding={!isMobile && "0 30px"}
                         justifyContent="space-between"
                     >
                         <div style={{ width: "65%" }}>
@@ -602,7 +642,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                 fontSize="24px"
                             />
                             <div>
-                                <p>
+                                <p style={{ fontWeight: "bold" }}>
                                     Valid invite level can reach level 3, and
                                     the wager discount reward is
                                     <span style={{ color: "#64A2FF" }}>
@@ -615,16 +655,21 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                 </p>
                             </div>
                         </div>
-                        <div style={{ width: "35%" }}>
+                        <div
+                            style={{
+                                width: "35%",
+                                marginLeft: isMobile && "20px",
+                            }}
+                        >
                             <img src={dollarValue} alt="" />
                         </div>
                     </Flex>
                 </TextWithImage>
 
-                <TextWithImage width={"50%"}>
+                <TextWithImage width={isMobile ? "100%" : "50%"}>
                     <Flex
                         alignItems="center"
-                        padding="0 30px"
+                        padding={!isMobile && "0 30px"}
                         justifyContent="space-between"
                     >
                         <div style={{ width: "65%" }}>
@@ -642,27 +687,47 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                 fontSize="24px"
                             />
                             <div
-                                style={{ fontWeight: "600", fontSize: "14px" }}
+                                style={{
+                                    fontWeight: "bold",
+                                    fontSize: isMobile ? "12px" : "14px",
+                                }}
                             >
                                 <p>
                                     The invite ratio is A invite B, B invite C,
                                     C invite D, D invite E. When E bets
                                     10.000R$"
                                 </p>
-                                <p>※ D can get 10000 * 0.15% = 15 R$"</p>
-                                <p>※ C can get 10000 * 0.07% = 7 R$"</p>
-                                <p>※ B can get 10000 * 0.02% = 2 R$"</p>
-                                <p>※ A has no return in three Levels."</p>
+                                <p style={{ whiteSpace: "nowrap" }}>
+                                    ※ D can get 10000 * 0.15% = 15 R$"
+                                </p>
+                                <p style={{ whiteSpace: "nowrap" }}>
+                                    ※ C can get 10000 * 0.07% = 7 R$"
+                                </p>
+                                <p style={{ whiteSpace: "nowrap" }}>
+                                    ※ B can get 10000 * 0.02% = 2 R$"
+                                </p>
+                                <p style={{ whiteSpace: "nowrap" }}>
+                                    ※ A has no return in three Levels."
+                                </p>
                             </div>
                         </div>
-                        <div style={{ width: "35%" }}>
+                        <div
+                            style={{
+                                width: "35%",
+                                marginLeft: isMobile && "20px",
+                            }}
+                        >
                             <img src={bank} alt="" />
                         </div>
                     </Flex>
                 </TextWithImage>
             </Flex>
 
-            <Flex alignItems="stretch" gap="20px">
+            <Flex
+                alignItems="stretch"
+                gap="20px"
+                direction={isMobile ? "column" : "row"}
+            >
                 <RefNetwork isMobile={isMobile}>
                     <img src={network} alt="" />
                 </RefNetwork>
@@ -711,7 +776,6 @@ subordinates, where the bonus amount lower level user betting depends on the val
                     <Text
                         type="p"
                         text={`Invite ${rangeVal} Users assets Expected annual income to be earned`}
-                        color="#64A2FF"
                         fontSize="15px"
                         fontWeight="bold"
                         padding="15px 0"
@@ -731,7 +795,11 @@ subordinates, where the bonus amount lower level user betting depends on the val
                 </IncomeCalculator>
             </Flex>
 
-            <Flex alignItems="stretch" gap="20px">
+            <Flex
+                alignItems="stretch"
+                gap="20px"
+                direction={isMobile ? "column" : "row"}
+            >
                 <LeaderBoard isMobile={isMobile}>
                     <Text
                         type="p"
@@ -741,7 +809,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                         color="#64A2FF"
                         paddingBottom="20px"
                     />
-                    <LeaderBoardUsers>
+                    <LeaderBoardUsers isMobile={isMobile}>
                         {[
                             {
                                 position: 2,
@@ -806,7 +874,7 @@ subordinates, where the bonus amount lower level user betting depends on the val
                         ))}
                     </LeaderBoardUsers>
                 </LeaderBoard>
-                <WhoWon>
+                <WhoWon isMobile={isMobile}>
                     <Text
                         type="p"
                         text="Who won the prize"
@@ -825,9 +893,10 @@ subordinates, where the bonus amount lower level user betting depends on the val
                             key={index}
                             style={{
                                 background: "#140E37",
-                                width: "80%",
+                                width: isMobile ? "95%" : "80%",
                                 margin: "10px 0",
                                 borderRadius: "10px",
+                                fontSize: isMobile ? "12px" : "15px",
                             }}
                         >
                             <Flex
@@ -839,21 +908,18 @@ subordinates, where the bonus amount lower level user betting depends on the val
                                     type="p"
                                     text={item.name}
                                     color="#9AA4CF"
-                                    fontSize="15px"
                                     fontWeight="medium"
                                 />
                                 <Text
                                     type="p"
                                     text="Receive and Invite Bonus"
                                     color="#9AA4CF"
-                                    fontSize="15px"
                                     fontWeight="medium"
                                 />
                                 <Text
                                     type="p"
                                     text={item.amount}
                                     color="#64A2FF"
-                                    fontSize="15px"
                                     fontWeight="medium"
                                 />
                             </Flex>
@@ -878,16 +944,17 @@ const ReferralIndex = () => {
             <Head title="Referral" />
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
-                    <PersonalCenterPageWrapper>
+                    <ReferralPageWrapper isMobile={isMobile}>
                         <ImageGridLayout
                             item={{
                                 title: "Referral",
                                 icon: referral,
+                                margin: "10px",
                             }}
                             index={0}
-                            page="personal-center"
+                            page="referral"
                         >
-                            <ReferralWrapper>
+                            <ReferralWrapper isMobile={isMobile}>
                                 <TabComponent>
                                     <NewCustomTabs
                                         tabItems={[
@@ -915,11 +982,12 @@ const ReferralIndex = () => {
                                             },
                                         ]}
                                         width={isMobile ? "100%" : "500px"}
+                                        padding="0"
                                     />
                                 </TabComponent>
                             </ReferralWrapper>
                         </ImageGridLayout>
-                    </PersonalCenterPageWrapper>
+                    </ReferralPageWrapper>
                 </PageTemplate>
             </GuestLayout>
         </>

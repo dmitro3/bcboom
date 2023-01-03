@@ -16,14 +16,14 @@ import settings from "../../../../public/images/svg/settings.svg";
 import TextWithBg from "@/Components/UtilComponents/TextWithBg";
 import { Divider } from "@/Components/Divider/Divider";
 import Button from "@/Components/Button/Button";
-const PersonalCenterPageWrapper = styled("div")(() => ({
-    marginLeft: "auto",
-    marginRight: "auto",
+const PersonalCenterPageWrapper = styled("div")(({isMobile}) => ({
+    margin: '0 auto',
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
     position: "relative",
     zIndex: 100,
+    
 }));
 
 const PersonalCard = styled("div")(({ padding, isMobile }) => ({
