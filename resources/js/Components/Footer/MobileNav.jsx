@@ -13,7 +13,7 @@ const MobieNavWrapper = styled("div")(() => ({
     position: "fixed",
     bottom: 0,
     left: 0,
-    zIndex: 100000,
+    zIndex: 751,
 }));
 
 const InnerHeaderItem = styled("div")(({ active }) => ({
@@ -30,7 +30,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
         marginLeft: "5px",
         marginTop: "9px",
         fontSize: "14px",
-        color: active ? 'white' : '#8990AE',
+        color: active ? "white" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
         whiteSpace: "nowrap",
@@ -53,7 +53,18 @@ const MobileDivider = styled("div")(() => ({
 const MobileNav = () => {
     const dispatcher = useDispatch();
     const { drawerState } = useSelector((state) => state.app);
-
+    const Component = ({ item, active }) => (
+        <InnerHeaderItem active={active}>
+            <img
+                src={item.icon}
+                alt={item.name}
+                style={{
+                    filter: active && "brightness(0) invert(1)",
+                }}
+            />
+            <p>{item.name}</p>
+        </InnerHeaderItem>
+    );
     const location =
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
@@ -63,32 +74,23 @@ const MobileNav = () => {
             <Flex
                 alignItems="center"
                 justifyContent="space-between"
-                padding="10px 20px"
+                padding="10px 1%"
             >
                 {mobileNavLinks.map((item, index) => {
-                    const Component = (
-                        <InnerHeaderItem
-                            key={index}
-                            active={
-                                item.navigatable &&
-                                location == item.link.replace("/", "")
-                            }
-                        >
-                            <img
-                                src={item.icon}
-                                alt={item.name}
-                                style={{
-                                    filter:
+                    if (item.navigatable)
+                        return (
+                            <Link href={item.link}>
+                                <Component
+                                    key={index}
+                                    item={item}
+                                    active={
                                         location ==
                                             item.link.replace("/", "") &&
-                                        "brightness(0) invert(1)",
-                                }}
-                            />
-                            <p>{item.name}</p>
-                        </InnerHeaderItem>
-                    );
-                    if (item.navigatable)
-                        return <Link href={item.link}>{Component}</Link>;
+                                        !drawerState.open
+                                    }
+                                />
+                            </Link>
+                        );
                     return (
                         <div
                             onClick={() =>
@@ -98,7 +100,13 @@ const MobileNav = () => {
                                 )
                             }
                         >
-                            {Component}
+                            <Component
+                                key={index}
+                                item={item}
+                                active={
+                                    item.name === "Menu" && drawerState.open
+                                }
+                            />
                         </div>
                     );
                 })}

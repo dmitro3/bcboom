@@ -108,7 +108,11 @@ const VIPIndex = () => {
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <ImageGridLayout
-                        item={{ title: "VIP Rank System", icon: goldencup, margin: '10px' }}
+                        item={{
+                            title: "VIP Rank System",
+                            icon: goldencup,
+                            margin: "10px",
+                        }}
                         index={0}
                         page="vip"
                     >
@@ -131,7 +135,7 @@ const VIPIndex = () => {
                         </div>
                         <DividerStats isMobile={isMobile}>
                             <Flex
-                                alignItems={isMobile ? "stretch" : "flex-start"}
+                                alignItems={isMobile ? "stretch" : "center"}
                                 justifyContent="space-between"
                                 padding="10px 5%"
                             >
@@ -147,7 +151,7 @@ const VIPIndex = () => {
                                 </div>
                                 <Flex
                                     alignItems="center"
-                                    gap={isMobile ? '5px' : "20px"}
+                                    gap={isMobile ? "5px" : "20px"}
                                     direction={isMobile ? "column" : "row"}
                                 >
                                     <TextWithBg
@@ -156,10 +160,10 @@ const VIPIndex = () => {
                                         secondaryText={"R$ 0"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
-                                        width={isMobile && '100%'}
-                                        />
+                                        width={isMobile && "100%"}
+                                    />
                                     <TextWithBg
-                                        width={isMobile && '100%'}
+                                        width={isMobile && "100%"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
                                         bg={"#4F5DFE"}
