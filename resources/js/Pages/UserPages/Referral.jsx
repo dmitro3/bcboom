@@ -1,48 +1,45 @@
+import { SelectWithDropdown } from "@/Components/Dropdown/Select";
 import ImageGridLayout from "@/Components/ImageGrid/ImageGridLayout";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
+import Text from "@/Components/Text/Text";
+import CopyableLink from "@/Components/UtilComponents/CopyableLink";
+import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
+import { currencyFormatter } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
+import { Tooltip } from "@mui/material";
+import { styled as MuiStyle } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
-import referral from "../../../../public/images/user/referral.svg";
-import stats from "../../../../public/images/user/stats.svg";
-import profitbox from "../../../../public/images/user/profitbox.png";
+import { useState } from "react";
+import faq from "../../../../public/images/svg/faq.svg";
+import target from "../../../../public/images/svg/target.svg";
+import bank from "../../../../public/images/user/bank.png";
+import discount from "../../../../public/images/user/discount.png";
+import dollarValue from "../../../../public/images/user/dollarValue.png";
+import form from "../../../../public/images/user/form.svg";
+import idea from "../../../../public/images/user/idea.png";
+import incomecalculatorbg from "../../../../public/images/user/incomecalculatorbg.svg";
 import invite from "../../../../public/images/user/invite.svg";
 import invitebg from "../../../../public/images/user/inviteBg.png";
-import monthlyBg from "../../../../public/images/user/monthlyBg.png";
-import dollarValue from "../../../../public/images/user/dollarValue.png";
-import bank from "../../../../public/images/user/bank.png";
-import idea from "../../../../public/images/user/idea.png";
-import discount from "../../../../public/images/user/discount.png";
-import refnetwork from "../../../../public/images/user/refnetwork.svg";
-import profitTodaybg from "../../../../public/images/user/profittoday.svg";
-import network from "../../../../public/images/user/network.svg";
-import incomecalculatorbg from "../../../../public/images/user/incomecalculatorbg.svg";
-import whowonbg from "../../../../public/images/user/whowonbg.svg";
 import leaderboardbg from "../../../../public/images/user/leaderboardbg.svg";
+import monthlyBg from "../../../../public/images/user/monthlyBg.png";
+import network from "../../../../public/images/user/network.svg";
+import profitbox from "../../../../public/images/user/profitbox.png";
+import profitTodaybg from "../../../../public/images/user/profittoday.svg";
+import referral from "../../../../public/images/user/referral.svg";
+import refnetwork from "../../../../public/images/user/refnetwork.svg";
+import statsbg from "../../../../public/images/user/refstatbg.png";
+import stats from "../../../../public/images/user/stats.svg";
 import user1 from "../../../../public/images/user/user1.png";
 import user2 from "../../../../public/images/user/user2.png";
 import user3 from "../../../../public/images/user/user3.png";
-import form from "../../../../public/images/user/form.svg";
-import target from "../../../../public/images/svg/target.svg";
-import faq from "../../../../public/images/svg/faq.svg";
-import { styled as MuiStyle } from "@mui/material/styles";
-import { Flex } from "@/Components/UtilComponents/Flex";
-import Text from "@/Components/Text/Text";
-import CopyableLink from "@/Components/UtilComponents/CopyableLink";
-import { Tooltip } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { useState } from "react";
-import { currencyFormatter } from "@/utils/util";
-import {
-    Cell,
-    Label,
-    Legend,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-} from "recharts";
+import whowonbg from "../../../../public/images/user/whowonbg.svg";
+
+import BcButton from "@/Components/Button/Button";
+import { Cell, Label, Pie, PieChart } from "recharts";
 const ReferralPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -279,6 +276,26 @@ const ProfitTodayBox = styled("div")(({ isMobile }) => ({
     flexDirection: "column",
 }));
 
+const StatsWrapper = styled("div")(({}) => ({
+    background: `url(${statsbg})`,
+    height: "300px",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    padding: "20px",
+    borderRadius: "10px",
+    display: "flex",
+    // justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+}));
+
+const TableWrapper = styled("div")(({}) => ({
+    margin: "50px auto",
+    width: "60%",
+    display: "flex",
+    justifyContent: "space-between",
+}));
 const HeaderStats = ({ isMobile, stats, justify, gap, wrap }) => (
     <MonthlyHeader isMobile={isMobile} justify={justify} gap={gap}>
         {stats.map((item, index) => (
@@ -1024,7 +1041,7 @@ const Form = ({ isMobile }) => {
     const COLORS = ["#7BFFEF", "#FF7285"];
 
     return (
-        <TabWrapper>
+        <TabWrapper isMobile={isMobile}>
             <Flex
                 alignItems="stretch"
                 gap="20px"
@@ -1187,8 +1204,113 @@ We want all players to have fun at Betfiery, whether it's the fun of winning bet
         </TabWrapper>
     );
 };
-const Stats = () => {
-    return <TabWrapper>this is referral stats</TabWrapper>;
+const Stats = ({ isMobile }) => {
+    const [limit, setLimit] = useState("10");
+    const [type, setType] = useState("Upgrade reward");
+   
+    return (
+        <TabWrapper isMobile={isMobile}>
+            <StatsWrapper isMobile={isMobile}>
+                <Flex alignItems="center" gap="20px" direction={isMobile ? 'column-reverse': 'row'}>
+                    <Flex gap='20px'>
+                        <SelectWithDropdown
+                            items={[
+                                { value: "10", label: "10" },
+                                { value: "20", label: "20" },
+                                { value: "30", label: "30" },
+                                {
+                                    value: "40",
+                                    label: "40",
+                                },
+                            ]}
+                            value={limit}
+                            setValue={(e) => setLimit(e)}
+                            background="transparent"
+                            border="1px solid #8A96CA"
+                        />
+                        <SelectWithDropdown
+                            items={[
+                                {
+                                    value: "Upgrade reward",
+                                    label: "Upgrade reward",
+                                },
+                                {
+                                    value: "Betting commision",
+                                    label: "Betting commision",
+                                },
+                                {
+                                    value: "Invitation bonus",
+                                    label: "Invitation bonus",
+                                },
+                            ]}
+                            value={type}
+                            setValue={(e) => setType(e)}
+                            background="transparent"
+                            border="1px solid #8A96CA"
+                        />
+                    </Flex>
+                    <div
+                        style={{
+                            border: "1px solid #8a86ca",
+                            width: isMobile ? '100%' : "200px",
+                            height: "100%",
+                            borderRadius: "10px",
+                        }}
+                    >
+                        <input
+                            type="date"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                border: "none",
+                                borderRadius: "10px",
+                                padding: "10px",
+                                background: "transparent",
+                            }}
+                            placeholder="start - end date"
+                        />
+                    </div>
+
+                   {!isMobile && <BcButton
+                        text="Search"
+                        background="#3586FF"
+                        height="100%"
+                        width="100px"
+                    />}
+                </Flex>
+                <TableWrapper>
+                    <Text
+                        type="p"
+                        text="Bonus"
+                        fontSize="14px"
+                        fontWeight="bold"
+                        color="#8A96CA"
+                    />
+                    <Text
+                        type="p"
+                        text="User"
+                        fontSize="14px"
+                        fontWeight="bold"
+                        color="#8A96CA"
+                    />
+                    <Text
+                        type="p"
+                        text="Time"
+                        fontSize="14px"
+                        fontWeight="bold"
+                        color="#8A96CA"
+                    />
+                </TableWrapper>
+                <Text
+                    type="p"
+                    text="No data"
+                    fontSize="17px"
+                    fontWeight="bold"
+                    color="#3586FF"
+                />
+            </StatsWrapper>
+        </TabWrapper>
+    );
 };
 
 const ReferralIndex = () => {
@@ -1233,7 +1355,11 @@ const ReferralIndex = () => {
                                             {
                                                 label: "Statistics",
                                                 value: "statistics",
-                                                content: <Stats>stats</Stats>,
+                                                content: (
+                                                    <Stats
+                                                        isMobile={isMobile}
+                                                    />
+                                                ),
                                                 icon: stats,
                                             },
                                         ]}
