@@ -1,0 +1,1 @@
+import{a as t}from"./app-0f969b83.js";import{B as m}from"./GuestLayout-01c8b0ae.js";const n=({customStyles:e,children:r})=>t(m,{sx:{width:{xs:"100%",md:"48%"},height:"12.75rem",borderRadius:"1.25rem",display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center",flexDirection:"column",padding:"2rem",mb:{xs:"1rem",md:"0"},...e},children:r});export{n as P};
