@@ -53,7 +53,7 @@ const VipCarouselCard = ({ item }) => {
     const { isMobile } = useScreenResolution();
     return (
         <CarouselCard color={item.color} isMobile={isMobile}>
-            <div style={{ position: "absolute", top: "0", left: "46%" }}>
+            <div style={{ position: "absolute", top: "0", left: isMobile ? '44%' : "46%" }}>
                 <img src={item.icon} alt="level1" style={{ height: "60px" }} />
             </div>
             <div style={{ zIndex: 200 }}>
