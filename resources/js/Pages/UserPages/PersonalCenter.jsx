@@ -22,6 +22,8 @@ const PersonalCenterPageWrapper = styled("div")(() => ({
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
+    position: "relative",
+    zIndex: 100,
 }));
 
 const PersonalCard = styled("div")(({ padding, isMobile }) => ({
@@ -147,6 +149,7 @@ const PersonalCenter = () => {
                             item={{
                                 title: "Personal Center",
                                 icon: centerIcon,
+                                margin: '10px'
                             }}
                             index={0}
                             page="personal-center"
@@ -155,7 +158,7 @@ const PersonalCenter = () => {
                                 alignItems="stretch"
                                 gap="20px"
                                 direction={isMobile ? "column" : "row"}
-                                margin="60px 0"
+                                margin={isMobile ? '60px 0 0' : "60px 0"}
                             >
                                 <PersonalCard isMobile={isMobile}>
                                     <Text
@@ -362,6 +365,7 @@ const PersonalCenter = () => {
                                     <Flex
                                         justifyContent="space-between"
                                         alignItems="center"
+                                        width='100%'
                                         gap="20px"
                                     >
                                         <TextWithBg
@@ -395,15 +399,15 @@ const PersonalCenter = () => {
                                         <Button
                                             text="Deposit"
                                             background="#5484FF"
-                                            width="50%"
-                                            padding="15px 0"
+                                            width="100%"
+                                            padding="15px 20px"
                                             addon={wallet}
                                         />
                                         <Button
                                             text="Withdraw"
                                             background="#F93967"
-                                            width="50%"
-                                            padding="15px 0"
+                                            width="100%"
+                                            padding="15px 20px"
                                         />
                                     </Flex>
                                     <Text
