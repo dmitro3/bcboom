@@ -258,7 +258,7 @@ const DesktopHeader = () => {
 
 const MobileHeaderWrapper = styled("div")(() => ({
     display: "flex",
-    padding: "10px 20px",
+    padding: "10px",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
@@ -266,6 +266,7 @@ const MobileHeaderWrapper = styled("div")(() => ({
 }));
 const MoreIconWrapper = styled("div")(() => ({
     cursor: "pointer",
+    
 }));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
@@ -289,7 +290,7 @@ export const MobileHeader = () => {
                     <img
                         src={bclogo}
                         alt="bcboom logo"
-                        style={{ height: "62px" }}
+                        style={{ width: "70%" }}
                     />
                 </Link>
             </Logo>

@@ -1,6 +1,8 @@
 import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
+import FooterActions from "@/Components/Footer/FooterActions";
 import MobileFooter from "@/Components/Footer/MobileFooter";
+import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
 import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
@@ -30,7 +32,9 @@ export default function GuestLayout({ children }) {
     const { isMobile } = useScreenResolution();
     const { drawerState } = useSelector((state) => state.app);
     const { modalState } = useSelector((state) => state.auth);
-    const { modalState: walletModalState } = useSelector((state) => state.wallet);
+    const { modalState: walletModalState } = useSelector(
+        (state) => state.wallet
+    );
 
     // if (isMobile) {
     //     return (
@@ -55,6 +59,7 @@ export default function GuestLayout({ children }) {
                     {!isMobile && <SimpleSidebar />}
                     {children}
                 </PageBody>
+                {isMobile && <MobileNav />}
                 {isMobile ? <MobileFooter /> : <DesktopFooter />}
             </PageLayout>
         </LayoutTheme>

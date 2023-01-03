@@ -30,6 +30,7 @@ const FooterWrapper = styled("div")(({}) => ({
     fontFamily: "Montserrat, sans-serif",
     color: "white",
     paddingTop: "80px",
+    marginBottom: "100px",
 }));
 const FooterLinks = styled("div")(({}) => ({
     // display: "flex",

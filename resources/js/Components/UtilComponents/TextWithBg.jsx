@@ -10,8 +10,9 @@ const TextWithBg = ({
     primaryColor,
     secondaryColor,
     padding,
+    width,
+    nowrap
 }) => {
-    console.log("sdfsdf: ", bg);
     return (
         <div
             style={{
@@ -19,6 +20,9 @@ const TextWithBg = ({
                 padding: padding || "14px 45px",
                 borderRadius: "20px",
                 textAlign: "center",
+                width: width && width,
+                whiteSpace: nowrap && "nowrap",
+                zIndex: 200
             }}
         >
             <Text

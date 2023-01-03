@@ -60,6 +60,8 @@ const PrimaryText = styled("p")(({ color }) => ({
     backgroundClip: "text",
     textFillColor: "transparent",
     paddingBottom: "10px",
+    width:"fit-content",
+                                            margin:"0 auto",
 }));
 
 const FrequentlyAsked = styled("div")(({ isMobile }) => ({
@@ -73,7 +75,8 @@ const FairnessImageHeader = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat, no-repeat",
     padding: isMobile ? "1.25rem" : "4.125rem",
     paddingLeft: isMobile ? "1.25rem" : "4.125rem",
-    margin: "0 25px",
+    height: isMobile ? "240px" : "100%",
+    // margin: "0 25px",
 
     "& p": {
         color: "#fff",
@@ -96,8 +99,8 @@ const FairnessImageHeader = styled("div")(({ isMobile }) => ({
     },
 }));
 
-const FairnessContentWrapper = styled("div")(({isMobile}) => ({
-    marginTop:  isMobile ? '-40px' : "80px",
+const FairnessContentWrapper = styled("div")(({ isMobile }) => ({
+    marginTop: isMobile ? "-40px" : "80px",
     textAlign: "center",
     position: "relative",
     zIndex: 2000,
@@ -158,7 +161,7 @@ const Accordion = ({ isMobile }) => {
                     display: "grid",
                     gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
                     gridGap: "40px",
-                    width: isMobile ? "80%" : "50%",
+                    width: isMobile ? "90%" : "50%",
                     alignItems: "start",
                 }}
             >
@@ -226,9 +229,13 @@ const FairnessIndex = () => {
                             </p>
                         </FairnessImageHeader>
                         <ImageGridLayout
-                            item={{ title: "Fairness", icon: fairnessIcon }}
+                            item={{
+                                title: "Fairness",
+                                icon: fairnessIcon,
+                                margin: "-25px 0 0 10px",
+                            }}
                             index={0}
-                            page="vip"
+                            page="fairness"
                         >
                             <FairnessContentWrapper isMobile={isMobile}>
                                 {!isMobile && (
@@ -243,6 +250,8 @@ const FairnessIndex = () => {
                                             text="HOW DOES IT WORK?"
                                             fontSize="24px"
                                             background="linear-gradient(90.46deg, #3F8BFF 0.19%, #5EFFD8 100%)"
+                                            width="fit-content"
+                                            margin="0 auto"
                                             WebkitBackgroundClip="text"
                                             WebkitTextFillColor="transparent"
                                             backgroundClip="text"
@@ -300,6 +309,9 @@ const FairnessIndex = () => {
                                                 textAlign: "center",
                                                 borderRadius: "12px",
                                                 margin: "20px auto",
+                                                background: "#1D204A",
+                                                zIndex: 1,
+                                                paddinbBottom: "20px",
                                                 // marginTop: "20px",
                                                 width: "90%",
                                             }}
@@ -320,12 +332,13 @@ winning number and the initial number of the server. Each
 round has its own hash, consisting of random wins that are uniquely generated for each bet."
                                                 color="#ABB7E2"
                                                 fontSize="10px"
+                                                paddingBottom="10px"
+                                            />
+                                            <CopyableLink
+                                                text="0e3232312313131343321657543433216575434332165754"
+                                                addon
                                             />
                                         </div>
-                                        <CopyableLink
-                                            text="0e3232312313131343321657543433216575434332165754"
-                                            addon
-                                        />
                                     </BgWithText>
                                     <BgWithText
                                         color="#3D89FA"
@@ -359,6 +372,8 @@ round has its own hash, consisting of random wins that are uniquely generated fo
                                                 textAlign: "center",
                                                 borderRadius: "12px",
                                                 margin: "20px auto",
+                                                background: "#1D204A",
+                                                zIndex: 1,
                                                 // marginTop: "20px",
                                                 width: "90%",
                                             }}
@@ -427,6 +442,8 @@ round has its own hash, consisting of random wins that are uniquely generated fo
                                                 textAlign: "center",
                                                 borderRadius: "12px",
                                                 margin: "20px auto",
+                                                background: "#1D204A",
+                                                zIndex: 1,
                                                 // marginTop: "20px",
                                                 width: "90%",
                                             }}
