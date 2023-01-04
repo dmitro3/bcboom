@@ -32,6 +32,7 @@ const BgWithText = styled("div")(({ color }) => ({
     textAlign: "center",
     width: "fit-content",
     position: "relative",
+    zIndex: "10",
     "& p": {
         "&:first-child": {
             fontSize: "100px",
@@ -107,7 +108,11 @@ const VIPIndex = () => {
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <ImageGridLayout
-                        item={{ title: "VIP Rank System", icon: goldencup }}
+                        item={{
+                            title: "VIP Rank System",
+                            icon: goldencup,
+                            margin: "10px",
+                        }}
                         index={0}
                         page="vip"
                     >
@@ -130,7 +135,7 @@ const VIPIndex = () => {
                         </div>
                         <DividerStats isMobile={isMobile}>
                             <Flex
-                                alignItems={isMobile ? "stretch" : "flex-start"}
+                                alignItems={isMobile ? "stretch" : "center"}
                                 justifyContent="space-between"
                                 padding="10px 5%"
                             >
@@ -146,7 +151,7 @@ const VIPIndex = () => {
                                 </div>
                                 <Flex
                                     alignItems="center"
-                                    gap="20px"
+                                    gap={isMobile ? "5px" : "20px"}
                                     direction={isMobile ? "column" : "row"}
                                 >
                                     <TextWithBg
@@ -155,13 +160,16 @@ const VIPIndex = () => {
                                         secondaryText={"R$ 0"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
+                                        width={isMobile && "100%"}
                                     />
                                     <TextWithBg
+                                        width={isMobile && "100%"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
                                         bg={"#4F5DFE"}
                                         primaryText="Accumulated Deposit Amount"
                                         secondaryText={"R$ 100"}
+                                        nowrap
                                     />
                                 </Flex>
                             </Flex>
@@ -203,7 +211,7 @@ const VIPIndex = () => {
                                         <Text type="p" text={item.text} />
                                         {item.tooltip && (
                                             <BcTooltip
-                                                title="60% of Betfiery users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
+                                                title="60% of Bcboom users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
                                                 placement="bottom-start"
                                                 arrow
                                                 classes={{

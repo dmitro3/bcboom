@@ -1,8 +1,8 @@
-import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { styled } from "@mui/system";
 import * as React from "react";
+import { Flex } from "../UtilComponents/Flex";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -14,9 +14,9 @@ function TabPanel(props) {
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
             {...other}
-            style={{ flexGrow: 1 , width: "100%"}}
+            style={{ flexGrow: 1, width: "100%" }}
         >
-            {value === index && <Box>{children}</Box>}
+            {value === index && <div>{children}</div>}
         </div>
     );
 }
@@ -29,8 +29,8 @@ const CustomTabs = ({ tabItems }) => {
     };
 
     return (
-        <Box sx={{ width: "100%", color: "#fff" }}>
-            <Box
+        <div style={{ width: "100%", color: "#fff" }}>
+            <div
                 sx={{
                     borderBottom: "none",
                     borderColor: "red",
@@ -58,7 +58,7 @@ const CustomTabs = ({ tabItems }) => {
                         );
                     })}
                 </Tabs>
-            </Box>
+            </div>
             {tabItems.map((item, index) => {
                 return (
                     <TabPanel value={value} index={index} key={index}>
@@ -66,28 +66,29 @@ const CustomTabs = ({ tabItems }) => {
                     </TabPanel>
                 );
             })}
-        </Box>
+        </div>
     );
 };
 
 export default CustomTabs;
 
-const TabWrapper = styled("div")(({}) => ({
+const TabWrapper = styled("div")(({ padding, marginTop }) => ({
     borderRadius: "20px",
     color: "#fff",
-    padding: "20px 30px",
+    padding: padding || "20px 30px",
+    marginTop: marginTop,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
 }));
-const TabButtons = styled("div")(({}) => ({
+const TabButtons = styled("div")(({ width }) => ({
     background: "#464F85",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    // padding: "20px 30px",
-    width: "250px",
+    // padding: "0px 30px",
+    width: width || "fit-content",
     borderRadius: "20px",
 }));
 const TabButton = styled("div")(({ active }) => ({
@@ -101,11 +102,11 @@ const TabButton = styled("div")(({ active }) => ({
     whiteSpace: "nowrap",
 }));
 
-export const NewCustomTabs = ({ tabItems }) => {
+export const NewCustomTabs = ({ tabItems, width, padding, marginTop }) => {
     const [value, setValue] = React.useState(0);
     return (
-        <TabWrapper>
-            <TabButtons>
+        <TabWrapper padding={padding} marginTop={marginTop}>
+            <TabButtons width={width}>
                 {tabItems.map((item, index) => {
                     return (
                         <TabButton
@@ -115,7 +116,14 @@ export const NewCustomTabs = ({ tabItems }) => {
                             }}
                             active={value === index}
                         >
-                            {item.label}
+                            <Flex
+                                justifyContent="center"
+                                alignItems="center"
+                                gap="10px"
+                            >
+                                {item.icon && <img src={item.icon} alt="" style={{filter: index === value && 'brightness(0) invert(1)'}} />}
+                                {item.label}
+                            </Flex>
                         </TabButton>
                     );
                 })}

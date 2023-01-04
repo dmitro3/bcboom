@@ -27,8 +27,8 @@ const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
-    top: isMobile ? "2%" : "20px",
-    right: isMobile ? "25px" : "20px",
+    top: isMobile ? "-1%" : "20px",
+    right: isMobile ? "-10px" : "20px",
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
@@ -93,13 +93,14 @@ const SignupForm = ({isMobile}) => {
             </div>
             <Button
                 text="Sign up"
-                styles={{
-                    background: "#3586FF",
-                    color: "#fff",
-                    borderRadius: "30px",
-                    padding: "15px ",
-                    marginTop: "20px",
-                }}
+                // styles={{
+                    width= "100%"
+                    background= "#3586FF"
+                    color= "#fff"
+                    borderRadius= "30px"
+                    padding= "15px "
+                    marginTop= "20px"
+                // }}
             />
         </SignupFormWrapper>
     );
@@ -130,7 +131,12 @@ const LoginForm = ({isMobile}) => {
             >
                 Forgot your password?
             </p>
-            <div style={{ transform: !isMobile && "scaleX(1.6)", transformOrigin: "0 0" }}>
+            <div
+                style={{
+                    transform: !isMobile && "scaleX(1.6)",
+                    transformOrigin: "0 0",
+                }}
+            >
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
                     onChange={onRecaptchaChange}
@@ -138,13 +144,14 @@ const LoginForm = ({isMobile}) => {
             </div>
             <Button
                 text="Login"
-                styles={{
-                    background: "#3586FF",
-                    color: "#fff",
-                    borderRadius: "30px",
-                    padding: "15px ",
-                    marginTop: "20px",
-                }}
+                // styles={{
+                width="100%"
+                background="#3586FF"
+                color="#fff"
+                borderRadius="30px"
+                padding="15px "
+                marginTop="20px"
+                // }}
             />
         </LoginFormWrapper>
     );
@@ -185,6 +192,7 @@ const LoginSignupModal = () => {
                                 content: <SignupForm isMobile={isMobile} />,
                             },
                         ]}
+                        width={isMobile ? "100%" : "350px"}
                     />
                 </TabComponent>
             </LoginSignupModalWrapper>

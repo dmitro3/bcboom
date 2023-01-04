@@ -1,34 +1,27 @@
 import { styled } from "@mui/system";
-import wifi from "../../../../public/images/svg/wifi.svg";
-import players from "../../../../public/images/svg/players.svg";
-import pad from "../../../../public/images/svg/pad.svg";
-import ticket from "../../../../public/images/svg/ticket.svg";
+import { useState } from "react";
+import bclogo from "../../../../public/images/brand/bcboom.svg";
+import { default as brazil, default as china, default as malta, default as portugal, default as russia, default as us } from "../../../../public/images/flags/us.svg";
 import cashback from "../../../../public/images/svg/cashback.svg";
+import facebook from "../../../../public/images/svg/facebook.svg";
 import fairness from "../../../../public/images/svg/fairness.svg";
 import help from "../../../../public/images/svg/help.svg";
-import referral from "../../../../public/images/svg/referral.svg";
-import facebook from "../../../../public/images/svg/facebook.svg";
 import instagram from "../../../../public/images/svg/instagram.svg";
-import telegram from "../../../../public/images/svg/telegram.svg";
-import volume from "../../../../public/images/svg/volume.svg";
-import twitter from "../../../../public/images/svg/twitter.svg";
-import us from "../../../../public/images/flags/us.svg";
-import malta from "../../../../public/images/flags/us.svg";
-import portugal from "../../../../public/images/flags/us.svg";
-import brazil from "../../../../public/images/flags/us.svg";
-import china from "../../../../public/images/flags/us.svg";
-import russia from "../../../../public/images/flags/us.svg";
-import bclogo from "../../../../public/images/brand/bcboom.svg";
-import { useState } from "react";
 import menu from "../../../../public/images/svg/menu.svg";
+import pad from "../../../../public/images/svg/pad.svg";
+import players from "../../../../public/images/svg/players.svg";
+import referral from "../../../../public/images/svg/referral.svg";
+import telegram from "../../../../public/images/svg/telegram.svg";
+import ticket from "../../../../public/images/svg/ticket.svg";
+import twitter from "../../../../public/images/svg/twitter.svg";
+import volume from "../../../../public/images/svg/volume.svg";
+import wifi from "../../../../public/images/svg/wifi.svg";
 // import Dropdown from "../Dropdown/Dropdown";
-import { Dropdown as AntDDropdown } from "antd";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import Button from "../Button/Button";
 import { setDrawerState } from "@/redux/app-state/app-slice";
-import { useDispatch, useSelector } from "react-redux";
-import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { Link } from "@inertiajs/inertia-react";
+import { Dropdown as AntDDropdown } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import UserDropdown from "../UserDropdown/UserDropdown";
 
 const HeaderWrapper = styled("div")(() => ({
@@ -265,7 +258,7 @@ const DesktopHeader = () => {
 
 const MobileHeaderWrapper = styled("div")(() => ({
     display: "flex",
-    padding: "10px 20px",
+    padding: "10px",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
@@ -273,6 +266,7 @@ const MobileHeaderWrapper = styled("div")(() => ({
 }));
 const MoreIconWrapper = styled("div")(() => ({
     cursor: "pointer",
+    
 }));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
@@ -296,7 +290,7 @@ export const MobileHeader = () => {
                     <img
                         src={bclogo}
                         alt="bcboom logo"
-                        style={{ height: "62px" }}
+                        style={{ width: "70%" }}
                     />
                 </Link>
             </Logo>

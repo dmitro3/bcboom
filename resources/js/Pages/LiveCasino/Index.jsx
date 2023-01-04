@@ -53,7 +53,7 @@ export default function LiveCasino(props) {
             icon: live,
             imageWidth: "534px",
             imageHeight: "175px",
-            margin: "25px",
+            margin: "5px",
             perColumn: 5,
             page: "home",
             countOnMobile: 4,

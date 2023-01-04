@@ -24,10 +24,12 @@ const GamePageWrapper = styled("div")(() => ({
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
+    overflow: "hidden",
 }));
 
 const GameImageHeader = styled("div")(({ isMobile }) => ({
     background: `url(${isMobile ? imgmobile : img})`,
+    
     borderRadius: "10px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -64,6 +66,7 @@ const GamesPageIndex = () => {
             hoverEffect: "overlay",
             page: "games",
             countOnMobile: 2,
+            margin: '10px',
             images: [
                 {
                     image: crash,

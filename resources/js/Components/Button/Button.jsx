@@ -1,6 +1,9 @@
 import { styled } from "@mui/system";
 import React from "react";
-const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
+import { Flex } from "../UtilComponents/Flex";
+import { Button } from "@mui/material";
+
+const ButtonWrapper = styled("div")(({ color, background, styles }) => ({
     background: background,
     color: color || "#fff",
     border: "none",
@@ -17,17 +20,28 @@ const ButtonWrapper = styled("button")(({ color, background, styles }) => ({
     },
     ...styles,
 }));
-const Button = ({ text, color, background, onSubmit, styles }) => {
+const BcButton = ({ text, color, background, addon, onSubmit, ...styles }) => {
+    const Btnstyles = {
+        background: background,
+        color: color || "#fff",
+        ...styles,
+    };
     return (
-        <ButtonWrapper
-            color={color}
-            background={background}
-            styles={styles}
-            onClick={onSubmit}
-        >
-            {text}
-        </ButtonWrapper>
+        <div onClick={onSubmit}>
+            <Button sx={{ ...Btnstyles }}>
+                <Flex justifyContent="center" alignItems="center">
+                    {addon && (
+                        <img
+                            src={addon}
+                            alt=""
+                            style={{ paddingRight: "10px" }}
+                        />
+                    )}
+                    {text}
+                </Flex>
+            </Button>
+        </div>
     );
 };
 
-export default Button;
+export default BcButton;
