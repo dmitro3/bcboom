@@ -5,8 +5,15 @@ import { Head } from "@inertiajs/inertia-react";
 import img from "../../../assets/promotions/distributor_pro_background.svg";
 import img_sm from "../../../assets/promotions/pro_dist_sm.svg";
 import activity from "../../../assets/promotions/activity.svg";
+<<<<<<< HEAD
 import bonus from "../../../assets/promotions/bonus.svg";
 import info from "../../../assets/promotions/info.svg";
+=======
+import activity_sm from "../../../assets/promotions/activity_sm.svg";
+import bonus from "../../../assets/promotions/bonus.svg";
+import info from "../../../assets/promotions/info.svg";
+import info_sm from "../../../assets/promotions/info_sm_img.png";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 import bell from "../../../assets/promotions/bell.svg";
 import infoBook from "../../../assets/promotions/infoBook.svg";
 import { styled } from "@mui/system";
@@ -14,6 +21,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { activeUsersColumns, activeUsersRows } from "@/data/promotions";
 import React from "react";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
+<<<<<<< HEAD
 import { Box } from "@mui/material";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 
@@ -28,10 +36,31 @@ const PromotionPageWrapper = styled("div")(() => ({
     paddingBottom: "2.125rem",
     height: "80%",
 }));
+=======
+import { Box, Typography } from "@mui/material";
+import GreyText from "@/Components/Promotions/Typography/GreyText";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
 const HEADER_TEXT = "Millions of Distributor Benefits";
 
 const Distributor = () => {
+<<<<<<< HEAD
+=======
+    const { isMobile } = useScreenResolution();
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     return (
         <>
             <Head title="Promotions Distributor" />
@@ -53,7 +82,16 @@ const Distributor = () => {
                                 justifyContent: "center",
                             }}
                         >
+<<<<<<< HEAD
                             <SemiBoldText>
+=======
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -73,7 +111,16 @@ const Distributor = () => {
                                 width: "90%",
                             }}
                         >
+<<<<<<< HEAD
                             <GreyText>
+=======
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 To encourage all BetDino users millions of
                                 benefits are offered to competent agents who
                                 meet the requirements to receive a generous
@@ -92,7 +139,11 @@ const Distributor = () => {
                                     xl: "center",
                                 },
                                 alignItems: "center",
+<<<<<<< HEAD
                                 marginTop: "4.5625rem",
+=======
+                                marginTop: { xs: "2.5rem", md: "4.5625rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             }}
                         >
                             <Box
@@ -128,7 +179,14 @@ const Distributor = () => {
                                             lg: "4.0625rem",
                                             xl: "4.0625rem",
                                         },
+<<<<<<< HEAD
                                         paddingRight: "4.0625rem",
+=======
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         width: {
                                             xs: "100%",
                                             sm: "100%",
@@ -164,11 +222,20 @@ const Distributor = () => {
                                                 lg: "center",
                                                 xl: "center",
                                             },
+<<<<<<< HEAD
                                             alignItems: "center",
                                             pt: "1rem",
                                             width: {
                                                 xs: "75px",
                                                 sm: "75px",
+=======
+                                            alignItems: "flex-start",
+                                            pt: { xs: ".5rem", md: "1rem" },
+
+                                            width: {
+                                                xs: "85px",
+                                                sm: "85px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -184,10 +251,21 @@ const Distributor = () => {
                                     >
                                         <img
                                             style={{
+<<<<<<< HEAD
                                                 height: "100%",
                                                 width: "100%",
                                             }}
                                             src={activity}
+=======
+                                                height: "28px",
+                                                width: "28.8px",
+                                            }}
+                                            src={
+                                                isMobile
+                                                    ? activity_sm
+                                                    : activity
+                                            }
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         />
                                     </Box>
                                     <Box
@@ -218,13 +296,24 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
+<<<<<<< HEAD
                                             ml: "1rem",
+=======
+                                            ml: ".75rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "1rem",
+=======
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "1rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -232,6 +321,10 @@ const Distributor = () => {
                                                     lg: "center",
                                                     xl: "center",
                                                 },
+<<<<<<< HEAD
+=======
+                                                mb: ".5rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             }}
                                         >
                                             ACTIVITY REQUIREMENTS
@@ -239,7 +332,14 @@ const Distributor = () => {
                                         <GreyText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "0.9375rem",
+=======
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "0.9375rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -265,7 +365,14 @@ const Distributor = () => {
                                             lg: "4.0625rem",
                                             xl: "4.0625rem",
                                         },
+<<<<<<< HEAD
                                         paddingRight: "4.0625rem",
+=======
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         width: {
                                             xs: "100%",
                                             sm: "100%",
@@ -302,7 +409,14 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
+<<<<<<< HEAD
                                             alignItems: "center",
+=======
+                                            alignItems: {
+                                                xs: "flex-start",
+                                                md: "center",
+                                            },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             //pt: "1rem",
                                             width: {
                                                 xs: "75px",
@@ -350,13 +464,24 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
+<<<<<<< HEAD
                                             ml: "1rem",
+=======
+                                            ml: ".75rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "1rem",
+=======
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "1rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -364,6 +489,10 @@ const Distributor = () => {
                                                     lg: "center",
                                                     xl: "center",
                                                 },
+<<<<<<< HEAD
+=======
+                                                mb: ".5rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             }}
                                         >
                                             EVENT BONUS
@@ -371,7 +500,14 @@ const Distributor = () => {
                                         <GreyText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "0.9375rem",
+=======
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "0.9375rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -398,7 +534,16 @@ const Distributor = () => {
                                 marginTop: "4.5625rem",
                             }}
                         >
+<<<<<<< HEAD
                             <SemiBoldText weight={700}>
+=======
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 Achievement Bonus
                             </SemiBoldText>
                         </Box>
@@ -428,7 +573,14 @@ const Distributor = () => {
                                 "& .MuiDataGrid-columnHeaderTitleContainerContent":
                                     {
                                         fontWeight: "700",
+<<<<<<< HEAD
                                         fontSize: "1.125rem",
+=======
+                                        fontSize: {
+                                            xs: ".875rem",
+                                            md: "1.125rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     },
 
                                 "& .MuiDataGrid-footerContainer": {
@@ -502,11 +654,20 @@ const Distributor = () => {
                         >
                             <Box
                                 sx={{
+<<<<<<< HEAD
                                     width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
                                     textAlign: "center",
+=======
+                                    width: { xs: "95%", md: "80%" },
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    textAlign: { xs: "center", md: "center" },
+                                    lineHeight: "5px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 }}
                             >
                                 <SemiBoldText
@@ -518,16 +679,36 @@ const Distributor = () => {
                                         component={"span"}
                                         sx={{
                                             color: "#FFF96A",
+<<<<<<< HEAD
                                             fontSize: "1.125rem",
                                             mr: "0.5rem",
+=======
+                                            fontSize: {
+                                                xs: "1rem",
+                                                md: "1.125rem",
+                                            },
+                                            mr: { xs: ".5rem", md: "0.5rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         Active users:
                                     </Box>
+<<<<<<< HEAD
                                     <Box
                                         component={"span"}
                                         sx={{
                                             fontSize: "1rem",
+=======
+                                    <Typography
+                                        component={"span"}
+                                        sx={{
+                                            fontSize: {
+                                                xs: ".875rem",
+                                                md: "1rem",
+                                            },
+                                            fontWeight: 700,
+                                            fontFamily: "montserrat",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         registered via your invite link and
@@ -535,17 +716,30 @@ const Distributor = () => {
                                         number of active users, you will receive
                                         an additional bonus The more guests you
                                         have, the greater the bonus
+<<<<<<< HEAD
                                     </Box>
+=======
+                                    </Typography>
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 </SemiBoldText>
                             </Box>
                         </Box>
                         <Box
                             sx={{
+<<<<<<< HEAD
                                 width: "100%",
+=======
+                                width: { xs: "90%", md: "100%" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
                                 marginTop: "4.5625rem",
+<<<<<<< HEAD
+=======
+
+                                mx: "auto",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             }}
                         >
                             <Box
@@ -565,8 +759,19 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
+<<<<<<< HEAD
                                         borderRight: "1px solid #555F8D",
                                         paddingRight: "4.0625rem",
+=======
+                                        borderRight: {
+                                            xs: "none",
+                                            md: "1px solid #555F8D",
+                                        },
+                                        paddingRight: {
+                                            xs: 0,
+                                            md: "4.0625rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         width: {
                                             xs: "100%",
                                             md: "50%",
@@ -593,8 +798,13 @@ const Distributor = () => {
                                             },
 
                                             width: {
+<<<<<<< HEAD
                                                 xs: "75px",
                                                 sm: "75px",
+=======
+                                                xs: "30%",
+                                                sm: "30%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -606,7 +816,11 @@ const Distributor = () => {
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
+<<<<<<< HEAD
                                             mr: "1rem",
+=======
+                                            mr: "2rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         <img src={bell} />
@@ -635,7 +849,14 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "1rem",
+=======
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",
@@ -665,14 +886,25 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
+<<<<<<< HEAD
                                         paddingRight: "4.0625rem",
+=======
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         paddingLeft: {
                                             xs: "0",
                                             md: "4.0625rem",
                                         },
 
                                         width: {
+<<<<<<< HEAD
                                             xs: "98%",
+=======
+                                            xs: "100%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             md: "50%",
                                         },
                                         alignItems: {
@@ -701,12 +933,23 @@ const Distributor = () => {
                                             },
 
                                             width: {
+<<<<<<< HEAD
+=======
+                                                xs: "50%",
+                                                sm: "50%",
+                                                md: "45px",
+                                                lg: "45px",
+                                                xl: "35px",
+                                            },
+                                            height: {
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 xs: "95px",
                                                 sm: "95px",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
+<<<<<<< HEAD
                                             height: {
                                                 xs: "75px",
                                                 sm: "75px",
@@ -718,12 +961,22 @@ const Distributor = () => {
                                         }}
                                     >
                                         <img src={info} />
+=======
+                                            mr: "2rem",
+                                        }}
+                                    >
+                                        <img src={isMobile ? info_sm : info} />
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     </Box>
                                     <Box
                                         sx={{
                                             display: "flex",
                                             justifyContent: {
+<<<<<<< HEAD
                                                 xs: "left",
+=======
+                                                xs: "flex-start",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: "center",
                                             },
                                             alignItems: {
@@ -743,7 +996,14 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "1rem",
+=======
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",
@@ -776,14 +1036,25 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
+<<<<<<< HEAD
                                         paddingRight: "4.0625rem",
+=======
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         paddingLeft: {
                                             xs: "0",
                                             md: "4.0625rem",
                                         },
 
                                         width: {
+<<<<<<< HEAD
                                             xs: "98%",
+=======
+                                            xs: "100%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             md: "50%",
                                         },
                                         alignItems: {
@@ -816,8 +1087,13 @@ const Distributor = () => {
                                             },
 
                                             width: {
+<<<<<<< HEAD
                                                 xs: "95px",
                                                 sm: "95px",
+=======
+                                                xs: "40%",
+                                                sm: "40%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -829,7 +1105,11 @@ const Distributor = () => {
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
+<<<<<<< HEAD
                                             mr: "1rem",
+=======
+                                            mr: "2rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         <img src={infoBook} />
@@ -858,7 +1138,14 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
+<<<<<<< HEAD
                                                 fontSize: "1rem",
+=======
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",

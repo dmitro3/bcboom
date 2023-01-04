@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ProfileController;
@@ -40,6 +41,9 @@ Route::middleware(['middleware' => 'api'])->group(function () {
     
 });
     
+=======
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 /*
 |--------------------------------------------------------------------------
 | API Routes

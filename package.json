@@ -8,7 +8,11 @@
         "@headlessui/react": "^1.4.2",
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-react": "^0.8.1",
+<<<<<<< HEAD
         "@inertiajs/progress": "^0.2.6",
+=======
+        "@inertiajs/progress": "^0.2.7",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-react": "^3.0.0",
         "alpinejs": "^3.4.2",
@@ -39,6 +43,10 @@
         "react-google-recaptcha": "^2.1.0",
         "react-redux": "^8.0.5",
         "react-slick": "^0.29.0",
+<<<<<<< HEAD
+=======
+        "recharts": "^2.2.0",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
         "redux-thunk": "^2.4.2",
         "slick-carousel": "^1.8.1",
         "styled-components": "^5.3.6"

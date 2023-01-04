@@ -17,6 +17,10 @@ import instagram from "../../../../public/images/svg/instagram.svg";
 import telegram from "../../../../public/images/svg/telegram.svg";
 import twitter from "../../../../public/images/svg/twitter.svg";
 import { Divider } from "../Divider/Divider";
+<<<<<<< HEAD
+=======
+import { Link } from "@inertiajs/inertia-react";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
 const FooterWrapper = styled("div")(({}) => ({
     backgroundColor: "#191D3A",
@@ -30,6 +34,10 @@ const FooterWrapper = styled("div")(({}) => ({
     fontFamily: "Montserrat, sans-serif",
     color: "white",
     paddingTop: "80px",
+<<<<<<< HEAD
+=======
+    marginBottom: "100px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }));
 const FooterLinks = styled("div")(({}) => ({
     // display: "flex",
@@ -80,7 +88,11 @@ const MobileFooter = () => {
         },
         {
             text: "VIP Rank",
+<<<<<<< HEAD
             link: "/vip-rank",
+=======
+            link: "/vip",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
         },
     ];
     const socials = [
@@ -103,7 +115,15 @@ const MobileFooter = () => {
             <FooterLinks>
                 {footerItems.map((item, index) => {
                     return (
+<<<<<<< HEAD
                         <FooterLinkItem key={index}>{item.text}</FooterLinkItem>
+=======
+                        <Link href={item.link}>
+                            <FooterLinkItem key={index}>
+                                {item.text}
+                            </FooterLinkItem>
+                        </Link>
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     );
                 })}
             </FooterLinks>

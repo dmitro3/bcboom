@@ -11,6 +11,7 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
 
+<<<<<<< HEAD
 const PromotionPageWrapper = styled("div")(() => ({
     background: "#1D2036",
     width: "95%",
@@ -26,6 +27,23 @@ const PromotionPageWrapper = styled("div")(() => ({
 const HEADER_TEXT = "Get 75% off your second deposit limited to R$ 1888";
 
 const Deposit = () => {
+=======
+const HEADER_TEXT = "Get 75% off your second deposit limited to R$ 1888";
+
+const Deposit = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     return (
         <>
             <Head title="Promotions Deposit" />
@@ -42,9 +60,21 @@ const Deposit = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+<<<<<<< HEAD
                             }}
                         >
                             <SemiBoldText>
+=======
+                                textAlign: "center",
+                            }}
+                        >
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -61,10 +91,23 @@ const Deposit = () => {
                                 marginRight: "auto",
                                 display: "flex",
                                 justifyContent: "center",
+<<<<<<< HEAD
                                 width: "90%",
                             }}
                         >
                             <GreyText>
+=======
+                                textAlign: "center",
+                                width: "90%",
+                            }}
+                        >
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 We are happy to see you again here at Betdino!
                                 It's time to make your second deposit for more
                                 fun. Betdino will send you a bonus of 75% of
@@ -81,7 +124,19 @@ const Deposit = () => {
                                 justifyContent: "center",
                             }}
                         >
+<<<<<<< HEAD
                             <SemiBoldText weight={700}>
+=======
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -114,7 +169,16 @@ const Deposit = () => {
                                 >
                                     <SemiBoldText
                                         weight={800}
+<<<<<<< HEAD
                                         customStyles={{ fontSize: "1.25rem" }}
+=======
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.25rem",
+                                                md: "1.25rem",
+                                            },
+                                        }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     >
                                         <Box
                                             sx={{ color: "#FFF96A" }}
@@ -125,7 +189,16 @@ const Deposit = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
+<<<<<<< HEAD
                                         customStyles={{ fontSize: "1.625rem" }}
+=======
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.25rem",
+                                                md: "1.25rem",
+                                            },
+                                        }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     >
                                         R$ 100 OR MORE
                                     </SemiBoldText>
@@ -175,7 +248,17 @@ const Deposit = () => {
                             >
                                 <SemiBoldText
                                     weight={700}
+<<<<<<< HEAD
                                     customStyles={{ color: "#FFF96A" }}
+=======
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.5rem",
+                                        },
+                                    }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -202,7 +285,14 @@ const Deposit = () => {
                                 <ul
                                     style={{
                                         listStyleType: "disc",
+<<<<<<< HEAD
                                         fontSize: "1.125rem",
+=======
+                                        fontSize: {
+                                            xs: "0.9375rem",
+                                            md: "1.125rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     }}
                                 >
                                     <li

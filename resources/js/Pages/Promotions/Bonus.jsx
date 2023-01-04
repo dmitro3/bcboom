@@ -11,6 +11,7 @@ import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
 
+<<<<<<< HEAD
 const PromotionPageWrapper = styled("div")(() => ({
     background: "#1D2036",
     width: "95%",
@@ -26,6 +27,23 @@ const PromotionPageWrapper = styled("div")(() => ({
 const HEADER_TEXT = "Crazy Weekend Bonus up to 777";
 
 const Bonus = () => {
+=======
+const HEADER_TEXT = "Crazy Weekend Bonus up to 777";
+
+const Bonus = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     return (
         <>
             <Head title="Promotions Bonus" />
@@ -45,9 +63,21 @@ const Bonus = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+<<<<<<< HEAD
                             }}
                         >
                             <SemiBoldText>
+=======
+                                textAlign: "center",
+                            }}
+                        >
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -67,7 +97,16 @@ const Bonus = () => {
                                 width: "90%",
                             }}
                         >
+<<<<<<< HEAD
                             <GreyText>
+=======
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 Enjoy a relaxing and enjoyable weekend with a
                                 login bonus on Sundays only at Betdino.
                             </GreyText>
@@ -79,7 +118,19 @@ const Bonus = () => {
                                 justifyContent: "center",
                             }}
                         >
+<<<<<<< HEAD
                             <SemiBoldText weight={700}>
+=======
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1.125rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -108,11 +159,22 @@ const Bonus = () => {
                                     customStyles={{
                                         backgroundImage:
                                             "linear-gradient( 100.65deg, #3971E8 2.29%, #5846C7 100%)",
+<<<<<<< HEAD
+=======
+                                        //height: "13rem",
+                                        padding: "1rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     }}
                                 >
                                     <SemiBoldText
                                         weight={800}
+<<<<<<< HEAD
                                         customStyles={{ fontSize: "1.25rem" }}
+=======
+                                        customStyles={{
+                                            fontSize: "1.25rem",
+                                        }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     >
                                         <Box
                                             sx={{ color: "#FFF96A" }}
@@ -123,7 +185,18 @@ const Bonus = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
+<<<<<<< HEAD
                                         customStyles={{ fontSize: "1.625rem" }}
+=======
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
+
+                                            width: "100%",
+                                        }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     >
                                         Deposit at least R$100 in your account
                                         on Sundays
@@ -133,8 +206,12 @@ const Bonus = () => {
                                     customStyles={{
                                         backgroundImage:
                                             "linear-gradient( 99.2deg, #3971E8 4.19%, #5848C8 108.12%)",
+<<<<<<< HEAD
                                         paddingLeft: "0.4rem",
                                         paddingRight: "0.4rem",
+=======
+                                        padding: "1rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     }}
                                 >
                                     <SemiBoldText
@@ -151,7 +228,14 @@ const Bonus = () => {
                                     <SemiBoldText
                                         weight={700}
                                         customStyles={{
+<<<<<<< HEAD
                                             fontSize: "1.625rem",
+=======
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         }}
                                     >
                                         You will have the chance to receive a
@@ -179,7 +263,17 @@ const Bonus = () => {
                             >
                                 <SemiBoldText
                                     weight={700}
+<<<<<<< HEAD
                                     customStyles={{ color: "#FFF96A" }}
+=======
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.5rem",
+                                        },
+                                    }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -206,7 +300,14 @@ const Bonus = () => {
                                 <ul
                                     style={{
                                         listStyleType: "disc",
+<<<<<<< HEAD
                                         fontSize: "1.125rem",
+=======
+                                        fontSize: {
+                                            xs: "0.9375rem",
+                                            md: "1.125rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     }}
                                 >
                                     <li

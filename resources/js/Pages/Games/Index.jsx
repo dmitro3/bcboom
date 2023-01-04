@@ -66,6 +66,10 @@ const GamesPageIndex = () => {
             hoverEffect: "overlay",
             page: "games",
             countOnMobile: 2,
+<<<<<<< HEAD
+=======
+            margin: '10px',
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
             images: [
                 {
                     image: crash,

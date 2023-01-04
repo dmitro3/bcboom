@@ -15,8 +15,11 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
     Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
 Route::get('/', function () {
     return Inertia::render('Index');
@@ -31,7 +34,10 @@ Route::get('/referral', function () {
     return Inertia::render('UserPages/Referral');
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 Route::get('/promotions/exclusive', function () {
     return Inertia::render('Promotions/Exclusive');
 });
@@ -44,7 +50,10 @@ Route::get('/promotions/deposit', function () {
    
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 Route::get('/promotions/bonus', function () {
     return Inertia::render('Promotions/Bonus');
    
@@ -136,7 +145,10 @@ Route::get('/games/plinko', function () {
    
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 Route::get('/games/stair', function () {
     return Inertia::render('Game/Stair');
    

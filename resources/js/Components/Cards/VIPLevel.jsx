@@ -223,6 +223,10 @@ const MyVIPLevel = () => {
                         background: "#121539",
                         padding: isMobile ? "10px 30px" : "14px 45px",
                         borderRadius: "20px",
+<<<<<<< HEAD
+=======
+                        width: "50%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     }}
                 >
                     <Text
@@ -237,13 +241,24 @@ const MyVIPLevel = () => {
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
+<<<<<<< HEAD
+=======
+                        whiteSpace="nowrap"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     />
                 </div>
                 <div
                     style={{
                         background: "#121539",
+<<<<<<< HEAD
                         padding: "14px 45px",
                         borderRadius: "20px",
+=======
+                        padding: isMobile ? "10px 30px" : "14px 45px",
+
+                        borderRadius: "20px",
+                        width: "50%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     }}
                 >
                     <Text

@@ -4,6 +4,10 @@ import chevrondown from "../../../../public/images/svg/chevrondown.svg";
 import { useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+<<<<<<< HEAD
+=======
+import { Flex } from "../UtilComponents/Flex";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 // const useStyles = makeStyles({
 //     customOutline: {
 //         "& .MuiOutlinedInput-notchedOutline": {
@@ -47,16 +51,29 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
 const SelectWithDropdownWrapper = styled("div")(({}) => ({
     position: "relative",
+<<<<<<< HEAD
     width: "100%",
+=======
+    // width: "100%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     "& label": {
         color: "#8990ae",
     },
 }));
+<<<<<<< HEAD
 const SelectDropdownComponent = styled("div")(({}) => ({
     background: "#3A4072",
     borderRadius: "10px",
     cursor: "pointer",
     width: "100%",
+=======
+const SelectDropdownComponent = styled("div")(({ background, border }) => ({
+    background: background || "#3A4072",
+    border: border,
+    borderRadius: "10px",
+    cursor: "pointer",
+    // width: "100%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     padding: "0",
     "&:hover": {
         background: "#747DB6",
@@ -123,14 +140,29 @@ const DrawerItem = styled("div")(({}) => ({
         color: "white",
     },
 }));
+<<<<<<< HEAD
 export const SelectWithDropdown = ({ setValue, value, items, label }) => {
+=======
+export const SelectWithDropdown = ({
+    setValue,
+    value,
+    items,
+    label,
+    background,
+    border
+}) => {
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     const [openDrawer, setOpenDrawer] = useState(false);
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setOpenDrawer(false));
     return (
         <SelectWithDropdownWrapper>
             <label htmlFor={value}>{label}</label>
+<<<<<<< HEAD
             <SelectDropdownComponent>
+=======
+            <SelectDropdownComponent background={background} border={border}>
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                 <Paragraph
                     onClick={() => setOpenDrawer(!openDrawer)}
                     opened={openDrawer}
@@ -147,10 +179,22 @@ export const SelectWithDropdown = ({ setValue, value, items, label }) => {
                                     key={i}
                                     onClick={() => {
                                         setOpenDrawer(!openDrawer);
+<<<<<<< HEAD
                                         setValue(provider);
                                     }}
                                 >
                                     {provider}
+=======
+                                        setValue(provider.label || provider);
+                                    }}
+                                >
+                                    <Flex alignItems="center" gap="10px">
+                                        {provider?.icon && (
+                                            <img src={provider.icon} />
+                                        )}
+                                        {provider.label || provider}
+                                    </Flex>
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 </DrawerItem>
                             ))}
                         </div>

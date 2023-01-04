@@ -258,7 +258,11 @@ const DesktopHeader = () => {
 
 const MobileHeaderWrapper = styled("div")(() => ({
     display: "flex",
+<<<<<<< HEAD
     padding: "10px 20px",
+=======
+    padding: "10px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
@@ -266,6 +270,10 @@ const MobileHeaderWrapper = styled("div")(() => ({
 }));
 const MoreIconWrapper = styled("div")(() => ({
     cursor: "pointer",
+<<<<<<< HEAD
+=======
+    
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
@@ -289,7 +297,11 @@ export const MobileHeader = () => {
                     <img
                         src={bclogo}
                         alt="bcboom logo"
+<<<<<<< HEAD
                         style={{ height: "62px" }}
+=======
+                        style={{ width: "70%" }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     />
                 </Link>
             </Logo>

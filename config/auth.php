@@ -14,7 +14,11 @@ return [
     */
 
     'defaults' => [
+<<<<<<< HEAD
         'guard' => 'api',
+=======
+        'guard' => 'web',
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
         'passwords' => 'users',
     ],
 
@@ -40,12 +44,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+<<<<<<< HEAD
 
         'api' => [
                 'driver' => 'jwt',
                 'provider' => 'users',
         ],
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     ],
 
     /*
@@ -77,8 +84,11 @@ return [
         // ],
     ],
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

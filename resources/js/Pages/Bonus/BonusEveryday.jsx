@@ -3,6 +3,10 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import img from "../../../assets/promotions/saba_spin_1.svg";
+<<<<<<< HEAD
+=======
+import img_sm from "../../../assets/promotions/spin_sm.svg";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 import { Head } from "@inertiajs/inertia-react";
 import React from "react";
 import PromotionsHeader from "@/Components/Promotions/header";
@@ -10,6 +14,7 @@ import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import BoldText from "@/Components/Promotions/Typography/BoldText";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
+<<<<<<< HEAD
 
 const PromotionPageWrapper = styled("div")(() => ({
     background: "#1D2036",
@@ -22,10 +27,30 @@ const PromotionPageWrapper = styled("div")(() => ({
     paddingBottom: "2.125rem",
     height: "80%",
 }));
+=======
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
 const HEADER_TEXT = "GET 8% BONUS EVERY DAY";
 
 const BonusEveryday = () => {
+<<<<<<< HEAD
+=======
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+    const { isMobile } = useScreenResolution();
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     return (
         <>
             <Head title="Promotions Bonus Everyday" />
@@ -34,7 +59,11 @@ const BonusEveryday = () => {
                     <PromotionPageWrapper>
                         <Box
                             sx={{
+<<<<<<< HEAD
                                 width: "100%",
+=======
+                                width: { xs: "95%", md: "98%" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 height: "17.375rem",
                                 display: "flex",
                                 justifyContent: "center",
@@ -42,11 +71,19 @@ const BonusEveryday = () => {
                                 position: "relative",
                                 borderRadius: "0.625rem",
                                 background: `linear-gradient(95.62deg, #3971E8 11.91%, #377EEC 60.57%, #3FAEEF 100% )`,
+<<<<<<< HEAD
+=======
+                                mx: "auto",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             }}
                         >
                             <Box
                                 sx={{
+<<<<<<< HEAD
                                     width: "80%",
+=======
+                                    width: { xs: "93%", md: "80%" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     height: "100%",
                                     display: "flex",
                                     justifyContent: "space-between",
@@ -55,12 +92,24 @@ const BonusEveryday = () => {
                             >
                                 <BoldText
                                     customStyles={{
+<<<<<<< HEAD
                                         width: "30rem",
+=======
+                                        width: "35rem",
+                                        fontSize: {
+                                            xs: "1.25rem",
+                                            md: "2.5rem",
+                                        },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     }}
                                 >
                                     GET 8% BONUS EVERY DAY
                                 </BoldText>
+<<<<<<< HEAD
                                 <img src={img} />
+=======
+                                <img src={isMobile ? img_sm : img} />
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             </Box>
                         </Box>
                         <Box
@@ -68,9 +117,21 @@ const BonusEveryday = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+<<<<<<< HEAD
                             }}
                         >
                             <SemiBoldText>
+=======
+                                textAlign: "center",
+                            }}
+                        >
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -91,13 +152,23 @@ const BonusEveryday = () => {
                             }}
                         >
                             <GreyText>
+<<<<<<< HEAD
                                 Bcboom will cherish and wait every day with you!
+=======
+                                {!isMobile
+                                    ? ` Bcboom will cherish and wait every day with you!
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 From now on, you have 3 chances to get more
                                 bonuses every day. As long as your deposit
                                 amount is greater than or equal to R$100, you
                                 will receive an additional 8% of the Betdino
                                 free deposit amount for free as a bonus!
+<<<<<<< HEAD
                                 Sincerely, I wish you to earn more!
+=======
+                                Sincerely, I wish you to earn more!`
+                                    : `Enjoy a relaxing and enjoyable weekend with a login bonus on Sundays only at Betdino.`}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             </GreyText>
                         </Box>
                         <Box
@@ -107,7 +178,19 @@ const BonusEveryday = () => {
                                 justifyContent: "center",
                             }}
                         >
+<<<<<<< HEAD
                             <SemiBoldText weight={700}>
+=======
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1.125rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -123,7 +206,11 @@ const BonusEveryday = () => {
                             <Box
                                 sx={{
                                     width: {
+<<<<<<< HEAD
                                         xs: "100%",
+=======
+                                        xs: "92%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         md: "98%",
                                         lg: "98%",
                                         xl: "80%",
@@ -271,6 +358,10 @@ const BonusEveryday = () => {
                             <Box
                                 sx={{
                                     width: {
+<<<<<<< HEAD
+=======
+                                        xs: "98%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         md: "98%",
                                         lg: "98%",
                                         xl: "80%",
@@ -278,11 +369,26 @@ const BonusEveryday = () => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+<<<<<<< HEAD
+=======
+
+                                    px: "1rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 }}
                             >
                                 <SemiBoldText
                                     weight={700}
+<<<<<<< HEAD
                                     customStyles={{ color: "#FFF96A" }}
+=======
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.125rem",
+                                        },
+                                    }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -308,6 +414,10 @@ const BonusEveryday = () => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+<<<<<<< HEAD
+=======
+                                    mx: "1rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 }}
                             >
                                 <ul

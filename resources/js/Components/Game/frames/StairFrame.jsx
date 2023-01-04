@@ -25,7 +25,11 @@ const StairFrame = () => {
                 <Box
                     sx={{
                         // mt: "1.25rem",
+<<<<<<< HEAD
                         width: "80%",
+=======
+                        width: "95%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     }}
                 >
                     <Frame src={stair_sm} />

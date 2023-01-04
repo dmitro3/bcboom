@@ -27,8 +27,13 @@ const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
+<<<<<<< HEAD
     top: isMobile ? "2%" : "20px",
     right: isMobile ? "25px" : "20px",
+=======
+    top: isMobile ? "-1%" : "20px",
+    right: isMobile ? "-10px" : "20px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
@@ -93,6 +98,7 @@ const SignupForm = ({isMobile}) => {
             </div>
             <Button
                 text="Sign up"
+<<<<<<< HEAD
                 styles={{
                     background: "#3586FF",
                     color: "#fff",
@@ -100,6 +106,16 @@ const SignupForm = ({isMobile}) => {
                     padding: "15px ",
                     marginTop: "20px",
                 }}
+=======
+                // styles={{
+                    width= "100%"
+                    background= "#3586FF"
+                    color= "#fff"
+                    borderRadius= "30px"
+                    padding= "15px "
+                    marginTop= "20px"
+                // }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
             />
         </SignupFormWrapper>
     );
@@ -130,7 +146,16 @@ const LoginForm = ({isMobile}) => {
             >
                 Forgot your password?
             </p>
+<<<<<<< HEAD
             <div style={{ transform: !isMobile && "scaleX(1.6)", transformOrigin: "0 0" }}>
+=======
+            <div
+                style={{
+                    transform: !isMobile && "scaleX(1.6)",
+                    transformOrigin: "0 0",
+                }}
+            >
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
                     onChange={onRecaptchaChange}
@@ -138,6 +163,7 @@ const LoginForm = ({isMobile}) => {
             </div>
             <Button
                 text="Login"
+<<<<<<< HEAD
                 styles={{
                     background: "#3586FF",
                     color: "#fff",
@@ -145,6 +171,16 @@ const LoginForm = ({isMobile}) => {
                     padding: "15px ",
                     marginTop: "20px",
                 }}
+=======
+                // styles={{
+                width="100%"
+                background="#3586FF"
+                color="#fff"
+                borderRadius="30px"
+                padding="15px "
+                marginTop="20px"
+                // }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
             />
         </LoginFormWrapper>
     );

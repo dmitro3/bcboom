@@ -19,13 +19,22 @@ const GridItems = styled("div")(({ perColumn, page }) => ({
         gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
     "@media (max-width: 500px)": {
+<<<<<<< HEAD
         gridTemplateColumns: !['home', 'games'].includes(page) && "repeat(1, minmax(100px, 1fr))",
+=======
+        gridTemplateColumns:
+            !["home", "games"].includes(page) &&
+            "repeat(1, minmax(100px, 1fr))",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     },
     position: "relative",
     zIndex: 400,
 }));
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
     height: height || "100px",
     width: width || "100px",
@@ -38,8 +47,11 @@ const GridItemImage = styled("img")(({ height, width, hoverEffect }) => ({
     },
 }));
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 const OverLay = ({ item, parent, visible }) => {
     return (
         <div
@@ -99,7 +111,11 @@ const OverLay = ({ item, parent, visible }) => {
                 )}
             </div>
         </div>
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 };
 
 const ImageGridWithHeader = ({ gridItems }) => {
@@ -114,7 +130,11 @@ const ImageGridWithHeader = ({ gridItems }) => {
                             {item.images
                                 .slice(
                                     0,
+<<<<<<< HEAD
                                     isMobile && ['home'].includes(item.page)
+=======
+                                    isMobile && ["home"].includes(item.page)
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         ? item.countOnMobile
                                         : item?.images.length
                                 )
@@ -184,10 +204,17 @@ const ImageGridWithHeader = ({ gridItems }) => {
                                 <Button
                                     text="See more"
                                     background={"#3586FF"}
+<<<<<<< HEAD
                                     styles={{
                                         padding: "10px 30px",
                                         borderRadius: "15px",
                                     }}
+=======
+                                    // styles={{
+                                    padding="10px 30px"
+                                    borderRadius="15px"
+                                    // }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     onSubmit={() => {
                                         Inertia.visit(item.urlForMore);
                                     }}

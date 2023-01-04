@@ -143,7 +143,11 @@ const CoinFlipButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: "1.375rem",
+=======
+                            fontSize: { xs: "1.25rem", md: "1.375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",
@@ -159,7 +163,11 @@ const CoinFlipButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: "1.375rem",
+=======
+                            fontSize: { xs: "1.25rem", md: "1.375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#4E61ED",
                             color: "#FFFFFF",
@@ -175,7 +183,11 @@ const CoinFlipButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#FF4A76",
+<<<<<<< HEAD
                             fontSize: "1.375rem",
+=======
+                            fontSize: { xs: "1.25rem", md: "1.375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             color: "#FFFFFF",
                         }}

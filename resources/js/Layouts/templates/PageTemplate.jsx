@@ -5,6 +5,10 @@ import InnerHeader from "../../Components/Header/InnerHeader";
 import mainBg from "../../../../public/images/others/mainBg.svg";
 import footercut from "../../../../public/images/others/footercut.png";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+<<<<<<< HEAD
+=======
+import FooterActions from "@/Components/Footer/FooterActions";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 const PageTemplateWrapper = styled("div")(({ isMobile }) => ({
     background: `url(${mainBg})`,
     width: isMobile ? "100%" : "95%",
@@ -21,7 +25,11 @@ const FooterCutImage = styled("div")(({ theme }) => ({
     background: `url(${footercut})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+<<<<<<< HEAD
     bottom: "-70px",
+=======
+    bottom: "-27px",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     zIndex: 100,
 }));
 const PageTemplate = ({
@@ -39,6 +47,10 @@ const PageTemplate = ({
             {gridWithHeader && (
                 <ImageGridWithHeader gridItems={gridWithHeader} />
             )}
+<<<<<<< HEAD
+=======
+            {!isMobile && <FooterActions />}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
             {!isMobile && <FooterCutImage />}
         </PageTemplateWrapper>
     );

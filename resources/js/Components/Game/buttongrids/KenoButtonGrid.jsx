@@ -171,7 +171,20 @@ const KenoButtonGrid = () => {
                             textTransform: "none",
                         }}
                     >
+<<<<<<< HEAD
                         Mines:1
+=======
+                        Mines:{" "}
+                        <Box
+                            sx={{
+                                color: "white !important",
+                                fontSize: ".875rem",
+                                fontWeight: 800,
+                            }}
+                        >
+                            Mines
+                        </Box>
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     </Button>
                 </Grid>
                 <Grid item xs={6} md={3}>
@@ -182,7 +195,11 @@ const KenoButtonGrid = () => {
                             height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: ".875rem",
+=======
+                            fontSize: { xs: "", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",

@@ -212,6 +212,10 @@ const UserDropdown = ({
                         }
                         key={index}
                         background={item.bg}
+<<<<<<< HEAD
+=======
+                        whiteSpace="nowrap"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     />
                 ))}
             </>

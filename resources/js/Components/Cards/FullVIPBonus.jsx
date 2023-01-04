@@ -16,7 +16,11 @@ const FullVipBonusWrapper = styled("div")(({ isMobile }) => ({
     backgroundRepeat: "no-repeat, no-repeat",
     textAlign: "center",
     width: isMobile ? "100%" : "75%",
+<<<<<<< HEAD
     padding: "1.5rem",
+=======
+    padding: !isMobile && "1.5rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     borderRadius: "10px",
 }));
 
@@ -86,15 +90,24 @@ const FullVIPBonus = () => {
                     )}
                 </Flex>
                 <RangeInput
+<<<<<<< HEAD
                     style={{ width: "80%", marginTop: "30px" }}
                     value={28}
+=======
+                    style={{ width: "80%", marginTop: "70px" }}
+                    value={22}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                 >
                     <div>
                         <input
                             type="range"
                             max={100}
                             min={0}
+<<<<<<< HEAD
                             value={30}
+=======
+                            value={2}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             style={{ width: "100%" }}
                         />
                         <Text
@@ -104,7 +117,11 @@ const FullVIPBonus = () => {
                             fontSize="14px"
                             fontWeight="medium"
                             textAlign="left"
+<<<<<<< HEAD
                             paddingTop="40px"
+=======
+                            paddingTop="20px"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                         />
                         <Flex
                             justifyContent="center"
@@ -123,12 +140,26 @@ const FullVIPBonus = () => {
                             >
                                 <Text
                                     type="p"
+<<<<<<< HEAD
                                     text="Accumulated Bet Amount"
+=======
+                                    text="Accumulated"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                 />
                                 <Text
                                     type="p"
+<<<<<<< HEAD
+=======
+                                    text="Bet Amount"
+                                    fontSize={isMobile ? "12px" : "17px"}
+                                    fontWeight="bold"
+                                    whiteSpace="nowrap"
+                                />
+                                <Text
+                                    type="p"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     text="R$ 0"
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
@@ -146,12 +177,26 @@ const FullVIPBonus = () => {
                             >
                                 <Text
                                     type="p"
+<<<<<<< HEAD
                                     text="Accumulated Deposit Amount"
+=======
+                                    text="Accumulated"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                 />
                                 <Text
                                     type="p"
+<<<<<<< HEAD
+=======
+                                    text="Deposit Amount"
+                                    fontSize={isMobile ? "12px" : "17px"}
+                                    fontWeight="bold"
+                                    whiteSpace="nowrap"
+                                />
+                                <Text
+                                    type="p"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     text="R$ 100"
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"

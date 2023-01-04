@@ -11,9 +11,13 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
+<<<<<<< HEAD
         "php-open-source-saver/jwt-auth": "^2.0",
         "tightenco/ziggy": "^1.0",
         "tymon/jwt-auth": "^1.0@dev"
+=======
+        "tightenco/ziggy": "^1.0"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

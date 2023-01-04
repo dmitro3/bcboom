@@ -14,6 +14,12 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
             <Box
                 sx={{
                     width: "90%",
+<<<<<<< HEAD
+=======
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                 }}
             >
                 <Typography
@@ -22,7 +28,11 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                         textAlign: "center",
                         display: "flex",
                         justifyContent: "center",
+<<<<<<< HEAD
                         fontSize: "1rem",
+=======
+                        fontSize: { xs: ".8rem", md: "1rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                         fontWeight: 800,
                     }}
                 >
@@ -32,9 +42,15 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                     sx={{
                         width: "100%",
                         textAlign: "center",
+<<<<<<< HEAD
                         display: "flex",
                         justifyContent: "center",
                         fontSize: ".75rem",
+=======
+                        display: { xs: "none", md: "flex" },
+                        justifyContent: "center",
+                        fontSize: { xs: ".65rem", md: ".75rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                         fontWeight: 800,
                         color: "#A6B0DA",
                     }}
@@ -52,7 +68,11 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                 >
                     <Typography
                         sx={{
+<<<<<<< HEAD
                             fontSize: ".75rem",
+=======
+                            fontSize: { xs: ".65rem", md: ".75rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             color: "#A6B0DA",
                             mr: ".3rem",

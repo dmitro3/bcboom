@@ -32,6 +32,10 @@ const BgWithText = styled("div")(({ color }) => ({
     textAlign: "center",
     width: "fit-content",
     position: "relative",
+<<<<<<< HEAD
+=======
+    zIndex: "10",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     "& p": {
         "&:first-child": {
             fontSize: "100px",
@@ -107,7 +111,15 @@ const VIPIndex = () => {
             <GuestLayout>
                 <PageTemplate innerHeader={true}>
                     <ImageGridLayout
+<<<<<<< HEAD
                         item={{ title: "VIP Rank System", icon: goldencup }}
+=======
+                        item={{
+                            title: "VIP Rank System",
+                            icon: goldencup,
+                            margin: "10px",
+                        }}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                         index={0}
                         page="vip"
                     >
@@ -130,7 +142,11 @@ const VIPIndex = () => {
                         </div>
                         <DividerStats isMobile={isMobile}>
                             <Flex
+<<<<<<< HEAD
                                 alignItems={isMobile ? "stretch" : "flex-start"}
+=======
+                                alignItems={isMobile ? "stretch" : "center"}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                 justifyContent="space-between"
                                 padding="10px 5%"
                             >
@@ -146,7 +162,11 @@ const VIPIndex = () => {
                                 </div>
                                 <Flex
                                     alignItems="center"
+<<<<<<< HEAD
                                     gap="20px"
+=======
+                                    gap={isMobile ? "5px" : "20px"}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     direction={isMobile ? "column" : "row"}
                                 >
                                     <TextWithBg
@@ -155,13 +175,24 @@ const VIPIndex = () => {
                                         secondaryText={"R$ 0"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
+<<<<<<< HEAD
                                     />
                                     <TextWithBg
+=======
+                                        width={isMobile && "100%"}
+                                    />
+                                    <TextWithBg
+                                        width={isMobile && "100%"}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
                                         bg={"#4F5DFE"}
                                         primaryText="Accumulated Deposit Amount"
                                         secondaryText={"R$ 100"}
+<<<<<<< HEAD
+=======
+                                        nowrap
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     />
                                 </Flex>
                             </Flex>
@@ -203,7 +234,11 @@ const VIPIndex = () => {
                                         <Text type="p" text={item.text} />
                                         {item.tooltip && (
                                             <BcTooltip
+<<<<<<< HEAD
                                                 title="60% of Betfiery users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
+=======
+                                                title="60% of Bcboom users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 placement="bottom-start"
                                                 arrow
                                                 classes={{

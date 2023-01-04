@@ -21,7 +21,11 @@ const RingButtonGrid = () => {
                             height: "3rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: ".875rem",
+=======
+                            fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#333965",
                             color: "#A6B0DA",
@@ -38,7 +42,11 @@ const RingButtonGrid = () => {
                         >
                             <Typography
                                 sx={{
+<<<<<<< HEAD
                                     fontSize: ".875rem",
+=======
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontWeight: 800,
                                     color: "#A6B0DA",
                                     mr: ".3rem",
@@ -48,7 +56,11 @@ const RingButtonGrid = () => {
                             </Typography>
                             <Typography
                                 sx={{
+<<<<<<< HEAD
                                     fontSize: ".875rem",
+=======
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontWeight: 800,
                                     color: "white",
                                 }}
@@ -67,7 +79,11 @@ const RingButtonGrid = () => {
                             height: "3rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: ".875rem",
+=======
+                            fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#333965",
                             color: "#A6B0DA",
@@ -84,7 +100,11 @@ const RingButtonGrid = () => {
                         >
                             <Typography
                                 sx={{
+<<<<<<< HEAD
                                     fontSize: ".875rem",
+=======
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontWeight: 800,
                                     color: "#A6B0DA",
                                     mr: ".3rem",
@@ -94,7 +114,11 @@ const RingButtonGrid = () => {
                             </Typography>{" "}
                             <Typography
                                 sx={{
+<<<<<<< HEAD
                                     fontSize: ".875rem",
+=======
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                     fontWeight: 800,
                                     color: "white",
                                 }}
@@ -176,7 +200,11 @@ const RingButtonGrid = () => {
                             >
                                 <Box
                                     sx={{
+<<<<<<< HEAD
                                         fontSize: "1rem",
+=======
+                                        fontSize: { xs: ".875rem", md: "1rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         fontWeight: 800,
                                         textAlign: "center",
                                     }}
@@ -236,7 +264,11 @@ const RingButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
+<<<<<<< HEAD
                             fontSize: "1.375rem",
+=======
+                            fontSize: { xs: "1rem", md: "1.375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",

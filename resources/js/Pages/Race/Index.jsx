@@ -66,6 +66,10 @@ const RaceIndex = () => {
             imageHeight: "175px",
             perColumn: 3,
             // hoverEffect: "",
+<<<<<<< HEAD
+=======
+            margin: '10px',
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
             cards: [
                 {
                     title: "weekly card",

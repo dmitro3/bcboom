@@ -16,12 +16,23 @@ import settings from "../../../../public/images/svg/settings.svg";
 import TextWithBg from "@/Components/UtilComponents/TextWithBg";
 import { Divider } from "@/Components/Divider/Divider";
 import Button from "@/Components/Button/Button";
+<<<<<<< HEAD
 const PersonalCenterPageWrapper = styled("div")(() => ({
     marginLeft: "auto",
     marginRight: "auto",
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
+=======
+const PersonalCenterPageWrapper = styled("div")(({isMobile}) => ({
+    margin: '0 auto',
+    paddingTop: "2.125rem",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    zIndex: 100,
+    
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }));
 
 const PersonalCard = styled("div")(({ padding, isMobile }) => ({
@@ -147,6 +158,10 @@ const PersonalCenter = () => {
                             item={{
                                 title: "Personal Center",
                                 icon: centerIcon,
+<<<<<<< HEAD
+=======
+                                margin: '10px'
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             }}
                             index={0}
                             page="personal-center"
@@ -155,7 +170,11 @@ const PersonalCenter = () => {
                                 alignItems="stretch"
                                 gap="20px"
                                 direction={isMobile ? "column" : "row"}
+<<<<<<< HEAD
                                 margin="60px 0"
+=======
+                                margin={isMobile ? '60px 0 0' : "60px 0"}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             >
                                 <PersonalCard isMobile={isMobile}>
                                     <Text
@@ -362,6 +381,10 @@ const PersonalCenter = () => {
                                     <Flex
                                         justifyContent="space-between"
                                         alignItems="center"
+<<<<<<< HEAD
+=======
+                                        width='100%'
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         gap="20px"
                                     >
                                         <TextWithBg
@@ -395,15 +418,25 @@ const PersonalCenter = () => {
                                         <Button
                                             text="Deposit"
                                             background="#5484FF"
+<<<<<<< HEAD
                                             width="50%"
                                             padding="15px 0"
+=======
+                                            width="100%"
+                                            padding="15px 20px"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             addon={wallet}
                                         />
                                         <Button
                                             text="Withdraw"
                                             background="#F93967"
+<<<<<<< HEAD
                                             width="50%"
                                             padding="15px 0"
+=======
+                                            width="100%"
+                                            padding="15px 20px"
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                         />
                                     </Flex>
                                     <Text

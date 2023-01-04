@@ -32,12 +32,21 @@ const GameLayout = ({
     customFrameHeader = false,
     innerHeader = false,
 }) => {
+<<<<<<< HEAD
+=======
+    const { isMobile } = useScreenResolution();
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     return (
         <div>
             <Box
                 sx={{
+<<<<<<< HEAD
                     width: "9rem",
                     height: "7.1875rem",
+=======
+                    width: `${isMobile ? "6rem" : "9rem"}`,
+                    height: `${isMobile ? "5.1875rem" : "7.1875rem"}`,
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     borderTopLeftRadius: "0.625rem",
                     background:
                         "linear-gradient(103.93deg, #337CFF 3.76%, #154BB2 71.62%)",
@@ -50,6 +59,10 @@ const GameLayout = ({
                     justifyContent: "center",
                     alignItems: "center",
                     textAlign: "center",
+<<<<<<< HEAD
+=======
+                    mt: ".1875rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
                     //px: ".3rem",
                 }}
@@ -59,7 +72,11 @@ const GameLayout = ({
                         fontFamily: "GROBOLD, montserrat",
                         fontStyle: "normal",
                         fontWeight: "500",
+<<<<<<< HEAD
                         fontSize: "1.5rem",
+=======
+                        fontSize: `${isMobile ? "1rem" : "1.5rem"}`,
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                         position: "absolute",
 
                         top: "4px",
@@ -96,14 +113,22 @@ const GameLayout = ({
                                 xs: `${customFrameHeader ? "flex" : "none"}`,
                                 md: "none",
                             },
+<<<<<<< HEAD
                             mt: "-1rem",
+=======
+                            mt: "-1.5rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             mb: ".5rem",
                         }}
                     >
                         <Box
                             sx={{
                                 display: "flex",
+<<<<<<< HEAD
                                 width: "24%",
+=======
+                                width: "34%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             }}
                         >
                             <GameFrameHeaderIconContainer>
@@ -130,6 +155,10 @@ const GameLayout = ({
                             flexDirection: "column",
                             background: "#2E3565",
                             padding: `${customFrameHeader ? 0 : "1.12rem"}`,
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             ...customFrameStyles,
                         }}
                     >

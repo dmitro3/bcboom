@@ -1,10 +1,21 @@
 * text=auto
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
+<<<<<<< HEAD
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 .jpg filter=lfs diff=lfs merge=lfs -text
+=======
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa

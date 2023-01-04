@@ -74,7 +74,11 @@ const GameTab = () => {
                 <TabPanel value={tabValue} index={0}>
                     <Box
                         sx={{
+<<<<<<< HEAD
                             height: { xs: "29rem", md: "14.9375rem" },
+=======
+                            height: { xs: "30rem", md: "14.9375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             background: "#272C4B",
                             borderRadius: "0.625rem",
                             flexGrow: 1,
@@ -93,6 +97,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -106,7 +114,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -126,7 +138,14 @@ const GameTab = () => {
                                         </Box>
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -149,6 +168,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -162,7 +185,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -170,7 +197,14 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -205,6 +239,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -218,7 +256,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -226,7 +268,14 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -261,7 +310,12 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
                                                 md: ".6rem",
+=======
+                                                xs: ".8rem",
+                                                md: ".375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 lg: ".875rem",
                                             },
                                             color: "#A6B0DA",
@@ -274,7 +328,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "flex-start",
@@ -283,7 +341,11 @@ const GameTab = () => {
                                         <Box
                                             sx={{
                                                 display: "flex",
+<<<<<<< HEAD
                                                 width: "25%",
+=======
+                                                width: "30%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 fontWeight: 800,
@@ -305,6 +367,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -385,6 +451,13 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+<<<<<<< HEAD
+=======
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 }}
                                             >
                                                 <Box
@@ -428,6 +501,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -508,6 +585,13 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+<<<<<<< HEAD
+=======
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 }}
                                             >
                                                 <Box
@@ -547,7 +631,11 @@ const GameTab = () => {
                 <TabPanel value={tabValue} index={1}>
                     <Box
                         sx={{
+<<<<<<< HEAD
                             height: { xs: "29rem", md: "14.9375rem" },
+=======
+                            height: { xs: "30rem", md: "14.9375rem" },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                             background: "#272C4B",
                             borderRadius: "0.625rem",
                             flexGrow: 1,
@@ -566,6 +654,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -579,7 +671,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -599,7 +695,14 @@ const GameTab = () => {
                                         </Box>
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -622,6 +725,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -635,7 +742,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -643,7 +754,14 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -678,6 +796,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -691,7 +813,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -699,7 +825,14 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
+<<<<<<< HEAD
                                                 display: "flex",
+=======
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -734,7 +867,12 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
                                                 md: ".6rem",
+=======
+                                                xs: ".8rem",
+                                                md: ".375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 lg: ".875rem",
                                             },
                                             color: "#A6B0DA",
@@ -747,7 +885,11 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
+<<<<<<< HEAD
 
+=======
+                                            pl: ".9375rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "flex-start",
@@ -756,7 +898,11 @@ const GameTab = () => {
                                         <Box
                                             sx={{
                                                 display: "flex",
+<<<<<<< HEAD
                                                 width: "25%",
+=======
+                                                width: "30%",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 fontWeight: 800,
@@ -778,6 +924,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -858,6 +1008,13 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+<<<<<<< HEAD
+=======
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 }}
                                             >
                                                 <Box
@@ -901,6 +1058,10 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+<<<<<<< HEAD
+=======
+                                                xs: ".8rem",
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -981,6 +1142,13 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+<<<<<<< HEAD
+=======
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                                                 }}
                                             >
                                                 <Box

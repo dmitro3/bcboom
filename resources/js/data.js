@@ -2,11 +2,21 @@ import live from "../../public/images/svg/live.svg";
 import race from "../../public/images/svg/race.svg";
 import slots from "../../public/images/svg/slots.svg";
 import vip from "../../public/images/svg/vip.svg";
+<<<<<<< HEAD
+=======
+import mobilevip from "../../public/images/user/vipicon.svg";
+import mobilenav from "../../public/images/user/mobilehamgurger.svg";
+import share from "../../public/images/user/share.svg";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 import games from "../../public/images/svg/games.svg";
 import homeSvg from "../../public/images/svg/homeSvg.svg";
 import bonus from "../../public/images/svg/bonus.svg";
 import promotion from "../../public/images/svg/promotion.svg";
+<<<<<<< HEAD
 
+=======
+import user from "../../public/images/svg/user.svg";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 import referral from "../../public/images/svg/referral.svg";
 import cashback from "../../public/images/svg/cashback.svg";
 import fairness from "../../public/images/svg/fairness.svg";
@@ -64,6 +74,43 @@ export const navlinks = [
     // },
 ];
 
+<<<<<<< HEAD
+=======
+export const mobileNavLinks = [
+    {
+        name: "Home",
+        icon: homeSvg,
+        link: "/",
+        navigatable: true
+    },
+    {
+        name: "VIP",
+        icon: mobilevip,
+        link: "/vip",
+        navigatable: true
+    },
+    {
+        name: "Share",
+        icon: share,
+        link: "/share",
+        navigatable: false
+    },
+
+    {
+        name: "Profile",
+        icon: user,
+        link: "/personal-center",
+        navigatable: true
+    },
+    {
+        name: "Menu",
+        icon: mobilenav,
+        link: "/menu",
+        navigatable: false
+    },
+];
+
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 
 export const miscNavLinks = [
     {

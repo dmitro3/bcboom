@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+<<<<<<< HEAD
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
+=======
+
+class User extends Authenticatable
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -22,6 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+<<<<<<< HEAD
         'username',
         'admin',
         'image',
@@ -29,6 +35,8 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'phone',
         'referred_by'
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     ];
 
     /**
@@ -49,6 +57,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+<<<<<<< HEAD
 
     public function getJWTIdentifier() {
         return $this->getKey();
@@ -63,3 +72,6 @@ class User extends Authenticatable implements JWTSubject
     }    
 }
 
+=======
+}
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+<<<<<<< HEAD
 use App\Http\Requests\ImageStoreRequest;
 
 class ProfileController extends Controller
@@ -15,6 +16,11 @@ class ProfileController extends Controller
     public function __construct(){
         return $this->middleware('auth');
     }
+=======
+
+class ProfileController extends Controller
+{
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
     /**
      * Display the user's profile form.
      *
@@ -71,6 +77,7 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+<<<<<<< HEAD
 
     public function imageStore(ImageStoreRequest $request){
         $validatedData = $request->validated();
@@ -153,4 +160,6 @@ class ProfileController extends Controller
         }
         
     }
+=======
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }

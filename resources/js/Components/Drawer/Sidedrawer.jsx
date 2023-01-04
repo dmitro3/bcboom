@@ -22,12 +22,21 @@ import { miscNavLinks, navlinks } from "@/data";
 import { Divider } from "../Divider/Divider";
 import CustomSelect from "../Dropdown/Select";
 import { Link } from "@inertiajs/inertia-react";
+<<<<<<< HEAD
+=======
+import { Inertia } from "@inertiajs/inertia";
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 const DrawerWrapper = styled("div")(({}) => ({
     width: "70vw",
     // height: "100%",
     background: "#1C2036!important",
     padding: "0 20px",
     position: "relative",
+<<<<<<< HEAD
+=======
+    display: "block",
+    zIndex: 110000,
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
 }));
 const CloseIcon = styled("div")(({}) => ({
     position: "absolute",
@@ -155,8 +164,27 @@ const Sidedrawer = () => {
                     <img src={bcboom} alt="" />
                 </Logo>
                 <DrawerImages>
+<<<<<<< HEAD
                     {[crash, mines, dice, limbo, keno].map((img, i) => (
                         <DrawerImage key={i} src={img} index={i} />
+=======
+                    {[
+                        { link: "/games/crash", icon: crash },
+                        { link: "games/mines", icon: mines },
+                        { link: "/games/dice", icon: dice },
+                        { link: "/games/limbo", icon: limbo },
+                        { link: "/games/keno", icon: keno },
+                    ].map((item, i) => (
+                        <DrawerImage
+                            key={i}
+                            src={item.icon}
+                            index={i}
+                            onClick={() => {
+                                closeDrawer();
+                                Inertia.visit(item.link);
+                            }}
+                        />
+>>>>>>> fe9182f2430f295fe8fb98e20603b4e90c1d31aa
                     ))}
                 </DrawerImages>
                 <Divider bg="#8990ae78" />
