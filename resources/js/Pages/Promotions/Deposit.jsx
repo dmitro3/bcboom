@@ -11,21 +11,21 @@ import PromotionsHeader from "@/Components/Promotions/header";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
 
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
-
 const HEADER_TEXT = "Get 75% off your second deposit limited to R$ 1888";
 
 const Deposit = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
     return (
         <>
             <Head title="Promotions Deposit" />
@@ -42,9 +42,15 @@ const Deposit = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -61,10 +67,16 @@ const Deposit = () => {
                                 marginRight: "auto",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                                 width: "90%",
                             }}
                         >
-                            <GreyText>
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
                                 We are happy to see you again here at Betdino!
                                 It's time to make your second deposit for more
                                 fun. Betdino will send you a bonus of 75% of
@@ -81,7 +93,15 @@ const Deposit = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -114,7 +134,12 @@ const Deposit = () => {
                                 >
                                     <SemiBoldText
                                         weight={800}
-                                        customStyles={{ fontSize: "1.25rem" }}
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.25rem",
+                                                md: "1.25rem",
+                                            },
+                                        }}
                                     >
                                         <Box
                                             sx={{ color: "#FFF96A" }}
@@ -125,7 +150,12 @@ const Deposit = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
-                                        customStyles={{ fontSize: "1.625rem" }}
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.25rem",
+                                                md: "1.25rem",
+                                            },
+                                        }}
                                     >
                                         R$ 100 OR MORE
                                     </SemiBoldText>
@@ -175,7 +205,13 @@ const Deposit = () => {
                             >
                                 <SemiBoldText
                                     weight={700}
-                                    customStyles={{ color: "#FFF96A" }}
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.5rem",
+                                        },
+                                    }}
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -202,7 +238,10 @@ const Deposit = () => {
                                 <ul
                                     style={{
                                         listStyleType: "disc",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: "0.9375rem",
+                                            md: "1.125rem",
+                                        },
                                     }}
                                 >
                                     <li

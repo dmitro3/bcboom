@@ -1,4 +1,4 @@
-import WheelButtonGrid from "@/Components/Game/buttongrids/WheelButtonGrid";
+import PlinkoButtonGrid from "@/Components/Game/buttongrids/PlinkoButtonGrid";
 import PlinkoFrame from "@/Components/Game/frames/PlinkoFrame";
 import GameLayout from "@/Components/Game/layout/GameLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
@@ -29,10 +29,10 @@ const Plinko = () => {
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
-                            GameFrameText={"Wheel"}
+                            GameFrameText={"Plinko"}
                             GameFrame={PlinkoFrame}
-                            ButtonGrid={WheelButtonGrid}
-                            displayPanel={false}
+                            ButtonGrid={PlinkoButtonGrid}
+                            displayPanel={true}
                             customFrameHeader={true}
                         />
                     </GamesPageWrapper>

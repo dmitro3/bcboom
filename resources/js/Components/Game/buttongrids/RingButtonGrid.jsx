@@ -21,7 +21,7 @@ const RingButtonGrid = () => {
                             height: "3rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: ".875rem",
+                            fontSize: { xs: ".75rem", md: ".875rem" },
                             fontWeight: 800,
                             backgroundColor: "#333965",
                             color: "#A6B0DA",
@@ -38,7 +38,7 @@ const RingButtonGrid = () => {
                         >
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "#A6B0DA",
                                     mr: ".3rem",
@@ -48,7 +48,7 @@ const RingButtonGrid = () => {
                             </Typography>
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "white",
                                 }}
@@ -67,7 +67,7 @@ const RingButtonGrid = () => {
                             height: "3rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: ".875rem",
+                            fontSize: { xs: ".75rem", md: ".875rem" },
                             fontWeight: 800,
                             backgroundColor: "#333965",
                             color: "#A6B0DA",
@@ -84,7 +84,7 @@ const RingButtonGrid = () => {
                         >
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "#A6B0DA",
                                     mr: ".3rem",
@@ -94,7 +94,7 @@ const RingButtonGrid = () => {
                             </Typography>{" "}
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "white",
                                 }}
@@ -176,7 +176,7 @@ const RingButtonGrid = () => {
                             >
                                 <Box
                                     sx={{
-                                        fontSize: "1rem",
+                                        fontSize: { xs: ".875rem", md: "1rem" },
                                         fontWeight: 800,
                                         textAlign: "center",
                                     }}
@@ -236,7 +236,7 @@ const RingButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: "1.375rem",
+                            fontSize: { xs: "1rem", md: "1.375rem" },
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",

@@ -249,7 +249,7 @@ const LimboButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: "1.375rem",
+                            fontSize: { xs: "1rem", md: "1.375rem" },
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",

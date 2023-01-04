@@ -14,6 +14,9 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
             <Box
                 sx={{
                     width: "90%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
                 }}
             >
                 <Typography
@@ -22,7 +25,7 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                         textAlign: "center",
                         display: "flex",
                         justifyContent: "center",
-                        fontSize: "1rem",
+                        fontSize: { xs: ".8rem", md: "1rem" },
                         fontWeight: 800,
                     }}
                 >
@@ -32,9 +35,9 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                     sx={{
                         width: "100%",
                         textAlign: "center",
-                        display: "flex",
+                        display: { xs: "none", md: "flex" },
                         justifyContent: "center",
-                        fontSize: ".75rem",
+                        fontSize: { xs: ".65rem", md: ".75rem" },
                         fontWeight: 800,
                         color: "#A6B0DA",
                     }}
@@ -52,7 +55,7 @@ const WheelSwitchBox = ({ firstAmount, secondAmount, checked }) => {
                 >
                     <Typography
                         sx={{
-                            fontSize: ".75rem",
+                            fontSize: { xs: ".65rem", md: ".75rem" },
                             fontWeight: 800,
                             color: "#A6B0DA",
                             mr: ".3rem",

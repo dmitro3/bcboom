@@ -1,5 +1,5 @@
 import React from "react";
-import coinFlip from "../../../../assets/games/CoinFlip.svg";
+import coinFlip from "../../../../assets/games/coin_flip_sm.svg";
 import coinFlip_bg from "../../../../assets/games/coinflip_bg.svg";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";

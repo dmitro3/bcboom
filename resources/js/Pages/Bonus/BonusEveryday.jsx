@@ -3,6 +3,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import img from "../../../assets/promotions/saba_spin_1.svg";
+import img_sm from "../../../assets/promotions/spin_sm.svg";
 import { Head } from "@inertiajs/inertia-react";
 import React from "react";
 import PromotionsHeader from "@/Components/Promotions/header";
@@ -10,22 +11,25 @@ import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import BoldText from "@/Components/Promotions/Typography/BoldText";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
-
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const HEADER_TEXT = "GET 8% BONUS EVERY DAY";
 
 const BonusEveryday = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+    const { isMobile } = useScreenResolution();
+
     return (
         <>
             <Head title="Promotions Bonus Everyday" />
@@ -34,7 +38,7 @@ const BonusEveryday = () => {
                     <PromotionPageWrapper>
                         <Box
                             sx={{
-                                width: "100%",
+                                width: { xs: "95%", md: "98%" },
                                 height: "17.375rem",
                                 display: "flex",
                                 justifyContent: "center",
@@ -42,11 +46,12 @@ const BonusEveryday = () => {
                                 position: "relative",
                                 borderRadius: "0.625rem",
                                 background: `linear-gradient(95.62deg, #3971E8 11.91%, #377EEC 60.57%, #3FAEEF 100% )`,
+                                mx: "auto",
                             }}
                         >
                             <Box
                                 sx={{
-                                    width: "80%",
+                                    width: { xs: "93%", md: "80%" },
                                     height: "100%",
                                     display: "flex",
                                     justifyContent: "space-between",
@@ -55,12 +60,16 @@ const BonusEveryday = () => {
                             >
                                 <BoldText
                                     customStyles={{
-                                        width: "30rem",
+                                        width: "35rem",
+                                        fontSize: {
+                                            xs: "1.25rem",
+                                            md: "2.5rem",
+                                        },
                                     }}
                                 >
                                     GET 8% BONUS EVERY DAY
                                 </BoldText>
-                                <img src={img} />
+                                <img src={isMobile ? img_sm : img} />
                             </Box>
                         </Box>
                         <Box
@@ -68,9 +77,15 @@ const BonusEveryday = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -91,13 +106,15 @@ const BonusEveryday = () => {
                             }}
                         >
                             <GreyText>
-                                Bcboom will cherish and wait every day with you!
+                                {!isMobile
+                                    ? ` Bcboom will cherish and wait every day with you!
                                 From now on, you have 3 chances to get more
                                 bonuses every day. As long as your deposit
                                 amount is greater than or equal to R$100, you
                                 will receive an additional 8% of the Betdino
                                 free deposit amount for free as a bonus!
-                                Sincerely, I wish you to earn more!
+                                Sincerely, I wish you to earn more!`
+                                    : `Enjoy a relaxing and enjoyable weekend with a login bonus on Sundays only at Betdino.`}
                             </GreyText>
                         </Box>
                         <Box
@@ -107,7 +124,15 @@ const BonusEveryday = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1.125rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -123,7 +148,7 @@ const BonusEveryday = () => {
                             <Box
                                 sx={{
                                     width: {
-                                        xs: "100%",
+                                        xs: "92%",
                                         md: "98%",
                                         lg: "98%",
                                         xl: "80%",
@@ -271,6 +296,7 @@ const BonusEveryday = () => {
                             <Box
                                 sx={{
                                     width: {
+                                        xs: "98%",
                                         md: "98%",
                                         lg: "98%",
                                         xl: "80%",
@@ -278,11 +304,19 @@ const BonusEveryday = () => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+
+                                    px: "1rem",
                                 }}
                             >
                                 <SemiBoldText
                                     weight={700}
-                                    customStyles={{ color: "#FFF96A" }}
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.125rem",
+                                        },
+                                    }}
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -308,6 +342,7 @@ const BonusEveryday = () => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
+                                    mx: "1rem",
                                 }}
                             >
                                 <ul

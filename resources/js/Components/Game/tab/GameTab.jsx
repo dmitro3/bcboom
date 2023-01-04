@@ -74,7 +74,7 @@ const GameTab = () => {
                 <TabPanel value={tabValue} index={0}>
                     <Box
                         sx={{
-                            height: { xs: "29rem", md: "14.9375rem" },
+                            height: { xs: "30rem", md: "14.9375rem" },
                             background: "#272C4B",
                             borderRadius: "0.625rem",
                             flexGrow: 1,
@@ -93,6 +93,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -106,7 +107,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -126,7 +127,10 @@ const GameTab = () => {
                                         </Box>
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -149,6 +153,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -162,7 +167,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -170,7 +175,10 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -205,6 +213,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -218,7 +227,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -226,7 +235,10 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -261,7 +273,8 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
-                                                md: ".6rem",
+                                                xs: ".8rem",
+                                                md: ".375rem",
                                                 lg: ".875rem",
                                             },
                                             color: "#A6B0DA",
@@ -274,7 +287,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "flex-start",
@@ -283,7 +296,7 @@ const GameTab = () => {
                                         <Box
                                             sx={{
                                                 display: "flex",
-                                                width: "25%",
+                                                width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 fontWeight: 800,
@@ -305,6 +318,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -385,6 +399,10 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
                                                 }}
                                             >
                                                 <Box
@@ -428,6 +446,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -508,6 +527,10 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
                                                 }}
                                             >
                                                 <Box
@@ -547,7 +570,7 @@ const GameTab = () => {
                 <TabPanel value={tabValue} index={1}>
                     <Box
                         sx={{
-                            height: { xs: "29rem", md: "14.9375rem" },
+                            height: { xs: "30rem", md: "14.9375rem" },
                             background: "#272C4B",
                             borderRadius: "0.625rem",
                             flexGrow: 1,
@@ -566,6 +589,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -579,7 +603,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -599,7 +623,10 @@ const GameTab = () => {
                                         </Box>
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -622,6 +649,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -635,7 +663,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -643,7 +671,10 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -678,6 +709,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -691,7 +723,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -699,7 +731,10 @@ const GameTab = () => {
                                     >
                                         <Box
                                             sx={{
-                                                display: "flex",
+                                                display: {
+                                                    xs: "none",
+                                                    md: "flex",
+                                                },
                                                 width: "15%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
@@ -734,7 +769,8 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
-                                                md: ".6rem",
+                                                xs: ".8rem",
+                                                md: ".375rem",
                                                 lg: ".875rem",
                                             },
                                             color: "#A6B0DA",
@@ -747,7 +783,7 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-
+                                            pl: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "flex-start",
@@ -756,7 +792,7 @@ const GameTab = () => {
                                         <Box
                                             sx={{
                                                 display: "flex",
-                                                width: "25%",
+                                                width: "30%",
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 fontWeight: 800,
@@ -778,6 +814,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -858,6 +895,10 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
                                                 }}
                                             >
                                                 <Box
@@ -901,6 +942,7 @@ const GameTab = () => {
                                         sx={{
                                             fontWeight: "700",
                                             fontSize: {
+                                                xs: ".8rem",
                                                 md: ".6rem",
                                                 lg: ".875rem",
                                             },
@@ -981,6 +1023,10 @@ const GameTab = () => {
                                                     display: "flex",
                                                     justifyContent:
                                                         "space-between",
+                                                    pl: {
+                                                        xs: ".9375rem",
+                                                        md: 0,
+                                                    },
                                                 }}
                                             >
                                                 <Box

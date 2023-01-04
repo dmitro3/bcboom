@@ -4,28 +4,32 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import img from "../../../assets/promotions/pro_invite_background.svg";
 import network from "../../../assets/promotions/netowkr.svg";
+import network_sm from "../../../assets/promotions/network_sm.svg";
 import img_sm from "../../../assets/promotions/pro_invite_sm.svg";
 import { styled } from "@mui/system";
 import React from "react";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import { Box, Button, Typography } from "@mui/material";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
-
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const HEADER_TEXT = "Invite Friends to Create Wealth Together";
 
 const Invite = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
+    const { isMobile } = useScreenResolution();
+
     return (
         <>
             <Head title="Promotions Invite" />
@@ -45,7 +49,12 @@ const Invite = () => {
                                 textAlign: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -65,11 +74,14 @@ const Invite = () => {
                                 width: "90%",
                             }}
                         >
-                            <GreyText>
-                                To encourage all BetDino users millions of
-                                benefits are offered to competent agents who
-                                meet the requirements to receive a generous
-                                bonus.
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
+                                Become one of our top partners Achieve a monthly
+                                income of R$ 100,000
                             </GreyText>
                         </Box>
                         <Box
@@ -79,7 +91,15 @@ const Invite = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1.125rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
                                 Referral Program
                             </SemiBoldText>
                         </Box>
@@ -90,10 +110,20 @@ const Invite = () => {
                                 marginRight: "auto",
                                 display: "flex",
                                 justifyContent: "center",
-                                width: "60%",
+                                width: { xs: "90%", md: "60%" },
                             }}
                         >
-                            <GreyText>
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                    textAlign: {
+                                        xs: "justify",
+                                        sm: "center",
+                                        md: "center",
+                                    },
+                                }}
+                            >
                                 Let the world know about Betdino - refer more
                                 people and earn big money, having more chance to
                                 supplement your income.
@@ -111,7 +141,7 @@ const Invite = () => {
                             <Box
                                 sx={{
                                     height: { xl: "57.25rem" },
-                                    width: "80%",
+                                    width: { xs: "90%", md: "80%" },
                                     padding: "2.3125rem",
                                     backgroundColor: "#2E3665",
                                     borderRadius: "0.625rem",
@@ -122,10 +152,10 @@ const Invite = () => {
                                     flexDirection: "column",
                                 }}
                             >
-                                <img src={network} />
+                                <img src={isMobile ? network_sm : network} />
                                 <Box
                                     sx={{
-                                        width: "70%",
+                                        width: { xs: "100%", md: "70%" },
                                         display: "flex",
                                         justifyContent: "center",
                                         textAlign: "center",
@@ -136,7 +166,10 @@ const Invite = () => {
                                         sx={{
                                             fontFamily: "Montserrat",
                                             fontWeight: 600,
-                                            fontSize: "1.125rem",
+                                            fontSize: {
+                                                xs: "1rem",
+                                                md: "1.125rem",
+                                            },
                                         }}
                                     >
                                         Get a Unique Referral Code
@@ -172,13 +205,16 @@ const Invite = () => {
                                     display: "flex",
                                     justifyContent: "center",
                                     textAlign: "center",
-                                    width: "60%",
+                                    width: { xs: "90%", md: "60%" },
                                 }}
                             >
                                 <SemiBoldText
                                     customStyles={{
                                         fontWeight: "700",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: ".8375rem",
+                                            md: "1.125rem",
+                                        },
                                     }}
                                 >
                                     Bonus Rules: All players at the "Promoter"
@@ -203,13 +239,16 @@ const Invite = () => {
                                     display: "flex",
                                     justifyContent: "center",
                                     textAlign: "center",
-                                    width: "60%",
+                                    width: { xs: "70%", md: "60%" },
                                 }}
                             >
                                 <SemiBoldText
                                     customStyles={{
                                         fontWeight: "600",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: ".875rem",
+                                            md: "1.125rem",
+                                        },
                                         color: "#3586FF",
                                     }}
                                 >
@@ -233,14 +272,14 @@ const Invite = () => {
                                     marginRight: "auto",
                                     display: "flex",
                                     justifyContent: "center",
-                                    textAlign: "center",
-                                    width: "50%",
+                                    textAlign: { xs: "left", md: "center" },
+                                    width: { xs: "80%", md: "50%" },
                                 }}
                             >
                                 <ul
                                     style={{
                                         listStyleType: "disc",
-                                        fontSize: "1rem",
+                                        fontSize: { xs: ".875", md: "1rem" },
                                     }}
                                 >
                                     <li
@@ -273,7 +312,7 @@ const Invite = () => {
                                     height: "3rem",
                                     borderRadius: "0.625rem",
                                     backgroundColor: "#404569",
-                                    fontSize: "1rem",
+                                    fontSize: { xs: ".875rem", md: "1rem" },
                                     fontWeight: "600",
                                 }}
                                 variant="contained"
@@ -293,11 +332,14 @@ const Invite = () => {
                             <Box
                                 sx={{
                                     height: {
+                                        xs: "15rem",
+                                        sm: "9rem",
                                         md: "9.1875rem",
                                         lg: "8.1875rem",
                                         xl: "8.1875rem",
                                     },
                                     width: {
+                                        xs: "90%",
                                         md: "90%",
                                         lg: "80%",
                                         xl: "80%",
@@ -311,7 +353,7 @@ const Invite = () => {
                                 <SemiBoldText
                                     weight={600}
                                     customStyles={{
-                                        fontSize: "1rem",
+                                        fontSize: { xs: ".875rem", md: "1rem" },
                                     }}
                                 >
                                     If you are a blogger or influencer, you have

@@ -171,7 +171,16 @@ const KenoButtonGrid = () => {
                             textTransform: "none",
                         }}
                     >
-                        Mines:1
+                        Mines:{" "}
+                        <Box
+                            sx={{
+                                color: "white !important",
+                                fontSize: ".875rem",
+                                fontWeight: 800,
+                            }}
+                        >
+                            Mines
+                        </Box>
                     </Button>
                 </Grid>
                 <Grid item xs={6} md={3}>
@@ -182,7 +191,7 @@ const KenoButtonGrid = () => {
                             height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: ".875rem",
+                            fontSize: { xs: "", md: ".875rem" },
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",

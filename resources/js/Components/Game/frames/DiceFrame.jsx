@@ -4,7 +4,9 @@ import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import dice from "../../../../assets/games/dice.svg";
 import cross from "../../../../assets/games/cross.svg";
+import cross_sm from "../../../../assets/games/cross_sm.svg";
 import arrow from "../../../../assets/games/arrow.svg";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const marks = [0, 25, 50, 75, 100];
 
@@ -54,8 +56,16 @@ const PrettoSlider = styled(Slider)({
 });
 
 const DiceFrame = () => {
+    const { isMobile } = useScreenResolution();
     return (
-        <Box sx={{ width: "98%", mt: ".625rem" }}>
+        <Box
+            sx={{
+                width: "98%",
+                mt: ".625rem",
+
+                px: { xs: "1.25rem", md: 0 },
+            }}
+        >
             <Box
                 sx={{
                     width: "100%",
@@ -125,217 +135,460 @@ const DiceFrame = () => {
                     );
                 })}
             </Box>
-            <Box
-                sx={{
-                    height: "6rem",
-                    width: "100%",
-                    mt: "3.125rem",
-                    pl: "1.4375rem",
-                    pr: "1.4375rem",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    borderRadius: ".625rem",
-                    background: "#272C4B",
-                    px: "1.0625rem",
-                    alignItems: "center",
-                }}
-            >
-                <Box
-                    sx={{
-                        width: "28%",
-                        height: "88%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            color: "white",
-                            fontSize: "0.875rem",
-                            fontWeight: 700,
-                        }}
-                    >
-                        Payout
-                    </Typography>
+            {!isMobile ? (
+                <>
                     <Box
                         sx={{
-                            height: "3.5rem",
-                            borderRadius: ".625rem",
-                            background: "#333965",
+                            height: "6rem",
+                            width: "100%",
+                            mt: "3.125rem",
+                            pl: "1.4375rem",
+                            pr: "1.4375rem",
                             display: "flex",
-                            justifyContent: "center",
+                            justifyContent: "space-between",
+                            borderRadius: ".625rem",
+                            background: "#272C4B",
+                            px: "1.0625rem",
                             alignItems: "center",
-                            padding: ".625rem",
                         }}
                     >
                         <Box
                             sx={{
-                                width: "100%",
+                                width: "28%",
+                                height: "88%",
                                 display: "flex",
+                                flexDirection: "column",
                                 justifyContent: "space-between",
                             }}
                         >
                             <Typography
                                 sx={{
+                                    color: "white",
+                                    fontSize: "0.875rem",
                                     fontWeight: 700,
-                                    fontSize: ".875rem",
                                 }}
                             >
-                                1.98x
-                            </Typography>
-                            <img src={cross} />
-                        </Box>
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        width: "28%",
-                        height: "88%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            color: "white",
-                            fontSize: "0.875rem",
-                            fontWeight: 700,
-                        }}
-                    >
-                        Roll Under
-                    </Typography>
-                    <Box
-                        sx={{
-                            height: "3.5rem",
-                            borderRadius: ".625rem",
-                            background: "#333965",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: ".625rem",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <Typography
-                                sx={{
-                                    fontWeight: 700,
-                                    fontSize: ".875rem",
-                                }}
-                            >
-                                51.00
-                            </Typography>
-                            <img src={arrow} />
-                        </Box>
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        width: "38%",
-                        height: "88%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            color: "white",
-                            fontSize: "0.875rem",
-                            fontWeight: 700,
-                        }}
-                    >
-                        Win Chance
-                    </Typography>
-                    <Box
-                        sx={{
-                            height: "3.5rem",
-                            borderRadius: ".625rem",
-                            background: "#333965",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: ".625rem",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <Typography
-                                sx={{
-                                    fontWeight: 700,
-                                    fontSize: ".875rem",
-                                }}
-                            >
-                                51
-                                <Box
-                                    component={"span"}
-                                    sx={{ color: "#3586FF" }}
-                                >
-                                    %
-                                </Box>
+                                Payout
                             </Typography>
                             <Box
                                 sx={{
-                                    height: "1.625rem",
-                                    width: "9.4375rem",
-                                    background: "#535D9D",
-                                    borderRadius: "0.8125rem",
+                                    height: "3.5rem",
+                                    borderRadius: ".625rem",
+                                    background: "#333965",
                                     display: "flex",
                                     justifyContent: "center",
+                                    alignItems: "center",
+                                    padding: ".625rem",
                                 }}
                             >
                                 <Box
                                     sx={{
-                                        height: "100%",
-                                        width: "95%",
+                                        width: "100%",
                                         display: "flex",
+                                        justifyContent: "space-between",
                                     }}
                                 >
-                                    {["Min", "-5", "+5", "Max"].map(
-                                        (item, idx) => {
-                                            return (
-                                                <Box
-                                                    sx={{
-                                                        width: "25%",
-                                                        cursor: "pointer",
-                                                        color: "#A6B0DA",
-                                                        fontWeight: 700,
-                                                        fontSize: ".75rem",
-                                                        textAlign: "center",
-                                                        display: "flex",
-                                                        justifyContent:
-                                                            "center",
-                                                        alignItems: "center",
-                                                        borderRight: `${
-                                                            idx !== 3
-                                                                ? "2px solid #2E3365"
-                                                                : ""
-                                                        }`,
-                                                    }}
-                                                >
-                                                    {item}
-                                                </Box>
-                                            );
-                                        }
-                                    )}
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 700,
+                                            fontSize: ".875rem",
+                                        }}
+                                    >
+                                        1.98x
+                                    </Typography>
+                                    <img src={cross} />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                width: "28%",
+                                height: "88%",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    color: "white",
+                                    fontSize: "0.875rem",
+                                    fontWeight: 700,
+                                }}
+                            >
+                                Roll Under
+                            </Typography>
+                            <Box
+                                sx={{
+                                    height: "3.5rem",
+                                    borderRadius: ".625rem",
+                                    background: "#333965",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    padding: ".625rem",
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 700,
+                                            fontSize: ".875rem",
+                                        }}
+                                    >
+                                        51.00
+                                    </Typography>
+                                    <img src={arrow} />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                width: "38%",
+                                height: "88%",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    color: "white",
+                                    fontSize: "0.875rem",
+                                    fontWeight: 700,
+                                }}
+                            >
+                                Win Chance
+                            </Typography>
+                            <Box
+                                sx={{
+                                    height: "3.5rem",
+                                    borderRadius: ".625rem",
+                                    background: "#333965",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    padding: ".625rem",
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 700,
+                                            fontSize: ".875rem",
+                                        }}
+                                    >
+                                        51
+                                        <Box
+                                            component={"span"}
+                                            sx={{ color: "#3586FF" }}
+                                        >
+                                            %
+                                        </Box>
+                                    </Typography>
+                                    <Box
+                                        sx={{
+                                            height: "1.625rem",
+                                            width: "9.4375rem",
+                                            background: "#535D9D",
+                                            borderRadius: "0.8125rem",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                height: "100%",
+                                                width: "95%",
+                                                display: "flex",
+                                            }}
+                                        >
+                                            {["Min", "-5", "+5", "Max"].map(
+                                                (item, idx) => {
+                                                    return (
+                                                        <Box
+                                                            sx={{
+                                                                width: "25%",
+                                                                cursor: "pointer",
+                                                                color: "#A6B0DA",
+                                                                fontWeight: 700,
+                                                                fontSize:
+                                                                    ".75rem",
+                                                                textAlign:
+                                                                    "center",
+                                                                display: "flex",
+                                                                justifyContent:
+                                                                    "center",
+                                                                alignItems:
+                                                                    "center",
+                                                                borderRight: `${
+                                                                    idx !== 3
+                                                                        ? "2px solid #2E3365"
+                                                                        : ""
+                                                                }`,
+                                                            }}
+                                                        >
+                                                            {item}
+                                                        </Box>
+                                                    );
+                                                }
+                                            )}
+                                        </Box>
+                                    </Box>
                                 </Box>
                             </Box>
                         </Box>
                     </Box>
-                </Box>
-            </Box>
+                </>
+            ) : (
+                <>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            mt: "1.625rem",
+                            mb: "1rem",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: "45%",
+
+                                display: "flex",
+                                flexDirection: "column",
+                                height: "3.5rem",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                    fontSize: "0.75rem",
+                                    color: "white",
+                                }}
+                            >
+                                Payout
+                            </Typography>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    width: "100%",
+                                    height: "2rem",
+                                    backgroundColor: "#131839",
+                                    borderRadius: ".625rem",
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        width: "95%",
+                                        height: "1.8rem",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: "white",
+                                            fontSize: ".625rem",
+                                            weight: "700",
+                                        }}
+                                    >
+                                        1.98x
+                                    </Typography>
+                                    <img
+                                        src={cross_sm}
+                                        style={{
+                                            width: ".625rem",
+                                            height: ".625rem",
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                width: "45%",
+
+                                display: "flex",
+                                flexDirection: "column",
+                                height: "3.5rem",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                    fontSize: "0.75rem",
+                                    color: "white",
+                                }}
+                            >
+                                Roll Under
+                            </Typography>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    width: "100%",
+                                    height: "2rem",
+                                    backgroundColor: "#131839",
+                                    borderRadius: ".625rem",
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        width: "95%",
+                                        height: "1.8rem",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: "#A6B0DA",
+                                            fontSize: ".625rem",
+                                            weight: "700",
+                                        }}
+                                    >
+                                        51.00
+                                    </Typography>
+                                    <img
+                                        src={arrow}
+                                        style={{
+                                            width: ".625rem",
+                                            height: ".625rem",
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            width: "100%",
+
+                            display: "flex",
+                            flexDirection: "column",
+                            height: "3.5rem",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontWeight: 700,
+                                fontSize: "0.75rem",
+                                color: "white",
+                            }}
+                        >
+                            Win Chances
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "100%",
+                                height: "2rem",
+                                backgroundColor: "#131839",
+                                borderRadius: ".625rem",
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    width: "95%",
+                                    height: "1.8rem",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        color: "white",
+                                        fontSize: ".625rem",
+                                        weight: "700",
+                                    }}
+                                >
+                                    51{" "}
+                                    <Box
+                                        component="span"
+                                        sx={{
+                                            color: "#3586FF",
+                                            fontSize: ".625rem",
+                                            weight: "700",
+                                        }}
+                                    >
+                                        %
+                                    </Box>
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        height: "1.625rem",
+                                        width: "9.4375rem",
+                                        background: "#535D9D",
+                                        borderRadius: "0.8125rem",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            height: "100%",
+                                            width: "95%",
+                                            display: "flex",
+                                        }}
+                                    >
+                                        {["Min", "-5", "+5", "Max"].map(
+                                            (item, idx) => {
+                                                return (
+                                                    <Box
+                                                        sx={{
+                                                            width: "25%",
+                                                            cursor: "pointer",
+                                                            color: "#A6B0DA",
+                                                            fontWeight: 700,
+                                                            fontSize: ".75rem",
+                                                            textAlign: "center",
+                                                            display: "flex",
+                                                            justifyContent:
+                                                                "center",
+                                                            alignItems:
+                                                                "center",
+                                                            borderRight: `${
+                                                                idx !== 3
+                                                                    ? "2px solid #2E3365"
+                                                                    : ""
+                                                            }`,
+                                                        }}
+                                                    >
+                                                        {item}
+                                                    </Box>
+                                                );
+                                            }
+                                        )}
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                </>
+            )}
         </Box>
     );
 };

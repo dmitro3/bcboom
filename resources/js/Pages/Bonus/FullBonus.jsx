@@ -10,22 +10,24 @@ import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import { Box } from "@mui/material";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
-
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const HEADER_TEXT = "COME AND GET 100% BONUS  UP TO 999";
 
 const FullBonus = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+    const { isMobile } = useScreenResolution();
+
     return (
         <>
             <Head title="Promotions Full Bonus" />
@@ -42,9 +44,16 @@ const FullBonus = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: { xs: "1rem", md: "1.125rem" },
+                                    width: { xs: "75%", md: "100%" },
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -64,15 +73,22 @@ const FullBonus = () => {
                                 width: "90%",
                             }}
                         >
-                            <GreyText>
-                                In order to thank you for your trust and support
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
+                                {!isMobile
+                                    ? `In order to thank you for your trust and support
                                 in BetDino, your first successful deposit amount
                                 of more than R$100, BetDino will give you a free
                                 bonus of 100% of the deposit amount, I sincerely
                                 wish you to earn more! your deposit, the bonus
                                 will automatically be credited to your account,
                                 so please check the system for messages sent to
-                                you
+                                you`
+                                    : `To encourage all BetDino users millions of benefits are offered to competent agents who meet the requirements to receive a generous bonus.`}
                             </GreyText>
                         </Box>
                         <Box
@@ -82,7 +98,13 @@ const FullBonus = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: { xs: "1rem", md: "1.5rem" },
+                                    fontWeight: 700,
+                                }}
+                            >
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -130,7 +152,12 @@ const FullBonus = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
-                                        customStyles={{ fontSize: "1.625rem" }}
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
+                                        }}
                                     >
                                         R$ 100 OR MORE
                                     </SemiBoldText>
@@ -154,7 +181,12 @@ const FullBonus = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
-                                        customStyles={{ fontSize: "1.625rem" }}
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
+                                        }}
                                     >
                                         100% of the deposit amount limit 999
                                     </SemiBoldText>
@@ -164,7 +196,8 @@ const FullBonus = () => {
                         <Box
                             sx={{
                                 display: "flex",
-                                width: "100%",
+                                width: { xs: "100%", md: "100%" },
+
                                 justifyContent: "center",
                                 alignItems: "center",
                                 marginTop: "1.5625rem",
@@ -172,7 +205,7 @@ const FullBonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: { xs: "100%", md: "80%" },
+                                    width: { xs: "90%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
@@ -189,7 +222,7 @@ const FullBonus = () => {
                         <Box
                             sx={{
                                 display: "flex",
-                                width: "100%",
+                                width: { xs: " 98%", md: "100%" },
                                 justifyContent: "center",
                                 alignItems: "center",
                                 marginTop: "1.5625rem",
@@ -198,7 +231,7 @@ const FullBonus = () => {
                         >
                             <Box
                                 sx={{
-                                    width: { xs: "100%", md: "80%" },
+                                    width: { xs: "98%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "space-between",
                                     alignItems: "center",
@@ -207,7 +240,10 @@ const FullBonus = () => {
                                 <ul
                                     style={{
                                         listStyleType: "disc",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: ".9375rem",
+                                            md: "1.125rem",
+                                        },
                                     }}
                                 >
                                     <li

@@ -144,7 +144,7 @@ const TowerButtonGrid = () => {
                             height: "4rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: "1.375rem",
+                            fontSize: { xs: "1rem", md: "1.375rem" },
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",
@@ -179,7 +179,7 @@ const TowerButtonGrid = () => {
                         >
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "#A6B0DA",
                                     mr: ".3rem",
@@ -189,7 +189,7 @@ const TowerButtonGrid = () => {
                             </Typography>
                             <Typography
                                 sx={{
-                                    fontSize: ".875rem",
+                                    fontSize: { xs: ".75rem", md: ".875rem" },
                                     fontWeight: 800,
                                     color: "white",
                                 }}
@@ -207,7 +207,7 @@ const TowerButtonGrid = () => {
                             height: { xs: "4rem", md: "3rem" },
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: ".875rem",
+                            fontSize: { xs: ".75rem", md: ".875rem" },
                             fontWeight: 800,
                             backgroundColor: "#3585ff",
                             color: "#FFFFFF",
@@ -224,7 +224,7 @@ const TowerButtonGrid = () => {
                             height: "3rem",
                             borderRadius: "0.625rem",
                             background: "#333965",
-                            fontSize: ".875rem",
+                            fontSize: { xs: ".75rem", md: ".875rem" },
                             fontWeight: 800,
 
                             backgroundColor: "#333965",
