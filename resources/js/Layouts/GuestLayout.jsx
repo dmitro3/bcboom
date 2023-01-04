@@ -5,13 +5,15 @@ import MobileFooter from "@/Components/Footer/MobileFooter";
 import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
 import WalletModal from "@/Components/modal/wallet/WalletModal";
+import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import LayoutTheme from "./theme";
-
+import bclogo from "../../../public/images/brand/bcboom.png";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
@@ -35,7 +37,16 @@ export default function GuestLayout({ children }) {
     const { modalState: walletModalState } = useSelector(
         (state) => state.wallet
     );
+    const [loading, setLoading] = useState(false);
 
+    const wait = (delay = 0) =>
+        new Promise((resolve) => setTimeout(resolve, delay));
+
+    document.addEventListener("DOMContentLoaded", () =>
+        wait(1000).then(() => {
+            setLoading(false);
+        })
+    );
     // if (isMobile) {
     //     return (
     //         <LayoutTheme>
@@ -48,6 +59,15 @@ export default function GuestLayout({ children }) {
     //         </LayoutTheme>
     //     );
     // }
+    if (loading)
+        return (
+            <Flex height="100%" justifyContent="center">
+                {/* <div>
+                    <img src={bclogo} alt="" />
+                </div> */}
+                LOADING!!
+            </Flex>
+        );
     return (
         <LayoutTheme>
             {isMobile && drawerState?.open && <Sidedrawer />}
