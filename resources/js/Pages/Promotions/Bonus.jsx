@@ -11,21 +11,21 @@ import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
 import PromotionCard from "@/Components/Promotions/card";
 
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
-
 const HEADER_TEXT = "Crazy Weekend Bonus up to 777";
 
 const Bonus = () => {
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
     return (
         <>
             <Head title="Promotions Bonus" />
@@ -45,9 +45,15 @@ const Bonus = () => {
                                 marginTop: "2.1875rem",
                                 display: "flex",
                                 justifyContent: "center",
+                                textAlign: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -67,7 +73,12 @@ const Bonus = () => {
                                 width: "90%",
                             }}
                         >
-                            <GreyText>
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
                                 Enjoy a relaxing and enjoyable weekend with a
                                 login bonus on Sundays only at Betdino.
                             </GreyText>
@@ -79,7 +90,15 @@ const Bonus = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: {
+                                        xs: "1.125rem",
+                                        md: "1.5rem",
+                                    },
+                                }}
+                            >
                                 REQUIREMENTS AND BONUS
                             </SemiBoldText>
                         </Box>
@@ -108,11 +127,15 @@ const Bonus = () => {
                                     customStyles={{
                                         backgroundImage:
                                             "linear-gradient( 100.65deg, #3971E8 2.29%, #5846C7 100%)",
+                                        //height: "13rem",
+                                        padding: "1rem",
                                     }}
                                 >
                                     <SemiBoldText
                                         weight={800}
-                                        customStyles={{ fontSize: "1.25rem" }}
+                                        customStyles={{
+                                            fontSize: "1.25rem",
+                                        }}
                                     >
                                         <Box
                                             sx={{ color: "#FFF96A" }}
@@ -123,7 +146,14 @@ const Bonus = () => {
                                     </SemiBoldText>
                                     <SemiBoldText
                                         weight={700}
-                                        customStyles={{ fontSize: "1.625rem" }}
+                                        customStyles={{
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
+
+                                            width: "100%",
+                                        }}
                                     >
                                         Deposit at least R$100 in your account
                                         on Sundays
@@ -133,8 +163,7 @@ const Bonus = () => {
                                     customStyles={{
                                         backgroundImage:
                                             "linear-gradient( 99.2deg, #3971E8 4.19%, #5848C8 108.12%)",
-                                        paddingLeft: "0.4rem",
-                                        paddingRight: "0.4rem",
+                                        padding: "1rem",
                                     }}
                                 >
                                     <SemiBoldText
@@ -151,7 +180,10 @@ const Bonus = () => {
                                     <SemiBoldText
                                         weight={700}
                                         customStyles={{
-                                            fontSize: "1.625rem",
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                md: "1.625rem",
+                                            },
                                         }}
                                     >
                                         You will have the chance to receive a
@@ -179,7 +211,13 @@ const Bonus = () => {
                             >
                                 <SemiBoldText
                                     weight={700}
-                                    customStyles={{ color: "#FFF96A" }}
+                                    customStyles={{
+                                        color: "#FFF96A",
+                                        fontSize: {
+                                            xs: "1.125rem",
+                                            md: "1.5rem",
+                                        },
+                                    }}
                                 >
                                     Rules
                                 </SemiBoldText>
@@ -206,7 +244,10 @@ const Bonus = () => {
                                 <ul
                                     style={{
                                         listStyleType: "disc",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: "0.9375rem",
+                                            md: "1.125rem",
+                                        },
                                     }}
                                 >
                                     <li

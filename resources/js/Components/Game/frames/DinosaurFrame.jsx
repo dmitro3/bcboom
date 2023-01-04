@@ -4,7 +4,10 @@ import dinosaur_sm from "../../../../assets/games/dinosaur.svg";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Box } from "@mui/material";
-const Frame = styled("img")(() => ({}));
+const Frame = styled("img")(() => ({
+    height: "100%",
+    width: "100%",
+}));
 
 const DinosaurFrame = () => {
     const { isMobile } = useScreenResolution();
@@ -23,11 +26,12 @@ const DinosaurFrame = () => {
                 </Box>
             ) : (
                 <Box
-                    sx={
-                        {
-                            // mt: "1.25rem",
-                        }
-                    }
+                    sx={{
+                        // mt: "1.25rem",
+
+                        width: "100%",
+                        height: "12.4375rem",
+                    }}
                 >
                     <Frame src={dinosaur_sm} />
                 </Box>

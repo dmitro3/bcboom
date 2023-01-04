@@ -5,8 +5,10 @@ import { Head } from "@inertiajs/inertia-react";
 import img from "../../../assets/promotions/distributor_pro_background.svg";
 import img_sm from "../../../assets/promotions/pro_dist_sm.svg";
 import activity from "../../../assets/promotions/activity.svg";
+import activity_sm from "../../../assets/promotions/activity_sm.svg";
 import bonus from "../../../assets/promotions/bonus.svg";
 import info from "../../../assets/promotions/info.svg";
+import info_sm from "../../../assets/promotions/info_sm_img.png";
 import bell from "../../../assets/promotions/bell.svg";
 import infoBook from "../../../assets/promotions/infoBook.svg";
 import { styled } from "@mui/system";
@@ -14,24 +16,26 @@ import { DataGrid } from "@mui/x-data-grid";
 import { activeUsersColumns, activeUsersRows } from "@/data/promotions";
 import React from "react";
 import SemiBoldText from "@/Components/Promotions/Typography/SemiBoldText";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import GreyText from "@/Components/Promotions/Typography/GreyText";
-
-const PromotionPageWrapper = styled("div")(() => ({
-    background: "#1D2036",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: "2.125rem",
-    paddingLeft: "1.5625rem",
-    paddingRight: "1.5625rem",
-    paddingBottom: "2.125rem",
-    height: "80%",
-}));
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 
 const HEADER_TEXT = "Millions of Distributor Benefits";
 
 const Distributor = () => {
+    const { isMobile } = useScreenResolution();
+    const PromotionPageWrapper = styled("div")(() => ({
+        background: "#1D2036",
+        width: "93%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: "2.125rem",
+        paddingLeft: { xs: "5%", md: "5%" },
+        paddingRight: { xs: "5%", md: "5%" },
+        paddingBottom: "2.125rem",
+        height: "80%",
+    }));
+
     return (
         <>
             <Head title="Promotions Distributor" />
@@ -53,7 +57,12 @@ const Distributor = () => {
                                 justifyContent: "center",
                             }}
                         >
-                            <SemiBoldText>
+                            <SemiBoldText
+                                customStyles={{
+                                    fontWeight: 700,
+                                    fontSize: "1.125rem",
+                                }}
+                            >
                                 <Box
                                     component="span"
                                     sx={{ color: "#FFF96A", mr: "0.625rem" }}
@@ -73,7 +82,12 @@ const Distributor = () => {
                                 width: "90%",
                             }}
                         >
-                            <GreyText>
+                            <GreyText
+                                customStyles={{
+                                    fontWeight: 600,
+                                    fontSize: { xs: "0.875rem", md: "1rem" },
+                                }}
+                            >
                                 To encourage all BetDino users millions of
                                 benefits are offered to competent agents who
                                 meet the requirements to receive a generous
@@ -92,7 +106,7 @@ const Distributor = () => {
                                     xl: "center",
                                 },
                                 alignItems: "center",
-                                marginTop: "4.5625rem",
+                                marginTop: { xs: "2.5rem", md: "4.5625rem" },
                             }}
                         >
                             <Box
@@ -128,7 +142,10 @@ const Distributor = () => {
                                             lg: "4.0625rem",
                                             xl: "4.0625rem",
                                         },
-                                        paddingRight: "4.0625rem",
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
                                         width: {
                                             xs: "100%",
                                             sm: "100%",
@@ -164,11 +181,12 @@ const Distributor = () => {
                                                 lg: "center",
                                                 xl: "center",
                                             },
-                                            alignItems: "center",
-                                            pt: "1rem",
+                                            alignItems: "flex-start",
+                                            pt: { xs: ".5rem", md: "1rem" },
+
                                             width: {
-                                                xs: "75px",
-                                                sm: "75px",
+                                                xs: "85px",
+                                                sm: "85px",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -184,10 +202,14 @@ const Distributor = () => {
                                     >
                                         <img
                                             style={{
-                                                height: "100%",
-                                                width: "100%",
+                                                height: "28px",
+                                                width: "28.8px",
                                             }}
-                                            src={activity}
+                                            src={
+                                                isMobile
+                                                    ? activity_sm
+                                                    : activity
+                                            }
                                         />
                                     </Box>
                                     <Box
@@ -218,13 +240,16 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
-                                            ml: "1rem",
+                                            ml: ".75rem",
                                         }}
                                     >
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "1rem",
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "1rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -232,6 +257,7 @@ const Distributor = () => {
                                                     lg: "center",
                                                     xl: "center",
                                                 },
+                                                mb: ".5rem",
                                             }}
                                         >
                                             ACTIVITY REQUIREMENTS
@@ -239,7 +265,10 @@ const Distributor = () => {
                                         <GreyText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "0.9375rem",
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "0.9375rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -265,7 +294,10 @@ const Distributor = () => {
                                             lg: "4.0625rem",
                                             xl: "4.0625rem",
                                         },
-                                        paddingRight: "4.0625rem",
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
                                         width: {
                                             xs: "100%",
                                             sm: "100%",
@@ -302,7 +334,10 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
-                                            alignItems: "center",
+                                            alignItems: {
+                                                xs: "flex-start",
+                                                md: "center",
+                                            },
                                             //pt: "1rem",
                                             width: {
                                                 xs: "75px",
@@ -350,13 +385,16 @@ const Distributor = () => {
                                                 xl: "center",
                                             },
 
-                                            ml: "1rem",
+                                            ml: ".75rem",
                                         }}
                                     >
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "1rem",
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "1rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -364,6 +402,7 @@ const Distributor = () => {
                                                     lg: "center",
                                                     xl: "center",
                                                 },
+                                                mb: ".5rem",
                                             }}
                                         >
                                             EVENT BONUS
@@ -371,7 +410,10 @@ const Distributor = () => {
                                         <GreyText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "0.9375rem",
+                                                fontSize: {
+                                                    xs: ".75rem",
+                                                    md: "0.9375rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     sm: "left",
@@ -398,7 +440,12 @@ const Distributor = () => {
                                 marginTop: "4.5625rem",
                             }}
                         >
-                            <SemiBoldText weight={700}>
+                            <SemiBoldText
+                                weight={700}
+                                customStyles={{
+                                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                                }}
+                            >
                                 Achievement Bonus
                             </SemiBoldText>
                         </Box>
@@ -428,7 +475,10 @@ const Distributor = () => {
                                 "& .MuiDataGrid-columnHeaderTitleContainerContent":
                                     {
                                         fontWeight: "700",
-                                        fontSize: "1.125rem",
+                                        fontSize: {
+                                            xs: ".875rem",
+                                            md: "1.125rem",
+                                        },
                                     },
 
                                 "& .MuiDataGrid-footerContainer": {
@@ -502,11 +552,12 @@ const Distributor = () => {
                         >
                             <Box
                                 sx={{
-                                    width: { xs: "98%", md: "80%" },
+                                    width: { xs: "95%", md: "80%" },
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    textAlign: "center",
+                                    textAlign: { xs: "center", md: "center" },
+                                    lineHeight: "5px",
                                 }}
                             >
                                 <SemiBoldText
@@ -518,16 +569,24 @@ const Distributor = () => {
                                         component={"span"}
                                         sx={{
                                             color: "#FFF96A",
-                                            fontSize: "1.125rem",
-                                            mr: "0.5rem",
+                                            fontSize: {
+                                                xs: "1rem",
+                                                md: "1.125rem",
+                                            },
+                                            mr: { xs: ".5rem", md: "0.5rem" },
                                         }}
                                     >
                                         Active users:
                                     </Box>
-                                    <Box
+                                    <Typography
                                         component={"span"}
                                         sx={{
-                                            fontSize: "1rem",
+                                            fontSize: {
+                                                xs: ".875rem",
+                                                md: "1rem",
+                                            },
+                                            fontWeight: 700,
+                                            fontFamily: "montserrat",
                                         }}
                                     >
                                         registered via your invite link and
@@ -535,17 +594,19 @@ const Distributor = () => {
                                         number of active users, you will receive
                                         an additional bonus The more guests you
                                         have, the greater the bonus
-                                    </Box>
+                                    </Typography>
                                 </SemiBoldText>
                             </Box>
                         </Box>
                         <Box
                             sx={{
-                                width: "100%",
+                                width: { xs: "90%", md: "100%" },
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
                                 marginTop: "4.5625rem",
+
+                                mx: "auto",
                             }}
                         >
                             <Box
@@ -565,8 +626,14 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        borderRight: "1px solid #555F8D",
-                                        paddingRight: "4.0625rem",
+                                        borderRight: {
+                                            xs: "none",
+                                            md: "1px solid #555F8D",
+                                        },
+                                        paddingRight: {
+                                            xs: 0,
+                                            md: "4.0625rem",
+                                        },
                                         width: {
                                             xs: "100%",
                                             md: "50%",
@@ -593,8 +660,8 @@ const Distributor = () => {
                                             },
 
                                             width: {
-                                                xs: "75px",
-                                                sm: "75px",
+                                                xs: "30%",
+                                                sm: "30%",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -606,7 +673,7 @@ const Distributor = () => {
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
-                                            mr: "1rem",
+                                            mr: "2rem",
                                         }}
                                     >
                                         <img src={bell} />
@@ -635,7 +702,10 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "1rem",
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",
@@ -665,14 +735,17 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        paddingRight: "4.0625rem",
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
                                         paddingLeft: {
                                             xs: "0",
                                             md: "4.0625rem",
                                         },
 
                                         width: {
-                                            xs: "98%",
+                                            xs: "100%",
                                             md: "50%",
                                         },
                                         alignItems: {
@@ -701,29 +774,29 @@ const Distributor = () => {
                                             },
 
                                             width: {
+                                                xs: "50%",
+                                                sm: "50%",
+                                                md: "45px",
+                                                lg: "45px",
+                                                xl: "35px",
+                                            },
+                                            height: {
                                                 xs: "95px",
                                                 sm: "95px",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
-                                            height: {
-                                                xs: "75px",
-                                                sm: "75px",
-                                                md: "45px",
-                                                lg: "45px",
-                                                xl: "35px",
-                                            },
-                                            mr: "1rem",
+                                            mr: "2rem",
                                         }}
                                     >
-                                        <img src={info} />
+                                        <img src={isMobile ? info_sm : info} />
                                     </Box>
                                     <Box
                                         sx={{
                                             display: "flex",
                                             justifyContent: {
-                                                xs: "left",
+                                                xs: "flex-start",
                                                 md: "center",
                                             },
                                             alignItems: {
@@ -743,7 +816,10 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "1rem",
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",
@@ -776,14 +852,17 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        paddingRight: "4.0625rem",
+                                        paddingRight: {
+                                            xs: "0",
+                                            md: "4.0625rem",
+                                        },
                                         paddingLeft: {
                                             xs: "0",
                                             md: "4.0625rem",
                                         },
 
                                         width: {
-                                            xs: "98%",
+                                            xs: "100%",
                                             md: "50%",
                                         },
                                         alignItems: {
@@ -816,8 +895,8 @@ const Distributor = () => {
                                             },
 
                                             width: {
-                                                xs: "95px",
-                                                sm: "95px",
+                                                xs: "40%",
+                                                sm: "40%",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -829,7 +908,7 @@ const Distributor = () => {
                                                 lg: "45px",
                                                 xl: "35px",
                                             },
-                                            mr: "1rem",
+                                            mr: "2rem",
                                         }}
                                     >
                                         <img src={infoBook} />
@@ -858,7 +937,10 @@ const Distributor = () => {
                                         <SemiBoldText
                                             customStyles={{
                                                 fontWeight: "600",
-                                                fontSize: "1rem",
+                                                fontSize: {
+                                                    xs: ".875rem",
+                                                    md: "1rem",
+                                                },
                                                 textAlign: {
                                                     xs: "left",
                                                     md: "center",

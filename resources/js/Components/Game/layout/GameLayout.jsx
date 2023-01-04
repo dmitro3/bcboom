@@ -32,12 +32,13 @@ const GameLayout = ({
     customFrameHeader = false,
     innerHeader = false,
 }) => {
+    const { isMobile } = useScreenResolution();
     return (
         <div>
             <Box
                 sx={{
-                    width: "9rem",
-                    height: "7.1875rem",
+                    width: `${isMobile ? "6rem" : "9rem"}`,
+                    height: `${isMobile ? "5.1875rem" : "7.1875rem"}`,
                     borderTopLeftRadius: "0.625rem",
                     background:
                         "linear-gradient(103.93deg, #337CFF 3.76%, #154BB2 71.62%)",
@@ -50,6 +51,7 @@ const GameLayout = ({
                     justifyContent: "center",
                     alignItems: "center",
                     textAlign: "center",
+                    mt: ".1875rem",
 
                     //px: ".3rem",
                 }}
@@ -59,7 +61,7 @@ const GameLayout = ({
                         fontFamily: "GROBOLD, montserrat",
                         fontStyle: "normal",
                         fontWeight: "500",
-                        fontSize: "1.5rem",
+                        fontSize: `${isMobile ? "1rem" : "1.5rem"}`,
                         position: "absolute",
 
                         top: "4px",
@@ -96,14 +98,14 @@ const GameLayout = ({
                                 xs: `${customFrameHeader ? "flex" : "none"}`,
                                 md: "none",
                             },
-                            mt: "-1rem",
+                            mt: "-1.5rem",
                             mb: ".5rem",
                         }}
                     >
                         <Box
                             sx={{
                                 display: "flex",
-                                width: "24%",
+                                width: "34%",
                             }}
                         >
                             <GameFrameHeaderIconContainer>
@@ -130,6 +132,7 @@ const GameLayout = ({
                             flexDirection: "column",
                             background: "#2E3565",
                             padding: `${customFrameHeader ? 0 : "1.12rem"}`,
+
                             ...customFrameStyles,
                         }}
                     >

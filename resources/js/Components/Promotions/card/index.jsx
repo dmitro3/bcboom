@@ -6,10 +6,10 @@ const PromotionCard = ({ customStyles, children }) => {
         <Box
             sx={{
                 width: {
-                    xs: "100%",
+                    xs: "90%",
                     md: "48%",
                 },
-                height: "12.75rem",
+                height: { xs: "11rem", md: "12.75rem" },
                 borderRadius: "1.25rem",
                 display: "flex",
                 alignItems: "center",

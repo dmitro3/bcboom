@@ -13,6 +13,7 @@ const PromotionsHeader = ({
         <Box
             sx={{
                 height: {
+                    xs: "12.875rem",
                     sm: "17rem",
                     md: "10rem",
                     lg: "12rem",
@@ -26,16 +27,20 @@ const PromotionsHeader = ({
                     xl: `url(${imgUrl})`,
                 },
                 backgroundSize: {
-                    sm: "100%",
-                    md: "100%",
-                    lg: "100%",
-                    xl: "100%",
+                    xs: "cover",
+                    sm: "cover",
+                    md: "cover",
+                    lg: "cover",
+                    xl: "cover",
                 },
                 backgroundRepeat: "no-repeat",
                 borderRadius: "10px",
                 display: "flex",
                 alignItems: "center",
+                backgroundPosition: { xs: "-1.5rem", sm: "center" },
+                width: { xs: "86%", md: "98%" },
 
+                mx: "auto",
                 ...customImageStyles,
             }}
         >
@@ -44,13 +49,13 @@ const PromotionsHeader = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "left",
-                    paddingLeft: "2%",
+                    paddingLeft: { xs: "7%", md: "2%" },
                     textAlign: "left",
                     borderRight: "none",
                     justifySelf: "left",
 
                     width: {
-                        xs: "40%",
+                        xs: "65%",
                         sm: "60%",
                         md: "50%",
                         lg: "60%",

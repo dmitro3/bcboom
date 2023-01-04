@@ -1,5 +1,5 @@
 import React from "react";
-import keno from "../../../../assets/games/KenoFrame.svg";
+import keno from "../../../../assets/games/keno_sm.svg";
 import keno_bg from "../../../../assets/games/keno_bg.svg";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";
@@ -15,7 +15,7 @@ const KenoFrame = () => {
                 <Box
                     sx={{
                         //mt: "1.25rem",
-                        height: "100%",
+                        height: "23.25rem",
                     }}
                 >
                     <Frame src={keno_bg} />
@@ -24,6 +24,7 @@ const KenoFrame = () => {
                 <Box
                     sx={{
                         mt: "1.25rem",
+                        height: "100%",
                     }}
                 >
                     <Frame src={keno} />
