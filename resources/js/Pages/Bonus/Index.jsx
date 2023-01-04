@@ -63,6 +63,7 @@ const BonusIndex = () => {
             icon: bonusIcon,
             imageWidth: "534px",
             imageHeight: "175px",
+            margin: '10px',
             perColumn: 3,
             hoverEffect: "overlay",
             hoverText: "see more",

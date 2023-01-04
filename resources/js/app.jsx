@@ -1,15 +1,16 @@
-import "./bootstrap";
 import "../css/app.css";
+import "./bootstrap";
 
-import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux/es/exports";
 import store from "./redux/store";
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "BcBoom Casino";
+    window.document.getElementsByTagName("title")[0]?.innerText ||
+    "BcBoom Casino";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -29,6 +30,19 @@ createInertiaApp({
     },
 });
 
+
+
+// Inertia.on("start", () => {
+//     console.log("starteed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// });
+
+// Inertia.on("progress", (event) => {
+//     console.log("progress!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// });
+// Inertia.on("finish", (event) => {
+//     console.log("finish!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// });
+
 InertiaProgress.init({
     // The delay after which the progress bar will
     // appear during navigation, in milliseconds.
@@ -41,5 +55,5 @@ InertiaProgress.init({
     includeCSS: true, //this
 
     // Whether the NProgress spinner will be shown.
-    showSpinner: false,
+    showSpinner: true,
 });
