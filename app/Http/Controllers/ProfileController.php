@@ -67,4 +67,85 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function imageStore(ImageStoreRequest $request){
+        $validatedData = $request->validated();
+        $validatedData['image'] = $request->file('image')->store('image');
+
+        $user = Auth::user();
+        $data = $user->update([
+            'image' => $validatedData
+        ]);
+        if($data){
+            return response()->json([
+                'message' => 'success',
+                'user' => $user
+            ], 200);
+        }else{
+             return response()->json([$data, status => 400, error =>'Image failed']);
+        }
+    }
+
+    public function updatebio(Request $request){
+        if(Auth::check()){
+            $request->validate([
+                'bio' => ['required', 'string'],
+            ]);
+    
+            $user = Auth::user();
+            $user->update([
+                'bio' => $request->all()
+            ]);
+            return response()->json([
+                'message' => 'success',
+                'user' => $user
+            ], 200);
+        }else{
+            return response()->json([
+                'error' => 'not logged in'], 401);
+        }
+        
+    }
+
+    public function updateusername(Request $request){
+        if(Auth::check()){
+            $request->validate([
+                'username' => 'required|string|max:255|unique:users|regex:/^\S*$/u'
+            ]);
+            
+            $user = Auth::user();
+
+            $user->update([
+                'username' => $request->all()
+            ]);
+            return response()->json([
+                'message' => 'success',
+                'user' => $user
+            ], 200);
+        }else{
+            return response()->json([
+                'error' => 'not logged in'], 401);
+        }
+        
+    }
+
+    public function updatephone(Request $request){
+        if(Auth::check()){
+            $request->validate([
+                'password' => 'required',
+            ]);
+    
+            $user = Auth::user();
+            $user->update([
+                'bio' => $request->all()
+            ]);
+            return response()->json([
+                'message' => 'success',
+                'user' => $user
+            ], 200);
+        }else{
+            return response()->json([
+                'error' => 'not logged in'], 401);
+        }
+        
+    }
 }
