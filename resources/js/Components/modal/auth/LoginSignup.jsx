@@ -3,26 +3,27 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Button from "@/Components/Button/Button";
 import Input from "@/Components/Input/Input";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
+import apiService from "@/hooks/apiService";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/system";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import close from "../../../../../public/images/svg/closeModal.svg";
 import lock from "../../../../../public/images/svg/lock.svg";
 import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import user from "../../../../../public/images/svg/user.svg";
 import CustomModal from "../Modal";
-const LoginSignupModalWrapper = styled("div")(({isMobile}) => ({
+const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
     background: "#272C4B",
     position: "relative",
     borderRadius: "20px",
     border: "transparent",
     padding: !isMobile && "20px 30px",
     width: isMobile ? "90vw" : "600px",
-    margin: isMobile && '0 auto',
-
+    margin: isMobile && "0 auto",
 }));
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
@@ -36,14 +37,14 @@ const LoginFormWrapper = styled("div")(({}) => ({
     marginTop: "40px",
     gap: "20px",
 }));
-const SignupFormWrapper = styled("div")(({isMobile}) => ({
+const SignupFormWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "40px",
     gap: "20px",
     width: isMobile ? "100%" : "480px",
 }));
-const SignupForm = ({isMobile}) => {
+const SignupForm = ({ isMobile }) => {
     const onRecaptchaChange = (value) => {
         console.log("Captcha value:", value);
     };
@@ -85,7 +86,12 @@ const SignupForm = ({isMobile}) => {
                     }
                 />
             </p>
-            <div style={{ transform: !isMobile &&"scaleX(1.6)", transformOrigin: "0 0" }}>
+            <div
+                style={{
+                    transform: !isMobile && "scaleX(1.6)",
+                    transformOrigin: "0 0",
+                }}
+            >
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
                     onChange={onRecaptchaChange}
@@ -94,32 +100,57 @@ const SignupForm = ({isMobile}) => {
             <Button
                 text="Sign up"
                 // styles={{
-                    width= "100%"
-                    background= "#3586FF"
-                    color= "#fff"
-                    borderRadius= "30px"
-                    padding= "15px "
-                    marginTop= "20px"
+                width="100%"
+                background="#3586FF"
+                color="#fff"
+                borderRadius="30px"
+                padding="15px "
+                marginTop="20px"
                 // }}
             />
         </SignupFormWrapper>
     );
 };
-const LoginForm = ({isMobile}) => {
-    const onRecaptchaChange = (value) => {
-        console.log("Captcha value:", value);
-    };
+const LoginForm = ({ isMobile }) => {
+    const [loginDetails, setLoginDetails] = useState({
+        email: "",
+        password: "",
+        captchaValue: "",
+    });
+    
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const { email, password, captchaValue } = loginDetails;
+        if(email === "" || password === "" || captchaValue === "") {
+            window.confirm("Please fill all the fields, and verify captcha");
+            return;
+        }
+        const response = await apiService('/auth/login', 'POST', loginDetails)
+        console.log('respone: ',response.data);
+    }
+
     return (
         <LoginFormWrapper>
             <Input
                 addon={<img src={user} alt="" />}
                 type="text"
                 placeholder="Email/Phone"
+                value={loginDetails.email}
+                onChange={(e) =>
+                    setLoginDetails({ ...loginDetails, email: e.target.value })
+                }
             />
             <Input
                 addon={<img src={lock} alt="" />}
                 type="password"
                 placeholder="Enter your password"
+                value={loginDetails.password}
+                onChange={(e) =>
+                    setLoginDetails({
+                        ...loginDetails,
+                        password: e.target.value,
+                    })
+                }
             />
             <p
                 style={{
@@ -139,19 +170,18 @@ const LoginForm = ({isMobile}) => {
             >
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
-                    onChange={onRecaptchaChange}
+                    onChange={(value) => setLoginDetails({...loginDetails, captchaValue: value})}
                 />
             </div>
             <Button
                 text="Login"
-                // styles={{
                 width="100%"
                 background="#3586FF"
                 color="#fff"
                 borderRadius="30px"
                 padding="15px "
                 marginTop="20px"
-                // }}
+                onSubmit={handleSubmit}
             />
         </LoginFormWrapper>
     );
@@ -184,7 +214,7 @@ const LoginSignupModal = () => {
                             {
                                 value: "login",
                                 label: "Log In",
-                                content: <LoginForm isMobile={isMobile}/>,
+                                content: <LoginForm isMobile={isMobile} />,
                             },
                             {
                                 label: "Sign Up",
