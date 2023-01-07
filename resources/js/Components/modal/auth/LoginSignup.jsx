@@ -3,9 +3,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Button from "@/Components/Button/Button";
 import Input from "@/Components/Input/Input";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
-import apiService from "@/hooks/apiService";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { login, setAuthModalState } from "@/redux/auth/auth-slice";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/system";
@@ -16,6 +15,9 @@ import lock from "../../../../../public/images/svg/lock.svg";
 import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import user from "../../../../../public/images/svg/user.svg";
 import CustomModal from "../Modal";
+import { toast } from "react-toastify";
+
+import Text from "@/Components/Text/Text";
 const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
     background: "#272C4B",
     position: "relative",
@@ -117,16 +119,34 @@ const LoginForm = ({ isMobile }) => {
         password: "",
         captchaValue: "",
     });
-    
+    const [loginError, setLoginError] = useState("");
+    const [catpchaError, setCatpchaError] = useState("");
+    const dispatcher = useDispatch();
     async function handleSubmit(e) {
         e.preventDefault();
         const { email, password, captchaValue } = loginDetails;
-        if(email === "" || password === "" || captchaValue === "") {
-            window.confirm("Please fill all the fields, and verify captcha");
+        if (email === "" || password === "") {
+            setLoginError("Please fill all the fields");
             return;
         }
-        const response = await apiService('/auth/login', 'POST', loginDetails)
-        console.log('respone: ',response.data);
+        if (captchaValue === "") {
+            setCatpchaError("Please verify that you are not a robot");
+            return;
+        }
+        const response = await dispatcher(login(loginDetails));
+        if (response.payload.status === 401) {
+            setLoginError(
+                "Invalid email or password, please try again or reset your password"
+            );
+        }
+        if (response.payload.status === 200) {
+            dispatcher(setAuthModalState({ open: false }));
+            localStorage.setItem(
+                "access_token",
+                response.payload.data.access_token
+            );
+            toast.success("You have successfully logged in");
+        }
     }
 
     return (
@@ -136,9 +156,11 @@ const LoginForm = ({ isMobile }) => {
                 type="text"
                 placeholder="Email/Phone"
                 value={loginDetails.email}
-                onChange={(e) =>
-                    setLoginDetails({ ...loginDetails, email: e.target.value })
-                }
+                onChange={(e) => {
+                    setLoginDetails({ ...loginDetails, email: e.target.value });
+                    setLoginError("");
+                }}
+                border={loginError && " #F93967"}
             />
             <Input
                 addon={<img src={lock} alt="" />}
@@ -151,7 +173,9 @@ const LoginForm = ({ isMobile }) => {
                         password: e.target.value,
                     })
                 }
+                border={loginError && "#F93967"}
             />
+            <Text type="p" text={loginError} color="#F93967" fontSize="14px" />
             <p
                 style={{
                     alignSelf: "flex-end",
@@ -166,13 +190,27 @@ const LoginForm = ({ isMobile }) => {
                 style={{
                     transform: !isMobile && "scaleX(1.6)",
                     transformOrigin: "0 0",
+                    // border: catpchaError && "3px solid #F93967",
+                    width: "fit-content",
                 }}
             >
                 <ReCAPTCHA
                     sitekey={"6LdGw6MjAAAAAOizaooLBfkIFQ6GkvxA22FtenMd"}
-                    onChange={(value) => setLoginDetails({...loginDetails, captchaValue: value})}
+                    onChange={(value) => {
+                        setLoginDetails({
+                            ...loginDetails,
+                            captchaValue: value,
+                        });
+                        setCatpchaError("");
+                    }}
                 />
             </div>
+            <Text
+                type="p"
+                text={catpchaError}
+                color="#F93967"
+                fontSize="14px"
+            />
             <Button
                 text="Login"
                 width="100%"

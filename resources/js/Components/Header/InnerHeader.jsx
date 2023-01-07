@@ -2,14 +2,7 @@ import { navlinks } from "@/data";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
-import bonus from "../../../../public/images/svg/bonus.svg";
-import games from "../../../../public/images/svg/games.svg";
-import homeSvg from "../../../../public/images/svg/homeSvg.svg";
-import live from "../../../../public/images/svg/live.svg";
-import promotion from "../../../../public/images/svg/promotion.svg";
-import race from "../../../../public/images/svg/race.svg";
-import slots from "../../../../public/images/svg/slots.svg";
-import vip from "../../../../public/images/svg/vip.svg";
+import { useSelector } from "react-redux";
 import UserDropdown from "../UserDropdown/UserDropdown";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
     padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
@@ -48,6 +41,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
 }));
 const InnerHeader = () => {
     const { isMobile } = useScreenResolution();
+    const { user } = useSelector((state) => state.auth);
     const location =
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
@@ -114,7 +108,7 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && <UserDropdown isLoggedIn={false} />}
+                {!isMobile && <UserDropdown isLoggedIn={user?.user} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );

@@ -1,6 +1,6 @@
 import { setAuthModalState } from "@/redux/auth/auth-slice";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userimg from "../../../../public/images/user/useravatar.png";
 import Button from "../Button/Button";
 import { Flex } from "../UtilComponents/Flex";
@@ -118,7 +118,7 @@ const UserDetails = ({ user }) => {
             <Flex padding="30px">
                 <UserImage size={"65px"}>
                     <img
-                        src={user.avatar}
+                        src={user.avatar || userimg}
                         alt="useravatar"
                         style={{ height: "100%" }}
                     />
@@ -134,7 +134,7 @@ const UserDetails = ({ user }) => {
                     />
                     <Text
                         type="p"
-                        text={user.rank}
+                        text={user.vip || 'Rank 0'}
                         color="#FFDC62"
                         fontSize="18px"
                         fontWeight="bold"
@@ -183,16 +183,19 @@ const UserDetails = ({ user }) => {
 };
 const UserDropdown = ({
     isLoggedIn,
-    user = {
-        avatar: userimg,
-        username: "User202021",
-        rank: "Rank 1",
-        balance: "2430.76",
-    },
+    // user = {
+    //     avatar: userimg,
+    //     username: "User202021",
+    //     rank: "Rank 1",
+    //     balance: "2430.76",
+    // },
 }) => {
     const dispatcher = useDispatch();
     const [mouseOver, setMouseOver] = useState(false);
     const { isMobile } = useScreenResolution();
+    const {
+        user: { user },
+    } = useSelector((state) => state.auth);
     if (!isLoggedIn)
         return (
             <>
@@ -235,16 +238,19 @@ const UserDropdown = ({
                 style={{ cursor: "pointer" }}
             >
                 <CurrentBalance isMobile={isMobile}>
-                    <p>{user.balance.split(".")[0]}.</p>
-                    <p>{user.balance.split(".")[1] || "00"}</p>
+                    <p>{user?.balance?.split(".")[0] || 0}.</p>
+                    <p>{user?.balance?.split(".")[1] || "00"}</p>
                 </CurrentBalance>
                 <Wallet>
                     <img
                         src={wallet}
                         alt="wallet"
-                        style={{ height: isMobile ? "18px" : "20px" }}
+                        style={{
+                            height: isMobile ? "13px" : "14px",
+                            marginRight: "5px",
+                        }}
                     />
-                    <p style={{fontSize: '15px'}}>Wallet</p>
+                    <p style={{ fontSize: "13px" }}>Wallet</p>
                 </Wallet>
             </div>
             <UserAvatar>
@@ -256,7 +262,7 @@ const UserDropdown = ({
                     <Flex alignItems="center">
                         <UserImage size={isMobile ? "40px" : "45px"}>
                             <img
-                                src={user.avatar}
+                                src={user?.avatar || userimg}
                                 alt="useravatar"
                                 style={{ height: "100%", cursor: "pointer" }}
                             />
