@@ -39,7 +39,9 @@
         "react-google-recaptcha": "^2.1.0",
         "react-redux": "^8.0.5",
         "react-slick": "^0.29.0",
+        "react-toastify": "^9.1.1",
         "recharts": "^2.2.0",
+        "redux-persist": "^6.0.0",
         "redux-thunk": "^2.4.2",
         "slick-carousel": "^1.8.1",
         "styled-components": "^5.3.6"
