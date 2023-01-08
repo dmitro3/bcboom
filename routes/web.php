@@ -16,6 +16,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
+
 Route::get('/', function () {
     return Inertia::render('Index');
 });

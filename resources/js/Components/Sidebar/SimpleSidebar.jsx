@@ -80,7 +80,7 @@ const SimpleSidebar = () => {
             link: "/games/wheels",
         },
         {
-            name: "Conflip",
+            name: "Coin-flip",
             icon: conflip,
             link: "/games/coin-flip",
         },

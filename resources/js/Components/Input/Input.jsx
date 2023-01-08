@@ -4,10 +4,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
-const InputWrapper = styled("div")(({ br }) => ({
+const InputWrapper = styled("div")(({ br, border }) => ({
     background: "transparent",
     borderRadius: br || "32px",
-    border: "1px solid #464F85",
+    border: `1px solid ${border || "#464F85"}`,
     position: "relative",
     width: "100%",
     "& label": {
@@ -45,7 +45,7 @@ const InputItem = styled("input")(({ addon, isMobile, bg, br }) => ({
     color: "#fff",
     fontSize: "14px",
     outline: "none",
-    
+
     "&::placeholder": {
         color: "#fff",
     },
@@ -75,13 +75,14 @@ const Input = ({
     onChange,
     bg,
     br,
+    border,
     afterInputText,
-    disabled
+    disabled,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const { isMobile } = useScreenResolution();
     return (
-        <InputWrapper br={br}>
+        <InputWrapper br={br} border={border}>
             <label>{label}</label>
             {addon && <small>{addon}</small>}
             <InputItem
