@@ -4,39 +4,120 @@ import carouseImage2 from "../../../../../public/images/carousel/saba-new-baner-
 import CustomCarousel from "../Carousel";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 const HomeCarousel = () => {
-    const {isMobile} = useScreenResolution();
+    const { isMobile } = useScreenResolution();
     return (
         <div>
             <CustomCarousel rowPerCount={isMobile ? 1 : 2}>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img
+                        src={carouseImage1}
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                            height: isMobile ? "10rem" : "100%",
+                        }}
+                        alt="carousel image"
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage2} alt="carousel image" />
+                    <img
+                        src={carouseImage2}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img
+                        src={carouseImage1}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage2} alt="carousel image" />
+                    <img
+                        src={carouseImage2}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img
+                        src={carouseImage1}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage2} alt="carousel image" />
+                    <img
+                        src={carouseImage2}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img
+                        src={carouseImage1}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage2} alt="carousel image" />
+                    <img
+                        src={carouseImage2}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage1} alt="carousel image" />
+                    <img
+                        src={carouseImage1}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
                 <div className="testimoni--wrapper">
-                    <img src={carouseImage2} alt="carousel image" />
+                    <img
+                        src={carouseImage2}
+                        alt="carousel image"
+                        style={{
+                            alignSelf: "center",
+                            marginLeft: ".6rem",
+                            marginRight: ".5rem",
+                        }}
+                    />
                 </div>
             </CustomCarousel>
         </div>

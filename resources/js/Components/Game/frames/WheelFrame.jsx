@@ -1,6 +1,6 @@
 import React from "react";
 import wheel from "../../../../assets/games/game_wheel.svg";
-import wheel_sm from "../../../../assets/games/wheel_frame_sm.svg";
+import wheel_sm from "../../../../assets/games/wheel_sm2.svg";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";
 import { useScreenResolution } from "@/hooks/useScreeResolution";

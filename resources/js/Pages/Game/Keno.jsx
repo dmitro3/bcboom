@@ -37,7 +37,7 @@ const Keno = () => {
                             customFrameHeader={true}
                             customFrameBoxStyles={{
                                 height: {
-                                    xs: "14.375rem",
+                                    xs: "16.375rem",
                                     md: "23.25rem",
                                     lg: "23.25rem",
                                 },
