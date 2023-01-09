@@ -20,12 +20,15 @@ const CustomCarousel = ({
     paging = true,
     prevArrow,
     nextArrow,
+    dots = true,
+    infinite = true,
+    customImageHeight,
 }) => {
     const settings = {
-        dots: true,
+        dots,
         autoplay: autoplay,
         autoplaySpeed: 4300,
-        infinite: true,
+        infinite: infinite,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
@@ -53,8 +56,8 @@ const CustomCarousel = ({
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
-        centerMode: true,
-        centerPadding: "0px",
+        // centerMode: true,
+        // centerPadding: "0px",
         responsive: [
             {
                 breakpoint: 1024,
@@ -84,43 +87,15 @@ const CustomCarousel = ({
     };
 
     const { isMobile } = useScreenResolution();
-    const carousel_settings = !isMobile
-        ? { ...settings }
-        : { ...mobileSettings };
+    // const carousel_settings = !isMobile
+    //     ? { ...settings }
+    //     : { ...mobileSettings };
 
     return (
         <Wrapper>
-            <StyledWrapper>
-                <Slider {...carousel_settings}>
-                    {/* <div className="testimoni--wrapper">
-                        <img src={carouseImage1} alt="carousel image" />
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <img src={carouseImage2} alt="carousel image" />
-                    </div> */}
-                    {/* <div
-                        className="testimoni--wrapper"
-                        style={{ color: "red" }}
-                    >
-                        <p>Testimoni One</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni Two</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni Three</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 4</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 5</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 6</p>
-                    </div> */}
-                    {children}
-                </Slider>
+            <StyledWrapper customHeight={customImageHeight}>
+                {/* <Slider {...carousel_settings}> */}
+                <Slider {...settings}>{children}</Slider>
             </StyledWrapper>
         </Wrapper>
     );
