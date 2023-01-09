@@ -33,6 +33,7 @@ const CloseIcon = styled("div")(({ isMobile }) => ({
     cursor: "pointer",
     top: isMobile ? "-1%" : "20px",
     right: isMobile ? "-10px" : "20px",
+    zIndex: 3030303
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
@@ -336,17 +337,15 @@ const LoginSignupModal = () => {
             open={modalState.open}
             handleClose={() => dispatcher(setAuthModalState({ open: false }))}
         >
+            <CloseIcon
+                onClick={() =>
+                    dispatcher(setAuthModalState({ open: !modalState.open }))
+                }
+                isMobile={isMobile}
+            >
+                <img src={isMobile ? mobileclose : close} alt="" />
+            </CloseIcon>
             <LoginSignupModalWrapper isMobile={isMobile}>
-                <CloseIcon
-                    onClick={() =>
-                        dispatcher(
-                            setAuthModalState({ open: !modalState.open })
-                        )
-                    }
-                    isMobile={isMobile}
-                >
-                    <img src={isMobile ? mobileclose : close} alt="" />
-                </CloseIcon>
                 <TabComponent>
                     <NewCustomTabs
                         tabItems={[
