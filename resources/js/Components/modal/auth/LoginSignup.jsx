@@ -31,7 +31,7 @@ const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
-    top: isMobile ? "-1%" : "20px",
+    top: isMobile ? "-3%" : "20px",
     right: isMobile ? "-10px" : "20px",
     zIndex: 3030303
 }));
@@ -336,6 +336,7 @@ const LoginSignupModal = () => {
         <CustomModal
             open={modalState.open}
             handleClose={() => dispatcher(setAuthModalState({ open: false }))}
+            isAuthModal={true}
         >
             <CloseIcon
                 onClick={() =>

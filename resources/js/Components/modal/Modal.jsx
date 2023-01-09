@@ -2,21 +2,20 @@ import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
-const style = (isMobile) => {
+const style = (isMobile, isAuthModal) => {
     return {
         position: "absolute",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        border: "2px solid #000",
+        border: isAuthModal && "2px solid #000",
         boxShadow: 24,
         borderRadius: "20px",
         outline: "none",
         // padding: "20px 0",
-        maxHeight: isMobile ? "65vh" : '100%',
-
-        overflowX: "hidden",
-        overflowY: "auto",
+        // overflowX: 'scroll'
+        // overflowX: "hidden",
+        // overflowY: "auto",
         // bordre: "transparent",
 
         // "&:before": {
@@ -33,8 +32,9 @@ const style = (isMobile) => {
         // },
     };
 };
-const CustomModal = ({ children, open, handleClose }) => {
+const CustomModal = ({ children, open, handleClose, isAuthModal = false }) => {
     const { isMobile } = useScreenResolution();
+
     return (
         <div>
             <Modal
@@ -43,8 +43,19 @@ const CustomModal = ({ children, open, handleClose }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style(isMobile)}>
-                    <div>{children}</div>
+                <Box sx={style(isMobile, isAuthModal)}>
+                    {isMobile && isAuthModal ? (
+                        <div
+                            style={{
+                                maxHeight: "90vh",
+                                overflow: "scroll",
+                            }}
+                        >
+                            {children}
+                        </div>
+                        ) : (
+                        <div>{children} </div>
+                    )}
                 </Box>
             </Modal>
         </div>

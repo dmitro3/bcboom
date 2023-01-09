@@ -15,7 +15,7 @@ const HomeCarousel = () => {
     return (
         <div>
             <CustomCarousel
-                rowPerCount={isMobile ? 1 : 2}
+                rowPerCount={isMobile ? 1: 2}
                 paging={!isMobile}
                 dots={!isMobile}
                 infinite={!isMobile}
