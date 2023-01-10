@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Referral;
+use Notification;
+use App\Notifications\ReferralBonus;
 use Validator;
 
 class AuthController extends Controller
@@ -20,6 +23,16 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+     public function showRegistrationForm(Request $request)
+{
+    if ($request->has('ref')) {
+        session(['referrer' => $request->query('ref')]);
+    }
+
+    return redirect()->route('open')->with('ref', $request->query('ref'));
+}
+
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
             'email' => 'required',
@@ -68,10 +81,37 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }else{
-        $user = User::create(array_merge(
+            
+            $referrer = User::whereUsername(session()->pull('referrer'))->first();
+
+            $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password)]
+                    ['password' => bcrypt($request->password),
+                    'referrer_id' => $referrer ? $referrer->id : null]
                 ));
+                
+                if($referrer){
+                    $referrer->makeVip();
+                }
+                if($request->has('ref')){
+                    $referring = User::where('username', '=', $request->ref)->first();
+
+                    if($referring){
+                    $referral = Referral::create([
+                        'user_id' => $referring->id,
+                        'ref_user_id' => $user->id
+                    ]);
+
+                    $user->update([
+                        'referrer_id' => $referring->id
+                    ]);
+                    $referring->makeVip();
+                }
+
+                }
+                
+ 
+
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user

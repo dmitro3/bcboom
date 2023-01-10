@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('phone')->nullable();
             $table->text('bio')->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
+            $table->foreign('referrer_id')->references('id')->on('users');
             $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->boolean('admin')->default(0);
