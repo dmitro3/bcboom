@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build+push": "vite build --mode=production && git add -A && git commit -m 'build' && git push"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
