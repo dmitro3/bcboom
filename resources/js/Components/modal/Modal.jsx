@@ -9,9 +9,13 @@ const style = (isMobile, isAuthModal) => {
         left: "50%",
         transform: "translate(-50%, -50%)",
         border: isAuthModal && "2px solid #000",
+        background:  isAuthModal && "linear-gradient(#FFDE9F,#50ABFF)",
+        padding: "1px",
         boxShadow: 24,
         borderRadius: "20px",
         outline: "none",
+        maxHeight: '90vh',
+        overflow: isMobile ? 'initial' : 'scroll'
         // padding: "20px 0",
         // overflowX: 'scroll'
         // overflowX: "hidden",

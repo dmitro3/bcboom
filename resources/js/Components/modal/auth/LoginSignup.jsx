@@ -182,6 +182,7 @@ const SignupForm = ({ isMobile }) => {
                 style={{
                     transform: !isMobile && "scaleX(1.6)",
                     transformOrigin: "0 0",
+                    // margin: '0 auto'
                 }}
             >
                 <ReCAPTCHA
@@ -294,6 +295,7 @@ const LoginForm = ({ isMobile }) => {
                     transformOrigin: "0 0",
                     // border: catpchaError && "3px solid #F93967",
                     width: "fit-content",
+                    // margin: '0 auto'
                 }}
             >
                 <ReCAPTCHA
