@@ -35,8 +35,7 @@ Route::middleware(['middleware' => 'api'])->group(function () {
     Route::post('update/username', [ProfileController::class, 'updateusername']);
     Route::post('update/bio', [ProfileController::class, 'updatebio']);
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
-    Route::get('wallet/info', [BonusController::class, 'index']);
-    
+    Route::get('/wallet/info', [BonusController::class, 'index']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
