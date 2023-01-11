@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->unsignedBigInteger('referrer_id')->nullable();
             $table->foreign('referrer_id')->references('id')->on('users');
+            $table->bigInteger('referral_count')->default(0);
+            $table->string('referral_token')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->boolean('admin')->default(0);

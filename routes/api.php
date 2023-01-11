@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;/*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,6 +35,7 @@ Route::middleware(['middleware' => 'api'])->group(function () {
     Route::post('update/username', [ProfileController::class, 'updateusername']);
     Route::post('update/bio', [ProfileController::class, 'updatebio']);
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
+    Route::get('wallet/info', [BonusController::class, 'index']);
     
 });
 
