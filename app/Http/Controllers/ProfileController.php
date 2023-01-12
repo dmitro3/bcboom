@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ImageStoreRequest;
 use Inertia\Inertia;
 
 class ProfileController extends Controller
@@ -17,7 +18,12 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
-    public function edit(Request $request)
+
+     public function __construct(){
+        $this->middleware('auth');
+     }
+
+     public function edit(Request $request)
     {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
@@ -67,33 +73,47 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-    public function imageStore(ImageStoreRequest $request){
-        $validatedData = $request->validated();
-        $validatedData['image'] = $request->file('image')->store('image');
 
+    public function imageStore(Request $request){
+        
+  if(Auth::check()){
+    $request->validate([
+        'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+    ]);
         $user = Auth::user();
-        $data = $user->update([
-            'image' => $validatedData
-        ]);
-        if($data){
-            return response()->json([
-                'message' => 'success',
-                'user' => $user
-            ], 200);
-        }else{
-             return response()->json([$data, status => 400, error =>'Image failed']);
-        }
-    }
+        $image = $request->image;
+        
+        $image_new_name = time() . $image->getClientOriginalName();
+        $image->move('uploads/images', $image_new_name);
 
+        $user->image = 'uploads/images/'.$image_new_name;
+        $user->save();
+        return response()->json([
+            'message' => 'success',
+             'user' => $user
+         ], 200);
+    }
+    
+else{
+    return response()->json([
+        'message' => 'not logged in',
+         'user' => null
+     ], 400);
+ }
+    }
+   
     public function updatebio(Request $request){
+        
         if(Auth::check()){
             $request->validate([
                 'bio' => ['required', 'string'],
             ]);
     
             $user = Auth::user();
+
+            if($user){
             $user->update([
-                'bio' => $request->all()
+                'bio' => $request->bio
             ]);
             return response()->json([
                 'message' => 'success',
@@ -101,12 +121,20 @@ class ProfileController extends Controller
             ], 200);
         }else{
             return response()->json([
-                'error' => 'not logged in'], 401);
+                'error' => 'not found.'], 401);
         }
         
+    }else{
+        return response()->json([
+                   'message' => 'not logged in',
+                    'user' => null
+                ], 400);
+            }
+
     }
 
     public function updateusername(Request $request){
+        
         if(Auth::check()){
             $request->validate([
                 'username' => 'required|string|max:255|unique:users|regex:/^\S*$/u'
@@ -115,7 +143,7 @@ class ProfileController extends Controller
             $user = Auth::user();
 
             $user->update([
-                'username' => $request->all()
+                'username' => $request->username
             ]);
             return response()->json([
                 'message' => 'success',
@@ -131,12 +159,12 @@ class ProfileController extends Controller
     public function updatephone(Request $request){
         if(Auth::check()){
             $request->validate([
-                'password' => 'required',
+                'phone' => 'required',
             ]);
     
             $user = Auth::user();
             $user->update([
-                'bio' => $request->all()
+                'phone' => $request->phone
             ]);
             return response()->json([
                 'message' => 'success',
