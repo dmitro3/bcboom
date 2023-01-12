@@ -22,10 +22,12 @@ export const StyledWrapper = styled("div")((props) => ({
         msTouchAction: "pan-y",
         touchAction: "pan-y",
         WebkitTapHighlightColor: "transparent",
+        height: props.customHeight && "190px",
     },
     ".testimoni--wrapper ": {
         paddingRight: "20px",
         outline: "none",
+        // height: "10000px",
         // minWidth: "250px",
         // marginRight: "50px",
     },
@@ -55,7 +57,7 @@ export const StyledWrapper = styled("div")((props) => ({
     ".slick-slide": {
         display: "none",
         cssFloat: "left",
-        height: "100%",
+        height: props.customHeight || "100%",
         minHeight: "1px",
     },
     '[dir="rtl"] .slick-slide': { cssFloat: "right" },
@@ -68,6 +70,10 @@ export const StyledWrapper = styled("div")((props) => ({
         display: "block",
         height: "auto",
         border: "1px solid transparent",
+    },
+    ".slick-disabled": {
+        opacity: '0!important',
+        // height: "3000px!important",
     },
     ".slick-arrow.slick-hidden": { display: "none" },
     ".slick-prev, .slick-next": {
@@ -209,7 +215,7 @@ export const StyledWrapper = styled("div")((props) => ({
     img: {
         width: "100%",
         cursor: "move",
-        height: "300px",
+        // height: "300px",
         paddingBottom: "10px",
         KhtmlUserSelect: "none",
         OUserSelect: "none",

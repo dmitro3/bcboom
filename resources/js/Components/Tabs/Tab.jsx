@@ -102,8 +102,8 @@ const TabButton = styled("div")(({ active }) => ({
     whiteSpace: "nowrap",
 }));
 
-export const NewCustomTabs = ({ tabItems, width, padding, marginTop }) => {
-    const [value, setValue] = React.useState(0);
+export const NewCustomTabs = ({ tabItems, defaultTab, width, padding, marginTop }) => {
+    const [value, setValue] = React.useState(defaultTab || 0);
     return (
         <TabWrapper padding={padding} marginTop={marginTop}>
             <TabButtons width={width}>
@@ -121,7 +121,17 @@ export const NewCustomTabs = ({ tabItems, width, padding, marginTop }) => {
                                 alignItems="center"
                                 gap="10px"
                             >
-                                {item.icon && <img src={item.icon} alt="" style={{filter: index === value && 'brightness(0) invert(1)'}} />}
+                                {item.icon && (
+                                    <img
+                                        src={item.icon}
+                                        alt=""
+                                        style={{
+                                            filter:
+                                                index === value &&
+                                                "brightness(0) invert(1)",
+                                        }}
+                                    />
+                                )}
                                 {item.label}
                             </Flex>
                         </TabButton>

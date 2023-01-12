@@ -6,6 +6,7 @@ import carouseImage2 from "../../../../public/images/carousel/saba-new-baner-2.p
 import { styled } from "@mui/system";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 const Wrapper = styled("div")(({ theme }) => ({
     padding: "20px",
     textAlign: "center",
@@ -17,13 +18,17 @@ const CustomCarousel = ({
     rowPerCount,
     autoplay = true,
     paging = true,
-    prevArrow, nextArrow
+    prevArrow,
+    nextArrow,
+    dots = true,
+    infinite = true,
+    customImageHeight,
 }) => {
     const settings = {
-        dots: true,
+        dots,
         autoplay: autoplay,
         autoplaySpeed: 4300,
-        infinite: true,
+        infinite: infinite,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
@@ -43,39 +48,54 @@ const CustomCarousel = ({
             ),
         }),
     };
+
+    const mobileSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 0,
+        // centerMode: true,
+        // centerPadding: "0px",
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    };
+
+    const { isMobile } = useScreenResolution();
+    // const carousel_settings = !isMobile
+    //     ? { ...settings }
+    //     : { ...mobileSettings };
+
     return (
         <Wrapper>
-            <StyledWrapper>
-                <Slider {...settings}>
-                    {/* <div className="testimoni--wrapper">
-                        <img src={carouseImage1} alt="carousel image" />
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <img src={carouseImage2} alt="carousel image" />
-                    </div> */}
-                    {/* <div
-                        className="testimoni--wrapper"
-                        style={{ color: "red" }}
-                    >
-                        <p>Testimoni One</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni Two</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni Three</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 4</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 5</p>
-                    </div>
-                    <div className="testimoni--wrapper">
-                        <p>Testimoni 6</p>
-                    </div> */}
-                    {children}
-                </Slider>
+            <StyledWrapper customHeight={customImageHeight}>
+                {/* <Slider {...carousel_settings}> */}
+                <Slider {...settings}>{children}</Slider>
             </StyledWrapper>
         </Wrapper>
     );

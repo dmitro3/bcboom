@@ -25,8 +25,8 @@ const WalletWrapper = styled("div")(({ isMobile }) => ({
     borderRadius: "20px",
     border: "transparent",
     width: isMobile ? "90vw" : "600px",
-    height: isMobile && "60vh",
-    overflowY: "auto",
+    height: isMobile && "80vh",
+    // overflowY: "auto",
     margin: isMobile && "0 auto",
     outline: "none",
 }));
@@ -38,8 +38,9 @@ const WalletHeader = styled("div")(({ isMobile }) => ({
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
     cursor: "pointer",
-    top: "2%",
-    right: "25px",
+    top: isMobile ? "-3%" : "20px",
+    right: isMobile ? "-10px" : "20px",
+    zIndex: 3030303,
 }));
 // padding: "20px 30px",
 

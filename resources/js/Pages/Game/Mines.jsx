@@ -38,7 +38,7 @@ const Mines = () => {
                             innerHeader={true}
                             customFrameStyles={{
                                 background: "#1D234F",
-                                paddingBottom: 0,
+                                paddingBottom: "0 !important",
                                 paddingLeft: 0,
 
                                 height: { xs: "15rem", md: "26.25rem" },

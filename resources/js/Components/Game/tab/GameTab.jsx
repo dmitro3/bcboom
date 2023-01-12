@@ -72,7 +72,7 @@ const GameTab = () => {
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    <Box
+                    {/* <Box
                         sx={{
                             height: { xs: "30rem", md: "14.9375rem" },
                             background: "#272C4B",
@@ -565,7 +565,7 @@ const GameTab = () => {
                                 </Box>
                             </Grid>
                         </Grid>
-                    </Box>
+                                                </Box>*/}
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     <Box
@@ -884,6 +884,9 @@ const GameTab = () => {
                                                 fontWeight: 800,
                                                 fontSize: "1rem",
                                                 borderRadius: "0.625rem",
+
+                                                ml: "auto",
+                                                mr: "auto",
                                             }}
                                         >
                                             <Box
@@ -1006,12 +1009,18 @@ const GameTab = () => {
                                         <Box
                                             sx={{
                                                 display: "flex",
-                                                width: { xs: "48%", md: "40%" },
+                                                width: {
+                                                    xs: "48%",
+
+                                                    md: "40%",
+                                                },
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 fontWeight: 800,
                                                 fontSize: "1rem",
                                                 borderRadius: "0.625rem",
+                                                ml: "auto",
+                                                mr: "auto",
                                             }}
                                         >
                                             <Box

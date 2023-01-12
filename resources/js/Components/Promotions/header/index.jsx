@@ -37,10 +37,14 @@ const PromotionsHeader = ({
                 borderRadius: "10px",
                 display: "flex",
                 alignItems: "center",
-                backgroundPosition: { xs: "-1.5rem", sm: "center" },
-                width: { xs: "86%", md: "98%" },
+                backgroundPosition: {
+                    xs: "center center",
+                    sm: "center center",
+                },
+                width: { xs: "98%", md: "98%" },
 
                 mx: "auto",
+
                 ...customImageStyles,
             }}
         >
@@ -49,7 +53,7 @@ const PromotionsHeader = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "left",
-                    paddingLeft: { xs: "7%", md: "2%" },
+                    paddingLeft: { xs: "8%", md: "2%" },
                     textAlign: "left",
                     borderRight: "none",
                     justifySelf: "left",

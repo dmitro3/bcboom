@@ -37,10 +37,10 @@ const PromotionImageHeader = styled("div")(({ isMobile }) => ({
         fontWeight: "900",
         "&:nth-child(1)": {
             fontSize: isMobile ? "1.4rem" : "2.25rem",
-            paddingBottom: isMobile ? ".5rem" : "1.5rem",
+            paddingBottom: isMobile ? ".1rem" : "1.5rem",
         },
         "&:nth-child(2)": {
-            fontSize: isMobile ? "1.4rem" : "3.5rem",
+            fontSize: isMobile ? "1.8rem" : "3.5rem",
             paddingBottom: isMobile ? ".5rem" : "2rem",
             color: "#5AA2FF",
         },

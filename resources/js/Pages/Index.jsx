@@ -40,7 +40,7 @@ export default function Homepage(props) {
             title: "Original Games",
             icon: game,
             imageWidth: "534px",
-            imageHeight: "175px",
+            imageHeight: "145px",
             margin: "10px",
             perColumn: 5,
             page: "home",
@@ -102,7 +102,7 @@ export default function Homepage(props) {
                 },
                 {
                     image: stairs,
-                    link: "/games/stairs",
+                    link: "/games/stair",
                     addon: null,
                     addonColor: null,
                 },

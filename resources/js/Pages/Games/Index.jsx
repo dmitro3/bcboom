@@ -29,7 +29,7 @@ const GamePageWrapper = styled("div")(() => ({
 
 const GameImageHeader = styled("div")(({ isMobile }) => ({
     background: `url(${isMobile ? imgmobile : img})`,
-    
+
     borderRadius: "10px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -66,7 +66,7 @@ const GamesPageIndex = () => {
             hoverEffect: "overlay",
             page: "games",
             countOnMobile: 2,
-            margin: '10px',
+            margin: "10px",
             images: [
                 {
                     image: crash,
@@ -133,7 +133,7 @@ const GamesPageIndex = () => {
                 },
                 {
                     image: stairs,
-                    link: "/games/stairs",
+                    link: "/games/stair",
                     addon: null,
                     title: "Stairs",
                     addonColor: null,
