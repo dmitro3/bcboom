@@ -75,14 +75,19 @@ class ForgotPasswordController extends Controller
         //     Mail::raw($codeData->code, function ($message) use($to) {  
             //     $message->to($to)->subject('Password Reset'); 
             // });
-            $code = $codeData->code;
+            $details = $codeData;
+            if($details){
             $to = 'darl@gmail.com';
-            Notification::send($user, new Reset($code));
+            $user->notify(new Reset($details));
+            //  Notification::send($user, new Reset($details));
         //  Mail::send(new SendCodeResetPassword($code))->to($to);
+            }
+        return response()->json([
+            "message" => "Mail sent successfully",
+            "data" => $details,
+             "statusCode" => 200]);
 
 
-
-        return response(['message' => trans('passwords.sent')], 200);
     }else{
         return response(['message' => 'email not found'], 404);
     }
@@ -115,23 +120,25 @@ class ForgotPasswordController extends Controller
     {
         $request->validate([
             'code' => 'required|string|exists:reset_code_passwords',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
 
         // find the code
-        $passwordReset = ResetCodePassword::firstWhere('code', $request->code);
-
+        $passwordReset = ResetCodePassword::where('code', $request->code)->first();
+        
         // check if it does not expired: the time is one hour
-        if ($passwordReset->created_at > now()->addHour()) {
-            $passwordReset->delete();
-            return response(['message' => trans('passwords.code_is_expire')], 422);
-        }
+        // if ($passwordReset->created_at > now()->addHour()) {
+        //     $passwordReset->delete();
+        //     return response(['message' => trans('passwords.code_is_expire')], 422);
+        // }
 
         // find user's email 
-        $user = User::firstWhere('email', $passwordReset->email);
+        $user = User::where('email', $passwordReset->email)->first();
 
         // update user password
-        $user->update(bcrypt($request->only('password')));
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
 
         // delete current code 
         $passwordReset->delete();
