@@ -148,7 +148,7 @@ public function referrals()
  */
 public function getReferralLinkAttribute()
 {
-    return $this->referral_link = route('registerapi', ['ref' => $this->username]);
+    return $this->referral_link = route('register', ['referral' => $this->username]);
 }
 
     public function getJWTIdentifier() {

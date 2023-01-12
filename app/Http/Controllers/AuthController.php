@@ -74,7 +74,6 @@ class AuthController extends Controller
     public function register(Request $request) {
         
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
             'username' => 'required|string|max:255|unique:users|regex:/^\S*$/u'
@@ -96,8 +95,14 @@ class AuthController extends Controller
                 
                 $tokenize = rand(111111, 777777);
                 $user->update([
-                    'referral_token' => strtolower($user->username) . $tokenize
+                    'referral_token' => strtolower($user->username) . $tokenize,
                 ]);
+
+                if($request->has('phone')){
+                    $user->update([
+                        'phone' => $request->get('phone')
+                    ]);
+                }
 
                 
                 
