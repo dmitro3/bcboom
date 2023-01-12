@@ -272,7 +272,7 @@ const Exclusive = () => {
                                         sx={{
                                             height: "100%",
 
-                                            width: "12%",
+                                            width: "11.5%",
                                             display: "flex",
                                             justifyContent: "flex-end",
                                             alignItems: "flex-start",

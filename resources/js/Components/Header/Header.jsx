@@ -1,7 +1,14 @@
 import { styled } from "@mui/system";
 import { useState } from "react";
 import bclogo from "../../../../public/images/brand/bcboom.svg";
-import { default as brazil, default as china, default as malta, default as portugal, default as russia, default as us } from "../../../../public/images/flags/us.svg";
+import {
+    default as brazil,
+    default as china,
+    default as malta,
+    default as portugal,
+    default as russia,
+    default as us,
+} from "../../../../public/images/flags/us.svg";
 import cashback from "../../../../public/images/svg/cashback.svg";
 import facebook from "../../../../public/images/svg/facebook.svg";
 import fairness from "../../../../public/images/svg/fairness.svg";
@@ -53,14 +60,14 @@ const HeaderPlatformLinkItems = styled("div")(() => ({
     ...styles(),
     marginRight: "15px",
 }));
-const HeaderItems = styled("div")(({active}) => ({
+const HeaderItems = styled("div")(({ active }) => ({
     display: "flex",
     cursor: "pointer",
     p: {
         marginLeft: "5px",
         marginTop: "3px",
         fontSize: "12px",
-         color: active ? "#3586FF" : "#8990AE",
+        color: active ? "#3586FF" : "#8990AE",
         fontWeight: "700",
         fontFamily: "Montserrat, sans-serif",
     },
@@ -266,7 +273,6 @@ const MobileHeaderWrapper = styled("div")(() => ({
 }));
 const MoreIconWrapper = styled("div")(() => ({
     cursor: "pointer",
-    
 }));
 const Logo = styled("div")(() => ({}));
 const ButtonComponents = styled("div")(() => ({
@@ -276,6 +282,7 @@ const ButtonComponents = styled("div")(() => ({
 export const MobileHeader = () => {
     const dispatcher = useDispatch();
     const { drawerState } = useSelector((state) => state.app);
+    const { user } = useSelector((state) => state.auth);
     return (
         <MobileHeaderWrapper>
             <MoreIconWrapper
@@ -295,7 +302,7 @@ export const MobileHeader = () => {
                 </Link>
             </Logo>
             <ButtonComponents>
-                <UserDropdown isLoggedIn={false} />
+                <UserDropdown isLoggedIn={user?.user} />
             </ButtonComponents>
         </MobileHeaderWrapper>
     );

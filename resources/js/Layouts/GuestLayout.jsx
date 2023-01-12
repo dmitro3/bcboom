@@ -1,6 +1,5 @@
 import Sidedrawer from "@/Components/Drawer/Sidedrawer";
 import DesktopFooter from "@/Components/Footer/DesktopFooter";
-import FooterActions from "@/Components/Footer/FooterActions";
 import MobileFooter from "@/Components/Footer/MobileFooter";
 import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
@@ -12,8 +11,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LayoutTheme from "./theme";
-import bclogo from "../../../public/images/brand/bcboom.png";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
@@ -70,6 +70,7 @@ export default function GuestLayout({ children }) {
         );
     return (
         <LayoutTheme>
+            <ToastContainer />
             {isMobile && drawerState?.open && <Sidedrawer />}
             {modalState?.open && <LoginSignupModal />}
             {walletModalState?.open && <WalletModal />}

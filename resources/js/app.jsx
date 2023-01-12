@@ -6,7 +6,8 @@ import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux/es/exports";
-import store from "./redux/store";
+import store, { persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText ||
@@ -24,13 +25,13 @@ createInertiaApp({
 
         root.render(
             <Provider store={store}>
-                <App {...props} />
+                <PersistGate loading={null} persistor={persistor}>
+                    <App {...props} />
+                </PersistGate>
             </Provider>
         );
     },
 });
-
-
 
 // Inertia.on("start", () => {
 //     console.log("starteed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

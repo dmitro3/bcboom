@@ -91,7 +91,7 @@ const MinesFrame = () => {
             <Frame>
                 <Box
                     sx={{
-                        width: { xs: "13%", sm: "24%", md: "20%" },
+                        width: { xs: "13%", sm: "13%", md: "20%" },
                         height: "100%",
                         display: "flex",
                         justifyContent: {
@@ -109,7 +109,7 @@ const MinesFrame = () => {
                             flexDirection: "column",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            height: "6rem",
+                            height: "8rem",
                         }}
                     >
                         <Typography
@@ -137,7 +137,7 @@ const MinesFrame = () => {
                 </Box>
                 <Box
                     sx={{
-                        width: { xs: "70%", sm: "52%", md: "60%" },
+                        width: { xs: "70%", sm: "70%", md: "60%" },
                         height: { xs: "15rem", md: "100%" },
                         position: "relative",
                         top: { xs: 0, md: "-1.5rem" },
@@ -196,7 +196,7 @@ const MinesFrame = () => {
                 </Box>
                 <Box
                     sx={{
-                        width: { xs: "13%", sm: "24%", md: "20%" },
+                        width: { xs: "13%", sm: "13%", md: "20%" },
                         height: "100%",
                         display: "flex",
                         justifyContent: {
@@ -213,7 +213,7 @@ const MinesFrame = () => {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
-                            height: "6.5rem",
+                            height: "8.5rem",
                         }}
                     >
                         <Typography

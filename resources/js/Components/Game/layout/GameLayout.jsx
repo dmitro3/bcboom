@@ -104,7 +104,7 @@ const GameLayout = ({
                     >
                         <Box
                             sx={{
-                                display: "flex",
+                                display: `${isMobile ? "flex" : "none"}`,
                                 width: "34%",
                             }}
                         >

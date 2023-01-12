@@ -135,7 +135,8 @@ const VIPIndex = () => {
                         </div>
                         <DividerStats isMobile={isMobile}>
                             <Flex
-                                alignItems={isMobile ? "stretch" : "center"}
+                                alignItems={isMobile ? "center" : "start"}
+                                // alignItems="center"
                                 justifyContent="space-between"
                                 padding="10px 5%"
                             >

@@ -33,6 +33,8 @@ class ForgotPasswordController extends Controller
     }
     }
     public function reset() {
+   
+
         $credentials = request()->validate([
             'email' => 'required|email',
             'token' => 'required|string',

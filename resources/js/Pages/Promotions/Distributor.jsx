@@ -258,6 +258,8 @@ const Distributor = () => {
                                                     xl: "center",
                                                 },
                                                 mb: ".5rem",
+
+                                                width: "12rem",
                                             }}
                                         >
                                             ACTIVITY REQUIREMENTS
@@ -287,6 +289,8 @@ const Distributor = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
+                                        borderRight: "none",
+
                                         paddingLeft: {
                                             xs: "2.0625rem",
                                             sm: "2.0625rem",
@@ -333,15 +337,12 @@ const Distributor = () => {
                                                 lg: "center",
                                                 xl: "center",
                                             },
+                                            alignItems: "flex-start",
+                                            pt: { xs: ".5rem", md: "1rem" },
 
-                                            alignItems: {
-                                                xs: "flex-start",
-                                                md: "center",
-                                            },
-                                            //pt: "1rem",
                                             width: {
-                                                xs: "75px",
-                                                sm: "75px",
+                                                xs: "85px",
+                                                sm: "85px",
                                                 md: "45px",
                                                 lg: "45px",
                                                 xl: "35px",
@@ -355,7 +356,13 @@ const Distributor = () => {
                                             },
                                         }}
                                     >
-                                        <img src={bonus} />
+                                        <img
+                                            style={{
+                                                height: "28px",
+                                                width: "28.8px",
+                                            }}
+                                            src={isMobile ? bonus : bonus}
+                                        />
                                     </Box>
                                     <Box
                                         sx={{
@@ -386,6 +393,11 @@ const Distributor = () => {
                                             },
 
                                             ml: ".75rem",
+                                            width: {
+                                                xs: "38rem",
+                                                sm: "38rem",
+                                                md: "100%",
+                                            },
                                         }}
                                     >
                                         <SemiBoldText
@@ -695,7 +707,10 @@ const Distributor = () => {
                                             },
                                             paddingBottom: "0.9375rem",
                                             flexDirection: "column",
-
+                                            width: {
+                                                xs: "70rem",
+                                                md: "100%",
+                                            },
                                             textAlign: "left",
                                         }}
                                     >
@@ -932,6 +947,10 @@ const Distributor = () => {
                                             flexDirection: "column",
 
                                             textAlign: "left",
+                                            width: {
+                                                xs: "88rem",
+                                                md: "100%",
+                                            },
                                         }}
                                     >
                                         <SemiBoldText

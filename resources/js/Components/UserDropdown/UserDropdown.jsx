@@ -1,23 +1,25 @@
-import { setAuthModalState } from "@/redux/auth/auth-slice";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import userimg from "../../../../public/images/user/useravatar.png";
-import Button from "../Button/Button";
-import { Flex } from "../UtilComponents/Flex";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { logout, setAuthModalState } from "@/redux/auth/auth-slice";
+import { setWalletModalState } from "@/redux/wallet/wallet-slice";
+import { Link } from "@inertiajs/inertia-react";
+import { styled } from "@mui/system";
+import { Dropdown as AntDropdown } from "antd";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import brazillianreal from "../../../../public/images/currencies/brazillianreal.svg";
-import wallet from "../../../../public/images/svg/wallet.svg";
 import chevrondown from "../../../../public/images/svg/chevrondown.svg";
 import chevronup from "../../../../public/images/svg/chevronup.svg";
 import crown from "../../../../public/images/svg/crown.svg";
-import vip from "../../../../public/images/svg/uservip.svg";
 import history from "../../../../public/images/svg/history.svg";
-import logout from "../../../../public/images/svg/logout.svg";
-import { Dropdown as AntDropdown, Space } from "antd";
-import { styled } from "@mui/system";
+import logouticon from "../../../../public/images/svg/logout.svg";
+import vip from "../../../../public/images/svg/uservip.svg";
+import wallet from "../../../../public/images/svg/wallet.svg";
+import userimg from "../../../../public/images/user/useravatar.png";
+import Button from "../Button/Button";
 import Text from "../Text/Text";
-import { Link } from "@inertiajs/inertia-react";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setWalletModalState } from "@/redux/wallet/wallet-slice";
+import { Flex } from "../UtilComponents/Flex";
+import {toast} from "react-toastify";
+
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
@@ -89,7 +91,7 @@ const Section = styled("div")(({}) => ({
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
 }));
-const UserDetails = ({ user }) => {
+const UserDetails = ({ user, dispatcher }) => {
     const sectionItems = [
         {
             text: "Personal Center",
@@ -108,8 +110,8 @@ const UserDetails = ({ user }) => {
         },
         {
             text: "Log out",
-            icon: logout,
-            link: "/logout",
+            icon: logouticon,
+            link: "/",
         },
     ];
     const [mouseOver, setMouseOver] = useState(-1);
@@ -118,7 +120,7 @@ const UserDetails = ({ user }) => {
             <Flex padding="30px">
                 <UserImage size={"65px"}>
                     <img
-                        src={user.avatar}
+                        src={user.avatar || userimg}
                         alt="useravatar"
                         style={{ height: "100%" }}
                     />
@@ -134,7 +136,7 @@ const UserDetails = ({ user }) => {
                     />
                     <Text
                         type="p"
-                        text={user.rank}
+                        text={user.vip || "Rank 0"}
                         color="#FFDC62"
                         fontSize="18px"
                         fontWeight="bold"
@@ -151,6 +153,12 @@ const UserDetails = ({ user }) => {
                         gap="10px"
                         onMouseEnter={() => setMouseOver(index)}
                         onMouseLeave={() => setMouseOver(-1)}
+                        onClick={async () => {
+                            if (item.text === "Log out") {
+                                await dispatcher(logout());
+                                toast.info("Logged out successfully");
+                            }
+                        }}
                     >
                         <img
                             src={item.icon}
@@ -183,16 +191,19 @@ const UserDetails = ({ user }) => {
 };
 const UserDropdown = ({
     isLoggedIn,
-    user = {
-        avatar: userimg,
-        username: "User202021",
-        rank: "Rank 1",
-        balance: "2430.76",
-    },
+    // user = {
+    //     avatar: userimg,
+    //     username: "User202021",
+    //     rank: "Rank 1",
+    //     balance: "2430.76",
+    // },
 }) => {
     const dispatcher = useDispatch();
     const [mouseOver, setMouseOver] = useState(false);
     const { isMobile } = useScreenResolution();
+    const {
+        user: { user },
+    } = useSelector((state) => state.auth);
     if (!isLoggedIn)
         return (
             <>
@@ -206,7 +217,7 @@ const UserDropdown = ({
                             dispatcher(
                                 setAuthModalState({
                                     open: true,
-                                    type: item.link.replace("/", ""),
+                                    tab: item.text === "Log In" ? 0 : 1,
                                 })
                             )
                         }
@@ -235,28 +246,33 @@ const UserDropdown = ({
                 style={{ cursor: "pointer" }}
             >
                 <CurrentBalance isMobile={isMobile}>
-                    <p>{user.balance.split(".")[0]}.</p>
-                    <p>{user.balance.split(".")[1] || "00"}</p>
+                    <p>{user?.balance?.split(".")[0] || 0}.</p>
+                    <p>{user?.balance?.split(".")[1] || "00"}</p>
                 </CurrentBalance>
                 <Wallet>
                     <img
                         src={wallet}
                         alt="wallet"
-                        style={{ height: isMobile ? "18px" : "20px" }}
+                        style={{
+                            height: isMobile ? "13px" : "14px",
+                            marginRight: "5px",
+                        }}
                     />
-                    <p style={{fontSize: '15px'}}>Wallet</p>
+                    <p style={{ fontSize: "13px" }}>Wallet</p>
                 </Wallet>
             </div>
             <UserAvatar>
                 <AntDropdown
-                    overlay={<UserDetails user={user} />}
+                    overlay={
+                        <UserDetails user={user} dispatcher={dispatcher} />
+                    }
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
                         <UserImage size={isMobile ? "40px" : "45px"}>
                             <img
-                                src={user.avatar}
+                                src={user?.avatar || userimg}
                                 alt="useravatar"
                                 style={{ height: "100%", cursor: "pointer" }}
                             />

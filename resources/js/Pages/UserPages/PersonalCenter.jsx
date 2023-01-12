@@ -16,14 +16,14 @@ import settings from "../../../../public/images/svg/settings.svg";
 import TextWithBg from "@/Components/UtilComponents/TextWithBg";
 import { Divider } from "@/Components/Divider/Divider";
 import Button from "@/Components/Button/Button";
-const PersonalCenterPageWrapper = styled("div")(({isMobile}) => ({
-    margin: '0 auto',
+import { useSelector } from "react-redux";
+const PersonalCenterPageWrapper = styled("div")(({ isMobile }) => ({
+    margin: "0 auto",
     paddingTop: "2.125rem",
     width: "100%",
     height: "100%",
     position: "relative",
     zIndex: 100,
-    
 }));
 
 const PersonalCard = styled("div")(({ padding, isMobile }) => ({
@@ -139,6 +139,9 @@ const CenterRange = () => {
 };
 const PersonalCenter = () => {
     const { isMobile } = useScreenResolution();
+    const {
+        user: { user },
+    } = useSelector((state) => state.auth);
     return (
         <>
             <Head title="Personal Center" />
@@ -149,7 +152,7 @@ const PersonalCenter = () => {
                             item={{
                                 title: "Personal Center",
                                 icon: centerIcon,
-                                margin: '10px'
+                                margin: "10px",
                             }}
                             index={0}
                             page="personal-center"
@@ -158,7 +161,7 @@ const PersonalCenter = () => {
                                 alignItems="stretch"
                                 gap="20px"
                                 direction={isMobile ? "column" : "row"}
-                                margin={isMobile ? '60px 0 0' : "60px 0"}
+                                margin={isMobile ? "60px 0 0" : "60px 0"}
                             >
                                 <PersonalCard isMobile={isMobile}>
                                     <Text
@@ -178,7 +181,7 @@ const PersonalCenter = () => {
                                         <div style={{ textAlign: "center" }}>
                                             <Text
                                                 type={"p"}
-                                                text={"User323123131313"}
+                                                text={user?.username}
                                                 fontSize={"15px"}
                                                 color={"white"}
                                                 fontWeight={"700"}
@@ -365,7 +368,7 @@ const PersonalCenter = () => {
                                     <Flex
                                         justifyContent="space-between"
                                         alignItems="center"
-                                        width='100%'
+                                        width="100%"
                                         gap="20px"
                                     >
                                         <TextWithBg
