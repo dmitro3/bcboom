@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\ResetCodePassword;
 
 class Reset extends Notification
 {
@@ -17,8 +18,8 @@ class Reset extends Notification
      * @return void
      */
     private $details;
-    
-    public function __construct($details)
+
+    public function __construct(ResetCodePassword $details)
     {
         //
         $this->details = $details;
@@ -32,7 +33,7 @@ class Reset extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'broadcast'];
     }
 
     /**
@@ -44,8 +45,9 @@ class Reset extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('Your code is')
+                    ->action($this->details['code'], url('/'))
+                    ->line('Expires in one hour!')
                     ->line('Thank you for using our application!');
     }
 
@@ -59,6 +61,7 @@ class Reset extends Notification
     {
         return [
             //
+            'code' => $this->details['code']
         ];
     }
 }
