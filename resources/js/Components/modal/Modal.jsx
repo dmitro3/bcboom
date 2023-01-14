@@ -14,7 +14,7 @@ const style = (isMobile, isAuthModal) => {
         boxShadow: 24,
         borderRadius: "20px",
         outline: "none",
-        maxHeight: '90vh',
+        maxHeight: '80vh',
         overflow: isMobile ? 'initial' : 'scroll'
         // padding: "20px 0",
         // overflowX: 'scroll'
@@ -51,8 +51,9 @@ const CustomModal = ({ children, open, handleClose, isAuthModal = false }) => {
                     {isMobile && isAuthModal ? (
                         <div
                             style={{
-                                maxHeight: "90vh",
+                                maxHeight: "70vh",
                                 overflow: "scroll",
+                                borderRadius: "20px",
                             }}
                         >
                             {children}
