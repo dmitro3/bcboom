@@ -16,7 +16,9 @@ import settings from "../../../../public/images/svg/settings.svg";
 import TextWithBg from "@/Components/UtilComponents/TextWithBg";
 import { Divider } from "@/Components/Divider/Divider";
 import Button from "@/Components/Button/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getMe, setProfile } from "@/redux/profile/profileSlice";
 const PersonalCenterPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -90,58 +92,69 @@ const TextWithIcon = ({ icon, text, width, height }) => {
         </div>
     );
 };
-const CenterRange = () => {
-    return (
-        <div style={{}}>
-            <Flex justifyContent="space-between" width="80%">
-                <Text
-                    type="p"
-                    text="Deposit"
-                    fontSize="15px"
-                    fontWeight="bold"
-                />
-                <Flex alignItems="center" gap="3px">
-                    <Text
-                        type="p"
-                        text="R$0"
-                        fontSize="15px"
-                        fontWeight="bold"
-                    />
-                    <small>/</small>
-                    <Text
-                        type="p"
-                        text="R$100"
-                        fontSize="15px"
-                        fontWeight="bold"
-                        color="#FFCD4D"
-                    />
-                </Flex>
-            </Flex>
-            <RangeInput
-                style={{
-                    width: "80%",
-                    marginTop: "10px",
-                }}
-            >
-                <Flex alignItems="center" gap="6px">
-                    <input
-                        type="range"
-                        max={100}
-                        min={0}
-                        value={10}
-                        style={{ width: "100%" }}
-                    />
-                    <Text text="0%" type="p" fontWeight="bold" />
-                </Flex>
-            </RangeInput>
-        </div>
-    );
-};
+// const CenterRange = () => {
+//     return (
+//         <div style={{}}>
+//             <Flex justifyContent="space-between" width="80%">
+//                 <Text
+//                     type="p"
+//                     text="Deposit"
+//                     fontSize="15px"
+//                     fontWeight="bold"
+//                 />
+//                 <Flex alignItems="center" gap="3px">
+//                     <Text
+//                         type="p"
+//                         text="R$0"
+//                         fontSize="15px"
+//                         fontWeight="bold"
+//                     />
+//                     <small>/</small>
+//                     <Text
+//                         type="p"
+//                         text="R$100"
+//                         fontSize="15px"
+//                         fontWeight="bold"
+//                         color="#FFCD4D"
+//                     />
+//                 </Flex>
+//             </Flex>
+//             <RangeInput
+//                 style={{
+//                     width: "80%",
+//                     marginTop: "10px",
+//                 }}
+//             >
+//                 <Flex alignItems="center" gap="6px">
+//                     <input
+//                         type="range"
+//                         max={100}
+//                         min={0}
+//                         value={10}
+//                         style={{ width: "100%" }}
+//                     />
+//                     <Text text="0%" type="p" fontWeight="bold" />
+//                 </Flex>
+//             </RangeInput>
+//         </div>
+//     );
+// };
 const PersonalCenter = () => {
     const { isMobile } = useScreenResolution();
-    const {
-        user: { user },
-    } = useSelector((state) => state.auth);
+    // const {
+    //     user: { user },
+    // } = useSelector((state) => state.auth);
+    const dispatcher = useDispatch();
+    const { profile } = useSelector((state) => state.profile);
+    useEffect(() => {
+        const getProfile = async () => {
+            const response = await dispatcher(getMe());
+            dispatcher(setProfile(response?.payload?.data));
+        };
+        if (!profile) {
+            getProfile();
+        }
+    }, [profile]);
     return (
         <>
             <Head title="Personal Center" />
@@ -181,7 +194,7 @@ const PersonalCenter = () => {
                                         <div style={{ textAlign: "center" }}>
                                             <Text
                                                 type={"p"}
-                                                text={user?.username}
+                                                text={profile?.username}
                                                 fontSize={"15px"}
                                                 color={"white"}
                                                 fontWeight={"700"}
