@@ -14,6 +14,7 @@ import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LayoutTheme from "./theme";
+import NicknameModal from "@/Components/modal/profile/NicknameModal";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
@@ -34,6 +35,7 @@ export default function GuestLayout({ children }) {
     const { isMobile } = useScreenResolution();
     const { drawerState } = useSelector((state) => state.app);
     const { modalState } = useSelector((state) => state.auth);
+    const { nicknameModalState } = useSelector((state) => state.profile);
     const { modalState: walletModalState } = useSelector(
         (state) => state.wallet
     );
@@ -74,6 +76,7 @@ export default function GuestLayout({ children }) {
             {isMobile && drawerState?.open && <Sidedrawer />}
             {modalState?.open && <LoginSignupModal />}
             {walletModalState?.open && <WalletModal />}
+            {nicknameModalState.open && <NicknameModal />}
             <PageLayout>
                 {isMobile ? <MobileHeader /> : <DesktopHeader />}
                 <PageBody isMobile={isMobile}>

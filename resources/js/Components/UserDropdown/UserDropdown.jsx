@@ -64,14 +64,14 @@ const UserAvatar = styled("div")(({}) => ({
     justifyContent: "center",
     marginLeft: "15px",
 }));
-const UserImage = styled("div")(({ size }) => ({
+const UserImage = styled("div")(({ size, background }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "#667BFF",
+    background: background || "#667BFF",
     borderRadius: "50%",
     width: size || "45px",
-    height: size || "45px",
+    // height: size || "45px",
 }));
 const Chevron = styled("div")(({}) => ({
     marginLeft: "10px",
@@ -101,7 +101,7 @@ const UserDetails = ({ user, dispatcher }) => {
         {
             text: "VIP Level",
             icon: vip,
-            link: "/vip-level",
+            link: "/vip",
         },
         {
             text: "Game History",
@@ -115,10 +115,12 @@ const UserDetails = ({ user, dispatcher }) => {
         },
     ];
     const [mouseOver, setMouseOver] = useState(-1);
+    const { profileColor } = useSelector((state) => state.profile);
+
     return (
         <UserDetailsWrapper>
-            <Flex padding="30px">
-                <UserImage size={"65px"}>
+            <Flex padding="30px" alignItems='center'>
+                <UserImage size={"65px"} background={profileColor}>
                     <img
                         src={user.avatar || userimg}
                         alt="useravatar"
@@ -204,6 +206,8 @@ const UserDropdown = ({
     const {
         user: { user },
     } = useSelector((state) => state.auth);
+    const { profileColor } = useSelector((state) => state.profile);
+
     if (!isLoggedIn)
         return (
             <>
@@ -270,7 +274,7 @@ const UserDropdown = ({
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage size={isMobile ? "40px" : "45px"}>
+                        <UserImage size={isMobile ? "40px" : "45px"} background={profileColor}>
                             <img
                                 src={user?.avatar || userimg}
                                 alt="useravatar"

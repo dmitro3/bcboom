@@ -377,6 +377,7 @@ const LoginSignupModal = () => {
             open={modalState.open}
             handleClose={() => dispatcher(setAuthModalState({ open: false }))}
             isAuthModal={true}
+            shouldHaveBorder={true}
         >
             <CloseIcon
                 onClick={() =>

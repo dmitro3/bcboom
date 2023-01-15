@@ -2,20 +2,21 @@ import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 
-const style = (isMobile, isAuthModal) => {
+const style = (isMobile, shouldHaveBorder, styles) => {
     return {
         position: "absolute",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        border: isAuthModal && "2px solid #000",
-        background:  isAuthModal && "linear-gradient(#FFDE9F,#50ABFF)",
+        border: shouldHaveBorder && "2px solid #000",
+        background: shouldHaveBorder && "linear-gradient(#FFDE9F,#50ABFF)",
         padding: "1px",
         boxShadow: 24,
         borderRadius: "20px",
         outline: "none",
-        maxHeight: '80vh',
-        overflow: isMobile ? 'initial' : 'scroll'
+        maxHeight: "80vh",
+        overflow: isMobile ? "initial" : "scroll",
+        ...styles
         // padding: "20px 0",
         // overflowX: 'scroll'
         // overflowX: "hidden",
@@ -36,7 +37,14 @@ const style = (isMobile, isAuthModal) => {
         // },
     };
 };
-const CustomModal = ({ children, open, handleClose, isAuthModal = false }) => {
+const CustomModal = ({
+    children,
+    open,
+    handleClose,
+    isAuthModal = false,
+    shouldHaveBorder = false,
+    styles
+}) => {
     const { isMobile } = useScreenResolution();
 
     return (
@@ -47,7 +55,7 @@ const CustomModal = ({ children, open, handleClose, isAuthModal = false }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style(isMobile, isAuthModal)}>
+                <Box sx={style(isMobile, shouldHaveBorder, styles)}>
                     {isMobile && isAuthModal ? (
                         <div
                             style={{
@@ -58,7 +66,7 @@ const CustomModal = ({ children, open, handleClose, isAuthModal = false }) => {
                         >
                             {children}
                         </div>
-                        ) : (
+                    ) : (
                         <div>{children} </div>
                     )}
                 </Box>

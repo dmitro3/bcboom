@@ -8,14 +8,32 @@ export const getMe = createAsyncThunk("me", async () => {
     return response;
 });
 
+export const changeUsername = createAsyncThunk(
+    "change-username",
+    async (username) => {
+        const response = await profileFunctions.changeUsername(username);
+        return response;
+    }
+);
+
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
         profile: null,
+        profileColor: "#64A2FF",
+        nicknameModalState: {
+            open: false,
+        },
     },
     reducers: {
         setProfile: (state, action) => {
             state.profile = action.payload;
+        },
+        changeNicknameModalState: (state, action) => {
+            state.nicknameModalState = action.payload;
+        },
+        setProfileColorStore: (state, action) => {
+            state.profileColor = action.payload;
         },
     },
     extraReducers: {
@@ -29,8 +47,14 @@ const profileSlice = createSlice({
                 state.profile = action?.payload?.data?.user;
             }
         },
+        [changeUsername.fulfilled]: (state, action) => {
+            if (action.payload.status === 200) {
+                state.profile.username = action.payload.data.username;
+            }
+        },
     },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, changeNicknameModalState, setProfileColorStore } =
+    profileSlice.actions;
 export const ProfileState = profileSlice.reducer;
