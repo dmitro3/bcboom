@@ -64,6 +64,7 @@ Route::middleware(['jwt.verify'])->group(function () {
     
         Route::get('/payment', [PaymentController::class, 'index']);
         Route::post('/payment/pay', [PaymentController::class, 'pay']);
+        Route::post('/payment/test', [PaymentController::class, 'testPay']);
         Route::post('/payment/callback', [PaymentController::class, 'callback']);
 });
 
