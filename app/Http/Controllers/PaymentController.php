@@ -49,7 +49,7 @@ class PaymentController extends Controller
         $data['amount'] = $request->amount;
         $data['orderno'] = intval(microtime(true) * 1000 * 1000);;
         $data['notifyurl '] = '(/notify/url)';
-        $data['currency'] = 'USD';
+        $data['currency'] = 'BRL';
     
         $url = 'https://api.hpay.one/open/index/createorder';
         $merchantKey = 'HECJKDEtTMbFKQDzVqY9';
