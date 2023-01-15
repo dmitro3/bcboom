@@ -13,13 +13,13 @@ use Auth;
 class PaymentController extends Controller
 {
     //
-    public function payment(){
+    public function pay(){
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
         $data['amount'] = '100';
         $data['orderno'] = intval(microtime(true) * 1000 * 1000);;
         $data['notifyurl '] = 'xxxxx';
-        $data['currency'] = 'USD';
+        $data['currency'] = 'BRL';
     
     
     
@@ -43,7 +43,7 @@ class PaymentController extends Controller
 
     dd($response);
     }
-    public function pay(Request $request){
+    public function payment(Request $request){
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
         $data['amount'] = $request->amount;
