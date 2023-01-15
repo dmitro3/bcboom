@@ -8,6 +8,8 @@ use Notification;
 use App\Notifications\ReferralBonus;
 use Illuminate\Support\Str;
 use Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -134,6 +136,8 @@ class AuthController extends Controller
                     $referring->grantBonus();
                     // $referring->makeVip();
                 }else{
+                    $token = JWTAuth::fromUser($user);
+
                     return response()->json([
                         'message' => 'User successfully registered',
                         'user' => $user
@@ -144,6 +148,7 @@ class AuthController extends Controller
                 }
                 
  
+                $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'message' => 'User successfully registered',
