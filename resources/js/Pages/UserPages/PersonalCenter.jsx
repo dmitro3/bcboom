@@ -236,7 +236,7 @@ const PersonalCenter = () => {
                                             size="80px"
                                         >
                                             <img
-                                                src={avatarIcon}
+                                                src={profile?.image || avatarIcon}
                                                 alt=""
                                                 style={{ height: "100%" }}
                                             />

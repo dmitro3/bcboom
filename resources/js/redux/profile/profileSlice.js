@@ -18,11 +18,8 @@ export const changeUsername = createAsyncThunk(
 export const changeProfileImage = createAsyncThunk(
     "change-profile-image",
     async (profileImage) => {
-        const fd = new FormData();
-        fd.append("image", profileImage);
-        console.log("profile: ", fd);
         const response = await profileFunctions.changeProfileImage({
-            image: fd.image.value,
+            profileImage,
         });
         return response;
     }

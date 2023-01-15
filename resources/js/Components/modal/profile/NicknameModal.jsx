@@ -199,7 +199,7 @@ const NicknameModal = () => {
                                     onClick={() => setProfileColor(color)}
                                 >
                                     <img
-                                        src={profile?.image || userimg}
+                                        src={userimg}
                                         alt="user image"
                                         style={{ height: "100%" }}
                                     />
@@ -236,14 +236,15 @@ const NicknameModal = () => {
                             }
                             if (newImage) {
                                 const image = dataURItoBlob(newImage.content);
-                                // const formImage = new FormData();
-                                // formImage.append(
-                                //     "image",
-                                //     image,
-                                //     `${profile?.username}.jpeg`
-                                // );
+                                const formImage = new FormData();
+                                formImage.set(
+                                    "image",
+                                    image,
+                                    `${profile?.username}.jpeg`
+                                );
 
-                                await dispatcher(changeProfileImage(image));
+                               const res = await dispatcher(changeProfileImage(formImage));
+                               console.log('resres', res);
                             }
                             // await sleep(2000);
                             // dispatcher(setProfileColorStore(profileColor));
