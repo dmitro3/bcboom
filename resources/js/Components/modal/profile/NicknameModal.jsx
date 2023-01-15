@@ -3,6 +3,7 @@ import {
     changeNicknameModalState,
     changeProfileImage,
     changeUsername,
+    resetProfileImage,
     setProfileColorStore,
 } from "@/redux/profile/profileSlice";
 import { styled } from "@mui/system";
@@ -96,11 +97,12 @@ const NicknameModal = () => {
     const dispatcher = useDispatch();
     const [profileColor, setProfileColor] = useState("#64A2FF");
     const [editable, makeEditable] = useState(false);
-    const [username, setUsername] = useState(profile?.username);
+    const [username, setUsername] = useState(profile?.username || "");
     const inputRef = useRef(null);
     const COLORS = ["#64A2FF", "#64FFE3", "#FF9C64", "#FF6480", "#A8FF64"];
     const [submitted, setSubmitted] = useState(false);
     const [newImage, setNewImage] = useState(null);
+    const [profileImage, setProfileImage] = useState(profile?.image || userimg);
     const [openFileSelector, { filesContent }] = useFilePicker({
         readAs: "DataURL",
         accept: "image/*",
@@ -111,7 +113,7 @@ const NicknameModal = () => {
             setNewImage(filesContent[0]);
         }
     }, [filesContent]);
-    const profileImage = profile?.image || userimg;
+    // let profileImage = profile?.image || userimg;
     return (
         <CustomModal
             open={nicknameModalState?.open}
@@ -169,7 +171,7 @@ const NicknameModal = () => {
                         />
                         <input
                             type="text"
-                            value={username || "uswer23se"}
+                            value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             disabled={!editable}
                             ref={inputRef}
@@ -196,7 +198,11 @@ const NicknameModal = () => {
                                     size={"70px"}
                                     background={color}
                                     key={i}
-                                    onClick={() => setProfileColor(color)}
+                                    onClick={() => {
+                                        setProfileColor(color);
+                                        setProfileImage(userimg);
+                                        // setNewImage(null);
+                                    }}
                                 >
                                     <img
                                         src={userimg}
@@ -235,23 +241,26 @@ const NicknameModal = () => {
                                 await dispatcher(changeUsername({ username }));
                             }
                             if (newImage) {
-                                const image = dataURItoBlob(newImage.content);
+                                // const image = dataURItoBlob(newImage.content);
                                 const formImage = new FormData();
-                                formImage.set(
-                                    "image",
-                                    image,
-                                    `${profile?.username}.jpeg`
+                                formImage.append("image", newImage);
+                                console.log("newImage: ", formImage);
+                                const res = await dispatcher(
+                                    changeProfileImage({ image: formImage })
                                 );
+                                console.log("res: ", res);
+                            }
 
-                               const res = await dispatcher(changeProfileImage(formImage));
-                               console.log('resres', res);
+                            if (profileImage === userimg) {
+                                dispatcher(resetProfileImage(userimg));
                             }
                             // await sleep(2000);
-                            // dispatcher(setProfileColorStore(profileColor));
-                            // dispatcher(
-                            //     changeNicknameModalState({ open: false })
-                            // );
-                            // toast.info("Profile updated");
+                            dispatcher(setProfileColorStore(profileColor));
+                            dispatcher(
+                                changeNicknameModalState({ open: false })
+                            );
+                            toast.info("Profile updated");
+                            setSubmitted(false);
                         }}
                     />
                 </Flex>

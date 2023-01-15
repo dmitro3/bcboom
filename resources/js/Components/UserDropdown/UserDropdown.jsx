@@ -122,7 +122,7 @@ const UserDetails = ({ user, dispatcher }) => {
             <Flex padding="30px" alignItems='center'>
                 <UserImage size={"65px"} background={profileColor}>
                     <img
-                        src={user.image || userimg}
+                        src={user?.image || userimg}
                         alt="useravatar"
                         style={{ height: "100%" }}
                     />

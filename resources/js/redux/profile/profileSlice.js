@@ -18,9 +18,9 @@ export const changeUsername = createAsyncThunk(
 export const changeProfileImage = createAsyncThunk(
     "change-profile-image",
     async (profileImage) => {
-        const response = await profileFunctions.changeProfileImage({
-            profileImage,
-        });
+        const response = await profileFunctions.changeProfileImage(
+            profileImage
+        );
         return response;
     }
 );
@@ -43,6 +43,9 @@ const profileSlice = createSlice({
         },
         setProfileColorStore: (state, action) => {
             state.profileColor = action.payload;
+        },
+        resetProfileImage: (state, action) => {
+            state.profile.image = action.payload;
         },
     },
     extraReducers: {
@@ -69,6 +72,10 @@ const profileSlice = createSlice({
     },
 });
 
-export const { setProfile, changeNicknameModalState, setProfileColorStore } =
-    profileSlice.actions;
+export const {
+    setProfile,
+    changeNicknameModalState,
+    setProfileColorStore,
+    resetProfileImage,
+} = profileSlice.actions;
 export const ProfileState = profileSlice.reducer;
