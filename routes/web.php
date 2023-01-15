@@ -21,7 +21,7 @@ Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
 
 Route::get('/', function () {
     return Inertia::render('Index');
-});
+})->name('index');
 Route::get('/fairness', function () {
     return Inertia::render('Fairness/Index');
 });
