@@ -92,6 +92,7 @@ const NicknameModal = () => {
     const inputRef = useRef(null);
     const COLORS = ["#64A2FF", "#64FFE3", "#FF9C64", "#FF6480", "#A8FF64"];
     const [submitted, setSubmitted] = useState(false);
+    const [newImage, setNewImage] = useState(null)
     return (
         <CustomModal
             open={nicknameModalState?.open}
@@ -208,9 +209,9 @@ const NicknameModal = () => {
                         onSubmit={async () => {
                             setSubmitted(true);
                             if (username !== profile?.username) {
-                                await dispatcher(changeUsername(username));
+                                await dispatcher(changeUsername({username}));
                             }
-                            await sleep(2000);
+                            // await sleep(2000);
                             dispatcher(setProfileColorStore(profileColor));
                             dispatcher(
                                 changeNicknameModalState({ open: false })

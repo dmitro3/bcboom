@@ -49,7 +49,7 @@ const profileSlice = createSlice({
         },
         [changeUsername.fulfilled]: (state, action) => {
             if (action.payload.status === 200) {
-                state.profile.username = action.payload.data.username;
+                state.profile.username = action.payload?.data?.user?.username;
             }
         },
     },
