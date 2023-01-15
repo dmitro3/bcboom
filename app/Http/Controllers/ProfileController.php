@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ImageStoreRequest;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\URL;
 
 class ProfileController extends Controller
 {
@@ -75,7 +76,7 @@ class ProfileController extends Controller
     }
 
     public function imageStore(Request $request){
-        
+        $url = route('index');
   if(Auth::check()){
     $request->validate([
         'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -86,7 +87,7 @@ class ProfileController extends Controller
         $image_new_name = time() . $image->getClientOriginalName();
         $image->move('uploads/images', $image_new_name);
 
-        $user->image = 'uploads/images/'.$image_new_name;
+        $user->image = $url.'/uploads/images/'.$image_new_name;
         $user->save();
         return response()->json([
             'message' => 'success',

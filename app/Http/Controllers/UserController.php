@@ -7,6 +7,7 @@ use App\Mail\SendCodeResetPassword;
 use App\Models\ResetCodePassword;
 use Auth;
 use Mail;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
