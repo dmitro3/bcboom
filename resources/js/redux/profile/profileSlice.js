@@ -15,6 +15,18 @@ export const changeUsername = createAsyncThunk(
         return response;
     }
 );
+export const changeProfileImage = createAsyncThunk(
+    "change-profile-image",
+    async (profileImage) => {
+        const fd = new FormData();
+        fd.append("image", profileImage);
+        console.log("profile: ", fd);
+        const response = await profileFunctions.changeProfileImage({
+            image: fd.image.value,
+        });
+        return response;
+    }
+);
 
 const profileSlice = createSlice({
     name: "profile",
@@ -50,6 +62,11 @@ const profileSlice = createSlice({
         [changeUsername.fulfilled]: (state, action) => {
             if (action.payload.status === 200) {
                 state.profile.username = action.payload?.data?.user?.username;
+            }
+        },
+        [changeProfileImage.fulfilled]: (state, action) => {
+            if (action.payload.status === 200) {
+                state.profile.image = action.payload?.data?.user?.image;
             }
         },
     },
