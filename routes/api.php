@@ -62,11 +62,12 @@ Route::middleware(['jwt.verify'])->group(function () {
     
         // Payment routes
     
-        Route::get('/payment', [PaymentController::class, 'index']);
-        Route::post('/payment/pay', [PaymentController::class, 'pay']);
         Route::post('/payment/callback', [PaymentController::class, 'callback']);
-});
+        Route::post('/payment', [PaymentController::class, 'testpay']);
+        Route::post('/payment/pay', [PaymentController::class, 'pay']);
+    });
+    
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
