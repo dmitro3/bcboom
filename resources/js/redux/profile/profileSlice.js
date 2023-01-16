@@ -81,10 +81,3 @@ export const {
 export const ProfileState = profileSlice.reducer;
 
 
-
-//    "['timestamp']" : time();
-//         "['amount']" : "100";
-//         "['orderno']" : intval(microtime(true) * 1000 * 1000);;
-//         "['notifyurl ']" : '(/notify/url)';
-//         "['currency']" : 'BRL';
-    

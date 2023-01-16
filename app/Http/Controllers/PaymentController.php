@@ -36,7 +36,7 @@ class PaymentController extends Controller
 
         $response = Curl::to($url)
 
-                ->withData($data, $key)
+                ->withData([$data, $key])
 
                 ->post();
 
@@ -77,25 +77,25 @@ class PaymentController extends Controller
         return url("/payment_error");
     }
 
-    function status(Request $request): string {
-        $data = $request->all();
-        unset($data['sign']);
-        $sign = sign($data, $merchantKey);
+    // function status(Request $request): string {
+    //     $data = $request->all();
+    //     unset($data['sign']);
+    //     $sign = sign($data, $merchantKey);
 
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
+    //     if($sign === $request->sign) {
+    //         if($data['trade_state'] === 'SUCCESS') {
                 
-                if($wallet != null) {
-                    $wallet->update([
-                        'deposit' => $wallet->deposit + $data['pay_amount'],
-                    ]);
+    //             if($wallet != null) {
+    //                 $wallet->update([
+    //                     'deposit' => $wallet->deposit + $data['pay_amount'],
+    //                 ]);
                     
-                }
-            }
-        }
+    //             }
+    //         }
+    //     }
 
-        return "SUCCESS";
-    }
+    //     return "SUCCESS";
+    // }
 
     // function validate(Request $request) {
     //     return $request->trade_state !== null;

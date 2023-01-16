@@ -254,7 +254,7 @@ const SignupForm = ({ isMobile }) => {
         </SignupFormWrapper>
     );
 };
-const LoginForm = ({ isMobile }) => {
+const LoginForm = ({ isMobile, switchTo }) => {
     const [loginDetails, setLoginDetails] = useState({
         email: "",
         password: "",
@@ -324,6 +324,7 @@ const LoginForm = ({ isMobile }) => {
                     color: "#9DA6CA",
                     cursor: "pointer",
                 }}
+                onClick={() => switchTo("forgotPassword")}
             >
                 Forgot your password?
             </p>
@@ -372,6 +373,48 @@ const LoginSignupModal = () => {
     const { modalState } = useSelector((state) => state.auth);
     const dispatcher = useDispatch();
     const { isMobile } = useScreenResolution();
+    const [mountedComponent, setMountedComponent] = useState("loginSignup");
+
+    const LoginSignup = () => (
+        <TabComponent>
+            <NewCustomTabs
+                tabItems={[
+                    {
+                        value: "login",
+                        label: "Log In",
+                        content: <LoginForm isMobile={isMobile} switchTo={setMountedComponent} />,
+                    },
+                    {
+                        label: "Sign Up",
+                        value: "signup",
+                        content: <SignupForm isMobile={isMobile} />,
+                    },
+                ]}
+                defaultTab={modalState.tab}
+                width={isMobile ? "100%" : "350px"}
+            />
+        </TabComponent>
+    );
+    let ForgotPassword = () => {
+        return <div>forgot your password</div>;
+    };
+    let ResetPassword = () => {
+        return <div>reset your password</div>;
+    };
+    let Component = null;
+    switch (mountedComponent) {
+        case "loginSignup":
+            Component = LoginSignup;
+            break;
+        case "forgotPassword":
+            Component = ForgotPassword;
+            break;
+        case "resetPassword":
+            Component = ResetPassword;
+            break;
+        default:
+            Component = LoginSignup;
+    }
     return (
         <CustomModal
             open={modalState.open}
@@ -388,24 +431,7 @@ const LoginSignupModal = () => {
                 <img src={isMobile ? mobileclose : close} alt="" />
             </CloseIcon>
             <LoginSignupModalWrapper isMobile={isMobile}>
-                <TabComponent>
-                    <NewCustomTabs
-                        tabItems={[
-                            {
-                                value: "login",
-                                label: "Log In",
-                                content: <LoginForm isMobile={isMobile} />,
-                            },
-                            {
-                                label: "Sign Up",
-                                value: "signup",
-                                content: <SignupForm isMobile={isMobile} />,
-                            },
-                        ]}
-                        defaultTab={modalState.tab}
-                        width={isMobile ? "100%" : "350px"}
-                    />
-                </TabComponent>
+                <Component />
             </LoginSignupModalWrapper>
         </CustomModal>
     );

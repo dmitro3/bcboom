@@ -201,7 +201,7 @@ const NicknameModal = () => {
                                     onClick={() => {
                                         setProfileColor(color);
                                         setProfileImage(userimg);
-                                        // setNewImage(null);
+                                        setNewImage(null);
                                     }}
                                 >
                                     <img
