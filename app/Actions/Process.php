@@ -50,7 +50,7 @@ class Process
         // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
-            print('success');
+            // print('success');
 
             $wallet = Wallet::where('user_id', Auth::id())->first();
             if ($wallet) {
