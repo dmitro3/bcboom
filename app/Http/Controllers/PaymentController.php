@@ -27,7 +27,7 @@ class PaymentController extends Controller
         $data['orderno'] = intval(microtime(true) * 1000 * 1000);
         ;
         $data['notifyurl '] = 'http://localhost:8000';
-        $data['currency'] = 'USD';
+        $data['currency'] = 'BRL';
 
 
 
