@@ -1,34 +1,32 @@
+import Button from "@/Components/Button/Button";
+import { Divider } from "@/Components/Divider/Divider";
 import ImageGridLayout from "@/Components/ImageGrid/ImageGridLayout";
 import Text from "@/Components/Text/Text";
 import { Flex } from "@/Components/UtilComponents/Flex";
+import TextWithBg from "@/Components/UtilComponents/TextWithBg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
-import { Head } from "@inertiajs/inertia-react";
-import { styled } from "@mui/system";
-import centerIcon from "../../../../public/images/user/userIcon.svg";
-import pad from "../../../../public/images/svg/pad.svg";
-import avatarIcon from "../../../../public/images/user/useravatar.png";
-import level1 from "../../../../public/images/levels/level1.svg";
-import link from "../../../../public/images/svg/link.svg";
-import walletImg from "../../../../public/images/svg/walletmini.svg";
-import settings from "../../../../public/images/svg/settings.svg";
-import TextWithBg from "@/Components/UtilComponents/TextWithBg";
-import { Divider } from "@/Components/Divider/Divider";
-import Button from "@/Components/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import {
     changeNicknameModalState,
     getMe,
-    setProfile,
+    setProfile
 } from "@/redux/profile/profileSlice";
 import {
-    getWallet,
-    setWallet,
-    setWalletModalState,
+    setWalletModalState
 } from "@/redux/wallet/wallet-slice";
+import { Head } from "@inertiajs/inertia-react";
+import { styled } from "@mui/system";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import level1 from "../../../../public/images/levels/level1.svg";
+import link from "../../../../public/images/svg/link.svg";
+import pad from "../../../../public/images/svg/pad.svg";
+import settings from "../../../../public/images/svg/settings.svg";
+import walletImg from "../../../../public/images/svg/walletmini.svg";
+import avatarIcon from "../../../../public/images/user/useravatar.png";
+import centerIcon from "../../../../public/images/user/userIcon.svg";
 const PersonalCenterPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
