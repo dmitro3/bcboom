@@ -52,7 +52,7 @@ class PaymentController extends Controller
     public function pay(Request $request){
 
         $process = new Process;
-        $process->execute();
+        $process->execute($request);
         
     }
  
