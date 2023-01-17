@@ -64,8 +64,9 @@ class Process
                     'deposit' => $result['data']['amount']
                 ]);
             }
+            $user = Auth::user();
             return response()->json([
-                'user' => Auth::user(),
+                'user' => $user,
                 'message' => 'Payment successful',
             ], 200);
             // redirect(route('callback', ['result' => $result['data']['pay_info']]));
