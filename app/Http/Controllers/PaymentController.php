@@ -56,7 +56,7 @@ class PaymentController extends Controller
 
         $process = new Process;
         $user = Auth::user();
-        $process->execute($request, $user);
+        $process->execute($request);
 
     }
 
