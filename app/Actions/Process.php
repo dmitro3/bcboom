@@ -22,8 +22,9 @@ class Process {
  */
 
  
-     function execute(Request $request): User{
-    
+     function execute(Request $request, Wallet $wallet): User{
+        
+        dd('hit');
 
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();

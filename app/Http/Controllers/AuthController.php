@@ -137,7 +137,7 @@ class AuthController extends Controller
                     $referring->grantBonus();
                     // $referring->makeVip();
                 }else{
-                    $token = JWTAuth::fromUser($user);
+                    // $token = JWTAuth::fromUser($user);
 
                     return response()->json([
                         'message' => 'User successfully registered',
@@ -149,7 +149,7 @@ class AuthController extends Controller
                 }
                 
  
-                $token = JWTAuth::fromUser($user);
+                // $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'message' => 'User successfully registered',

@@ -49,7 +49,7 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['jwt.verify'])->group(function () {
     
     // Profile
         Route::get('me',[UserController::class, 'aboutMe']);
@@ -63,10 +63,14 @@ Route::middleware(['auth'])->group(function () {
         // Payment routes
     
         Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
+        
     });
+    
+    Route::middleware(['jwt.auth'])->group(function () {
+
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
-    
+    });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

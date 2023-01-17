@@ -10,15 +10,14 @@ use Ixudra\Curl\Facades\Curl;
 use Auth;
 use App\Actions\Process;
 use App\Actions\Proc;
+use JWTAuth;
 
 
 class PaymentController extends Controller
 {
     
 
-    // public function __construct(){
-    //     $this->middleware('auth');
-    // }
+
     public function paym(){
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
@@ -51,9 +50,24 @@ class PaymentController extends Controller
     }
     public function pay(Request $request){
         
-        $process = new Process;
-        $user = Auth::user();
-        $process->execute($request, $user);
+        $wallet = Wallet::where('user_id', Auth::id())->first();
+
+        dd($wallet);
+        if($wallet != null){
+            $process = new Process;
+            $process->execute($request, $wallet);
+        }else{
+
+            $wallet = Wallet::create([
+                'user_id' => Auth::id()
+            ]);
+
+            dd($wallet);
+
+            $process = new Process;
+            $process->execute($request, $wallet);
+        }
+        
         
     }
  
@@ -68,7 +82,7 @@ class PaymentController extends Controller
 
     public function callback($result){
         dd('hit');
-$wallet = Wallet::where('user_id', Auth::id())->first();
+        $wallet = Wallet::where('user_id', Auth::id())->first();
             if($wallet){
             $wallet->update([
                 'order_no' => $result['data']['tx_orderno'],
