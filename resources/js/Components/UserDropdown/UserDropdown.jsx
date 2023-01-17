@@ -248,7 +248,7 @@ const UserDropdown = ({
             // setBalance(formatted);
         };
         if (isLoggedIn) getWalletInfo();
-    }, []);
+    }, [isLoggedIn]);
     const balance = currencyFormatter.format(
         +wallet?.bet + +wallet?.deposit + +wallet?.bonus
     ) || "0.00";

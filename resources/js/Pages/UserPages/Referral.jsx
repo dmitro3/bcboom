@@ -326,6 +326,7 @@ const Invite = ({ isMobile }) => {
     const classes = useStyles();
     const [rangeVal, setRangeVal] = useState(0);
     const { profile } = useSelector((state) => state.profile);
+    const { wallet } = useSelector((state) => state.wallet);
     return (
         <TabWrapper isMobile={isMobile}>
             <Flex
@@ -493,13 +494,13 @@ subordinates, where the bonus amount lower level user betting depends on the val
                             />
                             <Text
                                 type="p"
-                                text="41041535"
+                                text={profile?.referral_count }
                                 fontWeight="bold"
                                 fontSize="24px"
                             />
                             <Text
                                 type="p"
-                                text="8207315 Received"
+                                text={'R$ ' + wallet?.bonus + " Received"}
                                 fontSize="18px"
                             />
                         </div>

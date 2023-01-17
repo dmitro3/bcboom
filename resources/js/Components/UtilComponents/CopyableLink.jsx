@@ -26,7 +26,7 @@ const Wrapper = styled("div")(({ splitted, size, background }) => ({
     },
 }));
 const CopyableLink = ({ text, addon, background, size }) => {
-    const newText = text.split("_");
+    const newText = text?.split("_") || [];
     return (
         <Wrapper splitted={newText[1]} size={size} background={background}
             onClick={() => {
