@@ -51,7 +51,21 @@ class Process
 
         if (isset($result['data']['pay_info'])) {
             print('success');
-            redirect(route('callback', ['result' => $result['data']['pay_info']]));
+
+            $wallet = Wallet::where('user_id', Auth::id())->first();
+            if ($wallet) {
+                $wallet->update([
+                    'order_no' => $result['data']['tx_orderno'],
+                    'deposit' => $wallet->deposit + $result['data']['amount'],
+                ]);
+            } else {
+                Wallet::create([
+                    'user_id' => Auth::Id(),
+                    'deposit' => $result['data']['amount']
+                ]);
+            }
+            return $result['data']['pay_info'];
+            // redirect(route('callback', ['result' => $result['data']['pay_info']]));
 
             //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
