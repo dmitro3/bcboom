@@ -46,10 +46,10 @@ class Process
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
 
-        var_dump($result);
+        // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
-
+            print('success');
             return route('callback', ['result' => $result['data']['pay_info']]);
 
             //  I had placed an if statement here but recently redirecting;
