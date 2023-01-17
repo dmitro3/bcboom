@@ -63,7 +63,7 @@ const Wallet = styled("div")(({}) => ({
     color: "#8990AE",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     marginLeft: "10px",
     fontSize: "18px",
     fontWeight: "bold",
@@ -219,7 +219,7 @@ const UserDropdown = ({
     // } = useSelector((state) => state.auth);
     const { profileColor, profile } = useSelector((state) => state.profile);
     const { wallet, level } = useSelector((state) => state.wallet);
-    const [balance, setBalance] = useState("0.00");
+    // const [balance, setBalance] = useState("0.00");
     useEffect(() => {
         const getWalletInfo = async () => {
             const response = await dispatcher(getWallet());
@@ -242,13 +242,16 @@ const UserDropdown = ({
                     maxBet: stats.maxBet,
                 })
             );
-            const formatted = currencyFormatter
-                .format(sumValueOfObj(wallet))
-                .replace("$", "");
-            setBalance(formatted);
+            // const formatted = currencyFormatter
+            //     .format(sumValueOfObj(wallet))
+            //     .replace("$", "");
+            // setBalance(formatted);
         };
         if (isLoggedIn) getWalletInfo();
     }, []);
+    const balance = currencyFormatter.format(
+        +wallet?.bet + +wallet?.deposit + +wallet?.bonus
+    ) || "0.00";
     if (!isLoggedIn)
         return (
             <>

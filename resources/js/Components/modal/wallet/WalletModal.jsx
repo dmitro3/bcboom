@@ -1,6 +1,6 @@
 import Text from "@/Components/Text/Text";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setWalletModalState } from "@/redux/wallet/wallet-slice";
+import { deposit, setWalletModalState } from "@/redux/wallet/wallet-slice";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomModal from "../Modal";
@@ -18,6 +18,8 @@ import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
 import { currencyFormatter } from "@/utils/util";
 import CustomCarousel from "@/Components/Carousel/Carousel";
 import Button from "@/Components/Button/Button";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 const WalletWrapper = styled("div")(({ isMobile }) => ({
     background: "#464F85",
@@ -67,12 +69,16 @@ const AmountOptions = styled("div")(({}) => ({
     marginTop: "20px",
 }));
 
-const DepositButton = styled("button")(({fontSize}) => ({
+const DepositButton = styled("button")(({ fontSize }) => ({
     width: "100%",
     background: "#3586FF",
     borderRadius: "10px",
     padding: "10px",
     fontSize: fontSize,
+
+    "&:hover": {
+        background: "#3586ff70",
+    },
 }));
 
 const Disclaimer = styled("div")(({}) => ({
@@ -89,6 +95,36 @@ const DepositCarousel = styled("div")(({}) => ({
 
 const Deposit = () => {
     const [value, setValue] = useState(100);
+    const [calculatedValue, setCalculatedValue] = useState(
+        Math.floor(value * 0.544)
+    );
+    const [submitted, setSubmitted] = useState(false);
+    const [buttonHovered, setButtonHovered] = useState(false);
+    const dispatcher = useDispatch();
+    async function handleDeposit(value) {
+        setSubmitted(true);
+        if(!value || value < 10) {
+            toast.error("Minimum deposit is R$10");
+            setSubmitted(false);
+            return;
+        }
+        const response = await dispatcher(deposit(value));
+        console.log("response", response);
+        if (!response?.payload) {
+            toast.error("An error occured");
+            setSubmitted(false);
+            return;
+        }
+        if (response?.payload?.error) {
+            toast.error(response.payload.error);
+            setSubmitted(false);
+            return;
+        }
+
+        toast.success(`Deposit of R$ ${value} was successful`);
+        setSubmitted(false);
+       dispatcher(setWalletModalState({ open: false }));
+    }
     return (
         <TabWrapper>
             <Flex alignItems="center" gap="10px" width="100%">
@@ -99,7 +135,10 @@ const Deposit = () => {
                 addon={<img src={currency} alt="" />}
                 type="number"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    setCalculatedValue(Math.floor(e.target.value * 0.544));
+                }}
                 afterInputText="Extra + G$20"
                 br="10px"
             />
@@ -119,37 +158,61 @@ const Deposit = () => {
                                 style={{ width: "20px" }}
                             />
                         }
-                        onChange={() => setValue(item)}
+                        onChange={() => {
+                            setValue(item);
+                            setCalculatedValue(item * 0.544);
+                        }}
                     />
                 ))}
             </AmountOptions>
-            <DepositButton>
-                <Flex alignItems="center" justifyContent="space-between">
-                    <div>
-                        <Text
-                            type="p"
-                            text="Deposit"
-                            fontSize="22px"
-                            fontWeight="bold"
-                        />
-                        <Text
-                            type="p"
-                            text="( 1B$ = R$0.544)"
-                            fontSize="13px"
-                        />
-                    </div>
-                    <Flex alignItems="center">
-                        <Text
-                            type="p"
-                            text={`R$ ${currencyFormatter
-                                .format(value * 0.544)
-                                .replace("$", "")}`}
-                            fontSize="24px"
-                            fontWeight="bold"
-                        />
-                        <img src={proceed} alt="" />
+            <DepositButton
+                onClick={() => handleDeposit(calculatedValue)}
+                onMouseEnter={() => setButtonHovered(true)}
+                onMouseLeave={() => setButtonHovered(false)}
+            >
+                {submitted ? (
+                    <CircularProgress
+                        sx={{
+                            color: "#fff",
+                        }}
+                    />
+                ) : (
+                    <Flex alignItems="center" justifyContent="space-between">
+                        <div>
+                            <Text
+                                type="p"
+                                text="Deposit"
+                                fontSize="22px"
+                                fontWeight="bold"
+                            />
+                            <Text
+                                type="p"
+                                text="( 1B$ = R$0.544)"
+                                fontSize="13px"
+                            />
+                        </div>
+                        <Flex alignItems="center">
+                            <Text
+                                type="p"
+                                text={`R$ ${
+                                    Math.floor(calculatedValue)
+                                    // .replace("$", "")
+                                }`}
+                                fontSize="24px"
+                                fontWeight="bold"
+                            />
+                            <img
+                                src={proceed}
+                                alt=""
+                                style={{
+                                    marginRight: buttonHovered && "20px",
+                                    paddingLeft: buttonHovered && "10px",
+                                    transition: "all .4s",
+                                }}
+                            />
+                        </Flex>
                     </Flex>
-                </Flex>
+                )}
             </DepositButton>
             <DepositCarousel>
                 <CustomCarousel rowPerCount={1} autoplay={false}>
@@ -222,8 +285,8 @@ const Withdraw = () => {
                 placeholder="Enter name of card holder"
                 br="10px"
             />
-            <Flex alignItems="center" gap='10px'>
-                <div style={{width: '50%'}}>
+            <Flex alignItems="center" gap="10px">
+                <div style={{ width: "50%" }}>
                     <Text type="p" text="CPF:" />
                     <Input
                         type="text"
@@ -233,7 +296,7 @@ const Withdraw = () => {
                         br="10px"
                     />
                 </div>
-                <div style={{width: '50%'}}>
+                <div style={{ width: "50%" }}>
                     <Text type="p" text="WhatsApp:" />
                     <Input
                         type="text"
@@ -244,12 +307,12 @@ const Withdraw = () => {
                     />
                 </div>
             </Flex>
-            <Flex alignItems="center" gap='10px'>
-                <div style={{width: '50%'}}>
+            <Flex alignItems="center" gap="10px">
+                <div style={{ width: "50%" }}>
                     <Text type="p" text="PIX Type:" />
                     <Input type="text" value={"CPF"} br="10px" disabled />
                 </div>
-                <div style={{width: '50%'}}>
+                <div style={{ width: "50%" }}>
                     <Text type="p" text="Change PIX:" />
                     <Input
                         type="text"
@@ -287,7 +350,7 @@ const Withdraw = () => {
                     />
                 ))}
             </Disclaimer>
-            <DepositButton fontSize='20px'>Withdraw</DepositButton>
+            <DepositButton fontSize="20px">Withdraw</DepositButton>
         </TabWrapper>
     );
 };
