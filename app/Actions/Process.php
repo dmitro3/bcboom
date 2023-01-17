@@ -49,13 +49,16 @@ class Process
         // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
-            print('success');
-            return route('callback', ['result' => $result['data']['pay_info']]);
+            $res = $result['data'];
+            return redirect()->action(
+                [PaymentController::class, 'callback'], ['result' => $res]
+            );
+
 
             //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
         } else {
-            dd($result);
+
             return $result['msg'];
 
         }
