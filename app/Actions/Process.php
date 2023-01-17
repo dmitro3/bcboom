@@ -13,67 +13,74 @@ class Process {
     private string $gateway = "https://api.hpay.one";
     
     
-    function execute(Request $request){
+    
 
-        $user = Auth::id();
+/**
+ * Create a new controller instance.
+ *
+ * @return void
+ */
 
-        $wallet =  Wallet::where('user_id', $user->id)->first();
+ 
+     function execute(Request $request): User{
+    
+
+
+        // $wallet =  Wallet::where('user_id', $user->id)->first();
         
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
-            'notifyurl' => url('/api/paymentStatus'),
+            'notifyurl' => url('/payment/callback/{result}'),
             'currency' => 'BRL'
         ];
-        dd($data);    
+   
         
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
         
-
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+    
+        
+
         if(isset($result['data']['pay_info'])) {
-            if($wallet){
-            $wallet->update([
-                'order_no' => $result['data']['tx_orderno'],
-                'deposit' => $wallet->deposit + $result['data']['amount'],
-            ]);
-        }else{
-            Wallet::create([
-                'user_id' => $user->id,
-                'deposit' => $result['data']['amount']
-            ]);
-        }
-            return $result['data']['pay_info'];
+
+            return route('callback', ['result' => $result['data']['pay_info']]);
+
+        //  I had placed an if statement here but recently redirecting;
+            // return $result['data']['pay_info'];
         }
         
-        else Log::warning('Error: ' . json_encode($result));
+        else
+        {
+             dd($result);
 
-        return url("/payment_error");
     }
+}
 
-    function status(Request $request): string {
-        $data = $request->all();
-        unset($data['sign']);
-        $sign = $this->sign($data, $this->merchantKey);
+    // function status(Request $request): string {
+    //     $data = $request->all();
+    //     unset($data['sign']);
+    //     $sign = $this->sign($data, $this->merchantKey);
 
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
-                $wallet = wallet::where('user_id', Auth::id())->first();
+    //     //if($sign === $request->sign) {
+    //         // if($data['trade_state'] === 'SUCCESS') {
+    //         //     $wallet = wallet::where('user_id', Auth::id())->first();
 
 
-                    $wallet->update([
-                        'deposit' => $data['amount']
-                    ]);
+    //         //         $wallet->update([
+    //         //             'deposit' => $data['amount']
+    //         //         ]);
 
+    //         // return route('callback', ['result' => $]);
                 
-            }
-        }
+    //         //}
+    //     //}
 
-        return "SUCCESS";
-    }
+    //     return "SUCCESS";
+    // }
 
     function validate(Request $request): bool {
         return $request->trade_state !== null;

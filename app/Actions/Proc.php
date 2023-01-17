@@ -8,23 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class Proc {
-    public function exec(Request $request){
-        dd('hit');
     
-    $data['mchid'] = '"000801682';
+    function exec(): User{
+        $user = User::find(1);
+    
+    $data['mchid'] = '000801682';
     $data['timestamp'] = time();
-    $data['amount'] = $request->amount;
+    $data['amount'] = 1000;
     $data['orderno'] = intval(microtime(true) * 1000 * 1000);;
     $data['notifyurl '] = url('api/payment/pay');
 
+$wallet = Wallet::where('user_id', $user->id)->first();
 
+$url = 'https://api.hpay.one/open/index/createorder';
+$key = 'HECJKDEtTMbFKQDzVqY9';
 
+$sign = getSignOpen($data,$key);
 
-    $url = 'https://api.hpay.one/open/index/createorder';
-    $key = 'HECJKDEtTMbFKQDzVqY9';
-    $sign = getSignOpen($data,$key);
-
-    $data['sign'] = $sign;
+$data['sign'] = $sign;
+dd($data);
 
     $result = curl_file_get_contents($url,$data,'1');
     if(isset($result['data']['pay_info'])) {
