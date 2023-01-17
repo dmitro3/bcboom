@@ -249,9 +249,10 @@ const UserDropdown = ({
         };
         if (isLoggedIn) getWalletInfo();
     }, [isLoggedIn]);
-    const balance = currencyFormatter.format(
-        +wallet?.bet + +wallet?.deposit + +wallet?.bonus
-    ) || "0.00";
+    const balance =
+        currencyFormatter
+            .format(+wallet?.bet + +wallet?.deposit + +wallet?.bonus)
+            .replace("$", "") || "0.00";
     if (!isLoggedIn)
         return (
             <>
