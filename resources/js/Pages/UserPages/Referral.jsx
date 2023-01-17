@@ -40,6 +40,7 @@ import whowonbg from "../../../../public/images/user/whowonbg.svg";
 
 import BcButton from "@/Components/Button/Button";
 import { Cell, Label, Pie, PieChart } from "recharts";
+import { useSelector } from "react-redux";
 const ReferralPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -324,7 +325,7 @@ const HeaderStats = ({ isMobile, stats, justify, gap, wrap }) => (
 const Invite = ({ isMobile }) => {
     const classes = useStyles();
     const [rangeVal, setRangeVal] = useState(0);
-    console.log("isMobile: ", isMobile);
+    const { profile } = useSelector((state) => state.profile);
     return (
         <TabWrapper isMobile={isMobile}>
             <Flex
@@ -363,7 +364,7 @@ const Invite = ({ isMobile }) => {
                                 />
                                 <CopyableLink
                                     addon={true}
-                                    text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
+                                    text={profile?.referral_link}
                                     size="6px"
                                     background="#1A2150"
                                 />
@@ -371,15 +372,15 @@ const Invite = ({ isMobile }) => {
                             <div>
                                 <Text
                                     type="p"
-                                    text="Invite URL"
+                                    text="Copy the invite code"
                                     fontWeight="bold"
                                     fontSize="12px"
                                     padding="10px 0"
                                 />
                                 <CopyableLink
                                     addon={true}
-                                    text="https://betdino.io?referralcode=62f14645860e2bee6be9f840"
-                                    size="6px"
+                                    text={profile?.referral_token}
+                                    size="18px"
                                     background="#1A2150"
                                 />
                             </div>
@@ -1207,12 +1208,16 @@ We want all players to have fun at Betfiery, whether it's the fun of winning bet
 const Stats = ({ isMobile }) => {
     const [limit, setLimit] = useState("10");
     const [type, setType] = useState("Upgrade reward");
-   
+
     return (
         <TabWrapper isMobile={isMobile}>
             <StatsWrapper isMobile={isMobile}>
-                <Flex alignItems="center" gap="20px" direction={isMobile ? 'column-reverse': 'row'}>
-                    <Flex gap='20px'>
+                <Flex
+                    alignItems="center"
+                    gap="20px"
+                    direction={isMobile ? "column-reverse" : "row"}
+                >
+                    <Flex gap="20px">
                         <SelectWithDropdown
                             items={[
                                 { value: "10", label: "10" },
@@ -1252,7 +1257,7 @@ const Stats = ({ isMobile }) => {
                     <div
                         style={{
                             border: "1px solid #8a86ca",
-                            width: isMobile ? '100%' : "200px",
+                            width: isMobile ? "100%" : "200px",
                             height: "100%",
                             borderRadius: "10px",
                         }}
@@ -1271,12 +1276,14 @@ const Stats = ({ isMobile }) => {
                         />
                     </div>
 
-                   {!isMobile && <BcButton
-                        text="Search"
-                        background="#3586FF"
-                        height="100%"
-                        width="100px"
-                    />}
+                    {!isMobile && (
+                        <BcButton
+                            text="Search"
+                            background="#3586FF"
+                            height="100%"
+                            width="100px"
+                        />
+                    )}
                 </Flex>
                 <TableWrapper>
                     <Text

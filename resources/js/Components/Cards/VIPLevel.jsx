@@ -202,7 +202,9 @@ const MyVIPLevel = () => {
                         />
                     </Flex>
                 </Flex>
-                <RangeInput style={{ width: "80%", marginTop: "10px" }}>
+                <RangeInput style={{ width: "80%", marginTop: "10px" }}
+                    value={level?.betProgress}
+                >
                     <Flex alignItems="center" gap="6px">
                         <input
                             type="range"

@@ -1,16 +1,18 @@
 import { styled } from "@mui/system";
 import React from "react";
+import { toast } from "react-toastify";
 import link from "../../../../public/images/svg/link.svg";
-const Wrapper = styled("div")(({ splitted, size , background}) => ({
+const Wrapper = styled("div")(({ splitted, size, background }) => ({
     border: "1px solid #ABB7E2",
-    borderRadius: "10px",
+    borderRadius: "15px",
     position: "relative",
     background: background,
     height: "40px",
     fontSize: size || "16px",
     "& p": {
         overflow: "hidden",
-        padding: "6px 50px 1px 3px",
+        // padding: "6px 50px 3px 3px",
+        paddingLeft: "13px",
         display: "flex",
         alignItems: "center",
         // justifyContent: "center",
@@ -26,11 +28,16 @@ const Wrapper = styled("div")(({ splitted, size , background}) => ({
 const CopyableLink = ({ text, addon, background, size }) => {
     const newText = text.split("_");
     return (
-        <Wrapper splitted={newText[1]} size={size} background={background}>
+        <Wrapper splitted={newText[1]} size={size} background={background}
+            onClick={() => {
+                navigator.clipboard.writeText(text);
+                toast.info("Copied to clipboard");
+            }}
+        >
             {/* <input type="text"  */}
             <p>
                 <span>{newText[0]}</span>
-                <span style={{ color: "#4792FF" }}>_</span>
+                {newText[1] && <span style={{ color: "#4792FF" }}>_</span>}
                 <span>{newText[1]}</span>
             </p>
             {/* disabled /> */}
@@ -46,7 +53,7 @@ const CopyableLink = ({ text, addon, background, size }) => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        borderRadius: "0px 10px 10px 0px",
+                        borderRadius: "0px 15px 15px 0px",
                         cursor: "pointer",
                     }}
                 >
