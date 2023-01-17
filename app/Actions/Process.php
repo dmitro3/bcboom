@@ -46,7 +46,7 @@ class Process
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
 
-        print($result);
+        var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
 
