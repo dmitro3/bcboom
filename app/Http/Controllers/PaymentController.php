@@ -27,7 +27,7 @@ class PaymentController extends Controller
         $data['amount'] = '100';
         $data['orderno'] = intval(microtime(true) * 1000 * 1000);
         ;
-        $data['notifyurl '] = 'http://localhost:8000';
+        $data['notifyurl '] = '/callback/{result}';
         $data['currency'] = 'BRL';
 
 
@@ -56,7 +56,7 @@ class PaymentController extends Controller
     {
 
         $process = new Process;
-        dd($user);
+        // dd(Auth::Id());
         $process->execute($request);
 
     }

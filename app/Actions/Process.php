@@ -1,4 +1,4 @@
-<?php
+\<?php
 namespace App\Actions;
 
 use App\Models\Payment;
@@ -6,7 +6,9 @@ use App\Models\Wallet;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\PaymentController;
 
 class Process
 {
@@ -49,11 +51,26 @@ class Process
         // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
-            $res = $result['data'];
-            return redirect()->action(
-                [PaymentController::class, 'callback'], ['result' => $res]
-            );
+            // print('success');
 
+            $wallet = Wallet::where('user_id', Auth::id())->first();
+            if ($wallet) {
+                $wallet->update([
+                    'order_no' => $result['data']['tx_orderno'],
+                    'deposit' => $wallet->deposit + $result['data']['amount'],
+                ]);
+            } else {
+                Wallet::create([
+                    'user_id' => Auth::Id(),
+                    'deposit' => $result['data']['amount']
+                ]);
+            }
+            $user = Auth::user();
+            return response()->json([
+                'user' => $user,
+                'message' => 'Payment successful',
+            ], 200);
+            // redirect(route('callback', ['result' => $result['data']['pay_info']]));
 
             //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
