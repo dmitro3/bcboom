@@ -50,27 +50,29 @@ const PersonalCard = styled("div")(({ padding, isMobile }) => ({
     padding: padding || "20px",
 }));
 
-const RangeInput = styled("div")(() => ({
+const RangeInput = styled("div")(({value}) => ({
     width: "100%",
-    "& input[type='range']": {
-        overflow: "hidden",
+    "input[type='range']": {
+        background: `linear-gradient(to right, #3586FF 0%, #3586FF ${value}%, #62679E ${value}%, #62679E 100%)`,
         borderRadius: "10px",
+        height: "18px",
+        // width: "356px",
+        outline: "none",
+        transition: "background 450ms ease-in",
         WebkitAppearance: "none",
-        backgroundColor: "#172C4F",
     },
-    "& input[type='range']::-webkit-slider-runnable-track": {
-        height: "20px",
-        WebkitAppearance: "none",
-        color: "blue",
-        marginTop: "-1px",
-    },
-    "& input[type='range']::-webkit-slider-thumb": {
+    // "input[type='range']::-webkit-slider-runnable-track": {
+    //     height: "10px",
+    //     WebkitAppearance: "none",
+    //     color: "blue",
+    //     marginTop: "-1px",
+    // },
+    "input[type='range']::-webkit-slider-thumb": {
         width: "10px",
         WebkitAppearance: "none",
-        height: "10px",
-        cursor: "ew-resize",
-        background: "#434343",
-        display: "none",
+        // height: "50px",
+        background: "red",
+        // boxShadow: "-80px 0 0 80px #43e5f7",
     },
 }));
 
@@ -168,29 +170,29 @@ const PersonalCenter = () => {
     // } = useSelector((state) => state.auth);
     const dispatcher = useDispatch();
     const { profile } = useSelector((state) => state.profile);
-    const { wallet } = useSelector((state) => state.wallet);
+    const { wallet, level } = useSelector((state) => state.wallet);
     useEffect(() => {
         const getProfile = async () => {
             const response = await dispatcher(getMe());
             dispatcher(setProfile(response?.payload?.data));
         };
-        const getWalletInfo = async () => {
-            const response = await dispatcher(getWallet());
-            const data = response?.payload?.data;
-            dispatcher(
-                setWallet({
-                    ...data,
-                    deposit: +data?.deposit || 0,
-                    bet: +data?.bet || 0,
-                })
-            );
-        };
+        // const getWalletInfo = async () => {
+        //     const response = await dispatcher(getWallet());
+        //     const data = response?.payload?.data;
+        //     dispatcher(
+        //         setWallet({
+        //             ...data,
+        //             deposit: +data?.deposit || 0,
+        //             bet: +data?.bet || 0,
+        //         })
+        //     );
+        // };
         if (!profile) {
             getProfile();
         }
-        // if (!wallet) {
-        getWalletInfo();
-        // }
+        // // if (!wallet) {
+        // getWalletInfo();
+        // // }
     }, [profile]);
 
     const [copied, setCopied] = useState(false);
@@ -236,7 +238,9 @@ const PersonalCenter = () => {
                                             size="80px"
                                         >
                                             <img
-                                                src={profile?.image || avatarIcon}
+                                                src={
+                                                    profile?.image || avatarIcon
+                                                }
                                                 alt=""
                                                 style={{ height: "100%" }}
                                             />
@@ -347,7 +351,8 @@ const PersonalCenter = () => {
                                             <small>/</small>
                                             <Text
                                                 type="p"
-                                                text="R$100"
+                                                // text="R$100"
+                                                text={`R$${level?.maxDeposit}`}
                                                 fontSize="15px"
                                                 fontWeight="bold"
                                                 color="#64A2FF"
@@ -359,6 +364,7 @@ const PersonalCenter = () => {
                                             width: "80%",
                                             marginTop: "10px",
                                         }}
+                                        value={level.depositProgress}
                                     >
                                         <Flex alignItems="center" gap="6px">
                                             <input
@@ -369,7 +375,7 @@ const PersonalCenter = () => {
                                                 style={{ width: "100%" }}
                                             />
                                             <Text
-                                                text="0%"
+                                                text={`${level.depositProgress}%`}
                                                 type="p"
                                                 fontWeight="bold"
                                             />
@@ -396,7 +402,7 @@ const PersonalCenter = () => {
                                             <small>/</small>
                                             <Text
                                                 type="p"
-                                                text="R$100"
+                                                text={`R$${level?.maxBet}`}
                                                 fontSize="15px"
                                                 fontWeight="bold"
                                                 color="#64A2FF"
@@ -408,6 +414,7 @@ const PersonalCenter = () => {
                                             width: "80%",
                                             marginTop: "10px",
                                         }}
+                                        value={level.betProgress}
                                     >
                                         <Flex alignItems="center" gap="6px">
                                             <input
@@ -418,7 +425,7 @@ const PersonalCenter = () => {
                                                 style={{ width: "100%" }}
                                             />
                                             <Text
-                                                text="0%"
+                                                text={`${level.betProgress}%`}
                                                 type="p"
                                                 fontWeight="bold"
                                             />

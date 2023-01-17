@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { styled as MuiStyle } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { useSelector } from "react-redux";
 
 const BcTooltip = MuiStyle(({ className, ...props }) => (
     <Tooltip
@@ -76,6 +77,7 @@ const VipLevelCard = styled("div")(({ isMobile }) => ({
 const MyVIPLevel = () => {
     let classes = useStyles();
     const { isMobile } = useScreenResolution();
+    const { wallet, level } = useSelector((state) => state.wallet);
     return (
         <VipLevelCard isMobile={isMobile}>
             <Flex
@@ -105,7 +107,7 @@ const MyVIPLevel = () => {
             </Flex>
             <Text
                 type="p"
-                text="LEVEL 0"
+                text={`LEVEL ${level.currentLevel || 0}`}
                 color="#3586FF"
                 fontSize="15px"
                 fontWeight="bolder"
@@ -131,7 +133,7 @@ const MyVIPLevel = () => {
                     <Flex alignItems="center" gap="3px">
                         <Text
                             type="p"
-                            text="R$0"
+                            text={"R$" + wallet?.deposit || 0}
                             fontSize="15px"
                             fontWeight="bold"
                         />

@@ -9,7 +9,17 @@ export const getWallet = createAsyncThunk("wallet", async () => {
 const walletSlice = createSlice({
     name: "wallet",
     initialState: {
-        modalState: { open: false, tab: 0},
+        modalState: { open: false, tab: 0 },
+        wallet: {},
+        level: {
+            currentLevel: 0,
+            nextLevel: 0,
+            depositProgress: 0,
+            betProgress: 0,
+            maxWithdraw: 0,
+            maxDeposit: 0,
+            maxBet: 0,
+        },
     },
     reducers: {
         setWalletModalState: (state, action) => {
@@ -18,8 +28,11 @@ const walletSlice = createSlice({
         setWallet: (state, action) => {
             state.wallet = action.payload;
         },
+        setLevel: (state, action) => {
+            state.level = action.payload;
+        },
     },
 });
 
-export const { setWalletModalState, setWallet } = walletSlice.actions;
+export const { setWalletModalState, setWallet, setLevel } = walletSlice.actions;
 export const WalletState = walletSlice.reducer;

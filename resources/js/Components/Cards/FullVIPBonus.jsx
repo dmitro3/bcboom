@@ -1,6 +1,8 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { currencyFormatter } from "@/utils/util";
 import { styled } from "@mui/system";
 import React from "react";
+import { useSelector } from "react-redux";
 import fullbg from "../../../../public/images/vip/fullbg.png";
 import level0 from "../../../../public/images/vip/levels00.svg";
 import level1 from "../../../../public/images/vip/levels01.svg";
@@ -57,6 +59,7 @@ const BonusLevels = styled("div")(({}) => ({
 
 const FullVIPBonus = () => {
     const { isMobile } = useScreenResolution();
+    const { wallet } = useSelector((state) => state.wallet);
     return (
         <FullVipBonusWrapper isMobile={isMobile}>
             <Text
@@ -109,7 +112,7 @@ const FullVIPBonus = () => {
                         <Flex
                             justifyContent="center"
                             alignItems="center"
-                            gap={isMobile ? '10px' : "30px"}
+                            gap={isMobile ? "10px" : "30px"}
                             margin="20px 0 20px 0"
                         >
                             <div
@@ -166,7 +169,9 @@ const FullVIPBonus = () => {
                                 />
                                 <Text
                                     type="p"
-                                    text="R$ 100"
+                                    text={`R$ ${currencyFormatter
+                                        .format(wallet?.deposit || 0)
+                                        .replace("$", "")}`}
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                     color="#3586FF"
