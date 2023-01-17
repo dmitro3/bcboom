@@ -18,7 +18,7 @@ import CustomModal from "../Modal";
 import { toast } from "react-toastify";
 
 import Text from "@/Components/Text/Text";
-import { sleep } from "@/utils/util";
+import { sleep, validatePhoneNumber } from "@/utils/util";
 const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
     background: "#272C4B",
     position: "relative",
@@ -33,7 +33,7 @@ const CloseIcon = styled("div")(({ isMobile }) => ({
     cursor: "pointer",
     top: isMobile ? "-3%" : "20px",
     right: isMobile ? "-10px" : "20px",
-    zIndex: 3030303
+    zIndex: 3030303,
 }));
 const LoginFormWrapper = styled("div")(({}) => ({
     display: "flex",
@@ -51,12 +51,12 @@ const SignupFormWrapper = styled("div")(({ isMobile }) => ({
 const SignupForm = ({ isMobile }) => {
     const dispatcher = useDispatch();
     const [signupDetails, setSignupDetails] = useState({
-        // phone: "",
-        name: "",
-        username: "",
+        phone: "",
+        // name: "",
         email: "",
+        username: "",
         password: "",
-        inviteCode: "",
+        ref: "",
         captchaValue: null,
     });
     const [checked, setChecked] = useState("");
@@ -64,8 +64,8 @@ const SignupForm = ({ isMobile }) => {
     const [recaptchaError, setRecaptchaError] = useState("");
     async function handleSubmit(e) {
         e.preventDefault();
-        const { name, username, email, password } = signupDetails;
-        if (!name || !username || !password) {
+        const { username, email, password, phone } = signupDetails;
+        if (!username || !password || !email || !phone) {
             setSignupError("Please fill all fields");
             return;
         }
@@ -80,22 +80,39 @@ const SignupForm = ({ isMobile }) => {
             return;
         }
 
+        const validPhone = validatePhoneNumber(signupDetails.phone);
+        if (!validPhone) {
+            setSignupError("Please enter a valid phone number");
+            toast.error("Please enter a valid phone number");
+            setSignupDetails({ ...signupDetails, phone: "" });
+            return;
+        }
         const response = await dispatcher(signup(signupDetails));
-        console.log("response: ", response);
+        if (response.payload.status === 400) {
+            const error = JSON.parse(response.payload.data);
+            console.log("error: ", error);
+            Object.values(error).map((err) => {
+                setSignupError(err[0]);
+                toast.error(err[0]);
+            });
+            Object.keys(error).map((err) => {
+                setSignupDetails({ ...signupDetails, [err]: "" });
+            });
+        }
         if (response.payload.status === 201) {
             toast.success("Signup successful, please login");
             dispatcher(setAuthModalState({ open: false }));
-            await sleep(50)
+            await sleep(50);
             dispatcher(setAuthModalState({ open: true, tab: 0 }));
         }
     }
 
     return (
         <SignupFormWrapper isMobile={isMobile}>
-            {/* <Input
+            <Input
                 addon=""
                 type="phone"
-                placeholder="Phone Number"
+                placeholder="Phone Number (1234567890)"
                 value={signupDetails.phone}
                 onChange={(e) =>
                     setSignupDetails({
@@ -103,9 +120,11 @@ const SignupForm = ({ isMobile }) => {
                         phone: e.target.value,
                     })
                 }
-                border={signupError && !signupDetails.phone && " #F93967"}
-            /> */}
-            <Input
+                pattern="^\d{10}$"
+                size="50"
+                border={signupError && !signupDetails.phone && "#F93967"}
+            />
+            {/* <Input
                 addon={<img src={user} alt="" />}
                 type="text"
                 placeholder="Full Name"
@@ -114,7 +133,22 @@ const SignupForm = ({ isMobile }) => {
                     setSignupDetails({ ...signupDetails, name: e.target.value })
                 }
                 border={signupError && !signupDetails.name && " #F93967"}
+            /> */}
+
+            <Input
+                addon={<img src={user} alt="" />}
+                type="text"
+                placeholder="Email"
+                value={signupDetails.email}
+                onChange={(e) =>
+                    setSignupDetails({
+                        ...signupDetails,
+                        email: e.target.value,
+                    })
+                }
+                border={signupError && !signupDetails.email && " #F93967"}
             />
+
             <Input
                 addon={<img src={user} alt="" />}
                 type="text"
@@ -128,19 +162,7 @@ const SignupForm = ({ isMobile }) => {
                 }
                 border={signupError && !signupDetails.username && " #F93967"}
             />
-            <Input
-                addon={<img src={user} alt="" />}
-                type="text"
-                placeholder="Email"
-                value={signupDetails.enail}
-                onChange={(e) =>
-                    setSignupDetails({
-                        ...signupDetails,
-                        email: e.target.value,
-                    })
-                }
-                border={signupError && !signupDetails.email && " #F93967"}
-            />
+
             <Input
                 addon={<img src={lock} alt="" />}
                 type="password"
@@ -154,7 +176,18 @@ const SignupForm = ({ isMobile }) => {
                 }
                 border={signupError && !signupDetails.password && " #F93967"}
             />
-            <Input addon="" type="phone" placeholder="Invite code (optional)" />
+            <Input
+                addon=""
+                type="phone"
+                placeholder="Invite code (optional)"
+                value={signupDetails.ref}
+                onChange={(e) =>
+                    setSignupDetails({
+                        ...signupDetails,
+                        ref: e.target.value,
+                    })
+                }
+            />
             <p
                 style={{
                     alignSelf: "flex-end",
@@ -170,7 +203,12 @@ const SignupForm = ({ isMobile }) => {
                         />
                     }
                     label={
-                        <p style={{ fontSize: "13px", color: "white" }}>
+                        <p
+                            style={{
+                                fontSize: isMobile ? "10px" : "12px",
+                                color: "white",
+                            }}
+                        >
                             I am at least 18 years old and have read and agree
                             to the Terms & Conditions and Privacy Policy
                         </p>
@@ -216,7 +254,7 @@ const SignupForm = ({ isMobile }) => {
         </SignupFormWrapper>
     );
 };
-const LoginForm = ({ isMobile }) => {
+const LoginForm = ({ isMobile, switchTo }) => {
     const [loginDetails, setLoginDetails] = useState({
         email: "",
         password: "",
@@ -286,6 +324,7 @@ const LoginForm = ({ isMobile }) => {
                     color: "#9DA6CA",
                     cursor: "pointer",
                 }}
+                onClick={() => switchTo("forgotPassword")}
             >
                 Forgot your password?
             </p>
@@ -334,11 +373,54 @@ const LoginSignupModal = () => {
     const { modalState } = useSelector((state) => state.auth);
     const dispatcher = useDispatch();
     const { isMobile } = useScreenResolution();
+    const [mountedComponent, setMountedComponent] = useState("loginSignup");
+
+    const LoginSignup = () => (
+        <TabComponent>
+            <NewCustomTabs
+                tabItems={[
+                    {
+                        value: "login",
+                        label: "Log In",
+                        content: <LoginForm isMobile={isMobile} switchTo={setMountedComponent} />,
+                    },
+                    {
+                        label: "Sign Up",
+                        value: "signup",
+                        content: <SignupForm isMobile={isMobile} />,
+                    },
+                ]}
+                defaultTab={modalState.tab}
+                width={isMobile ? "100%" : "350px"}
+            />
+        </TabComponent>
+    );
+    let ForgotPassword = () => {
+        return <div>forgot your password</div>;
+    };
+    let ResetPassword = () => {
+        return <div>reset your password</div>;
+    };
+    let Component = null;
+    switch (mountedComponent) {
+        case "loginSignup":
+            Component = LoginSignup;
+            break;
+        case "forgotPassword":
+            Component = ForgotPassword;
+            break;
+        case "resetPassword":
+            Component = ResetPassword;
+            break;
+        default:
+            Component = LoginSignup;
+    }
     return (
         <CustomModal
             open={modalState.open}
             handleClose={() => dispatcher(setAuthModalState({ open: false }))}
             isAuthModal={true}
+            shouldHaveBorder={true}
         >
             <CloseIcon
                 onClick={() =>
@@ -349,24 +431,7 @@ const LoginSignupModal = () => {
                 <img src={isMobile ? mobileclose : close} alt="" />
             </CloseIcon>
             <LoginSignupModalWrapper isMobile={isMobile}>
-                <TabComponent>
-                    <NewCustomTabs
-                        tabItems={[
-                            {
-                                value: "login",
-                                label: "Log In",
-                                content: <LoginForm isMobile={isMobile} />,
-                            },
-                            {
-                                label: "Sign Up",
-                                value: "signup",
-                                content: <SignupForm isMobile={isMobile} />,
-                            },
-                        ]}
-                        defaultTab={modalState.tab}
-                        width={isMobile ? "100%" : "350px"}
-                    />
-                </TabComponent>
+                <Component />
             </LoginSignupModalWrapper>
         </CustomModal>
     );

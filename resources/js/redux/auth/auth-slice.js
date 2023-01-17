@@ -48,10 +48,10 @@ const authSlice = createSlice({
             }
         },
         [logout.fulfilled]: (state, action) => {
-            if (action.payload.status === 200) {
-                state.user = { user: null };
-                localStorage.clear();
-            }
+            // if (action.payload.status === 200) {
+            state.user = { user: null };
+            localStorage.clear();
+            // }
         },
     },
 });

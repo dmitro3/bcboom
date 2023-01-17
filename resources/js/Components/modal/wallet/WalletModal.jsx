@@ -346,6 +346,7 @@ const WalletModal = () => {
                                     content: <Withdraw isMobile={isMobile} />,
                                 },
                             ]}
+                            defaultTab={modalState.tab}
                         />
                     </TabComponent>
                 </WalletContentWrapper>

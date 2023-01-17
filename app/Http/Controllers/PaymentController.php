@@ -15,24 +15,30 @@ use JWTAuth;
 
 class PaymentController extends Controller
 {
-    
 
+
+    // public function __construct(){
+    //     $this->middleware('auth');
+    // }
+    public function paym()
+    {
 
     public function paym(){
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
         $data['amount'] = '100';
-        $data['orderno'] = intval(microtime(true) * 1000 * 1000);;
+        $data['orderno'] = intval(microtime(true) * 1000 * 1000);
+        ;
         $data['notifyurl '] = 'http://localhost:8000';
-        $data['currency'] = 'USD';
-    
-    
-    
-    
+        $data['currency'] = 'BRL';
+
+
+
+
         $url = 'https://api.hpay.one/open/index/createorder';
         $key = 'HECJKDEtTMbFKQDzVqY9';
-    
-// $curl = new Curl();
+
+        // $curl = new Curl();
 // $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
 // $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
 // $curl->to($url)
@@ -40,62 +46,50 @@ class PaymentController extends Controller
 
         $response = Curl::to($url)
 
-                ->withData($data)
+            ->withData($data)
 
-                ->post();
+            ->post();
 
         // $response = $curl;
 
-    dd($response);
+        dd($response);
     }
-    public function pay(Request $request){
-        
+    public function pay(Request $request)
+    {
+
+        $process = new Process;
+        $user = Auth::user();
+        $process->execute($request);
+
+    }
+
+    public function testpay()
+    {
+
+
+        $process2 = new Proc;
+
+        $process2->exec();
+
+    }
+
+    public function callback($result)
+    {
+        print('got here');
         $wallet = Wallet::where('user_id', Auth::id())->first();
-
-        dd($wallet);
-        if($wallet != null){
-            $process = new Process;
-            $process->execute($request, $wallet);
-        }else{
-
-            $wallet = Wallet::create([
-                'user_id' => Auth::id()
-            ]);
-
-            dd($wallet);
-
-            $process = new Process;
-            $process->execute($request, $wallet);
-        }
-        
-        
-    }
- 
-    public function testpay(){
-    
-
-    $process2 = new Proc;
-
-    $process2->exec();
-    
-    }
-
-    public function callback($result){
-        dd('hit');
-        $wallet = Wallet::where('user_id', Auth::id())->first();
-            if($wallet){
+        if ($wallet) {
             $wallet->update([
                 'order_no' => $result['data']['tx_orderno'],
                 'deposit' => $wallet->deposit + $result['data']['amount'],
             ]);
-        }else{
+        } else {
             Wallet::create([
-                'user_id' => $user->id,
+                'user_id' => Auth::Id(),
                 'deposit' => $result['data']['amount']
             ]);
         }
-            return $result['data']['pay_info'];
-        }
-    
+        return $result['data']['pay_info'];
+    }
+
 
 }

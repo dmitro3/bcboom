@@ -64,11 +64,11 @@ const UserAvatar = styled("div")(({}) => ({
     justifyContent: "center",
     marginLeft: "15px",
 }));
-const UserImage = styled("div")(({ size }) => ({
+const UserImage = styled("div")(({ size, background }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "#667BFF",
+    background: background || "#667BFF",
     borderRadius: "50%",
     width: size || "45px",
     height: size || "45px",
@@ -101,7 +101,7 @@ const UserDetails = ({ user, dispatcher }) => {
         {
             text: "VIP Level",
             icon: vip,
-            link: "/vip-level",
+            link: "/vip",
         },
         {
             text: "Game History",
@@ -115,12 +115,14 @@ const UserDetails = ({ user, dispatcher }) => {
         },
     ];
     const [mouseOver, setMouseOver] = useState(-1);
+    const { profileColor } = useSelector((state) => state.profile);
+
     return (
         <UserDetailsWrapper>
-            <Flex padding="30px">
-                <UserImage size={"65px"}>
+            <Flex padding="30px" alignItems='center'>
+                <UserImage size={"65px"} background={profileColor}>
                     <img
-                        src={user.avatar || userimg}
+                        src={user?.image || userimg}
                         alt="useravatar"
                         style={{ height: "100%" }}
                     />
@@ -201,9 +203,11 @@ const UserDropdown = ({
     const dispatcher = useDispatch();
     const [mouseOver, setMouseOver] = useState(false);
     const { isMobile } = useScreenResolution();
-    const {
-        user: { user },
-    } = useSelector((state) => state.auth);
+    // const {
+    //     user: { user },
+    // } = useSelector((state) => state.auth);
+    const { profileColor, profile } = useSelector((state) => state.profile);
+
     if (!isLoggedIn)
         return (
             <>
@@ -246,8 +250,8 @@ const UserDropdown = ({
                 style={{ cursor: "pointer" }}
             >
                 <CurrentBalance isMobile={isMobile}>
-                    <p>{user?.balance?.split(".")[0] || 0}.</p>
-                    <p>{user?.balance?.split(".")[1] || "00"}</p>
+                    <p>{profile?.balance?.split(".")[0] || 0}.</p>
+                    <p>{profile?.balance?.split(".")[1] || "00"}</p>
                 </CurrentBalance>
                 <Wallet>
                     <img
@@ -264,15 +268,15 @@ const UserDropdown = ({
             <UserAvatar>
                 <AntDropdown
                     overlay={
-                        <UserDetails user={user} dispatcher={dispatcher} />
+                        <UserDetails user={profile} dispatcher={dispatcher} />
                     }
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage size={isMobile ? "40px" : "45px"}>
+                        <UserImage size={isMobile ? "40px" : "45px"} background={profileColor}>
                             <img
-                                src={user?.avatar || userimg}
+                                src={profile?.image || userimg}
                                 alt="useravatar"
                                 style={{ height: "100%", cursor: "pointer" }}
                             />

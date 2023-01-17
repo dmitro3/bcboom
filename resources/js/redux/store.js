@@ -6,10 +6,12 @@ import { WalletState } from "./wallet/wallet-slice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { persistStore } from "redux-persist";
+import { ProfileState } from "./profile/profileSlice";
 const rootReducer = combineReducers({
     app: AppState,
     auth: AuthState,
     wallet: WalletState,
+    profile: ProfileState,
 });
 const env = (key) => `{{ env(${key})  }}`;
 
@@ -17,7 +19,7 @@ const persistConfig = {
     key: "root",
     version: 1,
     storage,
-    whitelist: ["auth"],
+    whitelist: ["auth", "profile"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
