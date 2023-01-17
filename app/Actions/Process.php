@@ -64,7 +64,10 @@ class Process
                     'deposit' => $result['data']['amount']
                 ]);
             }
-            return $result['data']['pay_info'];
+            return response()->json([
+                'user' => Auth::user(),
+                'message' => 'Payment successful',
+            ], 200);
             // redirect(route('callback', ['result' => $result['data']['pay_info']]));
 
             //  I had placed an if statement here but recently redirecting;
