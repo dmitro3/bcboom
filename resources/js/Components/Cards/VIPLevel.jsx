@@ -74,6 +74,9 @@ const VipLevelCard = styled("div")(({ isMobile }) => ({
     width: isMobile ? "100%" : "35%",
     padding: "1.5rem",
     borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
 }));
 
 const MyVIPLevel = () => {
