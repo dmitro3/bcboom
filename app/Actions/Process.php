@@ -1,4 +1,5 @@
-<?php namespace App\Actions;
+<?php
+namespace App\Actions;
 
 use App\Models\Payment;
 use App\Models\Wallet;
@@ -7,27 +8,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class Process {
+class Process
+{
     private string $merchantNumber = "000801682";
     private string $merchantKey = "HECJKDEtTMbFKQDzVqY9";
     private string $gateway = "https://api.hpay.one";
-    
-    
-    
 
-/**
- * Create a new controller instance.
- *
- * @return void
- */
 
- 
-     function execute(Request $request): User{
-    
+
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+
+    function execute(Request $request): User
+    {
+
 
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-        
+
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
@@ -36,29 +39,26 @@ class Process {
             'notifyurl' => url('/payment/callback/{result}'),
             'currency' => 'BRL'
         ];
-   
-        
+
+
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
-        
-        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-    
-        
 
-        if(isset($result['data']['pay_info'])) {
+        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+
+        print($result);
+
+        if (isset($result['data']['pay_info'])) {
 
             return route('callback', ['result' => $result['data']['pay_info']]);
 
-        //  I had placed an if statement here but recently redirecting;
+            //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
-        }
-        
-        else
-        {
-             dd($result);
+        } else {
+            dd($result);
 
+        }
     }
-}
 
     // function status(Request $request): string {
     //     $data = $request->all();
@@ -75,36 +75,42 @@ class Process {
     //         //         ]);
 
     //         // return route('callback', ['result' => $]);
-                
+
     //         //}
     //     //}
 
     //     return "SUCCESS";
     // }
 
-    function validate(Request $request): bool {
+    function validate(Request $request): bool
+    {
         return $request->trade_state !== null;
     }
 
-    function id(): string {
+    function id(): string
+    {
         return "hpay";
     }
 
-    function name(): string {
+    function name(): string
+    {
         return "PIX";
     }
 
-    function icon(): string {
+    function icon(): string
+    {
         return "";
     }
 
-    public function supports(): array {
+    public function supports(): array
+    {
         return [
             "local_brl"
         ];
     }
 
-    private function curl($url, $data = null, $post = false, $text = false) {
+    private function curl($url, $data = null, $post = false, $text = false)
+    {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -118,7 +124,7 @@ class Process {
         $json = curl_exec($ch);
         curl_close($ch);
 
-        if($text)
+        if ($text)
             $result = $json;
         else
             $result = json_decode($json, true);
@@ -126,28 +132,30 @@ class Process {
         return $result;
     }
 
-    private function sign($object, $key) {
+    private function sign($object, $key)
+    {
         $parameters = [];
 
         foreach ($object as $k => $v) {
-            if(isset($v) && strlen($v) > 0){
+            if (isset($v) && strlen($v) > 0) {
                 $parameters[$k] = $v;
             }
         }
 
         ksort($parameters);
         $string = $this->formatQuery($parameters);
-        $string = $string.'&key='.$key;
+        $string = $string . '&key=' . $key;
         $string = md5($string);
         return strtoupper($string);
     }
 
-    private function formatQuery($paraMap) {
+    private function formatQuery($paraMap)
+    {
         $buff = "";
         ksort($paraMap);
         foreach ($paraMap as $k => $v)
             if ($k != 's')
-                $buff .= $k .'='. $v.'&' ;
+                $buff .= $k . '=' . $v . '&';
 
         $reqPar = "";
         if (strlen($buff) > 0)
