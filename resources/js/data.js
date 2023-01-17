@@ -45,16 +45,19 @@ export const navlinks = [
         name: "Promotions",
         icon: promotion,
         link: "/promotions",
+        protected: true
     },
     {
         name: "Bonus",
         icon: bonus,
         link: "/bonus",
+        protected: true
     },
     {
         name: "VIP",
         icon: vip,
         link: "/vip",
+        protected: true
     },
     // {
     //     name: "Bonus",

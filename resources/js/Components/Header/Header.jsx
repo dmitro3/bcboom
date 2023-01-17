@@ -30,6 +30,7 @@ import { Link } from "@inertiajs/inertia-react";
 import { Dropdown as AntDDropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import UserDropdown from "../UserDropdown/UserDropdown";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
 
 const HeaderWrapper = styled("div")(() => ({
     padding: "10px 20px",
@@ -126,24 +127,28 @@ const DesktopHeader = () => {
             text: "Cashback",
             icon: cashback,
             link: "/cashback",
+            protected: true,
         },
         {
             id: 2,
             text: "Fairness",
             icon: fairness,
             link: "/fairness",
+            protected: true,
         },
         {
             id: 4,
             text: "Referral",
             icon: referral,
             link: "/referral",
+            protected: true,
         },
         {
             id: 3,
             text: "Help",
             icon: help,
             link: "/help",
+            protected: true,
         },
     ]);
     const [socials] = useState([
@@ -189,7 +194,9 @@ const DesktopHeader = () => {
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
             : "";
-    return (
+    const { user } = useSelector((state) => state.auth);
+    const dispatcher = useDispatch();
+    return (    
         <HeaderWrapper>
             <HeaderPlatformStats>
                 {statsItems.map((item) => (
@@ -207,9 +214,21 @@ const DesktopHeader = () => {
                 </Link>
             </LogoWrapper>
             <HeaderPlatformLinks>
-                <HeaderPlatformLinkItems>
+                <HeaderPlatformLinkItems
+                    onClick={() => {
+                        if (!user?.user) {
+                            dispatcher(
+                                setAuthModalState({
+                                    open: true,
+                                    tab: 0,
+                                })
+                            );
+                        }
+                    }}
+                >
+                    {/* {user?.user} ? */}
                     {links.map((item) => (
-                        <Link href={item.link}>
+                        <Link href={user?.user ? item.link : "/"}>
                             <HeaderItems
                                 key={item.id}
                                 active={location == item.link.replace("/", "")}
