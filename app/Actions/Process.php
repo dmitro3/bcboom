@@ -51,8 +51,7 @@ class Process
 
         if (isset($result['data']['pay_info'])) {
             print('success');
-            var_dump($result['data']['pay_info']);
-            return url('/api/payment/callback/{result}', ['result' => $result['data']['pay_info']]);
+            return url('/api/payment/callback/', ['result' => $result['data']['pay_info']]);
 
             //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
