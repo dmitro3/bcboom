@@ -24,7 +24,7 @@ class Process
      */
 
 
-    function execute(Request $request): User
+    function execute(Request $request) : string
     {
 
 
@@ -56,6 +56,7 @@ class Process
             // return $result['data']['pay_info'];
         } else {
             dd($result);
+            return $result['msg'];
 
         }
     }
