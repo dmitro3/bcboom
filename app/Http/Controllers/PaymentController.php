@@ -72,7 +72,7 @@ class PaymentController extends Controller
 
     public function callback($result)
     {
-        dd('hit');
+        // dd('hit');
         $wallet = Wallet::where('user_id', Auth::id())->first();
         if ($wallet) {
             $wallet->update([
