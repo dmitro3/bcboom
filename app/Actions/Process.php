@@ -6,6 +6,7 @@ use App\Models\Wallet;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 
 class Process
@@ -50,7 +51,7 @@ class Process
 
         if (isset($result['data']['pay_info'])) {
             print('success');
-            return route('callback', ['result' => $result['data']['pay_info']]);
+            return Route::post('/payment/callback', ['result' => $result['data']['pay_info']]);
 
             //  I had placed an if statement here but recently redirecting;
             // return $result['data']['pay_info'];
