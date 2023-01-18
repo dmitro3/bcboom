@@ -10,7 +10,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
 
-class Process
+class Withdraw
 {
     private string $merchantNumber = "000801682";
     private string $merchantKey = "HECJKDEtTMbFKQDzVqY9";
@@ -38,8 +38,7 @@ class Process
             'timestamp' => time(),
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
-            'notifyurl' => url('/api/notify'),
-          //  'notifyurl' => url('/api/notifyurl'),
+            'notifyurl' => url('/payment/callback/{result}'),
             'currency' => 'BRL'
         ];
 
@@ -54,49 +53,7 @@ class Process
         if (isset($result['data']['pay_info'])) {
             // print('success');
 
-            
-                Payment::create([
-                    "amount" => $result['data']['amount'],
-                    "pay_amount" => $result['data']['pay_amount'],
-                    "order_no" => $result['data']['order_no'],
-                    "create_time" => $result['data']['timestamp'],
-                    "customer" => $result['data']['customername'],
-                    "mobile" => $request['data']['customermobile'],
-                    "email" => $request['data']['customeremail'],
-                    "status" => "success",
-                ]);
-            
-            $user = Auth::user();
-            return response()->json([
-                'user' => $user,
-                'message' => 'Payment saved',
-            ], 200);
-            // The redirect statement will redirect to the Payment controller
-
-            // $res = $result['data'];
-            // return redirect()->action(
-            //     [PaymentController::class, 'callback'], ['result' => $res]
-            // );
-
-            //  I had placed an if statement here but recently redirecting;
-            //I had just return payment information
-            //  return $result['data']['pay_info'];
-        } else {
-
-            return $result['msg'];
-
-        }
-    }
-
-    function status(Request $request): string {
-        $data = $request->all();
-        unset($data['sign']);
-        $sign = $this->sign($data, $this->merchantKey);
-
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
-                
-                $wallet = Wallet::where('user_id', Auth::id())->first();
+            $wallet = Wallet::where('user_id', Auth::id())->first();
             if ($wallet) {
                 $wallet->update([
                     'order_no' => $result['data']['tx_orderno'],
@@ -113,18 +70,38 @@ class Process
                 'user' => $user,
                 'message' => 'Payment successful',
             ], 200);
-            // The redirect statement will redirect to the Payment controller
+            // redirect(route('callback', ['result' => $result['data']['pay_info']]));
 
-            // $res = $result['data'];
-            // return redirect()->action(
-            //     [PaymentController::class, 'callback'], ['result' => $res]
-            // );
+            //  I had placed an if statement here but recently redirecting;
+            // return $result['data']['pay_info'];
+        } else {
 
-            }
+            return $result['msg'];
+
         }
-
-        return "SUCCESS";
     }
+
+    // function status(Request $request): string {
+    //     $data = $request->all();
+    //     unset($data['sign']);
+    //     $sign = $this->sign($data, $this->merchantKey);
+
+    //     //if($sign === $request->sign) {
+    //         // if($data['trade_state'] === 'SUCCESS') {
+    //         //     $wallet = wallet::where('user_id', Auth::id())->first();
+
+
+    //         //         $wallet->update([
+    //         //             'deposit' => $data['amount']
+    //         //         ]);
+
+    //         // return route('callback', ['result' => $]);
+
+    //         //}
+    //     //}
+
+    //     return "SUCCESS";
+    // }
 
     function validate(Request $request): bool
     {

@@ -6,21 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\Wallet;
-use Ixudra\Curl\Facades\Curl;
 use Auth;
 use App\Actions\Process;
-use App\Actions\Proc;
+
 
 
 class PaymentController extends Controller
 {
 
 
-    // public function __construct(){
-    //     $this->middleware('auth');
-    // }
-    public function paym()
-    {
+    public function __construct(){
+        $this->middleware('auth');
+     }
+    
+
+    public function paym(){
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
         $data['amount'] = '100';

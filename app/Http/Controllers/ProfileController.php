@@ -104,7 +104,7 @@ else{
     }
    
     public function updatebio(Request $request){
-        
+        dd(Auth::id());
         if(Auth::check()){
             $request->validate([
                 'bio' => ['required', 'string'],
