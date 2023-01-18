@@ -100,7 +100,7 @@ class Process
 
         if($sign === $request->sign) {
             if($data['trade_state'] === 'SUCCESS') {
-                
+                $user = Auth::user();
                 $wallet = Wallet::where('user_id', Auth::id())->first();
             if ($wallet) {
                 $wallet->update([

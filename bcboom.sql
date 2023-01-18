@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 09:01 AM
+-- Generation Time: Jan 18, 2023 at 03:00 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -116,6 +116,7 @@ CREATE TABLE `payments` (
   `customer` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
