@@ -51,7 +51,7 @@ const HistoryPage = () => {
     const dispatcher = useDispatch();
 
     const [currentTab, setCurrentTab] = useState(2);
-
+    const tabs = ["Wallet", "Wallet", "Game"];
     return (
         <>
             <Head title="Personal Center" />
@@ -72,7 +72,7 @@ const HistoryPage = () => {
                                     <img src={historyIcon} alt="historyIcon" />
                                     <Text
                                         type="p"
-                                        text={currentTab + " History"}
+                                        text={tabs[currentTab] + " History"}
                                         fontSize="1rem"
                                         fontWeight="bold"
                                         color="#fff"
@@ -113,6 +113,7 @@ const HistoryPage = () => {
                                         ]}
                                         defaultTab={2}
                                         setTab={setCurrentTab}
+                                        width={isMobile ? "100%" : "500px"}
                                         // setCurrentTab={setCurrentTab}
                                     />
                                 </TabComponent>
