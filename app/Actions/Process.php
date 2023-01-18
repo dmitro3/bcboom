@@ -55,7 +55,7 @@ class Process
             // print('success');
 
             
-                Payment::create([
+               $pay = Payment::create([
                     "amount" => $result['data']['amount'],
                     "pay_amount" => $result['data']['pay_amount'],
                     "order_no" => $result['data']['order_no'],
@@ -66,12 +66,15 @@ class Process
                     "link" => $request['data']['pay_info'],
                     "status" => "success",
                 ]);
-            
+            dd($pay->link);
             $user = Auth::user();
             return response()->json([
+                'link' => $pay->link,
                 'user' => $user,
                 'message' => 'Payment saved',
             ], 200);
+
+        
             // The redirect statement will redirect to the Payment controller
 
             // $res = $result['data'];
@@ -82,6 +85,7 @@ class Process
             //  I had placed an if statement here but recently redirecting;
             //I had just return payment information
             //  return $result['data']['pay_info'];
+        
         } else {
 
             return $result['msg'];
