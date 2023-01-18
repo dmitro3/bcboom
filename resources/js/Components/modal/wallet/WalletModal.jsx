@@ -27,10 +27,13 @@ const WalletWrapper = styled("div")(({ isMobile }) => ({
     borderRadius: "20px",
     border: "transparent",
     width: isMobile ? "90vw" : "600px",
-    height: isMobile && "80vh",
+    // height: isMobile && "80vh",
     // overflowY: "auto",
     margin: isMobile && "0 auto",
     outline: "none",
+
+    // padding: !isMobile && "20px 30px",
+    maxWidth: isMobile && "370px",
 }));
 const WalletHeader = styled("div")(({ isMobile }) => ({
     padding: "20px 30px",
@@ -61,12 +64,12 @@ const TabWrapper = styled("div")(({}) => ({
     width: "100%",
 }));
 
-const AmountOptions = styled("div")(({}) => ({
+const AmountOptions = styled("div")(({isMobile}) => ({
     display: "flex",
     flexWrap: "wrap",
     gap: "10px",
     width: "100%",
-    marginTop: "20px",
+    marginTop: isMobile ? '0px' : "20px",
 }));
 
 const DepositButton = styled("button")(({ fontSize }) => ({
@@ -101,6 +104,7 @@ const Deposit = () => {
     const [submitted, setSubmitted] = useState(false);
     const [buttonHovered, setButtonHovered] = useState(false);
     const dispatcher = useDispatch();
+    const { isMobile } = useScreenResolution();
     async function handleDeposit(value) {
         setSubmitted(true);
         if(!value || value < 10) {
@@ -142,7 +146,7 @@ const Deposit = () => {
                 afterInputText="Extra + G$20"
                 br="10px"
             />
-            <AmountOptions>
+            <AmountOptions isMobile={isMobile}>
                 {Array.from([
                     100, 200, 300, 400, 500, 1000, 2000, 5000, 10000,
                 ]).map((item, i) => (
@@ -363,17 +367,9 @@ const WalletModal = () => {
         <CustomModal
             open={modalState.open}
             handleClose={() => dispatcher(setWalletModalState({ open: false }))}
+            isAuthModal
         >
-            <WalletWrapper isMobile={isMobile}>
-                <WalletHeader>
-                    <Text
-                        type="p"
-                        text="Wallet"
-                        fontWeight="bold"
-                        fontSize="16px"
-                    />
-
-                    <CloseIcon
+               <CloseIcon
                         onClick={() =>
                             dispatcher(
                                 setWalletModalState({ open: !modalState.open })
@@ -393,6 +389,16 @@ const WalletModal = () => {
                             />
                         )}
                     </CloseIcon>
+            <WalletWrapper isMobile={isMobile}>
+                <WalletHeader>
+                    <Text
+                        type="p"
+                        text="Wallet"
+                        fontWeight="bold"
+                        fontSize="16px"
+                    />
+
+                 
                 </WalletHeader>
                 <WalletContentWrapper>
                     <TabComponent>

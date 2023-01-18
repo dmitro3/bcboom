@@ -1,3 +1,4 @@
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import React from "react";
 import Text from "../Text/Text";
 import { Flex } from "./Flex";
@@ -19,11 +20,12 @@ const Tag = ({ text, bg }) => {
 };
 
 export const RemovableTag = ({ text, bg, border, addon, onChange }) => {
+    const {isMobile} = useScreenResolution()
     return (
         <Flex
             border={`1px solid ${border}`}
             borderRadius="20px"
-            padding="10px 13px"
+            padding={isMobile ? '5px 8px' : "10px 13px"}
             cursor="pointer"
             onClick={onChange}
         >
