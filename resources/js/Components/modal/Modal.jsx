@@ -15,6 +15,7 @@ const style = (isMobile, shouldHaveBorder, styles) => {
         borderRadius: "20px",
         outline: "none",
         maxHeight: "80vh",
+        // maxWidth: "80vw",
         overflow: isMobile ? "initial" : "scroll",
         ...styles
         // padding: "20px 0",

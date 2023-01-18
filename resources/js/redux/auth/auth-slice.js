@@ -28,6 +28,27 @@ export const signup = createAsyncThunk("signup", async (payload) => {
     }
 });
 
+export const sendForgotPasswordMail = createAsyncThunk(
+    "sendForgotPasswordMail",
+    async (payload) => {
+        try {
+            const response = await authFunctions.forgotPassword(payload);
+            return response;
+        } catch (error) {
+            return error;
+        }
+    }
+);
+
+export const resetPassword = createAsyncThunk("resetPassword", async (payload) => {
+    try {
+        const response = await authFunctions.resetPassword(payload);
+        return response;
+    } catch (error) {
+        return error;
+    }
+});
+
 const authSlice = createSlice({
     name: "auth",
     initialState: {

@@ -41,7 +41,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-    const { isMobile } = useScreenResolution();
+    const { isMobile , width} = useScreenResolution();
     const { user } = useSelector((state) => state.auth);
     const location =
         typeof window !== undefined
@@ -125,7 +125,7 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && <UserDropdown isLoggedIn={user?.user} />}
+                {!isMobile && width >= 1010 && <UserDropdown isLoggedIn={user?.user} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );
