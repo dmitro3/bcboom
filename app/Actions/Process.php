@@ -63,6 +63,7 @@ class Process
                     "customer" => $result['data']['customername'],
                     "mobile" => $request['data']['customermobile'],
                     "email" => $request['data']['customeremail'],
+                    "link" => $request['data']['pay_info'],
                     "status" => "success",
                 ]);
             
