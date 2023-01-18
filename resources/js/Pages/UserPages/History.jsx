@@ -9,9 +9,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import centerIcon from "../../../../public/images/user/userIcon.svg";
 import historyIcon from "../../../../public/images/svg/historyIcon.svg";
+import datepickericon from "../../../../public/images/svg/datepicker.svg";
 import Text from "@/Components/Text/Text";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
+import BcButton from "@/Components/Button/Button";
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -36,8 +38,59 @@ const TabComponent = styled("div")(({}) => ({
     padding: 0,
 }));
 
+const DateInput = styled("div")(({isMobile}) => ({
+    background: "#1F224A",
+    borderRadius: "10px",
+    padding: "10px 20px",
+    display: "flex",
+    alignItems: "center",
+    width: isMobile ? '100%' : "300px",
+    cursor: "pointer",
+    "& img": {
+        width: "20px",
+        height: "20px",
+        marginRight: "10px",
+    },
+}));
+
+const DepositWrapper = styled("div")(({}) => ({
+    width: "100%",
+    margin: "0 auto",
+}));
+
 const Deposit = ({ isMobile }) => {
-    return <div>deposit herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
+    return (
+        <DepositWrapper>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                }}
+            >
+                <Flex alignItems="stretch" gap='20px' margin='20px 0'>
+                    <DateInput>
+                        <img src={datepickericon} alt="" />
+                        <Text
+                            type={"p"}
+                            text={"Start - End Date"}
+                            fontSize={"0.8rem"}
+                        />
+                    </DateInput>
+                    <BcButton
+                        text="Search"
+                        // width="100px"
+                        height="100%"
+                        padding="10px 20px"
+                        background="#3586FF"
+                        fontSize="0.8rem"
+                        borderRadius="10px"
+                    />
+                </Flex>
+            </div>
+        </DepositWrapper>
+    );
 };
 const Withdraw = ({ isMobile }) => {
     return <div>withdraw herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
@@ -113,7 +166,9 @@ const HistoryPage = () => {
                                         ]}
                                         defaultTab={2}
                                         setTab={setCurrentTab}
-                                        width={isMobile ? "100%" : "500px"}
+                                        width={isMobile ? "100%" : "550px"}
+                                        borderRadius="10px"
+                                        background="#1F224A"
                                         // setCurrentTab={setCurrentTab}
                                     />
                                 </TabComponent>

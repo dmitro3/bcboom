@@ -72,8 +72,8 @@ const CustomTabs = ({ tabItems }) => {
 
 export default CustomTabs;
 
-const TabWrapper = styled("div")(({ padding, marginTop }) => ({
-    borderRadius: "20px",
+const TabWrapper = styled("div")(({ padding, marginTop, borderRadius }) => ({
+    borderRadius: borderRadius || "20px",
     color: "#fff",
     padding: padding || "20px 30px",
     marginTop: marginTop,
@@ -82,19 +82,19 @@ const TabWrapper = styled("div")(({ padding, marginTop }) => ({
     alignItems: "center",
     flexDirection: "column",
 }));
-const TabButtons = styled("div")(({ width }) => ({
-    background: "#464F85",
+const TabButtons = styled("div")(({ width, background, borderRadius }) => ({
+    background: background || "#464F85",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     // padding: "0px 30px",
     width: width || "fit-content",
-    borderRadius: "20px",
+    borderRadius: borderRadius || "20px",
 }));
-const TabButton = styled("div")(({ active }) => ({
+const TabButton = styled("div")(({ active, borderRadius }) => ({
     cursor: "pointer",
     padding: "10px 20px",
-    borderRadius: "20px",
+    borderRadius: borderRadius || "20px",
     background: active ? "#3586FF" : "transparent",
     textAlign: "center",
     color: "#fff",
@@ -109,11 +109,20 @@ export const NewCustomTabs = ({
     padding,
     marginTop,
     setTab,
+    borderRadius,
+    background,
 }) => {
     const [value, setValue] = React.useState(defaultTab || 0);
     return (
-        <TabWrapper padding={padding} marginTop={marginTop}>
-            <TabButtons width={width}>
+        <TabWrapper
+            padding={padding}
+            marginTop={marginTop}
+        >
+            <TabButtons
+                width={width}
+                background={background}
+                borderRadius={borderRadius}
+            >
                 {tabItems.map((item, index) => {
                     return (
                         <TabButton
@@ -123,6 +132,7 @@ export const NewCustomTabs = ({
                                 setValue(index);
                             }}
                             active={value === index}
+                            borderRadius={borderRadius}
                         >
                             <Flex
                                 justifyContent="center"
