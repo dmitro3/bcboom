@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2023 at 10:17 PM
+-- Generation Time: Jan 18, 2023 at 09:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -109,6 +109,14 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `amount` double DEFAULT NULL,
+  `pay_amount` double DEFAULT NULL,
+  `order_no` varchar(255) DEFAULT NULL,
+  `create_time` varchar(255) DEFAULT NULL,
+  `customer` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -186,13 +194,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `username`, `phone`, `bio`, `referrer_id`, `referral_count`, `referral_token`, `address`, `image`, `admin`, `vip`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'theboss1@gmail.com', 'thebossishere1', NULL, NULL, NULL, 0, 'thebossishere1350372', NULL, 'http://localhost:8000/uploads/images/167381574858d406dc-7551-4460-8557-ed45d99cdd29.jpg', 0, NULL, NULL, '$2y$10$zJpX0Alisf4ho4/2zcltfu8ER5sezEfR2Mm9j6WRrnFTogoJly3h2', NULL, '2023-01-15 19:21:42', '2023-01-15 19:49:08');
 
 -- --------------------------------------------------------
 
@@ -345,7 +346,7 @@ ALTER TABLE `reset_code_passwords`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wallets`

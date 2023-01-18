@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
 
+use App\Actions\Process;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update/bio', [ProfileController::class, 'updatebio']);
         Route::post('update/phone', [ProfileController::class, 'updatephone']);
         Route::get('/wallet/info', [BonusController::class, 'index']);
+
+        Route::post('/withdrawal', [WithdrawalController::class, 'check']);
     
         // Payment routes
     
@@ -67,6 +71,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
     
+    Route::post('notifyurl', function(Request $request) {
+        $callback = new Callback;
+        
+        return $callback->execute($request);
+    });
+
+    Route::post('notify', function(Request $request) {
+        $process = new Process;
+        return $process->status($request);
+    });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
