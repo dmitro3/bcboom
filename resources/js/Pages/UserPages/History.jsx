@@ -14,6 +14,7 @@ import Text from "@/Components/Text/Text";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
 import BcButton from "@/Components/Button/Button";
+import CustomTable from "@/Components/UtilComponents/Table";
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -38,13 +39,13 @@ const TabComponent = styled("div")(({}) => ({
     padding: 0,
 }));
 
-const DateInput = styled("div")(({isMobile}) => ({
+const DateInput = styled("div")(({ isMobile }) => ({
     background: "#1F224A",
     borderRadius: "10px",
     padding: "10px 20px",
     display: "flex",
     alignItems: "center",
-    width: isMobile ? '100%' : "300px",
+    width: isMobile ? "100%" : "300px",
     cursor: "pointer",
     "& img": {
         width: "20px",
@@ -69,7 +70,7 @@ const Deposit = ({ isMobile }) => {
                     width: "100%",
                 }}
             >
-                <Flex alignItems="stretch" gap='20px' margin='20px 0'>
+                <Flex alignItems="stretch" gap="20px" margin="20px 0">
                     <DateInput>
                         <img src={datepickericon} alt="" />
                         <Text
@@ -89,6 +90,11 @@ const Deposit = ({ isMobile }) => {
                     />
                 </Flex>
             </div>
+            <Flex alignItems='center' justifyContent='center' margin='40px 0'>
+                <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                    <CustomTable />
+                </div>
+            </Flex>
         </DepositWrapper>
     );
 };
@@ -166,7 +172,7 @@ const HistoryPage = () => {
                                         ]}
                                         defaultTab={2}
                                         setTab={setCurrentTab}
-                                        width={isMobile ? "100%" : "550px"}
+                                        width={isMobile ? "100%" : "1000px"}
                                         borderRadius="10px"
                                         background="#1F224A"
                                         // setCurrentTab={setCurrentTab}
