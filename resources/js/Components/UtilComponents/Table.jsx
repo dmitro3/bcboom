@@ -1,23 +1,88 @@
-import { DataGrid } from "@mui/x-data-grid";
-import React from "react";
+import { styled } from "@mui/system";
+import { format } from "date-fns";
+import Text from "../Text/Text";
+import { Flex } from "./Flex";
 
-const CustomTable = ({ columns = ["Transaction ID", "Deposit", "Amount"] }) => {
-    const rows = [
-        { id: 1, col1: "Hello", col2: "World" },
-        { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-        { id: 3, col1: "MUI", col2: "is Amazing" },
-    ];
+const TableWrapper = styled("div")(() => ({}));
+const TableGrid = styled("div")(() => ({
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 1fr)",
+    gridGap: "20px",
+    // padding: "20px",
 
-     columns = [
-        { field: "col1", headerName: "Column 1", width: 150 },
-        { field: "col2", headerName: "Column 2", width: 150 },
-    ];
+    "& > p": {
+        "&:last-child": {
+            width: "100%",
+            textAlign: "right",
+        },
+    },
+}));
 
-   return (
-       <div style={{ height: 300, width: "100%" }}>
-           <DataGrid rows={rows} columns={columns} />
-       </div>
-   );
+const CustomTable = ({ columns = [], rows = [] }) => {
+    rows = Array.from({ length: 50 }).fill(rows[0]);
+    return (
+        <TableWrapper style={{ height: 300, width: "100%" }}>
+            <TableGrid justifyContent="space-between" alignItems="center">
+                {columns.map((column, index) => (
+                    <Text
+                        type="p"
+                        text={column}
+                        color="#A0ABDB"
+                        key={index}
+                        fontSize="12px"
+                    />
+                ))}
+            </TableGrid>
+            {rows.map((item, index) => (
+                <div style={{ marginTop: "20px" }}>
+                    <TableGrid key={index}>
+                        {Object.keys(item).map((key, index) => {
+                            let text = item[key];
+                            let day, time;
+                            if (key === "date") {
+                                day = format(new Date(text), "dd/MM/yyyy");
+                                time = format(new Date(text), "hh:mm:ss");
+                                return (
+                                    <div>
+                                        <Text
+                                            type="p"
+                                            text={day}
+                                            color="white"
+                                            key={index}
+                                            fontSize="12px"
+                                            fontWeight="600"
+                                            wordBreak="break-all"
+                                        />
+                                        <Text
+                                            type="p"
+                                            text={time}
+                                            color="#80B2FF"
+                                            key={index}
+                                            fontSize="12px"
+                                            fontWeight="600"
+                                            wordBreak="break-all"
+                                        />
+                                    </div>
+                                );
+                            }
+                            return (
+                                <Text
+                                    type="p"
+                                    text={text}
+                                    color="white"
+                                    key={index}
+                                    fontSize="12px"
+                                    fontWeight="600"
+                                    wordBreak="break-all"
+                                />
+                            );
+                        })}
+                    </TableGrid>
+                </div>
+            ))}
+            {/* </Flex> */}
+        </TableWrapper>
+    );
 };
 
 export default CustomTable;

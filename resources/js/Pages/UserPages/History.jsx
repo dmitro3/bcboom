@@ -90,9 +90,29 @@ const Deposit = ({ isMobile }) => {
                     />
                 </Flex>
             </div>
-            <Flex alignItems='center' justifyContent='center' margin='40px 0'>
+            <Flex alignItems="center" justifyContent="center" margin="40px 0">
                 <div style={{ width: isMobile ? "100%" : "1000px" }}>
-                    <CustomTable />
+                    <CustomTable
+                        columns={[
+                            "transaction ID",
+                            "Date",
+                            "Deposit Amount",
+                            "Bonus",
+                            "Actual Amount",
+                            "Status",
+                        ]}
+                        rows={[
+                            {
+                                transactionId:
+                                    "123456789123456789123456789123456789",
+                                date: "2023-01-17T20:58:41.000000Z",
+                                depositAmount: "100",
+                                bonus: "10",
+                                actualAmount: "110",
+                                status: "success",
+                            },
+                        ]}
+                    />
                 </div>
             </Flex>
         </DepositWrapper>
