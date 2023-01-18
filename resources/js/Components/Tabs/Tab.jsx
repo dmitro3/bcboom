@@ -102,7 +102,14 @@ const TabButton = styled("div")(({ active }) => ({
     whiteSpace: "nowrap",
 }));
 
-export const NewCustomTabs = ({ tabItems, defaultTab, width, padding, marginTop }) => {
+export const NewCustomTabs = ({
+    tabItems,
+    defaultTab,
+    width,
+    padding,
+    marginTop,
+    setTab,
+}) => {
     const [value, setValue] = React.useState(defaultTab || 0);
     return (
         <TabWrapper padding={padding} marginTop={marginTop}>
@@ -112,6 +119,7 @@ export const NewCustomTabs = ({ tabItems, defaultTab, width, padding, marginTop 
                         <TabButton
                             key={index}
                             onClick={() => {
+                                if (setTab) setTab(index);
                                 setValue(index);
                             }}
                             active={value === index}
