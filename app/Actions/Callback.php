@@ -28,7 +28,8 @@ class Callback{
 
   if($data['trade_state'] == 'SUCCESS')
   {
-    $wallet = Wallet::where('user_id', Auth::id())->first();
+    $user = Auth::user();
+    $wallet = Wallet::where('user_id', $user->id)->first();
             if ($wallet) {
                 $wallet->update([
                     'order_no' => $result['data']['tx_orderno'],
@@ -36,7 +37,7 @@ class Callback{
                 ]);
             } else {
                 Wallet::create([
-                    'user_id' => Auth::Id(),
+                    'user_id' => $user->id,
                     'deposit' => $result['data']['amount']
                 ]);
             }
