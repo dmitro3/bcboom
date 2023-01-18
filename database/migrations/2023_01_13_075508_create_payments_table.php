@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('customer')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
+            $table->string('link')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
