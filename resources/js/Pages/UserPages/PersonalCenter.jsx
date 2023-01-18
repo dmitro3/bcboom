@@ -10,11 +10,10 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import {
     changeNicknameModalState,
     getMe,
-    setProfile
+    setProfile,
 } from "@/redux/profile/profileSlice";
-import {
-    setWalletModalState
-} from "@/redux/wallet/wallet-slice";
+import { setWalletModalState } from "@/redux/wallet/wallet-slice";
+import { Inertia } from "@inertiajs/inertia";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
@@ -48,7 +47,7 @@ const PersonalCard = styled("div")(({ padding, isMobile }) => ({
     padding: padding || "20px",
 }));
 
-const RangeInput = styled("div")(({value}) => ({
+const RangeInput = styled("div")(({ value }) => ({
     width: "100%",
     "input[type='range']": {
         background: `linear-gradient(to right, #3586FF 0%, #3586FF ${value}%, #62679E ${value}%, #62679E 100%)`,
@@ -311,6 +310,9 @@ const PersonalCenter = () => {
                                         height="40px"
                                         text="Game History"
                                         width="80%"
+                                        onClick={() =>
+                                            Inertia.visit("/history")
+                                        }
                                     />
                                 </PersonalCard>
 
@@ -544,14 +546,20 @@ const PersonalCenter = () => {
                                             }}
                                         />
                                     </Flex>
-                                    <Text
-                                        type="p"
-                                        text="History"
-                                        color="#A0ABDB"
-                                        fontSize="13px"
-                                        padding="10px"
-                                        cursor="pointer"
-                                    />
+                                    <div
+                                        onClick={() => {
+                                            Inertia.get("/history");
+                                        }}
+                                    >
+                                        <Text
+                                            type="p"
+                                            text="History"
+                                            color="#A0ABDB"
+                                            fontSize="13px"
+                                            padding="10px"
+                                            cursor="pointer"
+                                        />
+                                    </div>
                                 </PersonalCard>
                             </Flex>
                         </ImageGridLayout>

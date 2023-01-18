@@ -121,7 +121,7 @@ const UserDetails = ({ user, dispatcher, level, opened }) => {
         {
             text: "Game History",
             icon: history,
-            link: "/game-history",
+            link: "/history",
         },
         {
             text: "Log out",
