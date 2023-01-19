@@ -27,7 +27,7 @@ class Process
      */
 
 
-    function execute(Request $request): Response
+    function execute(Request $request)
     {
 
 
@@ -53,7 +53,6 @@ class Process
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
 
-        // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
             // print('success');
@@ -85,7 +84,7 @@ class Process
             //     'message' => 'Payment saved',
             // ], 200);
 
-            return response($pay);
+            response()->json($pay);
 
 
             // The redirect statement will redirect to the Payment controller

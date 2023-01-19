@@ -61,9 +61,11 @@ class PaymentController extends Controller
         // dd(Auth::Id());
         $process->execute($request);
 
-        return response()->json([
-            'message' => 'success'
-        ], 200);
+        // return response()->json([
+        //     'link' => $data->link,
+        //     'user' => $user,
+        //     'message' => 'Payment saved',
+        // ], 200);
     }
 
     public function testpay()
