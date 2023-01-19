@@ -53,7 +53,7 @@ class Process
 
         if (isset($result['data']['pay_info'])) {
             // print('success');
-                // dd($result['data']);
+                dd($result['data']);
             
                $pay = Payment::create([
                     "amount" => $result['data']['amount'],
