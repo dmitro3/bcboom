@@ -81,7 +81,7 @@ class PaymentController extends Controller
             ]);
         } else {
             Wallet::create([
-                'user_id' => Auth::Id(),
+                'user_id' => Auth::id(),
                 'deposit' => $result['data']['amount']
             ]);
         }
