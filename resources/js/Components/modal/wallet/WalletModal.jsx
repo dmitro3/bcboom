@@ -1,25 +1,23 @@
+import CustomCarousel from "@/Components/Carousel/Carousel";
+import Input from "@/Components/Input/Input";
+import { NewCustomTabs } from "@/Components/Tabs/Tab";
 import Text from "@/Components/Text/Text";
+import { Flex } from "@/Components/UtilComponents/Flex";
+import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { deposit, setWalletModalState } from "@/redux/wallet/wallet-slice";
-import React, { useState } from "react";
+import { CircularProgress } from "@mui/material";
+import { styled } from "@mui/system";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CustomModal from "../Modal";
-import close from "../../../../../public/images/svg/closeModal.svg";
-import proceed from "../../../../../public/images/svg/proceed.svg";
+import { toast } from "react-toastify";
 import depositCarousel from "../../../../../public/images/carousel/depositcarousel.svg";
 import brazillianreal from "../../../../../public/images/currencies/brazillianreal.svg";
 import currency from "../../../../../public/images/currencies/currency.svg";
+import close from "../../../../../public/images/svg/closeModal.svg";
 import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
-import { styled } from "@mui/system";
-import { NewCustomTabs } from "@/Components/Tabs/Tab";
-import Input from "@/Components/Input/Input";
-import { Flex } from "@/Components/UtilComponents/Flex";
-import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
-import { currencyFormatter, sleep } from "@/utils/util";
-import CustomCarousel from "@/Components/Carousel/Carousel";
-import Button from "@/Components/Button/Button";
-import { CircularProgress } from "@mui/material";
-import { toast } from "react-toastify";
+import proceed from "../../../../../public/images/svg/proceed.svg";
+import CustomModal from "../Modal";
 
 const WalletWrapper = styled("div")(({ isMobile }) => ({
     background: "#464F85",

@@ -17,7 +17,16 @@ const style = (isMobile, shouldHaveBorder, styles) => {
         maxHeight: "80vh",
         // maxWidth: "80vw",
         overflow: isMobile ? "initial" : "scroll",
-        ...styles
+        overflowX: !isMobile && "hidden",
+        ...styles,
+
+        //hide scroolbar
+        "&::-webkit-scrollbar": {
+            display: "none!important",
+        },
+        "-ms-overflow-style": "none!important",
+        "scrollbar-width": "none!important",
+
         // padding: "20px 0",
         // overflowX: 'scroll'
         // overflowX: "hidden",

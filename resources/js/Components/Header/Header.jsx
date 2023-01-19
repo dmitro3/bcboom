@@ -120,7 +120,7 @@ const DesktopHeader = () => {
             icon: ticket,
             text: "1.2K won today",
         },
-    ]
+    ];
     const links = [
         {
             id: 1,
@@ -150,7 +150,7 @@ const DesktopHeader = () => {
             link: "/help",
             protected: true,
         },
-    ]
+    ];
     const socials = [
         {
             id: 1,
@@ -176,8 +176,8 @@ const DesktopHeader = () => {
             id: 5,
             icon: volume,
         },
-    ]
-    const [currentCountryIndex, setCurrentCountryIndex] = useState("us");
+    ];
+    const currentCountryIndex = "us";
     const countries = [
         { text: "china", icon: china },
         { text: "russia", icon: russia },
@@ -186,17 +186,13 @@ const DesktopHeader = () => {
         { text: "us", icon: us },
         { text: "malta", icon: malta },
     ];
-    const { isMobile } = useScreenResolution();
-    if (isMobile) {
-        return <div>hi am mobile</div>;
-    }
     const location =
         typeof window !== undefined
             ? window.location.pathname.split("/")[1]
             : "";
     const { user } = useSelector((state) => state.auth);
     const dispatcher = useDispatch();
-    return (    
+    return (
         <HeaderWrapper>
             <HeaderPlatformStats>
                 {statsItems.map((item) => (
@@ -285,7 +281,7 @@ const DesktopHeader = () => {
 const MobileHeaderWrapper = styled("div")(() => ({
     display: "flex",
     padding: "10px",
-    flex: '1 1 0px',
+    flex: "1 1 0px",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",
