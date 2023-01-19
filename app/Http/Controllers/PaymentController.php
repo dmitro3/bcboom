@@ -60,7 +60,7 @@ class PaymentController extends Controller
         $user = Auth::user();
         $process = new Process;
         $process->execute($request);
-        $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
+        $pay = Payment::where('customer', $user->username)->where('called', 0)->first();
 
         return response()->json([
             'link' => $pay,

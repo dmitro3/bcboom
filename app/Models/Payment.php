@@ -16,6 +16,7 @@ class Payment extends Model
         "order_no",
         "create_time",
         "link",
+        'called',
         "customer",
         "email",
         "mobile",
