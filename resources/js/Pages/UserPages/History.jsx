@@ -189,7 +189,7 @@ const Deposit = ({ isMobile }) => {
                 justifyContent="center"
                 margin={isMobile ? "1px 0 " : "40px 0"}
             >
-                {data.length && (
+                {data.length ? (
                     <div style={{ width: isMobile ? "100%" : "1000px" }}>
                         <CustomTable
                             columns={[
@@ -203,7 +203,7 @@ const Deposit = ({ isMobile }) => {
                             rows={data}
                         />
                     </div>
-                )}
+                ): <div>NO DATA</div>}
             </Flex>
         </DepositWrapper>
     );

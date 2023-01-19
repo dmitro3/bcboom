@@ -100,7 +100,7 @@ class PaymentController extends Controller
     public function transactions()
     {
         $user = Auth::user();
-        $payments = Payment::where('customer', $user->username)->orderBy('created_at', 'desc')->get();
+        $payments = Payment::where('email', $user->email)->orderBy('created_at', 'desc')->get();
         if ($payments) {
             return response()->json([
                 'payments' => $payments,
