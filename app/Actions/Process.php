@@ -27,7 +27,7 @@ class Process
      */
 
 
-    function execute(Request $request): String
+    function execute(Request $request): string
     {
 
 
@@ -69,37 +69,9 @@ class Process
                 "link" => $result['data']['pay_info'],
                 "status" => $result['data']["trade_state"],
             ]);
-            // dd($pay->link);
-            // $user = Auth::user();
 
-            // return Response::json([
-            //     'link' => $pay->link,
-            //     'user' => $user,
-            //     'message' => 'Payment saved',
-            // ], 200);
-            return response()->json([
-                'link' => $pay->link,
-                'user' => $user,
-                'message' => 'Payment saved',
-            ], 200);
 
-            // response()->json($pay);
-            // print($pay->link);
-            // print('got here');
-
-            // return $pay;
-
-            // The redirect statement will redirect to the Payment controller
-
-            // $res = $result['data'];
-            // return redirect()->action(
-            //     [PaymentController::class, 'callback'], ['result' => $res]
-            // );
-
-            //  I had placed an if statement here but recently redirecting;
-            //I had just return payment information
-            //  return $result['data']['pay_info'];
-
+            return $pay;
         } else {
 
             return $result['msg'];
