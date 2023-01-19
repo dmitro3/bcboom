@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Curl\Curl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
@@ -15,12 +16,14 @@ class PaymentController extends Controller
 {
 
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
-     }
-    
+    }
 
-    public function paym(){
+
+    public function paym()
+    {
         $data['mchid'] = '000801682';
         $data['timestamp'] = time();
         $data['amount'] = '100';
@@ -57,6 +60,7 @@ class PaymentController extends Controller
         $process = new Process;
         // dd(Auth::Id());
         $process->execute($request);
+
 
     }
 

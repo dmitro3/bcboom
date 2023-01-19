@@ -27,7 +27,7 @@ class Process
      */
 
 
-    function execute(Request $request): string
+    function execute(Request $request)
     {
 
 
@@ -79,13 +79,13 @@ class Process
             //     'user' => $user,
             //     'message' => 'Payment saved',
             // ], 200);
-            // return response()->json([
-            //     'link' => $pay->link,
-            //     'user' => $user,
-            //     'message' => 'Payment saved',
-            // ], 200);
+            return response()->json([
+                'link' => $pay->link,
+                'user' => $user,
+                'message' => 'Payment saved',
+            ], 200);
 
-            return response($pay->link);
+            // return $pay;
 
 
             // The redirect statement will redirect to the Payment controller
