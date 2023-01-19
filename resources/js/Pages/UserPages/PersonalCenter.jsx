@@ -82,6 +82,10 @@ const UserImage = styled("div")(({ size, background }) => ({
     width: size || "45px",
     height: size || "45px",
     cursor: "pointer",
+
+    "& img": {
+        borderRadius: "50%",
+    },
 }));
 
 const TextWithIcon = ({ icon, text, width, height, onClick }) => {

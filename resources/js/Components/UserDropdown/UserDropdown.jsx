@@ -4,13 +4,18 @@ import {
     getWallet,
     setLevel,
     setWallet,
-    setWalletModalState,
+    setWalletModalState
 } from "@/redux/wallet/wallet-slice";
+import {
+    currencyFormatter,
+    getLevelStats
+} from "@/utils/util";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { Dropdown as AntDropdown } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import brazillianreal from "../../../../public/images/currencies/brazillianreal.svg";
 import chevrondown from "../../../../public/images/svg/chevrondown.svg";
 import chevronup from "../../../../public/images/svg/chevronup.svg";
@@ -23,13 +28,6 @@ import userimg from "../../../../public/images/user/useravatar.png";
 import Button from "../Button/Button";
 import Text from "../Text/Text";
 import { Flex } from "../UtilComponents/Flex";
-import { toast } from "react-toastify";
-import {
-    currencyFormatter,
-    getLevelStats,
-    sumValueOfObj,
-    switchLevel,
-} from "@/utils/util";
 
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
@@ -83,6 +81,10 @@ const UserImage = styled("div")(({ size, background }) => ({
     borderRadius: "50%",
     width: size || "45px",
     height: size || "45px",
+
+    "& img": {
+        borderRadius: "50%",
+    },
 }));
 const Chevron = styled("div")(({}) => ({
     marginLeft: "10px",

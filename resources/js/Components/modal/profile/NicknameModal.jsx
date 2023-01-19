@@ -99,20 +99,22 @@ const NicknameModal = () => {
     const [editable, makeEditable] = useState(false);
     const [username, setUsername] = useState(profile?.username || "");
     const inputRef = useRef(null);
+    const fileRef = useRef(null);
     const COLORS = ["#64A2FF", "#64FFE3", "#FF9C64", "#FF6480", "#A8FF64"];
     const [submitted, setSubmitted] = useState(false);
     const [newImage, setNewImage] = useState(null);
     const [profileImage, setProfileImage] = useState(profile?.image || userimg);
-    const [openFileSelector, { filesContent }] = useFilePicker({
-        readAs: "DataURL",
-        accept: "image/*",
-        maxFileSize: 10,
-    });
-    useEffect(() => {
-        if (filesContent[0]) {
-            setNewImage(filesContent[0]);
-        }
-    }, [filesContent]);
+    // const [openFileSelector, { filesContent }] = useFilePicker({
+    //     readAs: "DataURL",
+    //     accept: "image/*",
+    //     maxFileSize: 10,
+    // });
+    const [rawFile, setRawFile] = useState(null);
+    // useEffect(() => {
+    //     if (filesContent[0]) {
+    //         setNewImage(filesContent[0]);
+    //     }
+    // }, [filesContent]);
     // let profileImage = profile?.image || userimg;
     return (
         <CustomModal
@@ -150,14 +152,37 @@ const NicknameModal = () => {
                     <UserImage
                         size={"70px"}
                         background={profileColor}
-                        onClick={() => openFileSelector()}
+                        onClick={() => fileRef.current.click()}
                     >
                         <img
                             src={newImage?.content || profileImage}
                             alt="user image"
-                            style={{ height: "100%" }}
+                            style={{ height: "100%", borderRadius: "50%" }}
                         />
                     </UserImage>
+                    <input
+                        type="file"
+                        name=""
+                        id=""
+                        accept="image/*"
+                        onChange={async (e) => {
+                            const file = e.target.files[0];
+                            setRawFile(file);
+                            const reader = new FileReader();
+                            reader.readAsDataURL(file);
+                            reader.onload = () => {
+                                setNewImage({
+                                    content: reader.result,
+                                    name: file.name,
+                                });
+                            };
+                            // await dispatcher(
+                            //     changeProfileImage({ image: file })
+                            // );
+                        }}
+                        ref={fileRef}
+                        style={{ display: "none" }}
+                    />
                     <Flex gap="10px">
                         <img
                             src={pencilIcon}
@@ -207,7 +232,7 @@ const NicknameModal = () => {
                                     <img
                                         src={userimg}
                                         alt="user image"
-                                        style={{ height: "100%" }}
+                                        style={{ height: "100%", borderRadius: "50%" }}
                                     />
                                 </UserImage>
                             ))}
@@ -240,15 +265,18 @@ const NicknameModal = () => {
                             if (username !== profile?.username) {
                                 await dispatcher(changeUsername({ username }));
                             }
-                            if (newImage) {
-                                // const image = dataURItoBlob(newImage.content);
-                                const formImage = new FormData();
-                                formImage.append("image", newImage);
-                                console.log("newImage: ", formImage);
+                            if (rawFile && newImage) {
                                 const res = await dispatcher(
-                                    changeProfileImage({ image: formImage })
+                                    changeProfileImage({ image: rawFile })
                                 );
-                                console.log("res: ", res);
+                                if (res?.payload?.status === 200) {
+                                    toast.success("Profile image updated");
+                                    return dispatcher(
+                                        changeNicknameModalState({
+                                            open: false,
+                                        })
+                                    );
+                                }
                             }
 
                             if (profileImage === userimg) {
