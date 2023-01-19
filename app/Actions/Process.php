@@ -27,7 +27,7 @@ class Process
      */
 
 
-    function execute(Request $request): String
+    function execute(Request $request)
     {
 
 
@@ -71,7 +71,7 @@ class Process
             ]);
             // dd($pay->link);
             // $user = Auth::user();
-            
+
             // return Response::json([
             //     'link' => $pay->link,
             //     'user' => $user,
@@ -87,7 +87,7 @@ class Process
             // print($pay->link);
             print('got here');
 
-            return $result['data']['pay_info'];
+            return $pay;
 
             // The redirect statement will redirect to the Payment controller
 

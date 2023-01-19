@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use Curl\Curl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -56,16 +57,16 @@ class PaymentController extends Controller
     }
     public function pay(Request $request)
     {
-
+        $user = Auth::user();
         $process = new Process;
-        // dd(Auth::Id());
         $process->execute($request);
+        $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
 
-        // return response()->json([
-        //     'link' => $data->link,
-        //     'user' => $user,
-        //     'message' => 'Payment saved',
-        // ], 200);
+        return response()->json([
+            'link' => $pay->link,
+            'user' => $user,
+            'message' => 'Payment saved',
+        ], 200);
     }
 
     public function testpay()
