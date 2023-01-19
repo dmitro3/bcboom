@@ -34,10 +34,12 @@ class Process
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
+        dd($request);
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $request->amount,
+
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'notifyurl' => url('/api/notify'),
             'email' => $user->email,
