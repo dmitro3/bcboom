@@ -5,7 +5,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { getMe, setProfile } from "@/redux/profile/profileSlice";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import centerIcon from "../../../../public/images/user/userIcon.svg";
 import historyIcon from "../../../../public/images/svg/historyIcon.svg";
@@ -15,6 +15,11 @@ import { Flex } from "@/Components/UtilComponents/Flex";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
 import BcButton from "@/Components/Button/Button";
 import CustomTable from "@/Components/UtilComponents/Table";
+import DateRangePicker from "@/Components/UtilComponents/DateRangePicker";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { format } from "date-fns";
+import { eachDayOfInterval } from "date-fns";
+
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
     paddingTop: "2.125rem",
@@ -45,8 +50,9 @@ const DateInput = styled("div")(({ isMobile }) => ({
     padding: "10px 20px",
     display: "flex",
     alignItems: "center",
-    width: isMobile ? "100%" : "300px",
+    width: isMobile ? "100%" : "400px",
     cursor: "pointer",
+    position: "relative",
     "& img": {
         width: "20px",
         height: "20px",
@@ -60,6 +66,41 @@ const DepositWrapper = styled("div")(({}) => ({
 }));
 
 const Deposit = ({ isMobile }) => {
+    const [open, setOpen] = useState(false);
+    const [currentRange, setCurrentRange] = useState("");
+    const pickerRef = useRef(null);
+    useOnClickOutside(pickerRef, () => setOpen(false));
+    const [data, setData] = useState(
+        Array.from({ length: 100 }).fill({
+            transactionId: "123456789123456789123456789123456789",
+            date: "2023-01-18T20:58:41.000000Z",
+            depositAmount: "100",
+            bonus: "10",
+            actualAmount: "110",
+            status: "success",
+        })
+    );
+    useEffect(() => {
+        if (currentRange.endDate) setOpen(false);
+    }, [currentRange]);
+    function handleSearch(ranges) {
+        if (!ranges.startDate || !ranges.endDate) return;
+        const daysInterval = eachDayOfInterval({
+            start: ranges.startDate,
+            end: ranges.endDate,
+        }).map((el) => new Date(el).setHours(0, 0, 0, 0));
+        const filtered = data.filter((el, i) =>
+            daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
+        );
+        console.log(
+            "filtered: ",
+            filtered,
+            daysInterval,
+            new Date(data[0].date).setHours(0, 0, 0, 0)
+        );
+        // console.log("daysInterval: ", daysInterval, rows);
+        setData(filtered);
+    }
     return (
         <DepositWrapper>
             <div
@@ -70,27 +111,50 @@ const Deposit = ({ isMobile }) => {
                     width: "100%",
                 }}
             >
-                <Flex alignItems="stretch" gap="20px" margin="20px 0">
-                    <DateInput>
+                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                    <DateInput
+                        isMobile={isMobile}
+                        onClick={() => setOpen(!open)}
+                    >
                         <img src={datepickericon} alt="" />
                         <Text
                             type={"p"}
-                            text={"Start - End Date"}
+                            text={
+                                currentRange
+                                    ? `${format(
+                                          currentRange.startDate,
+                                          "dd-MM-yyyy"
+                                      )} - 
+                                      ${format(
+                                          currentRange.endDate,
+                                          "dd-MM-yyyy"
+                                      )}`
+                                    : "Start - End Date"
+                            }
                             fontSize={"0.8rem"}
                         />
                     </DateInput>
+                    <div style={{ position: "absolute", top: "140px" }}>
+                        <DateRangePicker
+                            toggle={setOpen}
+                            open={open}
+                            ref={pickerRef}
+                            setCurrentRange={setCurrentRange}
+                        />
+                    </div>
                     <BcButton
                         text="Search"
-                        // width="100px"
+                        width={"100%"}
                         height="100%"
                         padding="10px 20px"
                         background="#3586FF"
                         fontSize="0.8rem"
                         borderRadius="10px"
+                        onSubmit={() => handleSearch(currentRange)}
                     />
                 </Flex>
             </div>
-            <Flex alignItems="center" justifyContent="center" margin="40px 0">
+            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
                 <div style={{ width: isMobile ? "100%" : "1000px" }}>
                     <CustomTable
                         columns={[
@@ -101,17 +165,7 @@ const Deposit = ({ isMobile }) => {
                             "Actual Amount",
                             "Status",
                         ]}
-                        rows={[
-                            {
-                                transactionId:
-                                    "123456789123456789123456789123456789",
-                                date: "2023-01-17T20:58:41.000000Z",
-                                depositAmount: "100",
-                                bonus: "10",
-                                actualAmount: "110",
-                                status: "success",
-                            },
-                        ]}
+                        rows={data}
                     />
                 </div>
             </Flex>
@@ -119,11 +173,225 @@ const Deposit = ({ isMobile }) => {
     );
 };
 const Withdraw = ({ isMobile }) => {
-    return <div>withdraw herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
+    const [open, setOpen] = useState(false);
+    const [currentRange, setCurrentRange] = useState("");
+    const pickerRef = useRef(null);
+    useOnClickOutside(pickerRef, () => setOpen(false));
+    const [data, setData] = useState(
+        Array.from({ length: 100 }).fill({
+            transactionId: "123456789123456789123456789123456789",
+            date: "2023-01-18T20:58:41.000000Z",
+            depositAmount: "100",
+            bonus: "10",
+            actualAmount: "110",
+            status: "success",
+        })
+    );
+    useEffect(() => {
+        if (currentRange.endDate) setOpen(false);
+    }, [currentRange]);
+    function handleSearch(ranges) {
+        if (!ranges.startDate || !ranges.endDate) return;
+        const daysInterval = eachDayOfInterval({
+            start: ranges.startDate,
+            end: ranges.endDate,
+        }).map((el) => new Date(el).setHours(0, 0, 0, 0));
+        const filtered = data.filter((el, i) =>
+            daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
+        );
+        console.log(
+            "filtered: ",
+            filtered,
+            daysInterval,
+            new Date(data[0].date).setHours(0, 0, 0, 0)
+        );
+        // console.log("daysInterval: ", daysInterval, rows);
+        setData(filtered);
+    }
+    return (
+        <DepositWrapper>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                }}
+            >
+                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                    <DateInput
+                        isMobile={isMobile}
+                        onClick={() => setOpen(!open)}
+                    >
+                        <img src={datepickericon} alt="" />
+                        <Text
+                            type={"p"}
+                            text={
+                                currentRange
+                                    ? `${format(
+                                          currentRange.startDate,
+                                          "dd-MM-yyyy"
+                                      )} - 
+                                      ${format(
+                                          currentRange.endDate,
+                                          "dd-MM-yyyy"
+                                      )}`
+                                    : "Start - End Date"
+                            }
+                            fontSize={"0.8rem"}
+                        />
+                    </DateInput>
+                    <div style={{ position: "absolute", top: "140px" }}>
+                        <DateRangePicker
+                            toggle={setOpen}
+                            open={open}
+                            ref={pickerRef}
+                            setCurrentRange={setCurrentRange}
+                        />
+                    </div>
+                    <BcButton
+                        text="Search"
+                        width={"100%"}
+                        height="100%"
+                        padding="10px 20px"
+                        background="#3586FF"
+                        fontSize="0.8rem"
+                        borderRadius="10px"
+                        onSubmit={() => handleSearch(currentRange)}
+                    />
+                </Flex>
+            </div>
+            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
+                <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                    <CustomTable
+                        columns={[
+                            "transaction ID",
+                            "Date",
+                            "Deposit Amount",
+                            "Bonus",
+                            "Actual Amount",
+                            "Status",
+                        ]}
+                        rows={data}
+                    />
+                </div>
+            </Flex>
+        </DepositWrapper>
+    );
 };
 const GameHistory = ({ isMobile }) => {
-    return <div>game history herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
+    const [open, setOpen] = useState(false);
+    const [currentRange, setCurrentRange] = useState("");
+    const pickerRef = useRef(null);
+    useOnClickOutside(pickerRef, () => setOpen(false));
+    const [data, setData] = useState(
+        Array.from({ length: 100 }).fill({
+            transactionId: "123456789123456789123456789123456789",
+            date: "2023-01-18T20:58:41.000000Z",
+            depositAmount: "100",
+            bonus: "10",
+            actualAmount: "110",
+            status: "success",
+        })
+    );
+    useEffect(() => {
+        if (currentRange.endDate) setOpen(false);
+    }, [currentRange]);
+    function handleSearch(ranges) {
+        if (!ranges.startDate || !ranges.endDate) return;
+        const daysInterval = eachDayOfInterval({
+            start: ranges.startDate,
+            end: ranges.endDate,
+        }).map((el) => new Date(el).setHours(0, 0, 0, 0));
+        const filtered = data.filter((el, i) =>
+            daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
+        );
+        console.log(
+            "filtered: ",
+            filtered,
+            daysInterval,
+            new Date(data[0].date).setHours(0, 0, 0, 0)
+        );
+        // console.log("daysInterval: ", daysInterval, rows);
+        setData(filtered);
+    }
+    return (
+        <DepositWrapper>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                }}
+            >
+                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                    <DateInput
+                        isMobile={isMobile}
+                        onClick={() => setOpen(!open)}
+                    >
+                        <img src={datepickericon} alt="" />
+                        <Text
+                            type={"p"}
+                            text={
+                                currentRange
+                                    ? `${format(
+                                          currentRange.startDate,
+                                          "dd-MM-yyyy"
+                                      )} - 
+                                      ${format(
+                                          currentRange.endDate,
+                                          "dd-MM-yyyy"
+                                      )}`
+                                    : "Start - End Date"
+                            }
+                            fontSize={"0.8rem"}
+                        />
+                    </DateInput>
+                    <div style={{ position: "absolute", top: "140px" }}>
+                        <DateRangePicker
+                            toggle={setOpen}
+                            open={open}
+                            ref={pickerRef}
+                            setCurrentRange={setCurrentRange}
+                        />
+                    </div>
+                    <BcButton
+                        text="Search"
+                        width={"100%"}
+                        height="100%"
+                        padding="10px 20px"
+                        background="#3586FF"
+                        fontSize="0.8rem"
+                        borderRadius="10px"
+                        onSubmit={() => handleSearch(currentRange)}
+                    />
+                </Flex>
+            </div>
+            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
+                <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                    <CustomTable
+                        columns={[
+                            "transaction ID",
+                            "Date",
+                            "Deposit Amount",
+                            "Bonus",
+                            "Actual Amount",
+                            "Status",
+                        ]}
+                        rows={data}
+                    />
+                </div>
+            </Flex>
+        </DepositWrapper>
+    );
 };
+// const Withdraw = ({ isMobile }) => {
+//     return <div>withdraw herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
+// };
+// const GameHistory = ({ isMobile }) => {
+//     return <div>game history herere@!wfgijhsdfgkljabsdflkjhasdf</div>;
+// };
 
 const HistoryPage = () => {
     const { isMobile } = useScreenResolution();
@@ -195,6 +463,7 @@ const HistoryPage = () => {
                                         width={isMobile ? "100%" : "1000px"}
                                         borderRadius="10px"
                                         background="#1F224A"
+                                        padding={isMobile && '30px 0px'}
                                         // setCurrentTab={setCurrentTab}
                                     />
                                 </TabComponent>
