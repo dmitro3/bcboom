@@ -27,7 +27,7 @@ class Process
      */
 
 
-    function execute(Request $request)
+    function execute(Request $request): String
     {
 
 
