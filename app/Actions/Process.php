@@ -6,6 +6,7 @@ use App\Models\Wallet;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
@@ -73,11 +74,16 @@ class Process
             // $user = Auth::user();
             print($pay->link);
             print('got here');
-            return response()->json([
+            return Response::json([
                 'link' => $pay->link,
                 'user' => $user,
                 'message' => 'Payment saved',
             ], 200);
+            // return response()->json([
+            //     'link' => $pay->link,
+            //     'user' => $user,
+            //     'message' => 'Payment saved',
+            // ], 200);
 
 
             // The redirect statement will redirect to the Payment controller
