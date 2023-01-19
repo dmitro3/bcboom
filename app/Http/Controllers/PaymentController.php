@@ -97,5 +97,20 @@ class PaymentController extends Controller
         return $result['data']['pay_info'];
     }
 
+    public function transactions()
+    {
+        $user = Auth::user();
+        $payments = Payment::where('customer', $user->username)->orderBy('created_at', 'desc')->get();
+        if ($payments) {
+            return response()->json([
+                'payments' => $payments,
+                'message' => 'Payments retrieved',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'No payments found',
+            ], 404);
+        }
+    }
 
 }

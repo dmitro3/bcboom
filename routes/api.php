@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update/bio', [ProfileController::class, 'updatebio']);
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
-
+    Route::get('/all/payments', [PaymentController::class, 'transactions']);
     Route::post('/withdrawal', [WithdrawalController::class, 'check']);
 
     // Payment routes
