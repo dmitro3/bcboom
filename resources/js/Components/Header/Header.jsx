@@ -99,7 +99,7 @@ const Menu = ({ data, setValue }) => {
     );
 };
 const DesktopHeader = () => {
-    const [statsItems] = useState([
+    const statsItems = [
         {
             id: 1,
             icon: wifi,
@@ -120,8 +120,8 @@ const DesktopHeader = () => {
             icon: ticket,
             text: "1.2K won today",
         },
-    ]);
-    const [links] = useState([
+    ]
+    const links = [
         {
             id: 1,
             text: "Cashback",
@@ -150,8 +150,8 @@ const DesktopHeader = () => {
             link: "/help",
             protected: true,
         },
-    ]);
-    const [socials] = useState([
+    ]
+    const socials = [
         {
             id: 1,
             icon: facebook,
@@ -176,7 +176,7 @@ const DesktopHeader = () => {
             id: 5,
             icon: volume,
         },
-    ]);
+    ]
     const [currentCountryIndex, setCurrentCountryIndex] = useState("us");
     const countries = [
         { text: "china", icon: china },
@@ -285,6 +285,7 @@ const DesktopHeader = () => {
 const MobileHeaderWrapper = styled("div")(() => ({
     display: "flex",
     padding: "10px",
+    flex: '1 1 0px',
     alignItems: "center",
     justifyContent: "space-between",
     gap: "10px",

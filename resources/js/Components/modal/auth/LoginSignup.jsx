@@ -4,18 +4,24 @@ import Button from "@/Components/Button/Button";
 import Input from "@/Components/Input/Input";
 import { NewCustomTabs } from "@/Components/Tabs/Tab";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { login, setAuthModalState, signup } from "@/redux/auth/auth-slice";
+import {
+    login,
+    resetPassword,
+    sendForgotPasswordMail,
+    setAuthModalState,
+    signup,
+} from "@/redux/auth/auth-slice";
 import { FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/system";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import close from "../../../../../public/images/svg/closeModal.svg";
 import lock from "../../../../../public/images/svg/lock.svg";
 import mobileclose from "../../../../../public/images/svg/mobileclose.svg";
 import user from "../../../../../public/images/svg/user.svg";
 import CustomModal from "../Modal";
-import { toast } from "react-toastify";
 
 import Text from "@/Components/Text/Text";
 import { sleep, validatePhoneNumber } from "@/utils/util";
@@ -27,6 +33,7 @@ const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
     padding: !isMobile && "20px 30px",
     width: isMobile ? "90vw" : "600px",
     margin: isMobile && "0 auto",
+    maxWidth: isMobile && "370px",
 }));
 const CloseIcon = styled("div")(({ isMobile }) => ({
     position: "absolute",
@@ -48,6 +55,26 @@ const SignupFormWrapper = styled("div")(({ isMobile }) => ({
     gap: "20px",
     width: isMobile ? "100%" : "480px",
 }));
+
+const ForgotPasswordWrapper = styled("div")(({ isMobile }) => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    width: isMobile ? "100%" : "380px",
+    padding: isMobile && "20px",
+    margin: "0 auto",
+    paddingTop: "30px",
+}));
+const ResetPasswordWrapper = styled("div")(({ isMobile }) => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    width: isMobile ? "100%" : "380px",
+    padding: isMobile && "20px",
+    margin: "0 auto",
+    paddingTop: "30px",
+}));
+
 const SignupForm = ({ isMobile }) => {
     const dispatcher = useDispatch();
     const [signupDetails, setSignupDetails] = useState({
@@ -382,7 +409,12 @@ const LoginSignupModal = () => {
                     {
                         value: "login",
                         label: "Log In",
-                        content: <LoginForm isMobile={isMobile} switchTo={setMountedComponent} />,
+                        content: (
+                            <LoginForm
+                                isMobile={isMobile}
+                                switchTo={setMountedComponent}
+                            />
+                        ),
                     },
                     {
                         label: "Sign Up",
@@ -396,10 +428,245 @@ const LoginSignupModal = () => {
         </TabComponent>
     );
     let ForgotPassword = () => {
-        return <div>forgot your password</div>;
+        const [forgotDetails, setForgotDetails] = useState({
+            email: "",
+            submitted: false,
+            error: "",
+        });
+        async function handleForgotPassword() {
+            if (forgotDetails.submitted) return;
+            if (forgotDetails.email === "") {
+                toast.error("Please enter your email address");
+                setForgotDetails({
+                    ...forgotDetails,
+                    error: "Fill in your email",
+                });
+                return;
+            }
+            setForgotDetails({ ...forgotDetails, submitted: true });
+            console.log("forgot password");
+            const response = await dispatcher(
+                sendForgotPasswordMail({ email: forgotDetails.email })
+            );
+            console.log("response", response);
+            if (response.payload.status === 422) {
+                toast.error(response.payload.data.message);
+                setForgotDetails({
+                    ...forgotDetails,
+                    error: response.payload.data.message,
+                });
+                return;
+            }
+            if (response.type === "sendForgotPasswordMail/fulfilled") {
+                toast.success(
+                    "A password reset link has been sent to your email"
+                );
+            }
+            return setMountedComponent("resetPassword");
+        }
+        return (
+            <ForgotPasswordWrapper isMobile={isMobile}>
+                <Text
+                    type="p"
+                    text="Enter your email address and we'll send you a link to reset your password"
+                    color="white"
+                    fontSize="14px"
+                    textAlign="center"
+                    paddingTop="20px"
+                />
+                <Input
+                    addon={<img src={user} alt="" />}
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={forgotDetails.email}
+                    onChange={(e) => {
+                        setForgotDetails({
+                            ...forgotDetails,
+                            email: e.target.value,
+                        });
+                    }}
+                    border={forgotDetails.error && " #F93967"}
+                />
+                {forgotDetails.error && (
+                    <Text
+                        type="p"
+                        text={forgotDetails.error}
+                        color="#F93967"
+                        fontSize="14px"
+                    />
+                )}
+                <div onClick={() => setMountedComponent("loginSignup")}>
+                    <Text
+                        type="p"
+                        text={"Back to login"}
+                        fontSize="14px"
+                        textAlign="right"
+                        cursor="pointer"
+                        color="rgb(157, 166, 202)"
+                    />
+                </div>
+                <Button
+                    text={forgotDetails.submitted ? "Sending...." : "Send"}
+                    width="100%"
+                    background="#3586FF"
+                    color="#fff"
+                    borderRadius="30px"
+                    padding="15px "
+                    marginTop="20px"
+                    onSubmit={handleForgotPassword}
+                />
+            </ForgotPasswordWrapper>
+        );
     };
     let ResetPassword = () => {
-        return <div>reset your password</div>;
+        const [resetDetails, setResetDetails] = useState({
+            password: "",
+            token: "",
+            submitted: false,
+            error: {
+                password: "",
+                token: "",
+                field: "",
+            },
+        });
+        async function handleResetPassword() {
+            if (resetDetails.submitted) return;
+            setResetDetails({ ...resetDetails, submitted: true });
+
+            if (resetDetails.password === "" && resetDetails.token === "") {
+                toast.error("Please enter your password and token");
+                setResetDetails({
+                    ...resetDetails,
+                    error: {
+                        ...resetDetails.error,
+                        password: "Fill in your password",
+                        token: "Fill in your token",
+                    },
+                });
+                return;
+            }
+            if (resetDetails.password === "") {
+                toast.error("Please enter your password");
+                setResetDetails({
+                    ...resetDetails,
+                    error: {
+                        ...resetDetails.error,
+                        password: "Fill in your password",
+                    },
+                });
+                return;
+            }
+            if (resetDetails.token === "") {
+                toast.error("Please enter your token");
+                setResetDetails({
+                    ...resetDetails,
+                    error: {
+                        ...resetDetails.error,
+                        token: "Fill in your token",
+                    },
+                });
+                return;
+            }
+            const response = await dispatcher(
+                resetPassword({
+                    password: resetDetails.password,
+                    code: resetDetails.token,
+                })
+            );
+            console.log("response", response);
+            if (response.payload.status === 422) {
+                toast.error(response.payload.data.message);
+                setResetDetails({
+                    ...resetDetails,
+                    error: {
+                        ...resetDetails.error,
+                        field: response.payload.data.message,
+                        [Object.keys(response.payload.data.errors)[0]]:
+                            response.payload.data.message,
+                    },
+                });
+                return;
+            }
+            if(response.payload.status === 200){
+                toast.success("Password reset successfully, please login");
+                setMountedComponent("loginSignup");
+
+            }
+        }
+        return (
+            <ResetPasswordWrapper isMobile={isMobile}>
+                <Text
+                    type="p"
+                    text="Enter your new password and the token sent to your email"
+                    color="white"
+                    fontSize="14px"
+                    textAlign="center"
+                    paddingTop="20px"
+                />
+                <Input
+                    addon={<img src={lock} alt="" />}
+                    type="password"
+                    placeholder="Enter new password"
+                    value={resetDetails.password}
+                    onChange={(e) =>
+                        setResetDetails({
+                            ...resetDetails,
+                            password: e.target.value,
+                            error: {
+                                ...resetDetails.error,
+                                password: "",
+                            },
+                        })
+                    }
+                    border={resetDetails.error.password && "#F93967"}
+                />
+                <Input
+                    addon={<img src={lock} alt="" />}
+                    type="text"
+                    placeholder="Token sent to your email"
+                    value={resetDetails.token}
+                    onChange={(e) =>
+                        setResetDetails({
+                            ...resetDetails,
+                            token: e.target.value,
+                            error: {
+                                ...resetDetails.error,
+                                token: "",
+                            },
+                        })
+                    }
+                    border={resetDetails.error.token && "#F93967"}
+                />
+                {resetDetails.error.field && (
+                    <Text
+                        type="p"
+                        text={resetDetails.error.field}
+                        color="#F93967"
+                        fontSize="14px"
+                    />
+                )}
+                <div onClick={() => setMountedComponent("forgotPassword")}>
+                    <Text
+                        type="p"
+                        text={"Resend token"}
+                        fontSize="14px"
+                        textAlign="right"
+                        cursor="pointer"
+                        color="rgb(157, 166, 202)"
+                    />
+                </div>
+                <Button
+                    text={resetDetails.submitted ? "Sending...." : "Send"}
+                    width="100%"
+                    background="#3586FF"
+                    color="#fff"
+                    borderRadius="30px"
+                    padding="15px "
+                    marginTop="20px"
+                    onSubmit={handleResetPassword}
+                />
+            </ResetPasswordWrapper>
+        );
     };
     let Component = null;
     switch (mountedComponent) {

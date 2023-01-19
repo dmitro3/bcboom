@@ -1,3 +1,5 @@
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { Button } from "@mui/material";
 import React from "react";
 import Text from "../Text/Text";
 import { Flex } from "./Flex";
@@ -13,21 +15,28 @@ const Tag = ({ text, bg }) => {
             color="#4F95FF"
             fontWeight="bold"
             fontSize="14px"
-            cursor='pointer'
+            cursor="pointer"
         />
     );
 };
 
 export const RemovableTag = ({ text, bg, border, addon, onChange }) => {
+    const { isMobile } = useScreenResolution();
+    const [hovered, sethovered] = React.useState(false);
     return (
+        // <Button>
         <Flex
             border={`1px solid ${border}`}
             borderRadius="20px"
-            padding="10px 13px"
+            padding={isMobile ? "5px 8px" : "10px 13px"}
             cursor="pointer"
-            onClick={onChange}
+            onClick={() => onChange}
+            onMouseEnter={() => sethovered(true)}
+            onMouseLeave={() => sethovered(false)}
+
         >
             {addon && addon}
+
             <Text
                 text={text}
                 type="p"
@@ -39,6 +48,7 @@ export const RemovableTag = ({ text, bg, border, addon, onChange }) => {
                 fontSize="14px"
             />
         </Flex>
+        // </Button>
     );
 };
 

@@ -87,6 +87,10 @@ const UserImage = styled("div")(({ size, background }) => ({
 const Chevron = styled("div")(({}) => ({
     marginLeft: "10px",
     cursor: "pointer",
+
+    "& img": {
+        transition: "all 10s ease-in-out",
+    },
 }));
 const UserDetailsWrapper = styled("div")(({}) => ({
     background: "#323879",
@@ -102,7 +106,7 @@ const Section = styled("div")(({}) => ({
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
 }));
-const UserDetails = ({ user, dispatcher, level }) => {
+const UserDetails = ({ user, dispatcher, level, opened }) => {
     const sectionItems = [
         {
             text: "Personal Center",
@@ -117,7 +121,7 @@ const UserDetails = ({ user, dispatcher, level }) => {
         {
             text: "Game History",
             icon: history,
-            link: "/game-history",
+            link: "/history",
         },
         {
             text: "Log out",
@@ -129,7 +133,10 @@ const UserDetails = ({ user, dispatcher, level }) => {
     const { profileColor } = useSelector((state) => state.profile);
 
     return (
-        <UserDetailsWrapper>
+        <UserDetailsWrapper
+            onMouseEnter={() => opened(true)}
+            onMouseLeave={() => opened(false)}
+        >
             <Flex padding="30px" alignItems="center">
                 <UserImage size={"65px"} background={profileColor}>
                     <img
@@ -318,6 +325,7 @@ const UserDropdown = ({
                             wallet={wallet}
                             level={level}
                             dispatcher={dispatcher}
+                            opened={setMouseOver}
                         />
                     }
                     onMouseEnter={() => setMouseOver(true)}
