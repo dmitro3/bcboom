@@ -83,9 +83,11 @@ class Process
             //     'message' => 'Payment saved',
             // ], 200);
 
-            response()->json($pay);
-            print($pay->link);
+            // response()->json($pay);
+            // print($pay->link);
             print('got here');
+
+            return $result['data']['pay_info'];
 
             // The redirect statement will redirect to the Payment controller
 
