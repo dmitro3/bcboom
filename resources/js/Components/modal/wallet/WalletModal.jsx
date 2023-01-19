@@ -125,8 +125,8 @@ const Deposit = () => {
             return;
         }
         if (response?.payload?.status === 200) {
-            toast.success(`You made an order of R$ ${value}`);
-            await sleep(2000)
+            toast.info(`You made an order of R$ ${value}`);
+            // await sleep(2000)
             window.location.href = response?.payload?.data?.link;
         }
         setSubmitted(false);
