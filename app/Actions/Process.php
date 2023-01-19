@@ -64,9 +64,9 @@ class Process
                 "order_no" => $result['data']['orderno'],
                 "create_time" => $result['data']['create_time'],
                 "customer" => $result['data']['customer'],
-                "mobile" => $request['data']['mobile'],
-                "email" => $request['data']['email'],
-                "link" => $request['data']['pay_info'],
+                "mobile" => $result['data']['mobile'],
+                "email" => $result['data']['email'],
+                "link" => $result['data']['pay_info'],
                 "status" => "trade_state",
             ]);
             // dd($pay->link);
