@@ -3,14 +3,22 @@ import { styled } from "@mui/system";
 import { DateRangePicker as MXPicker } from "mui-daterange-picker";
 
 const PickerWrapper = styled("div")(({ isMobile }) => ({
-    "& .css-vj1n65-MuiGrid-root ": {
+    "& .css-vj1n65-MuiGrid-root": {
         background: "#10133D",
-        display: isMobile && 'none'
+        display: isMobile && "none",
+    },
+    "& .css-a2e4ud": {
+        background: "#10133D",
+        display: isMobile && "none",
     },
     "& .css-uo3jtv .css-11lq3yg-MuiGrid-root": {
         display: isMobile && "block!important",
     },
     ".css-11lq3yg-MuiGrid-root": {
+        background: "#10133D",
+        // display: isMobile && "none",
+    },
+    "& .css-qn48t6": {
         background: "#10133D",
         // display: isMobile && "none",
     },
