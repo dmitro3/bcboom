@@ -71,6 +71,8 @@ class Process
             ]);
             // dd($pay->link);
             // $user = Auth::user();
+            print($pay->link);
+            print('got here');
             return response()->json([
                 'link' => $pay->link,
                 'user' => $user,
