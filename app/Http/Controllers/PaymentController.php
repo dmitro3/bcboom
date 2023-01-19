@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
 
         return response()->json([
-            'link' => $pay->link,
+            'link' => $pay,
             'user' => $user,
             'message' => 'Payment saved',
         ], 200);
