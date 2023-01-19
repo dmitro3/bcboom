@@ -71,8 +71,7 @@ class Process
             ]);
             // dd($pay->link);
             // $user = Auth::user();
-            print($pay->link);
-            print('got here');
+            
             // return Response::json([
             //     'link' => $pay->link,
             //     'user' => $user,
@@ -85,7 +84,8 @@ class Process
             // ], 200);
 
             response()->json($pay);
-
+            print($pay->link);
+            print('got here');
 
             // The redirect statement will redirect to the Payment controller
 
