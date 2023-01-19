@@ -5,15 +5,24 @@ import { styled } from "@mui/system";
 const PaginationWrapper = styled("div")(() => ({
     display: "flex",
 
-    "& .css-1kwoymn-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
+    "& .css-1kwoymn-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected ": {
         backgroundColor: "#3586FF",
         color: "white",
     },
-    '& .css-1kwoymn-MuiButtonBase-root-MuiPaginationItem-root': {
-        borderRadius: '10px',
-        backgroundColor: '#1F224A',
-        color: '#A0ABDB',
-    }
+    "& .css-1aqigp0.Mui-selected ": {
+        backgroundColor: "#3586FF",
+        color: "white",
+    },
+    "& .css-1kwoymn-MuiButtonBase-root-MuiPaginationItem-root": {
+        borderRadius: "10px",
+        backgroundColor: "#1F224A",
+        color: "#A0ABDB",
+    },
+    "& .css-1aqigp0": {
+        borderRadius: "10px",
+        backgroundColor: "#1F224A",
+        color: "#A0ABDB",
+    },
 }));
 
 const Pagination = ({count, page, onChange}) => {
