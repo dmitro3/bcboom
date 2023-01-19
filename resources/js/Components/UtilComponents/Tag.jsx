@@ -30,7 +30,7 @@ export const RemovableTag = ({ text, bg, border, addon, onChange }) => {
             borderRadius="20px"
             padding={isMobile ? "5px 8px" : "10px 13px"}
             cursor="pointer"
-            onClick={() => onChange}
+            onClick={onChange}
             onMouseEnter={() => sethovered(true)}
             onMouseLeave={() => sethovered(false)}
 

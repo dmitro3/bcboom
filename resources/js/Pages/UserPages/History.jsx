@@ -164,7 +164,7 @@ const Deposit = ({ isMobile }) => {
                             fontSize={"0.8rem"}
                         />
                     </DateInput>
-                    <div style={{ position: "absolute", top: "140px" }}>
+                    <div style={{ position: "absolute", top: "140px", zIndex:1000 }}>
                         <DateRangePicker
                             toggle={setOpen}
                             open={open}
@@ -283,7 +283,13 @@ const Withdraw = ({ isMobile }) => {
                             fontSize={"0.8rem"}
                         />
                     </DateInput>
-                    <div style={{ position: "absolute", top: "140px" }}>
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "140px",
+                            zIndex: 1000,
+                        }}
+                    >
                         <DateRangePicker
                             toggle={setOpen}
                             open={open}

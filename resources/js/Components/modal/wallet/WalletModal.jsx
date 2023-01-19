@@ -126,11 +126,11 @@ const Deposit = () => {
         }
         if (response?.payload?.status === 200) {
             toast.info(`You made an order of R$ ${value}`);
-            // await sleep(2000)
+            toast.info('Redirecting to payment gateway...')
             window.location.href = response?.payload?.data?.link;
         }
-        setSubmitted(false);
-        dispatcher(setWalletModalState({ open: false }));
+        // setSubmitted(false);
+        // dispatcher(setWalletModalState({ open: false }));
     }
     return (
         <TabWrapper>
@@ -166,6 +166,7 @@ const Deposit = () => {
                             />
                         }
                         onChange={() => {
+                            console.log('item: ', item)
                             setValue(item);
                             setCalculatedValue(item * 0.544);
                         }}
