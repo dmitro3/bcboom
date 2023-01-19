@@ -15,6 +15,15 @@ export const deposit = createAsyncThunk("deposit", async (amount) => {
     }
 });
 
+export const allPayments = createAsyncThunk("all/payments", async () => {
+    try {
+        const response = walletFunctions.allPayments();
+        return response;
+    } catch (error) {
+        return error;
+    }
+});
+
 const walletSlice = createSlice({
     name: "wallet",
     initialState: {

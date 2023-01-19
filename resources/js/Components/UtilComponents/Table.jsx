@@ -33,12 +33,13 @@ const TableGrid = styled("div")(({ isMobile }) => ({
 
 const CustomTable = ({ columns = [], rows = [] }) => {
     const { isMobile } = useScreenResolution();
-    const [perPage, setPerPage] = useState(1);
+    const perPage = isMobile ? 1 : 5
+    console.log('pepage: ', perPage)
     // const perPage = isMobile ? 1 : 5
-    useEffect(() => {
-        if (isMobile) setPerPage(1);
-        setPerPage(5);
-    }, [isMobile]);
+    // useEffect(() => {
+    //     if (isMobile) setPerPage(1);
+    //     setPerPage(5);
+    // }, [isMobile]);
     const [currentRows, setCurrentRows] = useState(rows.slice(0, perPage));
     const [currentPage, setCurrentPage] = useState(1);
     function handlePageChange(event, value) {

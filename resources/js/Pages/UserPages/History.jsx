@@ -19,6 +19,7 @@ import DateRangePicker from "@/Components/UtilComponents/DateRangePicker";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { format } from "date-fns";
 import { eachDayOfInterval } from "date-fns";
+import { allPayments } from "@/redux/wallet/wallet-slice";
 
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
@@ -67,19 +68,42 @@ const DepositWrapper = styled("div")(({}) => ({
 
 const Deposit = ({ isMobile }) => {
     const [open, setOpen] = useState(false);
+    const dispatcher = useDispatch();
     const [currentRange, setCurrentRange] = useState("");
     const pickerRef = useRef(null);
     useOnClickOutside(pickerRef, () => setOpen(false));
-    const [data, setData] = useState(
-        Array.from({ length: 100 }).fill({
-            transactionId: "123456789123456789123456789123456789",
-            date: "2023-01-18T20:58:41.000000Z",
-            depositAmount: "100",
-            bonus: "10",
-            actualAmount: "110",
-            status: "success",
-        })
-    );
+    const [data, setData] = useState([]);
+    // Array.from({ length: 100 }).fill({
+    //     transactionId: "123456789123456789123456789123456789",
+    //     date: "2023-01-18T20:58:41.000000Z",
+    //     depositAmount: "100",
+    //     bonus: "10",
+    //     actualAmount: "110",
+    //     status: "success",
+    // });
+    console.log("data: ", data);
+    useEffect(() => {
+        async function getAllPayments() {
+            const response = await dispatcher(allPayments());
+            if (response?.payload?.status === 200) {
+                const payments = response?.payload?.data?.payments;
+                const formattedData = payments.map((el) => {
+                    const obj = {};
+                    {
+                        obj.transactionId = el.order_no;
+                        obj.date = new Date(el.created_at).toISOString();
+                        obj.depositAmount = el.amount;
+                        obj.bonus = el.bonus || 0;
+                        obj.actualAmount = el.amount;
+                        obj.status = el.status;
+                    }
+                    return obj;
+                });
+                setData(formattedData);
+            }
+        }
+        getAllPayments();
+    }, []);
     useEffect(() => {
         if (currentRange.endDate) setOpen(false);
     }, [currentRange]);
@@ -111,7 +135,13 @@ const Deposit = ({ isMobile }) => {
                     width: "100%",
                 }}
             >
-                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                <Flex
+                    alignItems="stretch"
+                    gap="20px"
+                    margin="20px 0"
+                    direction={isMobile ? "column" : "row"}
+                    width={isMobile && "100%"}
+                >
                     <DateInput
                         isMobile={isMobile}
                         onClick={() => setOpen(!open)}
@@ -154,20 +184,26 @@ const Deposit = ({ isMobile }) => {
                     />
                 </Flex>
             </div>
-            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
-                <div style={{ width: isMobile ? "100%" : "1000px" }}>
-                    <CustomTable
-                        columns={[
-                            "transaction ID",
-                            "Date",
-                            "Deposit Amount",
-                            "Bonus",
-                            "Actual Amount",
-                            "Status",
-                        ]}
-                        rows={data}
-                    />
-                </div>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+                margin={isMobile ? "1px 0 " : "40px 0"}
+            >
+                {data.length && (
+                    <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                        <CustomTable
+                            columns={[
+                                "transaction ID",
+                                "Date",
+                                "Deposit Amount",
+                                "Bonus",
+                                "Actual Amount",
+                                "Status",
+                            ]}
+                            rows={data}
+                        />
+                    </div>
+                )}
             </Flex>
         </DepositWrapper>
     );
@@ -218,7 +254,13 @@ const Withdraw = ({ isMobile }) => {
                     width: "100%",
                 }}
             >
-                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                <Flex
+                    alignItems="stretch"
+                    gap="20px"
+                    margin="20px 0"
+                    direction={isMobile ? "column" : "row"}
+                    width={isMobile && "100%"}
+                >
                     <DateInput
                         isMobile={isMobile}
                         onClick={() => setOpen(!open)}
@@ -261,7 +303,11 @@ const Withdraw = ({ isMobile }) => {
                     />
                 </Flex>
             </div>
-            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+                margin={isMobile ? "1px 0 " : "40px 0"}
+            >
                 <div style={{ width: isMobile ? "100%" : "1000px" }}>
                     <CustomTable
                         columns={[
@@ -325,7 +371,13 @@ const GameHistory = ({ isMobile }) => {
                     width: "100%",
                 }}
             >
-                <Flex alignItems="stretch" gap="20px" margin="20px 0" direction={isMobile ? 'column': 'row'} width={isMobile && '100%'} >
+                <Flex
+                    alignItems="stretch"
+                    gap="20px"
+                    margin="20px 0"
+                    direction={isMobile ? "column" : "row"}
+                    width={isMobile && "100%"}
+                >
                     <DateInput
                         isMobile={isMobile}
                         onClick={() => setOpen(!open)}
@@ -368,7 +420,11 @@ const GameHistory = ({ isMobile }) => {
                     />
                 </Flex>
             </div>
-            <Flex alignItems="center" justifyContent="center" margin={isMobile ? '1px 0 ' : "40px 0"}>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+                margin={isMobile ? "1px 0 " : "40px 0"}
+            >
                 <div style={{ width: isMobile ? "100%" : "1000px" }}>
                     <CustomTable
                         columns={[
@@ -463,7 +519,7 @@ const HistoryPage = () => {
                                         width={isMobile ? "100%" : "1000px"}
                                         borderRadius="10px"
                                         background="#1F224A"
-                                        padding={isMobile && '30px 0px'}
+                                        padding={isMobile && "30px 0px"}
                                         // setCurrentTab={setCurrentTab}
                                     />
                                 </TabComponent>
