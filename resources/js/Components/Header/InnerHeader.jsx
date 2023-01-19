@@ -1,8 +1,9 @@
 import { navlinks } from "@/data";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserDropdown from "../UserDropdown/UserDropdown";
 const InnerHeaderWrapper = styled("div")(({ isMobile }) => ({
     padding: isMobile ? "20px 20px 0 20px" : "15px 20px",
@@ -40,7 +41,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-    const { isMobile } = useScreenResolution();
+    const { isMobile , width} = useScreenResolution();
     const { user } = useSelector((state) => state.auth);
     const location =
         typeof window !== undefined
@@ -61,6 +62,8 @@ const InnerHeader = () => {
         "promotions/bonus_everyday",
         "promotions/exclusive",
     ];
+    const dispatcher = useDispatch();
+
     return (
         <InnerHeaderWrapper isMobile={isMobile}>
             <InnerHeaderItems isMobile={isMobile}>
@@ -89,10 +92,24 @@ const InnerHeader = () => {
             </InnerHeaderItems>
             <InnerHeaderItems isMobile={isMobile}>
                 {navlinks.slice(5, 8).map((item, index) => (
-                    <Link href={item.link} preserveScroll preserveState>
+                    <Link
+                        href={user?.user ? item.link : "/"}
+                        preserveScroll
+                        preserveState
+                    >
                         <InnerHeaderItem
                             key={index}
                             active={location == item.link.replace("/", "")}
+                            onClick={() => {
+                                if (!user?.user) {
+                                    dispatcher(
+                                        setAuthModalState({
+                                            open: true,
+                                            tab: 0,
+                                        })
+                                    );
+                                }
+                            }}
                         >
                             <img
                                 src={item.icon}
@@ -108,7 +125,7 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && <UserDropdown isLoggedIn={user?.user} />}
+                {!isMobile && width >= 1010 && <UserDropdown isLoggedIn={user?.user} />}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );

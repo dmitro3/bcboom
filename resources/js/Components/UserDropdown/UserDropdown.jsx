@@ -1,10 +1,15 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { logout, setAuthModalState } from "@/redux/auth/auth-slice";
-import { setWalletModalState } from "@/redux/wallet/wallet-slice";
+import {
+    getWallet,
+    setLevel,
+    setWallet,
+    setWalletModalState,
+} from "@/redux/wallet/wallet-slice";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { Dropdown as AntDropdown } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import brazillianreal from "../../../../public/images/currencies/brazillianreal.svg";
 import chevrondown from "../../../../public/images/svg/chevrondown.svg";
@@ -13,12 +18,18 @@ import crown from "../../../../public/images/svg/crown.svg";
 import history from "../../../../public/images/svg/history.svg";
 import logouticon from "../../../../public/images/svg/logout.svg";
 import vip from "../../../../public/images/svg/uservip.svg";
-import wallet from "../../../../public/images/svg/wallet.svg";
+import walletIcon from "../../../../public/images/svg/wallet.svg";
 import userimg from "../../../../public/images/user/useravatar.png";
 import Button from "../Button/Button";
 import Text from "../Text/Text";
 import { Flex } from "../UtilComponents/Flex";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import {
+    currencyFormatter,
+    getLevelStats,
+    sumValueOfObj,
+    switchLevel,
+} from "@/utils/util";
 
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
@@ -52,7 +63,7 @@ const Wallet = styled("div")(({}) => ({
     color: "#8990AE",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     marginLeft: "10px",
     fontSize: "18px",
     fontWeight: "bold",
@@ -76,6 +87,10 @@ const UserImage = styled("div")(({ size, background }) => ({
 const Chevron = styled("div")(({}) => ({
     marginLeft: "10px",
     cursor: "pointer",
+
+    "& img": {
+        transition: "all 10s ease-in-out",
+    },
 }));
 const UserDetailsWrapper = styled("div")(({}) => ({
     background: "#323879",
@@ -91,7 +106,7 @@ const Section = styled("div")(({}) => ({
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
 }));
-const UserDetails = ({ user, dispatcher }) => {
+const UserDetails = ({ user, dispatcher, level, opened }) => {
     const sectionItems = [
         {
             text: "Personal Center",
@@ -106,7 +121,7 @@ const UserDetails = ({ user, dispatcher }) => {
         {
             text: "Game History",
             icon: history,
-            link: "/game-history",
+            link: "/history",
         },
         {
             text: "Log out",
@@ -118,8 +133,11 @@ const UserDetails = ({ user, dispatcher }) => {
     const { profileColor } = useSelector((state) => state.profile);
 
     return (
-        <UserDetailsWrapper>
-            <Flex padding="30px" alignItems='center'>
+        <UserDetailsWrapper
+            onMouseEnter={() => opened(true)}
+            onMouseLeave={() => opened(false)}
+        >
+            <Flex padding="30px" alignItems="center">
                 <UserImage size={"65px"} background={profileColor}>
                     <img
                         src={user?.image || userimg}
@@ -138,7 +156,7 @@ const UserDetails = ({ user, dispatcher }) => {
                     />
                     <Text
                         type="p"
-                        text={user.vip || "Rank 0"}
+                        text={`Rank ${level.currentLevel || 0}`}
                         color="#FFDC62"
                         fontSize="18px"
                         fontWeight="bold"
@@ -207,7 +225,41 @@ const UserDropdown = ({
     //     user: { user },
     // } = useSelector((state) => state.auth);
     const { profileColor, profile } = useSelector((state) => state.profile);
-
+    const { wallet, level } = useSelector((state) => state.wallet);
+    // const [balance, setBalance] = useState("0.00");
+    useEffect(() => {
+        const getWalletInfo = async () => {
+            const response = await dispatcher(getWallet());
+            const data = response?.payload?.data;
+            const wallet = {
+                ...data,
+                deposit: +data?.deposit || 0,
+                bet: +data?.bet || 0,
+                bonus: +data?.bonus || 0,
+            };
+            dispatcher(setWallet(wallet));
+            const stats = getLevelStats(wallet);
+            dispatcher(
+                setLevel({
+                    ...level,
+                    depositProgress: stats.depositProgress,
+                    betProgress: stats.betProgress,
+                    currentLevel: stats.currentLevel,
+                    maxDeposit: stats.maxDeposit,
+                    maxBet: stats.maxBet,
+                })
+            );
+            // const formatted = currencyFormatter
+            //     .format(sumValueOfObj(wallet))
+            //     .replace("$", "");
+            // setBalance(formatted);
+        };
+        if (isLoggedIn) getWalletInfo();
+    }, [isLoggedIn]);
+    const balance =
+        currencyFormatter
+            .format(+wallet?.bet + +wallet?.deposit + +wallet?.bonus)
+            .replace("$", "") || "0.00";
     if (!isLoggedIn)
         return (
             <>
@@ -250,12 +302,12 @@ const UserDropdown = ({
                 style={{ cursor: "pointer" }}
             >
                 <CurrentBalance isMobile={isMobile}>
-                    <p>{profile?.balance?.split(".")[0] || 0}.</p>
-                    <p>{profile?.balance?.split(".")[1] || "00"}</p>
+                    <p>{balance?.split(".")[0] || 0}.</p>
+                    <p>{balance?.split(".")[1] || "00"}</p>
                 </CurrentBalance>
                 <Wallet>
                     <img
-                        src={wallet}
+                        src={walletIcon}
                         alt="wallet"
                         style={{
                             height: isMobile ? "13px" : "14px",
@@ -268,13 +320,22 @@ const UserDropdown = ({
             <UserAvatar>
                 <AntDropdown
                     overlay={
-                        <UserDetails user={profile} dispatcher={dispatcher} />
+                        <UserDetails
+                            user={profile}
+                            wallet={wallet}
+                            level={level}
+                            dispatcher={dispatcher}
+                            opened={setMouseOver}
+                        />
                     }
                     onMouseEnter={() => setMouseOver(true)}
                     onMouseLeave={() => setMouseOver(false)}
                 >
                     <Flex alignItems="center">
-                        <UserImage size={isMobile ? "40px" : "45px"} background={profileColor}>
+                        <UserImage
+                            size={isMobile ? "40px" : "45px"}
+                            background={profileColor}
+                        >
                             <img
                                 src={profile?.image || userimg}
                                 alt="useravatar"

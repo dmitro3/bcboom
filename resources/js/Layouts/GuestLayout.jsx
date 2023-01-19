@@ -20,11 +20,16 @@ const PageLayout = styled("div")(({ theme }) => ({
     backgroundColor: "#000000",
     minHeight: "100vh",
     fontfamily: "Montserrat, sans-serif",
+    overflow: "-moz-scrollbars-none",
+    '-ms-overflow-style': 'none',
+    "&::-webkit-scrollbar": { display: "none" },
 }));
 
 const PageBody = styled("div")(({ isMobile }) => ({
     height: "fit-content",
     width: "100%",
+    // maxWidth: "1750px",
+    margin: "0 auto",
     display: "flex",
     flexDirection: "row",
     paddingRight: !isMobile && "68px",
@@ -32,7 +37,7 @@ const PageBody = styled("div")(({ isMobile }) => ({
 }));
 
 export default function GuestLayout({ children }) {
-    const { isMobile } = useScreenResolution();
+    const { isMobile, width } = useScreenResolution();
     const { drawerState } = useSelector((state) => state.app);
     const { modalState } = useSelector((state) => state.auth);
     const { nicknameModalState } = useSelector((state) => state.profile);
@@ -78,11 +83,13 @@ export default function GuestLayout({ children }) {
             {walletModalState?.open && <WalletModal />}
             {nicknameModalState.open && <NicknameModal />}
             <PageLayout>
-                {isMobile ? <MobileHeader /> : <DesktopHeader />}
-                <PageBody isMobile={isMobile}>
-                    {!isMobile && <SimpleSidebar />}
-                    {children}
-                </PageBody>
+                <div style={{ maxWidth: "1700px", margin: "0 auto" }}>
+                    {width <= 1010 ? <MobileHeader /> : <DesktopHeader />}
+                    <PageBody isMobile={isMobile}>
+                        {!isMobile && <SimpleSidebar />}
+                        {children}
+                    </PageBody>
+                </div>
                 {isMobile && <MobileNav />}
                 {isMobile ? <MobileFooter /> : <DesktopFooter />}
             </PageLayout>

@@ -10,25 +10,34 @@ class BonusController extends Controller
 {
     //
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $bonusAmount = Wallet::where('user_id', '=', Auth::id())->first();
         // var_dump($bonusAmount);
-        if($bonusAmount){
+        if ($bonusAmount) {
             return response()->json([
                 'deposit' => $bonusAmount->deposit,
                 'bet' => $bonusAmount->bet,
                 'bonus' => $bonusAmount->bonus
-            ], 201);
-        }else{
+            ], 200);
+        } else {
+            $wallet = Wallet::create([
+                'user_id' => Auth::id(),
+                'deposit' => 0,
+                'bet' => 0,
+                'bonus' => 0
+            ]);
             return response()->json([
-                'bonus' => 0,
-                'amount' => 0,
-                'message' => 'User has no bonus/amount',
+                'deposit' => $wallet->deposit,
+                'bet' => $wallet->bet,
+                'bonus'=> $wallet->bonus,
+                'message' => 'wallet created for user',
             ], 201);
-        } 
+        }
     }
 }

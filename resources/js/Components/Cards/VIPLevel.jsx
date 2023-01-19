@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { styled as MuiStyle } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { useSelector } from "react-redux";
 
 const BcTooltip = MuiStyle(({ className, ...props }) => (
     <Tooltip
@@ -39,27 +40,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RangeInput = styled("div")(() => ({
+const RangeInput = styled("div")(({ value }) => ({
     width: "100%",
-    "& input[type='range']": {
-        overflow: "hidden",
+    "input[type='range']": {
+        background: `linear-gradient(to right, #3586FF 0%, #3586FF ${value}%, #62679E ${value}%, #62679E 100%)`,
         borderRadius: "10px",
+        height: "18px",
+        // width: "356px",
+        outline: "none",
+        transition: "background 450ms ease-in",
         WebkitAppearance: "none",
-        backgroundColor: "#172C4F",
     },
-    "& input[type='range']::-webkit-slider-runnable-track": {
-        height: "20px",
-        WebkitAppearance: "none",
-        color: "blue",
-        marginTop: "-1px",
-    },
-    "& input[type='range']::-webkit-slider-thumb": {
+    // "input[type='range']::-webkit-slider-runnable-track": {
+    //     height: "10px",
+    //     WebkitAppearance: "none",
+    //     color: "blue",
+    //     marginTop: "-1px",
+    // },
+    "input[type='range']::-webkit-slider-thumb": {
         width: "10px",
         WebkitAppearance: "none",
-        height: "10px",
-        cursor: "ew-resize",
-        background: "#434343",
-        display: "none",
+        // height: "50px",
+        background: "red",
+        // boxShadow: "-80px 0 0 80px #43e5f7",
     },
 }));
 
@@ -71,11 +74,15 @@ const VipLevelCard = styled("div")(({ isMobile }) => ({
     width: isMobile ? "100%" : "35%",
     padding: "1.5rem",
     borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
 }));
 
 const MyVIPLevel = () => {
     let classes = useStyles();
     const { isMobile } = useScreenResolution();
+    const { wallet, level } = useSelector((state) => state.wallet);
     return (
         <VipLevelCard isMobile={isMobile}>
             <Flex
@@ -105,7 +112,7 @@ const MyVIPLevel = () => {
             </Flex>
             <Text
                 type="p"
-                text="LEVEL 0"
+                text={`LEVEL ${level.currentLevel || 0}`}
                 color="#3586FF"
                 fontSize="15px"
                 fontWeight="bolder"
@@ -131,21 +138,24 @@ const MyVIPLevel = () => {
                     <Flex alignItems="center" gap="3px">
                         <Text
                             type="p"
-                            text="R$0"
+                            text={"R$" + wallet?.deposit || 0}
                             fontSize="15px"
                             fontWeight="bold"
                         />
                         <small>/</small>
                         <Text
                             type="p"
-                            text="R$100"
+                            text={`R$${level?.maxDeposit}`}
                             fontSize="15px"
                             fontWeight="bold"
                             color="#FFCD4D"
                         />
                     </Flex>
                 </Flex>
-                <RangeInput style={{ width: "80%", marginTop: "10px" }}>
+                <RangeInput
+                    style={{ width: "80%", marginTop: "10px" }}
+                    value={level?.depositProgress}
+                >
                     <Flex alignItems="center" gap="6px">
                         <input
                             type="range"
@@ -154,7 +164,11 @@ const MyVIPLevel = () => {
                             value={10}
                             style={{ width: "100%" }}
                         />
-                        <Text text="0%" type="p" fontWeight="bold" />
+                        <Text
+                            text={`${level.depositProgress}%`}
+                            type="p"
+                            fontWeight="bold"
+                        />
                     </Flex>
                 </RangeInput>
             </div>
@@ -177,21 +191,23 @@ const MyVIPLevel = () => {
                     <Flex alignItems="center" gap="3px">
                         <Text
                             type="p"
-                            text="R$0"
+                            text={`R$ ${wallet?.bet || 0}`}
                             fontSize="15px"
                             fontWeight="bold"
                         />
                         <small>/</small>
                         <Text
                             type="p"
-                            text="R$100"
+                            text={`R$${level?.maxBet}`}
                             fontSize="15px"
                             fontWeight="bold"
                             color="#43BB41"
                         />
                     </Flex>
                 </Flex>
-                <RangeInput style={{ width: "80%", marginTop: "10px" }}>
+                <RangeInput style={{ width: "80%", marginTop: "10px" }}
+                    value={level?.betProgress}
+                >
                     <Flex alignItems="center" gap="6px">
                         <input
                             type="range"
@@ -200,7 +216,11 @@ const MyVIPLevel = () => {
                             value={10}
                             style={{ width: "100%" }}
                         />
-                        <Text text="0%" type="p" fontWeight="bold" />
+                        <Text
+                            text={`${level.betProgress}%`}
+                            type="p"
+                            fontWeight="bold"
+                        />
                     </Flex>
                 </RangeInput>
             </div>

@@ -6,6 +6,7 @@ use App\Models\Wallet;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
@@ -26,20 +27,24 @@ class Process
      */
 
 
-    function execute(Request $request) : string
+    function execute(Request $request): string
     {
 
 
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-
+        $user = Auth::user();
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $request->amount,
+
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'notifyurl' => url('/api/notify'),
-          //  'notifyurl' => url('/api/notifyurl'),
+            'email' => $user->email,
+            'mobile' => $user->phone,
+            'customer' => $user->username,
+            'callbackurl' => url('/api/notifyurl'),
             'currency' => 'BRL'
         ];
 
@@ -48,44 +53,27 @@ class Process
         $data['sign'] = $sign;
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+        // dd($result);
 
-        // var_dump($result);
 
         if (isset($result['data']['pay_info'])) {
             // print('success');
+            // dd($result['data']);
 
-            
-               $pay = Payment::create([
-                    "amount" => $result['data']['amount'],
-                    "pay_amount" => $result['data']['pay_amount'],
-                    "order_no" => $result['data']['order_no'],
-                    "create_time" => $result['data']['timestamp'],
-                    "customer" => $result['data']['customername'],
-                    "mobile" => $request['data']['customermobile'],
-                    "email" => $request['data']['customeremail'],
-                    "link" => $request['data']['pay_info'],
-                    "status" => "success",
-                ]);
-            dd($pay->link);
-            $user = Auth::user();
-            return response()->json([
-                'link' => $pay->link,
-                'user' => $user,
-                'message' => 'Payment saved',
-            ], 200);
+            $pay = Payment::create([
+                "amount" => $result['data']['amount'],
+                "pay_amount" => $result['data']['pay_amount'],
+                "order_no" => $result['data']['orderno'],
+                "create_time" => $result['data']['create_time'],
+                "customer" => $user->username,
+                "mobile" => $user->phone,
+                "email" => $user->email,
+                "link" => $result['data']['pay_info'],
+                "status" => $result['data']["trade_state"],
+            ]);
 
-        
-            // The redirect statement will redirect to the Payment controller
 
-            // $res = $result['data'];
-            // return redirect()->action(
-            //     [PaymentController::class, 'callback'], ['result' => $res]
-            // );
-
-            //  I had placed an if statement here but recently redirecting;
-            //I had just return payment information
-            //  return $result['data']['pay_info'];
-        
+            return $pay;
         } else {
 
             return $result['msg'];
@@ -93,37 +81,38 @@ class Process
         }
     }
 
-    function status(Request $request): string {
+    function status(Request $request): string
+    {
         $data = $request->all();
+        $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
+        $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
 
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
-                $user = Auth::user();
+        if ($sign === $request->sign) {
+            if ($data['trade_state'] === 'SUCCESS') {
                 $wallet = Wallet::where('user_id', $user->id)->first();
-            if ($wallet) {
-                $wallet->update([
-                    'order_no' => $result['data']['tx_orderno'],
-                    'deposit' => $wallet->deposit + $result['data']['amount'],
-                ]);
-            } else {
-                Wallet::create([
-                    'user_id' => $user->id,
-                    'deposit' => $result['data']['amount']
-                ]);
-            }
-            $user = Auth::user();
-            return response()->json([
-                'user' => $user,
-                'message' => 'Payment successful',
-            ], 200);
-            // The redirect statement will redirect to the Payment controller
+                if ($wallet) {
+                    $wallet->update([
+                        'order_no' => $pay->tx_orderno,
+                        'deposit' => $wallet->deposit + $pay->amount
+                    ]);
+                } else {
+                    Wallet::create([
+                        'user_id' => $user->id,
+                        'deposit' => $pay->amount
+                    ]);
+                }
+                return response()->json([
+                    'user' => $user,
+                    'message' => 'Payment successful',
+                ], 200);
+                // The redirect statement will redirect to the Payment controller
 
-            // $res = $result['data'];
-            // return redirect()->action(
-            //     [PaymentController::class, 'callback'], ['result' => $res]
-            // );
+                // $res = $result['data'];
+                // return redirect()->action(
+                //     [PaymentController::class, 'callback'], ['result' => $res]
+                // );
 
             }
         }
