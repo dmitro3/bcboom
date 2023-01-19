@@ -67,7 +67,7 @@ class Process
                 "mobile" => $result['data']['mobile'],
                 "email" => $result['data']['email'],
                 "link" => $result['data']['pay_info'],
-                "status" => $result['data'"trade_state",
+                "status" => $result['data']["trade_state"],
             ]);
             // dd($pay->link);
             // $user = Auth::user();
