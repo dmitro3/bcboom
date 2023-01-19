@@ -56,7 +56,7 @@ class Process
 
         if (isset($result['data']['pay_info'])) {
             // print('success');
-            dd($result['data']);
+            // dd($result['data']);
 
             $pay = Payment::create([
                 "amount" => $result['data']['amount'],
@@ -69,8 +69,8 @@ class Process
                 "link" => $request['data']['pay_info'],
                 "status" => "trade_state",
             ]);
-            dd($pay->link);
-            $user = Auth::user();
+            // dd($pay->link);
+            // $user = Auth::user();
             return response()->json([
                 'link' => $pay->link,
                 'user' => $user,
@@ -99,25 +99,25 @@ class Process
     function status(Request $request): string
     {
         $data = $request->all();
+        $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
+        $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
 
         if ($sign === $request->sign) {
             if ($data['trade_state'] === 'SUCCESS') {
-                $user = Auth::user();
                 $wallet = Wallet::where('user_id', $user->id)->first();
                 if ($wallet) {
                     $wallet->update([
-                        'order_no' => $result['data']['tx_orderno'],
-                        'deposit' => $wallet->deposit + $result['data']['amount'],
+                        'order_no' => $pay->tx_orderno,
+                        'deposit' => $wallet->deposit + $pay->amount
                     ]);
                 } else {
                     Wallet::create([
                         'user_id' => $user->id,
-                        'deposit' => $result['data']['amount']
+                        'deposit' => $pay->amount
                     ]);
                 }
-                $user = Auth::user();
                 return response()->json([
                     'user' => $user,
                     'message' => 'Payment successful',

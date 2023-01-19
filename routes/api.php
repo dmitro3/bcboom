@@ -31,57 +31,56 @@ Route::group([
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('registerapi');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
 
 Route::middleware(['middleware' => 'api'])->group(function () {
 
-// Update password here currently works but I created another update
+    // Update password here currently works but I created another update
 // link that sends a reset code to the user instead of utilizing Laravel update link
-    
-    Route::post('password/forgot', [ForgotPasswordController::class,'forgot']);
-    Route::post('password/reset', [ForgotPasswordController::class,'reset']);
 
-// The new reset password links are as follows:
+    Route::post('password/forgot', [ForgotPasswordController::class, 'forgot']);
+    Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
 
-    Route::post('password/email',  [ForgotPasswordController::class, 'forgotPassword']);
+    // The new reset password links are as follows:
+
+    Route::post('password/email', [ForgotPasswordController::class, 'forgotPassword']);
     Route::post('password/code/check', [ForgotPasswordController::class, 'sendCode']);
     Route::post('password/resetcode', [ForgotPasswordController::class, 'resetPassword']);
-    
+
 });
 
 
 Route::group(['middleware' => ['auth']], function () {
-    
+
     // Profile
-        Route::get('me',[UserController::class, 'aboutMe']);
-    
-        Route::post('image/update',[ProfileController::class, 'imageStore']);
-        Route::post('update/username', [ProfileController::class, 'updateusername']);
-        Route::post('update/bio', [ProfileController::class, 'updatebio']);
-        Route::post('update/phone', [ProfileController::class, 'updatephone']);
-        Route::get('/wallet/info', [BonusController::class, 'index']);
+    Route::get('me', [UserController::class, 'aboutMe']);
 
-        Route::post('/withdrawal', [WithdrawalController::class, 'check']);
-    
-        // Payment routes
-    
-        Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
-    });
-    Route::post('/payment/pay', [PaymentController::class, 'pay']);
-    Route::post('/payment', [PaymentController::class, 'testpay']);
-    
-    Route::post('notifyurl', function(Request $request) {
-        $callback = new Callback;
-        
-        return $callback->execute($request);
-    });
+    Route::post('image/update', [ProfileController::class, 'imageStore']);
+    Route::post('update/username', [ProfileController::class, 'updateusername']);
+    Route::post('update/bio', [ProfileController::class, 'updatebio']);
+    Route::post('update/phone', [ProfileController::class, 'updatephone']);
+    Route::get('/wallet/info', [BonusController::class, 'index']);
 
-    Route::post('notify', function(Request $request) {
-        $process = new Process;
-        return $process->status($request);
-    });
+    Route::post('/withdrawal', [WithdrawalController::class, 'check']);
 
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    // Payment routes
+
+    Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
+});
+Route::post('/payment/pay', [PaymentController::class, 'pay']);
+Route::post('/payment', [PaymentController::class, 'testpay']);
+
+Route::post('notifyurl', function (Request $request) {
+    $callback = new Callback;
+    return $callback->execute();
+});
+
+Route::post('notify', function (Request $request) {
+    $process = new Process;
+    return $process->status($request);
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

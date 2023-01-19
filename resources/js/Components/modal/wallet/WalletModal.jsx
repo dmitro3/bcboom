@@ -15,7 +15,7 @@ import { NewCustomTabs } from "@/Components/Tabs/Tab";
 import Input from "@/Components/Input/Input";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
-import { currencyFormatter } from "@/utils/util";
+import { currencyFormatter, sleep } from "@/utils/util";
 import CustomCarousel from "@/Components/Carousel/Carousel";
 import Button from "@/Components/Button/Button";
 import { CircularProgress } from "@mui/material";
@@ -64,12 +64,12 @@ const TabWrapper = styled("div")(({}) => ({
     width: "100%",
 }));
 
-const AmountOptions = styled("div")(({isMobile}) => ({
+const AmountOptions = styled("div")(({ isMobile }) => ({
     display: "flex",
     flexWrap: "wrap",
     gap: "10px",
     width: "100%",
-    marginTop: isMobile ? '0px' : "20px",
+    marginTop: isMobile ? "0px" : "20px",
 }));
 
 const DepositButton = styled("button")(({ fontSize }) => ({
@@ -107,7 +107,7 @@ const Deposit = () => {
     const { isMobile } = useScreenResolution();
     async function handleDeposit(value) {
         setSubmitted(true);
-        if(!value || value < 10) {
+        if (!value || value < 10) {
             toast.error("Minimum deposit is R$10");
             setSubmitted(false);
             return;
@@ -124,10 +124,13 @@ const Deposit = () => {
             setSubmitted(false);
             return;
         }
-
-        toast.success(`Deposit of R$ ${value} was successful`);
+        if (response?.payload?.status === 200) {
+            toast.success(`You made an order of R$ ${value}`);
+            await sleep(2000)
+            window.location.href = response?.payload?.data?.link;
+        }
         setSubmitted(false);
-       dispatcher(setWalletModalState({ open: false }));
+        dispatcher(setWalletModalState({ open: false }));
     }
     return (
         <TabWrapper>
@@ -369,26 +372,24 @@ const WalletModal = () => {
             handleClose={() => dispatcher(setWalletModalState({ open: false }))}
             isAuthModal
         >
-               <CloseIcon
-                        onClick={() =>
-                            dispatcher(
-                                setWalletModalState({ open: !modalState.open })
-                            )
-                        }
-                        isMobile={isMobile}
-                    >
-                        {isMobile ? (
-                            <img src={mobileclose} alt="" />
-                        ) : (
-                            <img
-                                src={close}
-                                alt=""
-                                style={{
-                                    filter: "invert(55%) sepia(12%) saturate(1139%) hue-rotate(192deg) brightness(98%) contrast(85%)",
-                                }}
-                            />
-                        )}
-                    </CloseIcon>
+            <CloseIcon
+                onClick={() =>
+                    dispatcher(setWalletModalState({ open: !modalState.open }))
+                }
+                isMobile={isMobile}
+            >
+                {isMobile ? (
+                    <img src={mobileclose} alt="" />
+                ) : (
+                    <img
+                        src={close}
+                        alt=""
+                        style={{
+                            filter: "invert(55%) sepia(12%) saturate(1139%) hue-rotate(192deg) brightness(98%) contrast(85%)",
+                        }}
+                    />
+                )}
+            </CloseIcon>
             <WalletWrapper isMobile={isMobile}>
                 <WalletHeader>
                     <Text
@@ -397,8 +398,6 @@ const WalletModal = () => {
                         fontWeight="bold"
                         fontSize="16px"
                     />
-
-                 
                 </WalletHeader>
                 <WalletContentWrapper>
                     <TabComponent>
