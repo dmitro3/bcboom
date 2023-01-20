@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('phone')->nullable();
             $table->text('bio')->nullable();
+            $table->bigInteger('withdrawal_limit')->default(0);
             $table->unsignedBigInteger('referrer_id')->nullable();
             $table->foreign('referrer_id')->references('id')->on('users');
             $table->bigInteger('referral_count')->default(0);
