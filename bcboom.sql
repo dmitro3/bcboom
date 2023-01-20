@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 03:00 PM
+-- Generation Time: Jan 20, 2023 at 08:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -87,7 +87,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2023_01_11_223417_create_reset_code_passwords_table', 1),
 (8, '2023_01_13_075312_create_histories_table', 1),
 (9, '2023_01_13_075508_create_payments_table', 1),
-(10, '2023_01_13_075611_create_games_table', 1);
+(10, '2023_01_13_075611_create_games_table', 1),
+(11, '2023_01_20_130220_create_withdraws_table', 1);
 
 -- --------------------------------------------------------
 
@@ -118,6 +119,7 @@ CREATE TABLE `payments` (
   `email` varchar(255) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
+  `called` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -182,6 +184,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `bio` text DEFAULT NULL,
+  `withdrawal_limit` bigint(20) NOT NULL DEFAULT 0,
   `referrer_id` bigint(20) UNSIGNED DEFAULT NULL,
   `referral_count` bigint(20) NOT NULL DEFAULT 0,
   `referral_token` varchar(255) DEFAULT NULL,
@@ -209,6 +212,28 @@ CREATE TABLE `wallets` (
   `bet` double NOT NULL DEFAULT 0,
   `bonus` double NOT NULL DEFAULT 0,
   `order_no` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `withdraws`
+--
+
+CREATE TABLE `withdraws` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `orderno` varchar(255) NOT NULL,
+  `tx_orderno` varchar(255) NOT NULL,
+  `create_time` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `bankname` varchar(255) NOT NULL,
+  `bankcard` varchar(255) NOT NULL,
+  `trade_state` varchar(255) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -292,6 +317,12 @@ ALTER TABLE `wallets`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `withdraws`
+--
+ALTER TABLE `withdraws`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -317,7 +348,7 @@ ALTER TABLE `histories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -353,6 +384,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `withdraws`
+--
+ALTER TABLE `withdraws`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
