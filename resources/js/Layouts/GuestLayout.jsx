@@ -7,7 +7,7 @@ import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
@@ -15,13 +15,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LayoutTheme from "./theme";
 import NicknameModal from "@/Components/modal/profile/NicknameModal";
+import { Howl, Howler } from "howler";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
     minHeight: "100vh",
     fontfamily: "Montserrat, sans-serif",
     overflow: "-moz-scrollbars-none",
-    '-ms-overflow-style': 'none',
+    "-ms-overflow-style": "none",
     "&::-webkit-scrollbar": { display: "none" },
 }));
 
@@ -48,6 +49,17 @@ export default function GuestLayout({ children }) {
 
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));
+    const sound = new Howl({
+        src: ["/sounds/casino-intro.mp3"],
+        onplayerror: function () {
+            sound.once("unlock", function () {
+                sound.play();
+            });
+        },
+    });
+    useEffect(() => {
+        sound.play();
+    }, []);
 
     document.addEventListener("DOMContentLoaded", () =>
         wait(1000).then(() => {

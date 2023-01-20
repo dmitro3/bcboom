@@ -494,13 +494,13 @@ subordinates, where the bonus amount lower level user betting depends on the val
                             />
                             <Text
                                 type="p"
-                                text={profile?.referral_count }
+                                text={profile?.referral_count}
                                 fontWeight="bold"
                                 fontSize="24px"
                             />
                             <Text
                                 type="p"
-                                text={'R$ ' + wallet?.bonus + " Received"}
+                                text={"R$ " + wallet?.bonus + " Received"}
                                 fontSize="18px"
                             />
                         </div>
@@ -1326,60 +1326,55 @@ const ReferralIndex = () => {
     return (
         <>
             <Head title="Referral" />
-            <GuestLayout>
-                <PageTemplate innerHeader={true}>
-                    <ReferralPageWrapper isMobile={isMobile}>
-                        <ImageGridLayout
-                            item={{
-                                title: "Referral",
-                                icon: referral,
-                                margin: "10px",
-                            }}
-                            index={0}
-                            page="referral"
-                        >
-                            <ReferralWrapper isMobile={isMobile}>
-                                <TabComponent>
-                                    <NewCustomTabs
-                                        tabItems={[
-                                            {
-                                                value: "toInvite",
-                                                label: "To Invite",
-                                                content: (
-                                                    <Invite
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                                icon: invite,
-                                            },
-                                            {
-                                                label: "Forms",
-                                                value: "forms",
-                                                content: (
-                                                    <Form isMobile={isMobile} />
-                                                ),
-                                                icon: form,
-                                            },
-                                            {
-                                                label: "Statistics",
-                                                value: "statistics",
-                                                content: (
-                                                    <Stats
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                                icon: stats,
-                                            },
-                                        ]}
-                                        width={isMobile ? "100%" : "500px"}
-                                        padding="0"
-                                    />
-                                </TabComponent>
-                            </ReferralWrapper>
-                        </ImageGridLayout>
-                    </ReferralPageWrapper>
-                </PageTemplate>
-            </GuestLayout>
+
+            <PageTemplate innerHeader={true}>
+                <ReferralPageWrapper isMobile={isMobile}>
+                    <ImageGridLayout
+                        item={{
+                            title: "Referral",
+                            icon: referral,
+                            margin: "10px",
+                        }}
+                        index={0}
+                        page="referral"
+                    >
+                        <ReferralWrapper isMobile={isMobile}>
+                            <TabComponent>
+                                <NewCustomTabs
+                                    tabItems={[
+                                        {
+                                            value: "toInvite",
+                                            label: "To Invite",
+                                            content: (
+                                                <Invite isMobile={isMobile} />
+                                            ),
+                                            icon: invite,
+                                        },
+                                        {
+                                            label: "Forms",
+                                            value: "forms",
+                                            content: (
+                                                <Form isMobile={isMobile} />
+                                            ),
+                                            icon: form,
+                                        },
+                                        {
+                                            label: "Statistics",
+                                            value: "statistics",
+                                            content: (
+                                                <Stats isMobile={isMobile} />
+                                            ),
+                                            icon: stats,
+                                        },
+                                    ]}
+                                    width={isMobile ? "100%" : "500px"}
+                                    padding="0"
+                                />
+                            </TabComponent>
+                        </ReferralWrapper>
+                    </ImageGridLayout>
+                </ReferralPageWrapper>
+            </PageTemplate>
         </>
     );
 };

@@ -27,7 +27,7 @@ const CoinFlip = () => {
     return (
         <div>
             <Head title="Game Coin Flip" />
-            <GuestLayout>
+            
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -39,7 +39,7 @@ const CoinFlip = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            
         </div>
     );
 };

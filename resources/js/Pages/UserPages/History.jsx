@@ -463,8 +463,8 @@ const HistoryPage = () => {
     const tabs = ["Wallet", "Wallet", "Game"];
     return (
         <>
-            <Head title="Personal Center" />
-            <GuestLayout>
+            <Head title="Game and Wallet History" />
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <HistoryPageWrapper>
                         <ImageGridLayout
@@ -533,7 +533,7 @@ const HistoryPage = () => {
                         </ImageGridLayout>
                     </HistoryPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };
