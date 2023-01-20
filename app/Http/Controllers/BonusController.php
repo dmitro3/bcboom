@@ -19,8 +19,6 @@ class BonusController extends Controller
     {
         $user = Auth::user();
         $bonusAmount = Wallet::where('user_id', '=', $user->id)->first();
-        var_dump($bonusAmount->deposit, $bonusAmount->bet, $bonusAmount->bonus);
-        var_dump($user->id, $user->username, $user->email);
         if ($bonusAmount) {
             return response()->json([
                 'deposit' => $bonusAmount->deposit,
