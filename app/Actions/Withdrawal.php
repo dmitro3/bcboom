@@ -30,43 +30,40 @@ class Withdrawal
 
     function handle(Request $request, $diff): string
     {
-
-
-
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
         $diff = [];
-        if($diff == null){
-            $data = [
-                'mchid' => $this->merchantNumber,
-                'timestamp' => time(),
-                'amount' => $request->amount,
-                'orderno' => intval(microtime(true) * 1000 * 1000),
-                'customermobile' => $request->whatsapp,
-                'taxi' => $request->taxi,
-                'pixkey' => $request->cpf,
-                'pixtype' => $request->pixtype,
-                'username' => $user->username,
-                'callbackurl' => url('/api/notifywithdrawal'),
-                'currency' => 'BRL'
-            ];
-            
-    }else{
+        // if($diff == null){
+        //         $data = [
+        //             'mchid' => $this->merchantNumber,
+        //             'timestamp' => time(),
+        //             'amount' => $request->amount,
+        //             'orderno' => intval(microtime(true) * 1000 * 1000),
+        //             'customermobile' => $request->whatsapp,
+        //             'taxi' => $request->taxi,
+        //             'pixkey' => $request->cpf,
+        //             'pixtype' => $request->pixtype,
+        //             'username' => $user->username,
+        //             'callbackurl' => url('/api/notifywithdrawal'),
+        //             'currency' => 'BRL'
+        //         ];
+
+        // }else{
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
-            'amount' => $diff->amount,
+            'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'customermobile' => $request->whatsapp,
             'taxi' => $request->taxi,
-            'pixkey' => $request->pixkey,
+            'pixkey' => $request->cpf,
             'pixtype' => $request->pixtype,
             'username' => $user->username,
             'callbackurl' => url('/api/notifywithdrawal'),
             'currency' => 'BRL'
         ];
-        
-    }
+
+        // }
 
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
@@ -89,11 +86,11 @@ class Withdrawal
                 'bankname' => $result['data']['bankname'],
                 'bankcard' => $result['data']['bankcard'],
                 'trade_state' => $result['data']['trade_state'],
-                'msg' =>  $result['msg']
+                'msg' => $result['msg']
             ]);
-            
 
-            return $pay;
+
+            return $withdrawal;
         } else {
 
             return $result['msg'];
@@ -107,28 +104,28 @@ class Withdrawal
         $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
-        
-    
 
-        
 
-if ($sign === $request->sign) {
-    if ($data['trade_state'] === 'SUCCESS') {
 
-        $wallet = Wallet::where('user_id', $user->id)->first();
-    
-$withdrawal = Withdraw::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')->first();
 
-        
-        $minused = $wallet->deposit - $withdrawal->amount;
+
+        if ($sign === $request->sign) {
+            if ($data['trade_state'] === 'SUCCESS') {
+
+                $wallet = Wallet::where('user_id', $user->id)->first();
+
+                $withdrawal = Withdraw::where('user_id', $user->id)
+                    ->orderBy('created_at', 'desc')->first();
+
+
+                $minused = $wallet->deposit - $withdrawal->amount;
                 $withdrawal->update(['approved', 1])
-                ->first();
-                
+                    ->first();
+
                 $wallet->update([
                     'amount' => $minused
                 ]);
-            
+
 
 
                 return response()->json([
