@@ -12,7 +12,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
 
-class Process
+class Withdrawal
 {
     private string $merchantNumber = "000801682";
     private string $merchantKey = "HECJKDEtTMbFKQDzVqY9";

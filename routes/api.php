@@ -53,10 +53,12 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth']], function () {
 
+Route::group(['middleware' => ['auth']], function () {
+    
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
+    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
     Route::post('image/update', [ProfileController::class, 'imageStore']);
     Route::post('update/username', [ProfileController::class, 'updateusername']);
@@ -64,7 +66,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
-    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
     // Payment routes
 
