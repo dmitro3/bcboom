@@ -53,12 +53,12 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
+Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
 Route::group(['middleware' => ['auth']], function () {
     
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
-    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
     Route::post('image/update', [ProfileController::class, 'imageStore']);
     Route::post('update/username', [ProfileController::class, 'updateusername']);
