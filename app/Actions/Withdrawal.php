@@ -2,16 +2,17 @@
 namespace App\Actions;
 
 use App\Models\Payment;
-use App\Models\Withdraw;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Withdraw;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
 
-class Withdrawal
+class Process
 {
     private string $merchantNumber = "000801682";
     private string $merchantKey = "HECJKDEtTMbFKQDzVqY9";
@@ -27,29 +28,15 @@ class Withdrawal
      */
 
 
-    function execute(Request $request, $diff) : string
+    function handle(Request $request, $diff): string
     {
 
-        $user = Auth::user();
+
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-        if($diff){
-        $data = [
-            'mchid' => $this->merchantNumber,
-            'timestamp' => time(),
-            'amount' => $diff->amount,
-            'orderno' => intval(microtime(true) * 1000 * 1000),
-            'customermobile' => $user->phone,
-            'taxi' => $request->taxi,
-            'pixkey' => $request->pixkey,
-            'pixtype' => $request->pixtype,
-            'username' => $user->username,
-            'callbackurl' => url('/api/notifywithdrawal'),
-            'currency' => 'BRL'
-        ];
-    }
-        else{
-     
+        $user = Auth::user();
+        $diff = [];
+        if($diff == null){
             $data = [
                 'mchid' => $this->merchantNumber,
                 'timestamp' => time(),
@@ -63,40 +50,50 @@ class Withdrawal
                 'callbackurl' => url('/api/notifywithdrawal'),
                 'currency' => 'BRL'
             ];
-     
-        }
+            
+    }else{
+        $data = [
+            'mchid' => $this->merchantNumber,
+            'timestamp' => time(),
+            'amount' => $diff->amount,
+            'orderno' => intval(microtime(true) * 1000 * 1000),
+            'customermobile' => $user->phone,
+            'taxi' => $request->taxi,
+            'pixkey' => $request->pixkey,
+            'pixtype' => $request->pixtype,
+            'username' => $user->username,
+            'callbackurl' => url('/api/notifywithdrawal'),
+            'currency' => 'BRL'
+        ];
+        
+    }
 
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
+        // dd($result);
 
-        // var_dump($result);
 
         if (isset($result['data']['orderno'])) {
             // print('success');
+            // dd($result['data']);
 
-            $withdrawal = Withdrawal::create([
+            $withdrawal = Withdraw::create([
                 'orderno' => $result['data']['orderno'],
                 'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
                 'create_time' => $result['data']['create_time'],
                 'username' => $user->username,
+                'user_id' => $user->id,
                 'bankname' => $result['data']['bankname'],
                 'bankcard' => $result['data']['bankcard'],
                 'trade_state' => $result['data']['trade_state'],
-                'msg' =>  $result['data']['msg']
+                'msg' =>  $result['msg']
             ]);
             
-            
-            return response()->json([
-                'user' => $user,
-                'message' => 'Payment successful',
-            ], 200);
-            // redirect(route('callback', ['result' => $result['data']['pay_info']]));
 
-            //  I had placed an if statement here but recently redirecting;
-            // return $result['data']['pay_info'];
+            return $pay;
         } else {
 
             return $result['msg'];
@@ -110,30 +107,34 @@ class Withdrawal
         $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
+        
+    
 
-        $withdrawal = Withdrawal::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')->first();
-       
-        $withdrawal->update(['approved', 1])
-        ->first();
+        
+
+if ($sign === $request->sign) {
+    if ($data['trade_state'] === 'SUCCESS') {
 
         $wallet = Wallet::where('user_id', $user->id)->first();
-            
-            $minused = $wallet->deposit - $withdrawal->amount;
+    
+$withdrawal = Withdraw::where('user_id', $user->id)
+        ->orderBy('created_at', 'desc')->first();
 
-            $wallet->update([
-                'amount' => $minused
-            ]);
+        
+        $minused = $wallet->deposit - $withdrawal->amount;
+                $withdrawal->update(['approved', 1])
+                ->first();
+                
+                $wallet->update([
+                    'amount' => $minused
+                ]);
+            
+
+
                 return response()->json([
                     'user' => $user,
-                    'message' => 'Payment successful',
+                    'message' => 'Withdrawal successful',
                 ], 200);
-                // The redirect statement will redirect to the Payment controller
-
-                // $res = $result['data'];
-                // return redirect()->action(
-                //     [PaymentController::class, 'callback'], ['result' => $res]
-                // );
 
             }
         }

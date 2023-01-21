@@ -38,7 +38,6 @@ class Process
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $request->amount,
-
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'notifyurl' => url('/api/notify'),
             'email' => $user->email,
@@ -66,6 +65,7 @@ class Process
                 "order_no" => $result['data']['orderno'],
                 "create_time" => $result['data']['create_time'],
                 "customer" => $user->username,
+                'user_id' => $user->id,
                 "mobile" => $user->phone,
                 "email" => $user->email,
                 "link" => $result['data']['pay_info'],
@@ -87,7 +87,7 @@ class Process
         $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
-        $pay = Payment::where('customer', $user->username)
+        $pay = Payment::where('user_id', $user->id)
         ->where('called', '=', 0)
         ->where('created_at', 'desc')
         ->first();

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('create_time')->nullable();
             $table->string('customer')->nullable();
             $table->string('mobile')->nullable();
+            $table->integer('user_id');
             $table->string('email')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->nullable();

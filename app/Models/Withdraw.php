@@ -17,6 +17,7 @@ class Withdraw extends Model
         "bankname",
         "bankcard",
         "trade_state",
+        'user_id',
         "approved",
     ];
     public function user(){
