@@ -16,7 +16,10 @@ use Carbon\Carbon;
 class WithdrawalController extends Controller
 {
     //
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function handle(Request $request){
         $user = Auth::user();
        
