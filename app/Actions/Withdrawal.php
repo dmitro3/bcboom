@@ -59,7 +59,7 @@ class Withdrawal
             'pixkey' => $request->cpf,
             'pixtype' => $request->pixtype,
             'username' => $user->username,
-            'callbackurl' => url('/api/notifywithdrawal'),
+            'notifyurl' => url('/api/notifywithdrawal'),
             'currency' => 'BRL'
         ];
 
