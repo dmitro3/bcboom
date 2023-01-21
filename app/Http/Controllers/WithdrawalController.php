@@ -16,15 +16,12 @@ use Carbon\Carbon;
 class WithdrawalController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function handle(Request $request){
         $user = Auth::user();
-       
-     
-
         $wallet = Wallet::where('user_id', $user->id)->first();
         $withdraw = Withdraw::where('user_id', $user->id)->first();
 
