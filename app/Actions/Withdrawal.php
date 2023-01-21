@@ -28,11 +28,11 @@ class Withdrawal
      */
 
 
-    function handle(Request $request, $diff): string
+    function handle(Request $request,): string
     {
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
-        $diff = [];
+        // $diff = [];
         // if($diff == null){
         //         $data = [
         //             'mchid' => $this->merchantNumber,
@@ -71,7 +71,7 @@ class Withdrawal
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
         // dd($result);
 
-
+        var_dump($result);
         if (isset($result['data']['orderno'])) {
             // print('success');
             // dd($result['data']);
@@ -89,7 +89,7 @@ class Withdrawal
                 'msg' => $result['msg']
             ]);
 
-
+            print($withdrawal);
             return $withdrawal;
         } else {
 

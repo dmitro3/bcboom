@@ -29,8 +29,8 @@ class WithdrawalController extends Controller
         ->where('created_at', 'desc')
         ->where('created_at','>', Carbon::now()->subDay())->first();
         if($user->vip == 0){
-            print($not_limited);
-            print($user);
+            // print($not_limited);
+            // print($user);
         // if($not_limited){
         // if($request->withdraw < $wallet->deposit){
         //     return response()->json([
