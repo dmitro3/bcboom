@@ -10,6 +10,7 @@ use App\Notifications\ReferralBonus;
 use Illuminate\Support\Str;
 use Validator;
 use JWTAuth;
+use App\Models\Wallet;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -107,6 +108,9 @@ class AuthController extends Controller
                     ]);
                 }
 
+                Wallet::create([
+                    'user_id' => $user->id,
+                ]);
                 
                 
                 if($referrer){
