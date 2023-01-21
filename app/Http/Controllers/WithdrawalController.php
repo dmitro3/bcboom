@@ -47,7 +47,7 @@ class WithdrawalController extends Controller
             $calc = 2.5/100 * $request->get('amount');
             $diff = $request->get('amount') - $calc;
             $withdraw = new Withdrawal;
-            $withdraw->handle($diff);
+            $withdraw->handle($request, $diff);
         }
 
     }else if($user->vip == 1){
