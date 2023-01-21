@@ -38,13 +38,13 @@ class WithdrawalController extends Controller
              ], 400);
         }else{
             $withdraw = new Withdrawal;
-            $withdraw->execute($request);
+            $withdraw->handle($request);
             }
         }else{
             $calc = 2.5/100 * $request->get('amount');
             $diff = $request->get('amount') - $calc;
             $withdraw = new Withdrawal;
-            $withdraw->execute($diff);
+            $withdraw->handle($diff);
         }
 
     }else if($user->vip == 1){
