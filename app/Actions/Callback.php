@@ -26,7 +26,11 @@ class Callback
         $user = Auth::user();
 
         $sign = getSignOpen($data, $key);
-        $pay = Payment::where('customer', $user->username)->where('called', '=', 0)->first();
+
+        $pay = Payment::where('customer', $user->username)
+        ->where('called', '=', 0)
+        ->where('created_at', 'desc')
+        ->first();
 
 
 
@@ -46,7 +50,11 @@ class Callback
                             'deposit' => $pay->amount
                         ]);
                     }
-                    $user = Auth::user();
+                    $pay->update([
+                        'called' => 1,
+                        'status' => 'PAY'
+                    ]);
+
                     return response()->json([
                         'user' => $user,
                         'message' => 'Payment successful',

@@ -11,6 +11,8 @@ use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
 
 use App\Actions\Process;
+use App\Actions\Callback;
+use App\Actions\Withdrawal;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,11 +64,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
-    Route::post('/withdrawal', [WithdrawalController::class, 'check']);
+    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
     // Payment routes
 
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
+
+    Route::get('notifywithdrawal', function(Request $request, Response $response){
+        $callback = new Withdrawal;
+        return $callback->execute();    
+    });
 });
 Route::post('/payment/pay', [PaymentController::class, 'pay']);
 Route::post('/payment', [PaymentController::class, 'testpay']);

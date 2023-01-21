@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->nullable();
+            $table->boolean('called')->default(0);
             $table->timestamps();
         });
     }
