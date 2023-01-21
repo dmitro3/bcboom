@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->boolean('admin')->default(0);
-            $table->string('vip')->nullable();
+            $table->string('vip')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
