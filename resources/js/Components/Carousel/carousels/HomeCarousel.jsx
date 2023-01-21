@@ -7,7 +7,6 @@ import prev from "../../../../../public/images/user/prev.png";
 import next from "../../../../../public/images/user/next.png";
 const HomeCarousel = () => {
     const { isMobile } = useScreenResolution();
-    console.log('isMobile', isMobile)
     const carouseImages = Array.from({ length: isMobile ? 3 : 10 }).map((_, i) => {
         if (i % 2 === 0) return carouseImage1;
         return carouseImage2;
