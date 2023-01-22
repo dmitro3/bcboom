@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2023 at 08:27 PM
+-- Generation Time: Jan 21, 2023 at 08:10 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
+  `uuid` varchar(191) NOT NULL,
   `connection` text NOT NULL,
   `queue` text NOT NULL,
   `payload` longtext NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `histories` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(191) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -97,8 +97,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `token` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -112,13 +112,14 @@ CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `amount` double DEFAULT NULL,
   `pay_amount` double DEFAULT NULL,
-  `order_no` varchar(255) DEFAULT NULL,
-  `create_time` varchar(255) DEFAULT NULL,
-  `customer` varchar(255) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `order_no` varchar(191) DEFAULT NULL,
+  `create_time` varchar(191) DEFAULT NULL,
+  `customer` varchar(191) DEFAULT NULL,
+  `mobile` varchar(191) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `link` varchar(191) DEFAULT NULL,
+  `status` varchar(191) DEFAULT NULL,
   `called` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -132,9 +133,9 @@ CREATE TABLE `payments` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(191) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(191) NOT NULL,
   `token` varchar(64) NOT NULL,
   `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
@@ -165,8 +166,8 @@ CREATE TABLE `referrals` (
 
 CREATE TABLE `reset_code_passwords` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `code` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -179,21 +180,21 @@ CREATE TABLE `reset_code_passwords` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `email` varchar(191) NOT NULL,
+  `username` varchar(191) NOT NULL,
+  `phone` varchar(191) DEFAULT NULL,
   `bio` text DEFAULT NULL,
   `withdrawal_limit` bigint(20) NOT NULL DEFAULT 0,
   `referrer_id` bigint(20) UNSIGNED DEFAULT NULL,
   `referral_count` bigint(20) NOT NULL DEFAULT 0,
-  `referral_token` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `referral_token` varchar(191) DEFAULT NULL,
+  `address` varchar(191) DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `vip` varchar(255) DEFAULT NULL,
+  `vip` varchar(191) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(191) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -211,7 +212,7 @@ CREATE TABLE `wallets` (
   `deposit` double NOT NULL DEFAULT 0,
   `bet` double NOT NULL DEFAULT 0,
   `bonus` double NOT NULL DEFAULT 0,
-  `order_no` varchar(255) DEFAULT NULL,
+  `order_no` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -226,13 +227,13 @@ CREATE TABLE `withdraws` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `amount` double NOT NULL,
-  `orderno` varchar(255) NOT NULL,
-  `tx_orderno` varchar(255) NOT NULL,
-  `create_time` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `bankname` varchar(255) NOT NULL,
-  `bankcard` varchar(255) NOT NULL,
-  `trade_state` varchar(255) NOT NULL,
+  `orderno` varchar(191) NOT NULL,
+  `tx_orderno` varchar(191) NOT NULL,
+  `create_time` varchar(191) NOT NULL,
+  `username` varchar(191) NOT NULL,
+  `bankname` varchar(191) NOT NULL,
+  `bankcard` varchar(191) NOT NULL,
+  `trade_state` varchar(191) NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
