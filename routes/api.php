@@ -71,9 +71,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
 
-    Route::get('notifywithdrawal', function(Request $request, Response $response){
+    Route::get('notifywithdrawal', function(Request $request){
         $callback = new Withdrawal;
-        return $callback->execute();    
+        return $callback->status($request);    
     });
 });
 Route::post('/payment/pay', [PaymentController::class, 'pay']);
