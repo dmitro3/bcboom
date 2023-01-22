@@ -24,33 +24,37 @@ class WithdrawalController extends Controller
         $user = Auth::user();
         $wallet = Wallet::where('user_id', $user->id)->first();
         $withdraw = Withdraw::where('user_id', $user->id)->first();
-
+        $time = Carbon::now()->subHour(24);
         $not_limited = Withdraw::where('user_id', $user->id)
         ->where('created_at', 'desc')
-        ->where('created_at','>', Carbon::now()->subDay())->first();
+        ->where('created_at','>', $time)->first();
         if($user->vip == 0){
-            // print($not_limited);
-            // print($user);
-        // if($not_limited){
-        // if($request->withdraw < $wallet->deposit){
-        //     return response()->json([
-        //         'message' => 'You dont have enough deposit to make a withdrawal',
-        //          'user' => $user->wallet->deposit
-        //      ], 400);
-        // }else{
+            
+            if($request->amount > $wallet->deposit){
+                return response()->json([
+                    'amount' => $request->amount,
+                    'deposit' => $wallet->deposit,
+                    'message' => 'Deposited amount is less than requested amount'
+                ]);
+            }
+
+            else{
+            
+            if($not_limited){    
             $withdraw = new Withdrawal;
             $withdraw->handle($request);
-        // }
-        }else{
+            }else{
+            
             $calc = 2.5/100 * $request->get('amount');
             $diff = $request->get('amount') - $calc;
             $withdraw = new Withdrawal;
             $withdraw->handle($request, $diff);
+            
         }
+            }
+        }else if($user->vip == 1){
 
-    // }else if($user->vip == 1){
-
-    //     }
+        }
 
 
     }

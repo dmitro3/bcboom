@@ -28,27 +28,27 @@ class Withdrawal
      */
 
 
-    function handle(Request $request,): string
+    function handle(Request $request, $diff): string
     {
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
-        // $diff = [];
-        // if($diff == null){
-        //         $data = [
-        //             'mchid' => $this->merchantNumber,
-        //             'timestamp' => time(),
-        //             'amount' => $request->amount,
-        //             'orderno' => intval(microtime(true) * 1000 * 1000),
-        //             'customermobile' => $request->whatsapp,
-        //             'taxi' => $request->taxi,
-        //             'pixkey' => $request->cpf,
-        //             'pixtype' => $request->pixtype,
-        //             'username' => $user->username,
-        //             'callbackurl' => url('/api/notifywithdrawal'),
-        //             'currency' => 'BRL'
-        //         ];
+        $diff = [];
+        if($diff == null){
+                $data = [
+                    'mchid' => $this->merchantNumber,
+                    'timestamp' => time(),
+                    'amount' => $request->amount,
+                    'orderno' => intval(microtime(true) * 1000 * 1000),
+                    'customermobile' => $request->whatsapp,
+                    'taxi' => $request->taxi,
+                    'pixkey' => $request->cpf,
+                    'pixtype' => $request->pixtype,
+                    'username' => $user->username,
+                    'notifyurl' => url('/api/notifywithdrawal'),
+                    'currency' => 'BRL'
+                ];
 
-        // }else{
+        }else{
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
@@ -63,7 +63,7 @@ class Withdrawal
             'currency' => 'BRL'
         ];
 
-        // }
+         }
 
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
@@ -123,7 +123,7 @@ class Withdrawal
                     ->first();
 
                 $wallet->update([
-                    'amount' => $minused
+                    'deposit' => $minused
                 ]);
 
 
