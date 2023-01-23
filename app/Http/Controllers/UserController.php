@@ -7,6 +7,7 @@ use App\Mail\SendCodeResetPassword;
 use App\Models\ResetCodePassword;
 use Auth;
 use Mail;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
@@ -19,7 +20,11 @@ class UserController extends Controller
             return response()->json([
                'user' => $user,
                "referrals_count" => $user->referrals->count(),
-               "all_referrals" => $user->referrals           
+               "all_referrals" => $user->referrals,
+               "total_in_wallet" => $user->wallet->total,
+               "deposits" => $user->wallet->deposit,
+               "bets" => $user->wallet->bet,
+               "bonus" => $user->wallet->bonus           
             ]);
         }
     }
