@@ -49,7 +49,7 @@ class PaymentController extends Controller
 
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
 
 
@@ -62,8 +62,8 @@ class PaymentController extends Controller
 // $key = 'HECJKDEtTMbFKQDzVqY9';//商户key
 
 
-        $callback = new Callback;
-        $callback->run();
+        $callback = new Process;
+        $callback->status($request);
     }
 
     public function transactions()

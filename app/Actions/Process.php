@@ -87,37 +87,25 @@ class Process
         $user = Auth::user();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
-        $pay = Payment::where('user_id', $user->id)
-        ->where('called', '=', 0)
+        $pay = Payment::where('called', 0)
         ->where('created_at', 'desc')
         ->first();
 
         if ($sign === $request->sign) {
             if ($data['trade_state'] === 'SUCCESS') {
-                $wallet = Wallet::where('user_id', $user->id)->first();
-                if ($wallet) {
+                $wallet = Wallet::where('user_id', $pay->user_id)->first();
+                
                     $wallet->update([
                         'order_no' => $pay->tx_orderno,
                         'deposit' => $wallet->deposit + $pay->amount,
                         'total' => $wallet->total + $pay->amount
                     ]);
-                } else {
-                    Wallet::create([
-                        'user_id' => $user->id,
-                        'deposit' => $pay->amount
-                    ]);
-                }
 
                 $pay->update([
                     'called' => 1,
                     'status' => 'PAY'
                 ]);
-
-                return response()->json([
-                    'user' => $user,
-                    'message' => 'Payment successful',
-                ], 200);
-
+                
                 return "SUCCESS";
                 
 
