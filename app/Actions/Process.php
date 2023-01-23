@@ -117,12 +117,9 @@ class Process
                     'user' => $user,
                     'message' => 'Payment successful',
                 ], 200);
-                // The redirect statement will redirect to the Payment controller
 
-                // $res = $result['data'];
-                // return redirect()->action(
-                //     [PaymentController::class, 'callback'], ['result' => $res]
-                // );
+                return "SUCCESS";
+                
 
             }
 
