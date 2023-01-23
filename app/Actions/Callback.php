@@ -37,11 +37,12 @@ if($sign == $data['sign']){
   //PENDING 处理中 SUCCESS完成 FAILURE失败
   if($data['trade_state'] == 'SUCCESS')
   {
-    $pay = Payment::where('user_id', $user->id)
-        ->where('called', 0)
+
+    $pay = Payment::where('called', 0)
         ->where('created_at', 'desc')
         ->first();
-        $wallet = Wallet::where('user_id', $user->id)->first();
+
+        $wallet = Wallet::where('user_id', $pay->user_id)->first();
         
             $wallet->update([
                 'order_no' => $pay->tx_orderno,
