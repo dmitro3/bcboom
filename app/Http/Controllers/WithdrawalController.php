@@ -21,13 +21,17 @@ class WithdrawalController extends Controller
     //     $this->middleware('auth');
     // }
     public function handle(Request $request){
+        
         $user = Auth::user();
         $wallet = Wallet::where('user_id', $user->id)->first();
-        $withdraw = Withdraw::where('user_id', $user->id)->first();
+        
+                
         $time = Carbon::now()->subHour(24);
-        $not_limited = Withdraw::where('user_id', $user->id)
+        
+        $limited = Withdraw::where('user_id', $user->id)
         ->where('created_at', 'desc')
-        ->where('created_at','>', $time)->first();
+        ->where('created_at','<', $time)->first();
+        
         if($user->vip == 0){
             
             if($request->amount > $wallet->deposit){
@@ -40,15 +44,18 @@ class WithdrawalController extends Controller
 
             else{
             
-            if($not_limited){    
-            $withdraw = new Withdrawal;
-            $withdraw->handle($request);
+            if(!$limited){
+    
+            $withdrawal = new Withdrawal;
+            $withdrawal->handle($request, $diff = null);
             }else{
             
             $calc = 2.5/100 * $request->get('amount');
             $diff = $request->get('amount') - $calc;
-            $withdraw = new Withdrawal;
-            $withdraw->handle($request, $diff);
+            
+            $withdrawal = new Withdrawal;
+            
+            $withdrawal->handle($request, $diff);
             
         }
             }
