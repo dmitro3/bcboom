@@ -43,7 +43,7 @@ class Process
             'email' => $user->email,
             'mobile' => $user->phone,
             'customer' => $user->username,
-            'callbackurl' => url('https://bcboom.restoraweb.com/api/notify'),
+            'callbackurl' => url('https://bcboom.restoraweb.com/api/notifypayment'),
             'currency' => 'BRL'
         ];
 
