@@ -121,6 +121,36 @@ public function referrals()
         
     }
 
+    public function sumWallet($increase, $decrease, $amount){
+    
+        $deposits = $this->wallet->deposit;
+        $bets = $this->wallet->bet;
+        $bonus = $this->wallet->bonus;
+        $totals = $this->wallet->total;
+        
+        if($totals == 0){
+            $sum = $deposits + $bets + $bonus;
+            $user->wallet->update([
+                'total' => $sum
+            ]);
+
+        }else{
+            if($increase)
+            {
+                 $sum = $total + $amount;
+                 $user->wallet->update([
+                    'total' => $sum
+                 ]);
+            }elseif($decrease)
+            {
+                $minus = $total - $amount;
+                $user->wallet->update([
+                    'total' => $minus
+                ]);
+            }
+        }
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
