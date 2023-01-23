@@ -41,8 +41,9 @@ class Callback
                     $wallet = Wallet::where('user_id', $user->id)->first();
                     if ($wallet) {
                         $wallet->update([
-                            'order_no' => $pay->order_no,
-                            'deposit' => $wallet->deposit + $pay->amount
+                            'order_no' => $pay->tx_orderno,
+                            'deposit' => $wallet->deposit + $pay->amount,
+                            'total' => $wallet->total + $pay->amount
                         ]);
                     } else {
                         Wallet::create([

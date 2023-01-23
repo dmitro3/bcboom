@@ -71,7 +71,8 @@ public function referrals()
             
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -79,7 +80,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 10;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -87,7 +89,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 10;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -95,7 +98,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 12;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -103,7 +107,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 15;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -114,7 +119,8 @@ public function referrals()
 
         $w = Wallet::create([
             'user_id' =>  $this->id,
-            'bonus' => 9
+            'bonus' => 9,
+            'total' => $wallet->total + $walletBonus
             ]);
 
     }
