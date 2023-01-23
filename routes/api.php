@@ -92,10 +92,10 @@ Route::middleware(['jwt.verify'])->group(function () {
     });
 });
 
-Route::post('/notifypayment', function (Request $request) {
-    $callback = new Callback;
-    $callback->execute();
-});    
+Route::post('/notifypayment', [
+    PaymentController::class, 'callback'
+]);
+   
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

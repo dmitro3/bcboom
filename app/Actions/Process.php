@@ -125,9 +125,10 @@ class Process
                 // );
 
             }
+            
+            return "SUCCESS";
         }
 
-        return "SUCCESS";
     }
 
     function validate(Request $request): bool

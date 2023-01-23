@@ -12,12 +12,20 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
 
 
-class Callback{
+class Callback
+
+{
 
 
-    function run(){
-//接收参数，
-$data = $_REQUEST;
+    private string $merchantNumber = "000801682";
+    private string $key = "HECJKDEtTMbFKQDzVqY9";
+    private string $gateway = "https://api.hpay.one";
+
+
+    function run()//接收参数，
+    {
+
+        $data = $_REQUEST;
 
 //接受返回数据验证开始
 //md5验证
@@ -25,17 +33,17 @@ unset($data['sign']);
 
 $user = Auth::user();
 
-$key = 'HECJKDEtTMbFKQDzVqY9';//商户key
+$key = $this->key;
 
-$sign = getSignOpen($data,$key);
 
+ $sign = getSignOpen($data,$key);
+ 
+ 
 if($sign == $data['sign']){
   // 验签成功
-
   //PENDING 处理中 SUCCESS完成 FAILURE失败
   if($data['trade_state'] == 'SUCCESS')
   {
-
     $pay = Payment::where('user_id', $user->id)
         ->where('called', 0)
         ->where('created_at', 'desc')
@@ -60,12 +68,15 @@ if($sign == $data['sign']){
   //接收通知后必须输出”SUCCESS“代表接收成功。
 }
 
-    }
+}
+
+
 /**
-        *  生成签名
-        */
-        function getSignOpen($Obj,$key) 
+ *  生成签名
+ */
+function getSignOpen($Obj,$key) 
         {
+            dd('hit');
             foreach ($Obj as $k => $v) {
                 if(isset($v) && strlen($v) > 0){
                     $Parameters[$k] = $v;
