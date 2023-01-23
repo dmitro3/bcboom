@@ -49,7 +49,7 @@ class PaymentController extends Controller
 
     }
 
-    public function callback(Request $request)
+    public function callback()
     {
 
 

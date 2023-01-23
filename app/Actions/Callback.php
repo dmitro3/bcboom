@@ -35,7 +35,8 @@ $key = 'HECJKDEtTMbFKQDzVqY9';//商户key
 if($sign == $data['sign']){
   // 验签成功
   //PENDING 处理中 SUCCESS完成 FAILURE失败
-  if($data['trade_state'] == 'SUCCESS')
+  if(
+    $data['trade_state'] == 'SUCCESS')
   {
 
     $pay = Payment::where('called', 0)
@@ -54,8 +55,15 @@ if($sign == $data['sign']){
                 'called' => 1,
                 'status' => 'PAY'
             ]);
+
      //改变订单状态，及其他业务修改
-  }
+
+     return "SUCCESS";
+  }else if($data['trade_state'] == 'PENDING'){
+    return "PENDING";
+  }else if(['trade_state'] == 'FAILURE'){
+    return "FAILURE";
+}
  
 
   return "SUCCESS";
