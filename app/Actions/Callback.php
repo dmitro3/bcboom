@@ -12,14 +12,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
 
 
-class Callback
-
-{
-
-
-    private string $merchantNumber = "000801682";
-    private string $key = "HECJKDEtTMbFKQDzVqY9";
-    private string $gateway = "https://api.hpay.one";
+class Callback{
 
 
     function run()//接收参数，
@@ -33,10 +26,10 @@ unset($data['sign']);
 
 $user = Auth::user();
 
-$key = $this->key;
+$key = 'HECJKDEtTMbFKQDzVqY9';//商户key
 
 
- $sign = getSignOpen($data,$key);
+ $sign = $this->getSignOpen($data,$key);
  
  
 if($sign == $data['sign']){
@@ -76,7 +69,6 @@ if($sign == $data['sign']){
  */
 function getSignOpen($Obj,$key) 
         {
-            dd('hit');
             foreach ($Obj as $k => $v) {
                 if(isset($v) && strlen($v) > 0){
                     $Parameters[$k] = $v;
@@ -84,7 +76,7 @@ function getSignOpen($Obj,$key)
             }
             //签名步骤一：按字典序排序参数
             ksort($Parameters);
-            $String = formatQueryParaMapOpen($Parameters);
+            $String = $this->formatQueryParaMapOpen($Parameters);
             $String = $String.'&key='.$key;
             //dlog($String);
             //签名步骤三：MD5加密
