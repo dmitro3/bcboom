@@ -43,7 +43,7 @@ class Process
             'email' => $user->email,
             'mobile' => $user->phone,
             'customer' => $user->username,
-            'callbackurl' => url('/api/notifyurl'),
+            'callbackurl' => url('/api/notify'),
             'currency' => 'BRL'
         ];
 

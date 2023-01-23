@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('notifywithdrawal', function(Request $request){
         $callback = new Withdrawal;
-        return $callback->status($request);    
+        $callback->status($request);    
     });
 });
 Route::post('/payment/pay', [PaymentController::class, 'pay']);
@@ -81,12 +81,12 @@ Route::post('/payment', [PaymentController::class, 'testpay']);
 
 Route::post('notifyurl', function (Request $request) {
     $callback = new Callback;
-    return $callback->execute();
+    $callback->execute();
 });
 
 Route::post('notify', function (Request $request) {
     $process = new Process;
-    return $process->status($request);
+     $process->status($request);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
