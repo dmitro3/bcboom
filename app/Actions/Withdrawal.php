@@ -124,9 +124,9 @@ class Withdrawal
                 ], 200);
 
             }
+            return "SUCCESS";
         }
 
-        return "SUCCESS";
     }
 
     function validate(Request $request): bool
