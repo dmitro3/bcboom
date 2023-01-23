@@ -30,14 +30,14 @@ class Withdrawal
 
     function handle(Request $request, $diff): string
     {
+        
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
-        $diff = [];
-        if($diff == null){
+            
                 $data = [
                     'mchid' => $this->merchantNumber,
                     'timestamp' => time(),
-                    'amount' => $request->amount,
+                    'amount' => $diff ? $diff : $request->amount,
                     'orderno' => intval(microtime(true) * 1000 * 1000),
                     'customermobile' => $request->whatsapp,
                     'taxi' => $request->taxi,
@@ -48,30 +48,16 @@ class Withdrawal
                     'currency' => 'BRL'
                 ];
 
-        }else{
-        $data = [
-            'mchid' => $this->merchantNumber,
-            'timestamp' => time(),
-            'amount' => $request->amount,
-            'orderno' => intval(microtime(true) * 1000 * 1000),
-            'customermobile' => $request->whatsapp,
-            'taxi' => $request->taxi,
-            'pixkey' => $request->cpf,
-            'pixtype' => $request->pixtype,
-            'username' => $user->username,
-            'notifyurl' => url('/api/notifywithdrawal'),
-            'currency' => 'BRL'
-        ];
 
-         }
+
 
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
-        // dd($result);
+         
 
-        var_dump($result);
+
         if (isset($result['data']['orderno'])) {
             // print('success');
             // dd($result['data']);
