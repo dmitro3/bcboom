@@ -39,7 +39,7 @@ class Process
             'timestamp' => time(),
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
-            'notifyurl' => url('https://bcboom.restoraweb.com/api/notifypayment'),
+            'notifyurl' => url('/api/notifypayment'),
             'email' => $user->email,
             'mobile' => $user->phone,
             'customer' => $user->username,

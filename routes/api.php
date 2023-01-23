@@ -84,17 +84,18 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
     
-    Route::post('/notifypayment', function (Request $request) {
-        $callback = new Callback;
-        $callback->execute();
-    });
+
     
     Route::post('notify', function (Request $request) {
         $process = new Process;
          $process->status($request);
     });
 });
-    
+
+Route::post('/notifypayment', function (Request $request) {
+    $callback = new Callback;
+    $callback->execute();
+});    
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
