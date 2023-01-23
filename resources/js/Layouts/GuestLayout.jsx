@@ -50,7 +50,8 @@ export default function GuestLayout({ children }) {
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));
     const sound = new Howl({
-        src: ["/sounds/casino-intro.mp3"],
+        src: ["/sounds/intro_casino.mp3"],
+        loop: true,
         onplayerror: function () {
             sound.once("unlock", function () {
                 sound.play();
@@ -59,6 +60,7 @@ export default function GuestLayout({ children }) {
     });
     useEffect(() => {
         sound.play();
+
     }, []);
 
     document.addEventListener("DOMContentLoaded", () =>

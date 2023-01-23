@@ -31,7 +31,7 @@ createInertiaApp({
                     <GuestLayout>
                         <App {...props} />
                     </GuestLayout>
-                    <Lines background="#272C4B" color={"#f7f7f7"} />
+                    {/* <Lines background="#272C4B" color={"#f7f7f7"} /> */}
                 </PersistGate>
             </Provider>
         );
