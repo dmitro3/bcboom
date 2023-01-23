@@ -27,14 +27,16 @@ class Callback
 
         $sign = getSignOpen($data, $key);
 
-        $pay = Payment::where('user_id', $user->id)
-        ->where('called', '=', 0)
-        ->where('created_at', 'desc')
-        ->first();
-
-
-
+        
+        
+        
         if ($sign == $data['sign']) {
+
+            $pay = Payment::where('user_id', $user->id)
+            ->where('called', '=', 0)
+            ->where('created_at', 'desc')
+            ->first();
+
             if ($pay) {
                 if ($data['trade_state'] == 'SUCCESS') {
                     $user = Auth::user();
