@@ -105,11 +105,15 @@ class Withdrawal
 
 
                 $minused = $wallet->deposit - $withdrawal->amount;
+
+                $total = $wallet->total - $withdrawal->amount;
+
                 $withdrawal->update(['approved', 1])
                     ->first();
 
                 $wallet->update([
-                    'deposit' => $minused
+                    'deposit' => $minused,
+                    'total' => $total
                 ]);
 
 

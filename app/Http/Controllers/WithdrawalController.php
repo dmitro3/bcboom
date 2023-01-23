@@ -34,11 +34,11 @@ class WithdrawalController extends Controller
         
         if($user->vip == 0){
             
-            if($request->amount > $wallet->deposit){
+            if($request->amount > $wallet->total){
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'message' => 'Deposited amount is less than requested amount'
+                    'message' => 'Total amount is less than requested amount'
                 ]);
             }
 

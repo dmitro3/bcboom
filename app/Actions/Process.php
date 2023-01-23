@@ -98,7 +98,8 @@ class Process
                 if ($wallet) {
                     $wallet->update([
                         'order_no' => $pay->tx_orderno,
-                        'deposit' => $wallet->deposit + $pay->amount
+                        'deposit' => $wallet->deposit + $pay->amount,
+                        'total' => $wallet->total + $pay->amount
                     ]);
                 } else {
                     Wallet::create([
