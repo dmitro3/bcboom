@@ -67,27 +67,35 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
 
+    
+    
+});
+
+
+Route::middleware(['jwt.verify'])->group(function () {
+    
     // Payment routes
-
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
-
+    
     Route::get('notifywithdrawal', function(Request $request){
         $callback = new Withdrawal;
         $callback->status($request);    
     });
+    Route::post('/payment/pay', [PaymentController::class, 'pay']);
+    Route::post('/payment', [PaymentController::class, 'testpay']);
+    
+    Route::post('notifypayment', function (Request $request) {
+        $callback = new Callback;
+        $callback->execute();
+    });
+    
+    Route::post('notify', function (Request $request) {
+        $process = new Process;
+         $process->status($request);
+    });
 });
-Route::post('/payment/pay', [PaymentController::class, 'pay']);
-Route::post('/payment', [PaymentController::class, 'testpay']);
+    
 
-Route::post('notifyurl', function (Request $request) {
-    $callback = new Callback;
-    $callback->execute();
-});
-
-Route::post('notify', function (Request $request) {
-    $process = new Process;
-     $process->status($request);
-});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
