@@ -51,8 +51,8 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
-        dd($data['sign']);
-        
+        $dsign  = $data['sign'];
+
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
         // dd($result);
 
@@ -72,7 +72,7 @@ class Process
                 "email" => $user->email,
                 "link" => $result['data']['pay_info'],
                 "status" => $result['data']["trade_state"],
-                "sign" => $data["sign"],
+                "sign" => $dsign,
             ]);
 
 
