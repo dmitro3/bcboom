@@ -41,7 +41,7 @@ const Exclusive = () => {
     return (
         <>
             <Head title="Promotion Exclusive" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionsHeader
@@ -739,7 +739,7 @@ const Exclusive = () => {
                         )}
                     </PromotionPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

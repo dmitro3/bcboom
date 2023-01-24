@@ -8,6 +8,8 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux/es/exports";
 import store, { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Lines } from "react-preloaders";
+import GuestLayout from "./Layouts/GuestLayout";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText ||
@@ -26,7 +28,10 @@ createInertiaApp({
         root.render(
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <App {...props} />
+                    <GuestLayout>
+                        <App {...props} />
+                    </GuestLayout>
+                    {/* <Lines background="#272C4B" color={"#f7f7f7"} /> */}
                 </PersistGate>
             </Provider>
         );

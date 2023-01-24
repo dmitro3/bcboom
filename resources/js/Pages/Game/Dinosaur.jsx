@@ -27,18 +27,17 @@ const Dinosaur = () => {
     return (
         <div>
             <Head title=" Game Dinosaur " />
-            <GuestLayout>
-                <PageTemplate innerHeader={true}>
-                    <GamesPageWrapper>
-                        <GameLayout
-                            ButtonGrid={DinosaurButtonGrids}
-                            GameFrameText={"Crash"}
-                            GameFrame={DinosaurFrame}
-                            customFrameHeader={true}
-                        />
-                    </GamesPageWrapper>
-                </PageTemplate>
-            </GuestLayout>
+
+            <PageTemplate innerHeader={true}>
+                <GamesPageWrapper>
+                    <GameLayout
+                        ButtonGrid={DinosaurButtonGrids}
+                        GameFrameText={"Crash"}
+                        GameFrame={DinosaurFrame}
+                        customFrameHeader={true}
+                    />
+                </GamesPageWrapper>
+            </PageTemplate>
         </div>
     );
 };

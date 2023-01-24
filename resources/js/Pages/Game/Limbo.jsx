@@ -27,7 +27,7 @@ const Limbo = () => {
     return (
         <div>
             <Head title="Game Limbo" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -38,7 +38,7 @@ const Limbo = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };

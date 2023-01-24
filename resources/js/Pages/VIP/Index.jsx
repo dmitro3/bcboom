@@ -105,7 +105,7 @@ const VIPIndex = () => {
     return (
         <>
             <Head title="VIP Rank System" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <ImageGridLayout
                         item={{
@@ -238,7 +238,7 @@ const VIPIndex = () => {
                         <VipCarousel />
                     </ImageGridLayout>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };
