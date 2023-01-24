@@ -25,6 +25,11 @@ class Callback{
 //md5验证
 unset($data['sign']);
 
+// // in case the other sign does not work,
+
+// $pay = Payment::orderBy('created_at', 'desc')->first();
+// $data = $pay->sign;
+
 $user = Auth::user();
 
 $key = 'HECJKDEtTMbFKQDzVqY9';//商户key
