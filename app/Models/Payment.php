@@ -23,6 +23,7 @@ class Payment extends Model
        "pay_info",
         "tx_order_no",
         "trade_state",
+        "sign",
         "pay_type",
         "status",
         "remark",
