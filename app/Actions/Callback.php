@@ -18,7 +18,8 @@ class Callback{
     function run()//接收参数，
     {
 
-        $data = $_REQUEST;
+        $data = Request::capture();
+        $data = $data->request->all();
 
 //接受返回数据验证开始
 //md5验证
