@@ -52,7 +52,7 @@ class Process
         $data['sign'] = $sign;
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-        // dd($result);
+        var_dump($result);
 
 
         if (isset($result['data']['pay_info'])) {

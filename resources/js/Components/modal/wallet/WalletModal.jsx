@@ -125,7 +125,8 @@ const Deposit = () => {
         if (response?.payload?.status === 200) {
             toast.info(`You made an order of R$ ${value}`);
             // toast.info('Redirecting to payment gateway...')
-            window.location.href = response?.payload?.data?.link;
+            // window.location.href = response?.payload?.data?.link;
+            console.log('window: ', response?.payload)
         }
         // setSubmitted(false);
         // dispatcher(setWalletModalState({ open: false }));
