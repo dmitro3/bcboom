@@ -51,6 +51,8 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
+        dd($data['sign']);
+        
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
         // dd($result);
 
