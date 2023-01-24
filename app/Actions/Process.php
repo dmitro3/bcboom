@@ -70,7 +70,7 @@ class Process
                 "email" => $user->email,
                 "link" => $result['data']['pay_info'],
                 "status" => $result['data']["trade_state"],
-                "sign" => $data['sign']
+                "sign" => $data["sign"],
             ]);
 
 
