@@ -63,20 +63,23 @@ export default function GuestLayout({ children }) {
         loop: true,
         onplayerror: function () {
             audio.once("unlock", function () {
-                const id = audio.play();
-                dispatch(setSound({ id }));
+                const id = !sound.muted ? audio.play() : audio.mute(true);
+                dispatch(setSound({ field: "id", value: id }));
             });
         },
     });
-    const id = audio.play();
-    dispatch(setSound({ id }));
-    // useEffect(() => {
-        if (sound.muted) {
+    useEffect(() => {
+        const id = !sound.muted ? audio.play() : audio.mute(true);
+        dispatch(setSound({ field: "id", value: id }));
+        //     console.log("sound.muted id", sound.id);
+        //     console.log("sound.muted", sound);
+        // if (sound.muted) {
+            console.log("sound.muted id", sound.id);
             audio.mute(true, sound.id);
-        } else {
-            audio.mute(false, sound.id);
-        }
-    // }, [sound.muted]);
+        // } else {
+        //     audio.mute(false, sound.id);
+        // }
+    }, [sound.currentSound, sound.muted]);
 
     document.addEventListener("DOMContentLoaded", () =>
         wait(1000).then(() => {

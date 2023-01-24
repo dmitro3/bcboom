@@ -194,7 +194,6 @@ const DesktopHeader = () => {
             : "";
     const { user } = useSelector((state) => state.auth);
     const { sound } = useSelector((state) => state.app);
-    console.log("sound", sound);
     const dispatcher = useDispatch();
     return (
         <HeaderWrapper>

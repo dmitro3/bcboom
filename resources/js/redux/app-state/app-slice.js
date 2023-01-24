@@ -11,7 +11,7 @@ const appStateSlice = createSlice({
             muted: false,
             currentSound: "/sounds/intro_casino.mp3",
             page: "/",
-            id: "intro_casino",
+            id: "22345",
         },
     },
     reducers: {
