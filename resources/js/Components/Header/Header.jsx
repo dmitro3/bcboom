@@ -22,10 +22,12 @@ import telegram from "../../../../public/images/svg/telegram.svg";
 import ticket from "../../../../public/images/svg/ticket.svg";
 import twitter from "../../../../public/images/svg/twitter.svg";
 import volume from "../../../../public/images/svg/volume.svg";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import wifi from "../../../../public/images/svg/wifi.svg";
 // import Dropdown from "../Dropdown/Dropdown";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setDrawerState } from "@/redux/app-state/app-slice";
+import { setDrawerState, setSound } from "@/redux/app-state/app-slice";
 import { Link } from "@inertiajs/inertia-react";
 import { Dropdown as AntDDropdown } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -191,6 +193,8 @@ const DesktopHeader = () => {
             ? window.location.pathname.split("/")[1]
             : "";
     const { user } = useSelector((state) => state.auth);
+    const { sound } = useSelector((state) => state.app);
+    console.log("sound", sound);
     const dispatcher = useDispatch();
     return (
         <HeaderWrapper>
@@ -244,11 +248,13 @@ const DesktopHeader = () => {
                         </Link>
                     ))}
                 </HeaderPlatformLinkItems>
-                {socials.slice(0, socials.length - 1).map((item) => (
-                    <SocialIcons key={item.id}>
-                        <img src={item.icon} alt={`${item.id}`} />
-                    </SocialIcons>
-                ))}
+                {socials.slice(0, socials.length - 1).map((item) => {
+                    return (
+                        <SocialIcons key={item.id}>
+                            <img src={item.icon} alt={`${item.id}`} />
+                        </SocialIcons>
+                    );
+                })}
                 <AntDDropdown
                     trigger={["click"]}
                     menu={<Menu countries={countries} />}
@@ -268,10 +274,27 @@ const DesktopHeader = () => {
                 </AntDDropdown>
 
                 <SocialIcons>
-                    <img
-                        src={socials[socials.length - 1].icon}
-                        alt={`${socials.id}`}
-                    />
+                    {sound.muted ? (
+                        <div
+                            onClick={() =>
+                                dispatcher(
+                                    setSound({ field: "muted", value: false })
+                                )
+                            }
+                        >
+                            <VolumeOffIcon sx={{ color: "#8990AE" }} />
+                        </div>
+                    ) : (
+                        <div
+                            onClick={() =>
+                                dispatcher(
+                                    setSound({ field: "muted", value: true })
+                                )
+                            }
+                        >
+                            <VolumeUpIcon sx={{ color: "#8990AE" }} />
+                        </div>
+                    )}
                 </SocialIcons>
             </HeaderPlatformLinks>
         </HeaderWrapper>

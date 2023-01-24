@@ -8,7 +8,7 @@ import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import { ToastContainer } from "react-toastify";
@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LayoutTheme from "./theme";
 import NicknameModal from "@/Components/modal/profile/NicknameModal";
 import { Howl, Howler } from "howler";
+import { setSound } from "@/redux/app-state/app-slice";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
@@ -36,10 +37,10 @@ const PageBody = styled("div")(({ isMobile }) => ({
     paddingRight: !isMobile && "68px",
     background: "#000000",
 
-    '& > div': {
-    '&:nth-child(2)': {
-        flexGrow: 1,
-    },
+    "& > div": {
+        "&:nth-child(2)": {
+            flexGrow: 1,
+        },
     },
 }));
 
@@ -51,23 +52,31 @@ export default function GuestLayout({ children }) {
     const { modalState: walletModalState } = useSelector(
         (state) => state.wallet
     );
+    const dispatch = useDispatch();
+    const { sound } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false);
 
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));
-    const sound = new Howl({
-        src: ["/sounds/intro_casino.mp3"],
+    const audio = new Howl({
+        src: [sound.currentSound, sound.currentSound],
         loop: true,
         onplayerror: function () {
-            sound.once("unlock", function () {
-                sound.play();
+            audio.once("unlock", function () {
+                const id = audio.play();
+                dispatch(setSound({ id }));
             });
         },
     });
-    useEffect(() => {
-        sound.play();
-
-    }, []);
+    const id = audio.play();
+    dispatch(setSound({ id }));
+    // useEffect(() => {
+        if (sound.muted) {
+            audio.mute(true, sound.id);
+        } else {
+            audio.mute(false, sound.id);
+        }
+    // }, [sound.muted]);
 
     document.addEventListener("DOMContentLoaded", () =>
         wait(1000).then(() => {
