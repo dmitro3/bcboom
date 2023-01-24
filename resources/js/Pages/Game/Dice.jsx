@@ -26,8 +26,8 @@ const Dice = () => {
 
     return (
         <div>
-            <Head title="Games Dinosaur" />
-            <GuestLayout>
+            <Head title="Games Dice" />
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -42,7 +42,7 @@ const Dice = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };

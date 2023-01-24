@@ -8,7 +8,8 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import FooterActions from "@/Components/Footer/FooterActions";
 const PageTemplateWrapper = styled("div")(({ isMobile }) => ({
     background: `url(${mainBg})`,
-    width: isMobile ? "100%" : "95%",
+    maxWidth: isMobile ? "100%" : "95%",
+    // maxWidth: isMobile ? '100%' : '95vw',
     height: "fit-content",
     borderRadius: "10px",
     backgroundRepeat: "no-repeat",

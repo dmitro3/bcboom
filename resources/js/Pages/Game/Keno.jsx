@@ -27,7 +27,7 @@ const Keno = () => {
     return (
         <div>
             <Head title="Game Keno" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -49,7 +49,7 @@ const Keno = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };

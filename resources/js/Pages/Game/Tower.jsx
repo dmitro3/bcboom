@@ -27,7 +27,7 @@ const Tower = () => {
     return (
         <div>
             <Head title="Game Tower" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -39,7 +39,7 @@ const Tower = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };

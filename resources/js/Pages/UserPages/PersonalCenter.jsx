@@ -201,7 +201,7 @@ const PersonalCenter = () => {
     return (
         <>
             <Head title="Personal Center" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PersonalCenterPageWrapper>
                         <ImageGridLayout
@@ -569,7 +569,7 @@ const PersonalCenter = () => {
                         </ImageGridLayout>
                     </PersonalCenterPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

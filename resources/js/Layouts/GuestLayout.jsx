@@ -29,12 +29,18 @@ const PageLayout = styled("div")(({ theme }) => ({
 const PageBody = styled("div")(({ isMobile }) => ({
     height: "fit-content",
     width: "100%",
-    // maxWidth: "1750px",
+    maxWidth: "1750px",
     margin: "0 auto",
     display: "flex",
     flexDirection: "row",
     paddingRight: !isMobile && "68px",
     background: "#000000",
+
+    '& > div': {
+    '&:nth-child(2)': {
+        flexGrow: 1,
+    },
+    },
 }));
 
 export default function GuestLayout({ children }) {

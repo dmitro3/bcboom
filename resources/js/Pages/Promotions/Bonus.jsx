@@ -29,7 +29,7 @@ const Bonus = () => {
     return (
         <>
             <Head title="Promotions Bonus" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionsHeader
@@ -285,7 +285,7 @@ const Bonus = () => {
                         </Box>
                     </PromotionPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

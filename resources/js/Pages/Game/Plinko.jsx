@@ -26,7 +26,7 @@ const Plinko = () => {
     return (
         <div>
             <Head title="Game Wheel" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -38,7 +38,7 @@ const Plinko = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };
