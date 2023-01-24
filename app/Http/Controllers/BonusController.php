@@ -17,8 +17,8 @@ class BonusController extends Controller
 
     public function index()
     {
-        $bonusAmount = Wallet::where('user_id', '=', Auth::id())->first();
-        var_dump($bonusAmount);
+        $user = Auth::user();
+        $bonusAmount = Wallet::where('user_id', '=', $user->id)->first();
         if ($bonusAmount) {
             return response()->json([
                 'deposit' => $bonusAmount->deposit,

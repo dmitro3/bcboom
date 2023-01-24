@@ -1,7 +1,7 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Text from "../Text/Text";
 import { Flex } from "./Flex";
 import Pagination from "./Pagination";
@@ -11,13 +11,13 @@ const TableWrapper = styled("div")(({ isMobile }) => ({
     // flexDirection:'column'
     "& .css-wjh20t-MuiPagination-ul": {
         flexWrap: isMobile && "nowrap",
-        padding: isMobile && '0 0px 0 20px!important'
+        padding: isMobile && "0 0px 0 20px!important",
     },
 }));
 const TableGrid = styled("div")(({ isMobile }) => ({
     display: isMobile ? "flex" : "grid",
     flexDirection: isMobile && "column",
-    alignSelf: isMobile && 'flex-end',
+    alignSelf: isMobile && "flex-end",
     // display: "grid",
     gridTemplateColumns: "repeat(6, 1fr)",
     gridGap: "20px",
@@ -32,23 +32,24 @@ const TableGrid = styled("div")(({ isMobile }) => ({
 }));
 
 const CustomTable = ({ columns = [], rows = [] }) => {
-    const { isMobile } = useScreenResolution();
-    const perPage = isMobile ? 1 : 5
-    console.log('pepage: ', perPage)
-    // const perPage = isMobile ? 1 : 5
-    // useEffect(() => {
-    //     if (isMobile) setPerPage(1);
-    //     setPerPage(5);
-    // }, [isMobile]);
-    const [currentRows, setCurrentRows] = useState(rows.slice(0, perPage));
+    const { isMobile , width} = useScreenResolution();
     const [currentPage, setCurrentPage] = useState(1);
+    const [perPage, setPerPage] = useState(5);
+    const [currentRows, setCurrentRows] = useState(rows.slice(0, perPage));
+    useEffect(() => {
+        setPerPage(width >= 768 ? 5 : 1);
+        width <= 768 && setCurrentRows(rows.slice(0, 1));
+        // console.log('perpage: ', perPage, width, isMobile)
+    }, []);
+    // const width = window.innerWidth;
+    // const perPage = width >= 768 ? 5 : 1;
     function handlePageChange(event, value) {
         setCurrentPage(value);
         const beginning = value * perPage - perPage;
         const end = value * perPage;
         setCurrentRows(rows.slice(beginning, end));
     }
-    console.log("currentRow: ", currentRows, perPage);
+    // console.log("currentRow: ", currentRows, perPage);
     return (
         <TableWrapper style={{ width: "100%" }} isMobile={isMobile}>
             <div

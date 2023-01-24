@@ -319,12 +319,12 @@ const Withdraw = () => {
                     <Input type="text" value={"CPF"} br="10px" disabled />
                 </div>
                 <div style={{ width: "50%" }}>
-                    <Text type="p" text="Change PIX:" />
+                    <Text type="p" text="Chave PIX:" />
                     <Input
                         type="text"
                         value={pix}
                         onChange={(e) => setPix(e.target.value)}
-                        placeholder="Change PIX"
+                        placeholder="Chave PIX"
                         br="10px"
                     />
                 </div>

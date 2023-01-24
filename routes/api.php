@@ -11,6 +11,8 @@ use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
 
 use App\Actions\Process;
+use App\Actions\Callback;
+use App\Actions\Withdrawal;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +53,10 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
+Route::group(['middleware' => ['auth']], function () {
+    
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
 
@@ -62,24 +66,37 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
-    Route::post('/withdrawal', [WithdrawalController::class, 'check']);
 
+    
+    
+});
+
+
+Route::middleware(['jwt.verify'])->group(function () {
+    
     // Payment routes
-
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
-});
-Route::post('/payment/pay', [PaymentController::class, 'pay']);
-Route::post('/payment', [PaymentController::class, 'testpay']);
+    
+    Route::get('notifywithdrawal', function(Request $request){
+        $callback = new Withdrawal;
+        $callback->status($request);    
+    });
+    Route::post('/payment/pay', [PaymentController::class, 'pay']);
+    Route::post('/payment', [PaymentController::class, 'testpay']);
+    
 
-Route::post('notifyurl', function (Request $request) {
-    $callback = new Callback;
-    return $callback->execute();
+    
+    Route::post('notify', function (Request $request) {
+        $process = new Process;
+         $process->status($request);
+    });
 });
 
-Route::post('notify', function (Request $request) {
-    $process = new Process;
-    return $process->status($request);
-});
+Route::post('/notifypayment', [
+    PaymentController::class, 'callback'
+]);
+   
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

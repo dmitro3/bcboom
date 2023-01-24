@@ -32,6 +32,7 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'referrer_id',
         'referral_count',
+        'withdrawal_limit',
         'phone',
         'vip',
         'referred_by'
@@ -70,7 +71,8 @@ public function referrals()
             
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -78,7 +80,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 10;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -86,7 +89,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 10;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -94,7 +98,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 12;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -102,7 +107,8 @@ public function referrals()
             $walletBonus = $wallet->bonus + 15;
             $w = Wallet::updateOrCreate(
                 ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus]
+                ['bonus' => $walletBonus],
+                ['total' => $wallet->total + $walletBonus]
             );
         }
 
@@ -113,11 +119,42 @@ public function referrals()
 
         $w = Wallet::create([
             'user_id' =>  $this->id,
-            'bonus' => 9
+            'bonus' => 9,
+            'total' => $wallet->total + $walletBonus
             ]);
 
     }
         
+    }
+
+    public function sumWallet($increase, $decrease, $amount){
+    
+        $deposits = $this->wallet->deposit;
+        $bets = $this->wallet->bet;
+        $bonus = $this->wallet->bonus;
+        $totals = $this->wallet->total;
+        
+        if($totals == 0){
+            $sum = $deposits + $bets + $bonus;
+            $user->wallet->update([
+                'total' => $sum
+            ]);
+
+        }else{
+            if($increase)
+            {
+                 $sum = $total + $amount;
+                 $user->wallet->update([
+                    'total' => $sum
+                 ]);
+            }elseif($decrease)
+            {
+                $minus = $total - $amount;
+                $user->wallet->update([
+                    'total' => $minus
+                ]);
+            }
+        }
     }
 
     /**
