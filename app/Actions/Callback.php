@@ -23,7 +23,7 @@ class Callback
         // $data = $_REQUEST;
         $data = Request::capture();
         $data = $data->request->all();
-        dd($data);
+    
         // dd($request->all());
 
         //接受返回数据验证开始
