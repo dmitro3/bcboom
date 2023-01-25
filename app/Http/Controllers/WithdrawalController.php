@@ -38,6 +38,7 @@ class WithdrawalController extends Controller
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
+                    'current_total' => $wallet->total,
                     'message' => 'Total amount is less than requested amount'
                 ]);
             }
@@ -55,7 +56,7 @@ class WithdrawalController extends Controller
             
             $withdrawal = new Withdrawal;
             
-            $withdrawal->handle($request, $diff);
+            $withdrawal->handle($request, $diff = $diff);
             
         }
             }

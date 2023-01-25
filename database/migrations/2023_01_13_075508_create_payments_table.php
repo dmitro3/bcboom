@@ -17,12 +17,14 @@ return new class extends Migration
             $table->id();
             $table->double('amount')->nullable();
             $table->double('pay_amount')->nullable();
+            $table->string('pay_time')->nullable();
             $table->string('order_no')->nullable();
             $table->string('create_time')->nullable();
             $table->string('customer')->nullable();
             $table->string('mobile')->nullable();
             $table->integer('user_id');
             $table->string('email')->nullable();
+            $table->string('sign')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->nullable();
             $table->boolean('called')->default(0);

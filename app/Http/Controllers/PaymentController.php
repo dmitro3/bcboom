@@ -52,18 +52,18 @@ class PaymentController extends Controller
     public function callback(Request $request)
     {
 
+        if($request == null){
+         $message = "failed to call callback";   
+        $status = false;
+            return response()->json([
+                'message' => $message,
+                'status' => $status
+            ]);
+        }else{
 
-//接受返回数据验证开始
-//md5验证
-// unset($data['sign']);
-
-// $user = Auth::user();
-
-// $key = 'HECJKDEtTMbFKQDzVqY9';//商户key
-
-
-        $callback = new Process;
-        $callback->status($request);
+            $callback = new Callback;
+            return $callback->run();
+        }
     }
 
     public function transactions()

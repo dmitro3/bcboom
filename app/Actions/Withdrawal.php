@@ -1,5 +1,5 @@
 <?php
-namespace App\Actions;
+namespace App\Actions\Withdrawal;
 
 use App\Models\Payment;
 use App\Models\Wallet;
@@ -75,8 +75,10 @@ class Withdrawal
                 'msg' => $result['msg']
             ]);
 
-            print($withdrawal);
-            return $withdrawal;
+            return response()->json([
+                'message' => $result['data']['msg'],
+                'note' => "Order submitted"
+            ]);
         } else {
 
             return $result['msg'];
@@ -88,7 +90,7 @@ class Withdrawal
     {
         $data = $request->all();
         $user = Auth::user();
-        unset($data['sign']);
+        // unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
 
 
@@ -118,10 +120,7 @@ class Withdrawal
 
 
 
-                return response()->json([
-                    'user' => $user,
-                    'message' => 'Withdrawal successful',
-                ], 200);
+                return "SUCCESS";
 
             }
             return "SUCCESS";
