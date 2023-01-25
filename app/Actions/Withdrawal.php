@@ -75,7 +75,6 @@ class Withdrawal
                 'msg' => $result['msg']
             ]);
 
-            print($withdrawal);
             return $withdrawal;
         } else {
 
@@ -88,7 +87,7 @@ class Withdrawal
     {
         $data = $request->all();
         $user = Auth::user();
-        unset($data['sign']);
+        // unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
 
 
@@ -118,10 +117,7 @@ class Withdrawal
 
 
 
-                return response()->json([
-                    'user' => $user,
-                    'message' => 'Withdrawal successful',
-                ], 200);
+                return "SUCCESS";
 
             }
             return "SUCCESS";
