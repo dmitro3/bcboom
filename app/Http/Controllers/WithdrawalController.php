@@ -56,7 +56,7 @@ class WithdrawalController extends Controller
             
             $withdrawal = new Withdrawal;
             
-            $withdrawal->handle($request, $diff);
+            $withdrawal->handle($request, $diff = $diff);
             
         }
             }
