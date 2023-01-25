@@ -35,7 +35,6 @@ class Process
 
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-        $user = Auth::user();
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
@@ -107,6 +106,12 @@ class Process
                     'total' => $wallet->total + $payment->amount,
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
+
+                $pay->update([
+                    'called' => 1,
+                    'status' => 'PAY'
+                ]);
+
             }
         }
 

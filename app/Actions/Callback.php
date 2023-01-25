@@ -16,7 +16,7 @@ class Callback
 {
 
 
-   public function run()
+   public function run(): String
 
     {
 
@@ -46,16 +46,13 @@ class Callback
                 $data['trade_state'] == 'SUCCESS'
             ) {
 
-                $pay = Payment::where('called', 0)
-                    ->where('created_at', 'desc')
-                    ->first();
+                $payment = Payment::where('order_no', $request->tx_orderno)->first();
 
-                $wallet = Wallet::where('user_id', $pay->user_id)->first();
+                $wallet = Wallet::where('order_no', $request->tx_orderno)->first();
 
                 $wallet->update([
-                    'order_no' => $pay->tx_orderno,
-                    'deposit' => $wallet->deposit + $pay->amount,
-                    'total' => $wallet->total + $pay->amount
+                    'total' => $wallet->total + $payment->amount,
+                    'deposit' => $wallet->deposit + $payment->amount
                 ]);
 
                 $pay->update([
