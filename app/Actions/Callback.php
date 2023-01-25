@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
+use PHPUnit\Util\Exception;
 
 
 class Callback
@@ -29,62 +30,68 @@ class Callback
 //md5验证
 
 
-        $user = Auth::user();
+        try {
+            $user = Auth::user();
 
-        $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
-        $data = $request->all();
+            $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
+            $data = $request->all();
+            $data = $request->all();
 
-        print('above');
-        dd($data);
-        print('below');
+            // print('above');
+            // throw new Exception('Error Processing Request', $data);
+            // print('below');
 
-        $t = $data['sign'];
-        unset($data['sign']);
+            $t = $data['sign'];
+            unset($data['sign']);
 
-        $sign = $this->getSignOpen($data, $key);
-
-
+            $sign = $this->getSignOpen($data, $key);
 
 
-        if ($sign == $sign) {
 
-            // 验签成功
-            //PENDING 处理中 SUCCESS完成 FAILURE失败
-            if (
-                $data['trade_state'] == 'SUCCESS'
-            ) {
 
-                $payment = Payment::where('order_no', $data['tx_orderno'])->first();
+            if ($sign == $sign) {
 
-                $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
-                if ($wallet) {
-                    $wallet->update([
-                        'total' => $wallet->total + $payment->amount,
-                        'deposit' => $wallet->deposit + $payment->amount
-                    ]);
-                } elseif ($payment) {
-                    $payment->update([
-                        'called' => 1,
-                        'status' => 'PAY'
-                    ]);
+                // 验签成功
+                //PENDING 处理中 SUCCESS完成 FAILURE失败
+                if (
+                    $data['trade_state'] == 'SUCCESS'
+                ) {
+
+                    $payment = Payment::where('order_no', $data['tx_orderno'])->first();
+
+                    $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
+                    if ($wallet) {
+                        $wallet->update([
+                            'total' => $wallet->total + $payment->amount,
+                            'deposit' => $wallet->deposit + $payment->amount
+                        ]);
+                    } elseif ($payment) {
+                        $payment->update([
+                            'called' => 1,
+                            'status' => 'PAY'
+                        ]);
+                    }
+                    //改变订单状态，及其他业务修改
+
+
+                } else if ($data['trade_state'] == 'PENDING') {
+                    echo "PENDING";
+                } else if (['trade_state'] == 'FAILURE') {
+                    echo "FAILURE";
                 }
-                //改变订单状态，及其他业务修改
 
+                return "SUCCESS";
 
-            } else if ($data['trade_state'] == 'PENDING') {
-                echo "PENDING";
-            } else if (['trade_state'] == 'FAILURE') {
-                echo "FAILURE";
+                //接收通知后必须输出”SUCCESS“代表接收成功。
             }
 
-            return "SUCCESS";
 
-            //接收通知后必须输出”SUCCESS“代表接收成功。
+        } catch (Exception $e) {
+            print('above');
+            throw new Exception($data);
         }
 
     }
-
-
     /**
      *  生成签名
      */
