@@ -9,10 +9,13 @@ use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
-
+use App\Utils\APIResponse;
 use App\Actions\Process;
 use App\Actions\Callback;
+use App\Models\Payment;
+use App\Models\Wallet;
 use App\Actions\Withdrawal;
+use App\Paym\Aggregate;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +69,33 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
-
     
+
+    Route::prefix('admin')->group(function () {
+        
+        Route::post('pay', function(Request $request) {
+            $aggregator = Aggregate::find($request->id);
+            if(!$aggregator) return APIResponse::reject(1);
+
+            $wallet = Wallet::where('user_id', Auth::id())->first();
+            
+            return Aggregate::find($aggregator->id())->wallet($wallet);
+        });
+        
+        Route::post('paymentStatus', function(Request $request) {
+            $aggregator = null;
+            foreach(Aggregate::list() as $ag) {
+                if($ag->validate($request)) {
+                    $aggregator = $ag;
+                    break;
+                }
+            }
+            if($aggregator == null) return 'Unknown aggregator';
+            
+            return $aggregator->status($request);
+        });
+        
+    });
     
 });
 

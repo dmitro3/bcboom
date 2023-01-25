@@ -1,73 +1,38 @@
-<?php
-namespace App\Actions;
+<?php namespace App\Paym\Aggregate;
 
-use App\Models\Payment;
+use App\Currency\Currency;
 use App\Models\Wallet;
-use Auth;
-use App\Models\User;
+use App\Models\Payment;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\PaymentController;
 
+class HpayOneAggregator extends Aggregate {
 
-
-
-class Process
-{
-    private string $merchantNumber = "000801682";
-    private string $merchantKey = "HECJKDEtTMbFKQDzVqY9";
+    private string $merchantNumber = "256018655";
+    private string $merchantKey = "LHLMkrgmTcZuRHWgDhYV";
     private string $gateway = "https://api.hpay.one";
 
-
-
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-
-    function execute(Request $request): string
-    {
-
-
-        // $wallet =  Wallet::where('user_id', $user->id)->first();
-        $user = Auth::user();
+    function wallet(Wallet $wallet): string {
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
-            'notifyurl' => url('/api/notifypayment'),
-                'email' => $user->email,
-                'mobile' => $user->phone,
-                'customer' => $user->username,
-                'callbackurl' => url('/api/notifypayment'),
-                'currency' => 'BRL'
-            ];
-            
-            
-            $sign = $this->sign($data, $this->merchantKey);
-            $data['sign'] = $sign;
-            
-            $dsign  = $data['sign'];
-            
-            $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-            
-        // dd($result);
+            'notifyurl' => url('/api/paymentStatus'),
+            'currency' => 'BRL'
+        ];
 
+        $sign = $this->sign($data, $this->merchantKey);
+        $data['sign'] = $sign;
 
-        if (isset($result['data']['pay_info'])) {
-            // print('success');
-            // dd($result['data']);
+        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
 
+        if(isset($result['data']['pay_info'])) {
             $pay = Payment::create([
                 "amount" => $result['data']['amount'],
                 "pay_amount" => $result['data']['pay_amount'],
-                "order_no" => $result['data']['tx_orderno'],
+                "order_no" => $result['data']['orderno'],
                 "create_time" => $result['data']['create_time'],
                 "customer" => $user->username,
                 'user_id' => $user->id,
@@ -78,18 +43,15 @@ class Process
                 "sign" => $dsign,
             ]);
 
-            $wallet = Wallet::where('user_id', $user->id)->first();
+
             $wallet->update([
                 'order_no' => $pay->order_no
             ]);
 
             return $result['data']['pay_info'];
+        } else Log::warning('Error: ' . json_encode($result));
 
-        } else {
-
-            return $result['msg'];
-
-        }
+        return url("/payment_error");
     }
 
     function status(Request $request): string {
@@ -99,49 +61,42 @@ class Process
 
         if($sign === $request->sign) {
             if($data['trade_state'] === 'SUCCESS') {
-                $payment = Payment::where('order_no', $request->tx_orderno)->first();
-
                 $wallet = Wallet::where('order_no', $request->tx_orderno)->first();
 
                 $wallet->update([
                     'total' => $wallet->total + $payment->amount,
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
+                
             }
         }
 
         return "SUCCESS";
     }
 
-    function validate(Request $request): bool
-    {
+    function validate(Request $request): bool {
         return $request->trade_state !== null;
     }
 
-    function id(): string
-    {
+    function id(): string {
         return "hpay";
     }
 
-    function name(): string
-    {
+    function name(): string {
         return "PIX";
     }
 
-    function icon(): string
-    {
+    function icon(): string {
         return "";
     }
 
-    public function supports(): array
-    {
+    public function supports(): array {
         return [
             "local_brl"
         ];
     }
 
-    private function curl($url, $data = null, $post = false, $text = false)
-    {
+    private function curl($url, $data = null, $post = false, $text = false) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -155,7 +110,7 @@ class Process
         $json = curl_exec($ch);
         curl_close($ch);
 
-        if ($text)
+        if($text)
             $result = $json;
         else
             $result = json_decode($json, true);
@@ -163,30 +118,28 @@ class Process
         return $result;
     }
 
-    private function sign($object, $key)
-    {
+    private function sign($object, $key) {
         $parameters = [];
 
         foreach ($object as $k => $v) {
-            if (isset($v) && strlen($v) > 0) {
+            if(isset($v) && strlen($v) > 0){
                 $parameters[$k] = $v;
             }
         }
 
         ksort($parameters);
         $string = $this->formatQuery($parameters);
-        $string = $string . '&key=' . $key;
+        $string = $string.'&key='.$key;
         $string = md5($string);
         return strtoupper($string);
     }
 
-    private function formatQuery($paraMap)
-    {
+    private function formatQuery($paraMap) {
         $buff = "";
         ksort($paraMap);
         foreach ($paraMap as $k => $v)
             if ($k != 's')
-                $buff .= $k . '=' . $v . '&';
+                $buff .= $k .'='. $v.'&' ;
 
         $reqPar = "";
         if (strlen($buff) > 0)

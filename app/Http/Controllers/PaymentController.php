@@ -51,19 +51,14 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
-
-
-//接受返回数据验证开始
-//md5验证
-// unset($data['sign']);
-
-// $user = Auth::user();
-
-// $key = 'HECJKDEtTMbFKQDzVqY9';//商户key
-
-
-        $callback = new Callback;
-        $callback->run();
+        $aggregator = $request->all();
+        if($aggregator == null){
+             return 'Unknown aggregator';
+        }else
+            {
+                $aggregator = Aggregate::list();
+                return $aggregator->status($request);
+            }
     }
 
     public function transactions()

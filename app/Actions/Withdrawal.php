@@ -1,5 +1,5 @@
 <?php
-namespace App\Actions;
+namespace App\Actions\Withdrawal;
 
 use App\Models\Payment;
 use App\Models\Wallet;
@@ -75,7 +75,10 @@ class Withdrawal
                 'msg' => $result['msg']
             ]);
 
-            return $withdrawal;
+            return response()->json([
+                'message' => $result['data']['msg'],
+                'note' => "Order submitted"
+            ]);
         } else {
 
             return $result['msg'];
