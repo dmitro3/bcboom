@@ -65,15 +65,16 @@ class Callback
 
                 //改变订单状态，及其他业务修改
 
-                return "SUCCESS";
+                echo "SUCCESS";
+
             } else if ($data['trade_state'] == 'PENDING') {
-                return "PENDING";
+                echo "PENDING";
             } else if (['trade_state'] == 'FAILURE') {
-                return "FAILURE";
+                echo "FAILURE";
             }
 
             echo "SUCCESS";
-            
+
             //接收通知后必须输出”SUCCESS“代表接收成功。
         }
 
