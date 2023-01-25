@@ -34,11 +34,17 @@ class Callback
 
         $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
 
+        $t = $data['sign'];
 
+        unset($data['sign']);
 
         $sign = $this->getSignOpen($data, $key);
         
-        if ($sign !== $data['sign']) {
+
+
+
+        if ($sign == $t) {
+
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败
             if (
