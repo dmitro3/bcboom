@@ -16,7 +16,7 @@ class Callback
 {
 
 
-   public function run(): String
+   public function run()
 
     {
 
@@ -28,39 +28,40 @@ class Callback
 
         //接受返回数据验证开始
 //md5验证
-         unset($data['sign']);
+
 
         $user = Auth::user();
 
         $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
 
 
+
         $sign = $this->getSignOpen($data, $key);
         
-        
-        if ($sign == $data['sign']) {
+        if ($sign !== $data['sign']) {
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败
             if (
                 $data['trade_state'] == 'SUCCESS'
             ) {
 
-                $payment = Payment::where('order_no', $request->tx_orderno)->first();
+                $payment = Payment::where('order_no', $data['tx_orderno'])->first();
 
-                $wallet = Wallet::where('order_no', $request->tx_orderno)->first();
-
+                $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
+                if($wallet){
                 $wallet->update([
                     'total' => $wallet->total + $payment->amount,
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
-
-                $pay->update([
+            }
+            elseif($payment){
+                $payment->update([
                     'called' => 1,
                     'status' => 'PAY'
                 ]);
-
+            }
                 //改变订单状态，及其他业务修改
-
+                
                 echo "SUCCESS";
 
             } else if ($data['trade_state'] == 'PENDING') {
