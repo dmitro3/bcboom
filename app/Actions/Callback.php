@@ -16,14 +16,13 @@ class Callback
 {
 
 
-   public function run()
-
+    public function run(Request $request)
     {
 
         // $data = $_REQUEST;
-        $data = Request::capture();
-        $data = $data->request->all();
-    
+        // $data = Request::capture();
+        // $data = $_REQUEST;
+
         // dd($request->all());
 
         //接受返回数据验证开始
@@ -33,12 +32,17 @@ class Callback
         $user = Auth::user();
 
         $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
+        $data = $request->all();
+
+        print('above');
+        var_dump($data);
+        print('below');
 
         $t = $data['sign'];
         unset($data['sign']);
 
         $sign = $this->getSignOpen($data, $key);
-        
+
 
 
 
@@ -53,20 +57,19 @@ class Callback
                 $payment = Payment::where('order_no', $data['tx_orderno'])->first();
 
                 $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
-                if($wallet){
-                $wallet->update([
-                    'total' => $wallet->total + $payment->amount,
-                    'deposit' => $wallet->deposit + $payment->amount
-                ]);
-            }
-            elseif($payment){
-                $payment->update([
-                    'called' => 1,
-                    'status' => 'PAY'
-                ]);
-            }
+                if ($wallet) {
+                    $wallet->update([
+                        'total' => $wallet->total + $payment->amount,
+                        'deposit' => $wallet->deposit + $payment->amount
+                    ]);
+                } elseif ($payment) {
+                    $payment->update([
+                        'called' => 1,
+                        'status' => 'PAY'
+                    ]);
+                }
                 //改变订单状态，及其他业务修改
-                
+
 
             } else if ($data['trade_state'] == 'PENDING') {
                 echo "PENDING";
@@ -85,17 +88,17 @@ class Callback
     /**
      *  生成签名
      */
-    function getSignOpen($Obj,$key) 
+    function getSignOpen($Obj, $key)
     {
         foreach ($Obj as $k => $v) {
-            if(isset($v) && strlen($v) > 0){
+            if (isset($v) && strlen($v) > 0) {
                 $Parameters[$k] = $v;
             }
         }
         //签名步骤一：按字典序排序参数
         ksort($Parameters);
         $String = $this->formatQueryParaMapOpen($Parameters);
-        $String = $String.'&key='.$key;
+        $String = $String . '&key=' . $key;
         //dlog($String);
         //签名步骤三：MD5加密
         $String = md5($String);
