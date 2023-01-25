@@ -25,7 +25,7 @@ const Dice = () => {
     }));
 
     return (
-        <div>
+        <div >
             <Head title="Games Dice" />
             {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>

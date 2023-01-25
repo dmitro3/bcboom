@@ -37,6 +37,7 @@
         "antd": "^5.1.0",
         "date-fns": "^2.29.3",
         "dayjs": "^1.11.7",
+        "framer-motion": "^8.5.2",
         "howler": "^2.2.3",
         "mui-daterange-picker": "^1.0.5",
         "react-google-recaptcha": "^2.1.0",

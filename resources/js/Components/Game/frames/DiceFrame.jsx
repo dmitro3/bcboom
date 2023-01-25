@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/system";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
@@ -7,12 +7,14 @@ import cross from "../../../../assets/games/cross.svg";
 import cross_sm from "../../../../assets/games/cross_sm.svg";
 import arrow from "../../../../assets/games/arrow.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { motion, useAnimation } from "framer-motion";
 
 const marks = [0, 25, 50, 75, 100];
 
-const Frame = styled("img")(() => ({
+const Frame = styled("img")(({ rotate }) => ({
     width: "4.1875rem",
     height: "4.1875rem",
+    transform: `rotate(${rotate}deg)`,
 }));
 
 const PrettoSlider = styled(Slider)({
@@ -57,6 +59,8 @@ const PrettoSlider = styled(Slider)({
 
 const DiceFrame = () => {
     const { isMobile } = useScreenResolution();
+    const [diceRotation, setDiceRotation] = useState(0);
+    const controls = useAnimation();
     return (
         <Box
             sx={{
@@ -74,7 +78,37 @@ const DiceFrame = () => {
                     alignItems: "center",
                 }}
             >
-                <Frame src={dice} />
+                {/* <motion.div
+                    animate={controls}
+                    variants={{
+                        rotateZ: 0,
+                        rotateY: 0.3,
+                        scale: 1.3,
+                        transition: {
+                            rotateZ: {
+                                duration: 1.5,
+                                ease: "linear",
+                                repeat: Infinity,
+                            },
+                        },
+                    }}
+                    style={{ perspective: 1000 }}
+                >
+                    Click me to move in 3D space
+                </motion.div> */}
+
+                {/* <Canvas >
+
+                </Canvas> */}
+
+                <motion.div
+                    animate={{
+                        rotate: diceRotation * 300,
+                    }}
+                    transition={{ ease: "easeIn", duration: 1 }}
+                >
+                    <Frame src={dice} />
+                </motion.div>
             </Box>
             <Box
                 sx={{
@@ -102,6 +136,11 @@ const DiceFrame = () => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         defaultValue={50}
+                        onChange={(e, value) => {
+                            console.log("dfgdfge", e, value);
+                            //     console.log('value', value)
+                            setDiceRotation(value);
+                        }}
                     />
                 </Box>
             </Box>
