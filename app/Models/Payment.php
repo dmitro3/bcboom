@@ -28,7 +28,8 @@ class Payment extends Model
         "status",
         "remark",
         "pay_time",
-        "user_id"
+        "user_id",
+        "sign"
     ];
 
     public function user(){
