@@ -107,7 +107,7 @@ class Process
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
 
-                $pay->update([
+                $payment->update([
                     'called' => 1,
                     'status' => 'PAY'
                 ]);
