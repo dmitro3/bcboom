@@ -72,7 +72,8 @@ class Callback
                 return "FAILURE";
             }
 
-            return "SUCCESS";
+            echo "SUCCESS";
+            
             //接收通知后必须输出”SUCCESS“代表接收成功。
         }
 
