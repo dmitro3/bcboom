@@ -55,7 +55,7 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 
 Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['jwt.verify']], function () {
     
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
