@@ -35,7 +35,6 @@ class Callback
         $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
 
         $t = $data['sign'];
-
         unset($data['sign']);
 
         $sign = $this->getSignOpen($data, $key);
@@ -43,7 +42,7 @@ class Callback
 
 
 
-        if ($sign == $t) {
+        if ($sign == $sign) {
 
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败
@@ -68,7 +67,6 @@ class Callback
             }
                 //改变订单状态，及其他业务修改
                 
-                echo "SUCCESS";
 
             } else if ($data['trade_state'] == 'PENDING') {
                 echo "PENDING";
@@ -87,18 +85,17 @@ class Callback
     /**
      *  生成签名
      */
-    function getSignOpen($Obj, $key)
+    function getSignOpen($Obj,$key) 
     {
-        $Parameters = array();
         foreach ($Obj as $k => $v) {
-            if (isset($v) && strlen($v) > 0) {
+            if(isset($v) && strlen($v) > 0){
                 $Parameters[$k] = $v;
             }
         }
         //签名步骤一：按字典序排序参数
         ksort($Parameters);
         $String = $this->formatQueryParaMapOpen($Parameters);
-        $String = $String . '&key=' . $key;
+        $String = $String.'&key='.$key;
         //dlog($String);
         //签名步骤三：MD5加密
         $String = md5($String);
@@ -106,7 +103,6 @@ class Callback
         $result = strtoupper($String);
         return $result;
     }
-
 
     /**
      *  作用：格式化参数，签名过程需要使用
