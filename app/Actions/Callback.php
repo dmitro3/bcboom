@@ -35,7 +35,7 @@ class Callback
         $data = $request->all();
 
         print('above');
-        var_dump($data);
+        dd($data);
         print('below');
 
         $t = $data['sign'];
