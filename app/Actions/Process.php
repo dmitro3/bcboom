@@ -32,10 +32,9 @@ class Process
 
     function execute(Request $request): string
     {
-
+        $user = Auth::user();
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-        $user = Auth::user();
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
@@ -52,8 +51,8 @@ class Process
             
             $sign = $this->sign($data, $this->merchantKey);
             $data['sign'] = $sign;
+
             
-            $dsign  = $data['sign'];
             
             $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
             
@@ -75,7 +74,7 @@ class Process
                 "email" => $user->email,
                 "link" => $result['data']['pay_info'],
                 "status" => $result['data']["trade_state"],
-                "sign" => $dsign,
+                "sign" => $data['sign'],
             ]);
 
             $wallet = Wallet::where('user_id', $user->id)->first();
@@ -107,6 +106,12 @@ class Process
                     'total' => $wallet->total + $payment->amount,
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
+
+                $pay->update([
+                    'called' => 1,
+                    'status' => 'PAY'
+                ]);
+
             }
         }
 

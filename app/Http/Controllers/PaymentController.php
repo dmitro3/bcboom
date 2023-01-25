@@ -51,14 +51,19 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
-        $aggregator = $request->all();
-        if($aggregator == null){
-             return 'Unknown aggregator';
-        }else
-            {
-                $aggregator = Aggregate::list();
-                return $aggregator->status($request);
-            }
+
+        if($request == null){
+         $message = "failed to call callback";   
+        $status = false;
+            return response()->json([
+                'message' => $message,
+                'status' => $status
+            ]);
+        }else{
+
+            $callback = new Callback;
+            return $callback->run();
+        }
     }
 
     public function transactions()
