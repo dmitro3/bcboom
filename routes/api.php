@@ -73,7 +73,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('admin')->group(function () {
         
-        Route::post('pay', function(Request $request) {
+        Route::post('paym', function(Request $request) {
             $aggregator = Aggregate::find($request->id);
             if(!$aggregator) return APIResponse::reject(1);
 
@@ -82,20 +82,21 @@ Route::group(['middleware' => ['jwt.verify']], function () {
             return Aggregate::find($aggregator->id())->wallet($wallet);
         });
         
-        Route::post('paymentStatus', function(Request $request) {
-            $aggregator = null;
-            foreach(Aggregate::list() as $ag) {
-                if($ag->validate($request)) {
-                    $aggregator = $ag;
-                    break;
-                }
-            }
-            if($aggregator == null) return 'Unknown aggregator';
+        // Route::post('paymentStatus', function(Request $request) {
+        //     $aggregator = null;
+        //     foreach(Aggregate::list() as $ag) {
+        //         if($ag->validate($request)) {
+        //             $aggregator = $ag;
+        //             break;
+        //         }
+        //     }
+        //     if($aggregator == null) return 'Unknown aggregator';
             
-            return $aggregator->status($request);
-        });
+        //     return $aggregator->status($request);
+        // });
         
     });
+
     
 });
 
@@ -118,11 +119,12 @@ Route::middleware(['jwt.verify'])->group(function () {
         $process = new Process;
          $process->status($request);
     });
+
+    Route::post('/notifypayment', [
+        PaymentController::class, 'callback'
+    ]);
 });
 
-Route::post('/notifypayment', [
-    PaymentController::class, 'callback'
-]);
    
 
 

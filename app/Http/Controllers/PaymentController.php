@@ -55,11 +55,12 @@ class PaymentController extends Controller
         if($request == null){
          $message = "failed to call callback";   
         $status = false;
-            return [
-                $message = $message,
-                $status = $status
-            ];
+            return response()->json([
+                'message' => $message,
+                'status' => $status
+            ]);
         }else{
+
             $callback = new Callback;
             return $callback->run();
         }
