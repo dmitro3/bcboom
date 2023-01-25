@@ -87,7 +87,6 @@ class Callback
 
 
         } catch (Exception $e) {
-            print('above');
             throw new Exception($data);
         }
 

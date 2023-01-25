@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Withdrawal\Withdrawal;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Withdraw;
 use Auth;
-use App\Actions\Withdrawal;
+// use App\Actions\Withdrawal;
 use App\Models\Deposit;
 use Carbon\Carbon;
 
@@ -26,7 +27,7 @@ class WithdrawalController extends Controller
         $wallet = Wallet::where('user_id', $user->id)->first();
         
                 
-        $time = Carbon::now()->subHour(24);
+        $time = Carbon::now()->subHours(24);
         
         $limited = Withdraw::where('user_id', $user->id)
         ->where('created_at', 'desc')
@@ -56,7 +57,7 @@ class WithdrawalController extends Controller
             
             $withdrawal = new Withdrawal;
             
-            $withdrawal->handle($request, $diff = $diff);
+            $withdrawal->handle($request,  $diff);
             
         }
             }
