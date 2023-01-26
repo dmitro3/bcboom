@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "@mui/system";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
@@ -8,6 +8,8 @@ import cross_sm from "../../../../assets/games/cross_sm.svg";
 import arrow from "../../../../assets/games/arrow.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { motion, useAnimation } from "framer-motion";
+import { DiceWrapper } from "../styles/diceStyles";
+import { useEffect } from "react";
 
 const marks = [0, 25, 50, 75, 100];
 
@@ -61,6 +63,21 @@ const DiceFrame = () => {
     const { isMobile } = useScreenResolution();
     const [diceRotation, setDiceRotation] = useState(0);
     const controls = useAnimation();
+    const diceRef = useRef();
+
+    console.log("ref: ", diceRef);
+    function rollDice(diceRef) {
+        const min = 1;
+        const max = 24;
+
+        function getRandomInt(min, max) {
+            return (Math.floor(Math.random() * (max - min)) + min) * 90;
+        }
+        const xRand = getRandomInt(min, max);
+        const yRand = getRandomInt(min, max);
+        diceRef.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
+        diceRef.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
+    }
     return (
         <Box
             sx={{
@@ -78,6 +95,45 @@ const DiceFrame = () => {
                     alignItems: "center",
                 }}
             >
+                {/* <DiceWrapper>
+                    <section classsName="container" ref={diceRef}>
+                        <div id="cube" onClick={() => rollDice()}>
+                            <div className="front">
+                                <span className="dot dot1"></span>
+                            </div>
+                            <div className="back">
+                                <span className="dot dot1"></span>
+                                <span className="dot dot2"></span>
+                            </div>
+                            <div className="right">
+                                <span className="dot dot1"></span>
+                                <span className="dot dot2"></span>
+                                <span className="dot dot3"></span>
+                            </div>
+                            <div className="left">
+                                <span className="dot dot1"></span>
+                                <span className="dot dot2"></span>
+                                <span className="dot dot3"></span>
+                                <span className="dot dot4"></span>
+                            </div>
+                            <div className="top">
+                                <span className="dot dot1"></span>
+                                <span className="dot dot2"></span>
+                                <span className="dot dot3"></span>
+                                <span className="dot dot4"></span>
+                                <span className="dot dot5"></span>
+                            </div>
+                            <div className="bottom">
+                                <span className="dot dot1"></span>
+                                <span className="dot dot2"></span>
+                                <span className="dot dot3"></span>
+                                <span className="dot dot4"></span>
+                                <span className="dot dot5"></span>
+                                <span className="dot dot6"></span>
+                            </div>
+                        </div>
+                    </section>
+                </DiceWrapper> */}
                 {/* <motion.div
                     animate={controls}
                     variants={{
@@ -96,11 +152,9 @@ const DiceFrame = () => {
                 >
                     Click me to move in 3D space
                 </motion.div> */}
-
                 {/* <Canvas >
 
                 </Canvas> */}
-
                 <motion.div
                     animate={{
                         rotate: diceRotation * 300,
