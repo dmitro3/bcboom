@@ -31,23 +31,12 @@ class Callback
 
 
         try {
-            $user = Auth::user();
 
             $key = 'HECJKDEtTMbFKQDzVqY9'; //商户key
             $data = $request->all();
-            $data = $request->all();
-
-            // print('above');
-            // throw new Exception('Error Processing Request', $data);
-            // print('below');
-
-            $t = $data['sign'];
             unset($data['sign']);
 
             $sign = $this->getSignOpen($data, $key);
-
-
-
 
             if ($sign == $sign) {
 

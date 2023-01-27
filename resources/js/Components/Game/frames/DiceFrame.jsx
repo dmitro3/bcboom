@@ -74,7 +74,7 @@ const DiceFrame = () => {
             return (Math.floor(Math.random() * (max - min)) + min) * 90;
         }
         const xRand = getRandomInt(min, max);
-        const yRand = getRandomInt(min, max);
+        const yRand = getRandomInt(min, mhyjax);
         diceRef.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
         diceRef.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
     }
@@ -95,7 +95,7 @@ const DiceFrame = () => {
                     alignItems: "center",
                 }}
             >
-                {/* <DiceWrapper>
+                <DiceWrapper>
                     <section classsName="container" ref={diceRef}>
                         <div id="cube" onClick={() => rollDice()}>
                             <div className="front">
@@ -133,7 +133,7 @@ const DiceFrame = () => {
                             </div>
                         </div>
                     </section>
-                </DiceWrapper> */}
+                </DiceWrapper>
                 {/* <motion.div
                     animate={controls}
                     variants={{

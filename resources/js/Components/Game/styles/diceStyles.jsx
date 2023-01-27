@@ -1,6 +1,8 @@
 import { styled } from "@mui/system";
 
 export const DiceWrapper = styled("div")(() => ({
+    border: "10px solid yellow",
+    width: "100%",
     "#cube .front": { transform: "translateZ(100px)" },
     "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube .right": { transform: "rotateY(90deg)    translateZ(100px)" },
