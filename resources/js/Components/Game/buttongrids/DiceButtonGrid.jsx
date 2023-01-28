@@ -260,7 +260,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                         );
                         dispatch(setGameIsOn(true));
                     }
-                }}
+                }}   
             >
                 {playing ? "..." : "Play"}
             </Button>
