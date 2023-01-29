@@ -39,15 +39,6 @@ class PaymentController extends Controller
         ], 200);
 
     }
-    public function testpay()
-    {
-
-
-        $process2 = new Proc;
-
-        $process2->exec();
-
-    }
 
     public function callback(Request $request)
     {

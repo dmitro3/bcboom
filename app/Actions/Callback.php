@@ -45,7 +45,7 @@ class Callback
                 $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
                 if ($wallet) {
                     $wallet->update([
-                        'total' => $wallet->total + $payment->amount,
+                        'withdrawable_balance' => $wallet->withdrawable_balance + $payment->amount,
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
                 } elseif ($payment) {

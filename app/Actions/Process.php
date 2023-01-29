@@ -103,7 +103,7 @@ class Process
                 $wallet = Wallet::where('order_no', $request->tx_orderno)->first();
 
                 $wallet->update([
-                    'total' => $wallet->total + $payment->amount,
+                    'withdrawable_balance' => $wallet->withdrawable_balance + $payment->amount,
                     'deposit' => $wallet->deposit + $payment->amount
                 ]);
 

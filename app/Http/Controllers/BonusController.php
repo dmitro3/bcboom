@@ -24,7 +24,7 @@ class BonusController extends Controller
             'deposit' => $bonusAmount->deposit,
             'bet' => $bonusAmount->bet,
             'bonus' => $bonusAmount->bonus,
-            'total' => $bonusAmount->total,
+            'withdrawable_balance' => $bonusAmount->withdrawable_balance,
             'message' => 'success',
         ], 200);
         // }

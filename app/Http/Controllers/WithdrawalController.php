@@ -36,11 +36,11 @@ class WithdrawalController extends Controller
         
         if($user->vip == 0){
             
-            if($request->amount > $wallet->total){
+            if($request->amount > $wallet->withdrawable_balance){
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'current_total' => $wallet->withdrawable_balance,
                     'message' => 'Total amount is less than requested amount'
                 ]);
             }

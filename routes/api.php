@@ -113,13 +113,6 @@ Route::middleware(['jwt.verify'])->group(function () {
     // Payment routes
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
 
-    Route::get(
-        'notifywithdrawal',
-        function (Request $request) {
-            $callback = new Withdrawal;
-            $callback->status($request);
-        }
-    );
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
 
@@ -140,6 +133,13 @@ Route::middleware(['jwt.verify'])->group(function () {
 // ]);
 
 
+Route::post(
+    'notifywithdrawal',
+    function (Request $request) {
+        $callback = new Withdrawal;
+        $callback->status($request);
+    }
+);
 Route::post('/notifypayment', function (Request $request): string {
     $callback = new Callback;
     return $callback->run($request);
