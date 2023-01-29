@@ -92,7 +92,7 @@ class Withdrawal
     {
         $data = $request->all();
 
-        // unset($data['sign']);
+        unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
         if ($sign === $request->sign) {
         // if ($sign === $sign) {
