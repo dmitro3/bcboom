@@ -39,7 +39,7 @@ class WithdrawalController extends Controller
             if($request->amount > $wallet->withdrawable_balance){
                 return response()->json([
                     'withdrawable' => $wallet->withdrawable_balance,
-                    'error' => 'Total amount is less than requested amount'
+                    'error' => 'Insufficient funds in your wallet to complete this withdrawal' 
                 ], 400);
             }
 

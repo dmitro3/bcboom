@@ -292,19 +292,21 @@ const Withdraw = () => {
             whatsapp,
         };
         const response = await dispatch(widthdraw(payload));
+        console.log("response: ", response);
         if (!response?.payload) {
             toast.error("An error occured");
             setSubmitted(false);
             return;
         }
-        if (response?.payload?.error) {
-            toast.error(response.payload.error);
+        if (response?.payload?.data?.error) {
+            toast.error(response.payload?.data?.error);
             setSubmitted(false);
             return;
         }
         if (response?.payload?.status === 200) {
             toast.info(`A withdraw order of R$ ${value} has been placed`);
             dispatch(setHistoryTab(1));
+            dispatcher(setWalletModalState({ open: false }));
             Inertia.visit("/history");
         }
         setSubmitted(false);
