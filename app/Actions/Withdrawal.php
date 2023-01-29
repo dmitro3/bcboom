@@ -102,7 +102,7 @@ class Withdrawal
             if ($data['trade_state'] === 'SUCCESS') {
 
                 // $minused = $wallet->deposit - $withdrawal->amount;
-
+                var_dump($wallet, $withdrawal);
                 $new_balance = $wallet->withdrawable_balance - $withdrawal->amount;
 
                 $withdrawal->update(['approved' => 1, 'status' => 'SUCCESS'])
