@@ -94,10 +94,8 @@ class Withdrawal
 
         // unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
-        var_dump($sign);
-        var_dump($request->sign);
-        // if ($sign === $request->sign) {
-        if ($sign === $sign) {
+        if ($sign === $request->sign) {
+        // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
             $withdrawal = Withdraw::where('orderno', $request->orderno)
                 ->orderBy('created_at', 'desc')->first();
@@ -108,7 +106,7 @@ class Withdrawal
                 $new_balance = $wallet->withdrawable_balance - $withdrawal->amount;
 
                 $withdrawal->update(['approved' => 1, 'status' => 'SUCCESS'])
-                    ->first();
+                ;
 
                 $wallet->update([
                     'withdrawable_balance' => $new_balance
@@ -118,11 +116,11 @@ class Withdrawal
 
             } elseif ($data['trade_state'] === 'PENDING') {
                 $withdrawal->update(['status' => 'PENDING', 'approved' => 0])
-                    ->first();
+                ;
 
             } else {
                 $withdrawal->update(['status' => 'FAIL', 'approved' => 0])
-                    ->first();
+                ;
             }
             return "SUCCESS";
         }

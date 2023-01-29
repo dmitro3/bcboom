@@ -137,7 +137,7 @@ Route::post(
     'notifywithdrawal',
     function (Request $request) {
         $callback = new Withdrawal;
-        $callback->status($request);
+       return $callback->status($request);
     }
 );
 Route::post('/notifypayment', function (Request $request): string {
