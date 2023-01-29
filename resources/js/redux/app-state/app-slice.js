@@ -13,6 +13,7 @@ const appStateSlice = createSlice({
             page: "/",
             id: "22345",
         },
+        historyTab: 2,
     },
     reducers: {
         setIsAppLoading: (state, action) => {
@@ -28,9 +29,12 @@ const appStateSlice = createSlice({
             );
             state.sound = current;
         },
+        setHistoryTab: (state, action) => {
+            state.historyTab = action.payload;
+        },
     },
 });
 
-export const { setIsAppLoading, setDrawerState, setSound } =
+export const { setIsAppLoading, setDrawerState, setSound, setHistoryTab } =
     appStateSlice.actions;
 export const AppState = appStateSlice.reducer;

@@ -260,7 +260,7 @@ const UserDropdown = ({
     }, [isLoggedIn]);
     const balance =
         currencyFormatter
-            .format(+wallet?.bet + +wallet?.deposit + +wallet?.bonus)
+            .format(wallet.withdrawable_balance)
             .replace("$", "") || "0.00";
     if (!isLoggedIn)
         return (

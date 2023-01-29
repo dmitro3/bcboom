@@ -116,12 +116,6 @@ const Deposit = ({ isMobile }) => {
         const filtered = data.filter((el, i) =>
             daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
         );
-        console.log(
-            "filtered: ",
-            filtered,
-            daysInterval,
-            new Date(data[0].date).setHours(0, 0, 0, 0)
-        );
         // console.log("daysInterval: ", daysInterval, rows);
         setData(filtered);
     }
@@ -164,7 +158,13 @@ const Deposit = ({ isMobile }) => {
                             fontSize={"0.8rem"}
                         />
                     </DateInput>
-                    <div style={{ position: "absolute", top: "140px", zIndex:1000 }}>
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "140px",
+                            zIndex: 1000,
+                        }}
+                    >
                         <DateRangePicker
                             toggle={setOpen}
                             open={open}
@@ -203,7 +203,9 @@ const Deposit = ({ isMobile }) => {
                             rows={data}
                         />
                     </div>
-                ): <div>NO DATA</div>}
+                ) : (
+                    <div>NO DATA</div>
+                )}
             </Flex>
         </DepositWrapper>
     );
@@ -457,7 +459,7 @@ const GameHistory = ({ isMobile }) => {
 
 const HistoryPage = () => {
     const { isMobile } = useScreenResolution();
-    const dispatcher = useDispatch();
+    const { historyTab } = useSelector((state) => state.app);
 
     const [currentTab, setCurrentTab] = useState(2);
     const tabs = ["Wallet", "Wallet", "Game"];
@@ -465,74 +467,70 @@ const HistoryPage = () => {
         <>
             <Head title="Game and Wallet History" />
             {/* <GuestLayout> */}
-                <PageTemplate innerHeader={true}>
-                    <HistoryPageWrapper>
-                        <ImageGridLayout
-                            item={{
-                                title: "Personal Center",
-                                icon: centerIcon,
-                                margin: "10px",
-                            }}
-                            index={0}
-                            page="personal-center"
-                        >
-                            <HistoryWrapper isMobile={isMobile}>
-                                <Flex alignItems="center" gap="10px">
-                                    <img src={historyIcon} alt="historyIcon" />
-                                    <Text
-                                        type="p"
-                                        text={tabs[currentTab] + " History"}
-                                        fontSize="1rem"
-                                        fontWeight="bold"
-                                        color="#fff"
-                                        textTransform="capitalize"
-                                    />
-                                </Flex>
+            <PageTemplate innerHeader={true}>
+                <HistoryPageWrapper>
+                    <ImageGridLayout
+                        item={{
+                            title: "Personal Center",
+                            icon: centerIcon,
+                            margin: "10px",
+                        }}
+                        index={0}
+                        page="personal-center"
+                    >
+                        <HistoryWrapper isMobile={isMobile}>
+                            <Flex alignItems="center" gap="10px">
+                                <img src={historyIcon} alt="historyIcon" />
+                                <Text
+                                    type="p"
+                                    text={tabs[currentTab] + " History"}
+                                    fontSize="1rem"
+                                    fontWeight="bold"
+                                    color="#fff"
+                                    textTransform="capitalize"
+                                />
+                            </Flex>
 
-                                <TabComponent>
-                                    <NewCustomTabs
-                                        tabItems={[
-                                            {
-                                                value: "Deposit",
-                                                label: "Deposit",
-                                                content: (
-                                                    <Deposit
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                            {
-                                                value: "Withdraw",
-                                                label: "Withdraw",
-                                                content: (
-                                                    <Withdraw
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                            {
-                                                value: "Game",
-                                                label: "Game",
-                                                content: (
-                                                    <GameHistory
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                        ]}
-                                        defaultTab={2}
-                                        setTab={setCurrentTab}
-                                        width={isMobile ? "100%" : "1000px"}
-                                        borderRadius="10px"
-                                        background="#1F224A"
-                                        padding={isMobile && "30px 0px"}
-                                        // setCurrentTab={setCurrentTab}
-                                    />
-                                </TabComponent>
-                            </HistoryWrapper>
-                        </ImageGridLayout>
-                    </HistoryPageWrapper>
-                </PageTemplate>
+                            <TabComponent>
+                                <NewCustomTabs
+                                    tabItems={[
+                                        {
+                                            value: "Deposit",
+                                            label: "Deposit",
+                                            content: (
+                                                <Deposit isMobile={isMobile} />
+                                            ),
+                                        },
+                                        {
+                                            value: "Withdraw",
+                                            label: "Withdraw",
+                                            content: (
+                                                <Withdraw isMobile={isMobile} />
+                                            ),
+                                        },
+                                        {
+                                            value: "Game",
+                                            label: "Game",
+                                            content: (
+                                                <GameHistory
+                                                    isMobile={isMobile}
+                                                />
+                                            ),
+                                        },
+                                    ]}
+                                    defaultTab={historyTab}
+                                    setTab={setCurrentTab}
+                                    width={isMobile ? "100%" : "1000px"}
+                                    borderRadius="10px"
+                                    background="#1F224A"
+                                    padding={isMobile && "30px 0px"}
+                                    // setCurrentTab={setCurrentTab}
+                                />
+                            </TabComponent>
+                        </HistoryWrapper>
+                    </ImageGridLayout>
+                </HistoryPageWrapper>
+            </PageTemplate>
             {/* </GuestLayout> */}
         </>
     );

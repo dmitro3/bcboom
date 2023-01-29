@@ -38,11 +38,9 @@ class WithdrawalController extends Controller
             
             if($request->amount > $wallet->withdrawable_balance){
                 return response()->json([
-                    'amount' => $request->amount,
-                    'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->withdrawable_balance,
-                    'message' => 'Total amount is less than requested amount'
-                ]);
+                    'withdrawable' => $wallet->withdrawable_balance,
+                    'error' => 'Total amount is less than requested amount'
+                ], 400);
             }
 
             else{
