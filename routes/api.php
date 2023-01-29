@@ -70,6 +70,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
+    Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
 
 
     Route::prefix('admin')->group(

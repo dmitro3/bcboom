@@ -19,7 +19,7 @@ import DateRangePicker from "@/Components/UtilComponents/DateRangePicker";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { format } from "date-fns";
 import { eachDayOfInterval } from "date-fns";
-import { allPayments } from "@/redux/wallet/wallet-slice";
+import { allPayments, allWithdrawals } from "@/redux/wallet/wallet-slice";
 
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
@@ -81,7 +81,6 @@ const Deposit = ({ isMobile }) => {
     //     actualAmount: "110",
     //     status: "success",
     // });
-    console.log("data: ", data);
     useEffect(() => {
         async function getAllPayments() {
             const response = await dispatcher(allPayments());
@@ -215,16 +214,40 @@ const Withdraw = ({ isMobile }) => {
     const [currentRange, setCurrentRange] = useState("");
     const pickerRef = useRef(null);
     useOnClickOutside(pickerRef, () => setOpen(false));
-    const [data, setData] = useState(
-        Array.from({ length: 100 }).fill({
-            transactionId: "123456789123456789123456789123456789",
-            date: "2023-01-18T20:58:41.000000Z",
-            depositAmount: "100",
-            bonus: "10",
-            actualAmount: "110",
-            status: "success",
-        })
-    );
+    const [data, setData] = useState([]);
+    const dispatcher = useDispatch();
+    useEffect(() => {
+        async function getAllWithdrawals() {
+            const response = await dispatcher(allWithdrawals());
+            if (response?.payload?.status === 200) {
+                const withdrawals = response?.payload?.data?.withdrawals;
+                const formattedData = withdrawals.map((el) => {
+                    const obj = {};
+                    {
+                        obj.transactionId = el.order_no;
+                        obj.date = new Date(el.created_at).toISOString();
+                        obj.depositAmount = el.amount;
+                        obj.bonus = el.bonus || 0;
+                        obj.actualAmount = el.amount;
+                        obj.status = el.status;
+                    }
+                    return obj;
+                });
+                setData(formattedData);
+            }
+        }
+        getAllWithdrawals();
+    }, []);
+    // const [data, setData] = useState(
+    //     Array.from({ length: 100 }).fill({
+    //         transactionId: "123456789123456789123456789123456789",
+    //         date: "2023-01-18T20:58:41.000000Z",
+    //         depositAmount: "100",
+    //         bonus: "10",
+    //         actualAmount: "110",
+    //         status: "success",
+    //     })
+    // );
     useEffect(() => {
         if (currentRange.endDate) setOpen(false);
     }, [currentRange]);
@@ -236,12 +259,6 @@ const Withdraw = ({ isMobile }) => {
         }).map((el) => new Date(el).setHours(0, 0, 0, 0));
         const filtered = data.filter((el, i) =>
             daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
-        );
-        console.log(
-            "filtered: ",
-            filtered,
-            daysInterval,
-            new Date(data[0].date).setHours(0, 0, 0, 0)
         );
         // console.log("daysInterval: ", daysInterval, rows);
         setData(filtered);
@@ -316,19 +333,23 @@ const Withdraw = ({ isMobile }) => {
                 justifyContent="center"
                 margin={isMobile ? "1px 0 " : "40px 0"}
             >
-                <div style={{ width: isMobile ? "100%" : "1000px" }}>
-                    <CustomTable
-                        columns={[
-                            "transaction ID",
-                            "Date",
-                            "Deposit Amount",
-                            "Bonus",
-                            "Actual Amount",
-                            "Status",
-                        ]}
-                        rows={data}
-                    />
-                </div>
+                {data.length ? (
+                    <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                        <CustomTable
+                            columns={[
+                                "transaction ID",
+                                "Date",
+                                "Deposit Amount",
+                                "Bonus",
+                                "Actual Amount",
+                                "Status",
+                            ]}
+                            rows={data}
+                        />
+                    </div>
+                ) : (
+                    <div>NO DATA</div>
+                )}
             </Flex>
         </DepositWrapper>
     );

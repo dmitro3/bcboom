@@ -277,6 +277,7 @@ const Withdraw = () => {
     const [widthrawError, setWithdrawError] = useState("");
     const dispatch = useDispatch();
     async function handleWithdraw() {
+        if(submitted) return;
         setSubmitted(true);
         if (!value || !name || !cpf || !pix || !whatsapp) {
             setWithdrawError(true);
@@ -304,10 +305,11 @@ const Withdraw = () => {
             return;
         }
         if (response?.payload?.status === 200) {
-            toast.info(`A withdraw order of R$ ${value} has been placed`);
+            toast.info(`A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`);
             dispatch(setHistoryTab(1));
-            dispatcher(setWalletModalState({ open: false }));
+            dispatch(setWalletModalState({ open: false }));
             Inertia.visit("/history");
+            setSubmitted(false);
         }
         setSubmitted(false);
     }
