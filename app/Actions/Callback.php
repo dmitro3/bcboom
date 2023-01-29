@@ -32,7 +32,7 @@ class Callback
 
         $sign = $this->getSignOpen($data, $key);
 
-        if ($sign == $sign) {
+        if ($sign == $request->sign) {
 
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败

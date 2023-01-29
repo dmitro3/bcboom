@@ -94,9 +94,6 @@ class Withdrawal
         $sign = $this->sign($data, $this->merchantKey);
 
 
-
-
-
         if ($sign === $request->sign) {
             if ($data['trade_state'] === 'SUCCESS') {
 
@@ -119,12 +116,11 @@ class Withdrawal
                 ]);
 
 
-
                 return "SUCCESS";
 
             }
-            return "SUCCESS";
         }
+        return "FAIL";
 
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -56,9 +57,9 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
+    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
@@ -139,7 +140,7 @@ Route::middleware(['jwt.verify'])->group(function () {
 // ]);
 
 
-Route::post('/notifypayment', function (Request $request): String {
+Route::post('/notifypayment', function (Request $request): string {
     $callback = new Callback;
     return $callback->run($request);
 });
