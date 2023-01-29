@@ -139,7 +139,7 @@ Route::middleware(['jwt.verify'])->group(function () {
 // ]);
 
 
-Route::post('/notifypayment', function (Request $request) {
+Route::post('/notifypayment', function (Request $request): String {
     $callback = new Callback;
     return $callback->run($request);
 });

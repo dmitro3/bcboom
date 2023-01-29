@@ -1,24 +1,21 @@
 import { styled } from "@mui/system";
 
 export const DiceWrapper = styled("div")(() => ({
-    border: "10px solid yellow",
-    width: "100%",
+    "& .container": {
+        width: "200px",
+        height: "200px",
+        position: "relative",
+        margin: "0 auto 40px",
+        perspective: "1000px",
+        perspectiveOrigin: "50% 100%",
+    },
+    "#cube": {
     "#cube .front": { transform: "translateZ(100px)" },
     "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube .right": { transform: "rotateY(90deg)    translateZ(100px)" },
     "#cube .left": { transform: "rotateY(-90deg)    translateZ(100px)" },
     "#cube .top": { transform: "rotateX(90deg)    translateZ(100px)" },
     "#cube .bottom": { transform: "rotateX(-90deg)    translateZ(100px)" },
-    ".container": {
-        width: "200px",
-        height: "200px",
-        position: "relative",
-        margin: "0 auto 40px",
-        border: "1px solid #FFF",
-        perspective: "1000px",
-        perspectiveOrigin: "50% 100%",
-    },
-    "#cube": {
         // width: "100%",
         // height: "100%",
         // top: "100px",

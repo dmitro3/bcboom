@@ -6,7 +6,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import React from "react";
+import React, { useState } from "react";
 
 const Dice = () => {
     const { isMobile } = useScreenResolution();
@@ -23,25 +23,29 @@ const Dice = () => {
         height: "80%",
         position: "relative",
     }));
-
+    const [btnClicked, setBtnClicked] = useState(false);
+    const gripProps = {
+        btnClicked,
+        setBtnClicked,
+    };
     return (
-        <div >
+        <div>
             <Head title="Games Dice" />
             {/* <GuestLayout> */}
-                <PageTemplate innerHeader={true}>
-                    <GamesPageWrapper>
-                        <GameLayout
-                            GameFrameText={"Dice"}
-                            GameFrame={DiceFrame}
-                            ButtonGrid={DiceButtonGrid}
-                            customFrameHeader={true}
-                            innerHeader={true}
-                            customFrameBoxStyles={{
-                                height: "21rem",
-                            }}
-                        />
-                    </GamesPageWrapper>
-                </PageTemplate>
+            <PageTemplate innerHeader={true}>
+                <GamesPageWrapper>
+                    <GameLayout
+                        GameFrameText={"Dice"}
+                        GameFrame={DiceFrame(gripProps)}
+                        ButtonGrid={DiceButtonGrid(gripProps)}
+                        customFrameHeader={true}
+                        innerHeader={true}
+                        customFrameBoxStyles={{
+                            height: "21rem",
+                        }}
+                    />
+                </GamesPageWrapper>
+            </PageTemplate>
             {/* </GuestLayout> */}
         </div>
     );

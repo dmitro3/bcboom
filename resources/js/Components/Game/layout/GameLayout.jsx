@@ -180,10 +180,10 @@ const GameLayout = ({
                                 ...customFrameBoxStyles,
                             }}
                         >
-                            {GameFrame ? GameFrame() : null}
+                            {GameFrame ? GameFrame : null}
                         </Box>
                     </Box>
-                    {ButtonGrid ? ButtonGrid() : null}
+                    {ButtonGrid ? ButtonGrid : null}
                     {displayPanel && <GameTab />}
                 </Box>
 

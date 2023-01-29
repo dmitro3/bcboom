@@ -10,6 +10,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { motion, useAnimation } from "framer-motion";
 import { DiceWrapper } from "../styles/diceStyles";
 import { useEffect } from "react";
+// import { sleep } from "@/utils/util";
 
 const marks = [0, 25, 50, 75, 100];
 
@@ -59,25 +60,32 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = () => {
+const DiceFrame = (gridProps) => {
+    const { btnClicked, setBtnClicked } = gridProps;
     const { isMobile } = useScreenResolution();
     const [diceRotation, setDiceRotation] = useState(0);
     const controls = useAnimation();
-    const diceRef = useRef();
-
-    console.log("ref: ", diceRef);
-    function rollDice(diceRef) {
+    const diceRef = useRef(null);
+    // useEffect(() => {
+    //     if (btnClicked) {
+    //         rollDice(diceRef);
+    //     }
+    // }, [btnClicked]);
+    async function rollDice() {
         const min = 1;
         const max = 24;
-
         function getRandomInt(min, max) {
             return (Math.floor(Math.random() * (max - min)) + min) * 90;
         }
         const xRand = getRandomInt(min, max);
-        const yRand = getRandomInt(min, mhyjax);
+        const yRand = getRandomInt(min, max);
+        console.log("refff", diceRef);
         diceRef.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
+        // await sleep(2000);
         diceRef.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
+        // setBtnClicked(false);
     }
+    console.log("refff 3", diceRef);
     return (
         <Box
             sx={{
@@ -87,83 +95,62 @@ const DiceFrame = () => {
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <Box
+            {/* <Box
                 sx={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
-            >
-                <DiceWrapper>
-                    <section classsName="container" ref={diceRef}>
-                        <div id="cube" onClick={() => rollDice()}>
-                            <div className="front">
-                                <span className="dot dot1"></span>
-                            </div>
-                            <div className="back">
-                                <span className="dot dot1"></span>
-                                <span className="dot dot2"></span>
-                            </div>
-                            <div className="right">
-                                <span className="dot dot1"></span>
-                                <span className="dot dot2"></span>
-                                <span className="dot dot3"></span>
-                            </div>
-                            <div className="left">
-                                <span className="dot dot1"></span>
-                                <span className="dot dot2"></span>
-                                <span className="dot dot3"></span>
-                                <span className="dot dot4"></span>
-                            </div>
-                            <div className="top">
-                                <span className="dot dot1"></span>
-                                <span className="dot dot2"></span>
-                                <span className="dot dot3"></span>
-                                <span className="dot dot4"></span>
-                                <span className="dot dot5"></span>
-                            </div>
-                            <div className="bottom">
-                                <span className="dot dot1"></span>
-                                <span className="dot dot2"></span>
-                                <span className="dot dot3"></span>
-                                <span className="dot dot4"></span>
-                                <span className="dot dot5"></span>
-                                <span className="dot dot6"></span>
-                            </div>
+            > */}
+            <DiceWrapper>
+                <section className="container">
+                    <div id="cube" onClick={() => rollDice()} ref={diceRef}>
+                        <div className="front">
+                            <span className="dot dot1"></span>
                         </div>
-                    </section>
-                </DiceWrapper>
-                {/* <motion.div
-                    animate={controls}
-                    variants={{
-                        rotateZ: 0,
-                        rotateY: 0.3,
-                        scale: 1.3,
-                        transition: {
-                            rotateZ: {
-                                duration: 1.5,
-                                ease: "linear",
-                                repeat: Infinity,
-                            },
-                        },
-                    }}
-                    style={{ perspective: 1000 }}
-                >
-                    Click me to move in 3D space
-                </motion.div> */}
-                {/* <Canvas >
-
-                </Canvas> */}
-                <motion.div
+                        <div className="back">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                        </div>
+                        <div className="right">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                        </div>
+                        <div className="left">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                        </div>
+                        <div className="top">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                            <span className="dot dot5"></span>
+                        </div>
+                        <div className="bottom">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                            <span className="dot dot5"></span>
+                            <span className="dot dot6"></span>
+                        </div>
+                    </div>
+                </section>
+            </DiceWrapper>
+            {/* <motion.div
                     animate={{
                         rotate: diceRotation * 300,
                     }}
                     transition={{ ease: "easeIn", duration: 1 }}
-                >
-                    <Frame src={dice} />
-                </motion.div>
-            </Box>
+                > */}
+            {/* <Frame src={dice} ref={diceRef} /> */}
+            {/* </motion.div> */}
+            {/* </Box> */}
             <Box
                 sx={{
                     width: "100%",
@@ -190,9 +177,7 @@ const DiceFrame = () => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         defaultValue={50}
-                        onChange={(e, value) => {
-                            console.log("dfgdfge", e, value);
-                            //     console.log('value', value)
+                        onChange={(_, value) => {
                             setDiceRotation(value);
                         }}
                     />
