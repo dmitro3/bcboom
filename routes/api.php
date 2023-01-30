@@ -109,6 +109,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 });
 
 
+Route::get('notifywithdrawal', function(Request $request){
+    $callback = new Withdrawal;
+    $callback->status($request);    
+});
+
+Route::post('/notifypayment', [
+    PaymentController::class, 'callback'
+]);
+
 Route::middleware(['jwt.verify'])->group(function () {
 
     // Payment routes
@@ -117,13 +126,53 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
 
+    
+    Route::post('notify', function (Request $request) {
+        $process = new Process;
+         $process->status($request);
+    });
+
+});
+Route::middleware(['jwt.verify', 'admin'])->group(function () {
+    
+    Route::get('make/admin/{id}', [
+        UserController::class, 'makeAdmin'
+    ]);
+
+        Route::get('users/all',[
+            UserController::class, 'allUsers'
+            ])->name('allUsers');
+            
+            Route::get('admins/all',[
+                UserController::class, 'allAdmins'
+                ])->name('allAdmins');
+                
+                    Route::post('user/save',[
+                        UserController::class, 'saveUser'
+                        ])->name('saveUser');
+                        
+                        Route::get('delete/user/{id}',[
+                            UserController::class, 'deleteUser'
+                            ])->name('deleteUser');
+                            
+                            
+                            Route::get('ban/user/{id}',[
+                                UserController::class, 'banUser'
+                                ])->name('banUser');
+
+                                    Route::post('email/send/{id}',[
+                                        UserController::class, 'sendMail'
+                                        ])->name('sendMail');
+                                        
+        
+       
 
 
     Route::post(
         'notify',
         function (Request $request) {
             $process = new Process;
-            $process->status($request);
+            return $process->status($request);
         }
     );
 
@@ -148,6 +197,7 @@ Route::post('/notifypayment', function (Request $request): string {
 
 
 
+ });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

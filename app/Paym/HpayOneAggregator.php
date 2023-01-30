@@ -1,4 +1,4 @@
-<?php namespace App\Paym\Aggregate;
+<?php namespace App\Paym;
 
 use App\Currency\Currency;
 use App\Models\Wallet;

@@ -1,4 +1,4 @@
-<?php namespace App\Actions\Validate;
+<?php namespace App\Actions;
 
 use App\Models\Wallet;
 use App\Models\Payment;
