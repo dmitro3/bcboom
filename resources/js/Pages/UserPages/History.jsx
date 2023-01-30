@@ -224,7 +224,7 @@ const Withdraw = ({ isMobile }) => {
                 const formattedData = withdrawals.map((el) => {
                     const obj = {};
                     {
-                        obj.transactionId = el.order_no;
+                        obj.transactionId = el.orderno;
                         obj.date = new Date(el.created_at).toISOString();
                         obj.depositAmount = el.amount;
                         obj.bonus = el.bonus || 0;

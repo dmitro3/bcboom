@@ -61,30 +61,17 @@ const PrettoSlider = styled(Slider)({
 });
 
 const DiceFrame = (gridProps) => {
-    const { btnClicked, setBtnClicked } = gridProps;
+    const { diceRef, rollDice } = gridProps;
     const { isMobile } = useScreenResolution();
     const [diceRotation, setDiceRotation] = useState(0);
     const controls = useAnimation();
-    const diceRef = useRef(null);
+    // const diceRef = useRef(null);
     // useEffect(() => {
     //     if (btnClicked) {
     //         rollDice(diceRef);
     //     }
     // }, [btnClicked]);
-    async function rollDice() {
-        const min = 1;
-        const max = 24;
-        function getRandomInt(min, max) {
-            return (Math.floor(Math.random() * (max - min)) + min) * 90;
-        }
-        const xRand = getRandomInt(min, max);
-        const yRand = getRandomInt(min, max);
-        console.log("refff", diceRef);
-        diceRef.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
-        // await sleep(2000);
-        diceRef.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
-        // setBtnClicked(false);
-    }
+   
     console.log("refff 3", diceRef);
     return (
         <Box
@@ -105,7 +92,7 @@ const DiceFrame = (gridProps) => {
             > */}
             <DiceWrapper>
                 <section className="container">
-                    <div id="cube" onClick={() => rollDice()} ref={diceRef}>
+                    <div id="cube" onClick={() => rollDice(diceRef)} ref={diceRef}>
                         <div className="front">
                             <span className="dot dot1"></span>
                         </div>

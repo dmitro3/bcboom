@@ -6,7 +6,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Dice = () => {
     const { isMobile } = useScreenResolution();
@@ -24,9 +24,24 @@ const Dice = () => {
         position: "relative",
     }));
     const [btnClicked, setBtnClicked] = useState(false);
+    const [diceRef, setDiceRef] = useState(useRef(null));
+    async function rollDice(ref) {
+        const min = 1;
+        const max = 24;
+        function getRandomInt(min, max) {
+            return (Math.floor(Math.random() * (max - min)) + min) * 90;
+        }
+        const xRand = getRandomInt(min, max);
+        const yRand = getRandomInt(min, max);
+        console.log("refff", ref);
+        ref.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
+        // await sleep(2000);
+        ref.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
+        // setBtnClicked(false);
+    }
     const gripProps = {
-        btnClicked,
-        setBtnClicked,
+        setDiceRef,
+        rollDice,
     };
     return (
         <div>
