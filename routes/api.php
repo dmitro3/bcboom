@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -56,10 +57,10 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
-    
+    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
+
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
 
@@ -69,35 +70,42 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
+    Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
+
+
+    Route::prefix('admin')->group(
+        function () {
+
+            Route::post(
+                'paym',
+                function (Request $request) {
+                        $aggregator = Aggregate::find($request->id);
+                        if (!$aggregator)
+                            return APIResponse::reject(1);
+
+                        $wallet = Wallet::where('user_id', Auth::id())->first();
+
+                        return Aggregate::find($aggregator->id())->wallet($wallet);
+                    }
+            );
+
+            // Route::post('paymentStatus', function(Request $request) {
+            //     $aggregator = null;
+            //     foreach(Aggregate::list() as $ag) {
+            //         if($ag->validate($request)) {
+            //             $aggregator = $ag;
+            //             break;
+            //         }
+            //     }
+            //     if($aggregator == null) return 'Unknown aggregator';
     
-
-    Route::prefix('admin')->group(function () {
-        
-        Route::post('paym', function(Request $request) {
-            $aggregator = Aggregate::find($request->id);
-            if(!$aggregator) return APIResponse::reject(1);
-
-            $wallet = Wallet::where('user_id', Auth::id())->first();
-            
-            return Aggregate::find($aggregator->id())->wallet($wallet);
-        });
-        
-        // Route::post('paymentStatus', function(Request $request) {
-        //     $aggregator = null;
-        //     foreach(Aggregate::list() as $ag) {
-        //         if($ag->validate($request)) {
-        //             $aggregator = $ag;
-        //             break;
-        //         }
-        //     }
-        //     if($aggregator == null) return 'Unknown aggregator';
-            
-        //     return $aggregator->status($request);
-        // });
-        
-    });
-
+            //     return $aggregator->status($request);
+            // });
     
+        }
+    );
+
+
 });
 
 
@@ -111,13 +119,12 @@ Route::post('/notifypayment', [
 ]);
 
 Route::middleware(['jwt.verify'])->group(function () {
-    
+
     // Payment routes
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
-    
+
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
-    
 
     
     Route::post('notify', function (Request $request) {
@@ -158,7 +165,37 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
                                         ])->name('sendMail');
                                         
         
-        
+       
+
+
+    Route::post(
+        'notify',
+        function (Request $request) {
+            $process = new Process;
+            return $process->status($request);
+        }
+    );
+
+});
+// Route::post('/notifypayment', [
+//     PaymentController::class,
+//     'callback'
+// ]);
+
+
+Route::post(
+    'notifywithdrawal',
+    function (Request $request) {
+        $callback = new Withdrawal;
+       return $callback->status($request);
+    }
+);
+Route::post('/notifypayment', function (Request $request): string {
+    $callback = new Callback;
+    return $callback->run($request);
+});
+
+
 
  });
 

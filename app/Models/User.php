@@ -12,7 +12,6 @@ use App\Models\Wallet;
 use App\Models\Referral;
 
 class User extends Authenticatable implements JWTSubject
-
 {
     use HasApiTokens, HasFactory, Notifiable;
     /**
@@ -42,15 +41,15 @@ public function emails(){
     return $this->hasMany(Email::class);
 }
     public function referrer()
-{
-    return $this->belongsTo(User::class, 'referrer_id', 'id');
-}
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    }
 
 
-public function referrals()
-{
-    return $this->hasMany(User::class, 'referrer_id', 'id');
-}
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
+    }
 
     public function wallet()
     {
@@ -61,100 +60,89 @@ public function referrals()
     //     return $this->hasMany(Referral::class);
     // }
 
-    public function grantBonus(){
+    public function grantBonus()
+    {
         $wallet = Wallet::where('user_id', '=', $this->id)->first();
         // $referrals = Referral::where('user_id', '=', $wallet->user_id)->get();
 
         $refs = $this->referrals->count();
-        
-       
-        if($wallet){
-            if($refs > 0){
-            $walletBonus = $wallet->bonus + 9;
-            
-            $w = Wallet::updateOrCreate(
-                ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus],
-                ['total' => $wallet->total + $walletBonus]
-            );
-        }
 
-        else if($refs > 999){
-            $walletBonus = $wallet->bonus + 10;
-            $w = Wallet::updateOrCreate(
-                ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus],
-                ['total' => $wallet->total + $walletBonus]
-            );
-        }
 
-        else if($refs > 1000){
-            $walletBonus = $wallet->bonus + 10;
-            $w = Wallet::updateOrCreate(
-                ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus],
-                ['total' => $wallet->total + $walletBonus]
-            );
-        }
+        if ($wallet) {
+            if ($refs > 0) {
+                $walletBonus = $wallet->bonus + 9;
 
-        else if($refs > 2999){
-            $walletBonus = $wallet->bonus + 12;
-            $w = Wallet::updateOrCreate(
-                ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus],
-                ['total' => $wallet->total + $walletBonus]
-            );
-        }
+                $w = Wallet::updateOrCreate(
+                    ['user_id' => $this->id],
+                    ['bonus' => $walletBonus],
+                    ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+                );
+            } else if ($refs > 999) {
+                $walletBonus = $wallet->bonus + 10;
+                $w = Wallet::updateOrCreate(
+                    ['user_id' => $this->id],
+                    ['bonus' => $walletBonus],
+                    ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+                );
+            } else if ($refs > 1000) {
+                $walletBonus = $wallet->bonus + 10;
+                $w = Wallet::updateOrCreate(
+                    ['user_id' => $this->id],
+                    ['bonus' => $walletBonus],
+                    ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+                );
+            } else if ($refs > 2999) {
+                $walletBonus = $wallet->bonus + 12;
+                $w = Wallet::updateOrCreate(
+                    ['user_id' => $this->id],
+                    ['bonus' => $walletBonus],
+                    ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+                );
+            } else if ($refs > 4999) {
+                $walletBonus = $wallet->bonus + 15;
+                $w = Wallet::updateOrCreate(
+                    ['user_id' => $this->id],
+                    ['bonus' => $walletBonus],
+                    ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+                );
+            }
 
-        else if($refs > 4999){
-            $walletBonus = $wallet->bonus + 15;
-            $w = Wallet::updateOrCreate(
-                ['user_id' =>  $this->id],
-                ['bonus' => $walletBonus],
-                ['total' => $wallet->total + $walletBonus]
-            );
-        }
+        } else {
 
-        }
-
-    else
-    {
-
-        $w = Wallet::create([
-            'user_id' =>  $this->id,
-            'bonus' => 9,
-            'total' => $wallet->total + $walletBonus
+            $w = Wallet::create([
+                'user_id' => $this->id,
+                'bonus' => 9,
+                'withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus
             ]);
 
-    }
-        
+        }
+
     }
 
-    public function sumWallet($increase, $decrease, $amount){
-    
+    public function sumWallet($increase, $decrease, $amount)
+    {
+
         $deposits = $this->wallet->deposit;
         $bets = $this->wallet->bet;
         $bonus = $this->wallet->bonus;
-        $totals = $this->wallet->total;
-        
-        if($totals == 0){
+        $totals = $this->wallet->withdrawable_balance;
+
+        if ($totals == 0) {
             $sum = $deposits + $bets + $bonus;
-            $user->wallet->update([
-                'total' => $sum
+            $this->wallet->update([
+                'withdrawable_balance' => $sum
             ]);
 
-        }else{
-            if($increase)
-            {
-                 $sum = $total + $amount;
-                 $user->wallet->update([
-                    'total' => $sum
-                 ]);
-            }elseif($decrease)
-            {
-                $minus = $total - $amount;
-                $user->wallet->update([
-                    'total' => $minus
+        } else {
+            if ($increase) {
+                $sum = $totals + $amount;
+                $this->wallet->update([
+                    'withdrawable_balance' => $sum
+                ]);
+            } elseif ($decrease) {
+                $minus = $totals - $amount;
+                $this->wallet->update([
+                    'withdrawable_balance' => $minus
                 ]);
             }
         }
@@ -181,17 +169,18 @@ public function referrals()
 
     protected $appends = ['referral_link'];
 
-/**
- * Get the user's referral link.
- *
- * @return string
- */
-public function getReferralLinkAttribute()
-{
-    return $this->referral_link = route('register', ['referral' => $this->username]);
-}
+    /**
+     * Get the user's referral link.
+     *
+     * @return string
+     */
+    public function getReferralLinkAttribute()
+    {
+        return $this->referral_link = route('register', ['referral' => $this->username]);
+    }
 
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
     /**
@@ -199,8 +188,8 @@ public function getReferralLinkAttribute()
      *
      * @return array
      */
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
-    }    
+    }
 }
-

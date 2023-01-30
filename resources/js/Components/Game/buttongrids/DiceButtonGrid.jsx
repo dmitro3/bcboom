@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 
-const DiceButtonGrid = () => {
+const DiceButtonGrid = (gridProps) => {
+    const { setBtnClicked } = gridProps;
     return (
         <Box
             sx={{
@@ -146,6 +147,7 @@ const DiceButtonGrid = () => {
                     backgroundColor: "#3585ff",
                     color: "#FFFFFF",
                 }}
+                onClick={() => setBtnClicked(true)}
             >
                 BET
             </Button>

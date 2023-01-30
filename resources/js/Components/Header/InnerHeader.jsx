@@ -41,7 +41,7 @@ const InnerHeaderItem = styled("div")(({ active }) => ({
     },
 }));
 const InnerHeader = () => {
-    const { isMobile , width} = useScreenResolution();
+    const { isMobile, width } = useScreenResolution();
     const { user } = useSelector((state) => state.auth);
     const location =
         typeof window !== undefined
@@ -96,9 +96,9 @@ const InnerHeader = () => {
                         href={user?.user ? item.link : "/"}
                         preserveScroll
                         preserveState
+                        key={index}
                     >
                         <InnerHeaderItem
-                            key={index}
                             active={location == item.link.replace("/", "")}
                             onClick={() => {
                                 if (!user?.user) {
@@ -125,7 +125,9 @@ const InnerHeader = () => {
                         </InnerHeaderItem>{" "}
                     </Link>
                 ))}
-                {!isMobile && width >= 1010 && <UserDropdown isLoggedIn={user?.user} />}
+                {!isMobile && width >= 1010 && (
+                    <UserDropdown isLoggedIn={user?.user} />
+                )}
             </InnerHeaderItems>
         </InnerHeaderWrapper>
     );

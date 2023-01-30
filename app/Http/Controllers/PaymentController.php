@@ -39,30 +39,21 @@ class PaymentController extends Controller
         ], 200);
 
     }
-    public function testpay()
-    {
-
-
-        $process2 = new Proc;
-
-        $process2->exec();
-
-    }
 
     public function callback(Request $request)
     {
 
-        if($request == null){
-         $message = "failed to call callback";   
-        $status = false;
+        if ($request == null) {
+            $message = "failed to call callback";
+            $status = false;
             return response()->json([
                 'message' => $message,
                 'status' => $status
             ]);
-        }else{
+        } else {
 
             $callback = new Callback;
-            return $callback->run();
+            return $callback->run($request);
         }
     }
 

@@ -3,9 +3,13 @@ import { styled } from "@mui/system";
 import { DateRangePicker as MXPicker } from "mui-daterange-picker";
 
 const PickerWrapper = styled("div")(({ isMobile }) => ({
+    // ".react-datepicker-popper": { zIndex: 30000 },
+
     "& .css-vj1n65-MuiGrid-root": {
         background: "#10133D",
         display: isMobile && "none",
+        // zIndex: 1000,
+        // position: "relative",
     },
     "& .css-a2e4ud": {
         background: "#10133D",
@@ -56,6 +60,9 @@ const DateRangePicker = ({ toggle, open, setCurrentRange }) => {
                 open={open}
                 toggle={toggle}
                 onChange={(range) => setCurrentRange(range)}
+                PopperProps={{
+                    style: {ZIndex: 100000},
+                }}
             />
         </PickerWrapper>
     );

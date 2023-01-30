@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('bankcard');
             $table->string('trade_state');
             $table->boolean('approved')->default(0);
+            $table->string('status')->default('PENDING');
             $table->timestamps();
         });
     }

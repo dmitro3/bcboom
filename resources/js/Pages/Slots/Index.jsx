@@ -212,7 +212,7 @@ export default function Homepage(props) {
     return (
         <>
             <Head title="Homepage" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate
                     innerHeader={true}
                     homeCarousel
@@ -288,7 +288,7 @@ export default function Homepage(props) {
                         </SearchSection>
                     </FilterSection>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 }

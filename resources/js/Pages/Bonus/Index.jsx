@@ -63,7 +63,7 @@ const BonusIndex = () => {
             icon: bonusIcon,
             imageWidth: "534px",
             imageHeight: "175px",
-            margin: '10px',
+            margin: "10px",
             perColumn: 3,
             hoverEffect: "overlay",
             hoverText: "see more",
@@ -111,22 +111,21 @@ const BonusIndex = () => {
     return (
         <>
             <Head title="Promotions" />
-            <GuestLayout>
-                <PageTemplate innerHeader={true}>
-                    <PromotionPageWrapper>
-                        <PromotionImageHeader isMobile={isMobile}>
-                            <p>DAILY</p>
-                            <p>BONUSES</p>
-                            <p>
-                                Participate in numerous tournaments and complete
-                                againts other players for a hefty
-                                <span> Prize Pool</span>
-                            </p>
-                        </PromotionImageHeader>
-                    </PromotionPageWrapper>
-                    <ImageGridWithHeader gridItems={gridItems} />
-                </PageTemplate>
-            </GuestLayout>
+
+            <PageTemplate innerHeader={true}>
+                <PromotionPageWrapper>
+                    <PromotionImageHeader isMobile={isMobile}>
+                        <p>DAILY</p>
+                        <p>BONUSES</p>
+                        <p>
+                            Participate in numerous tournaments and complete
+                            againts other players for a hefty
+                            <span> Prize Pool</span>
+                        </p>
+                    </PromotionImageHeader>
+                </PromotionPageWrapper>
+                <ImageGridWithHeader gridItems={gridItems} />
+            </PageTemplate>
         </>
     );
 };

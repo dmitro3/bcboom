@@ -219,7 +219,7 @@ const FairnessIndex = () => {
     return (
         <>
             <Head title="Fairnesss" />
-            <GuestLayout>
+            
                 <PageTemplate innerHeader={true}>
                     <FairnessPageWrapper>
                         <FairnessImageHeader isMobile={isMobile}>
@@ -492,7 +492,7 @@ round has its own hash, consisting of random wins that are uniquely generated fo
                         </ImageGridLayout>
                     </FairnessPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            
         </>
     );
 };

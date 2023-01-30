@@ -19,6 +19,7 @@ class Withdraw extends Model
         "trade_state",
         'user_id',
         "approved",
+        "status",
     ];
     public function user(){
         return $this->belongsTo(User::class);

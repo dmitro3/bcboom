@@ -123,7 +123,7 @@ const RaceIndex = () => {
     return (
         <>
             <Head title="Promotions" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionImageHeader isMobile={isMobile}>
@@ -138,7 +138,7 @@ const RaceIndex = () => {
                     </PromotionPageWrapper>
                     <CardCoursel cardItems={gridItems} />
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

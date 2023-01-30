@@ -106,7 +106,7 @@ const PromotionIndex = () => {
     return (
         <>
             <Head title="Promotions" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionImageHeader isMobile={isMobile}>
@@ -120,7 +120,7 @@ const PromotionIndex = () => {
                     </PromotionPageWrapper>
                     <ImageGridWithHeader gridItems={gridItems} />
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

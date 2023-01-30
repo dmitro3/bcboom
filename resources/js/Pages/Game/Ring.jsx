@@ -27,7 +27,7 @@ const Ring = () => {
     return (
         <div>
             <Head title="Game Ring" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
@@ -38,7 +38,7 @@ const Ring = () => {
                         />
                     </GamesPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </div>
     );
 };

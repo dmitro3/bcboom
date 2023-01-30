@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('deposit')->default(0);
             $table->double('bet')->default(0);
             $table->double('bonus')->default(0);
-            $table->double('total')->default(0);
+            $table->double('withdrawable_balance')->default(0);
             $table->string('order_no')->nullable();
             $table->timestamps();
         });
