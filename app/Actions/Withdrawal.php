@@ -1,5 +1,5 @@
 <?php
-namespace App\Actions\Withdrawal;
+namespace App\Actions;
 
 use App\Models\Payment;
 use App\Models\Wallet;

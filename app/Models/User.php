@@ -31,13 +31,16 @@ class User extends Authenticatable implements JWTSubject
         'bio',
         'address',
         'referrer_id',
+        'player',
         'referral_count',
         'withdrawal_limit',
         'phone',
         'vip',
         'referred_by'
     ];
-
+public function emails(){
+    return $this->hasMany(Email::class);
+}
     public function referrer()
 {
     return $this->belongsTo(User::class, 'referrer_id', 'id');

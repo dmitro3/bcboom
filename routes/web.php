@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,7 +155,21 @@ Route::get('/games/limbo', function () {
 
 });
 
+Route::get('authify', [
+    UserController::class, 'authify'
+])->name('authify');
 
+Route::post('post/auth', [
+    UserController::class, 'postAuthify'
+])->name('postAuthify');
+
+
+
+    
+    Route::get('admin/dash/open', [
+        UserController::class, 'openDash'
+    ])->name('openDash');
+    
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
