@@ -61,8 +61,8 @@ class Withdrawal
         if (isset($result['data']['orderno'])) {
             // print('success');
             // dd($result['data']);
-
-            $withdrawal = Withdraw::create([
+            var_dump($result['data']);
+            Withdraw::create([
                 'orderno' => $result['data']['orderno'],
                 'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
