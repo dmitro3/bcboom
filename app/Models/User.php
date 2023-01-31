@@ -186,6 +186,50 @@ public function referrals()
  *
  * @return string
  */
+
+ public function promoteLevel(){
+    $wallet = Wallet::where('user_id', $this->id)->first();
+
+    if($wallet->deposit > 999){
+     $vip =  $this->update([
+            'vip' => 1
+        ]);
+        return $vip; 
+    }
+    elseif($wallet->deposit > 1999){
+     $vip =  $this->update([
+        'vip' => 2    
+        ]);
+        return $vip;
+    }
+    elseif($wallet->deposit > 2999){
+      $vip = $this->update([
+        'vip' => 3 
+        ]);
+        return $vip;
+    }
+    elseif($wallet->deposit > 3999){
+      $vip = $this->update([
+            'vip' => 4
+        ]);
+        return $vip;
+    }
+    elseif($wallet->deposit > 4999){
+      $vip = $this->update([
+            'vip' => 5
+        ]);
+        return $vip;
+    }
+    else{
+      $vip = $this->update([
+            'vip' => 6
+        ]);
+        return $vip;
+    }
+
+    return $this->vip;
+ }
+
 public function getReferralLinkAttribute()
 {
     return $this->referral_link = route('register', ['referral' => $this->username]);
