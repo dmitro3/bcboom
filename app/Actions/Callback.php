@@ -43,15 +43,14 @@ class Callback
                 $payment = Payment::where('order_no', $data['tx_orderno'])->first();
 
                 $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
-                if ($wallet) {
+                if ($wallet && $payment) {
                     $wallet->update([
                         'withdrawable_balance' => $wallet->withdrawable_balance + $payment->amount,
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
-                } elseif ($payment) {
                     $payment->update([
                         'called' => 1,
-                        'status' => 'PAY'
+                        'status' => 'PAID'
                     ]);
                 }
                 //改变订单状态，及其他业务修改

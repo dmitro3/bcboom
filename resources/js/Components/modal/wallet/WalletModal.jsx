@@ -294,24 +294,25 @@ const Withdraw = () => {
         };
         const response = await dispatch(widthdraw(payload));
         console.log("response: ", response);
-        if (!response?.payload) {
-            toast.error("An error occured");
-            setSubmitted(false);
-            return;
-        }
-        if (response?.payload?.data?.error) {
-            toast.error(response.payload?.data?.error);
-            setSubmitted(false);
-            return;
-        }
-        if (response?.payload?.status === 200) {
-            toast.info(`A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`);
-            dispatch(setHistoryTab(1));
-            dispatch(setWalletModalState({ open: false }));
-            Inertia.visit("/history");
-            setSubmitted(false);
-        }
-        setSubmitted(false);
+        // if (!response?.payload) {
+        //     toast.error("An error occured");
+        //     setSubmitted(false);
+        //     return;
+        // }
+        // if (response?.payload?.data?.error) {
+        //     toast.error(response.payload?.data?.error);
+        //     setSubmitted(false);
+        //     return;
+        // }
+        // if (response?.payload?.status === 200) {
+        //     toast.info(`A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`);
+        //     dispatch(setHistoryTab(1));
+        //     dispatch(setWalletModalState({ open: false }));
+        //     dispatch()
+        //     Inertia.visit("/history");
+        //     setSubmitted(false);
+        // }
+        // setSubmitted(false);
     }
     return (
         <TabWrapper>
