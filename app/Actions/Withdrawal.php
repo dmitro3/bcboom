@@ -56,13 +56,13 @@ class Withdrawal
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
 
-
+        var_dump($result);
 
         if (isset($result['data']['orderno'])) {
             // print('success');
             // dd($result['data']);
 
-            $withdrawal = Withdraw::create([
+            Withdraw::create([
                 'orderno' => $result['data']['orderno'],
                 'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
@@ -95,7 +95,7 @@ class Withdrawal
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
         if ($sign === $sign) {
-        // if ($sign === $sign) {
+            // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
             $withdrawal = Withdraw::where('orderno', $request->orderno)
                 ->orderBy('created_at', 'desc')->first();
