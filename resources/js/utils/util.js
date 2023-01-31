@@ -99,7 +99,7 @@ export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
         const withdrawals = response?.payload?.data?.withdrawals;
         formattedData = withdrawals.map((el) => {
             const obj = {};
-            const fee = Math.ceil(el.amount * 0.03);
+            const fee = (el.amount * 0.03).toFixed(2);
             {
                 obj.transactionId = el.orderno;
                 obj.date = new Date(el.created_at).toISOString();
