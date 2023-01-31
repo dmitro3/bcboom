@@ -25,7 +25,7 @@ const Dice = () => {
     }));
     const [btnClicked, setBtnClicked] = useState(false);
     const [diceRef, setDiceRef] = useState(useRef(null));
-    async function rollDice(ref) {
+    async function rollDice(diceRef) {
         const min = 1;
         const max = 24;
         function getRandomInt(min, max) {
