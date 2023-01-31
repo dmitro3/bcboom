@@ -95,7 +95,7 @@ class Withdrawal
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
         if ($sign === $sign) {
-        // if ($sign === $sign) {
+            // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
             $withdrawal = Withdraw::where('orderno', $request->orderno)
                 ->orderBy('created_at', 'desc')->first();
