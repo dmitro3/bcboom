@@ -56,7 +56,7 @@ class Withdrawal
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
 
-
+        var_dump($result);
 
         if (isset($result['data']['orderno'])) {
             // print('success');
