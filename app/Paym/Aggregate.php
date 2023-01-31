@@ -1,4 +1,4 @@
-<?php namespace App\Paym\Aggregate;
+<?php namespace App\Paym;
 
 use App\Models\Wallet;
 use App\Models\Payment;

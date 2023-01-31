@@ -38,38 +38,22 @@ class AuthController extends Controller
     return redirect()->route('open')->with('ref', $request->query('ref'));
 }
 
-    public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        if (! $token = auth()->attempt($validator->validated())) {
+    public function login(Request $request)
+    {
+
+        // $credentials = request(['name', 'password']);
+        $credentials = $this->credentials($request);
+
+        if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        // if(is_numeric($request->get('email'))){
-        //     return ['phone'=>$request->get('email'),'password'=>$request->get('password')];
-        //   }
-        //   elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
-        //     return ['email' => $request->get('email'), 'password'=>$request->get('password')];
-        //   }
-        //   return ['username' => $request->get('email'), 'password'=>$request->get('password')];
-
-
-        if(is_numeric($request->email)){
-            $phone = User::where('phone', $request->email)->first();
-            if($phone !== NULL){
-                $email = $phone->email;
-                
-        return $this->createNewToken($token);
-            }
-        }
-
+        //
         return $this->createNewToken($token);
     }
+
+
+
+    
     /**
      * Register a User.
      *
@@ -186,6 +170,19 @@ class AuthController extends Controller
     public function userProfile() {
         return response()->json(auth()->user());
     }
+
+    protected function credentials(Request $request): array
+{
+    if(is_numeric($request->get('email'))){
+        return ['phone'=>$request->get('email'),'password'=>$request->get('password')];
+    }
+    elseif(!preg_match("![0-9/.,;'\\\[\]]!", $request->email)){
+        return ['username'=>$request->get('email'),'password'=>$request->get('password')];
+
+    }
+    return $request->only('email', 'password');
+}
+
     /**
      * Get the token array structure.
      *
