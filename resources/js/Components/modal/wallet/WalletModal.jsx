@@ -5,12 +5,14 @@ import Text from "@/Components/Text/Text";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setHistoryTab } from "@/redux/app-state/app-slice";
+import { setHistoryTab, setWithdrawHistory } from "@/redux/app-state/app-slice";
 import {
+    allWithdrawals,
     deposit,
     setWalletModalState,
     widthdraw,
 } from "@/redux/wallet/wallet-slice";
+import { getAllWithdrawalFunc, validateBrazilTaxNumber, validateCPF } from "@/utils/util";
 import { Inertia } from "@inertiajs/inertia";
 import { CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
@@ -283,6 +285,25 @@ const Withdraw = () => {
             toast.error("Please fill all the fields");
             return setSubmitted(false);
         }
+        if (validateCPF(cpf) === false) {
+            setWithdrawError(true);
+            toast.error("Please enter a valid CPF");
+            setCpf("");
+            return setSubmitted(false);
+        }
+        if (value < 10) {
+            setWithdrawError(true);
+            toast.error("Minimum withdraw amount is R$ 10");
+            setValue(0);
+            return setSubmitted(false);
+        }
+        if (validateBrazilTaxNumber(pix) === false) {
+            setWithdrawError(true);
+            toast.error("Please enter a valid PIX");
+            setPix("");
+            return setSubmitted(false);
+        }
+
         const payload = {
             amount: +value,
             name,
@@ -303,10 +324,19 @@ const Withdraw = () => {
             return;
         }
         if (response?.payload?.status === 200) {
-            toast.info(`A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`);
+            toast.info(
+                `A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`
+            );
             dispatch(setHistoryTab(1));
             dispatch(setWalletModalState({ open: false }));
-            dispatch()
+            async function getAllWithdrawals() {
+                const allWidthdrawals = await getAllWithdrawalFunc(
+                    dispatch,
+                    allWithdrawals
+                );
+                dispatch(setWithdrawHistory(allWidthdrawals));
+            }
+            getAllWithdrawals();
             Inertia.visit("/history");
             setSubmitted(false);
         }

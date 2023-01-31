@@ -20,6 +20,8 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { format } from "date-fns";
 import { eachDayOfInterval } from "date-fns";
 import { allPayments, allWithdrawals } from "@/redux/wallet/wallet-slice";
+import { getAllWithdrawalFunc } from "@/utils/util";
+import { setWithdrawHistory } from "@/redux/app-state/app-slice";
 
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
@@ -214,30 +216,24 @@ const Withdraw = ({ isMobile }) => {
     const [currentRange, setCurrentRange] = useState("");
     const pickerRef = useRef(null);
     useOnClickOutside(pickerRef, () => setOpen(false));
-    const [data, setData] = useState([]);
+    const { withdrawHistory } = useSelector((state) => state.app);
+    useEffect(() => {
+        setData(withdrawHistory);
+    }, [withdrawHistory]);
+    const [data, setData] = useState(withdrawHistory);
+    console.log("withdrawHistory: ", withdrawHistory, data);
     const dispatcher = useDispatch();
     useEffect(() => {
         async function getAllWithdrawals() {
-            const response = await dispatcher(allWithdrawals());
-            if (response?.payload?.status === 200) {
-                const withdrawals = response?.payload?.data?.withdrawals;
-                const formattedData = withdrawals.map((el) => {
-                    const obj = {};
-                    {
-                        obj.transactionId = el.orderno;
-                        obj.date = new Date(el.created_at).toISOString();
-                        obj.depositAmount = el.amount;
-                        obj.bonus = el.bonus || 0;
-                        obj.actualAmount = el.amount;
-                        obj.status = el.status;
-                    }
-                    return obj;
-                });
-                setData(formattedData);
-            }
+            const allWidthdrawals = await getAllWithdrawalFunc(
+                dispatcher,
+                allWithdrawals
+            );
+            dispatcher(setWithdrawHistory(allWidthdrawals));
         }
         getAllWithdrawals();
     }, []);
+    console.log("withdrawHistory: ", withdrawHistory, data);
     // const [data, setData] = useState(
     //     Array.from({ length: 100 }).fill({
     //         transactionId: "123456789123456789123456789123456789",
@@ -245,7 +241,7 @@ const Withdraw = ({ isMobile }) => {
     //         depositAmount: "100",
     //         bonus: "10",
     //         actualAmount: "110",
-    //         status: "success",
+    //         status: "success",do
     //     })
     // );
     useEffect(() => {
@@ -339,9 +335,10 @@ const Withdraw = ({ isMobile }) => {
                             columns={[
                                 "transaction ID",
                                 "Date",
-                                "Deposit Amount",
-                                "Bonus",
-                                "Actual Amount",
+                                "Withdrawal value",
+                                "Withdrawal Fee",
+                                "Final value",
+                                "Comments",
                                 "Status",
                             ]}
                             rows={data}

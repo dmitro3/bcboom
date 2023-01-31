@@ -91,3 +91,74 @@ export const getLevelStats = (wallet) => {
         maxBet: maxBet,
     };
 };
+
+export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
+    const response = await dispatch(dispatchFunc());
+    let formattedData = [];
+    if (response?.payload?.status === 200) {
+        const withdrawals = response?.payload?.data?.withdrawals;
+        formattedData = withdrawals.map((el) => {
+            const obj = {};
+            const fee = Math.el.amount * 0.03;
+            {
+                obj.transactionId = el.orderno;
+                obj.date = new Date(el.created_at).toISOString();
+                obj.withdrawalValue = el.amount;
+                obj.widthdrawalFee = fee || 0;
+                obj.finalValue = el.amount - fee;
+                obj.comment = el.remark || "---";
+                obj.status = el.status;
+            }
+            return obj;
+        });
+    }
+    return formattedData;
+};
+
+export function validateCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, "");
+    if (cpf == "") return false;
+    if (
+        cpf.length != 11 ||
+        cpf == "00000000000" ||
+        cpf == "11111111111" ||
+        cpf == "22222222222" ||
+        cpf == "33333333333" ||
+        cpf == "44444444444" ||
+        cpf == "55555555555" ||
+        cpf == "66666666666" ||
+        cpf == "77777777777" ||
+        cpf == "88888888888" ||
+        cpf == "99999999999"
+    )
+        return false;
+    let add = 0;
+    for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
+    let rev = 11 - (add % 11);
+    if (rev == 10 || rev == 11) rev = 0;
+    if (rev != parseInt(cpf.charAt(9))) return false;
+    add = 0;
+    for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i);
+    rev = 11 - (add % 11);
+    if (rev == 10 || rev == 11) rev = 0;
+    if (rev != parseInt(cpf.charAt(10))) return false;
+    return true;
+}
+
+export function validateBrazilTaxNumber(taxNumber) {
+    const pattern = /^\d{11}$/;
+    if (!taxNumber.match(pattern)) {
+        return false;
+    }
+    let sum = 0;
+    let weight = 2;
+    for (let i = taxNumber.length - 2; i >= 0; i--) {
+        sum += weight * parseInt(taxNumber.charAt(i), 10);
+        weight = (weight % 9) + 1;
+    }
+    let checkDigit = 11 - (sum % 11);
+    if (checkDigit >= 10) {
+        checkDigit = 0;
+    }
+    return checkDigit === parseInt(taxNumber.charAt(taxNumber.length - 1), 10);
+}

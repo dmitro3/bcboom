@@ -14,6 +14,7 @@ const appStateSlice = createSlice({
             id: "22345",
         },
         historyTab: 2,
+        withdrawHistory: [],
     },
     reducers: {
         setIsAppLoading: (state, action) => {
@@ -32,9 +33,17 @@ const appStateSlice = createSlice({
         setHistoryTab: (state, action) => {
             state.historyTab = action.payload;
         },
+        setWithdrawHistory: (state, action) => {
+            state.withdrawHistory = action.payload;
+        },
     },
 });
 
-export const { setIsAppLoading, setDrawerState, setSound, setHistoryTab } =
-    appStateSlice.actions;
+export const {
+    setIsAppLoading,
+    setDrawerState,
+    setSound,
+    setHistoryTab,
+    setWithdrawHistory,
+} = appStateSlice.actions;
 export const AppState = appStateSlice.reducer;
