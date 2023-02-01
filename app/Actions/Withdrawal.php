@@ -65,7 +65,6 @@ class Withdrawal
                 'tx_orderno' => $result['data']['tx_orderno'],
                 'create_time' => $result['data']['create_time'],
                 'username' => $user->username,
-                'user_id' => $user->id,
                 'bankname' => $result['data']['bankname'],
                 'bankcard' => $result['data']['bankcard'],
                 'trade_state' => $result['data']['trade_state'],
