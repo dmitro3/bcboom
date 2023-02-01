@@ -90,59 +90,68 @@ const DiceFrame = (gridProps) => {
                     alignItems: "center",
                 }}
             > */}
-            {/* <DiceWrapper>
-                <section className="container">
-                    <div id="cube" onClick={() => rollDice(diceRef)} ref={diceRef}>
-                        <div className="front">
-                            <span className="dot dot1"></span>
-                        </div>
-                        <div className="back">
-                            <span className="dot dot1"></span>
-                            <span className="dot dot2"></span>
-                        </div>
-                        <div className="right">
-                            <span className="dot dot1"></span>
-                            <span className="dot dot2"></span>
-                            <span className="dot dot3"></span>
-                        </div>
-                        <div className="left">
-                            <span className="dot dot1"></span>
-                            <span className="dot dot2"></span>
-                            <span className="dot dot3"></span>
-                            <span className="dot dot4"></span>
-                        </div>
-                        <div className="top">
-                            <span className="dot dot1"></span>
-                            <span className="dot dot2"></span>
-                            <span className="dot dot3"></span>
-                            <span className="dot dot4"></span>
-                            <span className="dot dot5"></span>
-                        </div>
-                        <div className="bottom">
-                            <span className="dot dot1"></span>
-                            <span className="dot dot2"></span>
-                            <span className="dot dot3"></span>
-                            <span className="dot dot4"></span>
-                            <span className="dot dot5"></span>
-                            <span className="dot dot6"></span>
-                        </div>
-                    </div>
-                </section>
-            </DiceWrapper> */}
+            <DiceWrapper>
+                <div class="shootingStarContainer">
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                </div>
+                <div class="shootingStarContainer">
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                </div>
+                <div class="shootingStarContainer">
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                    <div class="shootingStar"></div>
+                </div>
+
+                <div class="stars"></div>
+                <div class="twinkleMask"></div>
+                <div class="twinkleMask2"></div>
+                <div class="clouds"></div>
+
+                <div class="fogContainer">
+                    <div class="fog"></div>
+                </div>
+            </DiceWrapper>
             {/* <motion.div
                     animate={{
                         rotate: diceRotation * 300,
                     }}
                     transition={{ ease: "easeIn", duration: 1 }}
                 > */}
-            <Box sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-            }}>
+            {/* <Box
+                sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
                 <Frame src={dice} ref={diceRef} />
-                {/* </motion.div> */}
-            </Box>
+            </Box> */}
             <Box
                 sx={{
                     width: "100%",
