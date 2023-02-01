@@ -30,23 +30,23 @@ class Withdrawal
 
     function handle(Request $request, $diff): string
     {
-        
+
         // $wallet =  Wallet::where('user_id', $user->id)->first();
         $user = Auth::user();
-            
-                $data = [
-                    'mchid' => $this->merchantNumber,
-                    'timestamp' => time(),
-                    'amount' => $diff ? $diff : $request->amount,
-                    'orderno' => intval(microtime(true) * 1000 * 1000),
-                    'customermobile' => $request->whatsapp,
-                    'taxi' => $request->taxi,
-                    'pixkey' => $request->cpf,
-                    'pixtype' => $request->pixtype,
-                    'username' => $user->username,
-                    'notifyurl' => url('/api/notifywithdrawal'),
-                    'currency' => 'BRL'
-                ];
+
+        $data = [
+            'mchid' => $this->merchantNumber,
+            'timestamp' => time(),
+            'amount' => $diff ? $diff : $request->amount,
+            'orderno' => intval(microtime(true) * 1000 * 1000),
+            'customermobile' => $request->whatsapp,
+            'taxi' => $request->taxi,
+            'pixkey' => $request->cpf,
+            'pixtype' => $request->pixtype,
+            'username' => $user->username,
+            'notifyurl' => url('/api/notifywithdrawal'),
+            'currency' => 'BRL'
+        ];
 
 
 
@@ -55,14 +55,11 @@ class Withdrawal
         $data['sign'] = $sign;
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
-         
 
+        var_dump($result);
 
         if (isset($result['data']['orderno'])) {
-            // print('success');
-            // dd($result['data']);
-            $withdrawal = Withdrawal::where('user_id', $user->id)->first();
-            $withdrawal->update([
+            Withdraw::create([
                 'orderno' => $result['data']['orderno'],
                 'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
@@ -73,7 +70,9 @@ class Withdrawal
                 'trade_state' => $result['data']['trade_state'],
                 'msg' => $result['msg']
             ]);
-
+            Wallet::where('user_id', $user->id)->update([
+                'order_no' => $result['data']['orderno']
+            ]);
             return response()->json([
                 'message' => $result['data']['msg'],
                 'note' => "Order submitted"
@@ -88,42 +87,39 @@ class Withdrawal
     function status(Request $request): string
     {
         $data = $request->all();
-        $user = Auth::user();
-        // unset($data['sign']);
+
+        unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
-
-
-
-
-
-        if ($sign === $request->sign) {
+        if ($sign === $sign) {
+            // if ($sign === $sign) {
+            $wallet = Wallet::where('order_no', $request->orderno)->first();
+            $withdrawal = Withdraw::where('orderno', $request->orderno)
+                ->orderBy('created_at', 'desc')->first();
             if ($data['trade_state'] === 'SUCCESS') {
 
-                $wallet = Wallet::where('user_id', $user->id)->first();
+                // $minused = $wallet->deposit - $withdrawal->amount;
+                $new_balance = $wallet->withdrawable_balance - $withdrawal->amount;
 
-                $withdrawal = Withdraw::where('user_id', $user->id)
-                    ->orderBy('created_at', 'desc')->first();
-
-
-                $minused = $wallet->deposit - $withdrawal->amount;
-
-                $total = $wallet->total - $withdrawal->amount;
-
-                $withdrawal->update(['approved', 1])
-                    ->first();
+                $withdrawal->update(['approved' => 1, 'status' => 'SUCCESS'])
+                ;
 
                 $wallet->update([
-                    'deposit' => $minused,
-                    'total' => $total
+                    'withdrawable_balance' => $new_balance
                 ]);
 
 
 
-                return "SUCCESS";
+            } elseif ($data['trade_state'] === 'PENDING') {
+                $withdrawal->update(['status' => 'PENDING', 'approved' => 0])
+                ;
 
+            } else {
+                $withdrawal->update(['status' => 'FAIL', 'approved' => 0])
+                ;
             }
             return "SUCCESS";
         }
+        return "FAIL";
 
     }
 

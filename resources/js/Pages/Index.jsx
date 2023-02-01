@@ -269,13 +269,13 @@ export default function Homepage(props) {
     return (
         <>
             <Head title="Homepage" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate
                     innerHeader={true}
                     homeCarousel
                     gridWithHeader={gridItems}
                 />
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 }

@@ -33,7 +33,7 @@ const Invite = () => {
     return (
         <>
             <Head title="Promotions Invite" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionsHeader
@@ -401,7 +401,7 @@ const Invite = () => {
                         </Box>
                     </PromotionPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

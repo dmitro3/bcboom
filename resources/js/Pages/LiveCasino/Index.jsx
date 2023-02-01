@@ -212,7 +212,7 @@ export default function LiveCasino(props) {
     return (
         <>
             <Head title="Live Casino" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate
                     innerHeader={true}
                     homeCarousel
@@ -288,7 +288,7 @@ export default function LiveCasino(props) {
                         </SearchSection>
                     </FilterSection>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 }

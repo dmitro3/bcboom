@@ -19,7 +19,9 @@ import DateRangePicker from "@/Components/UtilComponents/DateRangePicker";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { format } from "date-fns";
 import { eachDayOfInterval } from "date-fns";
-import { allPayments } from "@/redux/wallet/wallet-slice";
+import { allPayments, allWithdrawals } from "@/redux/wallet/wallet-slice";
+import { getAllWithdrawalFunc } from "@/utils/util";
+import { setWithdrawHistory } from "@/redux/app-state/app-slice";
 
 const HistoryPageWrapper = styled("div")(({ isMobile }) => ({
     margin: "0 auto",
@@ -81,7 +83,6 @@ const Deposit = ({ isMobile }) => {
     //     actualAmount: "110",
     //     status: "success",
     // });
-    console.log("data: ", data);
     useEffect(() => {
         async function getAllPayments() {
             const response = await dispatcher(allPayments());
@@ -115,131 +116,6 @@ const Deposit = ({ isMobile }) => {
         }).map((el) => new Date(el).setHours(0, 0, 0, 0));
         const filtered = data.filter((el, i) =>
             daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
-        );
-        console.log(
-            "filtered: ",
-            filtered,
-            daysInterval,
-            new Date(data[0].date).setHours(0, 0, 0, 0)
-        );
-        // console.log("daysInterval: ", daysInterval, rows);
-        setData(filtered);
-    }
-    return (
-        <DepositWrapper>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                }}
-            >
-                <Flex
-                    alignItems="stretch"
-                    gap="20px"
-                    margin="20px 0"
-                    direction={isMobile ? "column" : "row"}
-                    width={isMobile && "100%"}
-                >
-                    <DateInput
-                        isMobile={isMobile}
-                        onClick={() => setOpen(!open)}
-                    >
-                        <img src={datepickericon} alt="" />
-                        <Text
-                            type={"p"}
-                            text={
-                                currentRange
-                                    ? `${format(
-                                          currentRange.startDate,
-                                          "dd-MM-yyyy"
-                                      )} - 
-                                      ${format(
-                                          currentRange.endDate,
-                                          "dd-MM-yyyy"
-                                      )}`
-                                    : "Start - End Date"
-                            }
-                            fontSize={"0.8rem"}
-                        />
-                    </DateInput>
-                    <div style={{ position: "absolute", top: "140px", zIndex:1000 }}>
-                        <DateRangePicker
-                            toggle={setOpen}
-                            open={open}
-                            ref={pickerRef}
-                            setCurrentRange={setCurrentRange}
-                        />
-                    </div>
-                    <BcButton
-                        text="Search"
-                        width={"100%"}
-                        height="100%"
-                        padding="10px 20px"
-                        background="#3586FF"
-                        fontSize="0.8rem"
-                        borderRadius="10px"
-                        onSubmit={() => handleSearch(currentRange)}
-                    />
-                </Flex>
-            </div>
-            <Flex
-                alignItems="center"
-                justifyContent="center"
-                margin={isMobile ? "1px 0 " : "40px 0"}
-            >
-                {data.length ? (
-                    <div style={{ width: isMobile ? "100%" : "1000px" }}>
-                        <CustomTable
-                            columns={[
-                                "transaction ID",
-                                "Date",
-                                "Deposit Amount",
-                                "Bonus",
-                                "Actual Amount",
-                                "Status",
-                            ]}
-                            rows={data}
-                        />
-                    </div>
-                ): <div>NO DATA</div>}
-            </Flex>
-        </DepositWrapper>
-    );
-};
-const Withdraw = ({ isMobile }) => {
-    const [open, setOpen] = useState(false);
-    const [currentRange, setCurrentRange] = useState("");
-    const pickerRef = useRef(null);
-    useOnClickOutside(pickerRef, () => setOpen(false));
-    const [data, setData] = useState(
-        Array.from({ length: 100 }).fill({
-            transactionId: "123456789123456789123456789123456789",
-            date: "2023-01-18T20:58:41.000000Z",
-            depositAmount: "100",
-            bonus: "10",
-            actualAmount: "110",
-            status: "success",
-        })
-    );
-    useEffect(() => {
-        if (currentRange.endDate) setOpen(false);
-    }, [currentRange]);
-    function handleSearch(ranges) {
-        if (!ranges.startDate || !ranges.endDate) return;
-        const daysInterval = eachDayOfInterval({
-            start: ranges.startDate,
-            end: ranges.endDate,
-        }).map((el) => new Date(el).setHours(0, 0, 0, 0));
-        const filtered = data.filter((el, i) =>
-            daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
-        );
-        console.log(
-            "filtered: ",
-            filtered,
-            daysInterval,
-            new Date(data[0].date).setHours(0, 0, 0, 0)
         );
         // console.log("daysInterval: ", daysInterval, rows);
         setData(filtered);
@@ -314,19 +190,163 @@ const Withdraw = ({ isMobile }) => {
                 justifyContent="center"
                 margin={isMobile ? "1px 0 " : "40px 0"}
             >
-                <div style={{ width: isMobile ? "100%" : "1000px" }}>
-                    <CustomTable
-                        columns={[
-                            "transaction ID",
-                            "Date",
-                            "Deposit Amount",
-                            "Bonus",
-                            "Actual Amount",
-                            "Status",
-                        ]}
-                        rows={data}
+                {data.length ? (
+                    <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                        <CustomTable
+                            columns={[
+                                "transaction ID",
+                                "Date",
+                                "Deposit Amount",
+                                "Bonus",
+                                "Actual Amount",
+                                "Status",
+                            ]}
+                            rows={data}
+                        />
+                    </div>
+                ) : (
+                    <div>NO DATA</div>
+                )}
+            </Flex>
+        </DepositWrapper>
+    );
+};
+const Withdraw = ({ isMobile }) => {
+    const [open, setOpen] = useState(false);
+    const [currentRange, setCurrentRange] = useState("");
+    const pickerRef = useRef(null);
+    useOnClickOutside(pickerRef, () => setOpen(false));
+    const { withdrawHistory } = useSelector((state) => state.app);
+    useEffect(() => {
+        setData(withdrawHistory);
+    }, [withdrawHistory]);
+    const [data, setData] = useState(withdrawHistory);
+    console.log("withdrawHistory: ", withdrawHistory, data);
+    const dispatcher = useDispatch();
+    useEffect(() => {
+        async function getAllWithdrawals() {
+            const allWidthdrawals = await getAllWithdrawalFunc(
+                dispatcher,
+                allWithdrawals
+            );
+            dispatcher(setWithdrawHistory(allWidthdrawals));
+        }
+        getAllWithdrawals();
+    }, []);
+    console.log("withdrawHistory: ", withdrawHistory, data);
+    // const [data, setData] = useState(
+    //     Array.from({ length: 100 }).fill({
+    //         transactionId: "123456789123456789123456789123456789",
+    //         date: "2023-01-18T20:58:41.000000Z",
+    //         depositAmount: "100",
+    //         bonus: "10",
+    //         actualAmount: "110",
+    //         status: "success",do
+    //     })
+    // );
+    useEffect(() => {
+        if (currentRange.endDate) setOpen(false);
+    }, [currentRange]);
+    function handleSearch(ranges) {
+        if (!ranges.startDate || !ranges.endDate) return;
+        const daysInterval = eachDayOfInterval({
+            start: ranges.startDate,
+            end: ranges.endDate,
+        }).map((el) => new Date(el).setHours(0, 0, 0, 0));
+        const filtered = data.filter((el, i) =>
+            daysInterval.includes(new Date(el.date).setHours(0, 0, 0, 0))
+        );
+        // console.log("daysInterval: ", daysInterval, rows);
+        setData(filtered);
+    }
+    return (
+        <DepositWrapper>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                }}
+            >
+                <Flex
+                    alignItems="stretch"
+                    gap="20px"
+                    margin="20px 0"
+                    direction={isMobile ? "column" : "row"}
+                    width={isMobile && "100%"}
+                >
+                    <DateInput
+                        isMobile={isMobile}
+                        onClick={() => setOpen(!open)}
+                    >
+                        <img src={datepickericon} alt="" />
+                        <Text
+                            type={"p"}
+                            text={
+                                currentRange
+                                    ? `${format(
+                                          currentRange.startDate,
+                                          "dd-MM-yyyy"
+                                      )} - 
+                                      ${format(
+                                          currentRange.endDate,
+                                          "dd-MM-yyyy"
+                                      )}`
+                                    : "Start - End Date"
+                            }
+                            fontSize={"0.8rem"}
+                        />
+                    </DateInput>
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "140px",
+                            zIndex: 1000,
+                        }}
+                    >
+                        <DateRangePicker
+                            toggle={setOpen}
+                            open={open}
+                            ref={pickerRef}
+                            setCurrentRange={setCurrentRange}
+                        />
+                    </div>
+                    <BcButton
+                        text="Search"
+                        width={"100%"}
+                        height="100%"
+                        padding="10px 20px"
+                        background="#3586FF"
+                        fontSize="0.8rem"
+                        borderRadius="10px"
+                        onSubmit={() => handleSearch(currentRange)}
                     />
-                </div>
+                </Flex>
+            </div>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+                margin={isMobile ? "1px 0 " : "40px 0"}
+            >
+                {data.length ? (
+                    <div style={{ width: isMobile ? "100%" : "1000px" }}>
+                        <CustomTable
+                            columns={[
+                                "transaction ID",
+                                "Date",
+                                "Withdrawal value",
+                                "Withdrawal Fee",
+                                "Final value",
+                                "Comments",
+                                "Status",
+                            ]}
+                            rows={data}
+                        />
+                    </div>
+                ) : (
+                    <div>NO DATA</div>
+                )}
             </Flex>
         </DepositWrapper>
     );
@@ -457,83 +477,79 @@ const GameHistory = ({ isMobile }) => {
 
 const HistoryPage = () => {
     const { isMobile } = useScreenResolution();
-    const dispatcher = useDispatch();
+    const { historyTab } = useSelector((state) => state.app);
 
     const [currentTab, setCurrentTab] = useState(2);
     const tabs = ["Wallet", "Wallet", "Game"];
     return (
         <>
-            <Head title="Personal Center" />
-            <GuestLayout>
-                <PageTemplate innerHeader={true}>
-                    <HistoryPageWrapper>
-                        <ImageGridLayout
-                            item={{
-                                title: "Personal Center",
-                                icon: centerIcon,
-                                margin: "10px",
-                            }}
-                            index={0}
-                            page="personal-center"
-                        >
-                            <HistoryWrapper isMobile={isMobile}>
-                                <Flex alignItems="center" gap="10px">
-                                    <img src={historyIcon} alt="historyIcon" />
-                                    <Text
-                                        type="p"
-                                        text={tabs[currentTab] + " History"}
-                                        fontSize="1rem"
-                                        fontWeight="bold"
-                                        color="#fff"
-                                        textTransform="capitalize"
-                                    />
-                                </Flex>
+            <Head title="Game and Wallet History" />
+            {/* <GuestLayout> */}
+            <PageTemplate innerHeader={true}>
+                <HistoryPageWrapper>
+                    <ImageGridLayout
+                        item={{
+                            title: "Personal Center",
+                            icon: centerIcon,
+                            margin: "10px",
+                        }}
+                        index={0}
+                        page="personal-center"
+                    >
+                        <HistoryWrapper isMobile={isMobile}>
+                            <Flex alignItems="center" gap="10px">
+                                <img src={historyIcon} alt="historyIcon" />
+                                <Text
+                                    type="p"
+                                    text={tabs[currentTab] + " History"}
+                                    fontSize="1rem"
+                                    fontWeight="bold"
+                                    color="#fff"
+                                    textTransform="capitalize"
+                                />
+                            </Flex>
 
-                                <TabComponent>
-                                    <NewCustomTabs
-                                        tabItems={[
-                                            {
-                                                value: "Deposit",
-                                                label: "Deposit",
-                                                content: (
-                                                    <Deposit
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                            {
-                                                value: "Withdraw",
-                                                label: "Withdraw",
-                                                content: (
-                                                    <Withdraw
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                            {
-                                                value: "Game",
-                                                label: "Game",
-                                                content: (
-                                                    <GameHistory
-                                                        isMobile={isMobile}
-                                                    />
-                                                ),
-                                            },
-                                        ]}
-                                        defaultTab={2}
-                                        setTab={setCurrentTab}
-                                        width={isMobile ? "100%" : "1000px"}
-                                        borderRadius="10px"
-                                        background="#1F224A"
-                                        padding={isMobile && "30px 0px"}
-                                        // setCurrentTab={setCurrentTab}
-                                    />
-                                </TabComponent>
-                            </HistoryWrapper>
-                        </ImageGridLayout>
-                    </HistoryPageWrapper>
-                </PageTemplate>
-            </GuestLayout>
+                            <TabComponent>
+                                <NewCustomTabs
+                                    tabItems={[
+                                        {
+                                            value: "Deposit",
+                                            label: "Deposit",
+                                            content: (
+                                                <Deposit isMobile={isMobile} />
+                                            ),
+                                        },
+                                        {
+                                            value: "Withdraw",
+                                            label: "Withdraw",
+                                            content: (
+                                                <Withdraw isMobile={isMobile} />
+                                            ),
+                                        },
+                                        {
+                                            value: "Game",
+                                            label: "Game",
+                                            content: (
+                                                <GameHistory
+                                                    isMobile={isMobile}
+                                                />
+                                            ),
+                                        },
+                                    ]}
+                                    defaultTab={historyTab}
+                                    setTab={setCurrentTab}
+                                    width={isMobile ? "100%" : "1000px"}
+                                    borderRadius="10px"
+                                    background="#1F224A"
+                                    padding={isMobile && "30px 0px"}
+                                    // setCurrentTab={setCurrentTab}
+                                />
+                            </TabComponent>
+                        </HistoryWrapper>
+                    </ImageGridLayout>
+                </HistoryPageWrapper>
+            </PageTemplate>
+            {/* </GuestLayout> */}
         </>
     );
 };

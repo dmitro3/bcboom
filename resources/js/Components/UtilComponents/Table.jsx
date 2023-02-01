@@ -14,12 +14,12 @@ const TableWrapper = styled("div")(({ isMobile }) => ({
         padding: isMobile && "0 0px 0 20px!important",
     },
 }));
-const TableGrid = styled("div")(({ isMobile }) => ({
+const TableGrid = styled("div")(({ isMobile, columns }) => ({
     display: isMobile ? "flex" : "grid",
     flexDirection: isMobile && "column",
     alignSelf: isMobile && "flex-end",
     // display: "grid",
-    gridTemplateColumns: "repeat(6, 1fr)",
+    gridTemplateColumns: `repeat(${columns}, 1fr)`,
     gridGap: "20px",
     // padding: "20px",
 
@@ -32,22 +32,15 @@ const TableGrid = styled("div")(({ isMobile }) => ({
 }));
 
 const CustomTable = ({ columns = [], rows = [] }) => {
-    const { isMobile } = useScreenResolution();
+    const { isMobile, width } = useScreenResolution();
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(5);
-    const [currentRows, setCurrentRows] = useState(rows);
-    const [width, setWidth] = useState(window.innerWidth);
-    useLayoutEffect(() => {
-        const second = window.addEventListener("resize", () => {
-            setWidth(window.innerWidth);
-            setPerPage(window.innerWidth >= 768 ? 5 : 1);
-        });
-        // second
-        console.log("currentRows: ", currentRows);
-        return () => {
-            window.removeEventListener("resize", second);
-        };
-    }, [currentPage, rows]);
+    const [currentRows, setCurrentRows] = useState(rows.slice(0, perPage));
+    useEffect(() => {
+        setPerPage(width >= 768 ? 5 : 1);
+        width <= 768 && setCurrentRows(rows.slice(0, 1));
+        // console.log('perpage: ', perPage, width, isMobile)
+    }, []);
     // const width = window.innerWidth;
     // const perPage = width >= 768 ? 5 : 1;
     function handlePageChange(event, value) {
@@ -56,7 +49,7 @@ const CustomTable = ({ columns = [], rows = [] }) => {
         const end = value * perPage;
         setCurrentRows(rows.slice(beginning, end));
     }
-    // console.log("currentRow: ", currentRows, perPage);
+    console.log("currentRow: ", currentRows, Math.ceil(rows.length/perPage))
     return (
         <TableWrapper style={{ width: "100%" }} isMobile={isMobile}>
             <div
@@ -68,7 +61,7 @@ const CustomTable = ({ columns = [], rows = [] }) => {
                     marginBottom: isMobile && "30px",
                 }}
             >
-                <TableGrid isMobile={isMobile}>
+                <TableGrid isMobile={isMobile} columns={columns.length}>
                     {columns.map((column, index) => (
                         <Text
                             type="p"
@@ -82,7 +75,7 @@ const CustomTable = ({ columns = [], rows = [] }) => {
                 </TableGrid>
                 {currentRows.map((item, index) => (
                     <div style={{ marginTop: isMobile ? "5px" : "20px" }}>
-                        <TableGrid key={index} isMobile={isMobile}>
+                        <TableGrid key={index} isMobile={isMobile} columns={columns.length}>
                             {Object.keys(item).map((key, index) => {
                                 let text = item[key];
                                 let day, time;
@@ -130,7 +123,7 @@ const CustomTable = ({ columns = [], rows = [] }) => {
             </div>
             <Flex justifyContent="flex-end">
                 <Pagination
-                    count={Math.round(rows.length / perPage)}
+                    count={Math.ceil(rows.length / perPage)}
                     page={currentPage}
                     onChange={handlePageChange}
                 />

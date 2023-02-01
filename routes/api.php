@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -56,10 +57,10 @@ Route::middleware(['middleware' => 'api'])->group(function () {
 });
 
 
-Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
-    
+    Route::post('/withdrawal', [WithdrawalController::class, 'handle']);
+
     // Profile
     Route::get('me', [UserController::class, 'aboutMe']);
 
@@ -69,98 +70,140 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('update/phone', [ProfileController::class, 'updatephone']);
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
+    Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
+
+
+    Route::prefix('admin')->group(
+        function () {
+
+            Route::post(
+                'paym',
+                function (Request $request) {
+                        $aggregator = Aggregate::find($request->id);
+                        if (!$aggregator)
+                            return APIResponse::reject(1);
+
+                        $wallet = Wallet::where('user_id', Auth::id())->first();
+
+                        return Aggregate::find($aggregator->id())->wallet($wallet);
+                    }
+            );
+
+            // Route::post('paymentStatus', function(Request $request) {
+            //     $aggregator = null;
+            //     foreach(Aggregate::list() as $ag) {
+            //         if($ag->validate($request)) {
+            //             $aggregator = $ag;
+            //             break;
+            //         }
+            //     }
+            //     if($aggregator == null) return 'Unknown aggregator';
     
-
-    Route::prefix('admin')->group(function () {
-        
-        Route::post('paym', function(Request $request) {
-            $aggregator = Aggregate::find($request->id);
-            if(!$aggregator) return APIResponse::reject(1);
-
-            $wallet = Wallet::where('user_id', Auth::id())->first();
-            
-            return Aggregate::find($aggregator->id())->wallet($wallet);
-        });
-        
-        // Route::post('paymentStatus', function(Request $request) {
-        //     $aggregator = null;
-        //     foreach(Aggregate::list() as $ag) {
-        //         if($ag->validate($request)) {
-        //             $aggregator = $ag;
-        //             break;
-        //         }
-        //     }
-        //     if($aggregator == null) return 'Unknown aggregator';
-            
-        //     return $aggregator->status($request);
-        // });
-        
-    });
-
+            //     return $aggregator->status($request);
+            // });
     
+        }
+    );
+
+
 });
 
 
-Route::get('notifywithdrawal', function(Request $request){
+Route::get('notifywithdrawal', function (Request $request) {
     $callback = new Withdrawal;
-    $callback->status($request);    
+    $callback->status($request);
 });
 
 Route::post('/notifypayment', [
-    PaymentController::class, 'callback'
+    PaymentController::class,
+    'callback'
 ]);
 
 Route::middleware(['jwt.verify'])->group(function () {
-    
+
     // Payment routes
     Route::post('/payment/callback/{result}', [PaymentController::class, 'callback'])->name('callback');
-    
+
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
-    
 
-    
+
     Route::post('notify', function (Request $request) {
         $process = new Process;
-         $process->status($request);
-    });
+        $process->status($request);
+    }
+    );
 
 });
 Route::middleware(['jwt.verify', 'admin'])->group(function () {
-    
+
     Route::get('make/admin/{id}', [
-        UserController::class, 'makeAdmin'
+        UserController::class,
+        'makeAdmin'
     ]);
 
-        Route::get('users/all',[
-            UserController::class, 'allUsers'
-            ])->name('allUsers');
-            
-            Route::get('admins/all',[
-                UserController::class, 'allAdmins'
-                ])->name('allAdmins');
-                
-                    Route::post('user/save',[
-                        UserController::class, 'saveUser'
-                        ])->name('saveUser');
-                        
-                        Route::get('delete/user/{id}',[
-                            UserController::class, 'deleteUser'
-                            ])->name('deleteUser');
-                            
-                            
-                            Route::get('ban/user/{id}',[
-                                UserController::class, 'banUser'
-                                ])->name('banUser');
+    Route::get('users/all', [
+        UserController::class,
+        'allUsers'
+    ])->name('allUsers');
 
-                                    Route::post('email/send/{id}',[
-                                        UserController::class, 'sendMail'
-                                        ])->name('sendMail');
-                                        
-        
-        
+    Route::get('admins/all', [
+        UserController::class,
+        'allAdmins'
+    ])->name('allAdmins');
 
- });
+    Route::post('user/save', [
+        UserController::class,
+        'saveUser'
+    ])->name('saveUser');
+
+    Route::get('delete/user/{id}', [
+        UserController::class,
+        'deleteUser'
+    ])->name('deleteUser');
+
+
+    Route::get('ban/user/{id}', [
+        UserController::class,
+        'banUser'
+    ])->name('banUser');
+
+    Route::post('email/send/{id}', [
+        UserController::class,
+        'sendMail'
+    ])->name('sendMail');
+
+
+
+
+
+    Route::post(
+        'notify',
+        function (Request $request) {
+            $process = new Process;
+            return $process->status($request);
+        }
+    );
+
+});
+// Route::post('/notifypayment', [
+//     PaymentController::class,
+//     'callback'
+// ]);
+
+
+Route::post(
+    'notifywithdrawal',
+    function (Request $request) {
+        $callback = new Withdrawal;
+        return $callback->status($request);
+    }
+);
+Route::post('/notifypayment', function (Request $request): string {
+    $callback = new Callback;
+    return $callback->run($request);
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

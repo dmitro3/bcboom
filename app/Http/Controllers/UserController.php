@@ -30,7 +30,7 @@ class UserController extends Controller
                'user' => $user,
                "referrals_count" => $user->referrals->count(),
                "all_referrals" => $user->referrals,
-               "total_in_wallet" => $user->wallet->total,
+               "total_in_wallet" => $user->wallet->withdrawable_balance,
                "deposits" => $user->wallet->deposit,
                "bets" => $user->wallet->bet,
                "bonus" => $user->wallet->bonus           

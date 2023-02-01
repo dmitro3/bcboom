@@ -29,7 +29,7 @@ const Deposit = () => {
     return (
         <>
             <Head title="Promotions Deposit" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionsHeader
@@ -287,7 +287,7 @@ const Deposit = () => {
                         </Box>
                     </PromotionPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

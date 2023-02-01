@@ -39,7 +39,7 @@ const Distributor = () => {
     return (
         <>
             <Head title="Promotions Distributor" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <PromotionPageWrapper>
                         <PromotionsHeader
@@ -992,7 +992,7 @@ const Distributor = () => {
                         </Box>
                     </PromotionPageWrapper>
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

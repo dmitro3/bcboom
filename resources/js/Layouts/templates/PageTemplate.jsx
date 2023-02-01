@@ -6,9 +6,10 @@ import mainBg from "../../../../public/images/others/mainBg.svg";
 import footercut from "../../../../public/images/others/footercut.png";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import FooterActions from "@/Components/Footer/FooterActions";
-const PageTemplateWrapper = styled("div")(({ isMobile }) => ({
+const PageTemplateWrapper = styled("div")(({ isMobile, gamePage }) => ({
     background: `url(${mainBg})`,
-    width: isMobile ? "100%" : "95%",
+    maxWidth: isMobile ? "100%" : gamePage ? "100%" : "95%",
+    // maxWidth: isMobile ? '100%' : '95vw',
     height: "fit-content",
     borderRadius: "10px",
     backgroundRepeat: "no-repeat",
@@ -32,8 +33,9 @@ const PageTemplate = ({
     children,
 }) => {
     const { isMobile } = useScreenResolution();
+    const isGamePage = window.location.pathname.includes("games");
     return (
-        <PageTemplateWrapper isMobile={isMobile}>
+        <PageTemplateWrapper isMobile={isMobile} gamePage={isGamePage}>
             {innerHeader && <InnerHeader />}
             {homeCarousel && <HomeCarousel />}
             {children}

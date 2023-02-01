@@ -7,33 +7,41 @@ import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
 import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LayoutTheme from "./theme";
 import NicknameModal from "@/Components/modal/profile/NicknameModal";
+import { Howl, Howler } from "howler";
+import { setSound } from "@/redux/app-state/app-slice";
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
     minHeight: "100vh",
     fontfamily: "Montserrat, sans-serif",
     overflow: "-moz-scrollbars-none",
-    '-ms-overflow-style': 'none',
+    "-ms-overflow-style": "none",
     "&::-webkit-scrollbar": { display: "none" },
 }));
 
 const PageBody = styled("div")(({ isMobile }) => ({
     height: "fit-content",
     width: "100%",
-    // maxWidth: "1750px",
+    maxWidth: "1750px",
     margin: "0 auto",
     display: "flex",
     flexDirection: "row",
     paddingRight: !isMobile && "68px",
     background: "#000000",
+
+    "& > div": {
+        "&:nth-child(2)": {
+            flexGrow: 1,
+        },
+    },
 }));
 
 export default function GuestLayout({ children }) {
@@ -44,10 +52,34 @@ export default function GuestLayout({ children }) {
     const { modalState: walletModalState } = useSelector(
         (state) => state.wallet
     );
+    const dispatch = useDispatch();
+    const { sound } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false);
 
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));
+    const audio = new Howl({
+        src: [sound.currentSound, sound.currentSound],
+        loop: true,
+        onplayerror: function () {
+            audio.once("unlock", function () {
+                const id = !sound.muted ? audio.play() : audio.mute(true);
+                dispatch(setSound({ field: "id", value: id }));
+            });
+        },
+    });
+    useEffect(() => {
+        const id = !sound.muted ? audio.play() : audio.mute(true);
+        dispatch(setSound({ field: "id", value: id }));
+        //     console.log("sound.muted id", sound.id);
+        //     console.log("sound.muted", sound);
+        // if (sound.muted) {
+            console.log("sound.muted id", sound.id);
+            audio.mute(true, sound.id);
+        // } else {
+        //     audio.mute(false, sound.id);
+        // }
+    }, [sound.currentSound, sound.muted]);
 
     document.addEventListener("DOMContentLoaded", () =>
         wait(1000).then(() => {

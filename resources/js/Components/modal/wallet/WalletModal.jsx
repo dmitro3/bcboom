@@ -5,7 +5,15 @@ import Text from "@/Components/Text/Text";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import Tag, { RemovableTag } from "@/Components/UtilComponents/Tag";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { deposit, setWalletModalState } from "@/redux/wallet/wallet-slice";
+import { setHistoryTab, setWithdrawHistory } from "@/redux/app-state/app-slice";
+import {
+    allWithdrawals,
+    deposit,
+    setWalletModalState,
+    widthdraw,
+} from "@/redux/wallet/wallet-slice";
+import { getAllWithdrawalFunc, validateBrazilTaxNumber, validateCPF } from "@/utils/util";
+import { Inertia } from "@inertiajs/inertia";
 import { CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { useState } from "react";
@@ -111,7 +119,7 @@ const Deposit = () => {
             return;
         }
         const response = await dispatcher(deposit(value));
-        console.log("response", response);
+        // console.log("response", response);
         if (!response?.payload) {
             toast.error("An error occured");
             setSubmitted(false);
@@ -164,7 +172,7 @@ const Deposit = () => {
                             />
                         }
                         onChange={() => {
-                            console.log('item: ', item)
+                            console.log("item: ", item);
                             setValue(item);
                             setCalculatedValue(item * 0.544);
                         }}
@@ -266,6 +274,74 @@ const Withdraw = () => {
     const [cpf, setCpf] = useState("");
     const [pix, setPix] = useState("");
     const [whatsapp, setWhatsapp] = useState("");
+    const [submitted, setSubmitted] = useState(false);
+    const [pixType, setPixType] = useState("CPF");
+    const [widthrawError, setWithdrawError] = useState("");
+    const dispatch = useDispatch();
+    async function handleWithdraw() {
+        setSubmitted(true);
+        if (!value || !name || !cpf || !pix || !whatsapp) {
+            setWithdrawError(true);
+            toast.error("Please fill all the fields");
+            return setSubmitted(false);
+        }
+        if (validateCPF(cpf) === false) {
+            setWithdrawError(true);
+            toast.error("Please enter a valid CPF");
+            setCpf("");
+            return setSubmitted(false);
+        }
+        if (value < 10) {
+            setWithdrawError(true);
+            toast.error("Minimum withdraw amount is R$ 10");
+            setValue(0);
+            return setSubmitted(false);
+        }
+        if (validateBrazilTaxNumber(pix) === false) {
+            setWithdrawError(true);
+            toast.error("Please enter a valid PIX");
+            setPix("");
+            return setSubmitted(false);
+        }
+
+        const payload = {
+            amount: +value,
+            name,
+            cpf,
+            taxi: pix,
+            pixtype: pixType,
+            whatsapp,
+        };
+        const response = await dispatch(widthdraw(payload));
+        if (!response?.payload) {
+            toast.error("An error occured");
+            setSubmitted(false);
+            return;
+        }
+        if (response?.payload?.data?.error) {
+            toast.error(response.payload?.data?.error);
+            setSubmitted(false);
+            return;
+        }
+        if (response?.payload?.status === 200) {
+            toast.info(
+                `A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`
+            );
+            dispatch(setHistoryTab(1));
+            dispatch(setWalletModalState({ open: false }));
+            async function getAllWithdrawals() {
+                const allWidthdrawals = await getAllWithdrawalFunc(
+                    dispatch,
+                    allWithdrawals
+                );
+                dispatch(setWithdrawHistory(allWidthdrawals));
+            }
+            getAllWithdrawals();
+            Inertia.visit("/history");
+            setSubmitted(false);
+        }
+        setSubmitted(false);
+    }
     return (
         <TabWrapper>
             <Flex alignItems="center" gap="10px" width="100%">
@@ -282,6 +358,7 @@ const Withdraw = () => {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 br="10px"
+                border={widthrawError && !value && "#F93967"}
             />
             <Text type="p" text="Cardholder name:" />
             <Input
@@ -290,42 +367,46 @@ const Withdraw = () => {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter name of card holder"
                 br="10px"
+                border={widthrawError && !name && "#F93967"}
             />
             <Flex alignItems="center" gap="10px">
                 <div style={{ width: "50%" }}>
-                    <Text type="p" text="CPF:" />
+                    <Text type="p" text="CPF:" paddingBottom="10px" />
                     <Input
                         type="text"
                         value={cpf}
                         onChange={(e) => setCpf(e.target.value)}
                         placeholder="Enter CPF"
                         br="10px"
+                        border={widthrawError && !cpf && "#F93967"}
                     />
                 </div>
                 <div style={{ width: "50%" }}>
-                    <Text type="p" text="WhatsApp:" />
+                    <Text type="p" text="WhatsApp:" paddingBottom="10px" />
                     <Input
                         type="text"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
                         placeholder="Enter WhatsApp number"
                         br="10px"
+                        border={widthrawError && !whatsapp && "#F93967"}
                     />
                 </div>
             </Flex>
             <Flex alignItems="center" gap="10px">
                 <div style={{ width: "50%" }}>
-                    <Text type="p" text="PIX Type:" />
+                    <Text type="p" text="PIX Type:" paddingBottom="10px" />
                     <Input type="text" value={"CPF"} br="10px" disabled />
                 </div>
                 <div style={{ width: "50%" }}>
-                    <Text type="p" text="Chave PIX:" />
+                    <Text type="p" text="Chave PIX:" paddingBottom="10px" />
                     <Input
                         type="text"
                         value={pix}
                         onChange={(e) => setPix(e.target.value)}
                         placeholder="Chave PIX"
                         br="10px"
+                        border={widthrawError && !pix && "#F93967"}
                     />
                 </div>
             </Flex>
@@ -356,7 +437,9 @@ const Withdraw = () => {
                     />
                 ))}
             </Disclaimer>
-            <DepositButton fontSize="20px">Withdraw</DepositButton>
+            <DepositButton fontSize="20px" onClick={() => handleWithdraw()}>
+                {submitted ? "Loading..." : "Widthdraw"}
+            </DepositButton>
         </TabWrapper>
     );
 };

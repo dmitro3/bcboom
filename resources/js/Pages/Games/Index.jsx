@@ -145,7 +145,7 @@ const GamesPageIndex = () => {
     return (
         <>
             <Head title="Games" />
-            <GuestLayout>
+            {/* <GuestLayout> */}
                 <PageTemplate innerHeader={true}>
                     <GamePageWrapper>
                         <GameImageHeader isMobile={isMobile}>
@@ -158,7 +158,7 @@ const GamesPageIndex = () => {
                     </GamePageWrapper>
                     <ImageGridWithHeader gridItems={gridItems} />
                 </PageTemplate>
-            </GuestLayout>
+            {/* </GuestLayout> */}
         </>
     );
 };

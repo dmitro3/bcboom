@@ -201,375 +201,359 @@ const PersonalCenter = () => {
     return (
         <>
             <Head title="Personal Center" />
-            <GuestLayout>
-                <PageTemplate innerHeader={true}>
-                    <PersonalCenterPageWrapper>
-                        <ImageGridLayout
-                            item={{
-                                title: "Personal Center",
-                                icon: centerIcon,
-                                margin: "10px",
-                            }}
-                            index={0}
-                            page="personal-center"
+            {/* <GuestLayout> */}
+            <PageTemplate innerHeader={true}>
+                <PersonalCenterPageWrapper>
+                    <ImageGridLayout
+                        item={{
+                            title: "Personal Center",
+                            icon: centerIcon,
+                            margin: "10px",
+                        }}
+                        index={0}
+                        page="personal-center"
+                    >
+                        <Flex
+                            alignItems="stretch"
+                            gap="20px"
+                            direction={isMobile ? "column" : "row"}
+                            margin={isMobile ? "60px 0 0" : "60px 0"}
+                            justifyContent="center"
                         >
-                            <Flex
-                                alignItems="stretch"
-                                gap="20px"
-                                direction={isMobile ? "column" : "row"}
-                                margin={isMobile ? "60px 0 0" : "60px 0"}
-                                justifyContent="center"
-                            >
-                                <PersonalCard isMobile={isMobile}>
-                                    <Text
-                                        type="p"
-                                        text="Personal Information"
-                                        fontSize="18px"
-                                        color="white"
-                                        fontWeight="700"
-                                        paddingBottom="20px"
-                                    />
-                                    <Flex
-                                        gap="30px"
-                                        alignItems="center"
-                                        margin="0 0 20px 0"
+                            <PersonalCard isMobile={isMobile}>
+                                <Text
+                                    type="p"
+                                    text="Personal Information"
+                                    fontSize="18px"
+                                    color="white"
+                                    fontWeight="700"
+                                    paddingBottom="20px"
+                                />
+                                <Flex
+                                    gap="30px"
+                                    alignItems="center"
+                                    margin="0 0 20px 0"
+                                >
+                                    <UserImage
+                                        background={profileColor}
+                                        size="80px"
                                     >
-                                        <UserImage
-                                            background={profileColor}
-                                            size="80px"
+                                        <img
+                                            src={profile?.image || avatarIcon}
+                                            alt=""
+                                            style={{ height: "100%" }}
+                                        />
+                                    </UserImage>
+                                    <div style={{ textAlign: "center" }}>
+                                        <Text
+                                            type={"p"}
+                                            text={profile?.username}
+                                            fontSize={"15px"}
+                                            color={"white"}
+                                            fontWeight={"700"}
+                                            paddingBottom={"10px"}
+                                        />
+                                        <TextWithIcon
+                                            icon={link}
+                                            text={copied ? "Copied" : "Copy"}
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(
+                                                    profile?.username
+                                                );
+                                                setCopied(true);
+                                                toast.info(
+                                                    "Your username is copied"
+                                                );
+                                                setTimeout(() => {
+                                                    setCopied(false);
+                                                }, 5000);
+                                            }}
+                                        />
+                                        <div
+                                            onClick={() =>
+                                                dispatcher(
+                                                    changeNicknameModalState({
+                                                        open: true,
+                                                    })
+                                                )
+                                            }
                                         >
-                                            <img
-                                                src={
-                                                    profile?.image || avatarIcon
-                                                }
-                                                alt=""
-                                                style={{ height: "100%" }}
-                                            />
-                                        </UserImage>
-                                        <div style={{ textAlign: "center" }}>
                                             <Text
                                                 type={"p"}
-                                                text={profile?.username}
-                                                fontSize={"15px"}
-                                                color={"white"}
-                                                fontWeight={"700"}
-                                                paddingBottom={"10px"}
+                                                text="Change Avatar"
+                                                fontSize={"14px"}
+                                                color="#A0ABDB"
+                                                cursor="pointer"
                                             />
-                                            <TextWithIcon
-                                                icon={link}
-                                                text={
-                                                    copied ? "Copied" : "Copy"
-                                                }
-                                                onClick={() => {
-                                                    navigator.clipboard.writeText(
-                                                        profile?.username
-                                                    );
-                                                    setCopied(true);
-                                                    toast.info(
-                                                        "Your username is copied"
-                                                    );
-                                                    setTimeout(() => {
-                                                        setCopied(false);
-                                                    }, 5000);
-                                                }}
-                                            />
-                                            <div
-                                                onClick={() =>
-                                                    dispatcher(
-                                                        changeNicknameModalState(
-                                                            {
-                                                                open: true,
-                                                            }
-                                                        )
-                                                    )
-                                                }
-                                            >
-                                                <Text
-                                                    type={"p"}
-                                                    text="Change Avatar"
-                                                    fontSize={"14px"}
-                                                    color="#A0ABDB"
-                                                    cursor="pointer"
-                                                />
-                                            </div>
                                         </div>
-                                    </Flex>
+                                    </div>
+                                </Flex>
 
-                                    <TextWithIcon
-                                        icon={settings}
-                                        text="Change Nickname"
-                                        width="80%"
-                                        height="40px"
-                                        onClick={() =>
-                                            dispatcher(
-                                                changeNicknameModalState({
-                                                    open: true,
-                                                })
-                                            )
-                                        }
-                                    />
-                                    <br />
-                                    <TextWithIcon
-                                        icon={pad}
-                                        height="40px"
-                                        text="Game History"
-                                        width="80%"
-                                        onClick={() =>
-                                            Inertia.visit("/history")
-                                        }
-                                    />
-                                </PersonalCard>
+                                <TextWithIcon
+                                    icon={settings}
+                                    text="Change Nickname"
+                                    width="80%"
+                                    height="40px"
+                                    onClick={() =>
+                                        dispatcher(
+                                            changeNicknameModalState({
+                                                open: true,
+                                            })
+                                        )
+                                    }
+                                />
+                                <br />
+                                <TextWithIcon
+                                    icon={pad}
+                                    height="40px"
+                                    text="Game History"
+                                    width="80%"
+                                    onClick={() => Inertia.visit("/history")}
+                                />
+                            </PersonalCard>
 
-                                <PersonalCard
-                                    padding="20px 20px 0 20px"
-                                    isMobile={isMobile}
+                            <PersonalCard
+                                padding="20px 20px 0 20px"
+                                isMobile={isMobile}
+                            >
+                                <Text
+                                    type="p"
+                                    text="My VIP Level"
+                                    fontSize="18px"
+                                    color="white"
+                                    fontWeight="700"
+                                    paddingBottom="20px"
+                                />
+                                <div style={{ textAlign: "center" }}>
+                                    <img src={level1} alt="" />
+                                </div>
+                                <Flex
+                                    justifyContent="space-between"
+                                    width="80%"
                                 >
                                     <Text
                                         type="p"
-                                        text="My VIP Level"
-                                        fontSize="18px"
-                                        color="white"
-                                        fontWeight="700"
-                                        paddingBottom="20px"
+                                        text="Deposit Amount"
+                                        fontSize="15px"
+                                        fontWeight="bold"
                                     />
-                                    <div style={{ textAlign: "center" }}>
-                                        <img src={level1} alt="" />
-                                    </div>
-                                    <Flex
-                                        justifyContent="space-between"
-                                        width="80%"
-                                    >
+                                    <Flex alignItems="center" gap="3px">
                                         <Text
                                             type="p"
-                                            text="Deposit Amount"
+                                            text={`R$ ${wallet?.deposit}`}
                                             fontSize="15px"
                                             fontWeight="bold"
                                         />
-                                        <Flex alignItems="center" gap="3px">
-                                            <Text
-                                                type="p"
-                                                text={`R$ ${wallet?.deposit}`}
-                                                fontSize="15px"
-                                                fontWeight="bold"
-                                            />
-                                            <small>/</small>
-                                            <Text
-                                                type="p"
-                                                // text="R$100"
-                                                text={`R$${level?.maxDeposit}`}
-                                                fontSize="15px"
-                                                fontWeight="bold"
-                                                color="#64A2FF"
-                                            />
-                                        </Flex>
-                                    </Flex>
-                                    <RangeInput
-                                        style={{
-                                            width: "80%",
-                                            marginTop: "10px",
-                                        }}
-                                        value={level.depositProgress}
-                                    >
-                                        <Flex alignItems="center" gap="6px">
-                                            <input
-                                                type="range"
-                                                max={100}
-                                                min={0}
-                                                value={10}
-                                                style={{ width: "100%" }}
-                                            />
-                                            <Text
-                                                text={`${level.depositProgress}%`}
-                                                type="p"
-                                                fontWeight="bold"
-                                            />
-                                        </Flex>
-                                    </RangeInput>
-                                    <br />
-                                    <Flex
-                                        justifyContent="space-between"
-                                        width="80%"
-                                    >
+                                        <small>/</small>
                                         <Text
                                             type="p"
-                                            text="Bet amount"
+                                            // text="R$100"
+                                            text={`R$${level?.maxDeposit}`}
                                             fontSize="15px"
                                             fontWeight="bold"
+                                            color="#64A2FF"
                                         />
-                                        <Flex alignItems="center" gap="3px">
-                                            <Text
-                                                type="p"
-                                                text={`R$ ${wallet?.bet || 0}`}
-                                                fontSize="15px"
-                                                fontWeight="bold"
-                                            />
-                                            <small>/</small>
-                                            <Text
-                                                type="p"
-                                                text={`R$${level?.maxBet}`}
-                                                fontSize="15px"
-                                                fontWeight="bold"
-                                                color="#64A2FF"
-                                            />
-                                        </Flex>
                                     </Flex>
-                                    <RangeInput
-                                        style={{
-                                            width: "80%",
-                                            marginTop: "10px",
-                                        }}
-                                        value={level.betProgress}
-                                    >
-                                        <Flex alignItems="center" gap="6px">
-                                            <input
-                                                type="range"
-                                                max={100}
-                                                min={0}
-                                                value={10}
-                                                style={{ width: "100%" }}
-                                            />
-                                            <Text
-                                                text={`${level.betProgress}%`}
-                                                type="p"
-                                                fontWeight="bold"
-                                            />
-                                        </Flex>
-                                    </RangeInput>
+                                </Flex>
+                                <RangeInput
+                                    style={{
+                                        width: "80%",
+                                        marginTop: "10px",
+                                    }}
+                                    value={level.depositProgress}
+                                >
+                                    <Flex alignItems="center" gap="6px">
+                                        <input
+                                            type="range"
+                                            max={100}
+                                            min={0}
+                                            value={10}
+                                            style={{ width: "100%" }}
+                                        />
+                                        <Text
+                                            text={`${level.depositProgress}%`}
+                                            type="p"
+                                            fontWeight="bold"
+                                        />
+                                    </Flex>
+                                </RangeInput>
+                                <br />
+                                <Flex
+                                    justifyContent="space-between"
+                                    width="80%"
+                                >
                                     <Text
                                         type="p"
-                                        text="View Rank System"
+                                        text="Bet amount"
+                                        fontSize="15px"
+                                        fontWeight="bold"
+                                    />
+                                    <Flex alignItems="center" gap="3px">
+                                        <Text
+                                            type="p"
+                                            text={`R$ ${wallet?.bet || 0}`}
+                                            fontSize="15px"
+                                            fontWeight="bold"
+                                        />
+                                        <small>/</small>
+                                        <Text
+                                            type="p"
+                                            text={`R$${level?.maxBet}`}
+                                            fontSize="15px"
+                                            fontWeight="bold"
+                                            color="#64A2FF"
+                                        />
+                                    </Flex>
+                                </Flex>
+                                <RangeInput
+                                    style={{
+                                        width: "80%",
+                                        marginTop: "10px",
+                                    }}
+                                    value={level.betProgress}
+                                >
+                                    <Flex alignItems="center" gap="6px">
+                                        <input
+                                            type="range"
+                                            max={100}
+                                            min={0}
+                                            value={10}
+                                            style={{ width: "100%" }}
+                                        />
+                                        <Text
+                                            text={`${level.betProgress}%`}
+                                            type="p"
+                                            fontWeight="bold"
+                                        />
+                                    </Flex>
+                                </RangeInput>
+                                <Text
+                                    type="p"
+                                    text="View Rank System"
+                                    color="#A0ABDB"
+                                    fontSize="13px"
+                                    paddingTop="20px"
+                                    cursor="pointer"
+                                />
+                            </PersonalCard>
+
+                            <PersonalCard
+                                padding="20px 40px 0 40px"
+                                isMobile={isMobile}
+                            >
+                                <Text
+                                    type="p"
+                                    text="Wallets"
+                                    fontSize="18px"
+                                    color="white"
+                                    fontWeight="700"
+                                    paddingBottom="20px"
+                                />
+                                <Text
+                                    type="p"
+                                    text="R$"
+                                    fontSize="18px"
+                                    color="white"
+                                    fontWeight="700"
+                                    paddingBottom="20px"
+                                />
+                                <Text
+                                    type="p"
+                                    text={wallet.withdrawable_balance}
+                                    fontSize="28px"
+                                    color="#64A2FF"
+                                    fontWeight="700"
+                                    paddingBottom="20px"
+                                />
+                                <Flex
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    width="100%"
+                                    gap="20px"
+                                >
+                                    <TextWithBg
+                                        bg="#191C51"
+                                        primaryText="BET"
+                                        secondaryText={`R$ ${wallet?.bet || 0}`}
+                                        secondaryTextSize={"14px"}
+                                        primaryTextSize={"12px"}
+                                        whiteSpace="nowrap"
+                                        padding={
+                                            isMobile ? "10px 20px" : "10px 45px"
+                                        }
+                                    />
+                                    <TextWithBg
+                                        secondaryTextSize={"14px"}
+                                        primaryTextSize={"12px"}
+                                        padding="10px 45px"
+                                        bg="#191C51"
+                                        primaryText="DEPOSIT"
+                                        secondaryText={`R$ ${
+                                            wallet?.deposit || 0
+                                        }`}
+                                    />
+                                </Flex>
+                                <Divider
+                                    bg="#A0ABDB"
+                                    margin="20px"
+                                    style={{ width: "100%" }}
+                                />
+                                <Flex
+                                    width="100%"
+                                    gap="20px"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                >
+                                    <Button
+                                        text="Deposit"
+                                        background="#5484FF"
+                                        width="100%"
+                                        padding="15px 20px"
+                                        addon={walletImg}
+                                        onSubmit={() => {
+                                            dispatcher(
+                                                setWalletModalState({
+                                                    open: true,
+                                                    tab: 0,
+                                                })
+                                            );
+                                        }}
+                                    />
+                                    <Button
+                                        text="Withdraw"
+                                        background="#F93967"
+                                        width="100%"
+                                        padding="15px 20px"
+                                        onSubmit={() => {
+                                            dispatcher(
+                                                setWalletModalState({
+                                                    open: true,
+                                                    tab: 1,
+                                                })
+                                            );
+                                        }}
+                                    />
+                                </Flex>
+                                <div
+                                    onClick={() => {
+                                        Inertia.get("/history");
+                                    }}
+                                >
+                                    <Text
+                                        type="p"
+                                        text="History"
                                         color="#A0ABDB"
                                         fontSize="13px"
-                                        paddingTop="20px"
+                                        padding="10px"
                                         cursor="pointer"
                                     />
-                                </PersonalCard>
-
-                                <PersonalCard
-                                    padding="20px 40px 0 40px"
-                                    isMobile={isMobile}
-                                >
-                                    <Text
-                                        type="p"
-                                        text="Wallets"
-                                        fontSize="18px"
-                                        color="white"
-                                        fontWeight="700"
-                                        paddingBottom="20px"
-                                    />
-                                    <Text
-                                        type="p"
-                                        text="R$"
-                                        fontSize="18px"
-                                        color="white"
-                                        fontWeight="700"
-                                        paddingBottom="20px"
-                                    />
-                                    <Text
-                                        type="p"
-                                        text={
-                                            +wallet?.bet +
-                                            +wallet?.deposit +
-                                            +wallet?.bonus
-                                        }
-                                        fontSize="28px"
-                                        color="#64A2FF"
-                                        fontWeight="700"
-                                        paddingBottom="20px"
-                                    />
-                                    <Flex
-                                        justifyContent="space-between"
-                                        alignItems="center"
-                                        width="100%"
-                                        gap="20px"
-                                    >
-                                        <TextWithBg
-                                            bg="#191C51"
-                                            primaryText="BET"
-                                            secondaryText={`R$ ${
-                                                wallet?.bet || 0
-                                            }`}
-                                            secondaryTextSize={"14px"}
-                                            primaryTextSize={"12px"}
-                                            whiteSpace="nowrap"
-                                            padding={
-                                                isMobile
-                                                    ? "10px 20px"
-                                                    : "10px 45px"
-                                            }
-                                        />
-                                        <TextWithBg
-                                            secondaryTextSize={"14px"}
-                                            primaryTextSize={"12px"}
-                                            padding="10px 45px"
-                                            bg="#191C51"
-                                            primaryText="DEPOSIT"
-                                            secondaryText={`R$ ${
-                                                wallet?.deposit || 0
-                                            }`}
-                                        />
-                                    </Flex>
-                                    <Divider
-                                        bg="#A0ABDB"
-                                        margin="20px"
-                                        style={{ width: "100%" }}
-                                    />
-                                    <Flex
-                                        width="100%"
-                                        gap="20px"
-                                        alignItems="center"
-                                        justifyContent="center"
-                                    >
-                                        <Button
-                                            text="Deposit"
-                                            background="#5484FF"
-                                            width="100%"
-                                            padding="15px 20px"
-                                            addon={walletImg}
-                                            onSubmit={() => {
-                                                dispatcher(
-                                                    setWalletModalState({
-                                                        open: true,
-                                                        tab: 0,
-                                                    })
-                                                );
-                                            }}
-                                        />
-                                        <Button
-                                            text="Withdraw"
-                                            background="#F93967"
-                                            width="100%"
-                                            padding="15px 20px"
-                                            onSubmit={() => {
-                                                dispatcher(
-                                                    setWalletModalState({
-                                                        open: true,
-                                                        tab: 1,
-                                                    })
-                                                );
-                                            }}
-                                        />
-                                    </Flex>
-                                    <div
-                                        onClick={() => {
-                                            Inertia.get("/history");
-                                        }}
-                                    >
-                                        <Text
-                                            type="p"
-                                            text="History"
-                                            color="#A0ABDB"
-                                            fontSize="13px"
-                                            padding="10px"
-                                            cursor="pointer"
-                                        />
-                                    </div>
-                                </PersonalCard>
-                            </Flex>
-                        </ImageGridLayout>
-                    </PersonalCenterPageWrapper>
-                </PageTemplate>
-            </GuestLayout>
+                                </div>
+                            </PersonalCard>
+                        </Flex>
+                    </ImageGridLayout>
+                </PersonalCenterPageWrapper>
+            </PageTemplate>
+            {/* </GuestLayout> */}
         </>
     );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { styled } from "@mui/system";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
@@ -7,12 +7,17 @@ import cross from "../../../../assets/games/cross.svg";
 import cross_sm from "../../../../assets/games/cross_sm.svg";
 import arrow from "../../../../assets/games/arrow.svg";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { motion, useAnimation } from "framer-motion";
+import { DiceWrapper } from "../styles/diceStyles";
+import { useEffect } from "react";
+// import { sleep } from "@/utils/util";
 
 const marks = [0, 25, 50, 75, 100];
 
-const Frame = styled("img")(() => ({
+const Frame = styled("img")(({ rotate }) => ({
     width: "4.1875rem",
     height: "4.1875rem",
+    transform: `rotate(${rotate}deg)`,
 }));
 
 const PrettoSlider = styled(Slider)({
@@ -55,8 +60,19 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = () => {
+const DiceFrame = (gridProps) => {
+    const { diceRef, rollDice } = gridProps;
     const { isMobile } = useScreenResolution();
+    const [diceRotation, setDiceRotation] = useState(0);
+    const controls = useAnimation();
+    // const diceRef = useRef(null);
+    // useEffect(() => {
+    //     if (btnClicked) {
+    //         rollDice(diceRef);
+    //     }
+    // }, [btnClicked]);
+
+    console.log("refff 3", diceRef);
     return (
         <Box
             sx={{
@@ -66,15 +82,66 @@ const DiceFrame = () => {
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <Box
+            {/* <Box
                 sx={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
-            >
-                <Frame src={dice} />
+            > */}
+            {/* <DiceWrapper>
+                <section className="container">
+                    <div id="cube" onClick={() => rollDice(diceRef)} ref={diceRef}>
+                        <div className="front">
+                            <span className="dot dot1"></span>
+                        </div>
+                        <div className="back">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                        </div>
+                        <div className="right">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                        </div>
+                        <div className="left">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                        </div>
+                        <div className="top">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                            <span className="dot dot5"></span>
+                        </div>
+                        <div className="bottom">
+                            <span className="dot dot1"></span>
+                            <span className="dot dot2"></span>
+                            <span className="dot dot3"></span>
+                            <span className="dot dot4"></span>
+                            <span className="dot dot5"></span>
+                            <span className="dot dot6"></span>
+                        </div>
+                    </div>
+                </section>
+            </DiceWrapper> */}
+            {/* <motion.div
+                    animate={{
+                        rotate: diceRotation * 300,
+                    }}
+                    transition={{ ease: "easeIn", duration: 1 }}
+                > */}
+            <Box sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+            }}>
+                <Frame src={dice} ref={diceRef} />
+                {/* </motion.div> */}
             </Box>
             <Box
                 sx={{
@@ -102,6 +169,9 @@ const DiceFrame = () => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         defaultValue={50}
+                        onChange={(_, value) => {
+                            setDiceRotation(value);
+                        }}
                     />
                 </Box>
             </Box>
