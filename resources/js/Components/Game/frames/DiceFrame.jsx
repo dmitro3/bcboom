@@ -71,7 +71,7 @@ const DiceFrame = (gridProps) => {
     //         rollDice(diceRef);
     //     }
     // }, [btnClicked]);
-   
+
     console.log("refff 3", diceRef);
     return (
         <Box
@@ -90,7 +90,7 @@ const DiceFrame = (gridProps) => {
                     alignItems: "center",
                 }}
             > */}
-            <DiceWrapper>
+            {/* <DiceWrapper>
                 <section className="container">
                     <div id="cube" onClick={() => rollDice(diceRef)} ref={diceRef}>
                         <div className="front">
@@ -128,16 +128,21 @@ const DiceFrame = (gridProps) => {
                         </div>
                     </div>
                 </section>
-            </DiceWrapper>
+            </DiceWrapper> */}
             {/* <motion.div
                     animate={{
                         rotate: diceRotation * 300,
                     }}
                     transition={{ ease: "easeIn", duration: 1 }}
                 > */}
-            {/* <Frame src={dice} ref={diceRef} /> */}
-            {/* </motion.div> */}
-            {/* </Box> */}
+            <Box sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+            }}>
+                <Frame src={dice} ref={diceRef} />
+                {/* </motion.div> */}
+            </Box>
             <Box
                 sx={{
                     width: "100%",
