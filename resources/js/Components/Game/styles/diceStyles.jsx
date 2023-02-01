@@ -254,7 +254,7 @@ export const DiceWrapper = styled("div")(() => ({
         "30%": { width: "200px" },
         "100%": { width: "0", transform: "translateX(806px)" },
     },
-    ".stars,\n.twinkleMask,\n.twinkleMask2,\n.clouds": {
+    ".stars, .twinkleMask, .twinkleMask2, .clouds": {
         position: "absolute",
         top: "0",
         left: "0",
@@ -280,7 +280,7 @@ export const DiceWrapper = styled("div")(() => ({
         background:
             'transparent url("https://wolf.drjm.co.uk/nightsky/twinkleMask2.png") repeat top center',
         zIndex: 2,
-        height: "200%",
+        height: "100%",
         WebkitAnimation: "twinkleFrames2 300s linear infinite",
         animation: "twinkleFrames2 300s linear infinite",
     },
@@ -288,7 +288,7 @@ export const DiceWrapper = styled("div")(() => ({
         background:
             'transparent url("https://wolf.drjm.co.uk/nightsky/clouds.png") repeat top center',
         zIndex: 3,
-        height: "150%",
+        height: "100%",
         WebkitAnimation: "cloudsFrames 300s linear infinite",
         animation: "cloudsFrames 300s linear infinite",
     },
@@ -303,8 +303,8 @@ export const DiceWrapper = styled("div")(() => ({
         position: "absolute",
         left: "-50%",
         top: "-30%",
-        width: "200%",
-        height: "200%",
+        width: "100%",
+        height: "100%",
         WebkitAnimationName: "fogFrames",
         animationName: "fogFrames",
         WebkitAnimationDuration: "60s",

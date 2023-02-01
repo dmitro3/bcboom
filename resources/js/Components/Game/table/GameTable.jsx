@@ -26,6 +26,8 @@ const GameTable = () => {
                         mr: "7.4375rem",
                         justifyContent: "space-between",
                         alignItems: "center",
+                        position: "relative",
+                        zIndex: 100,
                     }}
                 >
                     <Box
