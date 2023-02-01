@@ -9,6 +9,7 @@ class Withdraw extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "initial_amount",
         "amount",
         "orderno",
         "tx_orderno",

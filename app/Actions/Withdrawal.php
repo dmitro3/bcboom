@@ -61,14 +61,13 @@ class Withdrawal
         if (isset($result['data']['orderno'])) {
             // print('success');
             // dd($result['data']);
-
-            $withdrawal = Withdraw::create([
+            $withdrawal = Withdrawal::where('user_id', $user->id)->first();
+            $withdrawal->update([
                 'orderno' => $result['data']['orderno'],
                 'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
                 'create_time' => $result['data']['create_time'],
                 'username' => $user->username,
-                'user_id' => $user->id,
                 'bankname' => $result['data']['bankname'],
                 'bankcard' => $result['data']['bankcard'],
                 'trade_state' => $result['data']['trade_state'],

@@ -190,42 +190,70 @@ public function referrals()
  public function promoteLevel(){
     $wallet = Wallet::where('user_id', $this->id)->first();
 
-    if($wallet->deposit > 999){
+    if($wallet->deposit > 100){
      $vip =  $this->update([
             'vip' => 1
         ]);
         return $vip; 
     }
-    elseif($wallet->deposit > 1999){
+    elseif($wallet->deposit > 499){
      $vip =  $this->update([
         'vip' => 2    
         ]);
         return $vip;
     }
-    elseif($wallet->deposit > 2999){
+    elseif($wallet->deposit > 1999){
       $vip = $this->update([
         'vip' => 3 
         ]);
         return $vip;
     }
-    elseif($wallet->deposit > 3999){
+    elseif($wallet->deposit > 9999){
       $vip = $this->update([
             'vip' => 4
         ]);
         return $vip;
     }
-    elseif($wallet->deposit > 4999){
+    elseif($wallet->deposit > 49999){
       $vip = $this->update([
             'vip' => 5
         ]);
         return $vip;
     }
-    else{
+    else if($wallet->deposit > 199999){
       $vip = $this->update([
             'vip' => 6
         ]);
         return $vip;
     }
+
+    else if($wallet->deposit > 199999){
+        $vip = $this->update([
+              'vip' => 6
+          ]);
+          return $vip;
+      }
+
+          else if($wallet->deposit > 499999){
+        $vip = $this->update([
+              'vip' => 7
+          ]);
+          return $vip;
+      }
+
+      else if($wallet->deposit > 1499999){
+        $vip = $this->update([
+              'vip' => 8
+          ]);
+          return $vip;
+      }
+
+      else if($wallet->deposit > 4499999){
+        $vip = $this->update([
+              'vip' => 9
+          ]);
+          return $vip;
+      }
 
     return $this->vip;
  }
