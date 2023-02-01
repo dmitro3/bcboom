@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->double('amount');
-            $table->string('orderno');
-            $table->string('tx_orderno');
-            $table->string('create_time');
-            $table->string('username');
-            $table->string('bankname');
-            $table->string('bankcard');
-            $table->string('trade_state');
+            $table->double('amount')->nullable();
+            $table->double('initial_amount')->nullable();
+            $table->string('orderno')->nullable();
+            $table->string('tx_orderno')->nullable();
+            $table->string('create_time')->nullable();
+            $table->string('username')->nullable();
+            $table->string('bankname')->nullable();
+            $table->string('bankcard')->nullable();
+            $table->string('trade_state')->nullable();
             $table->boolean('approved')->default(0);
             $table->string('status')->default('PENDING');
             $table->timestamps();
