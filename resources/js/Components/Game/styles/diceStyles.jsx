@@ -272,7 +272,7 @@ export const DiceWrapper = styled("div")(() => ({
     },
     ".stars": {
         background:
-            '#000 url("https://wolf.drjm.co.uk/nightsky/stars.jpg") repeat top center',
+            '#040404 url("https://wolf.drjm.co.uk/nightsky/stars.jpg") repeat top center',
         zIndex: 0,
     },
     ".twinkleMask": {

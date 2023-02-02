@@ -10,6 +10,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { motion, useAnimation } from "framer-motion";
 import { DiceWrapper } from "../styles/diceStyles";
 import { useEffect } from "react";
+import DiceComponent from "../styles/dice";
 // import { sleep } from "@/utils/util";
 
 const marks = [0, 25, 50, 75, 100];
@@ -82,37 +83,7 @@ const DiceFrame = (gridProps) => {
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            {/* <Box
-                sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            > */}
-            {/* <Box
-                sx={{
-                    width: "100%",
-                    display: "flex",
-                }}
-            >
-               
-            </Box> */}
-            {/* <motion.div
-                    animate={{
-                        rotate: diceRotation * 300,
-                    }}
-                    transition={{ ease: "easeIn", duration: 1 }}
-                > */}
-            {/* <Box
-                sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                }}
-            >
-                <Frame src={dice} ref={diceRef} />
-            </Box> */}
+            <DiceComponent/>
             <Box
                 sx={{
                     width: "100%",
