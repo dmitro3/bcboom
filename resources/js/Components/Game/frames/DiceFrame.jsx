@@ -65,15 +65,6 @@ const DiceFrame = (gridProps) => {
     const { diceRef, rollDice } = gridProps;
     const { isMobile } = useScreenResolution();
     const [diceRotation, setDiceRotation] = useState(0);
-    const controls = useAnimation();
-    // const diceRef = useRef(null);
-    // useEffect(() => {
-    //     if (btnClicked) {
-    //         rollDice(diceRef);
-    //     }
-    // }, [btnClicked]);
-
-    console.log("refff 3", diceRef);
     return (
         <Box
             sx={{
@@ -110,9 +101,9 @@ const DiceFrame = (gridProps) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         defaultValue={50}
-                        onChange={(_, value) => {
-                            setDiceRotation(value);
-                        }}
+                        // onChange={(_, value) => {
+                        //     setDiceRotation(value);
+                        // }}
                     />
                 </Box>
             </Box>
