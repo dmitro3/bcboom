@@ -90,60 +90,14 @@ const DiceFrame = (gridProps) => {
                     alignItems: "center",
                 }}
             > */}
-            <Box
+            {/* <Box
                 sx={{
                     width: "100%",
                     display: "flex",
                 }}
             >
-                <DiceWrapper>
-                    <div className="shootingStarContainer">
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                    </div>
-                    <div className="shootingStarContainer">
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                    </div>
-                    <div className="shootingStarContainer">
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                        <div className="shootingStar"></div>
-                    </div>
-
-                    <div className="stars"></div>
-                    <div className="twinkleMask"></div>
-                    <div className="twinkleMask2"></div>
-                    <div className="clouds"></div>
-
-                    <div className="fogContainer">
-                        <div className="fog"></div>
-                    </div>
-                </DiceWrapper>
-            </Box>
+               
+            </Box> */}
             {/* <motion.div
                     animate={{
                         rotate: diceRotation * 300,

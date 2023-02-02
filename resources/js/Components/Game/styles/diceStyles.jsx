@@ -1,9 +1,15 @@
 import { styled } from "@mui/system";
 
 export const DiceWrapper = styled("div")(() => ({
-    maxHeight: "100px",
-    maxWidth: "100px",
+    maxHeight: "100%",
+    maxWidth: "100%",
     overflow: "hidden",
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    borderRadius: "10px",
     // display: 'none',
     ".shootingStarContainer:nth-child(1)": {
         position: "absolute",
@@ -293,8 +299,8 @@ export const DiceWrapper = styled("div")(() => ({
         animation: "cloudsFrames 300s linear infinite",
     },
     ".fogContainer": {
-        width: "100%",
-        height: "100%",
+        width: "200%",
+        height: "200%",
         overflow: "hidden",
         position: "relative",
         zIndex: 7,
@@ -316,7 +322,7 @@ export const DiceWrapper = styled("div")(() => ({
         WebkitAnimationDirection: "alternate",
         animationDirection: "alternate",
         background:
-            "linear-gradient(-5deg, #00000000 0%, #ffffff15 40%, #74590121 45%, #8b845b21 55%, #00000000 70%)",
+            "linear-gradient(-5deg, #2E356501 0%, #ffffff01 40%, #74590101 45%, #8b845b01 55%, #2E356501 70%)",
     },
     "@-webkit-keyframes fogFrames": {
         "0%": { transform: "none" },
