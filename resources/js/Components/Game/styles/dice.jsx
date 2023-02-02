@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const DiceWrapper = styled("div")(() => ({
     h1: { fontFamily: "Arial, Helvetica, sans-serif", textAlign: "center" },
@@ -76,17 +76,21 @@ const DiceComponent = () => {
     function getRandom(max, min) {
         return (Math.floor(Math.random() * (max - min)) + min) * 90;
     }
-    if (diceRef.current) {
-        diceRef.current.addEventListener("click", () => {
-            const xRand = getRandom(max, min);
-            const yRand = getRandom(max, min);
+    useEffect(() => {
+        var min = 1;
+        var max = 24;
+        if (diceRef.current) {
+            diceRef.current.addEventListener("click", () => {
+                const xRand = getRandom(max, min);
+                const yRand = getRandom(max, min);
 
-            cube.style.webkitTransform =
-                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-            cube.style.transform =
-                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-        });
-    }
+                cube.style.webkitTransform =
+                    "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+                cube.style.transform =
+                    "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            });
+        }
+    });
     return (
         <DiceWrapper>
             <section className="container">

@@ -1,15 +1,10 @@
-import React, { useRef, useState } from "react";
-import { styled } from "@mui/system";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
-import dice from "../../../../assets/games/dice.svg";
+import { styled } from "@mui/system";
+import arrow from "../../../../assets/games/arrow.svg";
 import cross from "../../../../assets/games/cross.svg";
 import cross_sm from "../../../../assets/games/cross_sm.svg";
-import arrow from "../../../../assets/games/arrow.svg";
-import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { motion, useAnimation } from "framer-motion";
-import { DiceWrapper } from "../styles/diceStyles";
-import { useEffect } from "react";
 import DiceComponent from "../styles/dice";
 // import { sleep } from "@/utils/util";
 
@@ -62,9 +57,7 @@ const PrettoSlider = styled(Slider)({
 });
 
 const DiceFrame = (gridProps) => {
-    const { diceRef, rollDice } = gridProps;
     const { isMobile } = useScreenResolution();
-    const [diceRotation, setDiceRotation] = useState(0);
     return (
         <Box
             sx={{
