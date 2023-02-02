@@ -31,6 +31,7 @@ const GameLayout = ({
     customFrameBoxStyles,
     customFrameHeader = false,
     innerHeader = false,
+    GameBg,
 }) => {
     const { isMobile } = useScreenResolution();
     return (
@@ -131,11 +132,13 @@ const GameLayout = ({
                             borderRadius: ".625rem",
                             flexDirection: "column",
                             background: "#2E3565",
+                            // background: "red",
                             padding: `${customFrameHeader ? 0 : "1.12rem"}`,
 
                             ...customFrameStyles,
                         }}
                     >
+                        {GameBg && GameBg}
                         <Box
                             sx={{
                                 height: "1.5rem",
@@ -147,6 +150,8 @@ const GameLayout = ({
                                     xs: `${!innerHeader ? "none" : "none"}`,
                                     md: `${!innerHeader ? "none" : "flex"}`,
                                 },
+                                zIndex: 1000,
+                                position: "relative",
                                 //border: "1px solid red",
                             }}
                         >
@@ -176,7 +181,7 @@ const GameLayout = ({
                                 width: "100%",
                                 display: "flex",
                                 justifyContent: "center",
-
+                                zIndex: 100,
                                 ...customFrameBoxStyles,
                             }}
                         >
@@ -191,7 +196,7 @@ const GameLayout = ({
                     sx={{
                         width: "35%",
                         display: { xs: "none", md: "flex" },
-                        //paddingTop: "1rem",
+                        zIndex: 100,
                     }}
                 >
                     <GameTable />

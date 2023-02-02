@@ -7,6 +7,57 @@ import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import React, { useRef, useState } from "react";
+import { DiceWrapper } from "@/Components/Game/styles/diceStyles";
+
+const DiceCloudBg = () => (
+    <DiceWrapper>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+
+        <div className="stars"></div>
+        <div className="twinkleMask"></div>
+        <div className="twinkleMask2"></div>
+        <div className="clouds"></div>
+
+        <div className="fogContainer">
+            <div className="fog"></div>
+        </div>
+    </DiceWrapper>
+);
 
 const Dice = () => {
     const { isMobile } = useScreenResolution();
@@ -43,6 +94,7 @@ const Dice = () => {
         setDiceRef,
         rollDice,
     };
+
     return (
         <div>
             <Head title="Games Dice" />
@@ -57,6 +109,11 @@ const Dice = () => {
                         innerHeader={true}
                         customFrameBoxStyles={{
                             height: "21rem",
+                            position: "relative",
+                        }}
+                        GameBg={DiceCloudBg()}
+                        customFrameStyles={{
+                            position: "relative",
                         }}
                     />
                 </GamesPageWrapper>
