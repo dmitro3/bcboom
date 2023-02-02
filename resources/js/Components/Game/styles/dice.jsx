@@ -2,7 +2,6 @@ import { styled } from "@mui/system";
 import React, { useEffect, useRef } from "react";
 
 const DiceWrapper = styled("div")(() => ({
-    h1: { fontFamily: "Arial, Helvetica, sans-serif", textAlign: "center" },
     "#cube .front": { transform: "translateZ(100px)" },
     "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube .right": { transform: "rotateY(90deg)    translateZ(100px)" },
@@ -24,7 +23,7 @@ const DiceWrapper = styled("div")(() => ({
         top: "100px",
         position: "absolute",
         transformStyle: "preserve-3d",
-        transition: "transform 6s",
+        transition: "transform 1s",
     },
     "#cube:hover": { cursor: "pointer" },
     "#cube div": {
