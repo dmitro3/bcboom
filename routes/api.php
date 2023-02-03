@@ -113,6 +113,11 @@ Route::get('all/deposits', [
     UserController::class, 'allDeposits'
 ]);
 
+Route::get('all/withdrawals', [
+    UserController::class, 'allWithdrawals'
+]);
+
+
 Route::get('notifywithdrawal', function (Request $request) {
     $callback = new Withdrawal;
     $callback->status($request);
