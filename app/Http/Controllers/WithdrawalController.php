@@ -19,7 +19,26 @@ class WithdrawalController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.verify');
+    
     }
+
+    public function transactions()
+    {
+        $user = Auth::user();
+        $withdrawals = Withdraw::where('id', $user->id)->orderBy('created_at', 'desc')->get();
+        
+        if ($withdrawals) {
+            return response()->json([
+                'payments' => $withdrawals,
+                'message' => 'Withdrawals retrieved',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'No withdrawal found',
+            ], 404);
+        }
+    }
+
     public function handle(Request $request)
     {
 

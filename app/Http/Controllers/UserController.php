@@ -18,6 +18,7 @@ use App\Notifications\Message;
 use Validator;
 use App\Models\Email;
 use App\Models\Depo;
+use App\Models\Withdraw;
 
 
 class UserController extends Controller
@@ -41,11 +42,20 @@ class UserController extends Controller
 
     public function allDeposits(){
         $deposits = Depo::all();
-
+        $wallets = Wallet::all();
         return response()->json([
             'deposits' => $deposits,
+            'wallets' => $wallets
         ]);
         
+    }
+
+    public function allWithdrawals(){
+        
+        $allWithdrawals = Withdraw::all();
+        return response()->json([
+            'allWithdrawals' => $allWithdrawals
+        ]);
     }
 
 public function openDash(){
@@ -78,9 +88,10 @@ public function openDash(){
 
     public function allUsers(){
         $users = User::orderBy('created_at', 'desc')->get();
-
+        
         return response()->json([
-            "users" => $users
+            "users" => $users,
+        
         ]);
     }
 
