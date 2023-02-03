@@ -41,6 +41,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Email::class);
     }
+
+    public function depos(){
+        return $this->hasMany(Depo::class);
+    }
+
     public function referrer()
     {
         return $this->belongsTo(User::class, 'referrer_id', 'id');
