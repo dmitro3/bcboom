@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2023 at 08:10 PM
+-- Generation Time: Feb 03, 2023 at 09:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `bcboom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `depos`
+--
+
+CREATE TABLE `depos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `deposit_amount` double DEFAULT NULL,
+  `percentage_amount` double DEFAULT NULL,
+  `final_amount` double DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emails`
+--
+
+CREATE TABLE `emails` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subject` varchar(191) NOT NULL,
+  `content` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -78,17 +109,20 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_01_09_092649_create_referrals_table', 1),
-(6, '2023_01_10_152746_create_wallets_table', 1),
-(7, '2023_01_11_223417_create_reset_code_passwords_table', 1),
-(8, '2023_01_13_075312_create_histories_table', 1),
-(9, '2023_01_13_075508_create_payments_table', 1),
-(10, '2023_01_13_075611_create_games_table', 1),
-(11, '2023_01_20_130220_create_withdraws_table', 1);
+(25, '2014_10_12_000000_create_users_table', 1),
+(26, '2014_10_12_100000_create_password_resets_table', 1),
+(27, '2019_08_19_000000_create_failed_jobs_table', 1),
+(28, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(29, '2023_01_09_092649_create_referrals_table', 1),
+(30, '2023_01_10_152746_create_wallets_table', 1),
+(31, '2023_01_11_223417_create_reset_code_passwords_table', 1),
+(32, '2023_01_13_075312_create_histories_table', 1),
+(33, '2023_01_13_075508_create_payments_table', 1),
+(34, '2023_01_13_075611_create_games_table', 1),
+(35, '2023_01_20_130220_create_withdraws_table', 1),
+(36, '2023_01_28_110635_create_sessions_table', 1),
+(37, '2023_01_30_171436_create_emails_table', 1),
+(38, '2023_02_03_060818_create_depos_table', 2);
 
 -- --------------------------------------------------------
 
@@ -112,12 +146,14 @@ CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `amount` double DEFAULT NULL,
   `pay_amount` double DEFAULT NULL,
+  `pay_time` varchar(191) DEFAULT NULL,
   `order_no` varchar(191) DEFAULT NULL,
   `create_time` varchar(191) DEFAULT NULL,
   `customer` varchar(191) DEFAULT NULL,
   `mobile` varchar(191) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `email` varchar(191) DEFAULT NULL,
+  `sign` varchar(191) DEFAULT NULL,
   `link` varchar(191) DEFAULT NULL,
   `status` varchar(191) DEFAULT NULL,
   `called` tinyint(1) NOT NULL DEFAULT 0,
@@ -175,6 +211,21 @@ CREATE TABLE `reset_code_passwords` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(191) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -185,20 +236,29 @@ CREATE TABLE `users` (
   `username` varchar(191) NOT NULL,
   `phone` varchar(191) DEFAULT NULL,
   `bio` text DEFAULT NULL,
-  `withdrawal_limit` bigint(20) NOT NULL DEFAULT 0,
+  `withdrawal_limit` bigint(20) NOT NULL DEFAULT 1000,
   `referrer_id` bigint(20) UNSIGNED DEFAULT NULL,
   `referral_count` bigint(20) NOT NULL DEFAULT 0,
   `referral_token` varchar(191) DEFAULT NULL,
   `address` varchar(191) DEFAULT NULL,
   `image` varchar(191) DEFAULT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `vip` varchar(191) DEFAULT NULL,
+  `player` tinyint(1) NOT NULL DEFAULT 1,
+  `vip` varchar(191) NOT NULL DEFAULT '0',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `phone`, `bio`, `withdrawal_limit`, `referrer_id`, `referral_count`, `referral_token`, `address`, `image`, `admin`, `player`, `vip`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@bcboom.com', 'admin', '123456', NULL, 1000, NULL, 0, NULL, NULL, NULL, 1, 0, '0', NULL, '$2y$10$oJkFEkiSYap6dglI1h10uuGnrOmWMa8T5uE/03B23URMR4Jfj7W/u', NULL, '2023-02-02 17:34:39', '2023-02-02 17:34:39'),
+(2, NULL, 'thebossishere@gmail.com', 'theboss', '123456789', NULL, 1000, NULL, 0, 'theboss474430', NULL, NULL, 0, 1, '0', NULL, '$2y$10$9FZLks1lyqswXtd7rwfbv.yssgEFz5j8vieN/ytlnZM64wfZHh/t2', NULL, '2023-02-02 17:35:19', '2023-02-02 17:35:19');
 
 -- --------------------------------------------------------
 
@@ -210,12 +270,21 @@ CREATE TABLE `wallets` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `deposit` double NOT NULL DEFAULT 0,
+  `deposit_amount` double NOT NULL DEFAULT 0,
   `bet` double NOT NULL DEFAULT 0,
   `bonus` double NOT NULL DEFAULT 0,
+  `withdrawable_balance` double NOT NULL DEFAULT 0,
   `order_no` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wallets`
+--
+
+INSERT INTO `wallets` (`id`, `user_id`, `deposit`, `deposit_amount`, `bet`, `bonus`, `withdrawable_balance`, `order_no`, `created_at`, `updated_at`) VALUES
+(1, 2, 0, 1600, 0, 0, 1600, NULL, '2023-02-02 17:35:19', '2023-02-02 17:35:19');
 
 -- --------------------------------------------------------
 
@@ -226,22 +295,43 @@ CREATE TABLE `wallets` (
 CREATE TABLE `withdraws` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `amount` double NOT NULL,
-  `orderno` varchar(191) NOT NULL,
-  `tx_orderno` varchar(191) NOT NULL,
-  `create_time` varchar(191) NOT NULL,
-  `username` varchar(191) NOT NULL,
-  `bankname` varchar(191) NOT NULL,
-  `bankcard` varchar(191) NOT NULL,
-  `trade_state` varchar(191) NOT NULL,
+  `amount` double DEFAULT NULL,
+  `initial_amount` double DEFAULT NULL,
+  `orderno` varchar(191) DEFAULT NULL,
+  `tx_orderno` varchar(191) DEFAULT NULL,
+  `create_time` varchar(191) DEFAULT NULL,
+  `username` varchar(191) DEFAULT NULL,
+  `bankname` varchar(191) DEFAULT NULL,
+  `bankcard` varchar(191) DEFAULT NULL,
+  `trade_state` varchar(191) DEFAULT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
+  `status` varchar(191) NOT NULL DEFAULT 'PENDING',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `withdraws`
+--
+
+INSERT INTO `withdraws` (`id`, `user_id`, `amount`, `initial_amount`, `orderno`, `tx_orderno`, `create_time`, `username`, `bankname`, `bankcard`, `trade_state`, `approved`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, NULL, 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'PENDING', '2023-02-02 17:36:46', '2023-02-02 17:36:46');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `depos`
+--
+ALTER TABLE `depos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `emails`
+--
+ALTER TABLE `emails`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -302,6 +392,14 @@ ALTER TABLE `reset_code_passwords`
   ADD KEY `reset_code_passwords_email_index` (`email`);
 
 --
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -328,6 +426,18 @@ ALTER TABLE `withdraws`
 --
 
 --
+-- AUTO_INCREMENT for table `depos`
+--
+ALTER TABLE `depos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `emails`
+--
+ALTER TABLE `emails`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -349,7 +459,7 @@ ALTER TABLE `histories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -379,19 +489,19 @@ ALTER TABLE `reset_code_passwords`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `withdraws`
 --
 ALTER TABLE `withdraws`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

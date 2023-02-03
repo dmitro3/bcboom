@@ -15,11 +15,11 @@ use Carbon\Carbon;
 
 class WithdrawalController extends Controller
 {
-    //
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    
+    public function __construct()
+    {
+        $this->middleware('jwt.verify');
+    }
     public function handle(Request $request)
     {
 
@@ -38,22 +38,22 @@ class WithdrawalController extends Controller
         $monthlyFree = Withdraw::where('user_id', $user->id)
             ->where('created_at', '<', $month)
             ->orderBy('created_at', 'desc')
-            ->first();
+            ->get();
 
         if ($user->vip == 0) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 500) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'People on level 0 cannot spend more than 500 units of money.'
                 ]);
             } else {
@@ -89,7 +89,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'You can only withdraw once a day.'
                     ]);
 
@@ -102,18 +102,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 1) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 2500) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'People on level 0 cannot spend more than 500 units of money.'
                 ]);
             } else {
@@ -149,7 +149,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'You can only withdraw twice a day.'
                     ]);
 
@@ -163,18 +163,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 2 || $user->vip == 3) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 5000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'Maximum value of withdrawal surpassed.'
                 ]);
             } else {
@@ -210,7 +210,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals per day reached.'
                     ]);
 
@@ -224,18 +224,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 4 || $user->vip == 5) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 5000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'Maximum value of withdrawal per day surpassed.'
                 ]);
             } else {
@@ -271,7 +271,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum value of withdrawal per day reached.'
                     ]);
 
@@ -286,18 +286,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 6) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 10000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'Maximum value of withdrawal per day reached.'
                 ]);
             } else {
@@ -333,7 +333,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals per day reached.'
                     ]);
 
@@ -346,18 +346,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 7) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 10000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'People on level 7 cannot spend more than 5000 units of money.'
                 ]);
             } else {
@@ -393,7 +393,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals per day reached.'
                     ]);
 
@@ -406,18 +406,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 8) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 10000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'Maximum value of withdrawals reached.'
                 ]);
             } else {
@@ -453,7 +453,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals per day reached.'
                     ]);
 
@@ -466,18 +466,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 9) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 20000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'You reach your withdrawal limit for your level.'
                 ]);
             } else {
@@ -513,7 +513,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals for level reached.'
                     ]);
 
@@ -526,18 +526,18 @@ class WithdrawalController extends Controller
 
         if ($user->vip == 10) {
 
-            if ($request->amount > $wallet->total) {
+            if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
-                    'message' => 'Total amount is less than requested amount'
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
+                    'message' => 'withdrawable_balance amount is less than requested amount'
                 ]);
             } else if ($request->amount > 20000) {
                 return response()->json([
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
-                    'current_total' => $wallet->total,
+                    'withdrawable_balance' => $wallet->withdrawable_balance,
                     'message' => 'maximum value of withdrawal reached.'
                 ]);
             } else {
@@ -573,7 +573,7 @@ class WithdrawalController extends Controller
                     return response()->json([
                         'amount' => $request->amount,
                         'deposit' => $wallet->deposit,
-                        'current_total' => $wallet->total,
+                        'withdrawable_balance' => $wallet->withdrawable_balance,
                         'message' => 'Maximum number of withdrawals for level reached.'
                     ]);
 

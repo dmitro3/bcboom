@@ -17,6 +17,7 @@ use App\Notifications\Register;
 use App\Notifications\Message;
 use Validator;
 use App\Models\Email;
+use App\Models\Depo;
 
 
 class UserController extends Controller
@@ -37,6 +38,16 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function allDeposits(){
+        $deposits = Depo::all();
+
+        return response()->json([
+            'deposits' => $deposits,
+        ]);
+        
+    }
+
 public function openDash(){
     
     return view('tron');
