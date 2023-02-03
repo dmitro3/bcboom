@@ -113,7 +113,7 @@ Route::get('all/deposits', [
     UserController::class, 'allDeposits'
 ]);
 
-Route::get('all/withdrawals', [
+Route::get('admin/all/withdrawals', [
     UserController::class, 'allWithdrawals'
 ]);
 
