@@ -68,7 +68,7 @@ const DiceFrame = (gridProps) => {
             }}
         >
             <DiceComponent/>
-            <Box
+            {/* <Box
                 sx={{
                     width: "100%",
                     display: "flex",
@@ -583,7 +583,7 @@ const DiceFrame = (gridProps) => {
                         </Box>
                     </Box>
                 </>
-            )}
+            )} */}
         </Box>
     );
 };

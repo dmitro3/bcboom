@@ -82,7 +82,7 @@ const DiceComponent = () => {
             diceRef.current.addEventListener("click", () => {
                 const xRand = getRandom(max, min);
                 const yRand = getRandom(max, min);
-
+                console.log('sdfsdf: ', xRand, yRand)
                 cube.style.webkitTransform =
                     "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
                 cube.style.transform =
