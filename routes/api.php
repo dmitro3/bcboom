@@ -107,6 +107,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 });
 
 
+Route::get('all/deposits', [
+    UserController::class, 'allDeposits'
+]);
+
+Route::get('admin/all/withdrawals', [
+    UserController::class, 'allWithdrawals'
+]);
+
+
 Route::get('notifywithdrawal', function (Request $request) {
     $callback = new Withdrawal;
     $callback->status($request);

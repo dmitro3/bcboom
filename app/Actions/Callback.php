@@ -5,6 +5,7 @@ use App\Models\Payment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use PHPUnit\Util\Exception;
+use App\Models\Depo;
 
 
 class Callback
@@ -43,15 +44,30 @@ class Callback
                 $payment = Payment::where('order_no', $data['tx_orderno'])->first();
 
                 $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
+
                 if ($wallet && $payment) {
+
+                    $depo = Depo::where('user_id', '=', $wallet->user_id)
+                    ->orderBy('created_at', 'desc')->first();
+                    
+                    $percentage_amount = 100/100 * $payment->amount;
+
+                    $depo->update([
+                        'deposit_amount' => $payment->amount,
+                        'percentage_amount' => $percentage_amount,
+                        'final_amount' => $payment->amount + $percentage_amount
+                    ]);
+
                     $wallet->update([
-                        'withdrawable_balance' => $wallet->withdrawable_balance + $payment->amount,
+                        'withdrawable_balance' => $wallet->withdrawable_balance + $depo->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
                     $payment->update([
                         'called' => 1,
                         'status' => 'PAID'
                     ]);
+
+                    
                 }
                 //改变订单状态，及其他业务修改
 

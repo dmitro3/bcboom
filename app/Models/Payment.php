@@ -29,7 +29,8 @@ class Payment extends Model
         "remark",
         "pay_time",
         "user_id",
-        "sign"
+        "sign",
+        "percentage_amount"
     ];
 
     public function user(){
