@@ -11,6 +11,7 @@ use App\Models\Wallet;
 use Auth;
 use App\Actions\Process;
 use App\Actions\Callback;
+use App\Models\Depo;
 
 
 
@@ -62,7 +63,7 @@ class PaymentController extends Controller
         $user = Auth::user();
         $payments = Payment::where('email', $user->email)->orderBy('created_at', 'desc')->get();
         $deposits = Depo::where('user_id', $user->id)->get();
-        if ($payments) {
+        if ($payments->count() > 0) {
             return response()->json([
                 'payments' => $payments,
                 'depsits' => $deposits,

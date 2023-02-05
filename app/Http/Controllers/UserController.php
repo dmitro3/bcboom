@@ -164,6 +164,18 @@ if($user){
         }
     }
 
+    public function counts(){
+        $withdrawals = Withdraw::all();
+        $payment = Wallet::all();
+        $deposits = Depo::all();
+
+        return response()->json([
+            "number_of_payments" => $payment->count(),
+            "number_of_deposits" => $deposits->count(),
+            "number_of_withdrawals" => $withdrawals->count(),
+        ]);
+    }
+
     public function sendMail(Request $request, $id){
         
 
