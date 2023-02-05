@@ -151,6 +151,10 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
         'makeAdmin'
     ]);
 
+    Route::get('admin/counts', [
+        UserController::class, 'counts'
+    ]);
+
     Route::get('users/all', [
         UserController::class,
         'allUsers'
