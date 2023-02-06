@@ -62,8 +62,8 @@ const dotStyle = {
 const wrapperStyle = {
     transform: "scale(0.35)",
     marginTop: "-1rem",
-    marginBottom: '2rem',
-    padding: '1rem',
+    marginBottom: "2rem",
+    padding: "1rem",
 };
 
 const DiceWrapperOne = styled("div")(() => ({
@@ -214,7 +214,7 @@ const DiceComponent = () => {
     const diceThreeRef = useRef(null);
     const dispatch = useDispatch();
     function getRandom(max, min) {
-        return (Math.floor(Math.random() * (max - min)) + min) * 90
+        return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
     }
     function rollDice(dice) {
         const xRand = getRandom(24, 1);
@@ -223,6 +223,8 @@ const DiceComponent = () => {
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.webkitTransform =
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+        dice.style.transition = "transform 2s ease";
+        dice.style.webkitTransition = "transform 2s ease";
     }
     const { playing } = useSelector((state) => state.game);
     useEffect(() => {
