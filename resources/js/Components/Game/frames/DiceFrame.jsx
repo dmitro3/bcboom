@@ -10,11 +10,11 @@ import DiceComponent from "../styles/dice";
 
 const marks = [0, 25, 50, 75, 100];
 
-const Frame = styled("img")(({ rotate }) => ({
-    width: "4.1875rem",
-    height: "4.1875rem",
-    transform: `rotate(${rotate}deg)`,
-}));
+// const Frame = styled("img")(({ rotate }) => ({
+//     width: "4.1875rem",
+//     height: "4.1875rem",
+//     transform: `rotate(${rotate}deg)`,
+// }));
 
 const PrettoSlider = styled(Slider)({
     color: "red",
@@ -56,7 +56,7 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = (gridProps) => {
+const DiceFrame = () => {
     const { isMobile } = useScreenResolution();
     return (
         <Box
@@ -67,8 +67,7 @@ const DiceFrame = (gridProps) => {
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <DiceComponent/>
-            {/* <DiceComponent/> */}
+            <DiceComponent roll={true} />
             <Box
                 sx={{
                     width: "100%",

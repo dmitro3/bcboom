@@ -138,7 +138,7 @@ const GameLayout = ({
                             ...customFrameStyles,
                         }}
                     >
-                        {GameBg && GameBg}
+                        {/* {GameBg && GameBg} */}
                         <Box
                             sx={{
                                 height: "1.5rem",
