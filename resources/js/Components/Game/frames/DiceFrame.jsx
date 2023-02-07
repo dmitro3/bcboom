@@ -67,7 +67,7 @@ const DiceFrame = () => {
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <DiceComponent roll={true} />
+            <DiceComponent />
             <Box
                 sx={{
                     width: "100%",
