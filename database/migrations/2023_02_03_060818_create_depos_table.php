@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('depos', function (Blueprint $table) {
+            Schema::dropIfExists('depos');
             $table->id();
             $table->integer('user_id');
             $table->double('deposit_amount')->nullable();
