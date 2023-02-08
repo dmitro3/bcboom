@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const DicesWrapper = styled("div")(() => ({
+const MainWrapper = styled("div")(() => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -17,6 +17,45 @@ const DicesWrapper = styled("div")(() => ({
     // backgroundColor: "rgba(0,0,0,0.5)",
     // backdropFilter: "blur(5px)",
 }));
+
+const DicesWrapper = ({ children }) => {
+    const refs = useRef([]);
+
+    useEffect(() => {
+        refs.current = refs.current.slice(0, children.length);
+        refs.current.forEach((ref, index) => {
+            const container = ref.querySelector(".container");
+            const front = window.getComputedStyle(ref.querySelector(`.front${index + 1}`)).width ;
+            const back = ref.querySelector(`.back${index + 1}`).offsetWidth;
+            const right = ref.querySelector(`.right${index + 1}`).offsetWidth;
+            const left = ref.querySelector(`.left${index + 1}`).offsetWidth;
+            const top = ref.querySelector(`.top${index + 1}`).offsetWidth;
+            const bottom = ref.querySelector(`.bottom${index + 1}`).offsetWidth;
+
+            console.log(
+                `Child ${index + 1} width:`,
+                ref,
+                container,
+                front,
+                back,
+                right,
+                left,
+                top,
+                bottom
+            );
+        });
+    });
+
+    return (
+        <MainWrapper>
+            {children.map((child, index) => {
+                return React.cloneElement(child, {
+                    ref: (el) => (refs.current[index] = el),
+                });
+            })}
+        </MainWrapper>
+    );
+};
 
 const containerStyle = {
     width: "100px",
@@ -69,12 +108,12 @@ const wrapperStyle = {
 const DiceWrapperOne = styled("div")(() => ({
     ...wrapperStyle,
     "&": {
-        "#cube .front": { transform: "translateZ(100px)" },
-        "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
-        "#cube .right": { transform: "rotateY(90deg)    translateZ(100px)" },
-        "#cube .left": { transform: "rotateY(-90deg)    translateZ(100px)" },
-        "#cube .top": { transform: "rotateX(90deg)    translateZ(100px)" },
-        "#cube .bottom": { transform: "rotateX(-90deg)    translateZ(100px)" },
+        "#cube .front1": { transform: "translateZ(100px)" },
+        "#cube .back1": { transform: "rotateX(-180deg)    translateZ(100px)" },
+        "#cube .right1": { transform: "rotateY(90deg)    translateZ(100px)" },
+        "#cube .left1": { transform: "rotateY(-90deg)    translateZ(100px)" },
+        "#cube .top1": { transform: "rotateX(90deg)    translateZ(100px)" },
+        "#cube .bottom1": { transform: "rotateX(-90deg)    translateZ(100px)" },
 
         // width: "200px",
         // height: "200px",
@@ -91,27 +130,27 @@ const DiceWrapperOne = styled("div")(() => ({
         ".dot": {
             ...dotStyle,
         },
-        ".front .dot1": { top: "85px", left: "85px" },
-        ".back .dot1": { top: "45px", left: "45px" },
-        ".back .dot2": { top: "125px", left: "125px" },
-        ".right .dot1": { top: "45px", left: "45px" },
-        ".right .dot2": { top: "85px", left: "85px" },
-        ".right .dot3": { top: "125px", left: "125px" },
-        ".left .dot1": { top: "45px", left: "45px" },
-        ".left .dot2": { top: "45px", left: "125px" },
-        ".left .dot3": { top: "125px", left: "45px" },
-        ".left .dot4": { top: "125px", left: "125px" },
-        ".top .dot1": { top: "45px", left: "45px" },
-        ".top .dot2": { top: "45px", left: "125px" },
-        ".top .dot3": { top: "85px", left: "85px" },
-        ".top .dot4": { top: "125px", left: "45px" },
-        ".top .dot5": { top: "125px", left: "125px" },
-        ".bottom .dot1": { top: "45px", left: "45px" },
-        ".bottom .dot2": { top: "45px", left: "85px" },
-        ".bottom .dot3": { top: "45px", left: "125px" },
-        ".bottom .dot4": { top: "125px", left: "45px" },
-        ".bottom .dot5": { top: "125px", left: "85px" },
-        ".bottom .dot6": { top: "125px", left: "125px" },
+        ".front1 .dot1": { top: "85px", left: "85px" },
+        ".back1 .dot1": { top: "45px", left: "45px" },
+        ".back1 .dot2": { top: "125px", left: "125px" },
+        ".right1 .dot1": { top: "45px", left: "45px" },
+        ".right1 .dot2": { top: "85px", left: "85px" },
+        ".right1 .dot3": { top: "125px", left: "125px" },
+        ".left1 .dot1": { top: "45px", left: "45px" },
+        ".left1 .dot2": { top: "45px", left: "125px" },
+        ".left1 .dot3": { top: "125px", left: "45px" },
+        ".left1 .dot4": { top: "125px", left: "125px" },
+        ".top1 .dot1": { top: "45px", left: "45px" },
+        ".top1 .dot2": { top: "45px", left: "125px" },
+        ".top1 .dot3": { top: "85px", left: "85px" },
+        ".top1 .dot4": { top: "125px", left: "45px" },
+        ".top1 .dot5": { top: "125px", left: "125px" },
+        ".bottom1 .dot1": { top: "45px", left: "45px" },
+        ".bottom1 .dot2": { top: "45px", left: "85px" },
+        ".bottom1 .dot3": { top: "45px", left: "125px" },
+        ".bottom1 .dot4": { top: "125px", left: "45px" },
+        ".bottom1 .dot5": { top: "125px", left: "85px" },
+        ".bottom1 .dot6": { top: "125px", left: "125px" },
     },
 }));
 
@@ -214,7 +253,14 @@ const DiceComponent = () => {
     const diceThreeRef = useRef(null);
     const dispatch = useDispatch();
     function getRandom(max, min) {
-        return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
+        const array = new Uint32Array(1);
+        self.crypto.getRandomValues(array);
+        const random = (((array[0] % 6) + 1) * (max - min) + min) * 810;
+        const generated =
+            (Math.floor(Math.random() * (max - min + 1)) + min) * 811;
+
+        console.log("random", random, generated);
+        return generated;
     }
     function rollDice(dice) {
         const xRand = getRandom(24, 1);
@@ -225,6 +271,7 @@ const DiceComponent = () => {
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.transition = "transform 2s ease";
         dice.style.webkitTransition = "transform 2s ease";
+        console.log("diceere: ", dice);
     }
     const { playing } = useSelector((state) => state.game);
     useEffect(() => {
@@ -245,32 +292,32 @@ const DiceComponent = () => {
             <DiceWrapperOne>
                 <section className="container">
                     <div id="cube" ref={diceOneRef}>
-                        <div className="front">
+                        <div className="front1">
                             <span className="dot dot1"></span>
                         </div>
-                        <div className="back">
+                        <div className="back1">
                             <span className="dot dot1"></span>
                             <span className="dot dot2"></span>
                         </div>
-                        <div className="right">
+                        <div className="right1">
                             <span className="dot dot1"></span>
                             <span className="dot dot2"></span>
                             <span className="dot dot3"></span>
                         </div>
-                        <div className="left">
+                        <div className="left1">
                             <span className="dot dot1"></span>
                             <span className="dot dot2"></span>
                             <span className="dot dot3"></span>
                             <span className="dot dot4"></span>
                         </div>
-                        <div className="top">
+                        <div className="top1">
                             <span className="dot dot1"></span>
                             <span className="dot dot2"></span>
                             <span className="dot dot3"></span>
                             <span className="dot dot4"></span>
                             <span className="dot dot5"></span>
                         </div>
-                        <div className="bottom">
+                        <div className="bottom1">
                             <span className="dot dot1"></span>
                             <span className="dot dot2"></span>
                             <span className="dot dot3"></span>
