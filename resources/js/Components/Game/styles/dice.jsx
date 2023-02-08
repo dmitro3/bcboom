@@ -1,6 +1,6 @@
 import { setGameIsOn } from "@/redux/game/game-slice";
 import { styled } from "@mui/system";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainWrapper = styled("div")(() => ({
@@ -19,40 +19,46 @@ const MainWrapper = styled("div")(() => ({
 }));
 
 const DicesWrapper = ({ children }) => {
-    const refs = useRef([]);
+    // const refs = useRef([]);
 
-    useEffect(() => {
-        refs.current = refs.current.slice(0, children.length);
-        refs.current.forEach((ref, index) => {
-            const container = ref.querySelector(".container");
-            const front = window.getComputedStyle(ref.querySelector(`.front${index + 1}`)).width ;
-            const back = ref.querySelector(`.back${index + 1}`).offsetWidth;
-            const right = ref.querySelector(`.right${index + 1}`).offsetWidth;
-            const left = ref.querySelector(`.left${index + 1}`).offsetWidth;
-            const top = ref.querySelector(`.top${index + 1}`).offsetWidth;
-            const bottom = ref.querySelector(`.bottom${index + 1}`).offsetWidth;
+    // useEffect(() => {
+    //     refs.current = refs.current.slice(0, children.length);
+    //     refs.current.forEach((ref, index) => {
+    //         // const container = ref.querySelector(".container");
+    //         const front = window.getComputedStyle(
+    //            ref.querySelector(`.front${index + 1}`)
+    //         ).transform;
+    //         const backTop = ref.querySelector(`.back${index + 1}`).offsetTop;
+    //         const backLeft = ref.querySelector(`.back${index + 1}`).offsetLeft;
+    //         const right = ref.querySelector(`.right${index + 1}`);
+    //         const left = ref.querySelector(`.left${index + 1}`);
+    //         const top = ref.querySelector(`.top${index + 1}`);
+    //         const bottom = ref.querySelector(`.bottom${index + 1}`);
 
-            console.log(
-                `Child ${index + 1} width:`,
-                ref,
-                container,
-                front,
-                back,
-                right,
-                left,
-                top,
-                bottom
-            );
-        });
-    });
+    //         console.log(
+    //             `Child child: ${index + 1} width:`,
+    //             // ref,
+    //             // container,
+    //             // window.getComputedStyle(front.style).transform,
+    //             front,
+    //             backTop,
+    //             backLeft,
+    //             // right,
+    //             // left,
+    //             // top,
+    //             // bottom
+    //         );
+    //     });
+    // }, [children]);
 
     return (
         <MainWrapper>
-            {children.map((child, index) => {
+            {/* {children.map((child, index) => {
                 return React.cloneElement(child, {
                     ref: (el) => (refs.current[index] = el),
                 });
-            })}
+            })} */}
+            {children}
         </MainWrapper>
     );
 };
@@ -108,12 +114,12 @@ const wrapperStyle = {
 const DiceWrapperOne = styled("div")(() => ({
     ...wrapperStyle,
     "&": {
-        "#cube .front1": { transform: "translateZ(100px)" },
-        "#cube .back1": { transform: "rotateX(-180deg)    translateZ(100px)" },
-        "#cube .right1": { transform: "rotateY(90deg)    translateZ(100px)" },
-        "#cube .left1": { transform: "rotateY(-90deg)    translateZ(100px)" },
-        "#cube .top1": { transform: "rotateX(90deg)    translateZ(100px)" },
-        "#cube .bottom1": { transform: "rotateX(-90deg)    translateZ(100px)" },
+        ".front1": { transform: "translateZ(100px)" },
+        ".back1": { transform: "rotateX(-180deg)    translateZ(100px)" },
+        ".right1": { transform: "rotateY(90deg)    translateZ(100px)" },
+        ".left1": { transform: "rotateY(-90deg)    translateZ(100px)" },
+        ".top1": { transform: "rotateX(90deg)    translateZ(100px)" },
+        ".bottom1": { transform: "rotateX(-90deg)    translateZ(100px)" },
 
         // width: "200px",
         // height: "200px",
@@ -258,10 +264,25 @@ const DiceComponent = () => {
         const random = (((array[0] % 6) + 1) * (max - min) + min) * 810;
         const generated =
             (Math.floor(Math.random() * (max - min + 1)) + min) * 811;
-
-        console.log("random", random, generated);
+        // console.log("random", random, generated);
         return generated;
     }
+    const [dicesArray, setDicesArray] = useState([]);
+    useEffect(() => {
+        const outcomeDeter = {
+            0: { front: null },
+            1: { front: null },
+            2: { front: null },
+        };
+        if (dicesArray.length === 3) {
+            dicesArray.forEach((dice, i) => {
+                // outcomeDeter[i]['front'] = dice.querySelector(".front");
+                console.log("outcomeDeter", window.getComputedStyle(dice.querySelector(`.front${i + 1}`)).transform);
+            });
+        }
+        console.log("outcomeDeter", outcomeDeter, dicesArray);
+        // return () => setDicesArray([]);
+    }, [dicesArray]);
     function rollDice(dice) {
         const xRand = getRandom(24, 1);
         const yRand = getRandom(24, 1);
@@ -271,7 +292,7 @@ const DiceComponent = () => {
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.transition = "transform 2s ease";
         dice.style.webkitTransition = "transform 2s ease";
-        console.log("diceere: ", dice);
+        setDicesArray((prev) => [...prev, dice]);
     }
     const { playing } = useSelector((state) => state.game);
     useEffect(() => {

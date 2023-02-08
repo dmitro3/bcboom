@@ -96,7 +96,8 @@ export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
     const response = await dispatch(dispatchFunc());
     let formattedData = [];
     if (response?.payload?.status === 200) {
-        const withdrawals = response?.payload?.data?.withdrawals;
+        console.log('response: ', response)
+        const withdrawals = response?.payload?.data?.payments;
         formattedData = withdrawals.map((el) => {
             const obj = {};
             const fee = (el.amount * 0.03).toFixed(2);
