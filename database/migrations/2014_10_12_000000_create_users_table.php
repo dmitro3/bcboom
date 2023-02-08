@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable()->unique();
             $table->text('bio')->nullable();
             $table->bigInteger('withdrawal_limit')->default(1000);
             $table->unsignedBigInteger('referrer_id')->nullable();
