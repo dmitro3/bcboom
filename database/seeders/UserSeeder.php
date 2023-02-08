@@ -35,5 +35,7 @@ class UserSeeder extends Seeder
             'player' => 0,
             'username' => 'shw02227',
         ]);
+
+        Wallet::create(['user_id' => $user->id]);
     }
 }
