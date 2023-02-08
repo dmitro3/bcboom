@@ -180,8 +180,8 @@ if($user){
         // $w = array_sum($maya);
 
 
-        $total_deposits = DB::table('depos')->sum('final_amount');
-        $total_payments = DB::table('payments')->sum('amount');
+        $total_deposits = Depo::where('final_amount', '>', 0)->sum('final_amount');
+        $total_payments = Wallet::where('withdrawable_balance', '>', 0)->sum('withdrawable_balance');
 
         return response()->json([
             "number_of_payments" => $payment->count(),
