@@ -127,6 +127,14 @@ class AuthController extends Controller
                 }else{
                     // $token = JWTAuth::fromUser($user);
 
+                    $wallet = Wallet::where('user_id', '=', $user->id)->first();
+
+                    if(!$wallet){
+                        Wallet::create([
+                            'user_id' => $user->id   
+                        ]);
+                    }
+
                     return response()->json([
                         'message' => 'User successfully registered',
                         'user' => $user
@@ -138,7 +146,13 @@ class AuthController extends Controller
                 
  
                 // $token = JWTAuth::fromUser($user);
+                $wallet = Wallet::where('user_id', '=', $user->id)->first();
 
+                if(!$wallet){
+                    Wallet::create([
+                        'user_id' => $user->id   
+                    ]);
+                }
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
