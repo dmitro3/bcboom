@@ -29,7 +29,7 @@ class WithdrawalController extends Controller
         
         if ($withdrawals) {
             return response()->json([
-                'payments' => $withdrawals,
+                'withdrawals' => $withdrawals,
                 'message' => 'Withdrawals retrieved',
             ], 200);
         } else {
@@ -59,8 +59,8 @@ class WithdrawalController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+            if($wallet->withdrawable_balance > 0){
         if ($user->vip == 0) {
-
             if ($request->amount > $wallet->withdrawable_balance) {
                 return response()->json([
                     'amount' => $request->amount,
@@ -599,6 +599,11 @@ class WithdrawalController extends Controller
 
                 }
             }
+        }
+        }else{
+            return response()->json([
+                'message' => 'No money in your wallet'
+            ], 404);
         }
 
 
