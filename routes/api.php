@@ -71,40 +71,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
 
 
-//     Route::prefix('admin')->group(
-//         function () {
-
-//             Route::post(
-//                 'paym',
-//                 function (Request $request) {
-//                         $aggregator = Aggregate::find($request->id);
-//                         if (!$aggregator)
-//                             return APIResponse::reject(1);
-
-//                         $wallet = Wallet::where('user_id', Auth::id())->first();
-
-//                         return Aggregate::find($aggregator->id())->wallet($wallet);
-//                     }
-//             );
-
-//              Route::post('paymentStatus', function(Request $request) {
-//                  $aggregator = null;
-//                  foreach(Aggregate::list() as $ag) {
-//                      if($ag->validate($request)) {
-//                         $aggregator = $ag;
-//                         break;
-//                     }
-//                 }
-//                 if($aggregator == null) return 'Unknown aggregator';
-    
-//                 return $aggregator->status($request);
-//             });
-    
-//         }
-//     );
-
-
-// });
+ });
 
 
 Route::get('all/deposits', [
