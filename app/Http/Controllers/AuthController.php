@@ -190,7 +190,7 @@ class AuthController extends Controller
     if(is_numeric($request->get('email'))){
         return ['phone'=>$request->get('email'),'password'=>$request->get('password')];
     }
-    elseif(!preg_match("![0-9/.,;'\\\[\]]!", $request->email)){
+    elseif(!preg_match("![0-9/.,;'\\\[\]]@!", $request->email)){
         return ['username'=>$request->get('email'),'password'=>$request->get('password')];
 
     }
