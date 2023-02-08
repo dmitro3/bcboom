@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\PaymentController;
-use App\Models\Depo;
+
 
 
 
@@ -72,15 +72,14 @@ class Process
                 'user_id' => $user->id,
                 "mobile" => $user->phone,
                 "pay_time" => $result['data']['create_time'],
+                "final_amount" => $result['data']['amount'],
                 "email" => $user->email,
                 "link" => $result['data']['pay_info'],
                 "status" => $result['data']["trade_state"],
                 "sign" => $data['sign'],
             ]);
 
-            $depo = Depo::create([
-                'user_id' => $user->id,
-            ]);
+
 
             $wallet = Wallet::where('user_id', $user->id)->first();
             $wallet->update([

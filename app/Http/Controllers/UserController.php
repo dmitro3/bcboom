@@ -43,11 +43,20 @@ class UserController extends Controller
     }
 
     public function allDeposits(){
-        $deposits = Depo::all();
-        $wallets = Wallet::all();
+        $deposits = Payment::all();
+        return response()->json([
+            'deposits' => $deposits
+
+        ]);
+        
+    }
+
+    public function allTransactions(){
+        $deposits = Payment::all();
+        $withdrawals = Withdraw::all();
         return response()->json([
             'deposits' => $deposits,
-            'wallets' => $wallets
+            'withdrawals' => $withdrawals
         ]);
         
     }
@@ -91,9 +100,18 @@ public function openDash(){
     public function allUsers(){
         $users = User::orderBy('created_at', 'desc')->get();
         
+        function balance(){
+            $wallets = Wallet::all();
+            foreach($wallets as $w){
+            $user_info = $w->user; 
+            $total_balance = $w->withdrawable_balance;
+            return $w;
+            }
+            return;
+        }
+
         return response()->json([
-            "users" => $users,
-        
+            "balance" => balance()
         ]);
     }
 
@@ -168,8 +186,8 @@ if($user){
 
     public function counts(){
         $withdrawals = Withdraw::all();
-        $payment = Wallet::all();
-        $deposits = Depo::all();
+        $wallet = Wallet::all();
+        $deposits = Payment::all();
 
 
         $total_withdrawals = array_sum(json_decode($withdrawals->pluck('amount')));
@@ -180,16 +198,17 @@ if($user){
         // $w = array_sum($maya);
 
 
-        $total_deposits = Depo::where('final_amount', '>', 0)->sum('final_amount');
-        $total_payments = Wallet::where('withdrawable_balance', '>', 0)->sum('withdrawable_balance');
+        $total_deposits = Payment::where('final_amount', '>', 0)->sum('final_amount');
+        $total_wallets = Wallet::where('withdrawable_balance', '>', 0)->sum('withdrawable_balance');
 
         return response()->json([
             "number_of_payments" => $payment->count(),
-            "number_of_deposits" => $deposits->count(),
+            "number_of_wallets" => $wallet->count(),
             "number_of_withdrawals" => $withdrawals->count(),
             "total_withdrawals" => $total_withdrawals,
             "total_deposits" => $total_deposits,
-            "total_payments" => $total_payments
+            "total_wallets" => $total_wallets,
+            
         ]);
     }
 

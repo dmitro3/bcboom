@@ -101,6 +101,9 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::post('/payment/pay', [PaymentController::class, 'pay']);
     Route::post('/payment', [PaymentController::class, 'testpay']);
 
+    Route::post('update/profile', [
+      ProfileController::class, 'updateProfile'  
+    ]);
 
     Route::post('notify', function (Request $request) {
         $process = new Process;

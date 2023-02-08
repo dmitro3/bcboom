@@ -56,12 +56,13 @@ class Withdrawal
 
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
 
-        var_dump($result);
 
         if (isset($result['data']['orderno'])) {
-            Withdraw::create([
+            $withdrawal = Withdraw::where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')->first();
+
+            $withdrawal->update([
                 'orderno' => $result['data']['orderno'],
-                'amount' => $result['data']['amount'],
                 'tx_orderno' => $result['data']['tx_orderno'],
                 'create_time' => $result['data']['create_time'],
                 'username' => $user->username,
@@ -70,6 +71,7 @@ class Withdrawal
                 'trade_state' => $result['data']['trade_state'],
                 'msg' => $result['msg']
             ]);
+            
             Wallet::where('user_id', $user->id)->update([
                 'order_no' => $result['data']['orderno']
             ]);
@@ -100,7 +102,8 @@ class Withdrawal
                 // $minused = $wallet->deposit - $withdrawal->amount;
                 $new_balance = $wallet->withdrawable_balance - $withdrawal->amount;
 
-                $withdrawal->update(['approved' => 1, 'status' => 'SUCCESS'])
+                $withdrawal->update(
+                    ['approved' => 1, 'status' => 'SUCCESS'])
                 ;
 
                 $wallet->update([

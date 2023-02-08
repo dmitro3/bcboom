@@ -62,11 +62,11 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         $payments = Payment::where('email', $user->email)->orderBy('created_at', 'desc')->get();
-        $deposits = Depo::where('user_id', $user->id)->get();
+        $deposits = Wallet::where('user_id', $user->id)->first();
         if ($payments->count() > 0) {
             return response()->json([
                 'payments' => $payments,
-                'depsits' => $deposits,
+                'deposits' => $deposits->deposit,
                 'message' => 'Payments retrieved',
             ], 200);
         } else {

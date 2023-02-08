@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('mobile')->nullable();
             $table->integer('user_id');
             $table->string('email')->nullable();
+            $table->double('percentage_amount')->nullable();
+            $table->double('final_amount')->nullable();
             $table->string('sign')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->nullable();
