@@ -17,6 +17,8 @@ use App\Notifications\Register;
 use App\Notifications\Message;
 use Validator;
 use App\Models\Email;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Models\Depo;
 use App\Models\Withdraw;
 
@@ -169,10 +171,25 @@ if($user){
         $payment = Wallet::all();
         $deposits = Depo::all();
 
+
+        $total_withdrawals = array_sum(json_decode($withdrawals->pluck('amount')));
+
+        //We could decide to use the pluck statement instead of sum
+        // $maya = json_decode($total_withdrawals);
+
+        // $w = array_sum($maya);
+
+
+        $total_deposits = DB::table('depos')->sum('final_amount');
+        $total_payments = DB::table('payments')->sum('amount');
+
         return response()->json([
             "number_of_payments" => $payment->count(),
             "number_of_deposits" => $deposits->count(),
             "number_of_withdrawals" => $withdrawals->count(),
+            "total_withdrawals" => $total_withdrawals,
+            "total_deposits" => $total_deposits,
+            "total_payments" => $total_payments
         ]);
     }
 
