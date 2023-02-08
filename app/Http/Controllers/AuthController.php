@@ -87,9 +87,14 @@ class AuthController extends Controller
                 ]);
 
                 if($request->has('phone')){
+                   $validated = $request->validate([
+                        'phone' => 'required|max:100|unique:users'
+                    ]);
+                    if($validated){
                     $user->update([
                         'phone' => $request->get('phone')
                     ]);
+                }
                 }
 
                 Wallet::create([
