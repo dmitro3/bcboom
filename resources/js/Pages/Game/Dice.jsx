@@ -7,6 +7,57 @@ import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import React, { useRef, useState } from "react";
+import { DiceWrapper } from "@/Components/Game/styles/diceStyles";
+
+const DiceCloudBg = () => (
+    <DiceWrapper>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+        <div className="shootingStarContainer">
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+            <div className="shootingStar"></div>
+        </div>
+
+        <div className="stars"></div>
+        <div className="twinkleMask"></div>
+        <div className="twinkleMask2"></div>
+        <div className="clouds"></div>
+
+        <div className="fogContainer">
+            <div className="fog"></div>
+        </div>
+    </DiceWrapper>
+);
 
 const Dice = () => {
     const { isMobile } = useScreenResolution();
@@ -23,26 +74,30 @@ const Dice = () => {
         height: "80%",
         position: "relative",
     }));
-    const [btnClicked, setBtnClicked] = useState(false);
-    const [diceRef, setDiceRef] = useState(useRef(null));
-    async function rollDice(diceRef) {
-        const min = 1;
-        const max = 24;
-        function getRandomInt(min, max) {
-            return (Math.floor(Math.random() * (max - min)) + min) * 90;
-        }
-        const xRand = getRandomInt(min, max);
-        const yRand = getRandomInt(min, max);
-        console.log("refff", ref);
-        ref.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
-        // await sleep(2000);
-        ref.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
-        // setBtnClicked(false);
-    }
-    const gripProps = {
-        setDiceRef,
-        rollDice,
-    };
+    // const [btnClicked, setBtnClicked] = useState(false);
+    // const [diceRef, setDiceRef] = useState(useRef(null));
+    // async function rollDice(diceRef) {
+    //     const min = 1;
+    //     const max = 24;
+    //     function getRandomInt(min, max) {
+    //         return (Math.floor(Math.random() * (max - min)) + min) * 90;
+    //     }
+    //     const xRand = getRandomInt(min, max);
+    //     const yRand = getRandomInt(min, max);
+    //     console.log("refff", ref);
+    //     ref.current.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`; // rotateZ(${zRand}deg)
+    //     // await sleep(2000);
+    //     ref.current.style.webkitTransform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
+    //     // setBtnClicked(false);
+    // }
+
+    // const gripProps = {
+    //     // setDiceRef,
+    //     // rollDice,
+    //     // roll: btnClicked,
+    //     // setRoll: setBtnClicked,
+    // };
+
     return (
         <div>
             <Head title="Games Dice" />
@@ -51,12 +106,17 @@ const Dice = () => {
                 <GamesPageWrapper>
                     <GameLayout
                         GameFrameText={"Dice"}
-                        GameFrame={DiceFrame(gripProps)}
-                        ButtonGrid={DiceButtonGrid(gripProps)}
+                        GameFrame={DiceFrame()}
+                        ButtonGrid={DiceButtonGrid()}
                         customFrameHeader={true}
                         innerHeader={true}
                         customFrameBoxStyles={{
-                            height: "21rem",
+                            height: "30rem",
+                            position: "relative",
+                        }}
+                        GameBg={DiceCloudBg()}
+                        customFrameStyles={{
+                            position: "relative",
                         }}
                     />
                 </GamesPageWrapper>

@@ -21,7 +21,7 @@ class Admin
         if (Auth::user()->admin == true) {
             return $next($request);
         }
-        return response()->json('You are not an admin.');
-        }
-    
+        return response()->json('You are not an admin.', 401);
+    }
+
 }

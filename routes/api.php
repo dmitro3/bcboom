@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -13,7 +12,6 @@ use App\Http\Controllers\ProfileController;
 use App\Utils\APIResponse;
 use App\Actions\Process;
 use App\Actions\Callback;
-use App\Models\Payment;
 use App\Models\Wallet;
 use App\Actions\Withdrawal;
 use App\Paym\Aggregate;

@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setGameIsOn } from "@/redux/game/game-slice";
 
-const DiceButtonGrid = (gridProps) => {
-    const { setBtnClicked } = gridProps;
+const DiceButtonGrid = () => {
+    // const { setRoll } = gridProps;
+    const dispatch = useDispatch()
     return (
         <Box
             sx={{
@@ -147,7 +150,7 @@ const DiceButtonGrid = (gridProps) => {
                     backgroundColor: "#3585ff",
                     color: "#FFFFFF",
                 }}
-                onClick={() => setBtnClicked(true)}
+                onClick={() => dispatch(setGameIsOn(true))}
             >
                 BET
             </Button>

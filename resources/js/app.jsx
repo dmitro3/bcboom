@@ -44,7 +44,7 @@ createInertiaApp({
 
 // Inertia.on("progress", (event) => {
 //     console.log("progress!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-// });
+// });-
 // Inertia.on("finish", (event) => {
 //     console.log("finish!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 // });

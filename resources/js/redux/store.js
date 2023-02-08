@@ -1,17 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import { AppState } from "./app-state/app-slice";
 import { AuthState } from "./auth/auth-slice";
-import { WalletState } from "./wallet/wallet-slice";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { persistStore } from "redux-persist";
+import { gameState } from "./game/game-slice";
 import { ProfileState } from "./profile/profileSlice";
+import { WalletState } from "./wallet/wallet-slice";
 const rootReducer = combineReducers({
     app: AppState,
     auth: AuthState,
     wallet: WalletState,
     profile: ProfileState,
+    game: gameState,
 });
 const env = (key) => `{{ env(${key})  }}`;
 
