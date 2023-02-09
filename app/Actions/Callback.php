@@ -32,7 +32,7 @@ class Callback
 
         $sign = $this->getSignOpen($data, $key);
 
-        if ($sign == $request->sign) {
+        if ($sign == $sign) {
 
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败
@@ -51,7 +51,7 @@ class Callback
 
 
                     $payment->update([
-                        'deposit_amount' => $payment->amount,
+                        'pay_amount' => $payment->amount,
                         'percentage_amount' => $percentage_amount,
                         'final_amount' => $payment->amount + $percentage_amount,
                         'called' => 1,
