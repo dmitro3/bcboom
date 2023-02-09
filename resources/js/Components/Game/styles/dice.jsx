@@ -102,6 +102,7 @@ const dotStyle = {
     height: "30px",
     background: "#fff",
     borderRadius: "15px",
+    boxShadow: "-3px 4px 42px -16px rgba(0,0,0,0.45) inset;",
 };
 
 const wrapperStyle = {
@@ -263,36 +264,62 @@ const DiceComponent = () => {
         self.crypto.getRandomValues(array);
         const random = (((array[0] % 6) + 1) * (max - min) + min) * 810;
         const generated =
-            (Math.floor(Math.random() * (max - min + 1)) + min) * 811;
+            (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
         // console.log("random", random, generated);
         return generated;
     }
-    const [dicesArray, setDicesArray] = useState([]);
-    useEffect(() => {
-        const outcomeDeter = {
-            0: { front: null },
-            1: { front: null },
-            2: { front: null },
-        };
-        if (dicesArray.length === 3) {
-            dicesArray.forEach((dice, i) => {
-                // outcomeDeter[i]['front'] = dice.querySelector(".front");
-                console.log("outcomeDeter", window.getComputedStyle(dice.querySelector(`.front${i + 1}`)).transform);
-            });
-        }
-        console.log("outcomeDeter", outcomeDeter, dicesArray);
-        // return () => setDicesArray([]);
-    }, [dicesArray]);
+    // const [dicesArray, setDicesArray] = useState([]);
+    // useEffect(() => {
+    //     const outcomeDeter = {
+    //         0: { front: null },
+    //         1: { front: null },
+    //         2: { front: null },
+    //     };
+    //     if (dicesArray.length === 3) {
+    //         dicesArray.forEach((dice, i) => {
+    //             // outcomeDeter[i]['front'] = dice.querySelector(".front");
+    //             console.log("outcomeDeter", window.getComputedStyle(dice.querySelector(`.front${i + 1}`)).transform);
+    //         });
+    //     }
+    //     console.log("outcomeDeter", outcomeDeter, dicesArray);
+    //     // return () => setDicesArray([]);
+    // }, [dicesArray]);
     function rollDice(dice) {
         const xRand = getRandom(24, 1);
         const yRand = getRandom(24, 1);
         dice.style.transform =
-            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)"; 
         dice.style.webkitTransform =
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.transition = "transform 2s ease";
         dice.style.webkitTransition = "transform 2s ease";
-        setDicesArray((prev) => [...prev, dice]);
+        // const transformValues = window.getComputedStyle(dice);
+        // const rotateX = parseFloat(transformValues.getPropertyValue('transform').split(',')[4]);
+        // const rotateY = parseFloat(transformValues.getPropertyValue('transform').split(',')[5]);
+
+        // Convert the rotation values to radians
+        const radX = rotateX * (Math.PI / 180);
+        const radY = rotateY * (Math.PI / 180);
+
+        // Calculate the final orientation of the div
+        const orientation = Math.round(
+            ((((Math.sin(radX) * Math.cos(radY)) / 2 + 0.5) * 6) % 6) +
+                1
+        );
+
+        // Map the orientation to the side of the dice
+        // const side = orientation;
+
+        console.log(
+            "The current side facing the user is:",
+            orientation, radX, radY, rotateX, rotateY
+        );
+        // const x = transformValues.split(",").map((value) => parseFloat(value));
+        // console.log("orientation x", x, xRand, yRand);
+        // const orientation = (x + y) / 60 % 6;
+        // const number = [1, 6, 2, 5, 3, 4][orientation] || 6;
+        // console.log("orientation", orientation, number, x, y, transformValues);
+        // setDicesArray((prev) => [...prev, dice]);
     }
     const { playing } = useSelector((state) => state.game);
     useEffect(() => {
