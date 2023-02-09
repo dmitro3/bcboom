@@ -202,7 +202,7 @@ if($user){
         $total_wallets = Wallet::where('withdrawable_balance', '>', 0)->sum('withdrawable_balance');
 
         return response()->json([
-            "number_of_payments" => $payment->count(),
+            "number_of_payments" => $deposits->count(),
             "number_of_wallets" => $wallet->count(),
             "number_of_withdrawals" => $withdrawals->count(),
             "total_withdrawals" => $total_withdrawals,
