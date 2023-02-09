@@ -16,18 +16,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //
-        // User::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@bcboom.com',
-        //     'password' => bcrypt('password'),
-        //     'phone' => '123456',
-        //     'admin' => 1,
-        //     'player' => 0,
-        //     'username' => 'admin',
-        // ]);
+        
+       $user1 =  User::create([
+            'name' => 'Admin',
+            'email' => 'admin@bcboom.com',
+            'password' => bcrypt('password'),
+            'phone' => '123456',
+            'admin' => 1,
+            'player' => 0,
+            'username' => 'admin',
+        ]);
 
-        User::create([
+       $user2 = User::create([
             'name' => 'Second Admin',
             'email' => 'shw02227@gmail.com',
             'password' => bcrypt('password'),
@@ -37,6 +37,7 @@ class UserSeeder extends Seeder
             'username' => 'shw02227',
         ]);
 
-        Wallet::create(['user_id' => $user->id]);
+        Wallet::create(['user_id' => $user1->id]);
+        Wallet::create(['user_id' => $user2->id]);
     }
 }
