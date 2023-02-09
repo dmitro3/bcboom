@@ -5,7 +5,6 @@ use App\Models\Payment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use PHPUnit\Util\Exception;
-use App\Models\Depo;
 
 
 class Callback
@@ -47,24 +46,21 @@ class Callback
 
                 if ($wallet && $payment) {
 
-                    $depo = Depo::where('user_id', '=', $wallet->user_id)
-                    ->orderBy('created_at', 'desc')->first();
                     
                     $percentage_amount = 100/100 * $payment->amount;
 
-                    $depo->update([
+
+                    $payment->update([
                         'deposit_amount' => $payment->amount,
                         'percentage_amount' => $percentage_amount,
-                        'final_amount' => $payment->amount + $percentage_amount
+                        'final_amount' => $payment->amount + $percentage_amount,
+                        'called' => 1,
+                        'status' => 'PAID'
                     ]);
 
                     $wallet->update([
-                        'withdrawable_balance' => $wallet->withdrawable_balance + $depo->final_amount,
+                        'withdrawable_balance' => $wallet->withdrawable_balance + $payment->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
-                    ]);
-                    $payment->update([
-                        'called' => 1,
-                        'status' => 'PAID'
                     ]);
 
                     

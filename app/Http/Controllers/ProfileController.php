@@ -177,4 +177,57 @@ else{
         }
         
     }
+
+    public function updateProfile(Request $request){
+        $user = Auth::user();
+        if($request->has('image')){
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ]);
+                $user = Auth::user();
+                $image = $request->image;
+                
+                $image_new_name = time() . $image->getClientOriginalName();
+                $image->move('uploads/images', $image_new_name);
+        
+                $user->image = $url.'/uploads/images/'.$image_new_name;
+                $user->save();
+        } elseif($request->has('bio')){
+            $user->update([
+                'bio' => $request->bio
+            ]);
+        }
+        
+        elseif($request->has('username')){
+            $user->update([
+                'username' => $request->username 
+            ]);
+        }
+
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+        }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+        }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+            
+        }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+        }
+        return response()->json([
+            'message' => 'success',
+            'user' => $user
+        ], 200);
+    }
 }

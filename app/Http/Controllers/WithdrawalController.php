@@ -82,21 +82,24 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 100) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount')
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
+                        
                         $calc = 2.5 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
-
+                        
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);
 
                         $withdrawal = new Withdrawal;
 
@@ -142,20 +145,24 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 100) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount')
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 2.5 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);
+
 
 
                         $withdrawal = new Withdrawal;
@@ -203,20 +210,23 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 100) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount'),
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
+                        $calc = 2.5 / 100 * $request->get('amount');
+                        $diff = $request->get('amount') - $calc;
 
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
                         ]);
 
-                        $calc = 2.5 / 100 * $request->get('amount');
-                        $diff = $request->get('amount') - $calc;
 
 
                         $withdrawal = new Withdrawal;
@@ -264,20 +274,24 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 5000) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount')
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 2 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);
+
 
 
                         $withdrawal = new Withdrawal;
@@ -326,20 +340,24 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 100) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount')
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 2 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);
+
 
 
                         $withdrawal = new Withdrawal;
@@ -386,6 +404,7 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 10000) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
+                            'final_amount' => $request->get('amount'),
                             'user_id' => Auth::id()
                         ]);
                         $withdrawal = new Withdrawal;
@@ -393,13 +412,16 @@ class WithdrawalController extends Controller
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 1.5 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+
+                        ]);
 
 
                         $withdrawal = new Withdrawal;
@@ -446,20 +468,23 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 10000) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount'),
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 1.5 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);    
 
 
                         $withdrawal = new Withdrawal;
@@ -506,21 +531,24 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 20000) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount')
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
-
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
+                        
                         $calc = 1 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
 
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);                            
 
                         $withdrawal = new Withdrawal;
 
@@ -566,20 +594,23 @@ class WithdrawalController extends Controller
                     if ($monthlyFree->sum('amount') < 50000) {
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
+                            'user_id' => Auth::id(),
+                            'final_amount' => $request->get('amount'),
                         ]);
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);
                     } else {
 
-                        Withdraw::create([
-                            'initial_amount' => $request->get('amount'),
-                            'user_id' => Auth::id()
-                        ]);
-
                         $calc = 1 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
+
+                        Withdraw::create([
+                            'initial_amount' => $request->get('amount'),
+                            'withdrawal_fee' => $calc,
+                            'user_id' => Auth::id(),
+                            'final_amount' => $diff
+                        ]);    
 
 
                         $withdrawal = new Withdrawal;

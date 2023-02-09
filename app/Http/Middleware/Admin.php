@@ -17,10 +17,11 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-
+        if(Auth::check()){
         if (Auth::user()->admin == true) {
             return $next($request);
         }
+    }
         return response()->json('You are not an admin.', 401);
     }
 
