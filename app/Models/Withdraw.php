@@ -21,8 +21,10 @@ class Withdraw extends Model
         'user_id',
         "approved",
         "status",
+        'withdrawal_fee'
     ];
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
