@@ -192,39 +192,42 @@ else{
         
                 $user->image = $url.'/uploads/images/'.$image_new_name;
                 $user->save();
-                return response()->json([
-                    'message' => 'success',
-                     'user' => $user
-                 ], 200);
-        }
-        if($request->has('bio')){
+        } elseif($request->has('bio')){
             $user->update([
                 'bio' => $request->bio
             ]);
-            return response()->json([
-                'message' => 'success',
-                'user' => $user
-            ], 200);
         }
-
-        if($request->has('username')){
+        
+        elseif($request->has('username')){
             $user->update([
-                'username' => $request->username
+                'username' => $request->username 
             ]);
-            return response()->json([
-                'message' => 'success',
-                'user' => $user
-            ], 200);
         }
 
-        if($request->has('phone')){
+        elseif($request->has('phone')){
             $user->update([
                 'phone' => $request->phone
             ]);
-            return response()->json([
-                'message' => 'success',
-                'user' => $user
-            ], 200);
         }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+        }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+            
+        }
+        elseif($request->has('phone')){
+            $user->update([
+                'phone' => $request->phone
+            ]);
+        }
+        return response()->json([
+            'message' => 'success',
+            'user' => $user
+        ], 200);
     }
 }
