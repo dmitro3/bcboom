@@ -85,7 +85,7 @@ class WithdrawalController extends Controller
                             'user_id' => Auth::id(),
                             'final_amount' => $request->get('amount'),
                             'withdrawal_fee' => '0'
-                        ]);
+                        ]); 
                         $withdrawal = new Withdrawal;
 
                         $withdrawal->handle($request, $diff = null);

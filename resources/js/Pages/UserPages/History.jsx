@@ -221,7 +221,7 @@ const Withdraw = ({ isMobile }) => {
         setData(withdrawHistory);
     }, [withdrawHistory]);
     const [data, setData] = useState(withdrawHistory);
-    console.log("withdrawHistory: ", withdrawHistory, data);
+
     const dispatcher = useDispatch();
     useEffect(() => {
         async function getAllWithdrawals() {
@@ -230,10 +230,11 @@ const Withdraw = ({ isMobile }) => {
                 allWithdrawals
             );
             dispatcher(setWithdrawHistory(allWidthdrawals));
+            setData(allWidthdrawals);
         }
         getAllWithdrawals();
-    }, []);
-    console.log("withdrawHistory: ", withdrawHistory, data);
+    }, [withdrawHistory]);
+
     // const [data, setData] = useState(
     //     Array.from({ length: 100 }).fill({
     //         transactionId: "123456789123456789123456789123456789",
