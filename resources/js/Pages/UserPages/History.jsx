@@ -233,7 +233,7 @@ const Withdraw = ({ isMobile }) => {
             setData(allWidthdrawals);
         }
         getAllWithdrawals();
-    }, [withdrawHistory]);
+    }, []);
 
     // const [data, setData] = useState(
     //     Array.from({ length: 100 }).fill({
