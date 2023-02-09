@@ -19,8 +19,8 @@ use Validator;
 use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use App\Models\Depo;
 use App\Models\Withdraw;
+use App\Models\Payment;
 
 
 class UserController extends Controller
