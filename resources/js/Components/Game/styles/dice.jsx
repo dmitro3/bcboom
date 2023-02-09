@@ -287,39 +287,16 @@ const DiceComponent = () => {
     function rollDice(dice) {
         const xRand = getRandom(24, 1);
         const yRand = getRandom(24, 1);
+        console.log("transform before: ", window.getComputedStyle(dice).transform);
         dice.style.transform =
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)"; 
         dice.style.webkitTransform =
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.transition = "transform 2s ease";
         dice.style.webkitTransition = "transform 2s ease";
-        // const transformValues = window.getComputedStyle(dice);
-        // const rotateX = parseFloat(transformValues.getPropertyValue('transform').split(',')[4]);
-        // const rotateY = parseFloat(transformValues.getPropertyValue('transform').split(',')[5]);
-
-        // Convert the rotation values to radians
-        const radX = rotateX * (Math.PI / 180);
-        const radY = rotateY * (Math.PI / 180);
-
-        // Calculate the final orientation of the div
-        const orientation = Math.round(
-            ((((Math.sin(radX) * Math.cos(radY)) / 2 + 0.5) * 6) % 6) +
-                1
-        );
-
-        // Map the orientation to the side of the dice
-        // const side = orientation;
-
-        console.log(
-            "The current side facing the user is:",
-            orientation, radX, radY, rotateX, rotateY
-        );
-        // const x = transformValues.split(",").map((value) => parseFloat(value));
-        // console.log("orientation x", x, xRand, yRand);
-        // const orientation = (x + y) / 60 % 6;
-        // const number = [1, 6, 2, 5, 3, 4][orientation] || 6;
-        // console.log("orientation", orientation, number, x, y, transformValues);
-        // setDicesArray((prev) => [...prev, dice]);
+        const transform = window.getComputedStyle(dice).transform;
+        console.log('transform: ', transform)
+     
     }
     const { playing } = useSelector((state) => state.game);
     useEffect(() => {
