@@ -25,12 +25,12 @@ class WithdrawalController extends Controller
     public function transactions()
     {
         $user = Auth::user();
-        $withdrawals = Withdraw::where('id', $user->id)->orderBy('created_at', 'desc')->get();
-        
+        $withdrawals = Withdraw::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        // var_dump($withdrawals);
         if ($withdrawals) {
             return response()->json([
                 'withdrawals' => $withdrawals,
-                'message' => 'Withdrawals retrieved',
+                'message' => 'Withdrawals retrieved successfully',
             ], 200);
         } else {
             return response()->json([
