@@ -28,21 +28,23 @@ class Withdrawal
      */
 
 
-    function handle(Request $request, $diff): string
+    function handle(Withdraw $withdrawal): string
     {
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
-        $user = Auth::user();
+        $user = $withdrawal->user;
+
+        
 
         $data = [
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
-            'amount' => $diff ? $diff : $request->amount,
+            'amount' => $withdrawal->final_amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
-            'customermobile' => $request->whatsapp,
-            'taxi' => $request->taxi,
-            'pixkey' => $request->cpf,
-            'pixtype' => $request->pixtype,
+            'customermobile' => $withdrawal->whatsapp,
+            'taxi' => $withdrawal->taxi,
+            'pixkey' => $withdrawal->cpf,
+            'pixtype' => $withdrawal->pixtype,
             'username' => $user->username,
             'notifyurl' => url('/api/notifywithdrawal'),
             'currency' => 'BRL'
@@ -100,10 +102,12 @@ class Withdrawal
             if ($data['trade_state'] === 'SUCCESS') {
 
                 // $minused = $wallet->deposit - $withdrawal->amount;
-                $new_balance = $wallet->withdrawable_balance - $withdrawal->amount;
+                $new_balance = $wallet->withdrawable_balance - $withdrawal->final_amount;
 
-                $withdrawal->update(
-                    ['approved' => 1, 'status' => 'SUCCESS'])
+                $withdrawal->update([
+                    'approved' => 1,
+                     'status' => 'SUCCESS'
+                     ])
                 ;
 
                 $wallet->update([

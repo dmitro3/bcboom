@@ -26,9 +26,10 @@ use App\Models\Payment;
 class UserController extends Controller
 {
     //
-    public function aboutMe()
-    {
-        if (Auth::check()) {
+
+    
+    public function aboutMe(){
+        if(Auth::check()){
             $user = Auth::user();
 
             return response()->json([

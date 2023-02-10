@@ -20,6 +20,8 @@ class Payment extends Model
         "customer",
         "email",
         "mobile",
+        "approved",
+        "rejected",
        "pay_info",
         "tx_order_no",
         "trade_state",
