@@ -23,7 +23,6 @@ class Withdraw extends Model
         "approved",
         "rejected",
         'user_id',
-        'taxi',
         'pixkey',
         'pixtype',
         'taxi',
