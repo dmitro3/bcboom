@@ -31,8 +31,10 @@ class Withdraw extends Model
         "whatsapp",
         "approved",
         "status",
+        'withdrawal_fee'
     ];
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

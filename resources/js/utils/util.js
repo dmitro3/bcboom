@@ -96,16 +96,16 @@ export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
     const response = await dispatch(dispatchFunc());
     let formattedData = [];
     if (response?.payload?.status === 200) {
+        console.log('sdlhsdlsdh: ', response?.payload?.data?.withdrawals)
         const withdrawals = response?.payload?.data?.withdrawals;
         formattedData = withdrawals.map((el) => {
             const obj = {};
-            const fee = (el.amount * 0.03).toFixed(2);
             {
                 obj.transactionId = el.orderno;
                 obj.date = new Date(el.created_at).toISOString();
-                obj.withdrawalValue = el.amount;
-                obj.widthdrawalFee = fee || 0;
-                obj.finalValue = el.amount - fee;
+                obj.withdrawalValue = el.initial_amount;
+                obj.widthdrawalFee = `${el.withdrawal_fee}%`;
+                obj.finalValue = el.final_amount ;
                 obj.comment = el.remark || "---";
                 obj.status = el.status;
             }

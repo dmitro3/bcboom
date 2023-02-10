@@ -51,7 +51,7 @@ class Callback
 
 
                     $payment->update([
-                        'deposit_amount' => $payment->amount,
+                        'pay_amount' => $payment->amount,
                         'percentage_amount' => $percentage_amount,
                         'final_amount' => $payment->amount + $percentage_amount,
                         'called' => 1,
