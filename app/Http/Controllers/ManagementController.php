@@ -25,13 +25,21 @@ class ManagementController extends Controller
         $withdrawal = Withdraw::where('user_id',$id)->first();
         
         $runWithdrawal = new Withdrawal;
-
+        if($withdrawal !== Null){
         $runWithdrawal->handle($withdrawal);
-
+        
         $accept = $withdrawal->update([
             'approved' => 1
         ]);
-        
+
+        return response()->json([
+            "message" => "Accepted"
+        ]);
+    }else{
+        return response()->json([
+            'message' => "This withdrawal cannot be approved."
+        ]);
+    }
     }
 
     public function rejectWithdrawal($id){
