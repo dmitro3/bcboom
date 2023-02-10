@@ -1,45 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Wallet;
-use App\Models\Withdraw;
-use Auth;
-use App\Actions\Withdrawal;
-use App\Models\Deposit;
-use Carbon\Carbon;
-
-
-
-class WithdrawalController extends Controller
-{
-    
-    public function __construct()
-    {
-        $this->middleware('jwt.verify');
-    
-    }
-
-    public function transactions()
-    {
-        $user = Auth::user();
-        $withdrawals = Withdraw::where('id', $user->id)->orderBy('created_at', 'desc')->get();
-        
-        if ($withdrawals) {
-            return response()->json([
-                'withdrawals' => $withdrawals,
-                'message' => 'Withdrawals retrieved',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'No withdrawal found',
-            ], 404);
-        }
-    }
-
-    public function handle(Request $request)
+  public function handle(Request $request)
     {
 
         $user = Auth::user();
@@ -83,17 +42,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
-                            'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $request->get('amount')
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         
@@ -104,18 +57,12 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -158,18 +105,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
-                            'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $request->get('amount')
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
 
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 2.5 / 100 * $request->get('amount');
@@ -179,20 +119,14 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);
 
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -237,16 +171,10 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
                             'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
                         $calc = 2.5 / 100 * $request->get('amount');
                         $diff = $request->get('amount') - $calc;
@@ -255,21 +183,14 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);
 
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
 
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -313,18 +234,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
-                            'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $request->get('amount')
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
+                        $withdrawal = new Withdrawal;
 
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 2 / 100 * $request->get('amount');
@@ -334,21 +248,14 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);
 
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -393,18 +300,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
-                            'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $request->get('amount')
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 2 / 100 * $request->get('amount');
@@ -414,21 +314,14 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);
 
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -471,18 +364,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'final_amount' => $request->get('amount'),
-                            'user_id' => Auth::id(),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'user_id' => Auth::id()
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 1.5 / 100 * $request->get('amount');
@@ -492,21 +378,14 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
 
                         ]);
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -550,17 +429,10 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
                             'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 1.5 / 100 * $request->get('amount');
@@ -570,20 +442,13 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);    
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -626,18 +491,11 @@ class WithdrawalController extends Controller
                         Withdraw::create([
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
                             'final_amount' => $request->get('amount')
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
                         
                         $calc = 1 / 100 * $request->get('amount');
@@ -648,19 +506,12 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
                             'final_amount' => $diff
                         ]);                            
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -704,17 +555,10 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'user_id' => Auth::id(),
                             'final_amount' => $request->get('amount'),
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
                         ]);
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = null);
                     } else {
 
                         $calc = 1 / 100 * $request->get('amount');
@@ -724,21 +568,13 @@ class WithdrawalController extends Controller
                             'initial_amount' => $request->get('amount'),
                             'withdrawal_fee' => $calc,
                             'user_id' => Auth::id(),
-                            'final_amount' => $diff,
-                            'taxi' => $request->get('taxi'),
-                            'pixkey' => $request->get('pixkey'),
-                            'pixtype' => 'CPF',
-                            'taxi' => $request->taxi,
-                            'cpf' => $request->cpf,
-                            "whatsapp" => $request->whatsapp,
+                            'final_amount' => $diff
                         ]);    
 
 
-                        return response()->json([
-                            'message' => 'success',
-                            'status' => 200
-                        ],200);
-                    
+                        $withdrawal = new Withdrawal;
+
+                        $withdrawal->handle($request, $diff = $diff);
                     }
 
                 } else {
@@ -762,4 +598,3 @@ class WithdrawalController extends Controller
 
 
     }
-}

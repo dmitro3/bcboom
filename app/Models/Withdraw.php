@@ -10,6 +10,8 @@ class Withdraw extends Model
     use HasFactory;
     protected $fillable = [
         "initial_amount",
+        "final_amount",
+        "withdrawal_fee",
         "amount",
         "orderno",
         "tx_orderno",
@@ -18,7 +20,15 @@ class Withdraw extends Model
         "bankname",
         "bankcard",
         "trade_state",
+        "approved",
+        "rejected",
         'user_id',
+        'taxi',
+        'pixkey',
+        'pixtype',
+        'taxi',
+        'cpf',
+        "whatsapp",
         "approved",
         "status",
     ];
