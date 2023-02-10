@@ -1,7 +1,9 @@
 import { setGameIsOn } from "@/redux/game/game-slice";
+import { randomDiceOutput } from "@/utils/util";
 import { styled } from "@mui/system";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const DicesWrapper = styled("div")(() => ({
     display: "flex",
@@ -213,12 +215,68 @@ const DiceComponent = () => {
     const diceTwoRef = useRef(null);
     const diceThreeRef = useRef(null);
     const dispatch = useDispatch();
-    function getRandom(max, min) {
-        return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
+    
+    // function getRandom(max, min) {
+    //     return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
+    // }
+    const [dicesScore, setDicesScore] = useState(0);
+
+    useEffect(() => {
+        toast.info(`You rolled ${dicesScore}!`);
+    }, [dicesScore]);
+
+    function resetDice(dices) {
+        dices.forEach((dice) => {
+            // dice.style.transform = "rotateX(0) rotateY(0)";
+            dice.style.transition = "transform 20s ease";
+            dice.style.webkitTransform = "rotateX(1080deg) rotateY(1080deg) scale(1.5)";
+            // dice.style.transform = "rotateX(1080deg) rotateY(1080deg)";
+
+            console.log("reset dice: ", dice.style.transform);
+        });
     }
     function rollDice(dice) {
-        const xRand = getRandom(24, 1);
-        const yRand = getRandom(24, 1);
+        const diceNumber = randomDiceOutput(1, 6);
+        console.log("dNumber: ", diceNumber);
+        let yRand = 720;
+        let xRand = 450;
+
+        // cube.style.webkitTransform = 0
+        // "rotateX(" + 360 + "deg) rotateY(" + 360 + "deg)";
+        // cube.style.transform =
+        //     "rotateX(39deg) rotateY(30deg)";
+        switch (diceNumber) {
+            case 1:
+                yRand = 3240;
+                xRand = 1440;
+                break;
+            case 2:
+                yRand = 3240;
+                xRand = 3420;
+                break;
+            case 3:
+                yRand = 270;
+                xRand = 3240;
+                break;
+            case 4:
+                yRand = 1170;
+                xRand = 3240;
+                break;
+            case 5:
+                yRand = 3240;
+                xRand = 260;
+                break;
+            case 6:
+                yRand = 3240;
+                xRand = 1170;
+                break;
+            default:
+                break;
+        }
+        // cube.style.webkitTransform =
+        //     "rotateX(" + 0 + "deg) rotateY(" + 0 + "deg)";
+        // cube.style.transform = "rotateX(" + 0 + "deg) rotateY(" + 0 + "deg)";
+        // cube.style.transform = "rotateX(39deg) rotateY(30deg)";
         dice.style.transform =
             "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
         dice.style.webkitTransform =
@@ -234,6 +292,11 @@ const DiceComponent = () => {
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
+            resetDice([
+                diceOneRef.current,
+                diceTwoRef.current,
+                diceThreeRef.current,
+            ]);
             rollDice(diceOneRef.current);
             rollDice(diceTwoRef.current);
             rollDice(diceThreeRef.current);

@@ -162,3 +162,12 @@ export function validateBrazilTaxNumber(taxNumber) {
     }
     return checkDigit === parseInt(taxNumber.charAt(taxNumber.length - 1), 10);
 }
+
+
+
+export function randomDiceOutput(min, max) {
+    const range = max - min + 1;
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return min + (array[0] % range);
+}
