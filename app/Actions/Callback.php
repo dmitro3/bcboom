@@ -63,7 +63,8 @@ class Callback
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
 
-                    
+                    $user = $wallet->user;
+                    $user->promoteLevel();
                 }
                 //改变订单状态，及其他业务修改
 

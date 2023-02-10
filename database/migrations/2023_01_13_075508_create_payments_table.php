@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('email')->nullable();
             $table->double('final_amount')->nullable();
+            $table->boolean('rejected')->default(0);
+            $table->boolean('approved')->default('0');
             $table->string('sign')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->nullable();

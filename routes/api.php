@@ -9,6 +9,7 @@ use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ManagementController;
 use App\Utils\APIResponse;
 use App\Actions\Process;
 use App\Actions\Callback;
@@ -113,6 +114,26 @@ Route::middleware(['jwt.verify'])->group(function () {
 
 });
 Route::middleware(['jwt.verify', 'admin'])->group(function () {
+
+    Route::get('approval/withdrawals',[
+        ManagementController::class, 'withdrawalRequests'
+    ]);
+
+    Route::get('reject/withdrawal/{id}',[
+        ManagementController::class, 'rejectWithdrawal'
+    ]);
+
+    Route::get('ignore/withdrawal/{id}',[
+        ManagementController::class, 'ignoreWithdrawal'
+    ]);
+
+    Route::get('delete/withdrawal/{id}',[
+        ManagementController::class, 'deleteWithdrawal'
+    ]);
+
+    Route::get('approve/withdrawal/{id}',[
+        ManagementController::class, 'approveWithdrawal'
+    ]);
 
     Route::get('make/admin/{id}', [
         UserController::class,
