@@ -28,7 +28,7 @@ class Withdrawal
      */
 
 
-    function handle(Withdraw $withdrawal): string
+    function handle(Withdraw $withdrawal)
     {
 
         // $wallet =  Wallet::where('user_id', $user->id)->first();
