@@ -87,6 +87,7 @@ const DicePage = () => {
         await sleep(2000);
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
         toast.info("You rolled " + rolled);
+        dispatch(setGameData({ ...gameData, diceNumber: [0] }));
     };
 
     useEffect(() => {
