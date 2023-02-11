@@ -7,6 +7,7 @@ const gameSlice = createSlice({
             winChance: 51,
             payout: 1.5,
             rollUnder: 15,
+            betAmount: 0.0001,
         },
         loading: false,
         playing: false,

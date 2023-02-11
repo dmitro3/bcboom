@@ -3,6 +3,7 @@ import DiceFrame from "@/Components/Game/frames/DiceFrame";
 import GameLayout from "@/Components/Game/layout/GameLayout";
 import { DiceWrapper } from "@/Components/Game/styles/diceStyles";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { sleep } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";

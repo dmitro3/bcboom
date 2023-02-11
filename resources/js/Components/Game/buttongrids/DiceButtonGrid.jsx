@@ -1,11 +1,13 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setGameIsOn } from "@/redux/game/game-slice";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { sleep } from "@/utils/util";
 
 const DiceButtonGrid = ({ playDeter }) => {
     const dispatch = useDispatch();
+    const { wallet } = useSelector((state) => state.wallet);
+    const { gameData } = useSelector((state) => state.game);
     return (
         <Box
             sx={{
@@ -55,6 +57,15 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: 0.0001.toFixed(4),
+                                    })
+                                );
                             }}
                         >
                             Min
@@ -71,6 +82,15 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: 200.0000.toFixed(4),
+                                    })
+                                );
                             }}
                         >
                             Max
@@ -92,7 +112,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 textAlign: "center",
                             }}
                         >
-                            R$ 0.0000000
+                            R$ {gameData.betAmount}
                         </Box>
                     </Box>
                     <Box
@@ -116,6 +136,23 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                let newValue = (gameData.betAmount / 2).toFixed(
+                                    4
+                                );
+                                if (newValue < 0.0001) {
+                                    newValue = 0.0001;
+                                } else if (newValue > 200.0) {
+                                    newValue = 200.0000.toFixed(4);
+                                }
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: newValue,
+                                    })
+                                );
                             }}
                         >
                             1/2
@@ -132,6 +169,23 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                let newValue = (gameData.betAmount * 2).toFixed(
+                                    4
+                                );
+                                if (newValue < 0.0001) {
+                                    newValue = 0.0001;
+                                } else if (newValue > 200.0) {
+                                    newValue = 200.0000.toFixed(4);
+                                }
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: newValue,
+                                    })
+                                );
                             }}
                         >
                             2x
