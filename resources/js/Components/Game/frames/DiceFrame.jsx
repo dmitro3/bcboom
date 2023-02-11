@@ -1,7 +1,10 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setGameData } from "@/redux/game/game-slice";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/system";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import arrow from "../../../../assets/games/arrow.svg";
 import cross from "../../../../assets/games/cross.svg";
 import cross_sm from "../../../../assets/games/cross_sm.svg";
@@ -56,18 +59,23 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = () => {
+const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
     const { isMobile } = useScreenResolution();
+    const { gameData } = useSelector((state) => state.game);
+    const dispatch = useDispatch();
     return (
         <Box
             sx={{
                 width: "98%",
                 mt: ".625rem",
-
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <DiceComponent />
+            <DiceComponent
+                setPlaying={setPlaying}
+                usePlay={playing}
+                setDiceNumbers={setDiceNumbers}
+            />
             <Box
                 sx={{
                     width: "100%",
@@ -93,10 +101,15 @@ const DiceFrame = () => {
                     <PrettoSlider
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
-                        defaultValue={50}
-                        // onChange={(_, value) => {
-                        //     setDiceRotation(value);
-                        // }}
+                        value={gameData.winChance}
+                        onChange={(_, value) => {
+                            dispatch(
+                                setGameData({
+                                    ...gameData,
+                                    winChance: value,
+                                })
+                            );
+                        }}
                     />
                 </Box>
             </Box>
@@ -189,9 +202,23 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        1.98x
+                                        {gameData.payout + "x"}
                                     </Typography>
-                                    <img src={cross} />
+                                    <div
+                                        onClick={() =>
+                                            dispatch(
+                                                setGameData({
+                                                    ...gameData,
+                                                    payout: 0,
+                                                })
+                                            )
+                                        }
+                                    >
+                                        <img
+                                            src={cross}
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -237,9 +264,23 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        51.00
+                                        {gameData.rollUnder + ".00"}
                                     </Typography>
-                                    <img src={arrow} />
+                                    <div
+                                        onClick={() => {
+                                            dispatch(
+                                                setGameData({
+                                                    ...gameData,
+                                                    rollUnder: Math.floor(Math.random() * 20) + 1,
+                                                })
+                                            );
+                                        }}
+                                    >
+                                        <img
+                                            src={arrow}
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -285,7 +326,7 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        51
+                                        {gameData.winChance}
                                         <Box
                                             component={"span"}
                                             sx={{ color: "#3586FF" }}
@@ -310,36 +351,70 @@ const DiceFrame = () => {
                                                 display: "flex",
                                             }}
                                         >
-                                            {["Min", "-5", "+5", "Max"].map(
-                                                (item, idx) => {
-                                                    return (
-                                                        <Box
-                                                            sx={{
-                                                                width: "25%",
-                                                                cursor: "pointer",
-                                                                color: "#A6B0DA",
-                                                                fontWeight: 700,
-                                                                fontSize:
-                                                                    ".75rem",
-                                                                textAlign:
-                                                                    "center",
-                                                                display: "flex",
-                                                                justifyContent:
-                                                                    "center",
-                                                                alignItems:
-                                                                    "center",
-                                                                borderRight: `${
-                                                                    idx !== 3
-                                                                        ? "2px solid #2E3365"
-                                                                        : ""
-                                                                }`,
-                                                            }}
-                                                        >
-                                                            {item}
-                                                        </Box>
-                                                    );
-                                                }
-                                            )}
+                                            {[
+                                                {
+                                                    name: "Min",
+                                                    value: "-100",
+                                                },
+                                                {
+                                                    name: "-5",
+                                                    value: "-5",
+                                                },
+                                                {
+                                                    name: "+5",
+                                                    value: "+5",
+                                                },
+                                                {
+                                                    name: "Max",
+                                                    value: "+100",
+                                                },
+                                            ].map((item, idx) => {
+                                                return (
+                                                    <Box
+                                                        sx={{
+                                                            width: "25%",
+                                                            cursor: "pointer",
+                                                            color: "#A6B0DA",
+                                                            fontWeight: 700,
+                                                            fontSize: ".75rem",
+                                                            textAlign: "center",
+                                                            display: "flex",
+                                                            justifyContent:
+                                                                "center",
+                                                            alignItems:
+                                                                "center",
+                                                            borderRight: `${
+                                                                idx !== 3
+                                                                    ? "2px solid #2E3365"
+                                                                    : ""
+                                                            }`,
+                                                        }}
+                                                        onClick={() => {
+                                                            let newValue =
+                                                                gameData.winChance +
+                                                                Number(
+                                                                    item.value
+                                                                );
+                                                            if (newValue < 0) {
+                                                                newValue = 0;
+                                                            } else if (
+                                                                newValue > 100
+                                                            ) {
+                                                                newValue = 100;
+                                                            }
+                                                            dispatch(
+                                                                setGameData({
+                                                                    ...gameData,
+                                                                    winChance:
+                                                                        newValue,
+                                                                })
+                                                            );
+                                                        }}
+                                                    >
+                                                        {item.name}
+                                                    </Box>
+                                                );
+                                            })}
                                         </Box>
                                     </Box>
                                 </Box>

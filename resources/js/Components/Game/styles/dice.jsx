@@ -1,9 +1,8 @@
-import { setGameIsOn } from "@/redux/game/game-slice";
-import { randomDiceOutput } from "@/utils/util";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
+import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 const DicesWrapper = styled("div")(() => ({
     display: "flex",
@@ -210,98 +209,81 @@ const DiceWrapperThree = styled("div")(() => ({
     ".bottom3 .dot36": { top: "125px", left: "125px" },
 }));
 
-const DiceComponent = () => {
+const DiceComponent = ({ setPlaying }) => {
     const diceOneRef = useRef(null);
     const diceTwoRef = useRef(null);
     const diceThreeRef = useRef(null);
     const dispatch = useDispatch();
-    
-    // function getRandom(max, min) {
-    //     return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
-    // }
-    const [dicesScore, setDicesScore] = useState(0);
-
-    useEffect(() => {
-        toast.info(`You rolled ${dicesScore}!`);
-    }, [dicesScore]);
-
-    function resetDice(dices) {
-        dices.forEach((dice) => {
-            // dice.style.transform = "rotateX(0) rotateY(0)";
-            dice.style.transition = "transform 20s ease";
-            dice.style.webkitTransform = "rotateX(1080deg) rotateY(1080deg) scale(1.5)";
-            // dice.style.transform = "rotateX(1080deg) rotateY(1080deg)";
-
-            console.log("reset dice: ", dice.style.transform);
-        });
-    }
-    function rollDice(dice) {
+    const { gameData } = useSelector((state) => state.game);
+    async function rollDice(dice, idx) {
+        dice.style.transition = "transform 3s ease";
+        dice.style.webkitTransform = `rotateX(${Math.floor(
+            Math.random() * 360 + 1
+        )}deg) rotateY(${Math.floor(Math.random() * 360 + 1)}deg)`;
         const diceNumber = randomDiceOutput(1, 6);
-        console.log("dNumber: ", diceNumber);
-        let yRand = 720;
-        let xRand = 450;
+        await sleep(900).then(() => {
+            let yRand = 720;
+            let xRand = 450;
+            switch (diceNumber) {
+                case 1:
+                    yRand = 16200;
+                    xRand = 9720;
+                    break;
+                case 2:
+                    yRand = 11340;
+                    xRand = 3240;
+                    break;
+                case 3:
+                    yRand = 18630;
+                    xRand = 12960;
+                    break;
+                case 4:
+                    yRand = 12150;
+                    xRand = 14580;
+                    break;
+                case 5:
+                    yRand = 12150;
+                    xRand = 8910;
+                    break;
+            }
 
-        // cube.style.webkitTransform = 0
-        // "rotateX(" + 360 + "deg) rotateY(" + 360 + "deg)";
-        // cube.style.transform =
-        //     "rotateX(39deg) rotateY(30deg)";
-        switch (diceNumber) {
-            case 1:
-                yRand = 3240;
-                xRand = 1440;
-                break;
-            case 2:
-                yRand = 3240;
-                xRand = 3420;
-                break;
-            case 3:
-                yRand = 270;
-                xRand = 3240;
-                break;
-            case 4:
-                yRand = 1170;
-                xRand = 3240;
-                break;
-            case 5:
-                yRand = 3240;
-                xRand = 260;
-                break;
-            case 6:
-                yRand = 3240;
-                xRand = 1170;
-                break;
-            default:
-                break;
-        }
-        // cube.style.webkitTransform =
-        //     "rotateX(" + 0 + "deg) rotateY(" + 0 + "deg)";
-        // cube.style.transform = "rotateX(" + 0 + "deg) rotateY(" + 0 + "deg)";
-        // cube.style.transform = "rotateX(39deg) rotateY(30deg)";
-        dice.style.transform =
-            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-        dice.style.webkitTransform =
-            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-        dice.style.transition = "transform 2s ease";
-        dice.style.webkitTransition = "transform 2s ease";
+            dice.style.transform =
+                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            dice.style.webkitTransform =
+                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            dice.style.transition = "transform 2s ease";
+            dice.style.webkitTransition = "transform 2s ease";
+        });
+        return diceNumber;
     }
     const { playing } = useSelector((state) => state.game);
+    // const [xx, setXX] = useState({});
+    // console.log("xx: ", xx);
     useEffect(() => {
+        // if (!playing ) setPlaying(true);
         if (
             playing &&
             diceOneRef.current &&
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
-            resetDice([
-                diceOneRef.current,
-                diceTwoRef.current,
-                diceThreeRef.current,
-            ]);
-            rollDice(diceOneRef.current);
-            rollDice(diceTwoRef.current);
-            rollDice(diceThreeRef.current);
+            async function diceFn() {
+                setPlaying(true);
+                let x = await Promise.allSettled([
+                    rollDice(diceOneRef.current, 1),
+                    rollDice(diceTwoRef.current, 2),
+                    rollDice(diceThreeRef.current, 3),
+                ]);
+                // setXX(x.map((item) => item.value));
+                dispatch(
+                    setGameData({...gameData, diceNumber: x.map((item) => item.value) })
+                );
+            }
+
+            diceFn();
+            setPlaying(false);
+            dispatch(setGameIsOn(false));
         }
-        dispatch(setGameIsOn(false));
     }, [playing]);
     return (
         <DicesWrapper>

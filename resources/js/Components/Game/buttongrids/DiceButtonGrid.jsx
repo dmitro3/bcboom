@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGameIsOn } from "@/redux/game/game-slice";
+import { sleep } from "@/utils/util";
 
-const DiceButtonGrid = () => {
-    // const { setRoll } = gridProps;
-    const dispatch = useDispatch()
+const DiceButtonGrid = ({ playDeter }) => {
+    const dispatch = useDispatch();
     return (
         <Box
             sx={{
@@ -144,15 +144,19 @@ const DiceButtonGrid = () => {
                     width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
-                    background: "#333965",
+                    background: !playDeter
+                        ? "rgba(82, 90, 160, 0.04)"
+                        : "#3585ff",
                     fontSize: "1.375rem",
                     fontWeight: 800,
-                    backgroundColor: "#3585ff",
                     color: "#FFFFFF",
                 }}
-                onClick={() => dispatch(setGameIsOn(true))}
+                onClick={async () => {
+                    if (!playDeter) return;
+                    dispatch(setGameIsOn(true));
+                }}
             >
-                BET
+                {!playDeter ? "..." : "Play"}
             </Button>
         </Box>
     );
