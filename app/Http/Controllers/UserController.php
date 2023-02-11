@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function allDeposits()
     {
-        $deposits = Payment::all();
+        $deposits = Payment::all()->orderBy('created_at', 'desc')->get();
         return response()->json([
             'deposits' => $deposits
 
@@ -56,8 +56,8 @@ class UserController extends Controller
 
     public function allTransactions()
     {
-        $deposits = Payment::all();
-        $withdrawals = Withdraw::all();
+        $deposits = Payment::all()->orderBy('created_at', 'desc')->get();
+        $withdrawals = Withdraw::all()->orderBy('created_at', 'desc')->get();
         return response()->json([
             'deposits' => $deposits,
             'withdrawals' => $withdrawals
@@ -68,7 +68,7 @@ class UserController extends Controller
     public function allWithdrawals()
     {
 
-        $allWithdrawals = Withdraw::all();
+        $allWithdrawals = Withdraw::all()->orderBy('created_at', 'desc')->get();
         return response()->json([
             'allWithdrawals' => $allWithdrawals
         ]);
