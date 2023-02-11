@@ -25,7 +25,7 @@ class WithdrawalController extends Controller
     public function transactions()
     {
         $user = Auth::user();
-        $withdrawals = Withdraw::where('id', $user->id)->orderBy('created_at', 'desc')->get();
+        $withdrawals = Withdraw::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
         if ($withdrawals) {
             return response()->json([
