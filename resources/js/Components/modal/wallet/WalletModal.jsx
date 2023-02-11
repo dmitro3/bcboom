@@ -323,6 +323,11 @@ const Withdraw = () => {
             setSubmitted(false);
             return;
         }
+        if(response?.payload?.status === 422) {
+            toast.error(response?.payload?.data?.message);
+            setSubmitted(false);
+            return;
+        }
         if (response?.payload?.status === 200) {
             toast.info(
                 `A withdraw order of R$ ${value} has been placed and will be processed in 24 hours`

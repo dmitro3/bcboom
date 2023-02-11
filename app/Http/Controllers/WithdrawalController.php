@@ -73,8 +73,8 @@ class WithdrawalController extends Controller
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
                     'withdrawable_balance' => $wallet->withdrawable_balance,
-                    'message' => 'People on level 0 cannot spend more than 500 units of money.'
-                ]);
+                    'message' => 'User on level 0 cannot spend more than 500 units of money.'
+                ], 422);
             } else {
 
                 if ($limited->count() < 1) {
@@ -148,8 +148,8 @@ class WithdrawalController extends Controller
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
                     'withdrawable_balance' => $wallet->withdrawable_balance,
-                    'message' => 'People on level 0 cannot spend more than 500 units of money.'
-                ]);
+                    'message' => 'User on level 0 cannot spend more than 500 units of money.'
+                ], 422);
             } else {
 
                 if ($limited->count() < 2) {
@@ -461,8 +461,8 @@ class WithdrawalController extends Controller
                     'amount' => $request->amount,
                     'deposit' => $wallet->deposit,
                     'withdrawable_balance' => $wallet->withdrawable_balance,
-                    'message' => 'People on level 7 cannot spend more than 5000 units of money.'
-                ]);
+                    'message' => 'User on level 7 cannot spend more than 5000 units of money.'
+                ], 422);
             } else {
 
                 if ($limited->count() < 4) {
