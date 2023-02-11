@@ -4,6 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
 import { Switch } from "antd";
+import { useSelector } from "react-redux";
+import { currencyFormatter } from "@/utils/util";
 
 const GameTab = () => {
     const [tabValue, setTabValue] = React.useState(1);
@@ -47,6 +49,8 @@ const GameTab = () => {
         };
     }
 
+    const { gameData } = useSelector((state) => state.game);
+    const { wallet } = useSelector((state) => state.wallet);
     return (
         <div>
             <Box
@@ -304,7 +308,12 @@ const GameTab = () => {
                                                 fontSize: "1rem",
                                             }}
                                         >
-                                            R$ 0
+                                            R${" "}
+                                            {currencyFormatter
+                                                .format(
+                                                    wallet.withdrawable_balance
+                                                )
+                                                .replace("$", "")}
                                         </Box>
                                     </Box>
                                 </Box>

@@ -3,6 +3,7 @@ import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const DicesWrapper = styled("div")(() => ({
     display: "flex",
@@ -276,7 +277,10 @@ const DiceComponent = ({ setPlaying }) => {
                 ]);
                 // setXX(x.map((item) => item.value));
                 dispatch(
-                    setGameData({...gameData, diceNumber: x.map((item) => item.value) })
+                    setGameData({
+                        ...gameData,
+                        diceNumber: x.map((item) => item.value),
+                    })
                 );
             }
 

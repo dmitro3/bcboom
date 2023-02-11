@@ -5,9 +5,10 @@ const gameSlice = createSlice({
     initialState: {
         gameData: {
             winChance: 51,
-            payout: 1.5,
+            payout: 0.0001,
             rollUnder: 15,
-            betAmount: 0.0001,
+            betAmount: (0.1).toFixed(4),
+            diceNumber: [0],
         },
         loading: false,
         playing: false,

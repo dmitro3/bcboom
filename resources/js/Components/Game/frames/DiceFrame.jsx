@@ -102,11 +102,14 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         value={gameData.winChance}
+                        min={5}
+                        max={95}
                         onChange={(_, value) => {
                             dispatch(
                                 setGameData({
                                     ...gameData,
                                     winChance: value,
+                                    // payout,
                                 })
                             );
                         }}
@@ -194,6 +197,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                         width: "100%",
                                         display: "flex",
                                         justifyContent: "space-between",
+                                        alignItems: "center",
                                     }}
                                 >
                                     <Typography
@@ -202,14 +206,14 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        {gameData.payout + "x"}
+                                        {gameData.payout}
                                     </Typography>
                                     <div
                                         onClick={() =>
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: 0,
+                                                    payout: 0.0001,
                                                 })
                                             )
                                         }
@@ -271,7 +275,10 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    rollUnder: Math.floor(Math.random() * 20) + 1,
+                                                    rollUnder:
+                                                        Math.floor(
+                                                            Math.random() * 20
+                                                        ) + 1,
                                                 })
                                             );
                                         }}
@@ -354,7 +361,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             {[
                                                 {
                                                     name: "Min",
-                                                    value: "-100",
+                                                    value: "-95",
                                                 },
                                                 {
                                                     name: "-5",
@@ -366,7 +373,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                 },
                                                 {
                                                     name: "Max",
-                                                    value: "+100",
+                                                    value: "+95",
                                                 },
                                             ].map((item, idx) => {
                                                 return (
@@ -395,12 +402,12 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                                 Number(
                                                                     item.value
                                                                 );
-                                                            if (newValue < 0) {
-                                                                newValue = 0;
+                                                            if (newValue < 5) {
+                                                                newValue = 5;
                                                             } else if (
-                                                                newValue > 100
+                                                                newValue > 95
                                                             ) {
-                                                                newValue = 100;
+                                                                newValue = 95;
                                                             }
                                                             dispatch(
                                                                 setGameData({
