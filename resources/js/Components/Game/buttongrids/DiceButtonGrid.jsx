@@ -7,7 +7,7 @@ import { sleep } from "@/utils/util";
 const DiceButtonGrid = ({ playDeter }) => {
     const dispatch = useDispatch();
     const { wallet } = useSelector((state) => state.wallet);
-    const { gameData } = useSelector((state) => state.game);
+    const { gameData, playing } = useSelector((state) => state.game);
     return (
         <Box
             sx={{
@@ -63,7 +63,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 dispatch(
                                     setGameData({
                                         ...gameData,
-                                        betAmount: 0.0001.toFixed(4),
+                                        betAmount: (0.0001).toFixed(4),
                                     })
                                 );
                             }}
@@ -88,7 +88,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 dispatch(
                                     setGameData({
                                         ...gameData,
-                                        betAmount: 200.0000.toFixed(4),
+                                        betAmount: (200.0).toFixed(4),
                                     })
                                 );
                             }}
@@ -145,7 +145,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 if (newValue < 0.0001) {
                                     newValue = 0.0001;
                                 } else if (newValue > 200.0) {
-                                    newValue = 200.0000.toFixed(4);
+                                    newValue = (200.0).toFixed(4);
                                 }
                                 dispatch(
                                     setGameData({
@@ -178,7 +178,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 if (newValue < 0.0001) {
                                     newValue = 0.0001;
                                 } else if (newValue > 200.0) {
-                                    newValue = 200.0000.toFixed(4);
+                                    newValue = (200.0).toFixed(4);
                                 }
                                 dispatch(
                                     setGameData({
@@ -198,19 +198,17 @@ const DiceButtonGrid = ({ playDeter }) => {
                     width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
-                    background: !playDeter
-                        ? "rgba(82, 90, 160, 0.04)"
-                        : "#3585ff",
+                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3585ff",
                     fontSize: "1.375rem",
                     fontWeight: 800,
                     color: "#FFFFFF",
                 }}
                 onClick={async () => {
-                    if (!playDeter) return;
+                    if (playing) return;
                     dispatch(setGameIsOn(true));
                 }}
             >
-                {!playDeter ? "..." : "Play"}
+                {playing ? "..." : "Play"}
             </Button>
         </Box>
     );

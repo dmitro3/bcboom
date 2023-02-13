@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const DicesWrapper = styled("div")(({isMobile}) => ({
+const DicesWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -20,9 +20,9 @@ const DicesWrapper = styled("div")(({isMobile}) => ({
     // backgroundColor: "rgba(0,0,0,0.5)",
     // backdropFilter: "blur(5px)",
 
-    '& > *': {
-        width: isMobile ? "100px" : "200px",
-    }
+    "& > *": {
+        width: isMobile && "100px",
+    },
 }));
 
 const containerStyle = {
@@ -66,9 +66,9 @@ const dotStyle = {
     borderRadius: "15px",
 };
 
-const wrapperStyle = () => {
+const wrapperStyle = (isMobile) => {
     return {
-        transform: "scale(0.25)",
+        transform: `scale(${isMobile ? "0.25" : ".35"})`,
         marginTop: "-1rem",
         marginBottom: "2rem",
         padding: "1rem",
@@ -294,7 +294,7 @@ const DiceComponent = ({ setPlaying }) => {
 
             diceFn();
             setPlaying(false);
-            dispatch(setGameIsOn(false));
+            // dispatch(setGameIsOn(false));
         }
     }, [playing]);
     return (

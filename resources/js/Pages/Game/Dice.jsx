@@ -5,7 +5,7 @@ import { DiceWrapper } from "@/Components/Game/styles/diceStyles";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
-import { setGameData } from "@/redux/game/game-slice";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
@@ -88,6 +88,8 @@ const DicePage = () => {
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
         toast.info("You rolled " + rolled);
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
+        await sleep(5000)
+        dispatch(setGameIsOn(false))
     };
 
     useEffect(() => {
