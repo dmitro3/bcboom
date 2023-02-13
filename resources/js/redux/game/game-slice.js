@@ -4,9 +4,9 @@ const gameSlice = createSlice({
     name: "game",
     initialState: {
         gameData: {
-            winChance: 51,
+            winChance: 41,
             payout: 0.0001,
-            rollUnder: 15,
+            rollUnder: { type: "under", value: "0 - 9" },
             betAmount: (0.1).toFixed(4),
             diceNumber: [0],
         },

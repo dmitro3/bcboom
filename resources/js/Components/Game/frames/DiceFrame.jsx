@@ -1,5 +1,6 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setGameData } from "@/redux/game/game-slice";
+import { toggleRollUnder } from "@/utils/util";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/system";
@@ -102,8 +103,8 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         value={gameData.winChance}
-                        min={5}
-                        max={95}
+                        min={3}
+                        max={100}
                         onChange={(_, value) => {
                             dispatch(
                                 setGameData({
@@ -140,6 +141,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                 justifyContent: `${idx === 0 ? "" : "center"}`,
                                 pl: `${idx === 0 ? "2.5rem" : 0}`,
                             }}
+                            key={idx}
                         >
                             {mark}
                         </Box>
@@ -268,18 +270,14 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        {gameData.rollUnder + ".00"}
+                                        {gameData.rollUnder.value}
                                     </Typography>
                                     <div
                                         onClick={() => {
-                                            dispatch(
-                                                setGameData({
-                                                    ...gameData,
-                                                    rollUnder:
-                                                        Math.floor(
-                                                            Math.random() * 20
-                                                        ) + 1,
-                                                })
+                                            toggleRollUnder(
+                                                gameData,
+                                                dispatch,
+                                                setGameData
                                             );
                                         }}
                                     >
@@ -396,6 +394,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                                     : ""
                                                             }`,
                                                         }}
+                                                        key={idx}
                                                         onClick={() => {
                                                             let newValue =
                                                                 gameData.winChance +
@@ -653,6 +652,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                                     : ""
                                                             }`,
                                                         }}
+                                                        key={idx}
                                                     >
                                                         {item}
                                                     </Box>

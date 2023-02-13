@@ -153,7 +153,7 @@ export const gamesTableRows = [
         profit: "Betting",
     },
     {
-        id: 6,
+        id: 54,
         player: "Emma",
         cash_out: "Betting",
         amount: 35,

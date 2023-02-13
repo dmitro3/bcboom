@@ -6,7 +6,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { setGameData } from "@/redux/game/game-slice";
-import { sleep } from "@/utils/util";
+import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
@@ -91,38 +91,15 @@ const DicePage = () => {
     };
 
     useEffect(() => {
-        let payout = (
-            ((100 - 0.2) / gameData.winChance) *
-            gameData.betAmount *
-            0.7
-        ).toFixed(4);
-        if (gameData.winChance === 0) payout = 0;
-        if (payout === "Infinity" || payout === "undefined" || payout === NaN)
-            payout = 0;
-        if (
-            Number(String(payout).split(".")[0]) <
-            Number(String(gameData.betAmount).split(".")[0])
-        )
-            payout = (
-                gameData.betAmount *
-                1.1 *
-                0.01 *
-                gameData.winChance
-            ).toFixed(4);
-        const loseAmount = gameData.betAmount;
-        dispatch(
-            setGameData({
-                ...gameData,
-                loseAmount,
-                payout,
-            })
-        );
-
+        calcPayout(gameData, dispatch, setGameData);
         if (gameData.diceNumber.length === 3) {
             handleDiceRoll(gameData.diceNumber);
-            // console.log("playDeter", gameData.diceNumber);
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
+
+    // useEffect(() => {
+    //     calcPayout(gameData, dispatch, setGameData);
+    // }, [gameData.rollUnder]);
 
     return (
         <div>

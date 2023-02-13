@@ -69,7 +69,7 @@ const InnerHeader = () => {
             <InnerHeaderItems isMobile={isMobile}>
                 {navlinks.slice(0, 5).map((item, index) => {
                     return (
-                        <Link href={item.link} preserveScroll preserveState>
+                        <Link href={item.link} preserveScroll preserveState key={index}>
                             <InnerHeaderItem
                                 key={index}
                                 active={location == item.link.replace("/", "")}

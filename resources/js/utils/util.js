@@ -96,7 +96,7 @@ export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
     const response = await dispatch(dispatchFunc());
     let formattedData = [];
     if (response?.payload?.status === 200) {
-        console.log('sdlhsdlsdh: ', response?.payload?.data?.withdrawals)
+        console.log("sdlhsdlsdh: ", response?.payload?.data?.withdrawals);
         const withdrawals = response?.payload?.data?.withdrawals;
         formattedData = withdrawals.map((el) => {
             const obj = {};
@@ -105,7 +105,7 @@ export const getAllWithdrawalFunc = async (dispatch, dispatchFunc) => {
                 obj.date = new Date(el.created_at).toISOString();
                 obj.withdrawalValue = el.initial_amount;
                 obj.widthdrawalFee = `${el.withdrawal_fee}%`;
-                obj.finalValue = el.final_amount ;
+                obj.finalValue = el.final_amount;
                 obj.comment = el.remark || "---";
                 obj.status = el.status;
             }
@@ -163,11 +163,96 @@ export function validateBrazilTaxNumber(taxNumber) {
     return checkDigit === parseInt(taxNumber.charAt(taxNumber.length - 1), 10);
 }
 
-
-
 export function randomDiceOutput(min, max) {
     const range = max - min + 1;
     const array = new Uint32Array(1);
     crypto.getRandomValues(array);
     return min + (array[0] % range);
 }
+
+export const toggleRollUnder = (gameData, dispatch, setGameData) => {
+    // const chance = Math.floor(gameData.winChance * 0.18);
+    // const chances = [`0 - ${chance}`, `${chance} - 18`];
+    let chance = {};
+    switch (gameData.rollUnder.type) {
+        case "over":
+            chance = {
+                type: "under",
+                value: "0 - " + Math.floor(gameData.winChance * 0.18),
+            };
+            break;
+        case "under":
+            chance = {
+                type: "over",
+                value: Math.floor(gameData.winChance * 0.18) + " - 18",
+            };
+            break;
+        default:
+            break;
+    }
+    let differenceInChance = chance.value.split(" - ");
+    differenceInChance = Math.abs(
+        differenceInChance[1] - differenceInChance[0]
+    );
+
+    const multiplier =
+        chance.type === "under" ? 1 : gameData.winChance > 60 ? 0.1 : 20;
+    let payout = Math.abs(
+        (100 / (gameData.winChance * multiplier)) *
+            (gameData.betAmount - 50 / 100)
+    ).toFixed(4);
+    if (+gameData.betAmount > Number(payout)) payout * 2.2;
+
+    dispatch(
+        setGameData({
+            ...gameData,
+            rollUnder: { ...chance },
+            payout,
+        })
+    );
+};
+
+const payoutFunc = (gameData, rollUnder, chance) => {
+    let differenceInChance = chance.split(" - ");
+    differenceInChance = Math.abs(
+        differenceInChance[1] - differenceInChance[0]
+    );
+
+    const multiplier =
+        rollUnder.type === "under" ? 1 : gameData.winChance > 60 ? 0.1 : 20;
+    let payout = Math.abs(
+        (100 / (gameData.winChance * multiplier)) *
+            (gameData.betAmount - 50 / 100)
+    ).toFixed(4);
+    if (+gameData.betAmount > Number(payout)) payout * 2.2;
+
+    return payout;
+};
+
+export const calcPayout = (gameData, dispatch, setGameData) => {
+    let chance = "0 - 9";
+    switch (gameData.rollUnder.type) {
+        case "under":
+            chance = "0 - " + Math.floor(gameData.winChance * 0.18);
+            break;
+        case "over":
+            chance = Math.floor(gameData.winChance * 0.18) + " - 18";
+            break;
+        default:
+            break;
+    }
+    console.log("chance:", chance);
+    const loseAmount = gameData.betAmount;
+    const payout = payoutFunc(gameData, gameData.rollUnder, chance);
+    dispatch(
+        setGameData({
+            ...gameData,
+            loseAmount,
+            rollUnder: {
+                ...gameData.rollUnder,
+                value: chance,
+            },
+            payout,
+        })
+    );
+};
