@@ -1,3 +1,4 @@
+import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
@@ -5,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const DicesWrapper = styled("div")(() => ({
+const DicesWrapper = styled("div")(({isMobile}) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -18,6 +19,10 @@ const DicesWrapper = styled("div")(() => ({
     zIndex: "999",
     // backgroundColor: "rgba(0,0,0,0.5)",
     // backdropFilter: "blur(5px)",
+
+    '& > *': {
+        width: isMobile ? "100px" : "200px",
+    }
 }));
 
 const containerStyle = {
@@ -61,15 +66,17 @@ const dotStyle = {
     borderRadius: "15px",
 };
 
-const wrapperStyle = {
-    transform: "scale(0.35)",
-    marginTop: "-1rem",
-    marginBottom: "2rem",
-    padding: "1rem",
+const wrapperStyle = () => {
+    return {
+        transform: "scale(0.25)",
+        marginTop: "-1rem",
+        marginBottom: "2rem",
+        padding: "1rem",
+    };
 };
 
-const DiceWrapperOne = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperOne = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "&": {
         "#cube .front": { transform: "translateZ(100px)" },
         "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
@@ -117,8 +124,8 @@ const DiceWrapperOne = styled("div")(() => ({
     },
 }));
 
-const DiceWrapperTwo = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperTwo = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "#cube2 .front2": { transform: "translateZ(100px)" },
     "#cube2 .back2": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube2 .right2": { transform: "rotateY(90deg)    translateZ(100px)" },
@@ -163,8 +170,8 @@ const DiceWrapperTwo = styled("div")(() => ({
     ".bottom2 .dot25": { top: "125px", left: "85px" },
     ".bottom2 .dot26": { top: "125px", left: "125px" },
 }));
-const DiceWrapperThree = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperThree = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "#cube3 .front3": { transform: "translateZ(100px)" },
     "#cube3 .back3": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube3 .right3": { transform: "rotateY(90deg)    translateZ(100px)" },
@@ -211,6 +218,7 @@ const DiceWrapperThree = styled("div")(() => ({
 }));
 
 const DiceComponent = ({ setPlaying }) => {
+    const { isMobile } = useScreenResolution();
     const diceOneRef = useRef(null);
     const diceTwoRef = useRef(null);
     const diceThreeRef = useRef(null);
@@ -290,8 +298,8 @@ const DiceComponent = ({ setPlaying }) => {
         }
     }, [playing]);
     return (
-        <DicesWrapper>
-            <DiceWrapperOne>
+        <DicesWrapper isMobile={isMobile}>
+            <DiceWrapperOne isMobile={isMobile}>
                 <section className="container">
                     <div id="cube" ref={diceOneRef}>
                         <div className="front">
@@ -330,7 +338,7 @@ const DiceComponent = ({ setPlaying }) => {
                     </div>
                 </section>
             </DiceWrapperOne>
-            <DiceWrapperTwo>
+            <DiceWrapperTwo isMobile={isMobile}>
                 <section className="container2">
                     <div id="cube2" ref={diceTwoRef}>
                         <div className="front2">
@@ -369,7 +377,7 @@ const DiceComponent = ({ setPlaying }) => {
                     </div>
                 </section>
             </DiceWrapperTwo>
-            <DiceWrapperThree>
+            <DiceWrapperThree isMobile={isMobile}>
                 <section className="container3">
                     <div id="cube3" ref={diceThreeRef}>
                         <div className="front3">

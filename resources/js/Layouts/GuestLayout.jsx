@@ -32,7 +32,7 @@ const PageBody = styled("div")(({ isMobile }) => ({
     width: "100%",
     maxWidth: "1750px",
     margin: "0 auto",
-    display: "flex",
+    display: isMobile ? "block" : "flex",
     flexDirection: "row",
     paddingRight: !isMobile && "68px",
     background: "#000000",

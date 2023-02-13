@@ -311,7 +311,7 @@ const GameTab = () => {
                                             R${" "}
                                             {currencyFormatter
                                                 .format(
-                                                    wallet.withdrawable_balance
+                                                    wallet.withdrawable_balance || 0,
                                                 )
                                                 .replace("$", "")}
                                         </Box>
