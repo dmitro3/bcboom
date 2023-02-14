@@ -213,7 +213,6 @@ class WithdrawalController extends Controller
             // User Vip = 2 or 3
 
             if ($user->vip == 2 || $user->vip == 3) {
-
                 if ($request->amount > $wallet->withdrawable_balance) {
                     return response()->json([
                         'amount' => $request->amount,
@@ -229,7 +228,7 @@ class WithdrawalController extends Controller
                         'message' => 'Maximum value of withdrawal surpassed.'
                     ], 422);
                 } else {
-
+                    dd($limited->count());
                     if ($limited->count() < 2) {
 
                         if ($monthlyFree->sum('amount') < 100) {

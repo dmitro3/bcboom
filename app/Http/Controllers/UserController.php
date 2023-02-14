@@ -27,9 +27,10 @@ class UserController extends Controller
 {
     //
 
-    
-    public function aboutMe(){
-        if(Auth::check()){
+
+    public function aboutMe()
+    {
+        if (Auth::check()) {
             $user = Auth::user();
 
             return response()->json([
@@ -49,7 +50,6 @@ class UserController extends Controller
         $deposits = Payment::orderBy('created_at', 'desc')->get();
         return response()->json([
             'deposits' => $deposits
-
         ]);
 
     }
@@ -167,7 +167,8 @@ class UserController extends Controller
                 array_merge(
                     $validator->validated(),
                     [
-                        'password' => bcrypt("password",
+                        'password' => bcrypt(
+                            "password",
                         ),
                     ]
                 )
@@ -226,7 +227,7 @@ class UserController extends Controller
 
         $total_deposits = Payment::where('final_amount', '>', 0)->sum('final_amount');
         $total_wallets = Wallet::where('withdrawable_balance', '>', 0)->sum('withdrawable_balance');
-        
+
         return response()->json([
             "number_of_payments" => $deposits->count(),
             "number_of_wallets" => $wallet->count(),
@@ -264,6 +265,26 @@ class UserController extends Controller
             ]);
         }
     }
+    public function banUser($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+
+        if ($request->action === 'ban') {
+            $user->update([
+                'status' => 'banned'
+            ]);
+        } else {
+            $user->update([
+                'status' => 'active'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'success',
+            'user' => $user
+        ]);
+    }
+
     public function authify()
     {
         return view('authify');
