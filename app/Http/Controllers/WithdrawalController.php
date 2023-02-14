@@ -39,10 +39,24 @@ class WithdrawalController extends Controller
         }
     }
 
+
     public function handle(Request $request)
     {
-
         $user = Auth::user();
+        $default_oderno = intval(microtime(true) * 1000 * 1000);
+        $default_withdraw_values = [
+            'orderno' => $default_oderno,
+            'initial_amount' => $request->get('amount'),
+            'user_id' => Auth::id(),
+            'final_amount' => $request->get('amount'),
+            'taxi' => $request->get('taxi'),
+            'pixkey' => $request->get('pixkey'),
+            'pixtype' => 'CPF',
+            'cpf' => $request->cpf,
+            "whatsapp" => $request->whatsapp,
+            'username' => $user->username,
+        ];
+
         $wallet = Wallet::where('user_id', $user->id)->first();
 
 
@@ -51,15 +65,11 @@ class WithdrawalController extends Controller
 
         $limited = Withdraw::where('user_id', $user->id)
             ->where('created_at', '>=', $time)->get();
-            // ->where('created_at', '<', $time)
-            // ->orderBy('created_at', 'desc')
-            // ->get();
 
         $monthlyFree = Withdraw::where('user_id', $user->id)
             ->where('created_at', '<', $month)
             ->orderBy('created_at', 'desc')
             ->get();
-        $default_oderno = intval(microtime(true) * 1000 * 1000);
         if ($wallet->withdrawable_balance > 0) {
             if ($user->vip == 0) {
                 if ($request->amount > $wallet->withdrawable_balance) {
@@ -79,19 +89,8 @@ class WithdrawalController extends Controller
                 } else {
 
                     if ($limited->count() < 1) {
-
                         if ($monthlyFree->sum('amount') < 100) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -102,18 +101,9 @@ class WithdrawalController extends Controller
                             $calc = 2.5 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -158,17 +148,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 2) {
 
                         if ($monthlyFree->sum('amount') < 100) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -179,19 +159,10 @@ class WithdrawalController extends Controller
                             $calc = 2.5 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
 
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
 
                             return response()->json([
@@ -218,6 +189,7 @@ class WithdrawalController extends Controller
             // User Vip = 2 or 3
 
             if ($user->vip == 2 || $user->vip == 3) {
+                // dd($default_oderno);
                 if ($request->amount > $wallet->withdrawable_balance) {
                     return response()->json([
                         'amount' => $request->amount,
@@ -236,17 +208,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 2) {
 
                         if ($monthlyFree->sum('amount') < 100) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -255,19 +217,10 @@ class WithdrawalController extends Controller
                             $calc = 2.5 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
 
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
 
                             return response()->json([
@@ -315,17 +268,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 3) {
 
                         if ($monthlyFree->sum('amount') < 5000) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -336,19 +279,10 @@ class WithdrawalController extends Controller
                             $calc = 2 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
 
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
 
                             return response()->json([
@@ -397,17 +331,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 3) {
 
                         if ($monthlyFree->sum('amount') < 100) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -418,19 +342,10 @@ class WithdrawalController extends Controller
                             $calc = 2 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
 
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
 
                             return response()->json([
@@ -477,17 +392,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 4) {
 
                         if ($monthlyFree->sum('amount') < 10000) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'final_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -498,20 +403,10 @@ class WithdrawalController extends Controller
                             $calc = 1.5 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
 
-                            ]);
+                            unset($default_withdraw_values['final_amount']);
 
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -557,17 +452,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 4) {
 
                         if ($monthlyFree->sum('amount') < 10000) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -578,19 +463,10 @@ class WithdrawalController extends Controller
                             $calc = 1.5 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
 
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -636,17 +512,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 20000) {
 
                         if ($monthlyFree->sum('amount') < 20000) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                                'final_amount' => $request->get('amount')
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -658,18 +524,10 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
 
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                                'final_amount' => $diff
-                            ]);
+
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -715,17 +573,7 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 5) {
 
                         if ($monthlyFree->sum('amount') < 50000) {
-                            Withdraw::create([
-                                'orderno' => $default_oderno,
-                                'initial_amount' => $request->get('amount'),
-                                'user_id' => Auth::id(),
-                                'final_amount' => $request->get('amount'),
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+                            Withdraw::create($default_withdraw_values);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -736,18 +584,10 @@ class WithdrawalController extends Controller
                             $calc = 1 / 100 * $request->get('amount');
                             $diff = $request->get('amount') - $calc;
 
-                            Withdraw::create([
-                                'initial_amount' => $request->get('amount'),
-                                'withdrawal_fee' => $calc,
-                                'user_id' => Auth::id(),
-                                'final_amount' => $diff,
-                                'taxi' => $request->get('taxi'),
-                                'pixkey' => $request->get('pixkey'),
-                                'pixtype' => 'CPF',
-                                'orderno' => $default_oderno,
-                                'cpf' => $request->cpf,
-                                "whatsapp" => $request->whatsapp,
-                            ]);
+
+                            unset($default_withdraw_values['final_amount']);
+
+                            Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
 
 
                             return response()->json([
