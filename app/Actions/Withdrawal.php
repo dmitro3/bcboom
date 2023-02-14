@@ -97,32 +97,36 @@ class Withdrawal
         if ($sign === $request->sign) {
             // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
+            // $new_balance = $wallet->withdrawable_balance - $withdrawal->final_amount;
+            // $wallet->update([
+            //     'withdrawable_balance' => $new_balance
+            // ]);
             $withdrawal = Withdraw::where('orderno', $request->orderno)
                 ->orderBy('created_at', 'desc')->first();
             if ($data['trade_state'] === 'SUCCESS') {
 
                 // $minused = $wallet->deposit - $withdrawal->amount;
-                $new_balance = $wallet->withdrawable_balance - $withdrawal->final_amount;
+                
 
                 $withdrawal->update([
                     'approved' => 1,
-                     'status' => 'SUCCESS'
+                     'status' => 'COMPLETED'
                      ])
                 ;
 
-                $wallet->update([
-                    'withdrawable_balance' => $new_balance
-                ]);
 
 
 
             } elseif ($data['trade_state'] === 'PENDING') {
-                $withdrawal->update(['status' => 'PENDING', 'approved' => 0])
+                $withdrawal->update(['status' => 'IN PROGRESS', 'approved' => 0])
                 ;
 
             } else {
-                $withdrawal->update(['status' => 'FAIL', 'approved' => 0])
+                $withdrawal->update(['status' => 'FAILED', 'approved' => 0])
                 ;
+                $wallet->update([
+                    'withdrawable_balance' => $wallet->withdrawable_balance + $withdrawal->final_amount
+                ]);
             }
             return "SUCCESS";
         }

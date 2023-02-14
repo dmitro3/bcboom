@@ -55,6 +55,7 @@ class WithdrawalController extends Controller
             'cpf' => $request->cpf,
             "whatsapp" => $request->whatsapp,
             'username' => $user->username,
+            'status' => 'UNDER REVIEW',
         ];
 
         $wallet = Wallet::where('user_id', $user->id)->first();
@@ -91,6 +92,9 @@ class WithdrawalController extends Controller
                     if ($limited->count() < 1) {
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -104,12 +108,16 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
                             ], 200);
                         }
+
+
 
                     } else {
 
@@ -149,6 +157,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -163,7 +174,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -209,6 +222,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -221,7 +237,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -269,6 +287,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 5000) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -283,7 +304,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
 
                             return response()->json([
                                 'message' => 'success',
@@ -332,6 +355,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -346,8 +372,12 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -393,6 +423,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 10000) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -407,7 +440,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -453,6 +488,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 10000) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -467,7 +505,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -513,6 +553,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 20000) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -528,7 +571,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -574,6 +619,9 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 50000) {
                             Withdraw::create($default_withdraw_values);
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
                             return response()->json([
                                 'message' => 'success',
                                 'status' => 200
@@ -588,7 +636,9 @@ class WithdrawalController extends Controller
                             unset($default_withdraw_values['final_amount']);
 
                             Withdraw::create([...$default_withdraw_values, 'withdrawal_fee' => $calc, 'final_amount' => $diff]);
-
+                            $wallet->update([
+                                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount
+                            ]);
 
                             return response()->json([
                                 'message' => 'success',
