@@ -61,8 +61,8 @@ class Withdrawal
 
         // dd($result);
         if (isset($result['data']['orderno'])) {
-            $withdrawal = Withdraw::where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')->first();
+            // $withdrawal = Withdraw::where('user_id', Auth::id())
+            // ->orderBy('created_at', 'desc')->first();
             $withdrawal->update([
                 'orderno' => $result['data']['orderno'],
                 'tx_orderno' => $result['data']['tx_orderno'],
