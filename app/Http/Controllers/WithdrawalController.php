@@ -46,19 +46,20 @@ class WithdrawalController extends Controller
         $wallet = Wallet::where('user_id', $user->id)->first();
 
 
-        $time = Carbon::now()->subHours(24);
+        $time = Carbon::now()->subDay()->toDateTimeString();
         $month = Carbon::now()->subMonths(1);
 
         $limited = Withdraw::where('user_id', $user->id)
-            ->where('created_at', '<', $time)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->where('created_at', '>=', $time)->get();
+            // ->where('created_at', '<', $time)
+            // ->orderBy('created_at', 'desc')
+            // ->get();
 
         $monthlyFree = Withdraw::where('user_id', $user->id)
             ->where('created_at', '<', $month)
             ->orderBy('created_at', 'desc')
             ->get();
-
+        $default_oderno = intval(microtime(true) * 1000 * 1000);
         if ($wallet->withdrawable_balance > 0) {
             if ($user->vip == 0) {
                 if ($request->amount > $wallet->withdrawable_balance) {
@@ -81,6 +82,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -101,6 +103,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -156,6 +159,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -176,6 +180,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -228,11 +233,11 @@ class WithdrawalController extends Controller
                         'message' => 'Maximum value of withdrawal surpassed.'
                     ], 422);
                 } else {
-                    dd($limited->count());
                     if ($limited->count() < 2) {
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -251,6 +256,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -310,6 +316,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 5000) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -330,6 +337,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -390,6 +398,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 100) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -410,6 +419,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -468,6 +478,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 10000) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'final_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
@@ -488,6 +499,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -546,6 +558,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 10000) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -566,6 +579,7 @@ class WithdrawalController extends Controller
                             $diff = $request->get('amount') - $calc;
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -623,6 +637,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 20000) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'taxi' => $request->get('taxi'),
@@ -644,6 +659,7 @@ class WithdrawalController extends Controller
 
 
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'withdrawal_fee' => $calc,
                                 'user_id' => Auth::id(),
@@ -700,6 +716,7 @@ class WithdrawalController extends Controller
 
                         if ($monthlyFree->sum('amount') < 50000) {
                             Withdraw::create([
+                                'orderno' => $default_oderno,
                                 'initial_amount' => $request->get('amount'),
                                 'user_id' => Auth::id(),
                                 'final_amount' => $request->get('amount'),
@@ -727,7 +744,7 @@ class WithdrawalController extends Controller
                                 'taxi' => $request->get('taxi'),
                                 'pixkey' => $request->get('pixkey'),
                                 'pixtype' => 'CPF',
-                                'taxi' => $request->taxi,
+                                'orderno' => $default_oderno,
                                 'cpf' => $request->cpf,
                                 "whatsapp" => $request->whatsapp,
                             ]);

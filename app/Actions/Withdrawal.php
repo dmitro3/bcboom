@@ -40,7 +40,7 @@ class Withdrawal
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $withdrawal->final_amount,
-            'orderno' => intval(microtime(true) * 1000 * 1000),
+            'orderno' => $withdrawal->orderno ?? intval(microtime(true) * 1000 * 1000),
             'customermobile' => $withdrawal->whatsapp,
             'taxi' => $withdrawal->taxi,
             'pixkey' => $withdrawal->cpf,
@@ -51,7 +51,7 @@ class Withdrawal
         ];
 
 
-
+        // dd($data);
 
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
@@ -59,10 +59,10 @@ class Withdrawal
         $result = $this->curl($this->gateway . '/open/index/dfPay', $data, true);
 
 
+        // dd($result);
         if (isset($result['data']['orderno'])) {
             $withdrawal = Withdraw::where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')->first();
-
             $withdrawal->update([
                 'orderno' => $result['data']['orderno'],
                 'tx_orderno' => $result['data']['tx_orderno'],

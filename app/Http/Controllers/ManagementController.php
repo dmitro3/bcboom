@@ -24,14 +24,16 @@ class ManagementController extends Controller
 
     public function approveWithdrawal($id)
     {
-        $withdrawal = Withdraw::where('user_id', $id)->first();
+        $withdrawal = Withdraw::where('id', $id)->first();
 
         $runWithdrawal = new Withdrawal;
 
-        dd($withdrawal);
+        // dd($withdrawal);
 
 
         if ($withdrawal !== Null) {
+
+
             $runWithdrawal->handle($withdrawal);
 
             $accept = $withdrawal->update([
