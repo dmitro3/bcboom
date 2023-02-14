@@ -18,10 +18,15 @@ class GameController extends Controller
         foreach ($games as $game) {
             $player = User::where('id', $game->player)
                 ->first();
-            unset($player->email, $player->email_verified_at, $player->password, $player->remember_token, $player->created_at, $player->updated_at);
             $p_game = [
-                ...$game->toArray(),
-                ...$player->toArray(),
+                'id' => $game->id,
+                'name' => $game->name,
+                'status' => $game->status,
+                'bet_amount' => $game->bet_amount,
+                'earning' => $game->earning,
+                'loss' => $game->loss,
+                'player' => $player->username,
+                
             ];
             array_push($all_games, $p_game);
         }
