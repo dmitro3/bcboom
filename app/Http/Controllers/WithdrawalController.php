@@ -44,7 +44,7 @@ class WithdrawalController extends Controller
     {
         $user = Auth::user();
         $default_oderno = intval(microtime(true) * 1000 * 1000);
-        dd($default_oderno);
+        // dd($default_oderno);
         $default_withdraw_values = [
             'orderno' => $default_oderno,
             'initial_amount' => $request->get('amount'),
