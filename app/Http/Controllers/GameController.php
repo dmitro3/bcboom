@@ -37,7 +37,6 @@ class GameController extends Controller
             ]);
         } else {
             $wallet->update([
-                'bet' => $wallet->bet - $request->loss,
                 'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount,
             ]);
         }

@@ -232,7 +232,7 @@ const UserDropdown = ({
         const interval = setInterval(() => {
             const location = window.location.pathname;
             if (location.includes("games")) dispatcher(getWallet());
-        }, 60000);
+        }, 20000);
         return () => clearInterval(interval);
     }, []);
 
@@ -270,7 +270,6 @@ const UserDropdown = ({
         currencyFormatter
             .format(wallet.withdrawable_balance)
             .replace("$", "") || "0.00";
-            console.log('balcne: ', balance)
     if (!isLoggedIn)
         return (
             <>
