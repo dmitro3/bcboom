@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Auth;
@@ -11,10 +12,21 @@ class GameController extends Controller
 {
     public function all_games()
     {
-        $games = Game::all();
+        $all_games = [];
+        $games = Game::orderBy('created_at', 'desc')->get();
+        foreach ($games as $game) {
+            $player = User::where('id', $game->player)
+                ->first();
+            $username = $player->username;
+            $p_game = [
+                ...$game->toArray(),
+                $username,
+            ];
+            array_push($all_games, $p_game);
+        }
         return response()->json([
-            'games' => $games,
-            'message' => 'Games fetched',
+            'games' => $all_games,
+            'message' => 'success',
         ], 200);
     }
 
