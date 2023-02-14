@@ -44,7 +44,7 @@ class GameController extends Controller
         return response()->json([
             'game' => $game,
             'wallet' => $wallet,
-            'message' => 'Game saved',
+            'message' => 'success',
         ], 200);
     }
 

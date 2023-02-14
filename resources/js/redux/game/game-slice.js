@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import store from "../store";
+import gameApiFunctions from "./game-api";
 
 export const saveGame = createAsyncThunk("game/new", async (payload) => {
     const response = await gameApiFunctions.saveGame(payload);
@@ -29,11 +31,12 @@ const gameSlice = createSlice({
             state.loading = action.payload;
         },
     },
-    extraReducers: {
-        [saveGame.fulfilled]: (_, action) => {
-            store.getState().wallet = action.payload.data.wallet;
-        },
-    },
+    // extraReducers: {
+    //     [saveGame.fulfilled]: (state, action) => {
+    //         console.log('store: ', store.getState().wallet)
+    //         state.wallet = action.payload.data.wallet;
+    //     },
+    // },
 });
 
 export const { setGameData, setGameIsOn, setGameLoading } = gameSlice.actions;

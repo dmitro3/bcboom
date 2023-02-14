@@ -101,9 +101,11 @@ const DicePage = () => {
         await sleep(5000);
         const response = await dispatch(
             saveGame({
-                game: "dice",
+                name: "dice",
                 status,
                 amount,
+                earning: status === "won" ? gameData.payout : 0,
+                loss: status === "won" ? 0 : gameData.betAmount,
             })
         );
         if (response.type === "game/new/rejected") {
@@ -115,15 +117,14 @@ const DicePage = () => {
             dispatch(setGameIsOn(false));
     };
 
-    
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
         if (gameData.diceNumber.length === 3) {
             handleDiceRoll(gameData.diceNumber);
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
-    
-    console.log('gaeData: ', gameData)
+
+    console.log("gaeData: ", gameData);
     // useEffect(() => {
     //     calcPayout(gameData, dispatch, setGameData);
     // }, [gameData.rollUnder]);
