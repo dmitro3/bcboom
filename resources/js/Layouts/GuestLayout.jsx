@@ -61,13 +61,11 @@ export default function GuestLayout({ children }) {
     const [play, { stop, isPlaying }] = useSound(sound.currentSound);
 
     useEffect(() => {
-        console.log('sound: ', sound)
-        if (sound.muted) {
-            stop();
-        } else if(!isPlaying && !sound.muted) {
-            play();
-        }
-    }, []);
+        console.log("sound: ", sound);
+        if (sound.muted) return stop();
+        // if (!isPlaying && !sound.muted) return play();
+        // play();
+    }, [sound.muted, sound.currentSound]);
 
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));

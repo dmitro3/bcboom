@@ -3,11 +3,42 @@ import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { sleep } from "@/utils/util";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { toast } from "react-toastify";
+import { setSound } from "@/redux/app-state/app-slice";
 
 const DiceButtonGrid = ({ playDeter }) => {
     const dispatch = useDispatch();
     const { wallet } = useSelector((state) => state.wallet);
     const { gameData, playing } = useSelector((state) => state.game);
+    const { user } = useSelector((state) => state.auth);
+    function userCanPlay() {
+        console.log("got here");
+        if (playing) return false;
+        if (!user?.user) {
+            toast.error("You must be logged in to play.");
+            dispatch(
+                setAuthModalState({
+                    open: true,
+                    tab: 0,
+                })
+            );
+            return false;
+        }
+        if (wallet.withdrawable_balance < gameData.betAmount) {
+            toast.error("Insufficient funds to play.");
+            return false;
+        }
+        let differenceInChance = gameData.rollUnder.value.split(" - ");
+        differenceInChance = Math.abs(
+            differenceInChance[1] - differenceInChance[0]
+        );
+        if (differenceInChance < 3) {
+            toast.error("Roll under must be at least 3 numbers apart.");
+            return false;
+        }
+        return true;
+    }
     return (
         <Box
             sx={{
@@ -204,8 +235,21 @@ const DiceButtonGrid = ({ playDeter }) => {
                     color: "#FFFFFF",
                 }}
                 onClick={async () => {
-                    if (playing) return;
-                    dispatch(setGameIsOn(true));
+                    if (userCanPlay()) {
+                        dispatch(
+                            setSound({
+                                field: "currentSound",
+                                value: "/sounds/bet.mp3",
+                            })
+                        );
+                        // dispatch(
+                        //     setSound({
+                        //         field: "muted",
+                        //         value: "true",
+                        //     })
+                        // );
+                        dispatch(setGameIsOn(true));
+                    }
                 }}
             >
                 {playing ? "..." : "Play"}

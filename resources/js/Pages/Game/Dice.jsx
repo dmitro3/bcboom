@@ -5,6 +5,7 @@ import { DiceWrapper } from "@/Components/Game/styles/diceStyles";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
+import { setSound } from "@/redux/app-state/app-slice";
 import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
@@ -86,10 +87,24 @@ const DicePage = () => {
     const handleDiceRoll = async (diceNumber) => {
         await sleep(2000);
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
-        toast.info("You rolled " + rolled);
+        let differenceInChance = gameData.rollUnder.value.split(" - ");
+        differenceInChance = Math.abs(
+            differenceInChance[1] - differenceInChance[0]
+        );
+        const status = rolled <= differenceInChance ? "won" : "lose";
+        const amount = status === "won" ? gameData.payout : gameData.betAmount;
+        toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
+            position: "top-center",
+        });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
-        await sleep(5000)
-        dispatch(setGameIsOn(false))
+        dispatch(setSound({ field: "muted", value: true }));
+        await sleep(5000);
+        const response = await saveGame({
+            game: "dice",
+            status,
+            amount,
+        });
+        dispatch(setGameIsOn(false));
     };
 
     useEffect(() => {
