@@ -26,7 +26,7 @@ class GameController extends Controller
                 'earning' => $game->earning,
                 'loss' => $game->loss,
                 'player' => $player->username,
-                
+                'created_at' => $game->created_at,
             ];
             array_push($all_games, $p_game);
         }
