@@ -16,9 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->float('bet_amount');
-            $table->float('earning');
-            $table->float('loss');
+            $table->decimal('bet_amount');
+            $table->decimal('earning');
+            $table->decimal('loss');
             $table->bigInteger('player');
             $table->timestamps();
         });
