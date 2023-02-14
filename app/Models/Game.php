@@ -13,11 +13,13 @@ class Game extends Model
      * The attributes that are mass assignable.
      */
 
-     protected $fillable = ['name', 'game_data', 'type'];
+    protected $table = 'games';
 
-     protected $casts = ['game_data' => 'json'];
-    
-     public function user(){
+    protected $fillable = ['name', 'status', 'bet_amount', 'earning', 'loss', 'player',];
+
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
