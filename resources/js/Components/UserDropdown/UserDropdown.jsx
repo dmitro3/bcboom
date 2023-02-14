@@ -4,12 +4,9 @@ import {
     getWallet,
     setLevel,
     setWallet,
-    setWalletModalState
+    setWalletModalState,
 } from "@/redux/wallet/wallet-slice";
-import {
-    currencyFormatter,
-    getLevelStats
-} from "@/utils/util";
+import { currencyFormatter, getLevelStats } from "@/utils/util";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { Dropdown as AntDropdown } from "antd";
@@ -223,11 +220,22 @@ const UserDropdown = ({
     const dispatcher = useDispatch();
     const [mouseOver, setMouseOver] = useState(false);
     const { isMobile } = useScreenResolution();
+
     // const {
     //     user: { user },
     // } = useSelector((state) => state.auth);
     const { profileColor, profile } = useSelector((state) => state.profile);
     const { wallet, level } = useSelector((state) => state.wallet);
+
+    //fetch wallet after 30 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const location = window.location.pathname;
+            if (location.includes("games")) dispatcher(getWallet());
+        }, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
     // const [balance, setBalance] = useState("0.00");
     useEffect(() => {
         const getWalletInfo = async () => {
@@ -262,6 +270,7 @@ const UserDropdown = ({
         currencyFormatter
             .format(wallet.withdrawable_balance)
             .replace("$", "") || "0.00";
+            console.log('balcne: ', balance)
     if (!isLoggedIn)
         return (
             <>
