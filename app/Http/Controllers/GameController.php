@@ -14,13 +14,14 @@ class GameController extends Controller
     {
         $all_games = [];
         $games = Game::orderBy('created_at', 'desc')->get();
+        
         foreach ($games as $game) {
             $player = User::where('id', $game->player)
                 ->first();
-            $username = $player->username;
+            unset($player->email, $player->email_verified_at, $player->password, $player->remember_token, $player->created_at, $player->updated_at);
             $p_game = [
                 ...$game->toArray(),
-                $username,
+                ...$player->toArray(),
             ];
             array_push($all_games, $p_game);
         }
