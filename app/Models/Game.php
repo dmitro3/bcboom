@@ -13,7 +13,7 @@ class Game extends Model
      * The attributes that are mass assignable.
      */
 
-     protected $fillable = ['game_name', 'game_data', 'type'];
+     protected $fillable = ['name', 'game_data', 'type'];
 
      protected $casts = ['game_data' => 'json'];
     

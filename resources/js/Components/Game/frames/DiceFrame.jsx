@@ -215,7 +215,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: 0.0001,
+                                                    payout: 0.50.toFixed(4),
                                                 })
                                             )
                                         }
@@ -490,7 +490,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: 0.0001,
+                                                    payout: 0.50.toFixed(4),
                                                 })
                                             )
                                         }

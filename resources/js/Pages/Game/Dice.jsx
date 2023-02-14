@@ -6,7 +6,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { setSound } from "@/redux/app-state/app-slice";
-import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
+import { saveGame, setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
@@ -99,21 +99,31 @@ const DicePage = () => {
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
         await sleep(5000);
-        const response = await saveGame({
-            game: "dice",
-            status,
-            amount,
-        });
-        dispatch(setGameIsOn(false));
+        const response = await dispatch(
+            saveGame({
+                game: "dice",
+                status,
+                amount,
+            })
+        );
+        if (response.type === "game/new/rejected") {
+            toast.error(response.payload.message, {
+                position: "top-center",
+            });
+        }
+        if (response.payload.data.message === "success")
+            dispatch(setGameIsOn(false));
     };
 
+    
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
         if (gameData.diceNumber.length === 3) {
             handleDiceRoll(gameData.diceNumber);
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
-
+    
+    console.log('gaeData: ', gameData)
     // useEffect(() => {
     //     calcPayout(gameData, dispatch, setGameData);
     // }, [gameData.rollUnder]);

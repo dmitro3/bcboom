@@ -13,7 +13,6 @@ const DiceButtonGrid = ({ playDeter }) => {
     const { gameData, playing } = useSelector((state) => state.game);
     const { user } = useSelector((state) => state.auth);
     function userCanPlay() {
-        console.log("got here");
         if (playing) return false;
         if (!user?.user) {
             toast.error("You must be logged in to play.");
@@ -25,8 +24,13 @@ const DiceButtonGrid = ({ playDeter }) => {
             );
             return false;
         }
+        // if()
         if (wallet.withdrawable_balance < gameData.betAmount) {
             toast.error("Insufficient funds to play.");
+            return false;
+        }
+        if (gameData.betAmount < 0.4) {
+            toast.error("Bet amount must be at least 0.4000.");
             return false;
         }
         let differenceInChance = gameData.rollUnder.value.split(" - ");
@@ -173,8 +177,8 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 let newValue = (gameData.betAmount / 2).toFixed(
                                     4
                                 );
-                                if (newValue < 0.0001) {
-                                    newValue = 0.0001;
+                                if (newValue < 0.5) {
+                                    newValue = (0.5).toFixed(4);
                                 } else if (newValue > 200.0) {
                                     newValue = (200.0).toFixed(4);
                                 }
@@ -206,8 +210,8 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 let newValue = (gameData.betAmount * 2).toFixed(
                                     4
                                 );
-                                if (newValue < 0.0001) {
-                                    newValue = 0.0001;
+                                if (newValue < 0.5) {
+                                    newValue = 0.5;
                                 } else if (newValue > 200.0) {
                                     newValue = (200.0).toFixed(4);
                                 }

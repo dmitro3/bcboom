@@ -35,14 +35,16 @@ class User extends Authenticatable implements JWTSubject
         'withdrawal_limit',
         'phone',
         'vip',
-        'referred_by'
+        'referred_by',
+        'status'
     ];
     public function emails()
     {
         return $this->hasMany(Email::class);
     }
 
-    public function depos(){
+    public function depos()
+    {
         return $this->hasMany(Depo::class);
     }
 
@@ -73,7 +75,7 @@ class User extends Authenticatable implements JWTSubject
 
         $refs = $this->referrals->count();
 
-
+        $walletBonus = 0;
         if ($wallet) {
             if ($refs > 0) {
                 $walletBonus = $wallet->bonus + 9;

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -32,6 +31,7 @@ return new class extends Migration
             $table->boolean('player')->default(1);
             $table->string('vip')->default(0);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('status')->default('active');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

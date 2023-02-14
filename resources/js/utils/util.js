@@ -202,7 +202,7 @@ export const toggleRollUnder = (gameData, dispatch, setGameData) => {
             (gameData.betAmount - 50 / 100)
     ).toFixed(4);
     console.log("sdfsfs: ", +gameData.betAmount > +payout);
-    if (+gameData.betAmount > +payout) {
+    if (+gameData.betAmount >= +payout) {
         payout = +payout + +gameData.betAmount;
     }
 
@@ -227,7 +227,7 @@ const payoutFunc = (gameData, rollUnder, chance) => {
         (100 / (gameData.winChance * multiplier)) *
             (gameData.betAmount - 50 / 100)
     ).toFixed(4);
-    if (+gameData.betAmount > +payout) {
+    if (+gameData.betAmount >= +payout) {
         payout = +payout + +gameData.betAmount;
     }
     return payout;
