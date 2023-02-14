@@ -1,12 +1,4 @@
 {
-  "resources/assets/promotions/saba_spin_1.svg": {
-    "file": "assets/saba_spin_1-7e139c3e.svg",
-    "src": "resources/assets/promotions/saba_spin_1.svg"
-  },
-  "resources/assets/promotions/spin_sm.svg": {
-    "file": "assets/spin_sm-d9701a4f.svg",
-    "src": "resources/assets/promotions/spin_sm.svg"
-  },
   "resources/assets/promotions/full_bonus_pro_background.svg": {
     "file": "assets/full_bonus_pro_background-a9ebf8ad.svg",
     "src": "resources/assets/promotions/full_bonus_pro_background.svg"
@@ -15,41 +7,53 @@
     "file": "assets/fullbonus_pro_sm-85ceb39f.svg",
     "src": "resources/assets/promotions/fullbonus_pro_sm.svg"
   },
+  "resources/assets/promotions/spin_sm.svg": {
+    "file": "assets/spin_sm-d9701a4f.svg",
+    "src": "resources/assets/promotions/spin_sm.svg"
+  },
+  "resources/assets/promotions/saba_spin_1.svg": {
+    "file": "assets/saba_spin_1-7e139c3e.svg",
+    "src": "resources/assets/promotions/saba_spin_1.svg"
+  },
   "public/images/others/bonusheadermobile.png": {
     "file": "assets/bonusheadermobile-4896293b.png",
     "src": "public/images/others/bonusheadermobile.png"
-  },
-  "public/images/bonus/welcomeowl.png": {
-    "file": "assets/welcomeowl-43bb618b.png",
-    "src": "public/images/bonus/welcomeowl.png"
   },
   "public/images/svg/bonusColored.svg": {
     "file": "assets/bonusColored-c7ca4298.svg",
     "src": "public/images/svg/bonusColored.svg"
   },
-  "public/images/bonus/welcomecream.png": {
-    "file": "assets/welcomecream-fb4834a2.png",
-    "src": "public/images/bonus/welcomecream.png"
-  },
-  "public/images/bonus/welcomewallet.png": {
-    "file": "assets/welcomewallet-0c02b35a.png",
-    "src": "public/images/bonus/welcomewallet.png"
+  "public/images/bonus/welcomeowl.png": {
+    "file": "assets/welcomeowl-43bb618b.png",
+    "src": "public/images/bonus/welcomeowl.png"
   },
   "public/images/bonus/welcomelady.png": {
     "file": "assets/welcomelady-5eee033d.png",
     "src": "public/images/bonus/welcomelady.png"
   },
-  "public/images/bonus/welcomesd.png": {
-    "file": "assets/welcomesd-907f0470.png",
-    "src": "public/images/bonus/welcomesd.png"
+  "public/images/bonus/welcomecream.png": {
+    "file": "assets/welcomecream-fb4834a2.png",
+    "src": "public/images/bonus/welcomecream.png"
+  },
+  "public/images/others/bonusheader.png": {
+    "file": "assets/bonusheader-39b72a43.png",
+    "src": "public/images/others/bonusheader.png"
+  },
+  "public/images/bonus/welcomewallet.png": {
+    "file": "assets/welcomewallet-0c02b35a.png",
+    "src": "public/images/bonus/welcomewallet.png"
   },
   "public/images/bonus/welcomeparrot.png": {
     "file": "assets/welcomeparrot-5cd93b5a.png",
     "src": "public/images/bonus/welcomeparrot.png"
   },
-  "public/images/others/bonusheader.png": {
-    "file": "assets/bonusheader-39b72a43.png",
-    "src": "public/images/others/bonusheader.png"
+  "public/images/bonus/welcomesd.png": {
+    "file": "assets/welcomesd-907f0470.png",
+    "src": "public/images/bonus/welcomesd.png"
+  },
+  "public/images/svg/arrowup.svg": {
+    "file": "assets/arrowup-656978fb.svg",
+    "src": "public/images/svg/arrowup.svg"
   },
   "public/images/fairness/headerBgmobile.png": {
     "file": "assets/headerBgmobile-66b4b558.png",
@@ -58,10 +62,6 @@
   "public/images/fairness/headerBg.png": {
     "file": "assets/headerBg-c9c57dcb.png",
     "src": "public/images/fairness/headerBg.png"
-  },
-  "public/images/svg/arrowup.svg": {
-    "file": "assets/arrowup-656978fb.svg",
-    "src": "public/images/svg/arrowup.svg"
   },
   "public/images/svg/arrowdown.svg": {
     "file": "assets/arrowdown-18def6b5.svg",
@@ -75,13 +75,13 @@
     "file": "assets/gamesPageBg-e5fc4821.png",
     "src": "public/images/games/gamesPageBg.png"
   },
-  "public/images/svg/padColored.svg": {
-    "file": "assets/padColored-774101d5.svg",
-    "src": "public/images/svg/padColored.svg"
-  },
   "public/images/games/gamesPageBgmobile.png": {
     "file": "assets/gamesPageBgmobile-0a2c3704.png",
     "src": "public/images/games/gamesPageBgmobile.png"
+  },
+  "public/images/svg/padColored.svg": {
+    "file": "assets/padColored-774101d5.svg",
+    "src": "public/images/svg/padColored.svg"
   },
   "public/images/games/crash.png": {
     "file": "assets/crash-1c94ed44.png",
@@ -95,21 +95,21 @@
     "file": "assets/mines-81236998.png",
     "src": "public/images/games/mines.png"
   },
-  "public/images/games/keno.png": {
-    "file": "assets/keno-fbb7804d.png",
-    "src": "public/images/games/keno.png"
-  },
   "public/images/games/limbo.png": {
     "file": "assets/limbo-9e9a5baf.png",
     "src": "public/images/games/limbo.png"
   },
-  "public/images/games/roulette.png": {
-    "file": "assets/roulette-5179886c.png",
-    "src": "public/images/games/roulette.png"
-  },
   "public/images/games/wheel.png": {
     "file": "assets/wheel-432d8a3a.png",
     "src": "public/images/games/wheel.png"
+  },
+  "public/images/games/keno.png": {
+    "file": "assets/keno-fbb7804d.png",
+    "src": "public/images/games/keno.png"
+  },
+  "public/images/games/roulette.png": {
+    "file": "assets/roulette-5179886c.png",
+    "src": "public/images/games/roulette.png"
   },
   "public/images/games/coinflip.png": {
     "file": "assets/coinflip-574d2af0.png",
@@ -119,13 +119,13 @@
     "file": "assets/stairs-04138409.png",
     "src": "public/images/games/stairs.png"
   },
-  "public/images/svg/games.svg": {
-    "file": "assets/games-a5593433.svg",
-    "src": "public/images/svg/games.svg"
-  },
   "public/images/games/tower.png": {
     "file": "assets/tower-2c8fbd60.png",
     "src": "public/images/games/tower.png"
+  },
+  "public/images/svg/games.svg": {
+    "file": "assets/games-a5593433.svg",
+    "src": "public/images/svg/games.svg"
   },
   "public/images/svg/777.svg": {
     "file": "assets/777-791db2bf.svg",
@@ -163,45 +163,45 @@
     "file": "assets/bookofra-b3bb3ab9.png",
     "src": "public/images/games/bookofra.png"
   },
-  "public/images/games/bookoftut.png": {
-    "file": "assets/bookoftut-ae0203f9.png",
-    "src": "public/images/games/bookoftut.png"
-  },
   "public/images/games/madame.png": {
     "file": "assets/madame-bff25ccf.png",
     "src": "public/images/games/madame.png"
   },
-  "public/images/games/digdigger.png": {
-    "file": "assets/digdigger-8200fe99.png",
-    "src": "public/images/games/digdigger.png"
-  },
-  "public/images/games/blackjack.png": {
-    "file": "assets/blackjack-dc669e6f.png",
-    "src": "public/images/games/blackjack.png"
+  "public/images/games/bookoftut.png": {
+    "file": "assets/bookoftut-ae0203f9.png",
+    "src": "public/images/games/bookoftut.png"
   },
   "public/images/games/crazycoin.png": {
     "file": "assets/crazycoin-1ac6c98f.png",
     "src": "public/images/games/crazycoin.png"
   },
+  "public/images/games/blackjack.png": {
+    "file": "assets/blackjack-dc669e6f.png",
+    "src": "public/images/games/blackjack.png"
+  },
   "public/images/games/casinohold.png": {
     "file": "assets/casinohold-cdda3363.png",
     "src": "public/images/games/casinohold.png"
-  },
-  "public/images/games/goldbar.png": {
-    "file": "assets/goldbar-0fd2c9a9.png",
-    "src": "public/images/games/goldbar.png"
   },
   "public/images/games/lightning.png": {
     "file": "assets/lightning-8ffcfac1.png",
     "src": "public/images/games/lightning.png"
   },
-  "public/images/games/betonnumber.png": {
-    "file": "assets/betonnumber-6ab1e205.png",
-    "src": "public/images/games/betonnumber.png"
+  "public/images/games/goldbar.png": {
+    "file": "assets/goldbar-0fd2c9a9.png",
+    "src": "public/images/games/goldbar.png"
   },
   "public/images/games/ultimate.png": {
     "file": "assets/ultimate-4aa74f97.png",
     "src": "public/images/games/ultimate.png"
+  },
+  "public/images/games/betonnumber.png": {
+    "file": "assets/betonnumber-6ab1e205.png",
+    "src": "public/images/games/betonnumber.png"
+  },
+  "public/images/games/digdigger.png": {
+    "file": "assets/digdigger-8200fe99.png",
+    "src": "public/images/games/digdigger.png"
   },
   "public/images/games/32cards.png": {
     "file": "assets/32cards-9f862f02.png",
@@ -219,6 +219,10 @@
     "file": "assets/search-154cfd92.svg",
     "src": "public/images/svg/search.svg"
   },
+  "public/images/games/blackjcklive.png": {
+    "file": "assets/blackjcklive-75652fd8.png",
+    "src": "public/images/games/blackjcklive.png"
+  },
   "public/images/games/ruletika.png": {
     "file": "assets/ruletika-66abd5aa.png",
     "src": "public/images/games/ruletika.png"
@@ -226,10 +230,6 @@
   "public/images/games/andarbar.png": {
     "file": "assets/andarbar-ddf7c52b.png",
     "src": "public/images/games/andarbar.png"
-  },
-  "public/images/games/blackjcklive.png": {
-    "file": "assets/blackjcklive-75652fd8.png",
-    "src": "public/images/games/blackjcklive.png"
   },
   "public/images/games/goldblackjack.png": {
     "file": "assets/goldblackjack-3e4db6cd.png",
@@ -255,13 +255,101 @@
     "file": "assets/pro_bonus_sm-d4ba9990.svg",
     "src": "resources/assets/promotions/pro_bonus_sm.svg"
   },
+  "resources/assets/promotions/pro_deposit_sm.svg": {
+    "file": "assets/pro_deposit_sm-3a3b30fe.svg",
+    "src": "resources/assets/promotions/pro_deposit_sm.svg"
+  },
   "resources/assets/promotions/deposit_pro_background.svg": {
     "file": "assets/deposit_pro_background-72f19685.svg",
     "src": "resources/assets/promotions/deposit_pro_background.svg"
   },
-  "resources/assets/promotions/pro_deposit_sm.svg": {
-    "file": "assets/pro_deposit_sm-3a3b30fe.svg",
-    "src": "resources/assets/promotions/pro_deposit_sm.svg"
+  "resources/assets/promotions/exclusive_pro_background.svg": {
+    "file": "assets/exclusive_pro_background-d5b09337.svg",
+    "src": "resources/assets/promotions/exclusive_pro_background.svg"
+  },
+  "resources/assets/promotions/exclusive_sm.svg": {
+    "file": "assets/exclusive_sm-82cc00ee.svg",
+    "src": "resources/assets/promotions/exclusive_sm.svg"
+  },
+  "resources/assets/promotions/infoBook.svg": {
+    "file": "assets/infoBook-95c9ba99.svg",
+    "src": "resources/assets/promotions/infoBook.svg"
+  },
+  "resources/assets/promotions/activity_sm.svg": {
+    "file": "assets/activity_sm-061642d2.svg",
+    "src": "resources/assets/promotions/activity_sm.svg"
+  },
+  "resources/assets/promotions/bonus_icon.svg": {
+    "file": "assets/bonus_icon-54b1d346.svg",
+    "src": "resources/assets/promotions/bonus_icon.svg"
+  },
+  "resources/assets/promotions/promotion_activity.svg": {
+    "file": "assets/promotion_activity-dc430c8f.svg",
+    "src": "resources/assets/promotions/promotion_activity.svg"
+  },
+  "resources/assets/promotions/bell.svg": {
+    "file": "assets/bell-6ac4d732.svg",
+    "src": "resources/assets/promotions/bell.svg"
+  },
+  "resources/assets/promotions/info.svg": {
+    "file": "assets/info-66e9e5eb.svg",
+    "src": "resources/assets/promotions/info.svg"
+  },
+  "resources/assets/promotions/activity.svg": {
+    "file": "assets/activity-6c9bc245.svg",
+    "src": "resources/assets/promotions/activity.svg"
+  },
+  "resources/assets/promotions/pro_dist_sm.svg": {
+    "file": "assets/pro_dist_sm-cc5b0444.svg",
+    "src": "resources/assets/promotions/pro_dist_sm.svg"
+  },
+  "resources/assets/promotions/bonus.svg": {
+    "file": "assets/bonus-af7f0f96.svg",
+    "src": "resources/assets/promotions/bonus.svg"
+  },
+  "resources/assets/promotions/distributor_pro_background.svg": {
+    "file": "assets/distributor_pro_background-f3991a43.svg",
+    "src": "resources/assets/promotions/distributor_pro_background.svg"
+  },
+  "resources/assets/promotions/info_sm_img.png": {
+    "file": "assets/info_sm_img-9b72c69b.png",
+    "src": "resources/assets/promotions/info_sm_img.png"
+  },
+  "public/images/others/promotionheadermobile.png": {
+    "file": "assets/promotionheadermobile-994d637e.png",
+    "src": "public/images/others/promotionheadermobile.png"
+  },
+  "public/images/svg/gift.svg": {
+    "file": "assets/gift-019247d5.svg",
+    "src": "public/images/svg/gift.svg"
+  },
+  "public/images/promotions/wealth.png": {
+    "file": "assets/wealth-16706169.png",
+    "src": "public/images/promotions/wealth.png"
+  },
+  "public/images/others/promotionheader.png": {
+    "file": "assets/promotionheader-e767812c.png",
+    "src": "public/images/others/promotionheader.png"
+  },
+  "public/images/promotions/distributors.png": {
+    "file": "assets/distributors-76f84a6f.png",
+    "src": "public/images/promotions/distributors.png"
+  },
+  "public/images/promotions/bonus.png": {
+    "file": "assets/bonus-ab0ec36c.png",
+    "src": "public/images/promotions/bonus.png"
+  },
+  "public/images/promotions/vipexclusive.png": {
+    "file": "assets/vipexclusive-ad462e81.png",
+    "src": "public/images/promotions/vipexclusive.png"
+  },
+  "public/images/promotions/off.png": {
+    "file": "assets/off-55b6d0e1.png",
+    "src": "public/images/promotions/off.png"
+  },
+  "public/images/promotions/weekend.png": {
+    "file": "assets/weekend-2844a576.png",
+    "src": "public/images/promotions/weekend.png"
   },
   "resources/assets/promotions/pro_invite_background.svg": {
     "file": "assets/pro_invite_background-191f0c3c.svg",
@@ -279,94 +367,6 @@
     "file": "assets/pro_invite_sm-353a9e26.svg",
     "src": "resources/assets/promotions/pro_invite_sm.svg"
   },
-  "resources/assets/promotions/activity.svg": {
-    "file": "assets/activity-6c9bc245.svg",
-    "src": "resources/assets/promotions/activity.svg"
-  },
-  "resources/assets/promotions/activity_sm.svg": {
-    "file": "assets/activity_sm-061642d2.svg",
-    "src": "resources/assets/promotions/activity_sm.svg"
-  },
-  "resources/assets/promotions/distributor_pro_background.svg": {
-    "file": "assets/distributor_pro_background-f3991a43.svg",
-    "src": "resources/assets/promotions/distributor_pro_background.svg"
-  },
-  "resources/assets/promotions/pro_dist_sm.svg": {
-    "file": "assets/pro_dist_sm-cc5b0444.svg",
-    "src": "resources/assets/promotions/pro_dist_sm.svg"
-  },
-  "resources/assets/promotions/bonus.svg": {
-    "file": "assets/bonus-af7f0f96.svg",
-    "src": "resources/assets/promotions/bonus.svg"
-  },
-  "resources/assets/promotions/info.svg": {
-    "file": "assets/info-66e9e5eb.svg",
-    "src": "resources/assets/promotions/info.svg"
-  },
-  "resources/assets/promotions/info_sm_img.png": {
-    "file": "assets/info_sm_img-9b72c69b.png",
-    "src": "resources/assets/promotions/info_sm_img.png"
-  },
-  "resources/assets/promotions/bell.svg": {
-    "file": "assets/bell-6ac4d732.svg",
-    "src": "resources/assets/promotions/bell.svg"
-  },
-  "resources/assets/promotions/infoBook.svg": {
-    "file": "assets/infoBook-95c9ba99.svg",
-    "src": "resources/assets/promotions/infoBook.svg"
-  },
-  "resources/assets/promotions/exclusive_pro_background.svg": {
-    "file": "assets/exclusive_pro_background-d5b09337.svg",
-    "src": "resources/assets/promotions/exclusive_pro_background.svg"
-  },
-  "resources/assets/promotions/bonus_icon.svg": {
-    "file": "assets/bonus_icon-54b1d346.svg",
-    "src": "resources/assets/promotions/bonus_icon.svg"
-  },
-  "resources/assets/promotions/exclusive_sm.svg": {
-    "file": "assets/exclusive_sm-82cc00ee.svg",
-    "src": "resources/assets/promotions/exclusive_sm.svg"
-  },
-  "resources/assets/promotions/promotion_activity.svg": {
-    "file": "assets/promotion_activity-dc430c8f.svg",
-    "src": "resources/assets/promotions/promotion_activity.svg"
-  },
-  "public/images/others/promotionheader.png": {
-    "file": "assets/promotionheader-e767812c.png",
-    "src": "public/images/others/promotionheader.png"
-  },
-  "public/images/others/promotionheadermobile.png": {
-    "file": "assets/promotionheadermobile-994d637e.png",
-    "src": "public/images/others/promotionheadermobile.png"
-  },
-  "public/images/svg/gift.svg": {
-    "file": "assets/gift-019247d5.svg",
-    "src": "public/images/svg/gift.svg"
-  },
-  "public/images/promotions/wealth.png": {
-    "file": "assets/wealth-16706169.png",
-    "src": "public/images/promotions/wealth.png"
-  },
-  "public/images/promotions/distributors.png": {
-    "file": "assets/distributors-76f84a6f.png",
-    "src": "public/images/promotions/distributors.png"
-  },
-  "public/images/promotions/bonus.png": {
-    "file": "assets/bonus-ab0ec36c.png",
-    "src": "public/images/promotions/bonus.png"
-  },
-  "public/images/promotions/vipexclusive.png": {
-    "file": "assets/vipexclusive-ad462e81.png",
-    "src": "public/images/promotions/vipexclusive.png"
-  },
-  "public/images/promotions/weekend.png": {
-    "file": "assets/weekend-2844a576.png",
-    "src": "public/images/promotions/weekend.png"
-  },
-  "public/images/promotions/off.png": {
-    "file": "assets/off-55b6d0e1.png",
-    "src": "public/images/promotions/off.png"
-  },
   "public/images/race/raceheader.png": {
     "file": "assets/raceheader-35cc5469.png",
     "src": "public/images/race/raceheader.png"
@@ -379,13 +379,13 @@
     "file": "assets/goldencup-8a9100ab.svg",
     "src": "public/images/svg/goldencup.svg"
   },
-  "public/images/games/aztecbonanza.png": {
-    "file": "assets/aztecbonanza-b251043b.png",
-    "src": "public/images/games/aztecbonanza.png"
-  },
   "public/images/games/bigbass.png": {
     "file": "assets/bigbass-adcd2cd6.png",
     "src": "public/images/games/bigbass.png"
+  },
+  "public/images/games/aztecbonanza.png": {
+    "file": "assets/aztecbonanza-b251043b.png",
+    "src": "public/images/games/aztecbonanza.png"
   },
   "public/images/games/bonanzabillion.png": {
     "file": "assets/bonanzabillion-a565732d.png",
@@ -419,6 +419,10 @@
     "file": "assets/spinNspell-f64ea314.png",
     "src": "public/images/games/spinNspell.png"
   },
+  "public/images/user/userIcon.svg": {
+    "file": "assets/userIcon-69fc7353.svg",
+    "src": "public/images/user/userIcon.svg"
+  },
   "public/images/svg/historyIcon.svg": {
     "file": "assets/historyIcon-a37cc0f5.svg",
     "src": "public/images/svg/historyIcon.svg"
@@ -427,17 +431,9 @@
     "file": "assets/datepicker-d4fa5b25.svg",
     "src": "public/images/svg/datepicker.svg"
   },
-  "public/images/user/userIcon.svg": {
-    "file": "assets/userIcon-69fc7353.svg",
-    "src": "public/images/user/userIcon.svg"
-  },
   "public/images/svg/link.svg": {
     "file": "assets/link-89c392d3.svg",
     "src": "public/images/svg/link.svg"
-  },
-  "public/images/svg/settings.svg": {
-    "file": "assets/settings-5defa9c5.svg",
-    "src": "public/images/svg/settings.svg"
   },
   "public/images/levels/level1.svg": {
     "file": "assets/level1-e57a9c78.svg",
@@ -446,6 +442,10 @@
   "public/images/svg/pad.svg": {
     "file": "assets/pad-7da440ff.svg",
     "src": "public/images/svg/pad.svg"
+  },
+  "public/images/svg/settings.svg": {
+    "file": "assets/settings-5defa9c5.svg",
+    "src": "public/images/svg/settings.svg"
   },
   "public/images/svg/walletmini.svg": {
     "file": "assets/walletmini-27de28c2.svg",
@@ -459,117 +459,13 @@
     "file": "assets/faq-62d0d0e7.svg",
     "src": "public/images/svg/faq.svg"
   },
-  "public/images/svg/target.svg": {
-    "file": "assets/target-33d9b81b.svg",
-    "src": "public/images/svg/target.svg"
-  },
-  "public/images/svg/tower.svg": {
-    "file": "assets/tower-bb38c139.svg",
-    "src": "public/images/svg/tower.svg"
-  },
-  "public/images/svg/stairs.svg": {
-    "file": "assets/stairs-3c976750.svg",
-    "src": "public/images/svg/stairs.svg"
-  },
-  "public/images/svg/coinflip.svg": {
-    "file": "assets/coinflip-7a90f663.svg",
-    "src": "public/images/svg/coinflip.svg"
-  },
-  "public/images/svg/wheels.svg": {
-    "file": "assets/wheels-cdb4621c.svg",
-    "src": "public/images/svg/wheels.svg"
-  },
-  "public/images/svg/roulette.svg": {
-    "file": "assets/roulette-bb28a812.svg",
-    "src": "public/images/svg/roulette.svg"
-  },
-  "public/images/svg/mines.svg": {
-    "file": "assets/mines-f2642258.svg",
-    "src": "public/images/svg/mines.svg"
-  },
-  "public/images/svg/plinko.svg": {
-    "file": "assets/plinko-77413a4d.svg",
-    "src": "public/images/svg/plinko.svg"
-  },
-  "public/images/svg/turbor.svg": {
-    "file": "assets/turbor-c5e0aa6c.svg",
-    "src": "public/images/svg/turbor.svg"
-  },
-  "public/images/svg/limbo.svg": {
-    "file": "assets/limbo-e335cf3d.svg",
-    "src": "public/images/svg/limbo.svg"
-  },
-  "public/images/svg/dice.svg": {
-    "file": "assets/dice-b0f20200.svg",
-    "src": "public/images/svg/dice.svg"
-  },
-  "public/images/svg/keno.svg": {
-    "file": "assets/keno-b92c0e0a.svg",
-    "src": "public/images/svg/keno.svg"
-  },
-  "public/images/flags/us.svg": {
-    "file": "assets/us-38f6698b.svg",
-    "src": "public/images/flags/us.svg"
-  },
-  "public/images/svg/cashback.svg": {
-    "file": "assets/cashback-d19228d2.svg",
-    "src": "public/images/svg/cashback.svg"
-  },
-  "public/images/brand/bcboom.svg": {
-    "file": "assets/bcboom-f585da3e.svg",
-    "src": "public/images/brand/bcboom.svg"
-  },
-  "public/images/svg/facebook.svg": {
-    "file": "assets/facebook-9f209f4e.svg",
-    "src": "public/images/svg/facebook.svg"
-  },
-  "public/images/svg/fairness.svg": {
-    "file": "assets/fairness-6868df6a.svg",
-    "src": "public/images/svg/fairness.svg"
-  },
-  "public/images/svg/help.svg": {
-    "file": "assets/help-06affd1a.svg",
-    "src": "public/images/svg/help.svg"
-  },
-  "public/images/svg/instagram.svg": {
-    "file": "assets/instagram-f7ccff25.svg",
-    "src": "public/images/svg/instagram.svg"
-  },
-  "public/images/svg/menu.svg": {
-    "file": "assets/menu-8b2ced2b.svg",
-    "src": "public/images/svg/menu.svg"
-  },
-  "public/images/svg/players.svg": {
-    "file": "assets/players-b820f670.svg",
-    "src": "public/images/svg/players.svg"
-  },
-  "public/images/svg/referral.svg": {
-    "file": "assets/referral-c364ec35.svg",
-    "src": "public/images/svg/referral.svg"
-  },
-  "public/images/svg/telegram.svg": {
-    "file": "assets/telegram-0619e3cc.svg",
-    "src": "public/images/svg/telegram.svg"
-  },
-  "public/images/svg/ticket.svg": {
-    "file": "assets/ticket-6989c700.svg",
-    "src": "public/images/svg/ticket.svg"
-  },
-  "public/images/svg/twitter.svg": {
-    "file": "assets/twitter-efdfdaee.svg",
-    "src": "public/images/svg/twitter.svg"
-  },
-  "public/images/svg/wifi.svg": {
-    "file": "assets/wifi-26b5ccf2.svg",
-    "src": "public/images/svg/wifi.svg"
-  },
-  "public/images/svg/volume.svg": {
-    "file": "assets/volume-12a7f8e1.svg",
-    "src": "public/images/svg/volume.svg"
-  },
   "public/images/user/bank.png": {
     "file": "assets/bank-757e32e3.png",
     "src": "public/images/user/bank.png"
+  },
+  "public/images/svg/target.svg": {
+    "file": "assets/target-33d9b81b.svg",
+    "src": "public/images/svg/target.svg"
   },
   "public/images/user/discount.png": {
     "file": "assets/discount-6c46ba58.png",
@@ -595,13 +491,13 @@
     "file": "assets/invite-5501156f.svg",
     "src": "public/images/user/invite.svg"
   },
-  "public/images/user/inviteBg.png": {
-    "file": "assets/inviteBg-fcb7ceda.png",
-    "src": "public/images/user/inviteBg.png"
-  },
   "public/images/user/leaderboardbg.svg": {
     "file": "assets/leaderboardbg-83744ee6.svg",
     "src": "public/images/user/leaderboardbg.svg"
+  },
+  "public/images/user/inviteBg.png": {
+    "file": "assets/inviteBg-fcb7ceda.png",
+    "src": "public/images/user/inviteBg.png"
   },
   "public/images/user/monthlyBg.png": {
     "file": "assets/monthlyBg-891dd404.png",
@@ -619,25 +515,25 @@
     "file": "assets/profittoday-01d72edc.svg",
     "src": "public/images/user/profittoday.svg"
   },
-  "public/images/user/refnetwork.svg": {
-    "file": "assets/refnetwork-129634c3.svg",
-    "src": "public/images/user/refnetwork.svg"
-  },
   "public/images/user/referral.svg": {
     "file": "assets/referral-1a1d451b.svg",
     "src": "public/images/user/referral.svg"
+  },
+  "public/images/user/refnetwork.svg": {
+    "file": "assets/refnetwork-129634c3.svg",
+    "src": "public/images/user/refnetwork.svg"
   },
   "public/images/user/stats.svg": {
     "file": "assets/stats-9ea66e91.svg",
     "src": "public/images/user/stats.svg"
   },
-  "public/images/user/user1.png": {
-    "file": "assets/user1-ebb597a3.png",
-    "src": "public/images/user/user1.png"
-  },
   "public/images/user/refstatbg.png": {
     "file": "assets/refstatbg-e26079c1.png",
     "src": "public/images/user/refstatbg.png"
+  },
+  "public/images/user/user1.png": {
+    "file": "assets/user1-ebb597a3.png",
+    "src": "public/images/user/user1.png"
   },
   "public/images/user/user2.png": {
     "file": "assets/user2-13c0e76c.png",
@@ -651,33 +547,109 @@
     "file": "assets/whowonbg-b62aaf1c.svg",
     "src": "public/images/user/whowonbg.svg"
   },
-  "public/images/svg/close.svg": {
-    "file": "assets/close-a78f97c0.svg",
-    "src": "public/images/svg/close.svg"
+  "public/images/svg/stairs.svg": {
+    "file": "assets/stairs-3c976750.svg",
+    "src": "public/images/svg/stairs.svg"
   },
-  "public/images/others/drawercrash.png": {
-    "file": "assets/drawercrash-65349c6f.png",
-    "src": "public/images/others/drawercrash.png"
+  "public/images/svg/tower.svg": {
+    "file": "assets/tower-bb38c139.svg",
+    "src": "public/images/svg/tower.svg"
   },
-  "public/images/others/drawermines.png": {
-    "file": "assets/drawermines-1fa2aef5.png",
-    "src": "public/images/others/drawermines.png"
+  "public/images/svg/wheels.svg": {
+    "file": "assets/wheels-cdb4621c.svg",
+    "src": "public/images/svg/wheels.svg"
   },
-  "public/images/others/drawerlimbo.png": {
-    "file": "assets/drawerlimbo-83eb8b8c.png",
-    "src": "public/images/others/drawerlimbo.png"
+  "public/images/svg/coinflip.svg": {
+    "file": "assets/coinflip-7a90f663.svg",
+    "src": "public/images/svg/coinflip.svg"
   },
-  "public/images/others/drawerdice.png": {
-    "file": "assets/drawerdice-34090f2f.png",
-    "src": "public/images/others/drawerdice.png"
+  "public/images/svg/roulette.svg": {
+    "file": "assets/roulette-bb28a812.svg",
+    "src": "public/images/svg/roulette.svg"
   },
-  "public/images/others/drawerkeno.png": {
-    "file": "assets/drawerkeno-74cc5cd1.png",
-    "src": "public/images/others/drawerkeno.png"
+  "public/images/svg/plinko.svg": {
+    "file": "assets/plinko-77413a4d.svg",
+    "src": "public/images/svg/plinko.svg"
   },
-  "public/images/flags/portugal.svg": {
-    "file": "assets/portugal-45006d8d.svg",
-    "src": "public/images/flags/portugal.svg"
+  "public/images/svg/limbo.svg": {
+    "file": "assets/limbo-e335cf3d.svg",
+    "src": "public/images/svg/limbo.svg"
+  },
+  "public/images/svg/mines.svg": {
+    "file": "assets/mines-f2642258.svg",
+    "src": "public/images/svg/mines.svg"
+  },
+  "public/images/svg/turbor.svg": {
+    "file": "assets/turbor-c5e0aa6c.svg",
+    "src": "public/images/svg/turbor.svg"
+  },
+  "public/images/svg/dice.svg": {
+    "file": "assets/dice-b0f20200.svg",
+    "src": "public/images/svg/dice.svg"
+  },
+  "public/images/svg/keno.svg": {
+    "file": "assets/keno-b92c0e0a.svg",
+    "src": "public/images/svg/keno.svg"
+  },
+  "public/images/flags/us.svg": {
+    "file": "assets/us-38f6698b.svg",
+    "src": "public/images/flags/us.svg"
+  },
+  "public/images/brand/bcboom.svg": {
+    "file": "assets/bcboom-f585da3e.svg",
+    "src": "public/images/brand/bcboom.svg"
+  },
+  "public/images/svg/fairness.svg": {
+    "file": "assets/fairness-6868df6a.svg",
+    "src": "public/images/svg/fairness.svg"
+  },
+  "public/images/svg/cashback.svg": {
+    "file": "assets/cashback-d19228d2.svg",
+    "src": "public/images/svg/cashback.svg"
+  },
+  "public/images/svg/facebook.svg": {
+    "file": "assets/facebook-9f209f4e.svg",
+    "src": "public/images/svg/facebook.svg"
+  },
+  "public/images/svg/help.svg": {
+    "file": "assets/help-06affd1a.svg",
+    "src": "public/images/svg/help.svg"
+  },
+  "public/images/svg/instagram.svg": {
+    "file": "assets/instagram-f7ccff25.svg",
+    "src": "public/images/svg/instagram.svg"
+  },
+  "public/images/svg/menu.svg": {
+    "file": "assets/menu-8b2ced2b.svg",
+    "src": "public/images/svg/menu.svg"
+  },
+  "public/images/svg/players.svg": {
+    "file": "assets/players-b820f670.svg",
+    "src": "public/images/svg/players.svg"
+  },
+  "public/images/svg/referral.svg": {
+    "file": "assets/referral-c364ec35.svg",
+    "src": "public/images/svg/referral.svg"
+  },
+  "public/images/svg/telegram.svg": {
+    "file": "assets/telegram-0619e3cc.svg",
+    "src": "public/images/svg/telegram.svg"
+  },
+  "public/images/svg/twitter.svg": {
+    "file": "assets/twitter-efdfdaee.svg",
+    "src": "public/images/svg/twitter.svg"
+  },
+  "public/images/svg/ticket.svg": {
+    "file": "assets/ticket-6989c700.svg",
+    "src": "public/images/svg/ticket.svg"
+  },
+  "public/images/svg/volume.svg": {
+    "file": "assets/volume-12a7f8e1.svg",
+    "src": "public/images/svg/volume.svg"
+  },
+  "public/images/svg/wifi.svg": {
+    "file": "assets/wifi-26b5ccf2.svg",
+    "src": "public/images/svg/wifi.svg"
   },
   "public/images/svg/felix.svg": {
     "file": "assets/felix-923b18f1.svg",
@@ -695,37 +667,69 @@
     "file": "assets/elzugi-45f896c3.svg",
     "src": "public/images/svg/elzugi.svg"
   },
-  "public/images/svg/endorphinaTextLogo.svg": {
-    "file": "assets/endorphinaTextLogo-66f7a902.svg",
-    "src": "public/images/svg/endorphinaTextLogo.svg"
-  },
-  "public/images/svg/facebookTextLogo.svg": {
-    "file": "assets/facebookTextLogo-ceff86f5.svg",
-    "src": "public/images/svg/facebookTextLogo.svg"
-  },
-  "public/images/svg/elikTextLogo.svg": {
-    "file": "assets/elikTextLogo-561125fe.svg",
-    "src": "public/images/svg/elikTextLogo.svg"
-  },
   "public/images/svg/telegramTextLogo.svg": {
     "file": "assets/telegramTextLogo-149d0d8c.svg",
     "src": "public/images/svg/telegramTextLogo.svg"
+  },
+  "public/images/svg/endorphinaTextLogo.svg": {
+    "file": "assets/endorphinaTextLogo-66f7a902.svg",
+    "src": "public/images/svg/endorphinaTextLogo.svg"
   },
   "public/images/svg/mastercardTextLogo.svg": {
     "file": "assets/mastercardTextLogo-28f72ac4.svg",
     "src": "public/images/svg/mastercardTextLogo.svg"
   },
+  "public/images/svg/facebookTextLogo.svg": {
+    "file": "assets/facebookTextLogo-ceff86f5.svg",
+    "src": "public/images/svg/facebookTextLogo.svg"
+  },
   "public/images/svg/visaTextLogo.svg": {
     "file": "assets/visaTextLogo-08e58545.svg",
     "src": "public/images/svg/visaTextLogo.svg"
+  },
+  "public/images/svg/elikTextLogo.svg": {
+    "file": "assets/elikTextLogo-561125fe.svg",
+    "src": "public/images/svg/elikTextLogo.svg"
+  },
+  "public/images/svg/close.svg": {
+    "file": "assets/close-a78f97c0.svg",
+    "src": "public/images/svg/close.svg"
+  },
+  "public/images/others/drawercrash.png": {
+    "file": "assets/drawercrash-65349c6f.png",
+    "src": "public/images/others/drawercrash.png"
+  },
+  "public/images/others/drawerlimbo.png": {
+    "file": "assets/drawerlimbo-83eb8b8c.png",
+    "src": "public/images/others/drawerlimbo.png"
+  },
+  "public/images/others/drawerdice.png": {
+    "file": "assets/drawerdice-34090f2f.png",
+    "src": "public/images/others/drawerdice.png"
+  },
+  "public/images/others/drawermines.png": {
+    "file": "assets/drawermines-1fa2aef5.png",
+    "src": "public/images/others/drawermines.png"
+  },
+  "public/images/others/drawerkeno.png": {
+    "file": "assets/drawerkeno-74cc5cd1.png",
+    "src": "public/images/others/drawerkeno.png"
+  },
+  "public/images/flags/portugal.svg": {
+    "file": "assets/portugal-45006d8d.svg",
+    "src": "public/images/flags/portugal.svg"
+  },
+  "public/images/svg/igtextlogo.svg": {
+    "file": "assets/igtextlogo-e9d85238.svg",
+    "src": "public/images/svg/igtextlogo.svg"
   },
   "public/images/svg/google.svg": {
     "file": "assets/google-0a32a504.svg",
     "src": "public/images/svg/google.svg"
   },
-  "public/images/svg/igtextlogo.svg": {
-    "file": "assets/igtextlogo-e9d85238.svg",
-    "src": "public/images/svg/igtextlogo.svg"
+  "public/images/svg/lock.svg": {
+    "file": "assets/lock-3080113b.svg",
+    "src": "public/images/svg/lock.svg"
   },
   "public/images/svg/closeModal.svg": {
     "file": "assets/closeModal-00751613.svg",
@@ -739,33 +743,21 @@
     "file": "assets/user-549401ff.svg",
     "src": "public/images/svg/user.svg"
   },
-  "public/images/svg/lock.svg": {
-    "file": "assets/lock-3080113b.svg",
-    "src": "public/images/svg/lock.svg"
-  },
-  "public/images/carousel/depositcarousel.svg": {
-    "file": "assets/depositcarousel-390cdb23.svg",
-    "src": "public/images/carousel/depositcarousel.svg"
+  "public/images/currencies/brazillianreal.svg": {
+    "file": "assets/brazillianreal-9a9b99b2.svg",
+    "src": "public/images/currencies/brazillianreal.svg"
   },
   "public/images/currencies/currency.svg": {
     "file": "assets/currency-13c92d70.svg",
     "src": "public/images/currencies/currency.svg"
   },
-  "public/images/currencies/brazillianreal.svg": {
-    "file": "assets/brazillianreal-9a9b99b2.svg",
-    "src": "public/images/currencies/brazillianreal.svg"
+  "public/images/carousel/depositcarousel.svg": {
+    "file": "assets/depositcarousel-390cdb23.svg",
+    "src": "public/images/carousel/depositcarousel.svg"
   },
   "public/images/svg/proceed.svg": {
     "file": "assets/proceed-96180f0c.svg",
     "src": "public/images/svg/proceed.svg"
-  },
-  "public/images/others/footercut.png": {
-    "file": "assets/footercut-52f5e2dc.png",
-    "src": "public/images/others/footercut.png"
-  },
-  "public/images/others/mainBg.svg": {
-    "file": "assets/mainBg-ca38ca97.svg",
-    "src": "public/images/others/mainBg.svg"
   },
   "public/images/svg/xicon.svg": {
     "file": "assets/xicon-6c3dd9e1.svg",
@@ -775,6 +767,14 @@
     "file": "assets/pencil-f6101740.svg",
     "src": "public/images/svg/pencil.svg"
   },
+  "public/images/others/footercut.png": {
+    "file": "assets/footercut-52f5e2dc.png",
+    "src": "public/images/others/footercut.png"
+  },
+  "public/images/others/mainBg.svg": {
+    "file": "assets/mainBg-ca38ca97.svg",
+    "src": "public/images/others/mainBg.svg"
+  },
   "resources/assets/games/coin_flip_sm.svg": {
     "file": "assets/coin_flip_sm-84150706.svg",
     "src": "resources/assets/games/coin_flip_sm.svg"
@@ -782,22 +782,6 @@
   "resources/assets/games/coinflip_bg.svg": {
     "file": "assets/coinflip_bg-05304fc7.svg",
     "src": "resources/assets/games/coinflip_bg.svg"
-  },
-  "public/images/svg/overlayplay.svg": {
-    "file": "assets/overlayplay-d832e694.svg",
-    "src": "public/images/svg/overlayplay.svg"
-  },
-  "public/images/others/leftcut.svg": {
-    "file": "assets/leftcut-1c287b77.svg",
-    "src": "public/images/others/leftcut.svg"
-  },
-  "public/images/others/gridbg.png": {
-    "file": "assets/gridbg-1ca8519a.png",
-    "src": "public/images/others/gridbg.png"
-  },
-  "public/images/svg/titlebg.svg": {
-    "file": "assets/titlebg-93e295f3.svg",
-    "src": "public/images/svg/titlebg.svg"
   },
   "resources/assets/games/Keyboard.svg": {
     "file": "assets/Keyboard-4469f08e.svg",
@@ -815,33 +799,9 @@
     "file": "assets/Activity-c9adb182.svg",
     "src": "resources/assets/games/Activity.svg"
   },
-  "resources/assets/games/limbo_sm.svg": {
-    "file": "assets/limbo_sm-3b41753b.svg",
-    "src": "resources/assets/games/limbo_sm.svg"
-  },
-  "resources/assets/games/limbo.svg": {
-    "file": "assets/limbo-94aa4020.svg",
-    "src": "resources/assets/games/limbo.svg"
-  },
-  "resources/assets/games/coin2.svg": {
-    "file": "assets/coin2-899be69b.svg",
-    "src": "resources/assets/games/coin2.svg"
-  },
-  "resources/assets/games/Bomb.svg": {
-    "file": "assets/Bomb-cea8851a.svg",
-    "src": "resources/assets/games/Bomb.svg"
-  },
-  "node_modules/slick-carousel/slick/ajax-loader.gif": {
-    "file": "assets/ajax-loader-e7b44c86.gif",
-    "src": "node_modules/slick-carousel/slick/ajax-loader.gif"
-  },
-  "node_modules/slick-carousel/slick/fonts/slick.eot": {
-    "file": "assets/slick-06d80cf0.eot",
-    "src": "node_modules/slick-carousel/slick/fonts/slick.eot"
-  },
-  "resources/assets/games/Ring.svg": {
-    "file": "assets/Ring-916ea7b9.svg",
-    "src": "resources/assets/games/Ring.svg"
+  "public/images/svg/overlayplay.svg": {
+    "file": "assets/overlayplay-d832e694.svg",
+    "src": "public/images/svg/overlayplay.svg"
   },
   "resources/assets/games/dinosaur_frame_bg.svg": {
     "file": "assets/dinosaur_frame_bg-32defa90.svg",
@@ -850,46 +810,6 @@
   "resources/assets/games/dinosaur.svg": {
     "file": "assets/dinosaur-bf92dc40.svg",
     "src": "resources/assets/games/dinosaur.svg"
-  },
-  "resources/assets/games/ring_bg.svg": {
-    "file": "assets/ring_bg-1e7237ca.svg",
-    "src": "resources/assets/games/ring_bg.svg"
-  },
-  "resources/assets/games/plinko_bg.svg": {
-    "file": "assets/plinko_bg-cace3c92.svg",
-    "src": "resources/assets/games/plinko_bg.svg"
-  },
-  "resources/assets/games/plinko_sm.svg": {
-    "file": "assets/plinko_sm-f4c8ba6d.svg",
-    "src": "resources/assets/games/plinko_sm.svg"
-  },
-  "node_modules/slick-carousel/slick/fonts/slick.woff": {
-    "file": "assets/slick-26726bac.woff",
-    "src": "node_modules/slick-carousel/slick/fonts/slick.woff"
-  },
-  "resources/assets/games/keno_sm.svg": {
-    "file": "assets/keno_sm-73e3ecae.svg",
-    "src": "resources/assets/games/keno_sm.svg"
-  },
-  "resources/assets/games/keno_bg.svg": {
-    "file": "assets/keno_bg-68cde442.svg",
-    "src": "resources/assets/games/keno_bg.svg"
-  },
-  "resources/assets/games/ellipseUp.svg": {
-    "file": "assets/ellipseUp-35a278e4.svg",
-    "src": "resources/assets/games/ellipseUp.svg"
-  },
-  "resources/assets/games/ellipseDown.svg": {
-    "file": "assets/ellipseDown-86547d64.svg",
-    "src": "resources/assets/games/ellipseDown.svg"
-  },
-  "node_modules/slick-carousel/slick/fonts/slick.ttf": {
-    "file": "assets/slick-37bc99cf.ttf",
-    "src": "node_modules/slick-carousel/slick/fonts/slick.ttf"
-  },
-  "node_modules/slick-carousel/slick/fonts/slick.svg": {
-    "file": "assets/slick-12459f22.svg",
-    "src": "node_modules/slick-carousel/slick/fonts/slick.svg"
   },
   "resources/assets/games/arrow.svg": {
     "file": "assets/arrow-8e10d92f.svg",
@@ -903,13 +823,85 @@
     "file": "assets/cross_sm-a8e1de03.svg",
     "src": "resources/assets/games/cross_sm.svg"
   },
-  "resources/assets/games/Tower.svg": {
-    "file": "assets/Tower-4b21f77f.svg",
-    "src": "resources/assets/games/Tower.svg"
+  "resources/assets/games/keno_sm.svg": {
+    "file": "assets/keno_sm-73e3ecae.svg",
+    "src": "resources/assets/games/keno_sm.svg"
   },
-  "resources/assets/games/tower_bg.svg": {
-    "file": "assets/tower_bg-3c8d3e37.svg",
-    "src": "resources/assets/games/tower_bg.svg"
+  "resources/assets/games/keno_bg.svg": {
+    "file": "assets/keno_bg-68cde442.svg",
+    "src": "resources/assets/games/keno_bg.svg"
+  },
+  "resources/assets/games/limbo_sm.svg": {
+    "file": "assets/limbo_sm-3b41753b.svg",
+    "src": "resources/assets/games/limbo_sm.svg"
+  },
+  "resources/assets/games/limbo.svg": {
+    "file": "assets/limbo-94aa4020.svg",
+    "src": "resources/assets/games/limbo.svg"
+  },
+  "resources/assets/games/plinko_bg.svg": {
+    "file": "assets/plinko_bg-cace3c92.svg",
+    "src": "resources/assets/games/plinko_bg.svg"
+  },
+  "resources/assets/games/plinko_sm.svg": {
+    "file": "assets/plinko_sm-f4c8ba6d.svg",
+    "src": "resources/assets/games/plinko_sm.svg"
+  },
+  "resources/assets/games/ellipseUp.svg": {
+    "file": "assets/ellipseUp-35a278e4.svg",
+    "src": "resources/assets/games/ellipseUp.svg"
+  },
+  "resources/assets/games/ellipseDown.svg": {
+    "file": "assets/ellipseDown-86547d64.svg",
+    "src": "resources/assets/games/ellipseDown.svg"
+  },
+  "resources/assets/games/coin2.svg": {
+    "file": "assets/coin2-899be69b.svg",
+    "src": "resources/assets/games/coin2.svg"
+  },
+  "resources/assets/games/Bomb.svg": {
+    "file": "assets/Bomb-cea8851a.svg",
+    "src": "resources/assets/games/Bomb.svg"
+  },
+  "public/images/svg/titlebg.svg": {
+    "file": "assets/titlebg-93e295f3.svg",
+    "src": "public/images/svg/titlebg.svg"
+  },
+  "public/images/others/leftcut.svg": {
+    "file": "assets/leftcut-1c287b77.svg",
+    "src": "public/images/others/leftcut.svg"
+  },
+  "public/images/others/gridbg.png": {
+    "file": "assets/gridbg-1ca8519a.png",
+    "src": "public/images/others/gridbg.png"
+  },
+  "node_modules/slick-carousel/slick/ajax-loader.gif": {
+    "file": "assets/ajax-loader-e7b44c86.gif",
+    "src": "node_modules/slick-carousel/slick/ajax-loader.gif"
+  },
+  "node_modules/slick-carousel/slick/fonts/slick.eot": {
+    "file": "assets/slick-06d80cf0.eot",
+    "src": "node_modules/slick-carousel/slick/fonts/slick.eot"
+  },
+  "node_modules/slick-carousel/slick/fonts/slick.woff": {
+    "file": "assets/slick-26726bac.woff",
+    "src": "node_modules/slick-carousel/slick/fonts/slick.woff"
+  },
+  "node_modules/slick-carousel/slick/fonts/slick.ttf": {
+    "file": "assets/slick-37bc99cf.ttf",
+    "src": "node_modules/slick-carousel/slick/fonts/slick.ttf"
+  },
+  "resources/assets/games/Ring.svg": {
+    "file": "assets/Ring-916ea7b9.svg",
+    "src": "resources/assets/games/Ring.svg"
+  },
+  "resources/assets/games/ring_bg.svg": {
+    "file": "assets/ring_bg-1e7237ca.svg",
+    "src": "resources/assets/games/ring_bg.svg"
+  },
+  "node_modules/slick-carousel/slick/fonts/slick.svg": {
+    "file": "assets/slick-12459f22.svg",
+    "src": "node_modules/slick-carousel/slick/fonts/slick.svg"
   },
   "resources/assets/games/Stairs.svg": {
     "file": "assets/Stairs-1cd91ca7.svg",
@@ -927,13 +919,29 @@
     "file": "assets/wheel_sm2-9e07328f.svg",
     "src": "resources/assets/games/wheel_sm2.svg"
   },
-  "public/images/svg/live.svg": {
-    "file": "assets/live-20915285.svg",
-    "src": "public/images/svg/live.svg"
+  "resources/assets/games/tower_bg.svg": {
+    "file": "assets/tower_bg-3c8d3e37.svg",
+    "src": "resources/assets/games/tower_bg.svg"
+  },
+  "resources/assets/games/Tower.svg": {
+    "file": "assets/Tower-4b21f77f.svg",
+    "src": "resources/assets/games/Tower.svg"
+  },
+  "public/images/svg/chevronup.svg": {
+    "file": "assets/chevronup-df7c1d34.svg",
+    "src": "public/images/svg/chevronup.svg"
   },
   "public/images/svg/race.svg": {
     "file": "assets/race-0c5b21e3.svg",
     "src": "public/images/svg/race.svg"
+  },
+  "public/images/svg/live.svg": {
+    "file": "assets/live-20915285.svg",
+    "src": "public/images/svg/live.svg"
+  },
+  "public/images/svg/chevrondown.svg": {
+    "file": "assets/chevrondown-33a6bfcb.svg",
+    "src": "public/images/svg/chevrondown.svg"
   },
   "public/images/svg/slots.svg": {
     "file": "assets/slots-2286c9c9.svg",
@@ -955,25 +963,17 @@
     "file": "assets/share-33f70c8c.svg",
     "src": "public/images/user/share.svg"
   },
-  "public/images/svg/homeSvg.svg": {
-    "file": "assets/homeSvg-5a3a1eba.svg",
-    "src": "public/images/svg/homeSvg.svg"
+  "public/images/svg/bonus.svg": {
+    "file": "assets/bonus-d909a0aa.svg",
+    "src": "public/images/svg/bonus.svg"
   },
   "public/images/svg/promotion.svg": {
     "file": "assets/promotion-4b88d8f7.svg",
     "src": "public/images/svg/promotion.svg"
   },
-  "public/images/svg/bonus.svg": {
-    "file": "assets/bonus-d909a0aa.svg",
-    "src": "public/images/svg/bonus.svg"
-  },
-  "public/images/svg/chevronup.svg": {
-    "file": "assets/chevronup-df7c1d34.svg",
-    "src": "public/images/svg/chevronup.svg"
-  },
-  "public/images/svg/chevrondown.svg": {
-    "file": "assets/chevrondown-33a6bfcb.svg",
-    "src": "public/images/svg/chevrondown.svg"
+  "public/images/svg/homeSvg.svg": {
+    "file": "assets/homeSvg-5a3a1eba.svg",
+    "src": "public/images/svg/homeSvg.svg"
   },
   "public/images/user/prev.png": {
     "file": "assets/prev-6b0c659a.png",
@@ -987,13 +987,17 @@
     "file": "assets/fullbg-17c0f86c.png",
     "src": "public/images/vip/fullbg.png"
   },
+  "public/images/vip/levels00.svg": {
+    "file": "assets/levels00-70584403.svg",
+    "src": "public/images/vip/levels00.svg"
+  },
   "public/images/vip/levels01.svg": {
     "file": "assets/levels01-35538ccc.svg",
     "src": "public/images/vip/levels01.svg"
   },
-  "public/images/vip/levels00.svg": {
-    "file": "assets/levels00-70584403.svg",
-    "src": "public/images/vip/levels00.svg"
+  "public/images/vip/levels04.svg": {
+    "file": "assets/levels04-f7e3f033.svg",
+    "src": "public/images/vip/levels04.svg"
   },
   "public/images/vip/levels02.svg": {
     "file": "assets/levels02-cb6509e9.svg",
@@ -1003,17 +1007,13 @@
     "file": "assets/levels03-aa2e0ee6.svg",
     "src": "public/images/vip/levels03.svg"
   },
-  "public/images/vip/levels04.svg": {
-    "file": "assets/levels04-f7e3f033.svg",
-    "src": "public/images/vip/levels04.svg"
+  "public/images/vip/levelBg.png": {
+    "file": "assets/levelBg-5787e809.png",
+    "src": "public/images/vip/levelBg.png"
   },
   "public/images/vip/level1.svg": {
     "file": "assets/level1-a226e1a5.svg",
     "src": "public/images/vip/level1.svg"
-  },
-  "public/images/vip/levelBg.png": {
-    "file": "assets/levelBg-5787e809.png",
-    "src": "public/images/vip/levelBg.png"
   },
   "public/images/vip/next.svg": {
     "file": "assets/next-10935704.svg",
@@ -1047,10 +1047,6 @@
     "file": "assets/level8-16a5489b.svg",
     "src": "public/images/levels/level8.svg"
   },
-  "public/images/levels/levelBg.svg": {
-    "file": "assets/levelBg-73c7a1c4.svg",
-    "src": "public/images/levels/levelBg.svg"
-  },
   "public/images/levels/level0.svg": {
     "file": "assets/level0-47b39bbd.svg",
     "src": "public/images/levels/level0.svg"
@@ -1059,13 +1055,17 @@
     "file": "assets/level10-878dbf93.svg",
     "src": "public/images/levels/level10.svg"
   },
-  "public/images/svg/history.svg": {
-    "file": "assets/history-20daa519.svg",
-    "src": "public/images/svg/history.svg"
+  "public/images/levels/levelBg.svg": {
+    "file": "assets/levelBg-73c7a1c4.svg",
+    "src": "public/images/levels/levelBg.svg"
   },
   "public/images/svg/crown.svg": {
     "file": "assets/crown-5d3c698f.svg",
     "src": "public/images/svg/crown.svg"
+  },
+  "public/images/svg/history.svg": {
+    "file": "assets/history-20daa519.svg",
+    "src": "public/images/svg/history.svg"
   },
   "public/images/svg/logout.svg": {
     "file": "assets/logout-9b486ef6.svg",
@@ -1107,13 +1107,13 @@
     "file": "assets/IconYellow-db1448ed.svg",
     "src": "resources/assets/games/IconYellow.svg"
   },
-  "resources/assets/games/IconBlue.svg": {
-    "file": "assets/IconBlue-0557801b.svg",
-    "src": "resources/assets/games/IconBlue.svg"
-  },
   "resources/assets/games/IconGreen.svg": {
     "file": "assets/IconGreen-e8bba944.svg",
     "src": "resources/assets/games/IconGreen.svg"
+  },
+  "resources/assets/games/IconBlue.svg": {
+    "file": "assets/IconBlue-0557801b.svg",
+    "src": "resources/assets/games/IconBlue.svg"
   },
   "public/images/svg/cup.svg": {
     "file": "assets/cup-e6ddecc5.svg",
@@ -1139,85 +1139,59 @@
     "file": "assets/app-442c21b0.css",
     "src": "resources/js/app.css"
   },
-  "_link-712e60d6.js": {
-    "file": "assets/link-712e60d6.js",
-    "assets": [
-      "assets/link-89c392d3.svg"
-    ]
-  },
-  "resources/js/Pages/Auth/ConfirmPassword.jsx": {
-    "file": "assets/ConfirmPassword-cdb4b1b6.js",
-    "src": "resources/js/Pages/Auth/ConfirmPassword.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "_GreyText-7b7f26a1.js": {
-    "file": "assets/GreyText-7b7f26a1.js",
+  "_GreyText-53646b51.js": {
+    "file": "assets/GreyText-53646b51.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_CopyableLink-180305eb.js": {
-    "file": "assets/CopyableLink-180305eb.js",
+  "_index-78f3460b.js": {
+    "file": "assets/index-78f3460b.js",
     "imports": [
-      "resources/js/app.jsx",
-      "_link-712e60d6.js"
+      "resources/js/app.jsx"
     ]
   },
-  "resources/js/Pages/Bonus/Index.jsx": {
-    "file": "assets/Index-a4a06ca5.js",
-    "src": "resources/js/Pages/Bonus/Index.jsx",
+  "resources/js/Pages/Auth/Register.jsx": {
+    "file": "assets/Register-e700fabb.js",
+    "src": "resources/js/Pages/Auth/Register.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
       "_howler-5aa7ec92.js"
-    ],
-    "assets": [
-      "assets/bonusheader-39b72a43.png",
-      "assets/bonusheadermobile-4896293b.png",
-      "assets/bonusColored-c7ca4298.svg",
-      "assets/welcomeowl-43bb618b.png",
-      "assets/welcomecream-fb4834a2.png",
-      "assets/welcomelady-5eee033d.png",
-      "assets/welcomewallet-0c02b35a.png",
-      "assets/welcomesd-907f0470.png",
-      "assets/welcomeparrot-5cd93b5a.png"
     ]
   },
-  "resources/js/Pages/Auth/VerifyEmail.jsx": {
-    "file": "assets/VerifyEmail-b489fc4e.js",
-    "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
+  "resources/js/Pages/Auth/ConfirmPassword.jsx": {
+    "file": "assets/ConfirmPassword-8478ca18.js",
+    "src": "resources/js/Pages/Auth/ConfirmPassword.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PrimaryButton-6a221c14.js",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
       "_howler-5aa7ec92.js"
     ]
   },
-  "_index-6306a1ad.js": {
-    "file": "assets/index-6306a1ad.js",
+  "_index-a5e6493a.js": {
+    "file": "assets/index-a5e6493a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GreyText-7b7f26a1.js"
+      "_GreyText-53646b51.js"
     ]
   },
   "resources/js/Pages/Bonus/FullBonus.jsx": {
-    "file": "assets/FullBonus-507883bf.js",
+    "file": "assets/FullBonus-72517f14.js",
     "src": "resources/js/Pages/Bonus/FullBonus.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_index-6306a1ad.js",
-      "_GreyText-7b7f26a1.js",
-      "_index-00aae7d0.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_index-a5e6493a.js",
+      "_GreyText-53646b51.js",
+      "_index-78f3460b.js",
       "_howler-5aa7ec92.js"
     ],
     "assets": [
@@ -1225,37 +1199,8 @@
       "assets/fullbonus_pro_sm-85ceb39f.svg"
     ]
   },
-  "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-c2b96c9d.js",
-    "src": "resources/js/Pages/Auth/Register.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-b5b0863c.js",
-    "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_PrimaryButton-6a221c14.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "_index-00aae7d0.js": {
-    "file": "assets/index-00aae7d0.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_PageTemplate-bb0d4f96.js": {
-    "file": "assets/PageTemplate-bb0d4f96.js",
+  "_PageTemplate-f4bd5f12.js": {
+    "file": "assets/PageTemplate-f4bd5f12.js",
     "imports": [
       "resources/js/app.jsx"
     ],
@@ -1272,64 +1217,81 @@
       "assets/uparrow-f4e22ad8.svg"
     ]
   },
-  "_InputLabel-d38aa316.js": {
-    "file": "assets/InputLabel-d38aa316.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_PrimaryButton-6a221c14.js": {
-    "file": "assets/PrimaryButton-6a221c14.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_TextInput-6ab74e10.js": {
-    "file": "assets/TextInput-6ab74e10.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-ae1a575a.js",
-    "src": "resources/js/Pages/Auth/Login.jsx",
+  "resources/js/Pages/Bonus/BonusEveryday.jsx": {
+    "file": "assets/BonusEveryday-799ae174.js",
+    "src": "resources/js/Pages/Bonus/BonusEveryday.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_GreyText-53646b51.js",
+      "_index-78f3460b.js",
+      "_howler-5aa7ec92.js"
+    ],
+    "assets": [
+      "assets/saba_spin_1-7e139c3e.svg",
+      "assets/spin_sm-d9701a4f.svg"
+    ]
+  },
+  "resources/js/Pages/Auth/VerifyEmail.jsx": {
+    "file": "assets/VerifyEmail-54deb5a8.js",
+    "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-6868ef38.js",
       "_howler-5aa7ec92.js"
     ]
   },
-  "resources/js/Pages/Game/CoinFlip.jsx": {
-    "file": "assets/CoinFlip-b7af08ad.js",
-    "src": "resources/js/Pages/Game/CoinFlip.jsx",
+  "_TextInput-4114a6c2.js": {
+    "file": "assets/TextInput-4114a6c2.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/ResetPassword.jsx": {
+    "file": "assets/ResetPassword-cd44f64c.js",
+    "src": "resources/js/Pages/Auth/ResetPassword.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Grid-cf956749.js",
-      "_GameLayout-391ffb27.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
+      "_howler-5aa7ec92.js"
+    ]
+  },
+  "_InputLabel-065f34ad.js": {
+    "file": "assets/InputLabel-065f34ad.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_link-712e60d6.js": {
+    "file": "assets/link-712e60d6.js",
     "assets": [
-      "assets/coin_flip_sm-84150706.svg",
-      "assets/coinflip_bg-05304fc7.svg"
+      "assets/link-89c392d3.svg"
+    ]
+  },
+  "resources/js/Pages/Auth/ForgotPassword.jsx": {
+    "file": "assets/ForgotPassword-00e930bd.js",
+    "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-4114a6c2.js",
+      "_PrimaryButton-6868ef38.js",
+      "_howler-5aa7ec92.js"
     ]
   },
   "resources/js/Pages/Fairness/Index.jsx": {
-    "file": "assets/Index-68a593f3.js",
+    "file": "assets/Index-b5f7c076.js",
     "src": "resources/js/Pages/Fairness/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_CopyableLink-180305eb.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_CopyableLink-ad8a63fa.js",
       "_howler-5aa7ec92.js",
       "_link-712e60d6.js"
     ],
@@ -1341,51 +1303,85 @@
       "assets/fairness-cd1c19e0.svg"
     ]
   },
-  "resources/js/Pages/Bonus/BonusEveryday.jsx": {
-    "file": "assets/BonusEveryday-247d627b.js",
-    "src": "resources/js/Pages/Bonus/BonusEveryday.jsx",
-    "isDynamicEntry": true,
+  "_CopyableLink-ad8a63fa.js": {
+    "file": "assets/CopyableLink-ad8a63fa.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GreyText-7b7f26a1.js",
-      "_index-00aae7d0.js",
-      "_howler-5aa7ec92.js"
-    ],
-    "assets": [
-      "assets/saba_spin_1-7e139c3e.svg",
-      "assets/spin_sm-d9701a4f.svg"
+      "_link-712e60d6.js"
     ]
   },
-  "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-4dfbf887.js",
-    "src": "resources/js/Pages/Auth/ResetPassword.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "_Grid-cf956749.js": {
-    "file": "assets/Grid-cf956749.js",
+  "_PrimaryButton-6868ef38.js": {
+    "file": "assets/PrimaryButton-6868ef38.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_howler-5aa7ec92.js": {
-    "file": "assets/howler-5aa7ec92.js",
-    "isDynamicEntry": true
-  },
-  "_GameLayout-391ffb27.js": {
-    "file": "assets/GameLayout-391ffb27.js",
+  "resources/js/Pages/Game/CoinFlip.jsx": {
+    "file": "assets/CoinFlip-3ddadbce.js",
+    "src": "resources/js/Pages/Game/CoinFlip.jsx",
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Select-ce2c4600.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Grid-cf956749.js"
+      "_Grid-59943fdf.js",
+      "_GameLayout-2c49c315.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/coin_flip_sm-84150706.svg",
+      "assets/coinflip_bg-05304fc7.svg"
+    ]
+  },
+  "resources/js/Pages/Bonus/Index.jsx": {
+    "file": "assets/Index-d01d5fe5.js",
+    "src": "resources/js/Pages/Bonus/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js"
+    ],
+    "assets": [
+      "assets/bonusheader-39b72a43.png",
+      "assets/bonusheadermobile-4896293b.png",
+      "assets/bonusColored-c7ca4298.svg",
+      "assets/welcomeowl-43bb618b.png",
+      "assets/welcomecream-fb4834a2.png",
+      "assets/welcomelady-5eee033d.png",
+      "assets/welcomewallet-0c02b35a.png",
+      "assets/welcomesd-907f0470.png",
+      "assets/welcomeparrot-5cd93b5a.png"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-c9e3dfd4.js",
+    "src": "resources/js/Pages/Auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
+      "_howler-5aa7ec92.js"
+    ]
+  },
+  "_Grid-59943fdf.js": {
+    "file": "assets/Grid-59943fdf.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_GameLayout-2c49c315.js": {
+    "file": "assets/GameLayout-2c49c315.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Select-028588c9.js",
+      "_DataGrid-a9008242.js",
+      "_Grid-59943fdf.js"
     ],
     "assets": [
       "assets/Keyboard-4469f08e.svg",
@@ -1400,85 +1396,202 @@
       "assets/Ellipse 93-a55c9fb9.svg"
     ]
   },
-  "_Grow-3e626a22.js": {
-    "file": "assets/Grow-3e626a22.js",
+  "_howler-5aa7ec92.js": {
+    "file": "assets/howler-5aa7ec92.js",
+    "isDynamicEntry": true
+  },
+  "_Grow-26551156.js": {
+    "file": "assets/Grow-26551156.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_stairs-056b9126.js": {
-    "file": "assets/stairs-056b9126.js",
-    "assets": [
-      "assets/crash-1c94ed44.png",
-      "assets/dice-1b61dbee.png",
-      "assets/mines-81236998.png",
-      "assets/keno-fbb7804d.png",
-      "assets/limbo-9e9a5baf.png",
-      "assets/roulette-5179886c.png",
-      "assets/wheel-432d8a3a.png",
-      "assets/coinflip-574d2af0.png",
-      "assets/tower-2c8fbd60.png",
-      "assets/stairs-04138409.png"
-    ]
-  },
-  "resources/js/Pages/Game/Wheel.jsx": {
-    "file": "assets/Wheel-3c835ac8.js",
-    "src": "resources/js/Pages/Game/Wheel.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/game_wheel-85780bfa.svg",
-      "assets/wheel_sm2-9e07328f.svg"
-    ]
-  },
   "resources/js/Pages/Game/Limbo.jsx": {
-    "file": "assets/Limbo-19b614c6.js",
+    "file": "assets/Limbo-67e30705.js",
     "src": "resources/js/Pages/Game/Limbo.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
       "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
     ],
     "assets": [
       "assets/limbo-94aa4020.svg",
       "assets/limbo_sm-3b41753b.svg"
     ]
   },
+  "resources/js/Pages/Game/Plinko.jsx": {
+    "file": "assets/Plinko-9a65247a.js",
+    "src": "resources/js/Pages/Game/Plinko.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/ellipseUp-35a278e4.svg",
+      "assets/ellipseDown-86547d64.svg",
+      "assets/plinko_bg-cace3c92.svg",
+      "assets/plinko_sm-f4c8ba6d.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Ring.jsx": {
+    "file": "assets/Ring-ab750cf0.js",
+    "src": "resources/js/Pages/Game/Ring.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/Ring-916ea7b9.svg",
+      "assets/ring_bg-1e7237ca.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Dinosaur.jsx": {
+    "file": "assets/Dinosaur-851f81be.js",
+    "src": "resources/js/Pages/Game/Dinosaur.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/dinosaur_frame_bg-32defa90.svg",
+      "assets/dinosaur-bf92dc40.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Stair.jsx": {
+    "file": "assets/Stair-90edb8fb.js",
+    "src": "resources/js/Pages/Game/Stair.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/Stairs-1cd91ca7.svg",
+      "assets/stairs_sm-dc84b106.svg"
+    ]
+  },
   "resources/js/Pages/Game/Tower.jsx": {
-    "file": "assets/Tower-8305f521.js",
+    "file": "assets/Tower-846494e6.js",
     "src": "resources/js/Pages/Game/Tower.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_PageTemplate-bb0d4f96.js",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_PageTemplate-f4bd5f12.js",
       "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
     ],
     "assets": [
       "assets/Tower-4b21f77f.svg",
       "assets/tower_bg-3c8d3e37.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Wheel.jsx": {
+    "file": "assets/Wheel-a24e7946.js",
+    "src": "resources/js/Pages/Game/Wheel.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/game_wheel-85780bfa.svg",
+      "assets/wheel_sm2-9e07328f.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Keno.jsx": {
+    "file": "assets/Keno-269b56ac.js",
+    "src": "resources/js/Pages/Game/Keno.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/keno_sm-73e3ecae.svg",
+      "assets/keno_bg-68cde442.svg"
+    ]
+  },
+  "resources/js/Pages/Game/Mines.jsx": {
+    "file": "assets/Mines-1797264b.js",
+    "src": "resources/js/Pages/Game/Mines.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_GameLayout-2c49c315.js",
+      "_Grid-59943fdf.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_DataGrid-a9008242.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/coin2-899be69b.svg",
+      "assets/Bomb-cea8851a.svg"
+    ]
+  },
+  "_search-48b450a8.js": {
+    "file": "assets/search-48b450a8.js",
+    "assets": [
+      "assets/search-154cfd92.svg"
     ]
   },
   "_digdigger-f3a72a4c.js": {
@@ -1497,6 +1610,37 @@
       "assets/digdigger-8200fe99.png"
     ]
   },
+  "resources/js/Pages/Games/Index.jsx": {
+    "file": "assets/Index-3b8fddff.js",
+    "src": "resources/js/Pages/Games/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_stairs-056b9126.js",
+      "_howler-5aa7ec92.js"
+    ],
+    "assets": [
+      "assets/gamesPageBg-e5fc4821.png",
+      "assets/gamesPageBgmobile-0a2c3704.png",
+      "assets/padColored-774101d5.svg"
+    ]
+  },
+  "_stairs-056b9126.js": {
+    "file": "assets/stairs-056b9126.js",
+    "assets": [
+      "assets/crash-1c94ed44.png",
+      "assets/dice-1b61dbee.png",
+      "assets/mines-81236998.png",
+      "assets/keno-fbb7804d.png",
+      "assets/limbo-9e9a5baf.png",
+      "assets/roulette-5179886c.png",
+      "assets/wheel-432d8a3a.png",
+      "assets/coinflip-574d2af0.png",
+      "assets/tower-2c8fbd60.png",
+      "assets/stairs-04138409.png"
+    ]
+  },
   "_32cards-b217a3bd.js": {
     "file": "assets/32cards-b217a3bd.js",
     "assets": [
@@ -1513,65 +1657,58 @@
       "assets/32cards-9f862f02.png"
     ]
   },
-  "resources/js/Pages/Games/Index.jsx": {
-    "file": "assets/Index-cc357810.js",
-    "src": "resources/js/Pages/Games/Index.jsx",
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
+    "file": "assets/UpdateProfileInformationForm-405604ef.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_stairs-056b9126.js",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
+      "_transition-bdf6f0ba.js",
       "_howler-5aa7ec92.js"
-    ],
-    "assets": [
-      "assets/gamesPageBg-e5fc4821.png",
-      "assets/gamesPageBgmobile-0a2c3704.png",
-      "assets/padColored-774101d5.svg"
     ]
   },
-  "resources/js/Pages/Game/Keno.jsx": {
-    "file": "assets/Keno-9fc2d7e5.js",
-    "src": "resources/js/Pages/Game/Keno.jsx",
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
+    "file": "assets/UpdatePasswordForm-20978f20.js",
+    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_PrimaryButton-6868ef38.js",
+      "_transition-bdf6f0ba.js",
+      "_howler-5aa7ec92.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Edit.jsx": {
+    "file": "assets/Edit-07262b88.js",
+    "src": "resources/js/Pages/Profile/Edit.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
       "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/keno_sm-73e3ecae.svg",
-      "assets/keno_bg-68cde442.svg"
-    ]
-  },
-  "resources/js/Pages/Index.jsx": {
-    "file": "assets/Index-f8af042d.js",
-    "src": "resources/js/Pages/Index.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_digdigger-f3a72a4c.js",
-      "_32cards-b217a3bd.js",
-      "_stairs-056b9126.js",
-      "_howler-5aa7ec92.js"
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_transition-bdf6f0ba.js",
+      "_PrimaryButton-6868ef38.js"
     ]
   },
   "resources/js/Pages/Promotions/Bonus.jsx": {
-    "file": "assets/Bonus-8d50ab28.js",
+    "file": "assets/Bonus-1c547d30.js",
     "src": "resources/js/Pages/Promotions/Bonus.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_index-6306a1ad.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_GreyText-7b7f26a1.js",
-      "_index-00aae7d0.js",
+      "_index-a5e6493a.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_GreyText-53646b51.js",
+      "_index-78f3460b.js",
       "_howler-5aa7ec92.js"
     ],
     "assets": [
@@ -1579,78 +1716,22 @@
       "assets/pro_bonus_sm-d4ba9990.svg"
     ]
   },
-  "resources/js/Pages/Game/Plinko.jsx": {
-    "file": "assets/Plinko-a2668975.js",
-    "src": "resources/js/Pages/Game/Plinko.jsx",
-    "isDynamicEntry": true,
+  "_transition-bdf6f0ba.js": {
+    "file": "assets/transition-bdf6f0ba.js",
     "imports": [
-      "resources/js/app.jsx",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/ellipseUp-35a278e4.svg",
-      "assets/ellipseDown-86547d64.svg",
-      "assets/plinko_bg-cace3c92.svg",
-      "assets/plinko_sm-f4c8ba6d.svg"
-    ]
-  },
-  "resources/js/Pages/Game/Stair.jsx": {
-    "file": "assets/Stair-c3274814.js",
-    "src": "resources/js/Pages/Game/Stair.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/Stairs-1cd91ca7.svg",
-      "assets/stairs_sm-dc84b106.svg"
-    ]
-  },
-  "resources/js/Pages/Game/Dinosaur.jsx": {
-    "file": "assets/Dinosaur-7b5e414d.js",
-    "src": "resources/js/Pages/Game/Dinosaur.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/dinosaur_frame_bg-32defa90.svg",
-      "assets/dinosaur-bf92dc40.svg"
+      "resources/js/app.jsx"
     ]
   },
   "resources/js/Pages/Promotions/Deposit.jsx": {
-    "file": "assets/Deposit-07ca82d9.js",
+    "file": "assets/Deposit-001a1fdc.js",
     "src": "resources/js/Pages/Promotions/Deposit.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GreyText-7b7f26a1.js",
-      "_index-6306a1ad.js",
-      "_index-00aae7d0.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_GreyText-53646b51.js",
+      "_index-a5e6493a.js",
+      "_index-78f3460b.js",
       "_howler-5aa7ec92.js"
     ],
     "assets": [
@@ -1658,41 +1739,116 @@
       "assets/pro_deposit_sm-3a3b30fe.svg"
     ]
   },
-  "resources/js/Pages/Game/Mines.jsx": {
-    "file": "assets/Mines-046f2d6b.js",
-    "src": "resources/js/Pages/Game/Mines.jsx",
+  "resources/js/Pages/LiveCasino/Index.jsx": {
+    "file": "assets/Index-e957f6b1.js",
+    "src": "resources/js/Pages/LiveCasino/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
+      "_PageTemplate-f4bd5f12.js",
+      "_32cards-b217a3bd.js",
+      "_search-48b450a8.js",
+      "_howler-5aa7ec92.js"
     ],
     "assets": [
-      "assets/coin2-899be69b.svg",
-      "assets/Bomb-cea8851a.svg"
+      "assets/ruletika-66abd5aa.png",
+      "assets/andarbar-ddf7c52b.png",
+      "assets/blackjcklive-75652fd8.png",
+      "assets/goldblackjack-3e4db6cd.png",
+      "assets/craps-66084fda.png",
+      "assets/sniondrive-40484283.png",
+      "assets/dragontigerlive-c41c9be5.png"
+    ]
+  },
+  "resources/js/Pages/Index.jsx": {
+    "file": "assets/Index-22464a22.js",
+    "src": "resources/js/Pages/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_digdigger-f3a72a4c.js",
+      "_32cards-b217a3bd.js",
+      "_stairs-056b9126.js",
+      "_howler-5aa7ec92.js"
+    ]
+  },
+  "_index-9fd8bc04.js": {
+    "file": "assets/index-9fd8bc04.js",
+    "assets": [
+      "assets/activity_sm-061642d2.svg",
+      "assets/info-66e9e5eb.svg",
+      "assets/bell-6ac4d732.svg",
+      "assets/infoBook-95c9ba99.svg"
+    ]
+  },
+  "_Tooltip-ae72de7a.js": {
+    "file": "assets/Tooltip-ae72de7a.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Grow-26551156.js"
+    ]
+  },
+  "resources/js/Pages/Promotions/Exclusive.jsx": {
+    "file": "assets/Exclusive-36ad5a79.js",
+    "src": "resources/js/Pages/Promotions/Exclusive.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_index-9fd8bc04.js",
+      "_GreyText-53646b51.js",
+      "_index-a5e6493a.js",
+      "_DataGrid-a9008242.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_Tooltip-ae72de7a.js"
+    ],
+    "assets": [
+      "assets/exclusive_pro_background-d5b09337.svg",
+      "assets/exclusive_sm-82cc00ee.svg",
+      "assets/promotion_activity-dc430c8f.svg",
+      "assets/bonus_icon-54b1d346.svg"
+    ]
+  },
+  "_Select-028588c9.js": {
+    "file": "assets/Select-028588c9.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Grow-26551156.js"
+    ]
+  },
+  "resources/js/Pages/Race/Index.jsx": {
+    "file": "assets/Index-06e2196d.js",
+    "src": "resources/js/Pages/Race/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PageTemplate-f4bd5f12.js",
+      "_GamesCarouseCard-f6257d9b.js",
+      "_howler-5aa7ec92.js"
+    ],
+    "assets": [
+      "assets/raceheader-35cc5469.png",
+      "assets/raceheadermobile-a6528eed.png"
     ]
   },
   "resources/js/Pages/Promotions/Distributor.jsx": {
-    "file": "assets/Distributor-b5c06bc5.js",
+    "file": "assets/Distributor-4823bc54.js",
     "src": "resources/js/Pages/Promotions/Distributor.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_index-6306a1ad.js",
-      "_PageTemplate-bb0d4f96.js",
+      "_index-a5e6493a.js",
+      "_PageTemplate-f4bd5f12.js",
       "_index-9fd8bc04.js",
-      "_GreyText-7b7f26a1.js",
-      "_DataGrid-2e85c1ed.js",
+      "_GreyText-53646b51.js",
+      "_DataGrid-a9008242.js",
       "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_Tooltip-5aa729dc.js"
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_Tooltip-ae72de7a.js"
     ],
     "assets": [
       "assets/distributor_pro_background-f3991a43.svg",
@@ -1702,13 +1858,46 @@
       "assets/info_sm_img-9b72c69b.png"
     ]
   },
+  "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
+    "file": "assets/DeleteUserForm-afde6759.js",
+    "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-4114a6c2.js",
+      "_InputLabel-065f34ad.js",
+      "_transition-bdf6f0ba.js",
+      "_howler-5aa7ec92.js"
+    ]
+  },
+  "resources/js/Pages/Game/Dice.jsx": {
+    "file": "assets/Dice-1f1a6d7d.js",
+    "src": "resources/js/Pages/Game/Dice.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_DataGrid-a9008242.js",
+      "_GameLayout-2c49c315.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_howler-5aa7ec92.js",
+      "_Select-028588c9.js",
+      "_Grow-26551156.js",
+      "_Tooltip-ae72de7a.js",
+      "_Grid-59943fdf.js"
+    ],
+    "assets": [
+      "assets/arrow-8e10d92f.svg",
+      "assets/cross-d0610289.svg",
+      "assets/cross_sm-a8e1de03.svg"
+    ]
+  },
   "resources/js/Pages/Promotions/Index.jsx": {
-    "file": "assets/Index-78442d7d.js",
+    "file": "assets/Index-4f8df0ab.js",
     "src": "resources/js/Pages/Promotions/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
+      "_PageTemplate-f4bd5f12.js",
       "_howler-5aa7ec92.js"
     ],
     "assets": [
@@ -1723,67 +1912,13 @@
       "assets/weekend-2844a576.png"
     ]
   },
-  "resources/js/Pages/Race/Index.jsx": {
-    "file": "assets/Index-729b77d7.js",
-    "src": "resources/js/Pages/Race/Index.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_GamesCarouseCard-4aa2e14c.js",
-      "_howler-5aa7ec92.js"
-    ],
-    "assets": [
-      "assets/raceheader-35cc5469.png",
-      "assets/raceheadermobile-a6528eed.png"
-    ]
-  },
-  "resources/js/Pages/Game/Ring.jsx": {
-    "file": "assets/Ring-f35cebc7.js",
-    "src": "resources/js/Pages/Game/Ring.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_GameLayout-391ffb27.js",
-      "_Grid-cf956749.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_DataGrid-2e85c1ed.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/Ring-916ea7b9.svg",
-      "assets/ring_bg-1e7237ca.svg"
-    ]
-  },
-  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
-    "file": "assets/UpdateProfileInformationForm-eceee772.js",
-    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
-      "_transition-fc01378f.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "_search-48b450a8.js": {
-    "file": "assets/search-48b450a8.js",
-    "assets": [
-      "assets/search-154cfd92.svg"
-    ]
-  },
   "resources/js/Pages/Slots/Index.jsx": {
-    "file": "assets/Index-240be929.js",
+    "file": "assets/Index-fdbaff24.js",
     "src": "resources/js/Pages/Slots/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
+      "_PageTemplate-f4bd5f12.js",
       "_digdigger-f3a72a4c.js",
       "_search-48b450a8.js",
       "_howler-5aa7ec92.js"
@@ -1802,14 +1937,14 @@
     ]
   },
   "resources/js/Pages/Promotions/Invite.jsx": {
-    "file": "assets/Invite-83a1d6a1.js",
+    "file": "assets/Invite-3808717b.js",
     "src": "resources/js/Pages/Promotions/Invite.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_index-6306a1ad.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_GreyText-7b7f26a1.js",
+      "_index-a5e6493a.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_GreyText-53646b51.js",
       "_howler-5aa7ec92.js"
     ],
     "assets": [
@@ -1819,130 +1954,8 @@
       "assets/pro_invite_sm-353a9e26.svg"
     ]
   },
-  "_transition-fc01378f.js": {
-    "file": "assets/transition-fc01378f.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
-    "file": "assets/UpdatePasswordForm-a86a55c6.js",
-    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_PrimaryButton-6a221c14.js",
-      "_transition-fc01378f.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "resources/js/Pages/Profile/Edit.jsx": {
-    "file": "assets/Edit-2b5f4acb.js",
-    "src": "resources/js/Pages/Profile/Edit.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
-      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
-      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
-      "_howler-5aa7ec92.js",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_transition-fc01378f.js",
-      "_PrimaryButton-6a221c14.js"
-    ]
-  },
-  "resources/js/Pages/LiveCasino/Index.jsx": {
-    "file": "assets/Index-2cc0057a.js",
-    "src": "resources/js/Pages/LiveCasino/Index.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_32cards-b217a3bd.js",
-      "_search-48b450a8.js",
-      "_howler-5aa7ec92.js"
-    ],
-    "assets": [
-      "assets/ruletika-66abd5aa.png",
-      "assets/andarbar-ddf7c52b.png",
-      "assets/blackjcklive-75652fd8.png",
-      "assets/goldblackjack-3e4db6cd.png",
-      "assets/craps-66084fda.png",
-      "assets/sniondrive-40484283.png",
-      "assets/dragontigerlive-c41c9be5.png"
-    ]
-  },
-  "_index-9fd8bc04.js": {
-    "file": "assets/index-9fd8bc04.js",
-    "assets": [
-      "assets/activity_sm-061642d2.svg",
-      "assets/info-66e9e5eb.svg",
-      "assets/bell-6ac4d732.svg",
-      "assets/infoBook-95c9ba99.svg"
-    ]
-  },
-  "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
-    "file": "assets/DeleteUserForm-7da8ad54.js",
-    "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_TextInput-6ab74e10.js",
-      "_InputLabel-d38aa316.js",
-      "_transition-fc01378f.js",
-      "_howler-5aa7ec92.js"
-    ]
-  },
-  "resources/js/Pages/Promotions/Exclusive.jsx": {
-    "file": "assets/Exclusive-1ba59d04.js",
-    "src": "resources/js/Pages/Promotions/Exclusive.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_index-9fd8bc04.js",
-      "_GreyText-7b7f26a1.js",
-      "_index-6306a1ad.js",
-      "_DataGrid-2e85c1ed.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_Tooltip-5aa729dc.js"
-    ],
-    "assets": [
-      "assets/exclusive_pro_background-d5b09337.svg",
-      "assets/exclusive_sm-82cc00ee.svg",
-      "assets/promotion_activity-dc430c8f.svg",
-      "assets/bonus_icon-54b1d346.svg"
-    ]
-  },
-  "_userIcon-a16e75ce.js": {
-    "file": "assets/userIcon-a16e75ce.js",
-    "assets": [
-      "assets/userIcon-69fc7353.svg"
-    ]
-  },
-  "_level1-1f0d6be3.js": {
-    "file": "assets/level1-1f0d6be3.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ],
-    "assets": [
-      "assets/level1-e57a9c78.svg"
-    ]
-  },
-  "_Tooltip-5aa729dc.js": {
-    "file": "assets/Tooltip-5aa729dc.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_Grow-3e626a22.js"
-    ]
-  },
-  "_GamesCarouseCard-4aa2e14c.js": {
-    "file": "assets/GamesCarouseCard-4aa2e14c.js",
+  "_GamesCarouseCard-f6257d9b.js": {
+    "file": "assets/GamesCarouseCard-f6257d9b.js",
     "imports": [
       "resources/js/app.jsx",
       "_howler-5aa7ec92.js"
@@ -1956,14 +1969,29 @@
       "assets/asianman-1d6f2297.png"
     ]
   },
+  "_userIcon-a16e75ce.js": {
+    "file": "assets/userIcon-a16e75ce.js",
+    "assets": [
+      "assets/userIcon-69fc7353.svg"
+    ]
+  },
+  "_level1-2b032b41.js": {
+    "file": "assets/level1-2b032b41.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ],
+    "assets": [
+      "assets/level1-e57a9c78.svg"
+    ]
+  },
   "resources/js/Pages/UserPages/PersonalCenter.jsx": {
-    "file": "assets/PersonalCenter-06cec0c5.js",
+    "file": "assets/PersonalCenter-e47ba972.js",
     "src": "resources/js/Pages/UserPages/PersonalCenter.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_level1-1f0d6be3.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_level1-2b032b41.js",
       "_link-712e60d6.js",
       "_userIcon-a16e75ce.js",
       "_howler-5aa7ec92.js"
@@ -1973,47 +2001,19 @@
       "assets/walletmini-27de28c2.svg"
     ]
   },
-  "_Select-ce2c4600.js": {
-    "file": "assets/Select-ce2c4600.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_Grow-3e626a22.js"
-    ]
-  },
-  "resources/js/Pages/Game/Dice.jsx": {
-    "file": "assets/Dice-0e114582.js",
-    "src": "resources/js/Pages/Game/Dice.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.jsx",
-      "_DataGrid-2e85c1ed.js",
-      "_GameLayout-391ffb27.js",
-      "_PageTemplate-bb0d4f96.js",
-      "_howler-5aa7ec92.js",
-      "_Select-ce2c4600.js",
-      "_Grow-3e626a22.js",
-      "_Tooltip-5aa729dc.js",
-      "_Grid-cf956749.js"
-    ],
-    "assets": [
-      "assets/arrow-8e10d92f.svg",
-      "assets/cross-d0610289.svg",
-      "assets/cross_sm-a8e1de03.svg"
-    ]
-  },
   "resources/js/Pages/VIP/Index.jsx": {
-    "file": "assets/Index-eac4f25d.js",
+    "file": "assets/Index-7414e656.js",
     "src": "resources/js/Pages/VIP/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_target-eca844e3.js",
-      "_Tooltip-5aa729dc.js",
-      "_GamesCarouseCard-4aa2e14c.js",
-      "_level1-1f0d6be3.js",
-      "_PageTemplate-bb0d4f96.js",
+      "_target-113de262.js",
+      "_Tooltip-ae72de7a.js",
+      "_GamesCarouseCard-f6257d9b.js",
+      "_level1-2b032b41.js",
+      "_PageTemplate-f4bd5f12.js",
       "_howler-5aa7ec92.js",
-      "_Grow-3e626a22.js"
+      "_Grow-26551156.js"
     ],
     "assets": [
       "assets/fullbg-17c0f86c.png",
@@ -2037,8 +2037,8 @@
       "assets/levelBg-73c7a1c4.svg"
     ]
   },
-  "_target-eca844e3.js": {
-    "file": "assets/target-eca844e3.js",
+  "_target-113de262.js": {
+    "file": "assets/target-113de262.js",
     "imports": [
       "resources/js/app.jsx"
     ],
@@ -2048,45 +2048,45 @@
     ]
   },
   "resources/js/Pages/UserPages/History.jsx": {
-    "file": "assets/History-afe05b09.js",
+    "file": "assets/History-bc645bc4.js",
     "src": "resources/js/Pages/UserPages/History.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
+      "_PageTemplate-f4bd5f12.js",
       "_userIcon-a16e75ce.js",
-      "_Select-ce2c4600.js",
-      "_Grid-cf956749.js",
+      "_Select-028588c9.js",
+      "_Grid-59943fdf.js",
       "_howler-5aa7ec92.js",
-      "_Grow-3e626a22.js"
+      "_Grow-26551156.js"
     ],
     "assets": [
       "assets/historyIcon-a37cc0f5.svg",
       "assets/datepicker-d4fa5b25.svg"
     ]
   },
-  "_DataGrid-2e85c1ed.js": {
-    "file": "assets/DataGrid-2e85c1ed.js",
+  "_DataGrid-a9008242.js": {
+    "file": "assets/DataGrid-a9008242.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Select-ce2c4600.js",
-      "_Tooltip-5aa729dc.js",
-      "_Grow-3e626a22.js"
+      "_Select-028588c9.js",
+      "_Tooltip-ae72de7a.js",
+      "_Grow-26551156.js"
     ]
   },
   "resources/js/Pages/UserPages/Referral.jsx": {
-    "file": "assets/Referral-f48dd35d.js",
+    "file": "assets/Referral-7c921009.js",
     "src": "resources/js/Pages/UserPages/Referral.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-bb0d4f96.js",
-      "_CopyableLink-180305eb.js",
-      "_target-eca844e3.js",
-      "_Tooltip-5aa729dc.js",
+      "_PageTemplate-f4bd5f12.js",
+      "_CopyableLink-ad8a63fa.js",
+      "_target-113de262.js",
+      "_Tooltip-ae72de7a.js",
       "_howler-5aa7ec92.js",
       "_link-712e60d6.js",
-      "_Grow-3e626a22.js"
+      "_Grow-26551156.js"
     ],
     "assets": [
       "assets/bank-757e32e3.png",
@@ -2113,7 +2113,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-e76e3242.js",
+    "file": "assets/app-60df85b8.js",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
