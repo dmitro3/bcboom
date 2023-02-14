@@ -40,7 +40,7 @@ class Withdrawal
             'mchid' => $this->merchantNumber,
             'timestamp' => time(),
             'amount' => $withdrawal->final_amount,
-            'orderno' => $withdrawal->orderno ?? intval(microtime(true) * 1000 * 1000),
+            'orderno' => $withdrawal->orderno,
             'customermobile' => $withdrawal->whatsapp,
             'taxi' => $withdrawal->taxi,
             'pixkey' => $withdrawal->cpf,
