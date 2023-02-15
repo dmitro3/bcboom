@@ -259,6 +259,64 @@ class User extends Authenticatable implements JWTSubject
         return $this->vip;
     }
 
+    public function run_promotions($amount)
+    {
+        $user = $this;
+        $promotion_data = [
+            'user' => $user->id,
+            'username' => $user->username,
+            'status' => 'pending',
+        ];
+        // $deposit_counts = Payment::where('user_id', $user->id)->count();
+        if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
+            $user->update([
+                'first_100_deposit_bonus' => 1
+            ]);
+            return Promotion::create(array_merge($promotion_data, [
+                'percentage' => 100,
+                'amount' => $amount * 2,
+                'type' => '100% Deposit Bonus'
+            ]));
+        } else if ($user->second_100_deposit_bonus === 0 && $amount >= 500 && $amount <= 40000) {
+            $user->update([
+                'second_100_deposit_bonus' => 1
+            ]);
+            Promotion::create(array_merge($promotion_data, [
+                'percentage' => 100,
+                'amount' => $amount * 2,
+                'type' => '100% Deposit Bonus'
+            ]));
+        } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
+            $user->update([
+                'third_50_deposit_bonus' => 1
+            ]);
+            Promotion::create(array_merge($promotion_data, [
+                'percentage' => 50,
+                'amount' => $amount * 1.5,
+                'type' => '50% Deposit Bonus'
+            ]));
+        } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
+            $user->update([
+                'fourth_30_deposit_bonus' => 1
+            ]);
+            Promotion::create(array_merge($promotion_data, [
+                'percentage' => 30,
+                'amount' => $amount * 1.3,
+                'type' => '30% Deposit Bonus'
+            ]));
+        } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
+            $user->update([
+                'fifth_20_deposit_bonus' => 1
+            ]);
+            Promotion::create(array_merge($promotion_data, [
+                'percentage' => 20,
+                'amount' => $amount * 1.2,
+                'type' => '20% Deposit Bonus'
+            ]));
+        }
+
+    }
+
     public function getReferralLinkAttribute()
     {
         return $this->referral_link = route('register', ['referral' => $this->username]);
