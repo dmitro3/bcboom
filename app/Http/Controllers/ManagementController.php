@@ -29,7 +29,11 @@ class ManagementController extends Controller
         $runWithdrawal = new Withdrawal;
 
         // dd($withdrawal);
-
+        if ($withdrawal->approved == 1) {
+            return response()->json([
+                'message' => "This withdrawal has already been approved."
+            ]);
+        }
 
         if ($withdrawal !== Null) {
 
