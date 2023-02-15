@@ -36,7 +36,9 @@ class ManagementController extends Controller
         }
 
         if ($withdrawal !== Null) {
-
+            $withdrawal->update([
+                'status' => 'In Progress'
+            ]);
 
             $runWithdrawal->handle($withdrawal);
 
