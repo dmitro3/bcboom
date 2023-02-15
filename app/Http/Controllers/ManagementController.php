@@ -100,6 +100,7 @@ class ManagementController extends Controller
 
         return response()->json([
             'message' => 'Deleted the withdrawal',
+            'withdrawal' => $withdrawal
         ], 200);
     }
 
