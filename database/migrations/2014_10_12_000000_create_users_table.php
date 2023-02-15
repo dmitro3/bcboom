@@ -33,6 +33,11 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('status')->default('active');
             $table->string('password');
+            $table->boolean('first_100_deposit_bonus')->default(0);
+            $table->boolean('second_100_deposit_bonus')->default(0);
+            $table->boolean('third_50_deposit_bonus')->default(0);
+            $table->boolean('fourth_30_deposit_bonus')->default(0);
+            $table->boolean('fifth_20_deposit_bonus')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

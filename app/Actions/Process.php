@@ -2,6 +2,7 @@
 namespace App\Actions;
 
 use App\Models\Payment;
+use App\Models\Promotion;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
@@ -42,21 +43,75 @@ class Process
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'notifyurl' => url('/api/notifypayment'),
-                'email' => $user->email,
-                'mobile' => $user->phone,
-                'customer' => $user->username,
-                'callbackurl' => url('/api/notifypayment'),
-                'currency' => 'BRL'
-            ];
-            
-            
-            $sign = $this->sign($data, $this->merchantKey);
-            $data['sign'] = $sign;
+            'email' => $user->email,
+            'mobile' => $user->phone,
+            'customer' => $user->username,
+            'callbackurl' => url('/api/notifypayment'),
+            'currency' => 'BRL'
+        ];
 
-            
-            
-            $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-            
+
+        $sign = $this->sign($data, $this->merchantKey);
+        $data['sign'] = $sign;
+
+        function run_promotions($user, $amount)
+        {
+            $promotion_data = [
+                'user' => $user->id,
+                'username' => $user->username,
+                'status' => 'pending',
+            ];
+            $deposit_counts = Payment::where('user_id', $user->id)->count();
+            if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
+                $user->update([
+                    'first_100_deposit_bonus' => 1
+                ]);
+                return Promotion::create(array_merge($promotion_data, [
+                    'percentage' => 100,
+                    'amount' => $amount * 2,
+                    'type' => '100% Deposit Bonus'
+                ]));
+            } else if ($user->second_100_deposit_bonus === 0 && $amount >= 500 && $amount <= 40000) {
+                $user->update([
+                    'second_100_deposit_bonus' => 1
+                ]);
+                Promotion::create(array_merge($promotion_data, [
+                    'percentage' => 100,
+                    'amount' => $amount * 2,
+                    'type' => '100% Deposit Bonus'
+                ]));
+            } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
+                $user->update([
+                    'third_50_deposit_bonus' => 1
+                ]);
+                Promotion::create(array_merge($promotion_data, [
+                    'percentage' => 50,
+                    'amount' => $amount * 1.5,
+                    'type' => '50% Deposit Bonus'
+                ]));
+            } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
+                $user->update([
+                    'fourth_30_deposit_bonus' => 1
+                ]);
+                Promotion::create(array_merge($promotion_data, [
+                    'percentage' => 30,
+                    'amount' => $amount * 1.3,
+                    'type' => '30% Deposit Bonus'
+                ]));
+            } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
+                $user->update([
+                    'fifth_20_deposit_bonus' => 1
+                ]);
+                Promotion::create(array_merge($promotion_data, [
+                    'percentage' => 20,
+                    'amount' => $amount * 1.2,
+                    'type' => '20% Deposit Bonus'
+                ]));
+            }
+
+        }
+        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+
         // dd($result);
 
 
@@ -79,6 +134,7 @@ class Process
                 "sign" => $data['sign'],
             ]);
 
+            run_promotions($user, $request->amount);
 
 
             $wallet = Wallet::where('user_id', $user->id)->first();
@@ -95,13 +151,14 @@ class Process
         }
     }
 
-    function status(Request $request): string {
+    function status(Request $request): string
+    {
         $data = $request->all();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
 
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
+        if ($sign === $request->sign) {
+            if ($data['trade_state'] === 'SUCCESS') {
                 $payment = Payment::where('order_no', $request->tx_orderno)->first();
 
                 $wallet = Wallet::where('order_no', $request->tx_orderno)->first();

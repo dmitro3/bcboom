@@ -36,6 +36,11 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'vip',
         'referred_by',
+        'first_100_deposit_bonus',
+        'second_100_deposit_bonus',
+        'third_50_deposit_bonus',
+        'fourth_30_deposit_bonus',
+        'fifth_20_deposit_bonus',
         'status'
     ];
     public function emails()
@@ -93,23 +98,23 @@ class User extends Authenticatable implements JWTSubject
             //         ['bonus' => $walletBonus],
             //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
             //     );
-            } else if ($refs > 999) {
+        } else if ($refs > 999) {
             Promotion::create(array_merge($referral_promotion, ['amount' => 10]));
             //     $walletBonus = $wallet->bonus + 10;
             //     $w = Wallet::updateOrCreate(
             //         ['user_id' => $this->id],
             //         ['bonus' => $walletBonus],
             //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
-                // );
-            } else if ($refs > 1000) {
+            // );
+        } else if ($refs > 1000) {
             Promotion::create(array_merge($referral_promotion, ['amount' => 10]));
             //     $walletBonus = $wallet->bonus + 10;
             //     $w = Wallet::updateOrCreate(
             //         ['user_id' => $this->id],
             //         ['bonus' => $walletBonus],
-                    // ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            // ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
             //     );
-            } else if ($refs > 2999) {
+        } else if ($refs > 2999) {
             Promotion::create(array_merge($referral_promotion, ['amount' => 12]));
             //     $walletBonus = $wallet->bonus + 12;
             //     $w = Wallet::updateOrCreate(
@@ -117,7 +122,7 @@ class User extends Authenticatable implements JWTSubject
             //         ['bonus' => $walletBonus],
             //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
             //     );
-            } else if ($refs > 4999) {
+        } else if ($refs > 4999) {
             Promotion::create(array_merge($referral_promotion, ['amount' => 15]));
             //     $walletBonus = $wallet->bonus + 15;
             //     $w = Wallet::updateOrCreate(

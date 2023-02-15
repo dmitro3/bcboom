@@ -2,24 +2,25 @@
 
 namespace App\Notifications;
 
+use App\Models\Promotion;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReferralBonus extends Notification
+class Bonus extends Notification
 {
     use Queueable;
-    private $user;
+    private $promotion;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct(Promotion $promotion)
     {
         //
-        $this->user = $user;
+        $this->promotion = $promotion;
     }
 
     /**
@@ -42,10 +43,11 @@ class ReferralBonus extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You referred someone.')
-                    ->name($this->user['name'])
-                    ->action('Enter Dashboard', url('/home'))
-                    ->line('Enjoy your bonus!');
+                    ->line('Hello '.$this->promotion->username)
+                    // ->action('Enter Dashboard', url('/'))
+                    ->line('You have been credited with a '. $this->promotion->type .' of '.$this->promotion->amount.' R$')
+                    ->line('Enjoy your bonus!')
+                    ->action('Go home', url('/'));
     }
 
     /**

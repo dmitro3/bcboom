@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Promotion;
 use App\Models\Wallet;
+use App\Notifications\Bonus;
+use Auth;
 
 class PromotionController extends Controller
 {
     public function approve($id)
     {
+        $user = Auth::user();
         $promotion = Promotion::find($id);
         if ($promotion === null) {
             return response()->json([
@@ -26,6 +29,7 @@ class PromotionController extends Controller
             ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
         );
         $promotion->update(['status' => 'approved']);
+        $user->notify(new Bonus($promotion));
         return response()->json([
             'success' => 'Promotion approved successfully',
             'wallet' => $w
