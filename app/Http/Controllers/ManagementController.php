@@ -35,9 +35,15 @@ class ManagementController extends Controller
             ]);
         }
 
+        if ($withdrawal->status == 'IN PROGRESS' || $withdrawal->status == 'REJECTED' || $withdrawal->status == 'COMPLETED' || $withdrawal->status == 'FAILED') {
+            return response()->json([
+                'message' => "This withdrawal cannot be approved."
+            ]);
+        }
+
         if ($withdrawal !== Null) {
             $withdrawal->update([
-                'status' => 'In Progress'
+                'status' => 'IN PROGRESS'
             ]);
 
             $runWithdrawal->handle($withdrawal);
