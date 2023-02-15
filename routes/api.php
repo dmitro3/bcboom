@@ -204,6 +204,11 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
         'all_games'
     ])->name('all_games');
 
+    Route::post('/games/delete/{id}', [
+        GameController::class,
+        'delete'
+    ]);
+
 
     Route::post('/promotion/approve/{id}', [
         PromotionController::class,

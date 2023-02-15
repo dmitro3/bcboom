@@ -14,7 +14,7 @@ class GameController extends Controller
     {
         $all_games = [];
         $games = Game::orderBy('created_at', 'desc')->get();
-        
+
         foreach ($games as $game) {
             $player = User::where('id', $game->player)
                 ->first();
@@ -73,5 +73,19 @@ class GameController extends Controller
             'games' => $games,
             'message' => 'Games fetched',
         ], 200);
+    }
+
+    public function delete($id)
+    {
+        $game = Game::find($id);
+        if ($game === null) {
+            return response()->json([
+                'error' => 'game not found'
+            ]);
+        }
+        $game->delete();
+        return response()->json([
+            'success' => 'game deleted'
+        ]);
     }
 }

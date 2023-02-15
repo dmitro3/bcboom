@@ -3,19 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\Promotion;
+use App\Models\Wallet;
 
 class PromotionController extends Controller
 {
     public function approve($id)
     {
         $promotion = Promotion::find($id);
-        $wallet = $promotion->user->wallet;
-        return redirect()->back()->with('success', 'Promotion approved successfully');
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
+        if ($promotion->status == 'approved') {
+            return response()->json([
+                'error' => 'Promotion already approved'
+            ], 400);
+        }
+        $wallet = Wallet::where('user_id', $promotion->user)->first();
+        $walletBonus = $wallet->bonus + $promotion->amount;
+        $w = $wallet->update(
+            ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+        );
+        $promotion->update(['status' => 'approved']);
+        return response()->json([
+            'success' => 'Promotion approved successfully',
+            'wallet' => $w
+        ], 200);
     }
 
     public function reject($id)
     {
         $promotion = Promotion::find($id);
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
+
         $promotion->update(['status' => 'rejected']);
         return response()->json([
             'success' => 'Promotion rejected successfully'
@@ -24,7 +49,12 @@ class PromotionController extends Controller
 
     public function delete($id)
     {
-        $promotion = Promotion::findOrFail($id);
+        $promotion = Promotion::find($id);
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
         $promotion->delete();
         return response()->json([
             'success' => 'Promotion deleted successfully'
@@ -34,9 +64,10 @@ class PromotionController extends Controller
 
     public function all_promotions()
     {
-        $promotions = Promotion::orderBy('created_at', 'desc')->get();
+        $promotions = Promotion::where('status', '!=', 'approved')->orderBy('created_at', 'desc')->get();
         return response()->json([
-            'promotions' => $promotions
+            'promotions' => $promotions,
+            'message' => 'success'
         ]);
     }
 }
