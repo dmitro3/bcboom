@@ -83,7 +83,7 @@ class User extends Authenticatable implements JWTSubject
         // $walletBonus = 0;
         // if ($wallet) {
         $referral_promotion = [
-            'type' => 'Refferral Bonus',
+            'type' => 'Referral Bonus',
             'status' => 'pending',
             'percentage' => '0',
             'user' => $this->id,
