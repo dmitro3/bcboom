@@ -31,7 +31,7 @@ class Bonus extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -43,7 +43,6 @@ class Bonus extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->promotion->type .'Bonus')
                     ->line('Hello '.$this->promotion->username)
                     // ->action('Enter Dashboard', url('/'))
                     ->line('You have been credited with a '. $this->promotion->type .' of '.$this->promotion->amount.' R$')

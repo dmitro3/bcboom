@@ -24,12 +24,13 @@ class PromotionController extends Controller
             ], 400);
         }
         $wallet = Wallet::where('user_id', $promotion->user)->first();
-        $walletBonus = $wallet->bonus + $promotion->amount;
+        // $walletBonus = $wallet->bonus + $promotion;
+
         $w = $wallet->update(
-            ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            ['withdrawable_balance' => $wallet->withdrawable_balance + $promotion->amount]
         );
-        $promotion->update(['status' => 'approved']);
         $user->notify(new Bonus($promotion));
+        $promotion->update(['status' => 'approved']);
         return response()->json([
             'success' => 'Promotion approved successfully',
             'wallet' => $w
