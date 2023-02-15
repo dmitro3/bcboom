@@ -13,7 +13,8 @@ export const gamesTableColumns = [
         width: "25%",
         flex: 1,
         cellClassName: "player-column--cell",
-        renderCell: ({ row: { amount, player } }) => {
+        renderCell: ({ row: { earning, loss, player } }) => {
+            const isLoss = earning === '0.0000'
             return (
                 <Box
                     sx={{
@@ -24,15 +25,16 @@ export const gamesTableColumns = [
                 >
                     <img
                         src={
-                            amount >= 23 && amount < 25
-                                ? IconBlue
-                                : amount >= 25 && amount < 35
-                                ? IconYellow
-                                : amount >= 35 && amount < 55
-                                ? IconGreen
-                                : amount >= 55
-                                ? IconPurple
-                                : null
+                            // bet_amount >= 23 && bet_amount < 25
+                            //     ? IconBlue
+                            //     : bet_amount >= 25 && bet_amount < 35
+                            //     ? IconYellow
+                            //     : bet_amount >= 35 && bet_amount < 55
+                            //     ? IconGreen
+                            //     : bet_amount >= 55
+                            //     ? IconPurple
+                            //     : null
+                            isLoss ? IconBlue : IconPurple
                         }
                     />
                     <Typography
@@ -50,7 +52,7 @@ export const gamesTableColumns = [
     },
 
     {
-        field: "cash_out",
+        field: "name",
         headerName: "Cash Out",
         type: "text",
         sortable: false,
@@ -60,14 +62,14 @@ export const gamesTableColumns = [
     },
 
     {
-        field: "amount",
+        field: "bet_amount",
         headerName: "Amount",
         type: "text",
         width: "25%",
         sortable: "false",
         flex: 1,
         cellClassName: "amount-column--cell",
-        renderCell: ({ row: { amount } }) => {
+        renderCell: ({ row: { bet_amount } }) => {
             return (
                 <Box>
                     <Box
@@ -91,7 +93,7 @@ export const gamesTableColumns = [
                         }}
                         component="span"
                     >
-                        {amount}
+                        {bet_amount}
                     </Box>
                 </Box>
             );
@@ -99,13 +101,26 @@ export const gamesTableColumns = [
     },
 
     {
-        field: "profit",
+        field: "earning",
         headerName: "Profit",
         type: "text",
         sortable: false,
         width: "25%",
         flex: 1,
         cellClassName: "profit-column--cell",
+        renderCell: ({ row: { earning, loss } }) => {
+            const isLoss = earning === "0.0000";
+            return (
+                <Typography
+                    sx={{
+                        color: isLoss ? "#ed4a4a" : "green",
+                        fontSize: "13px",
+                    }}
+                >
+                    {isLoss ? loss : earning}
+                </Typography>
+            );
+        },
     },
 ];
 

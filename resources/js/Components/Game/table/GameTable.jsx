@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import {
     DataGrid,
@@ -10,10 +10,35 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import candidates from "../../../../assets/games/candidates.svg";
 import ellipsis from "../../../../assets/games/Ellipse 93.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllGames, setAllGames } from "@/redux/game/game-slice";
 
 const GameTable = () => {
-    const [height, setHeight] = React.useState("36.4rem");
-    const [showMore, setShowMore] = React.useState(true);
+    const [height, setHeight] = useState("36.4rem");
+    const [showMore, setShowMore] = useState(true);
+    const { allGames } = useSelector((state) => state.game);
+    const [games, setGames] = useState(allGames);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const location = window?.location?.pathname?.split("/")[2];
+        async function fetchAlllGamers(location) {
+            const response = await dispatch(fetchAllGames(location));
+            const games = response?.payload?.data?.games;
+            dispatch(setAllGames(games.slice(0, 51)));
+            setGames(games.slice(0, 51));
+        }
+        fetchAlllGamers(location);
+        // }, []);
+        // useEffect(() => {
+        const interval = setInterval(() => {
+            const location = window.location.pathname;
+            if (location.includes("games")) fetchAlllGamers();
+        }, 20000);
+        return () => clearInterval(interval);
+    }, []);
+    useEffect(() => {
+        setGames(allGames);
+    }, [allGames]);
 
     function CustomFooter() {
         return (
@@ -180,7 +205,7 @@ const GameTable = () => {
                     borderBottom: "none",
                     overflowX: "hidden",
                 }}
-                rows={gamesTableRows}
+                rows={games}
                 columns={gamesTableColumns}
                 disableColumnFilter={true}
                 disableColumnMenu={true}

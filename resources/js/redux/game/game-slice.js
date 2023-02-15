@@ -7,6 +7,11 @@ export const saveGame = createAsyncThunk("game/new", async (payload) => {
     return response;
 });
 
+export const fetchAllGames = createAsyncThunk("game/all", async () => {
+    const response = await gameApiFunctions.fetchAllGames();
+    return response;
+});
+
 const gameSlice = createSlice({
     name: "game",
     initialState: {
@@ -19,6 +24,7 @@ const gameSlice = createSlice({
         },
         loading: false,
         playing: false,
+        allGames: [],
     },
     reducers: {
         setGameData(state, action) {
@@ -30,14 +36,17 @@ const gameSlice = createSlice({
         setGameLoading(state, action) {
             state.loading = action.payload;
         },
+        setAllGames(state, action) {
+            state.allGames = action.payload;
+        },
     },
-    // extraReducers: {
-    //     [saveGame.fulfilled]: (state, action) => {
-    //         console.log('store: ', store.getState().wallet)
-    //         state.wallet = action.payload.data.wallet;
-    //     },
-    // },
+    extraReducers: {
+        [fetchAllGames.fulfilled]: (state, action) => {
+            state.allGames = action.payload.data.wallet;
+        },
+    },
 });
 
-export const { setGameData, setGameIsOn, setGameLoading } = gameSlice.actions;
+export const { setGameData, setGameIsOn, setGameLoading, setAllGames } =
+    gameSlice.actions;
 export const gameState = gameSlice.reducer;
