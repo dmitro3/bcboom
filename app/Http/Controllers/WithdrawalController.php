@@ -664,7 +664,7 @@ class WithdrawalController extends Controller
         } else {
             return response()->json([
                 'message' => 'No money in your wallet'
-            ], 401);
+            ], 422);
         }
 
 
