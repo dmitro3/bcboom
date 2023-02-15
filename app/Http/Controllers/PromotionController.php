@@ -23,6 +23,11 @@ class PromotionController extends Controller
                 'error' => 'Promotion already approved'
             ], 400);
         }
+        if ($promotion->status == 'rejected') {
+            return response()->json([
+                'error' => 'Promotion already rejected'
+            ], 400);
+        }
         $wallet = Wallet::where('user_id', $promotion->user)->first();
         // $walletBonus = $wallet->bonus + $promotion;
 
@@ -32,7 +37,7 @@ class PromotionController extends Controller
         $user->notify(new Bonus($promotion));
         $promotion->update(['status' => 'approved']);
         return response()->json([
-            'success' => 'Promotion approved successfully',
+            'message' => 'Promotion approved successfully',
             'wallet' => $wallet
         ], 200);
     }
@@ -48,7 +53,7 @@ class PromotionController extends Controller
 
         $promotion->update(['status' => 'rejected']);
         return response()->json([
-            'success' => 'Promotion rejected successfully'
+            'message' => 'Promotion rejected successfully'
         ], 200);
     }
 
@@ -62,7 +67,7 @@ class PromotionController extends Controller
         }
         $promotion->delete();
         return response()->json([
-            'success' => 'Promotion deleted successfully'
+            'message' => 'Promotion deleted successfully'
         ], 200);
 
     }
