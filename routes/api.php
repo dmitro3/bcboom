@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\PromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -204,6 +205,25 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
     ])->name('all_games');
 
 
+    Route::post('/promotion/approve/{id}', [
+        PromotionController::class,
+        'approve'
+    ])->name('approve');
+
+    Route::post('/promotion/reject/{id}', [
+        PromotionController::class,
+        'reject'
+    ])->name('reject');
+
+    Route::post('/promotion/delete/{id}', [
+        PromotionController::class,
+        'delete'
+    ])->name('delete');
+
+    Route::get('promotions/all', [
+        PromotionController::class,
+        'all_promotions'
+    ])->name('all_promotions');
 
     Route::post(
         'notify',

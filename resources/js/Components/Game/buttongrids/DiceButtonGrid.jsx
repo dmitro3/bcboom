@@ -25,11 +25,11 @@ const DiceButtonGrid = ({ playDeter }) => {
             return false;
         }
         // if()
-        if (wallet.withdrawable_balance < gameData.betAmount) {
+        if (+wallet.withdrawable_balance < +gameData.betAmount) {
             toast.error("Insufficient funds to play.");
             return false;
         }
-        if (gameData.betAmount < 0.4) {
+        if (+gameData.betAmount < 0.4) {
             toast.error("Bet amount must be at least 0.4000.");
             return false;
         }
