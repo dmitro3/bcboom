@@ -119,6 +119,11 @@ Route::middleware(['jwt.verify'])->group(function () {
         }
     );
 
+    Route::get('games/all', [
+        GameController::class,
+        'all_games'
+    ])->name('all_games');
+
     Route::post('game/new', [
         GameController::class,
         'new_game'
@@ -197,12 +202,6 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
         UserController::class,
         'sendMail'
     ])->name('sendMail');
-
-
-    Route::get('games/all', [
-        GameController::class,
-        'all_games'
-    ])->name('all_games');
 
     Route::post('/games/delete/{id}', [
         GameController::class,
