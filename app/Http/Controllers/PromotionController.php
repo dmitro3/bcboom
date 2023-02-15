@@ -68,7 +68,8 @@ class PromotionController extends Controller
 
     public function all_promotions()
     {
-        $promotions = Promotion::where('status', '!=', 'approved')->orderBy('created_at', 'desc')->get();
+        // $promotions = Promotion::where('status', '!=', 'approved')->orderBy('created_at', 'desc')->get();
+        $promotions = Promotion::orderBy('created_at', 'desc')->get();
         return response()->json([
             'promotions' => $promotions,
             'message' => 'success'
