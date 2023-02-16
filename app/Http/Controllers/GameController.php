@@ -39,6 +39,11 @@ class GameController extends Controller
     public function new_game(Request $request)
     {
         $user = Auth::user();
+        if ($request->amount > $user->wallet->withdrawable_balance) {
+            return response()->json([
+                'error' => 'Insufficient balance',
+            ], 200);
+        }
         $game = Game::create([
             'name' => $request->name,
             'status' => $request->status,
