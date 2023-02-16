@@ -110,7 +110,7 @@ const DicePage = () => {
         );
         if (response.type === "game/new/rejected") {
             toast.error(response.payload.message, {
-                position: "top-center",
+                position: "top-center", 
             });
         }
         if (response.payload.data.message === "success")

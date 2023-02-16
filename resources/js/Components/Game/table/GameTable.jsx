@@ -205,7 +205,7 @@ const GameTable = () => {
                     borderBottom: "none",
                     overflowX: "hidden",
                 }}
-                rows={games}
+                rows={games || []}
                 columns={gamesTableColumns}
                 disableColumnFilter={true}
                 disableColumnMenu={true}
