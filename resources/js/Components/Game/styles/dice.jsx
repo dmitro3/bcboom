@@ -188,6 +188,8 @@ const DiceWrapperThree = styled("div")(({ isMobile }) => ({
     },
     "#cube3": {
         ...cubeStyle,
+
+        
     },
     "#cube3:hover": { cursor: "pointer" },
     "#cube3 div": {
