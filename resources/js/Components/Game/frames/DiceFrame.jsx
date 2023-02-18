@@ -4,7 +4,6 @@ import { toggleRollUnder } from "@/utils/util";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/system";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import arrow from "../../../../assets/games/arrow.svg";
 import cross from "../../../../assets/games/cross.svg";
@@ -104,7 +103,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                         aria-label="pretto slider"
                         value={gameData.winChance}
                         min={3}
-                        max={100}
+                        max={96}
                         onChange={(_, value) => {
                             dispatch(
                                 setGameData({
@@ -208,14 +207,17 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        {gameData.payout}
+                                        {(
+                                            gameData.payout *
+                                            gameData.numberOfPlay
+                                        ).toFixed(4)}
                                     </Typography>
                                     <div
                                         onClick={() =>
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: 0.50.toFixed(4),
+                                                    payout: (0.5).toFixed(4),
                                                 })
                                             )
                                         }
@@ -490,7 +492,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: 0.50.toFixed(4),
+                                                    payout: (0.5).toFixed(4),
                                                 })
                                             )
                                         }
