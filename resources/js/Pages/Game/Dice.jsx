@@ -96,7 +96,7 @@ const DicePage = () => {
             differenceInChance[1]
         );
         const status = rolledArray.includes(rolled) ? "won" : "lose";
-        const amount = gameData.betAmount;
+        const amount = status === "won" ? gameData.payout : gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
         });
