@@ -25,7 +25,7 @@ const GameTable = () => {
             const response = await dispatch(fetchAllGames(location));
             const games = response?.payload?.data?.games;
             dispatch(setAllGames(games.slice(0, 51)));
-            setGames(games.slice(0, 51));
+            setGames(games?.slice(0, 51));
         }
         fetchAlllGamers(location);
         // }, []);

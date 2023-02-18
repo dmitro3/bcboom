@@ -231,7 +231,8 @@ const UserDropdown = ({
     useEffect(() => {
         const interval = setInterval(() => {
             const location = window.location.pathname;
-            if (location.includes("games")) dispatcher(getWallet());
+            if (location.includes("games") && isLoggedIn)
+                dispatcher(getWallet());
         }, 20000);
         return () => clearInterval(interval);
     }, []);
