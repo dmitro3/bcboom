@@ -1,10 +1,12 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
+import { setSound } from "@/redux/app-state/app-slice";
 import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import useSound from "use-sound";
 
 const DicesWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
@@ -266,16 +268,17 @@ const DiceComponent = ({ setPlaying }) => {
         return diceNumber;
     }
     const { playing } = useSelector((state) => state.game);
-    // const [xx, setXX] = useState({});
-    // console.log("xx: ", xx);
+    const { sound } = useSelector((state) => state.app);
+    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
     useEffect(() => {
-        // if (!playing ) setPlaying(true);
         if (
             playing &&
             diceOneRef.current &&
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
+            play();
+            console.log("sound: ", sound.currentSound);
             async function diceFn() {
                 setPlaying(true);
                 let x = await Promise.allSettled([
@@ -283,7 +286,6 @@ const DiceComponent = ({ setPlaying }) => {
                     rollDice(diceTwoRef.current, 2),
                     rollDice(diceThreeRef.current, 3),
                 ]);
-                // setXX(x.map((item) => item.value));
                 dispatch(
                     setGameData({
                         ...gameData,
@@ -294,7 +296,6 @@ const DiceComponent = ({ setPlaying }) => {
 
             diceFn();
             setPlaying(false);
-            // dispatch(setGameIsOn(false));
         }
     }, [playing]);
     return (

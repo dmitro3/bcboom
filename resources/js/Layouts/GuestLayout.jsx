@@ -3,21 +3,18 @@ import DesktopFooter from "@/Components/Footer/DesktopFooter";
 import MobileFooter from "@/Components/Footer/MobileFooter";
 import MobileNav from "@/Components/Footer/MobileNav";
 import LoginSignupModal from "@/Components/modal/auth/LoginSignup";
+import NicknameModal from "@/Components/modal/profile/NicknameModal";
 import WalletModal from "@/Components/modal/wallet/WalletModal";
 import { Flex } from "@/Components/UtilComponents/Flex";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { styled } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
-import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DesktopHeader, { MobileHeader } from "../Components/Header/Header";
+import SimpleSidebar from "../Components/Sidebar/SimpleSidebar";
 import LayoutTheme from "./theme";
-import NicknameModal from "@/Components/modal/profile/NicknameModal";
-import { Howl, Howler } from "howler";
-import { setSound } from "@/redux/app-state/app-slice";
-import useSound from "use-sound";
 
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
@@ -54,18 +51,15 @@ export default function GuestLayout({ children }) {
     const { modalState: walletModalState } = useSelector(
         (state) => state.wallet
     );
-    const dispatch = useDispatch();
-    const { sound } = useSelector((state) => state.app);
+    // const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
-
-    useEffect(() => {
-        console.log("sound: ", sound);
-        if (sound.muted) return stop();
-        // if (!isPlaying && !sound.muted) return play();
-        // play();
-    }, [sound.muted, sound.currentSound]);
+    // useEffect(() => {
+    //     console.log("sound: ", sound);
+    //     if (sound.muted) return stop();
+    //     // if (!isPlaying && !sound.muted) return play();
+    //     // play();
+    // }, [sound.muted, sound.currentSound]);
 
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));

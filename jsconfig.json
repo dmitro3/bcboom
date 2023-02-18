@@ -16,5 +16,6 @@
         "public",
         "tmp",
         "temp"
-    ]
+    ],
+    "jsxImportSource": "@emotion/react"
 }

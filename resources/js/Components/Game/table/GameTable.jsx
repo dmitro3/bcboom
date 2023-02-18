@@ -17,6 +17,7 @@ const GameTable = () => {
     const [height, setHeight] = useState("36.4rem");
     const [showMore, setShowMore] = useState(true);
     const { allGames } = useSelector((state) => state.game);
+    const { user } = useSelector((state) => state.auth);
     const [games, setGames] = useState(allGames);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,7 +25,7 @@ const GameTable = () => {
         async function fetchAlllGamers(location) {
             const response = await dispatch(fetchAllGames(location));
             const games = response?.payload?.data?.games;
-            dispatch(setAllGames(games.slice(0, 51)));
+            dispatch(setAllGames(games?.slice(0, 51)));
             setGames(games.slice(0, 51));
         }
         fetchAlllGamers(location);
@@ -32,7 +33,8 @@ const GameTable = () => {
         // useEffect(() => {
         const interval = setInterval(() => {
             const location = window.location.pathname;
-            if (location.includes("games")) fetchAlllGamers();
+            if (location.includes("games") && user.user)
+                fetchAlllGamers();
         }, 20000);
         return () => clearInterval(interval);
     }, []);
@@ -210,6 +212,7 @@ const GameTable = () => {
                 disableColumnFilter={true}
                 disableColumnMenu={true}
                 autoPageSize
+                // loading
                 components={{
                     Footer: CustomFooter,
                 }}
