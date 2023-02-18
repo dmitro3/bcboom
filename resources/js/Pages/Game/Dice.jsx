@@ -125,14 +125,14 @@ const DicePage = () => {
 
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
-        for (let i = 0; i < +gameData.numberOfPlay; i++) {
+        // for (let i = 0; i < +gameData.numberOfPlay; i++) {
             if (gameData.diceNumber.length === 3) {
-                console.log("gothereerer");
-                setTimeout(() => {
-                    dispatch(setGameIsOn(false));
-                }, 300);
-                // handleDiceRoll(gameData.diceNumber);
-            }
+                // console.log("gothereerer");
+                // setTimeout(() => {
+                //     dispatch(setGameIsOn(false));
+                // }, 300);
+                handleDiceRoll(gameData.diceNumber);
+            // }
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
 
