@@ -93,10 +93,22 @@ const DicePage = () => {
         await sleep(2000);
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
         let differenceInChance = gameData.rollUnder.value.split(" - ");
-        differenceInChance = Math.abs(
-            differenceInChance[1] - differenceInChance[0]
+        // differenceInChance = Math.abs(
+        //     differenceInChance[1] - differenceInChance[0]
+        // );
+        const array = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+        ];
+        const rolledArray = array.slice(
+            differenceInChance[0],
+            differenceInChance[1]
         );
-        const status = rolled <= differenceInChance ? "won" : "lose";
+        const status = rolledArray.includes(rolled) ? "won" : "lose";
+        // const status =
+        //     rolled <= differenceInChance[0] || rolled >= differenceInChance[1]
+        //         ? "won"
+        //         : "lose";
+        // const status = rolled <= differenceInChance ? "won" : "lose";
         const amount = status === "won" ? gameData.payout : gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
@@ -126,12 +138,12 @@ const DicePage = () => {
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
         // for (let i = 0; i < +gameData.numberOfPlay; i++) {
-            if (gameData.diceNumber.length === 3) {
-                // console.log("gothereerer");
-                // setTimeout(() => {
-                //     dispatch(setGameIsOn(false));
-                // }, 300);
-                handleDiceRoll(gameData.diceNumber);
+        if (gameData.diceNumber.length === 3) {
+            // console.log("gothereerer");
+            // setTimeout(() => {
+            //     dispatch(setGameIsOn(false));
+            // }, 300);
+            handleDiceRoll(gameData.diceNumber);
             // }
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
@@ -145,7 +157,7 @@ const DicePage = () => {
         <div>
             <Head title="Games Dice" />
             {/* <GuestLayout> */}
-            <PageTemplate innerHeader={true}>
+        <PageTemplate innerHeader={true}>
                 <GamesPageWrapper isMobile={isMobile}>
                     <GameLayout
                         GameFrameText={"Dice"}

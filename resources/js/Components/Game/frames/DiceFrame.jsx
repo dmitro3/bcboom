@@ -104,7 +104,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                         aria-label="pretto slider"
                         value={gameData.winChance}
                         min={3}
-                        max={100}
+                        max={96}
                         onChange={(_, value) => {
                             dispatch(
                                 setGameData({

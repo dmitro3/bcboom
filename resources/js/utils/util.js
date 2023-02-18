@@ -196,7 +196,7 @@ export const toggleRollUnder = (gameData, dispatch, setGameData) => {
     );
 
     const multiplier =
-        chance.type === "under" ? 1 : gameData.winChance > 60 ? 0.1 : 20;
+        chance.type === "under" ? 1 : gameData.winChance > 60 ? 10 : 20;
     let payout = Math.abs(
         (100 / (gameData.winChance * multiplier)) *
             (gameData.betAmount - 50 / 100)
@@ -221,14 +221,22 @@ const payoutFunc = (gameData, rollUnder, chance) => {
         differenceInChance[1] - differenceInChance[0]
     );
 
-let multiplier = 1;
+    let multiplier = 1;
     switch (rollUnder.type) {
         case "under":
             multiplier = 1;
             break;
         case "over":
-            multiplier = gameData.winChance > 60 ? 0.1 : 225;
+            multiplier = 225;
+            if (gameData.winChance < 10) multiplier = 900;
+            if (gameData.winChance > 50) multiplier = 0.25;
+            if (gameData.winChance > 60) multiplier = 0.15;
+            if (gameData.winChance > 80) multiplier = 0.1;
+            // if (gameData.winChance >= 0 && gameData.winChance <= 60)
+            //     multiplier = 900;
     }
+
+    console.log("multiplier: ", multiplier);
 
     let payout = Math.abs(
         (100 / (gameData.winChance * multiplier)) *

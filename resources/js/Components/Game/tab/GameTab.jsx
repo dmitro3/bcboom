@@ -11,7 +11,7 @@ import { setGameData } from "@/redux/game/game-slice";
 import Text from "@/Components/Text/Text";
 
 const Input = styled("input")(({ width }) => ({
-    background: "transparent",
+    background: "rgb(51, 57, 101)",
     border: "none",
     width: width || "30%",
 }));

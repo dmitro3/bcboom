@@ -245,7 +245,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                     width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
-                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3585ff",
+                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3586FF",
                     fontSize: "1.375rem",
                     fontWeight: 800,
                     color: "#FFFFFF",
