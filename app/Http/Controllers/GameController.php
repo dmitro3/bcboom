@@ -41,8 +41,8 @@ class GameController extends Controller
         $user = Auth::user();
         if ($request->amount > $user->wallet->withdrawable_balance) {
             return response()->json([
-                'error' => 'Insufficient balance',
-            ], 200);
+                'message' => 'Insufficient balance to play',
+            ], 400);
         }
         $new_balance = $user->wallet->withdrawable_balance - $request->amount;
         $user->wallet->update([

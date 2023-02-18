@@ -112,8 +112,8 @@ const DicePage = () => {
                 loss: status === "won" ? 0 : gameData.betAmount,
             })
         );
-        if (response.type === "game/new/rejected") {
-            toast.error(response.payload.message, {
+        if (response.type === response?.payload?.status) {
+            toast.error(response.payload.data.message, {
                 position: "top-center",
             });
         }
