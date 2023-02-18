@@ -10,11 +10,11 @@ import { styled } from "@mui/system";
 import { setGameData } from "@/redux/game/game-slice";
 import Text from "@/Components/Text/Text";
 
-// const Input = styled("input")(({ width }) => ({
-//     background: "rgb(51, 57, 101)",
-//     border: "none",
-//     width: width || "30%",
-// }));
+const Input = styled("input")(({ width }) => ({
+    background: "rgb(51, 57, 101)",
+    border: "none",
+    width: width || "30%",
+}));
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -136,7 +136,7 @@ const GameTab = () => {
                                                 fontSize: "1rem",
                                             }}
                                         > */}
-                                        {/* <Input
+                                        <Input
                                             type="number"
                                             value={gameData.numberOfPlay}
                                             onChange={(e) => {
@@ -152,7 +152,7 @@ const GameTab = () => {
                                                     })
                                                 );
                                             }}
-                                        /> */}
+                                        />
 
                                         <Text
                                             text={`R$ ${(
@@ -240,7 +240,7 @@ const GameTab = () => {
                                         >
                                             R$ 0
                                         </Box> */}
-                                        {/* <Input
+                                        <Input
                                             type="number"
                                             value={gameData.stopOnProfits}
                                             onChange={(e) => {
@@ -255,7 +255,7 @@ const GameTab = () => {
                                                 );
                                             }}
                                             width="50%"
-                                        /> */}
+                                        />
 
                                         <Text
                                             text={`R$ ${gameData.payout}`}
@@ -296,7 +296,7 @@ const GameTab = () => {
                                             alignItems: "center",
                                         }}
                                     >
-                                        {/* <Input
+                                        <Input
                                             type="number"
                                             value={gameData.stopOnLoss}
                                             onChange={(e) => {
@@ -311,7 +311,7 @@ const GameTab = () => {
                                                 );
                                             }}
                                             width="50%"
-                                        /> */}
+                                        />
 
                                         <Text
                                             text={`R$ ${gameData.payout}`}
