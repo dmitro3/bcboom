@@ -233,7 +233,7 @@ const UserDropdown = ({
             const location = window.location.pathname;
             if (location.includes("games") && isLoggedIn)
                 dispatcher(getWallet());
-        }, 20000);
+        }, 10000);
         return () => clearInterval(interval);
     }, []);
 
