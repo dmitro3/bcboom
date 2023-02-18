@@ -88,10 +88,14 @@ const DicePage = () => {
         await sleep(2000);
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
         let differenceInChance = gameData.rollUnder.value.split(" - ");
-        differenceInChance = Math.abs(
-            differenceInChance[1] - differenceInChance[0]
+        const array = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+        ];
+        const status = rolledArray.includes(rolled) ? "won" : "lose";
+        const rolledArray = array.slice(
+            differenceInChance[0],
+            differenceInChance[1]
         );
-        const status = rolled <= differenceInChance ? "won" : "lose";
         const amount = status === "won" ? gameData.payout : gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
@@ -110,7 +114,7 @@ const DicePage = () => {
         );
         if (response.type === "game/new/rejected") {
             toast.error(response.payload.message, {
-                position: "top-center", 
+                position: "top-center",
             });
         }
         if (response.payload.data.message === "success")
