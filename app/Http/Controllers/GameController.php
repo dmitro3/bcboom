@@ -44,6 +44,11 @@ class GameController extends Controller
                 'error' => 'Insufficient balance',
             ], 200);
         }
+        $new_balance = $user->wallet->withdrawable_balance - $request->amount;
+        $user->wallet->update([
+            'withdrawable_balance' => $new_balance,
+            'bet' => $user->wallet->bet + $request->amount,
+        ]);
         $game = Game::create([
             'name' => $request->name,
             'status' => $request->status,
@@ -52,22 +57,17 @@ class GameController extends Controller
             'loss' => $request->loss,
             'player' => $user->id,
         ]);
-        $new_balance = $user->wallet->withdrawable_balance - $request->amount;
-        $user->wallet->update([
-            'withdrawable_balance' => $new_balance,
-            'bet' => $user->wallet->bet + $request->amount,
-        ]);
         $wallet = Wallet::where('user_id', $user->id)->first();
         if ($request->status == 'won') {
             $wallet->update([
                 'withdrawable_balance' => $wallet->withdrawable_balance + $request->earning,
-                'bet' => $wallet->bet + $request->loss,
-            ]);
-        } else {
-            $wallet->update([
-                'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount,
             ]);
         }
+        // } else {
+        //     $wallet->update([
+        //         'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount,
+        //     ]);
+        // }
         return response()->json([
             'game' => $game,
             'wallet' => $wallet,
