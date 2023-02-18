@@ -1,17 +1,18 @@
-import React from "react";
+import { setSound } from "@/redux/app-state/app-slice";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
-import { sleep } from "@/utils/util";
-import { setAuthModalState } from "@/redux/auth/auth-slice";
 import { toast } from "react-toastify";
-import { setSound } from "@/redux/app-state/app-slice";
-
 const DiceButtonGrid = ({ playDeter }) => {
     const dispatch = useDispatch();
     const { wallet } = useSelector((state) => state.wallet);
     const { gameData, playing } = useSelector((state) => state.game);
     const { user } = useSelector((state) => state.auth);
+    // const [play, { stop, isPlaying }] = useSound(BetSound, {
+    //     volume: 1,
+    // });
+
     function userCanPlay() {
         if (playing) return false;
         if (!user?.user) {
@@ -26,11 +27,15 @@ const DiceButtonGrid = ({ playDeter }) => {
         }
         // if()
         if (+wallet.withdrawable_balance < +gameData.betAmount) {
-            toast.error("Insufficient funds to play.");
+            toast.error("Insufficient funds to play.", {
+                position: "top-center",
+            });
             return false;
         }
         if (+gameData.betAmount < 0.4) {
-            toast.error("Bet amount must be at least 0.4000.");
+            toast.error("Bet amount must be at least 0.4000.", {
+                position: "top-center",
+            });
             return false;
         }
         let differenceInChance = gameData.rollUnder.value.split(" - ");
@@ -38,11 +43,14 @@ const DiceButtonGrid = ({ playDeter }) => {
             differenceInChance[1] - differenceInChance[0]
         );
         if (differenceInChance < 3) {
-            toast.error("Roll under must be at least 3 numbers apart.");
+            toast.error("Roll under must be at least 3 numbers apart.", {
+                position: "top-center",
+            });
             return false;
         }
         return true;
     }
+
     return (
         <Box
             sx={{
@@ -233,25 +241,20 @@ const DiceButtonGrid = ({ playDeter }) => {
                     width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
-                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3585ff",
+                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3586FF",
                     fontSize: "1.375rem",
                     fontWeight: 800,
                     color: "#FFFFFF",
                 }}
                 onClick={async () => {
                     if (userCanPlay()) {
+                        // play();
                         dispatch(
                             setSound({
                                 field: "currentSound",
                                 value: "/sounds/bet.mp3",
                             })
                         );
-                        // dispatch(
-                        //     setSound({
-                        //         field: "muted",
-                        //         value: "true",
-                        //     })
-                        // );
                         dispatch(setGameIsOn(true));
                     }
                 }}
