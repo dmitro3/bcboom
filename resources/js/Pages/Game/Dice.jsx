@@ -91,12 +91,12 @@ const DicePage = () => {
         const array = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
         ];
-        const status = rolledArray.includes(rolled) ? "won" : "lose";
         const rolledArray = array.slice(
             differenceInChance[0],
             differenceInChance[1]
         );
-        const amount = status === "won" ? gameData.payout : gameData.betAmount;
+        const status = rolledArray.includes(rolled) ? "won" : "lose";
+        const amount = gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
         });
