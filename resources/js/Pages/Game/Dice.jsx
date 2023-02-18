@@ -9,10 +9,12 @@ import { setSound } from "@/redux/app-state/app-slice";
 import { saveGame, setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
+import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import useSound from "use-sound";
 
 const DiceCloudBg = () => (
     <DiceWrapper>
@@ -83,6 +85,9 @@ const DicePage = () => {
     const [playDeter, setPlayDeter] = useState(true);
     const { gameData } = useSelector((state) => state.game);
     const dispatch = useDispatch();
+    const { sound } = useSelector((state) => state.app);
+
+    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
 
     const handleDiceRoll = async (diceNumber) => {
         await sleep(2000);
@@ -98,6 +103,7 @@ const DicePage = () => {
         });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
+        stop();
         await sleep(5000);
         const response = await dispatch(
             saveGame({
@@ -110,7 +116,7 @@ const DicePage = () => {
         );
         if (response.type === "game/new/rejected") {
             toast.error(response.payload.message, {
-                position: "top-center", 
+                position: "top-center",
             });
         }
         if (response.payload.data.message === "success")
@@ -119,8 +125,14 @@ const DicePage = () => {
 
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
-        if (gameData.diceNumber.length === 3) {
-            handleDiceRoll(gameData.diceNumber);
+        for (let i = 0; i < +gameData.numberOfPlay; i++) {
+            if (gameData.diceNumber.length === 3) {
+                console.log("gothereerer");
+                setTimeout(() => {
+                    dispatch(setGameIsOn(false));
+                }, 300);
+                // handleDiceRoll(gameData.diceNumber);
+            }
         }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
 

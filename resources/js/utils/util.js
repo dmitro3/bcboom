@@ -221,8 +221,15 @@ const payoutFunc = (gameData, rollUnder, chance) => {
         differenceInChance[1] - differenceInChance[0]
     );
 
-    const multiplier =
-        rollUnder.type === "under" ? 1 : gameData.winChance > 60 ? 0.1 : 20;
+let multiplier = 1;
+    switch (rollUnder.type) {
+        case "under":
+            multiplier = 1;
+            break;
+        case "over":
+            multiplier = gameData.winChance > 60 ? 0.1 : 225;
+    }
+
     let payout = Math.abs(
         (100 / (gameData.winChance * multiplier)) *
             (gameData.betAmount - 50 / 100)
@@ -259,6 +266,3 @@ export const calcPayout = (gameData, dispatch, setGameData) => {
         })
     );
 };
-
-
-
