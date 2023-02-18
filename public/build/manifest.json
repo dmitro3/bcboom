@@ -15,23 +15,23 @@
     ],
     "file": "assets/32cards-b217a3bd.js"
   },
-  "_CopyableLink-b2c067d6.js": {
-    "file": "assets/CopyableLink-b2c067d6.js",
+  "_CopyableLink-20e5492d.js": {
+    "file": "assets/CopyableLink-20e5492d.js",
     "imports": [
       "resources/js/app.jsx",
       "_link-712e60d6.js"
     ]
   },
-  "_DataGrid-f554e307.js": {
-    "file": "assets/DataGrid-f554e307.js",
+  "_DataGrid-ab6e63f5.js": {
+    "file": "assets/DataGrid-ab6e63f5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Select-327fe67b.js",
-      "_Tooltip-c3af457a.js",
-      "_Grow-9e14eb89.js"
+      "_Select-38950a38.js",
+      "_Tooltip-8207f34e.js",
+      "_Grow-f15cf25f.js"
     ]
   },
-  "_GameLayout-4c47539c.js": {
+  "_GameLayout-8e3addfd.js": {
     "assets": [
       "assets/Keyboard-4469f08e.svg",
       "assets/Volume-bb75af6f.svg",
@@ -42,15 +42,15 @@
       "assets/candidates-348c4d9c.svg",
       "assets/Ellipse 93-a55c9fb9.svg"
     ],
-    "file": "assets/GameLayout-4c47539c.js",
+    "file": "assets/GameLayout-8e3addfd.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Select-327fe67b.js",
-      "_DataGrid-f554e307.js",
-      "_Grid-75276478.js"
+      "_Select-38950a38.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Grid-834a088e.js"
     ]
   },
-  "_GamesCarouseCard-c72fbd4e.js": {
+  "_GamesCarouseCard-d9d58264.js": {
     "assets": [
       "assets/goldencup-8a9100ab.svg",
       "assets/cup-e6ddecc5.svg",
@@ -59,36 +59,36 @@
       "assets/realsmall-9d19f763.png",
       "assets/asianman-1d6f2297.png"
     ],
-    "file": "assets/GamesCarouseCard-c72fbd4e.js",
+    "file": "assets/GamesCarouseCard-d9d58264.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_GreyText-1c4a1768.js": {
-    "file": "assets/GreyText-1c4a1768.js",
+  "_GreyText-f8cf4eb7.js": {
+    "file": "assets/GreyText-f8cf4eb7.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Grid-75276478.js": {
-    "file": "assets/Grid-75276478.js",
+  "_Grid-834a088e.js": {
+    "file": "assets/Grid-834a088e.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Grow-9e14eb89.js": {
-    "file": "assets/Grow-9e14eb89.js",
+  "_Grow-f15cf25f.js": {
+    "file": "assets/Grow-f15cf25f.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_InputLabel-7789567d.js": {
-    "file": "assets/InputLabel-7789567d.js",
+  "_InputLabel-a00731cf.js": {
+    "file": "assets/InputLabel-a00731cf.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_PageTemplate-32e808f4.js": {
+  "_PageTemplate-0f9d06f3.js": {
     "assets": [
       "assets/saba-new-baner-1f1131f4.png",
       "assets/saba-new-baner-2-b6316562.png",
@@ -101,35 +101,35 @@
       "assets/footercut-52f5e2dc.png",
       "assets/uparrow-f4e22ad8.svg"
     ],
-    "file": "assets/PageTemplate-32e808f4.js",
+    "file": "assets/PageTemplate-0f9d06f3.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_PrimaryButton-7d58260f.js": {
-    "file": "assets/PrimaryButton-7d58260f.js",
+  "_PrimaryButton-08a9b568.js": {
+    "file": "assets/PrimaryButton-08a9b568.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Select-327fe67b.js": {
-    "file": "assets/Select-327fe67b.js",
+  "_Select-38950a38.js": {
+    "file": "assets/Select-38950a38.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Grow-9e14eb89.js"
+      "_Grow-f15cf25f.js"
     ]
   },
-  "_TextInput-4bc91ef7.js": {
-    "file": "assets/TextInput-4bc91ef7.js",
+  "_TextInput-6813bcae.js": {
+    "file": "assets/TextInput-6813bcae.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Tooltip-c3af457a.js": {
-    "file": "assets/Tooltip-c3af457a.js",
+  "_Tooltip-8207f34e.js": {
+    "file": "assets/Tooltip-8207f34e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Grow-9e14eb89.js"
+      "_Grow-f15cf25f.js"
     ]
   },
   "_digdigger-f3a72a4c.js": {
@@ -148,11 +148,17 @@
     ],
     "file": "assets/digdigger-f3a72a4c.js"
   },
-  "_index-9bb3efe1.js": {
-    "file": "assets/index-9bb3efe1.js",
+  "_index-48404cec.js": {
+    "file": "assets/index-48404cec.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GreyText-1c4a1768.js"
+      "_GreyText-f8cf4eb7.js"
+    ]
+  },
+  "_index-6ef9b6d3.js": {
+    "file": "assets/index-6ef9b6d3.js",
+    "imports": [
+      "resources/js/app.jsx"
     ]
   },
   "_index-9fd8bc04.js": {
@@ -164,17 +170,11 @@
     ],
     "file": "assets/index-9fd8bc04.js"
   },
-  "_index-a34457ba.js": {
-    "file": "assets/index-a34457ba.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_level1-14c0deae.js": {
+  "_level1-87dd71ad.js": {
     "assets": [
       "assets/level1-e57a9c78.svg"
     ],
-    "file": "assets/level1-14c0deae.js",
+    "file": "assets/level1-87dd71ad.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -206,18 +206,18 @@
     ],
     "file": "assets/stairs-056b9126.js"
   },
-  "_target-53163fd7.js": {
+  "_target-f3692e5c.js": {
     "assets": [
       "assets/faq-62d0d0e7.svg",
       "assets/target-33d9b81b.svg"
     ],
-    "file": "assets/target-53163fd7.js",
+    "file": "assets/target-f3692e5c.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_transition-49667cdc.js": {
-    "file": "assets/transition-49667cdc.js",
+  "_transition-3a03c42d.js": {
+    "file": "assets/transition-3a03c42d.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -1365,64 +1365,64 @@
     "src": "resources/assets/promotions/spin_sm.svg"
   },
   "resources/js/Pages/Auth/ConfirmPassword.jsx": {
-    "file": "assets/ConfirmPassword-3654ec33.js",
+    "file": "assets/ConfirmPassword-b600ef0d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ConfirmPassword.jsx"
   },
   "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-84e066e0.js",
+    "file": "assets/ForgotPassword-47b071e1.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ForgotPassword.jsx"
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-9f17349e.js",
+    "file": "assets/Login-3ffd982b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Login.jsx"
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-7559e650.js",
+    "file": "assets/Register-8930368e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Register.jsx"
   },
   "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-e3f28514.js",
+    "file": "assets/ResetPassword-cdd64c6f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ResetPassword.jsx"
   },
   "resources/js/Pages/Auth/VerifyEmail.jsx": {
-    "file": "assets/VerifyEmail-fa959d3d.js",
+    "file": "assets/VerifyEmail-a0d1179d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PrimaryButton-7d58260f.js"
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/VerifyEmail.jsx"
@@ -1432,12 +1432,12 @@
       "assets/saba_spin_1-7e139c3e.svg",
       "assets/spin_sm-d9701a4f.svg"
     ],
-    "file": "assets/BonusEveryday-7d666d34.js",
+    "file": "assets/BonusEveryday-c6d11ba2.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GreyText-1c4a1768.js",
-      "_index-a34457ba.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GreyText-f8cf4eb7.js",
+      "_index-6ef9b6d3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Bonus/BonusEveryday.jsx"
@@ -1447,13 +1447,13 @@
       "assets/full_bonus_pro_background-a9ebf8ad.svg",
       "assets/fullbonus_pro_sm-85ceb39f.svg"
     ],
-    "file": "assets/FullBonus-99a966b2.js",
+    "file": "assets/FullBonus-23122b1b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_index-9bb3efe1.js",
-      "_GreyText-1c4a1768.js",
-      "_index-a34457ba.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_index-48404cec.js",
+      "_GreyText-f8cf4eb7.js",
+      "_index-6ef9b6d3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Bonus/FullBonus.jsx"
@@ -1470,10 +1470,10 @@
       "assets/welcomesd-907f0470.png",
       "assets/welcomeparrot-5cd93b5a.png"
     ],
-    "file": "assets/Index-1b2b33cf.js",
+    "file": "assets/Index-58ed9461.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js"
+      "_PageTemplate-0f9d06f3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Bonus/Index.jsx"
@@ -1486,11 +1486,11 @@
       "assets/arrowdown-18def6b5.svg",
       "assets/fairness-cd1c19e0.svg"
     ],
-    "file": "assets/Index-e5e3db12.js",
+    "file": "assets/Index-7db797d4.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_CopyableLink-b2c067d6.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_CopyableLink-20e5492d.js",
       "_link-712e60d6.js"
     ],
     "isDynamicEntry": true,
@@ -1501,16 +1501,16 @@
       "assets/coin_flip_sm-84150706.svg",
       "assets/coinflip_bg-05304fc7.svg"
     ],
-    "file": "assets/CoinFlip-06538d4b.js",
+    "file": "assets/CoinFlip-3ec2c035.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Grid-75276478.js",
-      "_GameLayout-4c47539c.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_Grid-834a088e.js",
+      "_GameLayout-8e3addfd.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/CoinFlip.jsx"
@@ -1521,16 +1521,16 @@
       "assets/cross-d0610289.svg",
       "assets/cross_sm-a8e1de03.svg"
     ],
-    "file": "assets/Dice-353534f6.js",
+    "file": "assets/Dice-5be38dfe.js",
     "imports": [
       "resources/js/app.jsx",
-      "_DataGrid-f554e307.js",
-      "_GameLayout-4c47539c.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_Tooltip-c3af457a.js",
-      "_Grid-75276478.js"
+      "_DataGrid-ab6e63f5.js",
+      "_GameLayout-8e3addfd.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_Tooltip-8207f34e.js",
+      "_Grid-834a088e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Dice.jsx"
@@ -1540,16 +1540,16 @@
       "assets/dinosaur_frame_bg-32defa90.svg",
       "assets/dinosaur-bf92dc40.svg"
     ],
-    "file": "assets/Dinosaur-0c4ee673.js",
+    "file": "assets/Dinosaur-bf55f36b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Dinosaur.jsx"
@@ -1559,16 +1559,16 @@
       "assets/keno_sm-73e3ecae.svg",
       "assets/keno_bg-68cde442.svg"
     ],
-    "file": "assets/Keno-7b7d0094.js",
+    "file": "assets/Keno-352e993c.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Keno.jsx"
@@ -1578,16 +1578,16 @@
       "assets/limbo-94aa4020.svg",
       "assets/limbo_sm-3b41753b.svg"
     ],
-    "file": "assets/Limbo-472c2ce7.js",
+    "file": "assets/Limbo-0c44d9ba.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Limbo.jsx"
@@ -1597,16 +1597,16 @@
       "assets/coin2-899be69b.svg",
       "assets/Bomb-cea8851a.svg"
     ],
-    "file": "assets/Mines-95fdb700.js",
+    "file": "assets/Mines-c0b9af80.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Mines.jsx"
@@ -1618,16 +1618,16 @@
       "assets/plinko_bg-cace3c92.svg",
       "assets/plinko_sm-f4c8ba6d.svg"
     ],
-    "file": "assets/Plinko-a99f1a80.js",
+    "file": "assets/Plinko-ed48d65d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Plinko.jsx"
@@ -1637,16 +1637,16 @@
       "assets/Ring-916ea7b9.svg",
       "assets/ring_bg-1e7237ca.svg"
     ],
-    "file": "assets/Ring-ac999590.js",
+    "file": "assets/Ring-9c969cc2.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Ring.jsx"
@@ -1656,16 +1656,16 @@
       "assets/Stairs-1cd91ca7.svg",
       "assets/stairs_sm-dc84b106.svg"
     ],
-    "file": "assets/Stair-31584d45.js",
+    "file": "assets/Stair-2626eb1f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Stair.jsx"
@@ -1675,16 +1675,16 @@
       "assets/Tower-4b21f77f.svg",
       "assets/tower_bg-3c8d3e37.svg"
     ],
-    "file": "assets/Tower-5bc2ecd2.js",
+    "file": "assets/Tower-d85e2b23.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Tower.jsx"
@@ -1694,16 +1694,16 @@
       "assets/game_wheel-85780bfa.svg",
       "assets/wheel_sm2-9e07328f.svg"
     ],
-    "file": "assets/Wheel-c097d60e.js",
+    "file": "assets/Wheel-a4bfd7bb.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GameLayout-4c47539c.js",
-      "_Grid-75276478.js",
-      "_PageTemplate-32e808f4.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_DataGrid-f554e307.js",
-      "_Tooltip-c3af457a.js"
+      "_GameLayout-8e3addfd.js",
+      "_Grid-834a088e.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Game/Wheel.jsx"
@@ -1714,20 +1714,20 @@
       "assets/gamesPageBgmobile-0a2c3704.png",
       "assets/padColored-774101d5.svg"
     ],
-    "file": "assets/Index-c1480c21.js",
+    "file": "assets/Index-f7088eab.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_stairs-056b9126.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Games/Index.jsx"
   },
   "resources/js/Pages/Index.jsx": {
-    "file": "assets/Index-1a0d492c.js",
+    "file": "assets/Index-2b37f25b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_digdigger-f3a72a4c.js",
       "_32cards-b217a3bd.js",
       "_stairs-056b9126.js"
@@ -1745,10 +1745,10 @@
       "assets/sniondrive-40484283.png",
       "assets/dragontigerlive-c41c9be5.png"
     ],
-    "file": "assets/Index-bfac0ec0.js",
+    "file": "assets/Index-dfc913f5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_32cards-b217a3bd.js",
       "_search-48b450a8.js"
     ],
@@ -1756,51 +1756,51 @@
     "src": "resources/js/Pages/LiveCasino/Index.jsx"
   },
   "resources/js/Pages/Profile/Edit.jsx": {
-    "file": "assets/Edit-b7f22061.js",
+    "file": "assets/Edit-1ec3a5f6.js",
     "imports": [
       "resources/js/app.jsx",
       "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
       "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_transition-49667cdc.js",
-      "_PrimaryButton-7d58260f.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_transition-3a03c42d.js",
+      "_PrimaryButton-08a9b568.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Edit.jsx"
   },
   "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
-    "file": "assets/DeleteUserForm-58360c58.js",
+    "file": "assets/DeleteUserForm-fa36f7b5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_transition-49667cdc.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_transition-3a03c42d.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx"
   },
   "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
-    "file": "assets/UpdatePasswordForm-cbd8a373.js",
+    "file": "assets/UpdatePasswordForm-8fbac171.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js",
-      "_transition-49667cdc.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js",
+      "_transition-3a03c42d.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx"
   },
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
-    "file": "assets/UpdateProfileInformationForm-266ad048.js",
+    "file": "assets/UpdateProfileInformationForm-c68bdf25.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-4bc91ef7.js",
-      "_InputLabel-7789567d.js",
-      "_PrimaryButton-7d58260f.js",
-      "_transition-49667cdc.js"
+      "_TextInput-6813bcae.js",
+      "_InputLabel-a00731cf.js",
+      "_PrimaryButton-08a9b568.js",
+      "_transition-3a03c42d.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx"
@@ -1810,13 +1810,13 @@
       "assets/bonus_pro_background-74462a6d.svg",
       "assets/pro_bonus_sm-d4ba9990.svg"
     ],
-    "file": "assets/Bonus-0bb75881.js",
+    "file": "assets/Bonus-d69f867b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-9bb3efe1.js",
-      "_PageTemplate-32e808f4.js",
-      "_GreyText-1c4a1768.js",
-      "_index-a34457ba.js"
+      "_index-48404cec.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_GreyText-f8cf4eb7.js",
+      "_index-6ef9b6d3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Bonus.jsx"
@@ -1826,13 +1826,13 @@
       "assets/deposit_pro_background-72f19685.svg",
       "assets/pro_deposit_sm-3a3b30fe.svg"
     ],
-    "file": "assets/Deposit-7b7ca843.js",
+    "file": "assets/Deposit-3177cf58.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GreyText-1c4a1768.js",
-      "_index-9bb3efe1.js",
-      "_index-a34457ba.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GreyText-f8cf4eb7.js",
+      "_index-48404cec.js",
+      "_index-6ef9b6d3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Deposit.jsx"
@@ -1845,17 +1845,17 @@
       "assets/bonus-af7f0f96.svg",
       "assets/info_sm_img-9b72c69b.png"
     ],
-    "file": "assets/Distributor-cb941342.js",
+    "file": "assets/Distributor-ec624593.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-9bb3efe1.js",
-      "_PageTemplate-32e808f4.js",
+      "_index-48404cec.js",
+      "_PageTemplate-0f9d06f3.js",
       "_index-9fd8bc04.js",
-      "_GreyText-1c4a1768.js",
-      "_DataGrid-f554e307.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_Tooltip-c3af457a.js"
+      "_GreyText-f8cf4eb7.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Distributor.jsx"
@@ -1867,17 +1867,17 @@
       "assets/promotion_activity-dc430c8f.svg",
       "assets/bonus_icon-54b1d346.svg"
     ],
-    "file": "assets/Exclusive-6e7cd300.js",
+    "file": "assets/Exclusive-cd001680.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_index-9fd8bc04.js",
-      "_GreyText-1c4a1768.js",
-      "_index-9bb3efe1.js",
-      "_DataGrid-f554e307.js",
-      "_Select-327fe67b.js",
-      "_Grow-9e14eb89.js",
-      "_Tooltip-c3af457a.js"
+      "_GreyText-f8cf4eb7.js",
+      "_index-48404cec.js",
+      "_DataGrid-ab6e63f5.js",
+      "_Select-38950a38.js",
+      "_Grow-f15cf25f.js",
+      "_Tooltip-8207f34e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Exclusive.jsx"
@@ -1894,10 +1894,10 @@
       "assets/off-55b6d0e1.png",
       "assets/weekend-2844a576.png"
     ],
-    "file": "assets/Index-2b997e5e.js",
+    "file": "assets/Index-71c7aaf2.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js"
+      "_PageTemplate-0f9d06f3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Index.jsx"
@@ -1909,12 +1909,12 @@
       "assets/network_sm-a99a3317.svg",
       "assets/pro_invite_sm-353a9e26.svg"
     ],
-    "file": "assets/Invite-9aaf1d69.js",
+    "file": "assets/Invite-8009f130.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-9bb3efe1.js",
-      "_PageTemplate-32e808f4.js",
-      "_GreyText-1c4a1768.js"
+      "_index-48404cec.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_GreyText-f8cf4eb7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Promotions/Invite.jsx"
@@ -1924,11 +1924,11 @@
       "assets/raceheader-35cc5469.png",
       "assets/raceheadermobile-a6528eed.png"
     ],
-    "file": "assets/Index-b03db195.js",
+    "file": "assets/Index-559bbcd0.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_GamesCarouseCard-c72fbd4e.js"
+      "_PageTemplate-0f9d06f3.js",
+      "_GamesCarouseCard-d9d58264.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Race/Index.jsx"
@@ -1946,10 +1946,10 @@
       "assets/riseofolympus-506b9663.png",
       "assets/spinNspell-f64ea314.png"
     ],
-    "file": "assets/Index-46d0f90f.js",
+    "file": "assets/Index-be80af11.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_digdigger-f3a72a4c.js",
       "_search-48b450a8.js"
     ],
@@ -1961,14 +1961,14 @@
       "assets/historyIcon-a37cc0f5.svg",
       "assets/datepicker-d4fa5b25.svg"
     ],
-    "file": "assets/History-554eedf5.js",
+    "file": "assets/History-2a4219ee.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
+      "_PageTemplate-0f9d06f3.js",
       "_userIcon-a16e75ce.js",
-      "_Select-327fe67b.js",
-      "_Grid-75276478.js",
-      "_Grow-9e14eb89.js"
+      "_Select-38950a38.js",
+      "_Grid-834a088e.js",
+      "_Grow-f15cf25f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/UserPages/History.jsx"
@@ -1978,11 +1978,11 @@
       "assets/settings-5defa9c5.svg",
       "assets/walletmini-27de28c2.svg"
     ],
-    "file": "assets/PersonalCenter-e3394b91.js",
+    "file": "assets/PersonalCenter-76708d02.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_level1-14c0deae.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_level1-87dd71ad.js",
       "_link-712e60d6.js",
       "_userIcon-a16e75ce.js"
     ],
@@ -2013,15 +2013,15 @@
       "assets/user3-d981d68f.png",
       "assets/whowonbg-b62aaf1c.svg"
     ],
-    "file": "assets/Referral-29d0fb37.js",
+    "file": "assets/Referral-8b803700.js",
     "imports": [
       "resources/js/app.jsx",
-      "_PageTemplate-32e808f4.js",
-      "_CopyableLink-b2c067d6.js",
-      "_target-53163fd7.js",
-      "_Tooltip-c3af457a.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_CopyableLink-20e5492d.js",
+      "_target-f3692e5c.js",
+      "_Tooltip-8207f34e.js",
       "_link-712e60d6.js",
-      "_Grow-9e14eb89.js"
+      "_Grow-f15cf25f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/UserPages/Referral.jsx"
@@ -2048,15 +2048,15 @@
       "assets/level10-878dbf93.svg",
       "assets/levelBg-73c7a1c4.svg"
     ],
-    "file": "assets/Index-f306325c.js",
+    "file": "assets/Index-5db801d2.js",
     "imports": [
       "resources/js/app.jsx",
-      "_target-53163fd7.js",
-      "_Tooltip-c3af457a.js",
-      "_GamesCarouseCard-c72fbd4e.js",
-      "_level1-14c0deae.js",
-      "_PageTemplate-32e808f4.js",
-      "_Grow-9e14eb89.js"
+      "_target-f3692e5c.js",
+      "_Tooltip-8207f34e.js",
+      "_GamesCarouseCard-d9d58264.js",
+      "_level1-87dd71ad.js",
+      "_PageTemplate-0f9d06f3.js",
+      "_Grow-f15cf25f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/VIP/Index.jsx"
@@ -2193,7 +2193,7 @@
       "resources/js/Pages/UserPages/Referral.jsx",
       "resources/js/Pages/VIP/Index.jsx"
     ],
-    "file": "assets/app-ac12e357.js",
+    "file": "assets/app-fd42b944.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }
