@@ -33,7 +33,7 @@ class ManagementController extends Controller
         ]);
 
         return response()->json([
-            "message" => "Accepted"
+            "message" => "Withdrawal approved. Go to hpay to complete"
         ]);
     }else{
         return response()->json([
