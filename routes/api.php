@@ -119,6 +119,7 @@ Route::middleware(['jwt.verify'])->group(function () {
         }
     );
 
+<<<<<<< HEAD
     Route::middleware(['jwt.verify', 'admin'])
     ->prefix('promo')
     ->group(function () {
@@ -130,6 +131,8 @@ Route::middleware(['jwt.verify'])->group(function () {
         ]);
     });
 
+=======
+>>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
     Route::get('games/all', [
         GameController::class,
         'all_games'
@@ -231,6 +234,7 @@ Route::prefix('promotion')->group(function () {
             'reject'
     ])->name('reject');
 
+<<<<<<< HEAD
     Route::post('save/{id}', [
         PromotionController::class,
         'save'
@@ -240,6 +244,27 @@ Route::post('edit/{id}', [
     PromotionController::class,
     'edit'
 ])->name('edit');
+=======
+    Route::post('/promotion/approve/{id}', [
+        PromotionController::class,
+        'approve'
+    ])->name('approve');
+
+    Route::post('/promotion/reject/{id}', [
+        PromotionController::class,
+        'reject'
+    ])->name('reject');
+
+    Route::post('/promotion/delete/{id}', [
+        PromotionController::class,
+        'delete'
+    ])->name('delete');
+
+    Route::get('promotions/all', [
+        PromotionController::class,
+        'all_promotions'
+    ])->name('all_promotions');
+>>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
 
 Route::post('pause/{id}', [
     PromotionController::class,

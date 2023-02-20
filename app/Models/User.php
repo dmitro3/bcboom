@@ -82,6 +82,7 @@ class User extends Authenticatable implements JWTSubject
 
         // $walletBonus = 0;
         // if ($wallet) {
+<<<<<<< HEAD
             // $referral_promotion = [
                 //     'type' => 'Referral Bonus',
                 //     'status' => 'pending',
@@ -171,6 +172,56 @@ class User extends Authenticatable implements JWTSubject
                 );
 
 
+=======
+        $referral_promotion = [
+            'type' => 'Referral Bonus',
+            'status' => 'pending',
+            'percentage' => '0',
+            'user' => $this->id,
+            'username' => $this->username,
+        ];
+        if ($refs > 0) {
+            Promotion::create(array_merge($referral_promotion, ['amount' => 9]));
+            //     $walletBonus = $wallet->bonus + 9;
+
+            //     $w = Wallet::updateOrCreate(
+            //         ['user_id' => $this->id],
+            //         ['bonus' => $walletBonus],
+            //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            //     );
+        } else if ($refs > 999) {
+            Promotion::create(array_merge($referral_promotion, ['amount' => 10]));
+            //     $walletBonus = $wallet->bonus + 10;
+            //     $w = Wallet::updateOrCreate(
+            //         ['user_id' => $this->id],
+            //         ['bonus' => $walletBonus],
+            //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            // );
+        } else if ($refs > 1000) {
+            Promotion::create(array_merge($referral_promotion, ['amount' => 10]));
+            //     $walletBonus = $wallet->bonus + 10;
+            //     $w = Wallet::updateOrCreate(
+            //         ['user_id' => $this->id],
+            //         ['bonus' => $walletBonus],
+            // ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            //     );
+        } else if ($refs > 2999) {
+            Promotion::create(array_merge($referral_promotion, ['amount' => 12]));
+            //     $walletBonus = $wallet->bonus + 12;
+            //     $w = Wallet::updateOrCreate(
+            //         ['user_id' => $this->id],
+            //         ['bonus' => $walletBonus],
+            //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            //     );
+        } else if ($refs > 4999) {
+            Promotion::create(array_merge($referral_promotion, ['amount' => 15]));
+            //     $walletBonus = $wallet->bonus + 15;
+            //     $w = Wallet::updateOrCreate(
+            //         ['user_id' => $this->id],
+            //         ['bonus' => $walletBonus],
+            //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
+            //     );
+>>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
         }
 
         // } else {
@@ -319,9 +370,12 @@ class User extends Authenticatable implements JWTSubject
             $user->update([
                 'first_100_deposit_bonus' => 1
             ]);
+<<<<<<< HEAD
 
             
 
+=======
+>>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
             return Promotion::create(array_merge($promotion_data, [
                 'percentage' => 100,
                 'amount' => $amount * 2,
