@@ -82,7 +82,7 @@ class User extends Authenticatable implements JWTSubject
 
         // $walletBonus = 0;
         // if ($wallet) {
-<<<<<<< HEAD
+
             // $referral_promotion = [
                 //     'type' => 'Referral Bonus',
                 //     'status' => 'pending',
@@ -172,7 +172,6 @@ class User extends Authenticatable implements JWTSubject
                 );
 
 
-=======
         $referral_promotion = [
             'type' => 'Referral Bonus',
             'status' => 'pending',
@@ -221,7 +220,7 @@ class User extends Authenticatable implements JWTSubject
             //         ['bonus' => $walletBonus],
             //         ['withdrawable_balance' => $wallet->withdrawable_balance + $walletBonus]
             //     );
->>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
+
         }
 
         // } else {
@@ -241,6 +240,7 @@ class User extends Authenticatable implements JWTSubject
         ]);
     }
 }
+    }
 
     public function sumWallet($increase, $decrease, $amount)
     {
@@ -370,53 +370,81 @@ class User extends Authenticatable implements JWTSubject
             $user->update([
                 'first_100_deposit_bonus' => 1
             ]);
-<<<<<<< HEAD
-
             
-
-=======
->>>>>>> db768d1787d6f9ee9065fa472da4af06bfd44d92
-            return Promotion::create(array_merge($promotion_data, [
-                'percentage' => 100,
-                'amount' => $amount * 2,
-                'type' => '100% Deposit Bonus'
-            ]));
+            $wallet = $user->wallet;
+            
+            $wallet->update([
+                'bonus' => $amount * 2
+            ]);
+            // return Promotion::create(array_merge($promotion_data, [
+            //     'percentage' => 100,
+            //     'amount' => $amount * 2,
+            //     'type' => '100% Deposit Bonus'
+            // ]));
         } else if ($user->second_100_deposit_bonus === 0 && $amount >= 500 && $amount <= 40000) {
             $user->update([
                 'second_100_deposit_bonus' => 1
             ]);
-            Promotion::create(array_merge($promotion_data, [
-                'percentage' => 100,
-                'amount' => $amount * 2,
-                'type' => '100% Deposit Bonus'
-            ]));
+            // Promotion::create(array_merge($promotion_data, [
+            //     'percentage' => 100,
+            //     'amount' => $amount * 2,
+            //     'type' => '100% Deposit Bonus'
+            // ]));
+
+            $wallet = $user->wallet;
+            
+            $wallet->update([
+                'bonus' => $amount * 2
+            ]);
+
         } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
             $user->update([
                 'third_50_deposit_bonus' => 1
             ]);
-            Promotion::create(array_merge($promotion_data, [
-                'percentage' => 50,
-                'amount' => $amount * 1.5,
-                'type' => '50% Deposit Bonus'
-            ]));
+            // Promotion::create(array_merge($promotion_data, [
+            //     'percentage' => 50,
+            //     'amount' => $amount * 1.5,
+            //     'type' => '50% Deposit Bonus'
+            // ]));
+
+            $wallet = $user->wallet;
+            
+            $wallet->update([
+                'bonus' => $amount * 1.5
+            ]);
+
         } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
             $user->update([
                 'fourth_30_deposit_bonus' => 1
             ]);
-            Promotion::create(array_merge($promotion_data, [
-                'percentage' => 30,
-                'amount' => $amount * 1.3,
-                'type' => '30% Deposit Bonus'
-            ]));
+            // Promotion::create(array_merge($promotion_data, [
+            //     'percentage' => 30,
+            //     'amount' => $amount * 1.3,
+            //     'type' => '30% Deposit Bonus'
+            // ]));
+
+            $wallet = $user->wallet;
+            
+            $wallet->update([
+                'bonus' => $amount * 1.3
+            ]);
+
         } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
             $user->update([
                 'fifth_20_deposit_bonus' => 1
             ]);
-            Promotion::create(array_merge($promotion_data, [
-                'percentage' => 20,
-                'amount' => $amount * 1.2,
-                'type' => '20% Deposit Bonus'
-            ]));
+            // Promotion::create(array_merge($promotion_data, [
+            //     'percentage' => 20,
+            //     'amount' => $amount * 1.2,
+            //     'type' => '20% Deposit Bonus'
+            // ]));
+
+            $wallet = $user->wallet;
+            
+            $wallet->update([
+                'bonus' => $amount * 1.2
+            ]);
+
         }
 
     }
