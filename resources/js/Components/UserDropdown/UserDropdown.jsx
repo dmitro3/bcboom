@@ -26,6 +26,8 @@ import Button from "../Button/Button";
 import Text from "../Text/Text";
 import { Flex } from "../UtilComponents/Flex";
 
+import "./styles.css";
+
 const CurrencyWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     alignItems: "center",
@@ -228,14 +230,14 @@ const UserDropdown = ({
     const { wallet, level } = useSelector((state) => state.wallet);
 
     //fetch wallet after 30 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const location = window.location.pathname;
-            if (location.includes("games") && isLoggedIn)
-                dispatcher(getWallet());
-        }, 10000);
-        return () => clearInterval(interval);
-    }, []);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         const location = window.location.pathname;
+    //         if (location.includes("games") && isLoggedIn)
+    //             dispatcher(getWallet());
+    //     }, 30000);
+    //     return () => clearInterval(interval);
+    // }, []);
 
     // const [balance, setBalance] = useState("0.00");
     useEffect(() => {
@@ -296,6 +298,13 @@ const UserDropdown = ({
             </>
         );
 
+    const [applyStyle, setApplyStyle] = useState(true);
+    useEffect(() => {
+        setApplyStyle(true);
+        setTimeout(() => {
+            setApplyStyle(false);
+        }, 2000);
+    }, [wallet]);
     return (
         <Flex
             alignItems="flex-start"
@@ -312,7 +321,10 @@ const UserDropdown = ({
                 onClick={() => dispatcher(setWalletModalState({ open: true }))}
                 style={{ cursor: "pointer" }}
             >
-                <CurrentBalance isMobile={isMobile}>
+                <CurrentBalance
+                    isMobile={isMobile}
+                    className={applyStyle && "text-flicker-in-glow"}
+                >
                     <p>{balance?.split(".")[0] || 0}.</p>
                     <p>{balance?.split(".")[1] || "00"}</p>
                 </CurrentBalance>

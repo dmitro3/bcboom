@@ -2,7 +2,7 @@ import { useScreenResolution } from "@/hooks/useScreeResolution";
 import { setGameData } from "@/redux/game/game-slice";
 import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
@@ -268,6 +268,7 @@ const DiceComponent = ({ setPlaying }) => {
     const { playing } = useSelector((state) => state.game);
     const { sound } = useSelector((state) => state.app);
     const [play, { stop, isPlaying }] = useSound(sound.currentSound);
+    const [resultArray, setResultArray] = useState([]);
     useEffect(() => {
         if (
             playing &&
@@ -275,25 +276,6 @@ const DiceComponent = ({ setPlaying }) => {
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
-            play();
-            console.log("sound: ", sound.currentSound);
-            async function diceFn() {
-                setPlaying(true);
-                let x = await Promise.allSettled([
-                    rollDice(diceOneRef.current, 1),
-                    rollDice(diceTwoRef.current, 2),
-                    rollDice(diceThreeRef.current, 3),
-                ]);
-                dispatch(
-                    setGameData({
-                        ...gameData,
-                        diceNumber: x.map((item) => item.value),
-                    })
-                );
-            }
-
-            diceFn();
-            setPlaying(false);
         }
     }, [playing]);
     return (
