@@ -1,11 +1,56 @@
-import React from "react";
+import { setSound } from "@/redux/app-state/app-slice";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { Box, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { setGameIsOn } from "@/redux/game/game-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+const DiceButtonGrid = ({ playDeter }) => {
+    const dispatch = useDispatch();
+    const { wallet } = useSelector((state) => state.wallet);
+    const { gameData, playing } = useSelector((state) => state.game);
+    const { user } = useSelector((state) => state.auth);
+    // const [play, { stop, isPlaying }] = useSound(BetSound, {
+    //     volume: 1,
+    // });
 
-const DiceButtonGrid = () => {
-    // const { setRoll } = gridProps;
-    const dispatch = useDispatch()
+    function userCanPlay() {
+        if (playing) return false;
+        if (!user?.user) {
+            toast.error("You must be logged in to play.");
+            dispatch(
+                setAuthModalState({
+                    open: true,
+                    tab: 0,
+                })
+            );
+            return false;
+        }
+        // if()
+        if (+wallet.withdrawable_balance < +gameData.betAmount) {
+            toast.error("Insufficient funds to play.", {
+                position: "top-center",
+            });
+            return false;
+        }
+        if (+gameData.betAmount < 0.4) {
+            toast.error("Bet amount must be at least 0.4000.", {
+                position: "top-center",
+            });
+            return false;
+        }
+        let differenceInChance = gameData.rollUnder.value.split(" - ");
+        differenceInChance = Math.abs(
+            differenceInChance[1] - differenceInChance[0]
+        );
+        if (differenceInChance < 3) {
+            toast.error("Roll under must be at least 3 numbers apart.", {
+                position: "top-center",
+            });
+            return false;
+        }
+        return true;
+    }
+
     return (
         <Box
             sx={{
@@ -55,6 +100,15 @@ const DiceButtonGrid = () => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: (0.0001).toFixed(4),
+                                    })
+                                );
                             }}
                         >
                             Min
@@ -71,6 +125,15 @@ const DiceButtonGrid = () => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: (200.0).toFixed(4),
+                                    })
+                                );
                             }}
                         >
                             Max
@@ -92,7 +155,7 @@ const DiceButtonGrid = () => {
                                 textAlign: "center",
                             }}
                         >
-                            R$ 0.0000000
+                            R$ {gameData.betAmount}
                         </Box>
                     </Box>
                     <Box
@@ -116,6 +179,23 @@ const DiceButtonGrid = () => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                let newValue = (gameData.betAmount / 2).toFixed(
+                                    4
+                                );
+                                if (newValue < 0.5) {
+                                    newValue = (0.5).toFixed(4);
+                                } else if (newValue > 200.0) {
+                                    newValue = (200.0).toFixed(4);
+                                }
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: newValue,
+                                    })
+                                );
                             }}
                         >
                             1/2
@@ -132,6 +212,23 @@ const DiceButtonGrid = () => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                let newValue = (gameData.betAmount * 2).toFixed(
+                                    4
+                                );
+                                if (newValue < 0.5) {
+                                    newValue = 0.5;
+                                } else if (newValue > 200.0) {
+                                    newValue = (200.0).toFixed(4);
+                                }
+                                dispatch(
+                                    setGameData({
+                                        ...gameData,
+                                        betAmount: newValue,
+                                    })
+                                );
                             }}
                         >
                             2x
@@ -144,15 +241,25 @@ const DiceButtonGrid = () => {
                     width: { xs: "39%", md: "49%" },
                     height: "4rem",
                     borderRadius: "0.625rem",
-                    background: "#333965",
+                    background: playing ? "rgba(82, 90, 160, 0.04)" : "#3586FF",
                     fontSize: "1.375rem",
                     fontWeight: 800,
-                    backgroundColor: "#3585ff",
                     color: "#FFFFFF",
                 }}
-                onClick={() => dispatch(setGameIsOn(true))}
+                onClick={async () => {
+                    if (userCanPlay()) {
+                        // play();
+                        dispatch(
+                            setSound({
+                                field: "currentSound",
+                                value: "/sounds/bet.mp3",
+                            })
+                        );
+                        dispatch(setGameIsOn(true));
+                    }
+                }}
             >
-                BET
+                {playing ? "..." : "Play"}
             </Button>
         </Box>
     );

@@ -4,7 +4,44 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
 import { Switch } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { currencyFormatter } from "@/utils/util";
+import { styled } from "@mui/system";
+import { setGameData } from "@/redux/game/game-slice";
+import Text from "@/Components/Text/Text";
 
+const Input = styled("input")(({ width }) => ({
+    background: "rgb(51, 57, 101)",
+    border: "none",
+    width: width || "30%",
+}));
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            style={{ width: "100%" }}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{}}>
+                    <Box
+                        sx={{
+                            width: "100%",
+                            marginTop: "1.25rem",
+                        }}
+                    >
+                        {children}
+                    </Box>
+                </Box>
+            )}
+        </div>
+    );
+}
 const GameTab = () => {
     const [tabValue, setTabValue] = React.useState(1);
 
@@ -12,41 +49,16 @@ const GameTab = () => {
         setTabValue(newValue);
     };
 
-    function TabPanel(props) {
-        const { children, value, index, ...other } = props;
-
-        return (
-            <div
-                role="tabpanel"
-                hidden={value !== index}
-                id={`simple-tabpanel-${index}`}
-                aria-labelledby={`simple-tab-${index}`}
-                style={{ width: "100%" }}
-                {...other}
-            >
-                {value === index && (
-                    <Box sx={{}}>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                marginTop: "1.25rem",
-                            }}
-                        >
-                            {children}
-                        </Box>
-                    </Box>
-                )}
-            </div>
-        );
-    }
-
     function a11yProps(index) {
         return {
             id: `simple-tab-${index}`,
             "aria-controls": `simple-tabpanel-${index}`,
         };
     }
+    const dispatch = useDispatch();
 
+    const { gameData } = useSelector((state) => state.game);
+    const { wallet } = useSelector((state) => state.wallet);
     return (
         <div>
             <Box
@@ -79,7 +91,6 @@ const GameTab = () => {
                             background: "#272C4B",
                             borderRadius: "0.625rem",
                             flexGrow: 1,
-
                             padding: "1.2rem",
                         }}
                     >
@@ -108,13 +119,14 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-                                            pl: ".9375rem",
+                                            px: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
+                                            alignItems: "center",
                                         }}
                                     >
-                                        <Box
+                                        {/* <Box
                                             sx={{
                                                 display: "flex",
                                                 width: "15%",
@@ -123,10 +135,36 @@ const GameTab = () => {
                                                 fontWeight: 800,
                                                 fontSize: "1rem",
                                             }}
-                                        >
-                                            0
-                                        </Box>
-                                        <Box
+                                        > */}
+                                        <Input
+                                            type="number"
+                                            value={gameData.numberOfPlay}
+                                            onChange={(e) => {
+                                                let value = Math.abs(
+                                                    e.target.value
+                                                );
+                                                if (value <= 0) value = 1;
+                                                if (value >= 5) value = 5;
+                                                dispatch(
+                                                    setGameData({
+                                                        ...gameData,
+                                                        numberOfPlay: value,
+                                                    })
+                                                );
+                                            }}
+                                        />
+
+                                        <Text
+                                            text={`R$ ${(
+                                                gameData.payout *
+                                                gameData.numberOfPlay
+                                            ).toFixed(4)}`}
+                                            type="p"
+                                            fontWeight={600}
+                                            fontSize="1rem"
+                                        />
+                                        {/* </Box> */}
+                                        {/* <Box
                                             sx={{
                                                 display: {
                                                     xs: "none",
@@ -140,7 +178,7 @@ const GameTab = () => {
                                             }}
                                         >
                                             R$ 0
-                                        </Box>
+                                        </Box> */}
                                     </Box>
                                 </Box>
                             </Grid>
@@ -168,13 +206,14 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-                                            pl: ".9375rem",
+                                            px: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
+                                            alignItems: "center",
                                         }}
                                     >
-                                        <Box
+                                        {/* <Box
                                             sx={{
                                                 display: {
                                                     xs: "none",
@@ -200,7 +239,29 @@ const GameTab = () => {
                                             }}
                                         >
                                             R$ 0
-                                        </Box>
+                                        </Box> */}
+                                        <Input
+                                            type="number"
+                                            value={gameData.stopOnProfits}
+                                            onChange={(e) => {
+                                                let value = Math.abs(
+                                                    e.target.value
+                                                );
+                                                dispatch(
+                                                    setGameData({
+                                                        ...gameData,
+                                                        stopOnProfits: value,
+                                                    })
+                                                );
+                                            }}
+                                            width="50%"
+                                        />
+
+                                        <Text
+                                            text={`R$ ${gameData.payout}`}
+                                            fontWeight={800}
+                                            fontSize="1rem"
+                                        />
                                     </Box>
                                 </Box>
                             </Grid>
@@ -228,39 +289,35 @@ const GameTab = () => {
                                         sx={{
                                             height: "4.0625rem",
                                             borderRadius: "0.625rem",
-                                            pl: ".9375rem",
+                                            px: ".9375rem",
                                             background: "#333965",
                                             display: "flex",
                                             justifyContent: "space-between",
+                                            alignItems: "center",
                                         }}
                                     >
-                                        <Box
-                                            sx={{
-                                                display: {
-                                                    xs: "none",
-                                                    md: "flex",
-                                                },
-                                                width: "15%",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                fontWeight: 800,
-                                                fontSize: "1rem",
+                                        <Input
+                                            type="number"
+                                            value={gameData.stopOnLoss}
+                                            onChange={(e) => {
+                                                let value = Math.abs(
+                                                    e.target.value
+                                                );
+                                                dispatch(
+                                                    setGameData({
+                                                        ...gameData,
+                                                        stopOnLoss: value,
+                                                    })
+                                                );
                                             }}
-                                        >
-                                            0
-                                        </Box>
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                width: "30%",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                fontWeight: 800,
-                                                fontSize: "1rem",
-                                            }}
-                                        >
-                                            R$ 0
-                                        </Box>
+                                            width="50%"
+                                        />
+
+                                        <Text
+                                            text={`R$ ${gameData.payout}`}
+                                            fontWeight={800}
+                                            fontSize="1rem"
+                                        />
                                     </Box>
                                 </Box>
                             </Grid>
@@ -304,7 +361,13 @@ const GameTab = () => {
                                                 fontSize: "1rem",
                                             }}
                                         >
-                                            R$ 0
+                                            R${" "}
+                                            {currencyFormatter
+                                                .format(
+                                                    wallet.withdrawable_balance ||
+                                                        0
+                                                )
+                                                .replace("$", "")}
                                         </Box>
                                     </Box>
                                 </Box>

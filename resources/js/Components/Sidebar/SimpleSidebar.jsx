@@ -101,9 +101,8 @@ const SimpleSidebar = () => {
         <SidebarWrapper>
             <SidebarItems>
                 {sidebarItems.map((item, index) => (
-                    <Link href={item.link}>
+                    <Link href={item.link} key={index}>
                         <SidebarItem
-                            key={index}
                             active={location === item.name.toLowerCase()}
                         >
                             <img

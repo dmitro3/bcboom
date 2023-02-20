@@ -2,6 +2,7 @@
 namespace App\Actions;
 
 use App\Models\Payment;
+use App\Models\Promotion;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
@@ -42,21 +43,20 @@ class Process
             'amount' => $request->amount,
             'orderno' => intval(microtime(true) * 1000 * 1000),
             'notifyurl' => url('/api/notifypayment'),
-                'email' => $user->email,
-                'mobile' => $user->phone,
-                'customer' => $user->username,
-                'callbackurl' => url('/api/notifypayment'),
-                'currency' => 'BRL'
-            ];
-            
-            
-            $sign = $this->sign($data, $this->merchantKey);
-            $data['sign'] = $sign;
+            'email' => $user->email,
+            'mobile' => $user->phone,
+            'customer' => $user->username,
+            'callbackurl' => url('/api/notifypayment'),
+            'currency' => 'BRL'
+        ];
 
-            
-            
-            $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-            
+
+        $sign = $this->sign($data, $this->merchantKey);
+        $data['sign'] = $sign;
+
+        
+        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+
         // dd($result);
 
 
@@ -79,6 +79,7 @@ class Process
                 "sign" => $data['sign'],
             ]);
 
+           
 
 
             $wallet = Wallet::where('user_id', $user->id)->first();
@@ -95,13 +96,14 @@ class Process
         }
     }
 
-    function status(Request $request): string {
+    function status(Request $request): string
+    {
         $data = $request->all();
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
 
-        if($sign === $request->sign) {
-            if($data['trade_state'] === 'SUCCESS') {
+        if ($sign === $request->sign) {
+            if ($data['trade_state'] === 'SUCCESS') {
                 $payment = Payment::where('order_no', $request->tx_orderno)->first();
 
                 $wallet = Wallet::where('order_no', $request->tx_orderno)->first();

@@ -2,6 +2,7 @@
 namespace App\Actions;
 
 use App\Models\Payment;
+use App\Models\Promotion;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use PHPUnit\Util\Exception;
@@ -46,8 +47,8 @@ class Callback
 
                 if ($wallet && $payment) {
 
-                    
-                    $percentage_amount = 100/100 * $payment->amount;
+
+                    $percentage_amount = 100 / 100 * $payment->amount;
 
 
                     $payment->update([
@@ -63,7 +64,9 @@ class Callback
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
 
+
                     $user = $wallet->user;
+                    $user->run_promotions($request->amount);
                     $user->promoteLevel();
                 }
                 //改变订单状态，及其他业务修改

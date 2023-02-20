@@ -199,8 +199,8 @@ const DesktopHeader = () => {
         <HeaderWrapper>
             <HeaderPlatformStats>
                 {statsItems.map((item) => (
-                    <Link href={item.link}>
-                        <HeaderItems key={item.id}>
+                    <Link href={item.link} key={item.id}>
+                        <HeaderItems>
                             <img src={item.icon} alt={`${item.text}`} />
                             <p>{item.text}</p>
                         </HeaderItems>
@@ -226,8 +226,8 @@ const DesktopHeader = () => {
                     }}
                 >
                     {/* {user?.user} ? */}
-                    {links.map((item) => (
-                        <Link href={user?.user ? item.link : "/"}>
+                    {links.map((item, i) => (
+                        <Link href={user?.user ? item.link : "/"} key={i}>
                             <HeaderItems
                                 key={item.id}
                                 active={location == item.link.replace("/", "")}
@@ -274,7 +274,7 @@ const DesktopHeader = () => {
 
                 <SocialIcons>
                     {sound.muted ? (
-                        <div
+                        <p
                             onClick={() =>
                                 dispatcher(
                                     setSound({ field: "muted", value: false })
@@ -282,9 +282,9 @@ const DesktopHeader = () => {
                             }
                         >
                             <VolumeOffIcon sx={{ color: "#8990AE" }} />
-                        </div>
+                        </p>
                     ) : (
-                        <div
+                        <p
                             onClick={() =>
                                 dispatcher(
                                     setSound({ field: "muted", value: true })
@@ -292,7 +292,7 @@ const DesktopHeader = () => {
                             }
                         >
                             <VolumeUpIcon sx={{ color: "#8990AE" }} />
-                        </div>
+                        </p>
                     )}
                 </SocialIcons>
             </HeaderPlatformLinks>

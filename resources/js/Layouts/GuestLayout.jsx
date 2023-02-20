@@ -17,6 +17,8 @@ import LayoutTheme from "./theme";
 import NicknameModal from "@/Components/modal/profile/NicknameModal";
 import { Howl, Howler } from "howler";
 import { setSound } from "@/redux/app-state/app-slice";
+import useSound from "use-sound";
+
 const PageLayout = styled("div")(({ theme }) => ({
     color: "white",
     backgroundColor: "#000000",
@@ -32,7 +34,7 @@ const PageBody = styled("div")(({ isMobile }) => ({
     width: "100%",
     maxWidth: "1750px",
     margin: "0 auto",
-    display: "flex",
+    display: isMobile ? "block" : "flex",
     flexDirection: "row",
     paddingRight: !isMobile && "68px",
     background: "#000000",
@@ -56,30 +58,39 @@ export default function GuestLayout({ children }) {
     const { sound } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false);
 
+    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
+
+    useEffect(() => {
+        console.log("sound: ", sound);
+        if (sound.muted) return stop();
+        // if (!isPlaying && !sound.muted) return play();
+        // play();
+    }, [sound.muted, sound.currentSound]);
+
     const wait = (delay = 0) =>
         new Promise((resolve) => setTimeout(resolve, delay));
-    const audio = new Howl({
-        src: [sound.currentSound, sound.currentSound],
-        loop: true,
-        onplayerror: function () {
-            audio.once("unlock", function () {
-                const id = !sound.muted ? audio.play() : audio.mute(true);
-                dispatch(setSound({ field: "id", value: id }));
-            });
-        },
-    });
-    useEffect(() => {
-        const id = !sound.muted ? audio.play() : audio.mute(true);
-        dispatch(setSound({ field: "id", value: id }));
-        //     console.log("sound.muted id", sound.id);
-        //     console.log("sound.muted", sound);
-        // if (sound.muted) {
-            console.log("sound.muted id", sound.id);
-            audio.mute(true, sound.id);
-        // } else {
-        //     audio.mute(false, sound.id);
-        // }
-    }, [sound.currentSound, sound.muted]);
+    // const audio = new Howl({
+    //     src: [sound.currentSound, sound.currentSound],
+    //     loop: true,
+    //     onplayerror: function () {
+    //         audio.once("unlock", function () {
+    //             const id = !sound.muted ? audio.play() : audio.mute(true);
+    //             dispatch(setSound({ field: "id", value: id }));
+    //         });
+    //     },
+    // });
+    // useEffect(() => {
+    //     const id = !sound.muted ? audio.play() : audio.mute(true);
+    //     dispatch(setSound({ field: "id", value: id }));
+    //     //     console.log("sound.muted id", sound.id);
+    //     //     console.log("sound.muted", sound);
+    //     // if (sound.muted) {
+    //         console.log("sound.muted id", sound.id);
+    //         audio.mute(true, sound.id);
+    //     // } else {
+    //     //     audio.mute(false, sound.id);
+    //     // }
+    // }, [sound.currentSound, sound.muted]);
 
     document.addEventListener("DOMContentLoaded", () =>
         wait(1000).then(() => {

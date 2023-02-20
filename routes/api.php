@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\PromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -72,15 +74,17 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
 
 
- });
+});
 
 
 Route::get('all/deposits', [
-    UserController::class, 'allDeposits'
+    UserController::class,
+    'allDeposits'
 ]);
 
 Route::get('admin/all/withdrawals', [
-    UserController::class, 'allWithdrawals'
+    UserController::class,
+    'allWithdrawals'
 ]);
 
 
@@ -103,36 +107,70 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::post('/payment', [PaymentController::class, 'testpay']);
 
     Route::post('update/profile', [
-      ProfileController::class, 'updateProfile'  
+        ProfileController::class,
+        'updateProfile'
     ]);
 
-    Route::post('notify', function (Request $request) {
-        $process = new Process;
-        $process->status($request);
-    }
+    Route::post(
+        'notify',
+        function (Request $request) {
+            $process = new Process;
+            $process->status($request);
+        }
     );
+
+    Route::middleware(['jwt.verify', 'admin'])
+    ->prefix('promo')
+    ->group(function () {
+        Route::get('add',[
+            PromotionController::class, 'add'
+        ]);
+        Route::post('save', [
+            PromotionController::class, 'save'
+        ]);
+    });
+
+    Route::get('games/all', [
+        GameController::class,
+        'all_games'
+    ])->name('all_games');
+
+    Route::post('game/new', [
+        GameController::class,
+        'new_game'
+    ]);
+
+    route::get('games/my', [
+        GameController::class,
+        'my_games'
+    ]);
 
 });
 Route::middleware(['jwt.verify', 'admin'])->group(function () {
 
-    Route::get('approval/withdrawals',[
-        ManagementController::class, 'withdrawalRequests'
+    Route::get('approval/withdrawals', [
+        ManagementController::class,
+        'withdrawalRequests'
     ]);
 
-    Route::get('reject/withdrawal/{id}',[
-        ManagementController::class, 'rejectWithdrawal'
+    Route::get('reject/withdrawal/{id}', [
+        ManagementController::class,
+        'rejectWithdrawal'
     ]);
 
-    Route::get('ignore/withdrawal/{id}',[
-        ManagementController::class, 'ignoreWithdrawal'
+    Route::get('ignore/withdrawal/{id}', [
+        ManagementController::class,
+        'ignoreWithdrawal'
     ]);
 
-    Route::get('delete/withdrawal/{id}',[
-        ManagementController::class, 'deleteWithdrawal'
+    Route::get('delete/withdrawal/{id}', [
+        ManagementController::class,
+        'deleteWithdrawal'
     ]);
 
-    Route::get('approve/withdrawal/{id}',[
-        ManagementController::class, 'approveWithdrawal'
+    Route::get('approve/withdrawal/{id}', [
+        ManagementController::class,
+        'approveWithdrawal'
     ]);
 
     Route::get('make/admin/{id}', [
@@ -141,7 +179,8 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
     ]);
 
     Route::get('admin/counts', [
-        UserController::class, 'counts'
+        UserController::class,
+        'counts'
     ]);
 
     Route::get('users/all', [
@@ -165,7 +204,7 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
     ])->name('deleteUser');
 
 
-    Route::get('ban/user/{id}', [
+    Route::post('ban/user/{id}', [
         UserController::class,
         'banUser'
     ])->name('banUser');
@@ -175,12 +214,51 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
         'sendMail'
     ])->name('sendMail');
 
+    Route::post('/games/delete/{id}', [
+        GameController::class,
+        'delete'
+    ]);
 
+Route::prefix('promotion')->group(function () {
+    
+    Route::post('approve/{id}', [
+        PromotionController::class,
+        'approve'
+        ])->name('approve');
+        
+        Route::post('reject/{id}', [
+            PromotionController::class,
+            'reject'
+    ])->name('reject');
 
+    Route::post('save/{id}', [
+        PromotionController::class,
+        'save'
+])->name('save');
 
+Route::post('edit/{id}', [
+    PromotionController::class,
+    'edit'
+])->name('edit');
 
-    Route::post(
-        'notify',
+Route::post('pause/{id}', [
+    PromotionController::class,
+    'pause'
+])->name('pause');
+
+    Route::post('delete/{id}', [
+        PromotionController::class,
+        'delete'
+    ])->name('delete');
+
+    Route::get('all', [
+        PromotionController::class,
+        'all_promotions'
+        ])->name('all_promotions');
+        
+    });
+        Route::post(
+            'notify',
         function (Request $request) {
             $process = new Process;
             return $process->status($request);

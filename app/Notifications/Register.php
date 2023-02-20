@@ -45,10 +45,10 @@ class Register extends Notification
     {
         return (new MailMessage)
         ->line('You got registered')
-        ->action('Login here', url('https://bcboom.restora.com'))
+        ->action('Login here', url('https://bcboom.restoraweb.com'))
         ->line('Login to change your password!')
-        ->line('email: '. $this->details['email'])
-        ->line('password: password');
+        ->line('email: '. $this->details['email']);
+        // ->line('password: password');
     }
 
     /**

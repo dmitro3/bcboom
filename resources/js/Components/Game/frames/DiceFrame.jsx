@@ -1,7 +1,10 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setGameData } from "@/redux/game/game-slice";
+import { toggleRollUnder } from "@/utils/util";
 import { Box, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
 import arrow from "../../../../assets/games/arrow.svg";
 import cross from "../../../../assets/games/cross.svg";
 import cross_sm from "../../../../assets/games/cross_sm.svg";
@@ -56,18 +59,23 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = () => {
+const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
     const { isMobile } = useScreenResolution();
+    const { gameData } = useSelector((state) => state.game);
+    const dispatch = useDispatch();
     return (
         <Box
             sx={{
                 width: "98%",
                 mt: ".625rem",
-
                 px: { xs: "1.25rem", md: 0 },
             }}
         >
-            <DiceComponent />
+            <DiceComponent
+                setPlaying={setPlaying}
+                usePlay={playing}
+                setDiceNumbers={setDiceNumbers}
+            />
             <Box
                 sx={{
                     width: "100%",
@@ -93,10 +101,18 @@ const DiceFrame = () => {
                     <PrettoSlider
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
-                        defaultValue={50}
-                        // onChange={(_, value) => {
-                        //     setDiceRotation(value);
-                        // }}
+                        value={gameData.winChance}
+                        min={3}
+                        max={96}
+                        onChange={(_, value) => {
+                            dispatch(
+                                setGameData({
+                                    ...gameData,
+                                    winChance: value,
+                                    // payout,
+                                })
+                            );
+                        }}
                     />
                 </Box>
             </Box>
@@ -124,6 +140,7 @@ const DiceFrame = () => {
                                 justifyContent: `${idx === 0 ? "" : "center"}`,
                                 pl: `${idx === 0 ? "2.5rem" : 0}`,
                             }}
+                            key={idx}
                         >
                             {mark}
                         </Box>
@@ -181,6 +198,7 @@ const DiceFrame = () => {
                                         width: "100%",
                                         display: "flex",
                                         justifyContent: "space-between",
+                                        alignItems: "center",
                                     }}
                                 >
                                     <Typography
@@ -189,9 +207,26 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        1.98x
+                                        {(
+                                            gameData.payout *
+                                            gameData.numberOfPlay
+                                        ).toFixed(4)}
                                     </Typography>
-                                    <img src={cross} />
+                                    <div
+                                        onClick={() =>
+                                            dispatch(
+                                                setGameData({
+                                                    ...gameData,
+                                                    payout: (0.5).toFixed(4),
+                                                })
+                                            )
+                                        }
+                                    >
+                                        <img
+                                            src={cross}
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -237,9 +272,22 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        51.00
+                                        {gameData.rollUnder.value}
                                     </Typography>
-                                    <img src={arrow} />
+                                    <div
+                                        onClick={() => {
+                                            toggleRollUnder(
+                                                gameData,
+                                                dispatch,
+                                                setGameData
+                                            );
+                                        }}
+                                    >
+                                        <img
+                                            src={arrow}
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -285,7 +333,7 @@ const DiceFrame = () => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        51
+                                        {gameData.winChance}
                                         <Box
                                             component={"span"}
                                             sx={{ color: "#3586FF" }}
@@ -310,36 +358,71 @@ const DiceFrame = () => {
                                                 display: "flex",
                                             }}
                                         >
-                                            {["Min", "-5", "+5", "Max"].map(
-                                                (item, idx) => {
-                                                    return (
-                                                        <Box
-                                                            sx={{
-                                                                width: "25%",
-                                                                cursor: "pointer",
-                                                                color: "#A6B0DA",
-                                                                fontWeight: 700,
-                                                                fontSize:
-                                                                    ".75rem",
-                                                                textAlign:
-                                                                    "center",
-                                                                display: "flex",
-                                                                justifyContent:
-                                                                    "center",
-                                                                alignItems:
-                                                                    "center",
-                                                                borderRight: `${
-                                                                    idx !== 3
-                                                                        ? "2px solid #2E3365"
-                                                                        : ""
-                                                                }`,
-                                                            }}
-                                                        >
-                                                            {item}
-                                                        </Box>
-                                                    );
-                                                }
-                                            )}
+                                            {[
+                                                {
+                                                    name: "Min",
+                                                    value: "-95",
+                                                },
+                                                {
+                                                    name: "-5",
+                                                    value: "-5",
+                                                },
+                                                {
+                                                    name: "+5",
+                                                    value: "+5",
+                                                },
+                                                {
+                                                    name: "Max",
+                                                    value: "+95",
+                                                },
+                                            ].map((item, idx) => {
+                                                return (
+                                                    <Box
+                                                        sx={{
+                                                            width: "25%",
+                                                            cursor: "pointer",
+                                                            color: "#A6B0DA",
+                                                            fontWeight: 700,
+                                                            fontSize: ".75rem",
+                                                            textAlign: "center",
+                                                            display: "flex",
+                                                            justifyContent:
+                                                                "center",
+                                                            alignItems:
+                                                                "center",
+                                                            borderRight: `${
+                                                                idx !== 3
+                                                                    ? "2px solid #2E3365"
+                                                                    : ""
+                                                            }`,
+                                                        }}
+                                                        key={idx}
+                                                        onClick={() => {
+                                                            let newValue =
+                                                                gameData.winChance +
+                                                                Number(
+                                                                    item.value
+                                                                );
+                                                            if (newValue < 5) {
+                                                                newValue = 5;
+                                                            } else if (
+                                                                newValue > 95
+                                                            ) {
+                                                                newValue = 95;
+                                                            }
+                                                            dispatch(
+                                                                setGameData({
+                                                                    ...gameData,
+                                                                    winChance:
+                                                                        newValue,
+                                                                })
+                                                            );
+                                                        }}
+                                                    >
+                                                        {item.name}
+                                                    </Box>
+                                                );
+                                            })}
                                         </Box>
                                     </Box>
                                 </Box>
@@ -360,7 +443,6 @@ const DiceFrame = () => {
                         <Box
                             sx={{
                                 width: "45%",
-
                                 display: "flex",
                                 flexDirection: "column",
                                 height: "3.5rem",
@@ -392,7 +474,7 @@ const DiceFrame = () => {
                                         display: "flex",
                                         justifyContent: "space-between",
                                         alignItems: "center",
-                                        width: "95%",
+                                        width: "90%",
                                         height: "1.8rem",
                                     }}
                                 >
@@ -403,15 +485,26 @@ const DiceFrame = () => {
                                             weight: "700",
                                         }}
                                     >
-                                        1.98x
+                                        {gameData.payout}
                                     </Typography>
-                                    <img
-                                        src={cross_sm}
-                                        style={{
-                                            width: ".625rem",
-                                            height: ".625rem",
-                                        }}
-                                    />
+                                    <div
+                                        onClick={() =>
+                                            dispatch(
+                                                setGameData({
+                                                    ...gameData,
+                                                    payout: (0.5).toFixed(4),
+                                                })
+                                            )
+                                        }
+                                    >
+                                        <img
+                                            src={cross_sm}
+                                            style={{
+                                                width: ".625rem",
+                                                height: ".625rem",
+                                            }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -450,7 +543,7 @@ const DiceFrame = () => {
                                         display: "flex",
                                         justifyContent: "space-between",
                                         alignItems: "center",
-                                        width: "95%",
+                                        width: "90%",
                                         height: "1.8rem",
                                     }}
                                 >
@@ -461,15 +554,25 @@ const DiceFrame = () => {
                                             weight: "700",
                                         }}
                                     >
-                                        51.00
+                                        {gameData.rollUnder.value}
                                     </Typography>
-                                    <img
-                                        src={arrow}
-                                        style={{
-                                            width: ".625rem",
-                                            height: ".625rem",
+                                    <div
+                                        onClick={() => {
+                                            toggleRollUnder(
+                                                gameData,
+                                                dispatch,
+                                                setGameData
+                                            );
                                         }}
-                                    />
+                                    >
+                                        <img
+                                            src={arrow}
+                                            style={{
+                                                width: ".625rem",
+                                                height: ".625rem",
+                                            }}
+                                        />
+                                    </div>
                                 </Box>
                             </Box>
                         </Box>
@@ -520,7 +623,7 @@ const DiceFrame = () => {
                                         weight: "700",
                                     }}
                                 >
-                                    51{" "}
+                                    {gameData.winChance}
                                     <Box
                                         component="span"
                                         sx={{
@@ -549,34 +652,68 @@ const DiceFrame = () => {
                                             display: "flex",
                                         }}
                                     >
-                                        {["Min", "-5", "+5", "Max"].map(
-                                            (item, idx) => {
-                                                return (
-                                                    <Box
-                                                        sx={{
-                                                            width: "25%",
-                                                            cursor: "pointer",
-                                                            color: "#A6B0DA",
-                                                            fontWeight: 700,
-                                                            fontSize: ".75rem",
-                                                            textAlign: "center",
-                                                            display: "flex",
-                                                            justifyContent:
-                                                                "center",
-                                                            alignItems:
-                                                                "center",
-                                                            borderRight: `${
-                                                                idx !== 3
-                                                                    ? "2px solid #2E3365"
-                                                                    : ""
-                                                            }`,
-                                                        }}
-                                                    >
-                                                        {item}
-                                                    </Box>
-                                                );
-                                            }
-                                        )}
+                                        {[
+                                            {
+                                                name: "Min",
+                                                value: "-95",
+                                            },
+                                            {
+                                                name: "-5",
+                                                value: "-5",
+                                            },
+                                            {
+                                                name: "+5",
+                                                value: "+5",
+                                            },
+                                            {
+                                                name: "Max",
+                                                value: "+95",
+                                            },
+                                        ].map((item, idx) => {
+                                            return (
+                                                <Box
+                                                    sx={{
+                                                        width: "25%",
+                                                        cursor: "pointer",
+                                                        color: "#A6B0DA",
+                                                        fontWeight: 700,
+                                                        fontSize: ".75rem",
+                                                        textAlign: "center",
+                                                        display: "flex",
+                                                        justifyContent:
+                                                            "center",
+                                                        alignItems: "center",
+                                                        borderRight: `${
+                                                            idx !== 3
+                                                                ? "2px solid #2E3365"
+                                                                : ""
+                                                        }`,
+                                                    }}
+                                                    key={idx}
+                                                    onClick={() => {
+                                                        let newValue =
+                                                            gameData.winChance +
+                                                            Number(item.value);
+                                                        if (newValue < 5) {
+                                                            newValue = 5;
+                                                        } else if (
+                                                            newValue > 95
+                                                        ) {
+                                                            newValue = 95;
+                                                        }
+                                                        dispatch(
+                                                            setGameData({
+                                                                ...gameData,
+                                                                winChance:
+                                                                    newValue,
+                                                            })
+                                                        );
+                                                    }}
+                                                >
+                                                    {item.name}
+                                                </Box>
+                                            );
+                                        })}
                                     </Box>
                                 </Box>
                             </Box>

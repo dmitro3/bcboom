@@ -1,9 +1,12 @@
-import { setGameIsOn } from "@/redux/game/game-slice";
+import { useScreenResolution } from "@/hooks/useScreeResolution";
+import { setGameData } from "@/redux/game/game-slice";
+import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useSound from "use-sound";
 
-const DicesWrapper = styled("div")(() => ({
+const DicesWrapper = styled("div")(({ isMobile }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -16,6 +19,10 @@ const DicesWrapper = styled("div")(() => ({
     zIndex: "999",
     // backgroundColor: "rgba(0,0,0,0.5)",
     // backdropFilter: "blur(5px)",
+
+    "& > *": {
+        width: isMobile && "100px",
+    },
 }));
 
 const containerStyle = {
@@ -59,15 +66,17 @@ const dotStyle = {
     borderRadius: "15px",
 };
 
-const wrapperStyle = {
-    transform: "scale(0.35)",
-    marginTop: "-1rem",
-    marginBottom: "2rem",
-    padding: "1rem",
+const wrapperStyle = (isMobile) => {
+    return {
+        transform: `scale(${isMobile ? "0.25" : ".35"})`,
+        marginTop: "-1rem",
+        marginBottom: "2rem",
+        padding: "1rem",
+    };
 };
 
-const DiceWrapperOne = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperOne = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "&": {
         "#cube .front": { transform: "translateZ(100px)" },
         "#cube .back": { transform: "rotateX(-180deg)    translateZ(100px)" },
@@ -115,8 +124,8 @@ const DiceWrapperOne = styled("div")(() => ({
     },
 }));
 
-const DiceWrapperTwo = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperTwo = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "#cube2 .front2": { transform: "translateZ(100px)" },
     "#cube2 .back2": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube2 .right2": { transform: "rotateY(90deg)    translateZ(100px)" },
@@ -161,8 +170,8 @@ const DiceWrapperTwo = styled("div")(() => ({
     ".bottom2 .dot25": { top: "125px", left: "85px" },
     ".bottom2 .dot26": { top: "125px", left: "125px" },
 }));
-const DiceWrapperThree = styled("div")(() => ({
-    ...wrapperStyle,
+const DiceWrapperThree = styled("div")(({ isMobile }) => ({
+    ...wrapperStyle(isMobile),
     "#cube3 .front3": { transform: "translateZ(100px)" },
     "#cube3 .back3": { transform: "rotateX(-180deg)    translateZ(100px)" },
     "#cube3 .right3": { transform: "rotateY(90deg)    translateZ(100px)" },
@@ -208,25 +217,57 @@ const DiceWrapperThree = styled("div")(() => ({
     ".bottom3 .dot36": { top: "125px", left: "125px" },
 }));
 
-const DiceComponent = () => {
+const DiceComponent = ({ setPlaying }) => {
+    const { isMobile } = useScreenResolution();
     const diceOneRef = useRef(null);
     const diceTwoRef = useRef(null);
     const diceThreeRef = useRef(null);
     const dispatch = useDispatch();
-    function getRandom(max, min) {
-        return (Math.floor(Math.random() * (max - min + 1)) + min) * 810;
-    }
-    function rollDice(dice) {
-        const xRand = getRandom(24, 1);
-        const yRand = getRandom(24, 1);
-        dice.style.transform =
-            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-        dice.style.webkitTransform =
-            "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
-        dice.style.transition = "transform 2s ease";
-        dice.style.webkitTransition = "transform 2s ease";
+    const { gameData } = useSelector((state) => state.game);
+    async function rollDice(dice, idx) {
+        dice.style.transition = "transform 3s ease";
+        dice.style.webkitTransform = `rotateX(${Math.floor(
+            Math.random() * 360 + 1
+        )}deg) rotateY(${Math.floor(Math.random() * 360 + 1)}deg)`;
+        const diceNumber = randomDiceOutput(1, 6);
+        await sleep(900).then(() => {
+            let yRand = 720;
+            let xRand = 450;
+            switch (diceNumber) {
+                case 1:
+                    yRand = 16200;
+                    xRand = 9720;
+                    break;
+                case 2:
+                    yRand = 11340;
+                    xRand = 3240;
+                    break;
+                case 3:
+                    yRand = 18630;
+                    xRand = 12960;
+                    break;
+                case 4:
+                    yRand = 12150;
+                    xRand = 14580;
+                    break;
+                case 5:
+                    yRand = 12150;
+                    xRand = 8910;
+                    break;
+            }
+
+            dice.style.transform =
+                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            dice.style.webkitTransform =
+                "rotateX(" + xRand + "deg) rotateY(" + yRand + "deg)";
+            dice.style.transition = "transform 2s ease";
+            dice.style.webkitTransition = "transform 2s ease";
+        });
+        return diceNumber;
     }
     const { playing } = useSelector((state) => state.game);
+    const { sound } = useSelector((state) => state.app);
+    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
     useEffect(() => {
         if (
             playing &&
@@ -234,15 +275,30 @@ const DiceComponent = () => {
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
-            rollDice(diceOneRef.current);
-            rollDice(diceTwoRef.current);
-            rollDice(diceThreeRef.current);
+            play();
+            console.log("sound: ", sound.currentSound);
+            async function diceFn() {
+                setPlaying(true);
+                let x = await Promise.allSettled([
+                    rollDice(diceOneRef.current, 1),
+                    rollDice(diceTwoRef.current, 2),
+                    rollDice(diceThreeRef.current, 3),
+                ]);
+                dispatch(
+                    setGameData({
+                        ...gameData,
+                        diceNumber: x.map((item) => item.value),
+                    })
+                );
+            }
+
+            diceFn();
+            setPlaying(false);
         }
-        dispatch(setGameIsOn(false));
     }, [playing]);
     return (
-        <DicesWrapper>
-            <DiceWrapperOne>
+        <DicesWrapper isMobile={isMobile}>
+            <DiceWrapperOne isMobile={isMobile}>
                 <section className="container">
                     <div id="cube" ref={diceOneRef}>
                         <div className="front">
@@ -281,7 +337,7 @@ const DiceComponent = () => {
                     </div>
                 </section>
             </DiceWrapperOne>
-            <DiceWrapperTwo>
+            <DiceWrapperTwo isMobile={isMobile}>
                 <section className="container2">
                     <div id="cube2" ref={diceTwoRef}>
                         <div className="front2">
@@ -320,7 +376,7 @@ const DiceComponent = () => {
                     </div>
                 </section>
             </DiceWrapperTwo>
-            <DiceWrapperThree>
+            <DiceWrapperThree isMobile={isMobile}>
                 <section className="container3">
                     <div id="cube3" ref={diceThreeRef}>
                         <div className="front3">
