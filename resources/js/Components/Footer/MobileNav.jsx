@@ -2,7 +2,7 @@ import { mobileNavLinks } from "@/data";
 import { setDrawerState } from "@/redux/app-state/app-slice";
 import { Link } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Flex } from "../UtilComponents/Flex";
 
@@ -53,6 +53,7 @@ const MobileDivider = styled("div")(() => ({
 const MobileNav = () => {
     const dispatcher = useDispatch();
     const { drawerState } = useSelector((state) => state.app);
+    const [location, setLocation] = useState(window?.location?.pathname);
     const Component = ({ item, active }) => (
         <InnerHeaderItem active={active}>
             <img
@@ -65,10 +66,11 @@ const MobileNav = () => {
             <p>{item.name}</p>
         </InnerHeaderItem>
     );
-    const location =
-        typeof window !== undefined
-            ? window.location.pathname.split("/")[1]
-            : "";
+    // let location =
+    //     typeof window !== undefined
+    //         ? window.location.pathname.split("/")[1]
+    //         : "";
+
     return (
         <MobieNavWrapper>
             <Flex
@@ -79,12 +81,17 @@ const MobileNav = () => {
                 {mobileNavLinks.map((item, index) => {
                     if (item.navigatable)
                         return (
-                            <Link href={item.link}>
+                            <Link
+                                href={item.link}
+                                onClick={() => {
+                                    setLocation(item.link.replace("/", ""));
+                                }}
+                            >
                                 <Component
                                     key={index}
                                     item={item}
                                     active={
-                                        location ==
+                                        location ===
                                             item.link.replace("/", "") &&
                                         !drawerState.open
                                     }
@@ -93,12 +100,15 @@ const MobileNav = () => {
                         );
                     return (
                         <div
-                            onClick={() =>
-                                item.link === "/menu" &&
-                                dispatcher(
-                                    setDrawerState({ open: !drawerState.open })
-                                )
-                            }
+                            onClick={() => {
+                                if (item.link === "/menu") {
+                                    dispatcher(
+                                        setDrawerState({
+                                            open: !drawerState.open,
+                                        })
+                                    );
+                                }
+                            }}
                         >
                             <Component
                                 key={index}
