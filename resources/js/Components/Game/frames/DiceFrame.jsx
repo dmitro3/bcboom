@@ -207,10 +207,7 @@ const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        {(
-                                            gameData.payout *
-                                            gameData.numberOfPlay
-                                        ).toFixed(4)}
+                                        {gameData.payout.toFixed(4)}
                                     </Typography>
                                     <div
                                         onClick={() => {
@@ -498,7 +495,7 @@ const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
                                                     ...gameData,
                                                     payout: (0.5).toFixed(4),
                                                 })
-                                            )
+                                            );
                                         }}
                                     >
                                         <img
@@ -562,7 +559,7 @@ const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
                                     </Typography>
                                     <div
                                         onClick={() => {
-                                            if(playing) return;
+                                            if (playing) return;
                                             toggleRollUnder(
                                                 gameData,
                                                 dispatch,
