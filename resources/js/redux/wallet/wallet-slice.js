@@ -42,7 +42,7 @@ export const allWithdrawals = createAsyncThunk("all/withdraws", async () => {
     }
 });
 
-const walletSlice = createSlice({
+export const walletSlice = createSlice({
     name: "wallet",
     initialState: {
         modalState: { open: false, tab: 0 },

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import store from "../store";
+import { setWallet } from "../wallet/wallet-slice";
 import gameApiFunctions from "./game-api";
 
 export const saveGame = createAsyncThunk("game/new", async (payload) => {
@@ -45,8 +47,13 @@ const gameSlice = createSlice({
     },
     extraReducers: {
         [fetchAllGames.fulfilled]: (state, action) => {
-            state.allGames = action.payload.data.wallet;
+            state.allGames = action.payload.data.games;
         },
+        // [saveGame.fulfilled]: (state, action) => {
+        //     // const dispatch = useDispatch();
+        //     console.log("something: ", setWallet);
+        //     store.dispatch(setWallet(action.payload.data.wallet))
+        // },
     },
 });
 

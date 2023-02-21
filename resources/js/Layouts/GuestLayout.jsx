@@ -61,7 +61,6 @@ export default function GuestLayout({ children }) {
     const [play, { stop, isPlaying }] = useSound(sound.currentSound);
 
     useEffect(() => {
-        console.log("sound: ", sound);
         if (sound.muted) return stop();
         // if (!isPlaying && !sound.muted) return play();
         // play();

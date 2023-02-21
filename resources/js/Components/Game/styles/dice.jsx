@@ -1,8 +1,8 @@
 import { useScreenResolution } from "@/hooks/useScreeResolution";
-import { setGameData } from "@/redux/game/game-slice";
+import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { randomDiceOutput, sleep } from "@/utils/util";
 import { styled } from "@mui/system";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
@@ -268,6 +268,7 @@ const DiceComponent = ({ setPlaying }) => {
     const { playing } = useSelector((state) => state.game);
     const { sound } = useSelector((state) => state.app);
     const [play, { stop, isPlaying }] = useSound(sound.currentSound);
+    const [playingState, setPlayingState] = useState(false);
     useEffect(() => {
         if (
             playing &&
@@ -275,8 +276,6 @@ const DiceComponent = ({ setPlaying }) => {
             diceTwoRef.current &&
             diceThreeRef.current
         ) {
-            play();
-            console.log("sound: ", sound.currentSound);
             async function diceFn() {
                 setPlaying(true);
                 let x = await Promise.allSettled([
@@ -284,18 +283,59 @@ const DiceComponent = ({ setPlaying }) => {
                     rollDice(diceTwoRef.current, 2),
                     rollDice(diceThreeRef.current, 3),
                 ]);
-                dispatch(
-                    setGameData({
-                        ...gameData,
-                        diceNumber: x.map((item) => item.value),
-                    })
-                );
+                // if (gameData.numberOfPlay === 1) {
+                //     dispatch(setGameIsOn(false));
+                //     setPlayingState(false);
+                // }
+                return x;
             }
+            // let numberOfPlay = gameData.numberOfPlay;
+            (() => {
+                // setPlaying(true);
+                diceFn().then((x) => {
+                    dispatch(
+                        setGameData({
+                            ...gameData,
+                            diceNumber: x.map((item) => item.value),
+                        })
+                    );
+                });
+                if (gameData.numberOfPlay === 1) setPlaying(false);
+            })();
+            let intervalId = setInterval(() => {
+                console.log("got here unkowingly");
+                if (gameData.numberOfPlay > 1) {
+                    diceFn().then((x) => {
+                        dispatch(
+                            setGameData({
+                                ...gameData,
+                                diceNumber: x.map((item) => item.value),
+                            })
+                        );
+                    });
+                    dispatch(
+                        setGameData({
+                            ...gameData,
+                            numberOfPlay: gameData.numberOfPlay--,
+                        })
+                    );
+                } else {
+                    clearInterval(intervalId);
+                    dispatch(setGameData({ ...gameData, numberOfPlay: 1 }));
+                    setPlayingState(false);
+                    dispatch(setGameIsOn(false));
+                    setPlaying(false);
+                }
+            }, 10000);
 
-            diceFn();
-            setPlaying(false);
+            console.log("got here");
         }
     }, [playing]);
+    useEffect(() => {
+        if (!playing && !playingState) {
+            console.log("run functions bro");
+        }
+    }, [playingState]);
     return (
         <DicesWrapper isMobile={isMobile}>
             <DiceWrapperOne isMobile={isMobile}>
@@ -420,3 +460,45 @@ const DiceComponent = ({ setPlaying }) => {
 };
 
 export default DiceComponent;
+
+
+
+
+
+
+
+    // play();
+            // console.log("sound: ", sound.currentSound);
+            // async function diceFn() {
+            //     setPlaying(true);
+            //     let x = await Promise.allSettled([
+            //         rollDice(diceOneRef.current, 1),
+            //         rollDice(diceTwoRef.current, 2),
+            //         rollDice(diceThreeRef.current, 3),
+            //     ]);
+            //     dispatch(
+            //         setGameData({
+            //             ...gameData,
+            //             diceNumber: x.map((item) => item.value),
+            //         })
+            //     );
+            //     await sleep(2000);
+            //     return x;
+            // }
+            // if (gameData.numberOfPlay === 1) {
+            //     // diceFn();
+            //     console.log("sdljhslhsglkshdg: ", gameData.numberOfPlay);
+            // } else if (gameData.numberOfPlay > 1) {
+            //     // const resultArray = [];
+            //     for (let i = 0; i < gameData.numberOfPlay; i++) {
+            //         console.log('sdfhsdkhsdkjlshdf')
+            //         diceFn().then((res) => {
+            //             setResultArray([...resultArray, res]);
+            //         });
+            //     }
+            //     setPlaying(false);
+            //     // if (resultArray.length === gameData.numberOfPlay) {
+            //         console.log("resultArray: ", resultArray);
+            //     // }
+            // }
+            // setPlaying(false);

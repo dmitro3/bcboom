@@ -96,7 +96,6 @@ const SimpleSidebar = () => {
         },
     ];
     const location = window.location.pathname.split("/")[2];
-    console.log("location: ", location);
     return (
         <SidebarWrapper>
             <SidebarItems>

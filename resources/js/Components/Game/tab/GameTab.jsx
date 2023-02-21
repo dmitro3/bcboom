@@ -44,7 +44,6 @@ function TabPanel(props) {
 }
 const GameTab = () => {
     const [tabValue, setTabValue] = React.useState(1);
-
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -59,6 +58,7 @@ const GameTab = () => {
 
     const { gameData } = useSelector((state) => state.game);
     const { wallet } = useSelector((state) => state.wallet);
+    const payout = (gameData.payout * gameData.numberOfPlay).toFixed(4);
     return (
         <div>
             <Box
@@ -155,10 +155,7 @@ const GameTab = () => {
                                         />
 
                                         <Text
-                                            text={`R$ ${(
-                                                gameData.payout *
-                                                gameData.numberOfPlay
-                                            ).toFixed(4)}`}
+                                            text={`R$ ${payout}`}
                                             type="p"
                                             fontWeight={600}
                                             fontSize="1rem"
@@ -258,7 +255,7 @@ const GameTab = () => {
                                         />
 
                                         <Text
-                                            text={`R$ ${gameData.payout}`}
+                                            text={`R$ ${payout}`}
                                             fontWeight={800}
                                             fontSize="1rem"
                                         />
@@ -314,7 +311,7 @@ const GameTab = () => {
                                         />
 
                                         <Text
-                                            text={`R$ ${gameData.payout}`}
+                                            text={`R$ ${payout}`}
                                             fontWeight={800}
                                             fontSize="1rem"
                                         />

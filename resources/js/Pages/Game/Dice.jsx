@@ -7,6 +7,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { setSound } from "@/redux/app-state/app-slice";
 import { saveGame, setGameData, setGameIsOn } from "@/redux/game/game-slice";
+import { setWallet } from "@/redux/wallet/wallet-slice";
 import { calcPayout, sleep, toggleRollUnder } from "@/utils/util";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
@@ -84,7 +85,7 @@ const DicePage = () => {
     const { gameData } = useSelector((state) => state.game);
     const dispatch = useDispatch();
 
-    const handleDiceRoll = async (diceNumber) => {
+    const handleDiceRoll = async (diceNumber, count) => {
         await sleep(2000);
         const rolled = diceNumber.reduce((a, b) => a + b, 0);
         let differenceInChance = gameData.rollUnder.value.split(" - ");
@@ -102,7 +103,7 @@ const DicePage = () => {
         });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
-        await sleep(5000);
+        // await sleep(5000);
         const response = await dispatch(
             saveGame({
                 name: "dice",
@@ -117,18 +118,34 @@ const DicePage = () => {
                 position: "top-center",
             });
         }
-        if (response.payload.data.message === "success")
+        if (response.payload.data.message === "success") {
+            dispatch(setWallet(response.payload.data.wallet));
+            // if (count === 1) return
+            if (gameData.numberOfPlay > 1) return;
+            await sleep(6000);
             dispatch(setGameIsOn(false));
+            // return true;
+        }
     };
 
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
         if (gameData.diceNumber.length === 3) {
             handleDiceRoll(gameData.diceNumber);
+            // } else {
+            // if (gameData.diceNumber.length === 3) {
+            // } else {
+            //     const resultArray = [];
+            //     for (let i = 0; i < gameData.numberOfPlay; i++) {
+            //         resultArray.push(handleDiceRoll(gameData.diceNumber, i));
+            //     }
+            //     console.log("resultArray: ", resultArray);
+            // }
         }
+        // if (gameData.diceNumber.length === 3) {
+        // }
     }, [gameData.winChance, gameData.betAmount, gameData.diceNumber]);
 
-    console.log("gaeData: ", gameData);
     // useEffect(() => {
     //     calcPayout(gameData, dispatch, setGameData);
     // }, [gameData.rollUnder]);

@@ -242,7 +242,8 @@ const payoutFunc = (gameData, rollUnder, chance) => {
     if (+gameData.betAmount >= +payout) {
         payout = +payout + +gameData.betAmount;
     }
-    if (gameData.betAmount * 2 > payout) payout = payout * 2;
+    if (differenceInChance >= 13) payout = gameData.betAmount * 1.02;
+    // if (gameData.betAmount * 2 > payout) payout = payout * 2;
     return payout;
 };
 
