@@ -13,6 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('promotions', function (Blueprint $table) {
+            Schema::dropIfExists('promotions');
             $table->id();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
@@ -30,5 +31,6 @@ return new class extends Migration {
     public function down()
     {
         //
+        Schema::dropIfExists('promotions');
     }
 };
