@@ -91,6 +91,7 @@ const SignupForm = ({ isMobile }) => {
 
     const [recaptchaError, setRecaptchaError] = useState("");
     async function handleSubmit(e) {
+
         if (submitted) return;
         setSubmitted(true);
         e.preventDefault();
@@ -105,11 +106,12 @@ const SignupForm = ({ isMobile }) => {
             setSubmitted(false);
             return;
         }
-        if (username.length > 10) {
-            setSignupError("Username must be less than 10 characters");
-            setSubmitted(false);
-            return;
-        }
+        // console.log('sdfsdf')
+        // if (username.length > 20) {
+        //     toast.error("Username must be less than 20 characters");
+        //     setSubmitted(false);
+        //     return;
+        // }
         if (!checked) {
             setChecked("Please agree to the terms and conditions");
             toast.error("Please agree to the terms and conditions");
