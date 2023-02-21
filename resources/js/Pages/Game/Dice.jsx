@@ -103,7 +103,7 @@ const DicePage = () => {
         });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
-        await sleep(5000);
+        // await sleep(5000);
         const response = await dispatch(
             saveGame({
                 name: "dice",
@@ -120,16 +120,19 @@ const DicePage = () => {
         }
         if (response.payload.data.message === "success") {
             dispatch(setWallet(response.payload.data.wallet));
-            if (count === 1) return dispatch(setGameIsOn(false));
-            return true;
+            // if (count === 1) return
+            if (gameData.numberOfPlay > 1) return;
+            await sleep(6000);
+            dispatch(setGameIsOn(false));
+            // return true;
         }
     };
 
     useEffect(() => {
         calcPayout(gameData, dispatch, setGameData);
-        if (gameData.diceNumber.length === 3 && gameData.numberOfPlay === 1) {
-            handleDiceRoll(gameData.diceNumber, 1);
-        } else {
+        if (gameData.diceNumber.length === 3) {
+            handleDiceRoll(gameData.diceNumber);
+            // } else {
             // if (gameData.diceNumber.length === 3) {
             // } else {
             //     const resultArray = [];
