@@ -313,10 +313,12 @@ const LoginForm = ({ isMobile, switchTo }) => {
         const { email, password, captchaValue } = loginDetails;
         if (email === "" || password === "") {
             setLoginError("Please fill all the fields");
+            setSubmitted(false);
             return;
         }
         if (captchaValue === "") {
             setCatpchaError("Please verify that you are not a robot");
+            setSubmitted(false);
             return;
         }
         const response = await dispatcher(login(loginDetails));
