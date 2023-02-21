@@ -460,3 +460,45 @@ const DiceComponent = ({ setPlaying }) => {
 };
 
 export default DiceComponent;
+
+
+
+
+
+
+
+    // play();
+            // console.log("sound: ", sound.currentSound);
+            // async function diceFn() {
+            //     setPlaying(true);
+            //     let x = await Promise.allSettled([
+            //         rollDice(diceOneRef.current, 1),
+            //         rollDice(diceTwoRef.current, 2),
+            //         rollDice(diceThreeRef.current, 3),
+            //     ]);
+            //     dispatch(
+            //         setGameData({
+            //             ...gameData,
+            //             diceNumber: x.map((item) => item.value),
+            //         })
+            //     );
+            //     await sleep(2000);
+            //     return x;
+            // }
+            // if (gameData.numberOfPlay === 1) {
+            //     // diceFn();
+            //     console.log("sdljhslhsglkshdg: ", gameData.numberOfPlay);
+            // } else if (gameData.numberOfPlay > 1) {
+            //     // const resultArray = [];
+            //     for (let i = 0; i < gameData.numberOfPlay; i++) {
+            //         console.log('sdfhsdkhsdkjlshdf')
+            //         diceFn().then((res) => {
+            //             setResultArray([...resultArray, res]);
+            //         });
+            //     }
+            //     setPlaying(false);
+            //     // if (resultArray.length === gameData.numberOfPlay) {
+            //         console.log("resultArray: ", resultArray);
+            //     // }
+            // }
+            // setPlaying(false);
