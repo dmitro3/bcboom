@@ -42,6 +42,15 @@ export const allWithdrawals = createAsyncThunk("all/withdraws", async () => {
     }
 });
 
+export const getRates = createAsyncThunk("get/rates", async () => {
+    try {
+        const response = await walletFunctions.getRates();
+        return response;
+    } catch (error) {
+        return error;
+    }
+});
+
 export const walletSlice = createSlice({
     name: "wallet",
     initialState: {

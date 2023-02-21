@@ -9,14 +9,19 @@ import { setHistoryTab, setWithdrawHistory } from "@/redux/app-state/app-slice";
 import {
     allWithdrawals,
     deposit,
+    getRates,
     setWalletModalState,
     widthdraw,
 } from "@/redux/wallet/wallet-slice";
-import { getAllWithdrawalFunc, validateBrazilTaxNumber, validateCPF } from "@/utils/util";
+import {
+    getAllWithdrawalFunc,
+    validateBrazilTaxNumber,
+    validateCPF,
+} from "@/utils/util";
 import { Inertia } from "@inertiajs/inertia";
 import { CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import depositCarousel from "../../../../../public/images/carousel/depositcarousel.svg";
@@ -104,21 +109,33 @@ const DepositCarousel = styled("div")(({}) => ({
 
 const Deposit = () => {
     const [value, setValue] = useState(100);
+    const [rate, setRate] = useState(5.209);
     const [calculatedValue, setCalculatedValue] = useState(
-        Math.floor(value * 0.544)
+        Math.floor(value * rate)
     );
+    const dispatcher = useDispatch();
+    useEffect(() => {
+        async function getRate() {
+            const res = await dispatcher(getRates());
+            if (res?.payload?.data) {
+                setRate(res.payload.data.rate);
+            }
+        }
+        getRate();
+    }, []);
     const [submitted, setSubmitted] = useState(false);
     const [buttonHovered, setButtonHovered] = useState(false);
-    const dispatcher = useDispatch();
     const { isMobile } = useScreenResolution();
-    async function handleDeposit(value) {
+    async function handleDeposit(propValue) {
         setSubmitted(true);
-        if (!value || value < 10) {
-            toast.error("Minimum deposit is R$10");
+        if (!value || value < 20) {
+            toast.error("Minimum deposit is R$20", {
+                autoClose: 5000,
+            });
             setSubmitted(false);
             return;
         }
-        const response = await dispatcher(deposit(value));
+        const response = await dispatcher(deposit(propValue));
         // console.log("response", response);
         if (!response?.payload) {
             toast.error("An error occured");
@@ -131,12 +148,12 @@ const Deposit = () => {
             return;
         }
         if (response?.payload?.status === 200) {
-            toast.info(`You made an order of R$ ${value}`);
+            toast.info(`You made an order of R$ ${propValue}`);
             // toast.info('Redirecting to payment gateway...')
             window.location.href = response?.payload?.data?.link;
         }
-        // setSubmitted(false);
-        // dispatcher(setWalletModalState({ open: false }));
+        setSubmitted(false);
+        dispatcher(setWalletModalState({ open: false }));
     }
     return (
         <TabWrapper>
@@ -150,7 +167,7 @@ const Deposit = () => {
                 value={value}
                 onChange={(e) => {
                     setValue(e.target.value);
-                    setCalculatedValue(Math.floor(e.target.value * 0.544));
+                    setCalculatedValue(Math.floor(e.target.value * rate));
                 }}
                 afterInputText="Extra + G$20"
                 br="10px"
@@ -174,7 +191,7 @@ const Deposit = () => {
                         onChange={() => {
                             console.log("item: ", item);
                             setValue(item);
-                            setCalculatedValue(item * 0.544);
+                            setCalculatedValue(item * rate);
                         }}
                     />
                 ))}
@@ -201,7 +218,7 @@ const Deposit = () => {
                             />
                             <Text
                                 type="p"
-                                text="( 1B$ = R$0.544)"
+                                text={`( 1G$ = R$${rate.toFixed(4)})`}
                                 fontSize="13px"
                             />
                         </div>
@@ -323,7 +340,7 @@ const Withdraw = () => {
             setSubmitted(false);
             return;
         }
-        if(response?.payload?.status === 422) {
+        if (response?.payload?.status === 422) {
             toast.error(response?.payload?.data?.message);
             setSubmitted(false);
             return;

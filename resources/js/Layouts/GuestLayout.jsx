@@ -125,7 +125,7 @@ export default function GuestLayout({ children }) {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-                theme="dark"
+                // theme="light"
                 autoClose={1000}
                 limit={3}
             />
