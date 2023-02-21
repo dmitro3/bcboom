@@ -11,7 +11,7 @@ class Promotion extends Model
 
     protected $table = 'promotions';
 
-    protected $fillable = ['type', 'status', 'user', 'amount', 'percentage', 'username'];
+    protected $fillable = ['type', 'status', 'amount', 'percentage'];
 
     public function user()
     {
