@@ -111,7 +111,6 @@ const SignupForm = ({ isMobile }) => {
         const response = await dispatcher(signup(signupDetails));
         if (response.payload.status === 400) {
             const error = JSON.parse(response.payload.data);
-            console.log("error: ", error);
             Object.values(error).map((err) => {
                 setSignupError(err[0]);
                 toast.error(err[0]);
@@ -120,11 +119,15 @@ const SignupForm = ({ isMobile }) => {
                 setSignupDetails({ ...signupDetails, [err]: "" });
             });
         }
-        if (response.payload.status === 201) {
-            toast.success("Signup successful, please login");
+        if (response.payload.status === 200) {
+            toast.success("Signup successful");
             dispatcher(setAuthModalState({ open: false }));
-            await sleep(50);
-            dispatcher(setAuthModalState({ open: true, tab: 0 }));
+            localStorage.setItem(
+                "access_token",
+                response.payload.data.access_token
+            );
+            // await sleep(50);
+            // dispatcher(setAuthModalState({ open: true, tab: 0 }));
         }
         setSubmitted(false);
     }

@@ -107,7 +107,7 @@ class AuthController extends Controller
                     $referrer->update([
                         'referral_count' => $referrer->referral_count+1
                     ]);
-                    $referrer->grantBonus();
+                    // $referrer->grantBonus();
                     // $referrer->makeVip();
                 }
 
@@ -127,7 +127,7 @@ class AuthController extends Controller
                     ]);
 
                     // Grant a bonus to the referring user.
-                    $referring->grantBonus();
+                    // $referring->grantBonus();
                     // $referring->makeVip();
                 }else{
                     // $token = JWTAuth::fromUser($user);
