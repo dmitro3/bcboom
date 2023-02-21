@@ -158,7 +158,7 @@ class AuthController extends Controller
                         'user_id' => $user->id   
                     ]);
                 }
-                $newRequest = ['email' => $request->email, 'password' => $request->password]; 
+                // $newRequest = ['email' => $request->email, 'password' => $request->password]; 
                 $credentials = $this->credentials($request);
 
                 if (! $token = auth()->attempt($credentials)) {
