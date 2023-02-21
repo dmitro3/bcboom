@@ -207,7 +207,7 @@ const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
                                             fontSize: ".875rem",
                                         }}
                                     >
-                                        {gameData.payout.toFixed(4)}
+                                        {gameData.payout}
                                     </Typography>
                                     <div
                                         onClick={() => {
@@ -215,7 +215,7 @@ const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
-                                                    payout: (0.5).toFixed(4),
+                                                    payout: 0.4000,
                                                 })
                                             );
                                         }}
