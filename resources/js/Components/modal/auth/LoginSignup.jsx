@@ -25,6 +25,7 @@ import CustomModal from "../Modal";
 
 import Text from "@/Components/Text/Text";
 import { sleep, validatePhoneNumber } from "@/utils/util";
+import { setProfile } from "@/redux/profile/profileSlice";
 const LoginSignupModalWrapper = styled("div")(({ isMobile }) => ({
     background: "#272C4B",
     position: "relative",
@@ -90,22 +91,37 @@ const SignupForm = ({ isMobile }) => {
 
     const [recaptchaError, setRecaptchaError] = useState("");
     async function handleSubmit(e) {
-        if(submitted) return;
+
+        if (submitted) return;
         setSubmitted(true);
         e.preventDefault();
         const { username, email, password } = signupDetails;
         if (!username || !password || !email) {
             setSignupError("Please fill all fields");
+            setSubmitted(false);
             return;
         }
+        if (username.length < 3) {
+            setSignupError("Username must be at least 3 characters");
+            setSubmitted(false);
+            return;
+        }
+        // console.log('sdfsdf')
+        // if (username.length > 20) {
+        //     toast.error("Username must be less than 20 characters");
+        //     setSubmitted(false);
+        //     return;
+        // }
         if (!checked) {
             setChecked("Please agree to the terms and conditions");
             toast.error("Please agree to the terms and conditions");
+            setSubmitted(false);
             return;
         }
         if (!signupDetails.captchaValue) {
             setRecaptchaError("Please verify that you are not a robot");
             toast.error("Please verify that you are not a robot");
+            setSubmitted(false);
             return;
         }
         const response = await dispatcher(signup(signupDetails));
@@ -122,6 +138,7 @@ const SignupForm = ({ isMobile }) => {
         if (response.payload.status === 200) {
             toast.success("Signup successful");
             dispatcher(setAuthModalState({ open: false }));
+            dispatcher(setProfile(response?.payload?.data?.user));
             localStorage.setItem(
                 "access_token",
                 response.payload.data.access_token
