@@ -40,14 +40,17 @@ export const sendForgotPasswordMail = createAsyncThunk(
     }
 );
 
-export const resetPassword = createAsyncThunk("resetPassword", async (payload) => {
-    try {
-        const response = await authFunctions.resetPassword(payload);
-        return response;
-    } catch (error) {
-        return error;
+export const resetPassword = createAsyncThunk(
+    "resetPassword",
+    async (payload) => {
+        try {
+            const response = await authFunctions.resetPassword(payload);
+            return response;
+        } catch (error) {
+            return error;
+        }
     }
-});
+);
 
 const authSlice = createSlice({
     name: "auth",
@@ -64,6 +67,11 @@ const authSlice = createSlice({
     },
     extraReducers: {
         [login.fulfilled]: (state, action) => {
+            if (action.payload.status === 200) {
+                state.user = action.payload.data;
+            }
+        },
+        [signup.fulfilled]: (state, action) => {
             if (action.payload.status === 200) {
                 state.user = action.payload.data;
             }
