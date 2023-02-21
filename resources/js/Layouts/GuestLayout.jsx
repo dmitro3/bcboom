@@ -119,7 +119,16 @@ export default function GuestLayout({ children }) {
         );
     return (
         <LayoutTheme>
-            <ToastContainer />
+            <ToastContainer
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                autoClose={1000}
+                limit={3}
+            />
             {isMobile && drawerState?.open && <Sidedrawer />}
             {modalState?.open && <LoginSignupModal />}
             {walletModalState?.open && <WalletModal />}

@@ -81,7 +81,6 @@ const GamesPageWrapper = styled("div")(({ isMobile }) => ({
 const DicePage = () => {
     const { isMobile } = useScreenResolution();
     const [playing, setPlaying] = useState(false);
-    const [playDeter, setPlayDeter] = useState(true);
     const { gameData } = useSelector((state) => state.game);
     const dispatch = useDispatch();
 
@@ -100,6 +99,7 @@ const DicePage = () => {
         const amount = status === "won" ? gameData.payout : gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
+            autoClose: 5000,
         });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
@@ -164,12 +164,7 @@ const DicePage = () => {
                                 playing={playing}
                             />
                         }
-                        ButtonGrid={
-                            <DiceButtonGrid
-                                playDeter={playDeter}
-                                setPlayDeter={setPlayDeter}
-                            />
-                        }
+                        ButtonGrid={<DiceButtonGrid />}
                         customFrameHeader={true}
                         innerHeader={true}
                         customFrameBoxStyles={{

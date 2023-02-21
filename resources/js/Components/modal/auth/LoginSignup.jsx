@@ -78,8 +78,6 @@ const ResetPasswordWrapper = styled("div")(({ isMobile }) => ({
 const SignupForm = ({ isMobile }) => {
     const dispatcher = useDispatch();
     const [signupDetails, setSignupDetails] = useState({
-        phone: "",
-        // name: "",
         email: "",
         username: "",
         password: "",
@@ -88,11 +86,15 @@ const SignupForm = ({ isMobile }) => {
     });
     const [checked, setChecked] = useState("");
     const [signupError, setSignupError] = useState("");
+    const [submitted, setSubmitted] = useState(false);
+
     const [recaptchaError, setRecaptchaError] = useState("");
     async function handleSubmit(e) {
+        if(submitted) return;
+        setSubmitted(true);
         e.preventDefault();
-        const { username, email, password, phone } = signupDetails;
-        if (!username || !password || !email || !phone) {
+        const { username, email, password } = signupDetails;
+        if (!username || !password || !email) {
             setSignupError("Please fill all fields");
             return;
         }
@@ -104,14 +106,6 @@ const SignupForm = ({ isMobile }) => {
         if (!signupDetails.captchaValue) {
             setRecaptchaError("Please verify that you are not a robot");
             toast.error("Please verify that you are not a robot");
-            return;
-        }
-
-        const validPhone = validatePhoneNumber(signupDetails.phone);
-        if (!validPhone) {
-            setSignupError("Please enter a valid phone number");
-            toast.error("Please enter a valid phone number");
-            setSignupDetails({ ...signupDetails, phone: "" });
             return;
         }
         const response = await dispatcher(signup(signupDetails));
@@ -132,11 +126,12 @@ const SignupForm = ({ isMobile }) => {
             await sleep(50);
             dispatcher(setAuthModalState({ open: true, tab: 0 }));
         }
+        setSubmitted(false);
     }
 
     return (
         <SignupFormWrapper isMobile={isMobile}>
-            <Input
+            {/* <Input
                 addon=""
                 type="phone"
                 placeholder="Phone Number (1234567890)"
@@ -150,7 +145,7 @@ const SignupForm = ({ isMobile }) => {
                 pattern="^\d{10}$"
                 size="50"
                 border={signupError && !signupDetails.phone && "#F93967"}
-            />
+            /> */}
             {/* <Input
                 addon={<img src={user} alt="" />}
                 type="text"
@@ -269,7 +264,7 @@ const SignupForm = ({ isMobile }) => {
             />
 
             <Button
-                text="Sign up"
+                text={submitted ? "Loading..." : "Sign Up"}
                 width="100%"
                 background="#3586FF"
                 color="#fff"
@@ -288,9 +283,12 @@ const LoginForm = ({ isMobile, switchTo }) => {
         captchaValue: "",
     });
     const [loginError, setLoginError] = useState("");
+    const [submitted, setSubmitted] = useState(false);
     const [catpchaError, setCatpchaError] = useState("");
     const dispatcher = useDispatch();
     async function handleSubmit(e) {
+        if (submitted) return;
+        setSubmitted(true);
         e.preventDefault();
         const { email, password, captchaValue } = loginDetails;
         if (email === "" || password === "") {
@@ -315,6 +313,7 @@ const LoginForm = ({ isMobile, switchTo }) => {
             );
             toast.success("You have successfully logged in");
         }
+        setSubmitted(false);
     }
 
     return (
@@ -322,7 +321,7 @@ const LoginForm = ({ isMobile, switchTo }) => {
             <Input
                 addon={<img src={user} alt="" />}
                 type="text"
-                placeholder="Email/Phone"
+                placeholder="Email/Username"
                 value={loginDetails.email}
                 onChange={(e) => {
                     setLoginDetails({ ...loginDetails, email: e.target.value });
@@ -382,7 +381,7 @@ const LoginForm = ({ isMobile, switchTo }) => {
                 fontSize="14px"
             />
             <Button
-                text="Login"
+                text={submitted ? "Logging in..." : "Log in"}
                 width="100%"
                 background="#3586FF"
                 color="#fff"
@@ -587,10 +586,9 @@ const LoginSignupModal = () => {
                 });
                 return;
             }
-            if(response.payload.status === 200){
+            if (response.payload.status === 200) {
                 toast.success("Password reset successfully, please login");
                 setMountedComponent("loginSignup");
-
             }
         }
         return (

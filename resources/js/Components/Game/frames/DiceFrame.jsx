@@ -59,9 +59,9 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
+const DiceFrame = ({ setPlaying, setDiceNumbers }) => {
     const { isMobile } = useScreenResolution();
-    const { gameData } = useSelector((state) => state.game);
+    const { gameData, playing } = useSelector((state) => state.game);
     const dispatch = useDispatch();
     return (
         <Box
@@ -73,7 +73,6 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
         >
             <DiceComponent
                 setPlaying={setPlaying}
-                usePlay={playing}
                 setDiceNumbers={setDiceNumbers}
             />
             <Box
@@ -102,6 +101,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                         valueLabelDisplay="auto"
                         aria-label="pretto slider"
                         value={gameData.winChance}
+                        disabled={playing}
                         min={3}
                         max={96}
                         onChange={(_, value) => {
@@ -213,14 +213,15 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                         ).toFixed(4)}
                                     </Typography>
                                     <div
-                                        onClick={() =>
+                                        onClick={() => {
+                                            if (playing) return;
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
                                                     payout: (0.5).toFixed(4),
                                                 })
-                                            )
-                                        }
+                                            );
+                                        }}
                                     >
                                         <img
                                             src={cross}
@@ -276,6 +277,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                     </Typography>
                                     <div
                                         onClick={() => {
+                                            if (playing) return;
                                             toggleRollUnder(
                                                 gameData,
                                                 dispatch,
@@ -398,6 +400,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                         }}
                                                         key={idx}
                                                         onClick={() => {
+                                                            if (playing) return;
                                                             let newValue =
                                                                 gameData.winChance +
                                                                 Number(
@@ -488,14 +491,15 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                         {gameData.payout}
                                     </Typography>
                                     <div
-                                        onClick={() =>
+                                        onClick={() => {
+                                            if (playing) return;
                                             dispatch(
                                                 setGameData({
                                                     ...gameData,
                                                     payout: (0.5).toFixed(4),
                                                 })
                                             )
-                                        }
+                                        }}
                                     >
                                         <img
                                             src={cross_sm}
@@ -558,6 +562,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                     </Typography>
                                     <div
                                         onClick={() => {
+                                            if(playing) return;
                                             toggleRollUnder(
                                                 gameData,
                                                 dispatch,
@@ -691,6 +696,7 @@ const DiceFrame = ({ setPlaying, playing, setDiceNumbers }) => {
                                                     }}
                                                     key={idx}
                                                     onClick={() => {
+                                                        if (playing) return;
                                                         let newValue =
                                                             gameData.winChance +
                                                             Number(item.value);

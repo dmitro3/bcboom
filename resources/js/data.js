@@ -86,8 +86,8 @@ export const mobileNavLinks = [
     {
         name: "Share",
         icon: share,
-        link: "/share",
-        navigatable: false
+        link: "/referral",
+        navigatable: true
     },
 
     {

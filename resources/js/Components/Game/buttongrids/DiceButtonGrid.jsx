@@ -4,7 +4,7 @@ import { setGameData, setGameIsOn } from "@/redux/game/game-slice";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-const DiceButtonGrid = ({ playDeter }) => {
+const DiceButtonGrid = () => {
     const dispatch = useDispatch();
     const { wallet } = useSelector((state) => state.wallet);
     const { gameData, playing } = useSelector((state) => state.game);
@@ -103,6 +103,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 cursor: "pointer",
                             }}
                             onClick={() => {
+                                if (playing) return;
                                 dispatch(
                                     setGameData({
                                         ...gameData,
@@ -182,6 +183,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 cursor: "pointer",
                             }}
                             onClick={() => {
+                                if (playing) return;
                                 let newValue = (gameData.betAmount / 2).toFixed(
                                     4
                                 );
@@ -215,6 +217,7 @@ const DiceButtonGrid = ({ playDeter }) => {
                                 cursor: "pointer",
                             }}
                             onClick={() => {
+                                if (playing) return;
                                 let newValue = (gameData.betAmount * 2).toFixed(
                                     4
                                 );
