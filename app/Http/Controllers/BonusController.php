@@ -12,7 +12,7 @@ class BonusController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('jwt.verify');
     }
 
     public function index()
@@ -27,6 +27,7 @@ class BonusController extends Controller
             'withdrawable_balance' => $bonusAmount->withdrawable_balance,
             'message' => 'success',
         ], 200);
+        
         // }
         // return response()->json([
         //     'deposit' => $wallet->deposit,

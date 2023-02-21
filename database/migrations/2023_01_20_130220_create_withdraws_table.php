@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->double('amount')->nullable();
             $table->double('initial_amount')->nullable();
             $table->double('final_amount')->nullable();
-            $table->double('withdrawal_fee')->nullable();
             $table->string('orderno')->nullable();
             $table->string('tx_orderno')->nullable();
             $table->string('create_time')->nullable();

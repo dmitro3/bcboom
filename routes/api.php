@@ -119,6 +119,33 @@ Route::middleware(['jwt.verify'])->group(function () {
         }
     );
 
+    Route::middleware(['jwt.verify', 'admin'])
+    ->prefix('promo')
+    ->group(function () {
+        
+        Route::get('delete/{id}',[
+            PromotionController::class, 'delete'
+        ]);
+
+        Route::get('all', [
+            PromotionController::class, 'all'
+        ]);
+
+
+        Route::post('save', [
+            PromotionController::class, 'save'
+        ]);
+
+        Route::post('pause/{id}', [
+            PromotionController::class, 'pause'
+        ]);
+
+        Route::post('edit/{id}', [
+            PromotionController::class, 'edit'
+        ]);
+
+    });
+
     Route::get('games/all', [
         GameController::class,
         'all_games'
@@ -208,29 +235,46 @@ Route::middleware(['jwt.verify', 'admin'])->group(function () {
         'delete'
     ]);
 
-
-    Route::post('/promotion/approve/{id}', [
+Route::prefix('promotion')->group(function () {
+    
+    Route::post('approve/{id}', [
         PromotionController::class,
         'approve'
-    ])->name('approve');
-
-    Route::post('/promotion/reject/{id}', [
-        PromotionController::class,
-        'reject'
+        ])->name('approve');
+        
+        Route::post('reject/{id}', [
+            PromotionController::class,
+            'reject'
     ])->name('reject');
 
-    Route::post('/promotion/delete/{id}', [
+    Route::post('save/{id}', [
+        PromotionController::class,
+        'save'
+])->name('save');
+
+Route::post('edit/{id}', [
+    PromotionController::class,
+    'edit'
+])->name('edit');
+
+Route::post('pause/{id}', [
+    PromotionController::class,
+    'pause'
+])->name('pause');
+
+    Route::post('delete/{id}', [
         PromotionController::class,
         'delete'
     ])->name('delete');
 
-    Route::get('promotions/all', [
+    Route::get('all', [
         PromotionController::class,
         'all_promotions'
-    ])->name('all_promotions');
-
-    Route::post(
-        'notify',
+        ])->name('all_promotions');
+        
+    });
+        Route::post(
+            'notify',
         function (Request $request) {
             $process = new Process;
             return $process->status($request);

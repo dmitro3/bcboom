@@ -9,76 +9,94 @@ use Auth;
 
 class PromotionController extends Controller
 {
-    public function approve($id)
-    {
-        $user = Auth::user();
-        $promotion = Promotion::find($id);
-        if ($promotion === null) {
-            return response()->json([
-                'error' => 'promotion cannot be found'
-            ], 404);
-        }
-        if ($promotion->status == 'approved') {
-            return response()->json([
-                'error' => 'Promotion already approved'
-            ], 400);
-        }
-        if ($promotion->status == 'rejected') {
-            return response()->json([
-                'error' => 'Promotion already rejected'
-            ], 400);
-        }
-        $wallet = Wallet::where('user_id', $promotion->user)->first();
-        // $walletBonus = $wallet->bonus + $promotion;
+    public function approve($id){
+        
+    }
 
-        $wallet->update(
-            ['withdrawable_balance' => $wallet->withdrawable_balance + $promotion->amount]
+    public function save(Request $request){
+
+        Promotion::firstOrCreate(
+            [
+                'type' => $request->get('type'),
+        ],
+            [
+                'percentage' => $request->get('percentage'),
+                'status' => 'Running'
+                ]
         );
-        $user->notify(new Bonus($promotion));
-        $promotion->update(['status' => 'approved']);
+
+
+
         return response()->json([
-            'message' => 'Promotion approved successfully',
-            'wallet' => $wallet
-        ], 200);
-    }
-
-    public function reject($id)
-    {
-        $promotion = Promotion::find($id);
-        if ($promotion === null) {
-            return response()->json([
-                'error' => 'promotion cannot be found'
-            ], 404);
-        }
-
-        $promotion->update(['status' => 'rejected']);
-        return response()->json([
-            'message' => 'Promotion rejected successfully'
-        ], 200);
-    }
-
-    public function delete($id)
-    {
-        $promotion = Promotion::find($id);
-        if ($promotion === null) {
-            return response()->json([
-                'error' => 'promotion cannot be found'
-            ], 404);
-        }
-        $promotion->delete();
-        return response()->json([
-            'message' => 'Promotion deleted successfully'
-        ], 200);
-
-    }
-
-    public function all_promotions()
-    {
-        // $promotions = Promotion::where('status', '!=', 'approved')->orderBy('created_at', 'desc')->get();
-        $promotions = Promotion::orderBy('created_at', 'desc')->get();
-        return response()->json([
-            'promotions' => $promotions,
-            'message' => 'success'
+            'message' => 'Sucessfully'
         ]);
     }
+
+    public function edit($id){
+        $promo = Promotion::findOrFail($id);
+        if ($request->has('type')) {
+            $promo->update([
+                'type' => $request->get('type'),
+            ]);
+        }elseif($request->has('amount')) {
+            $promo->update([
+                'amount' => $request->get('amount'),
+            ]);
+        }elseif($request->has('percentage')) {
+            $promo->update([
+                'percentage' => $request->get('percentage'),
+            ]);
+        }elseif($request->has('status')) {
+            $promo->update([
+                'status' => $request->get('status'),
+            ]);
+        }
+        return response()->json([
+            'message' => 'Successfully edited',
+        ]);
+    }
+
+    public function pause($id){
+        $promo = Promotion::findOrFail($id);
+
+        if($promo == null){
+            return response()->json([
+                'message' => 'Not found',
+            ]);
+        }else{
+            $promo->update([
+                'status' => 'Paused'
+            ]);
+
+            return response()->json([
+                'message' => 'Successfully paused',
+            ]);
+        }
+    }
+
+    public function delete($id){
+        $promo = Promotion::findOrFail($id);
+
+        if($promo == null){
+            return response()->json([
+                'message' => 'Not found',
+            ]);
+        }else{
+            $promo->delete();
+
+            return response()->json([
+                'message' => 'Successfully deleted',
+            ]);
+        }
+    }
+
+    public function all(){
+        $promo = Promotion::all();
+
+        return response()->json([
+            'message' => 'All promos',
+            'promos' => $promo
+        ]);
+    }
+
 }

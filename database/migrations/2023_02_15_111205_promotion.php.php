@@ -14,16 +14,14 @@ return new class extends Migration {
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('status');
-            $table->bigInteger('user');
-            $table->decimal('amount');
-            $table->decimal('percentage');
-            $table->string('username');
+            $table->string('type')->nullable();
+            $table->string('status')->nullable();
+            $table->decimal('amount')->nullable();
+            $table->decimal('percentage')->nullable();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

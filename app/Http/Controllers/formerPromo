@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Promotion;
+use App\Models\Wallet;
+use App\Notifications\Bonus;
+use Auth;
+
+class PromotionController extends Controller
+{
+    public function approve($id)
+    {
+
+        $promotion = Promotion::find($id);
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
+        if ($promotion->status == 'approved') {
+            return response()->json([
+                'error' => 'Promotion already approved'
+            ], 400);
+        }
+        if ($promotion->status == 'rejected') {
+            return response()->json([
+                'error' => 'Promotion already rejected'
+            ], 400);
+        }
+        $wallet = Wallet::where('user_id', $promotion->user)->first();
+        // $walletBonus = $wallet->bonus + $promotion;
+        if($promotion->type = 'Referral Bonus'){
+            $wallet->update(
+                [
+                    'withdrawable_balance' => $wallet->withdrawable_balance + $promotion->amount,
+                    'bonus' => $wallet->bonus + $promotion->amount
+                    ]
+            );
+        }else if($promotion->type = 'Deposit Bonus'){
+            $wallet->update(
+                [
+                    'withdrawable_balance' => $wallet->withdrawable_balance + $promotion->amount,
+                    'deposit' => $wallet->deposit + $promotion->amount
+                    ]
+            );
+        }
+
+        $user->notify(new Bonus($promotion));
+        $promotion->update(['status' => 'approved']);
+        return response()->json([
+            'message' => 'Promotion approved successfully',
+            'wallet' => $wallet
+        ], 200);
+    }
+
+    public function reject($id)
+    {
+        $promotion = Promotion::find($id);
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
+
+        $promotion->update(['status' => 'rejected']);
+        return response()->json([
+            'message' => 'Promotion rejected successfully'
+        ], 200);
+    }
+
+    public function delete($id)
+    {
+        $promotion = Promotion::find($id);
+        if ($promotion === null) {
+            return response()->json([
+                'error' => 'promotion cannot be found'
+            ], 404);
+        }
+        $promotion->delete();
+        return response()->json([
+            'message' => 'Promotion deleted successfully'
+        ], 200);
+
+    }
+
+    public function all_promotions()
+    {
+        // $promotions = Promotion::where('status', '!=', 'approved')->orderBy('created_at', 'desc')->get();
+        $promotions = Promotion::orderBy('created_at', 'desc')->get();
+        return response()->json([
+            'promotions' => $promotions,
+            'message' => 'success'
+        ]);
+    }
+}

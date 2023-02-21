@@ -47,8 +47,9 @@ class Callback
 
                 if ($wallet && $payment) {
 
+                    $promotion = Promotion::where('type', 'deposit_bonus')->first();
 
-                    $percentage_amount = 100 / 100 * $payment->amount;
+                    $percentage_amount = $promotion->percentage / 100 * $payment->amount;
 
 
                     $payment->update([
