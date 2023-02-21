@@ -81,7 +81,6 @@ const GamesPageWrapper = styled("div")(({ isMobile }) => ({
 const DicePage = () => {
     const { isMobile } = useScreenResolution();
     const [playing, setPlaying] = useState(false);
-    const [playDeter, setPlayDeter] = useState(true);
     const { gameData } = useSelector((state) => state.game);
     const dispatch = useDispatch();
 
@@ -164,12 +163,7 @@ const DicePage = () => {
                                 playing={playing}
                             />
                         }
-                        ButtonGrid={
-                            <DiceButtonGrid
-                                playDeter={playDeter}
-                                setPlayDeter={setPlayDeter}
-                            />
-                        }
+                        ButtonGrid={<DiceButtonGrid />}
                         customFrameHeader={true}
                         innerHeader={true}
                         customFrameBoxStyles={{

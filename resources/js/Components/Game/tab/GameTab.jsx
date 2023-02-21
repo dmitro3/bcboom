@@ -56,7 +56,7 @@ const GameTab = () => {
     }
     const dispatch = useDispatch();
 
-    const { gameData } = useSelector((state) => state.game);
+    const { gameData, playing } = useSelector((state) => state.game);
     const { wallet } = useSelector((state) => state.wallet);
     const payout = (gameData.payout * gameData.numberOfPlay).toFixed(4);
     return (
@@ -140,6 +140,7 @@ const GameTab = () => {
                                             type="number"
                                             value={gameData.numberOfPlay}
                                             onChange={(e) => {
+                                                if (playing) return;
                                                 let value = Math.abs(
                                                     e.target.value
                                                 );
@@ -241,6 +242,7 @@ const GameTab = () => {
                                             type="number"
                                             value={gameData.stopOnProfits}
                                             onChange={(e) => {
+                                                if (playing) return;
                                                 let value = Math.abs(
                                                     e.target.value
                                                 );
@@ -297,6 +299,7 @@ const GameTab = () => {
                                             type="number"
                                             value={gameData.stopOnLoss}
                                             onChange={(e) => {
+                                                if (playing) return;
                                                 let value = Math.abs(
                                                     e.target.value
                                                 );
