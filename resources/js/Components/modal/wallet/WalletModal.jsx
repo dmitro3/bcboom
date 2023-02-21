@@ -123,6 +123,11 @@ const Deposit = () => {
         }
         getRate();
     }, []);
+
+    useEffect(() => {
+        setCalculatedValue(Math.floor(value * rate));
+    }, [value, rate]);
+
     const [submitted, setSubmitted] = useState(false);
     const [buttonHovered, setButtonHovered] = useState(false);
     const { isMobile } = useScreenResolution();
