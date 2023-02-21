@@ -90,4 +90,13 @@ class PromotionController extends Controller
         }
     }
 
+    public function all(){
+        $promo = Promotion::all();
+
+        return response()->json([
+            'message' => 'All promos',
+            'promos' => $promo
+        ]);
+    }
+
 }

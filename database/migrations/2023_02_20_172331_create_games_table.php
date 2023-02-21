@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('status');
+            $table->decimal('bet_amount');
+            $table->decimal('earning');
+            $table->decimal('loss');
+            $table->bigInteger('player');
             $table->timestamps();
-        });
+            });
     }
 
     /**

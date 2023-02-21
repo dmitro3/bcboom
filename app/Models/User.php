@@ -308,6 +308,9 @@ class User extends Authenticatable implements JWTSubject
             'status' => 'pending',
         ];
         // $deposit_counts = Payment::where('user_id', $user->id)->count();
+
+        $promotion = Promotion::where('type', 'deposit_bonus')->first();
+
         if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
             $user->update([
                 'first_100_deposit_bonus' => 1

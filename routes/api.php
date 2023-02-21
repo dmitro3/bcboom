@@ -122,12 +122,28 @@ Route::middleware(['jwt.verify'])->group(function () {
     Route::middleware(['jwt.verify', 'admin'])
     ->prefix('promo')
     ->group(function () {
-        Route::get('add',[
-            PromotionController::class, 'add'
+        
+        Route::get('delete/{id}',[
+            PromotionController::class, 'delete'
         ]);
+
+        Route::get('all', [
+            PromotionController::class, 'all'
+        ]);
+
+
         Route::post('save', [
             PromotionController::class, 'save'
         ]);
+
+        Route::post('pause/{id}', [
+            PromotionController::class, 'pause'
+        ]);
+
+        Route::post('edit/{id}', [
+            PromotionController::class, 'edit'
+        ]);
+
     });
 
     Route::get('games/all', [
