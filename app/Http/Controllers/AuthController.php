@@ -158,11 +158,21 @@ class AuthController extends Controller
                         'user_id' => $user->id   
                     ]);
                 }
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+                $newRequest = ['email' => $request->email, 'password' => $request->password]; 
+                $credentials = $this->credentials($request);
+
+                if (! $token = auth()->attempt($credentials)) {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }
+                //
+                return $this->createNewToken($token);
+
+        // return response()->json([
+        //     'message' => 'User successfully registered',
+        //     'user' => $user
+        // ], 201);
     }
+
     }
     /**
      * Log the user out (Invalidate the token).

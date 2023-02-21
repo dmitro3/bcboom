@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Promotion;
 use App\Models\Wallet;
 use App\Notifications\Bonus;
+use Illuminate\Http\Request;
 use Auth;
 
 class PromotionController extends Controller
@@ -15,12 +16,12 @@ class PromotionController extends Controller
 
     public function save(Request $request){
 
-        Promotion::firstOrCreate(
+        Promotion::updateOrCreate(
             [
-                'type' => $request->get('type'),
+                'type' => $request->type,
         ],
             [
-                'percentage' => $request->get('percentage'),
+                'percentage' => $request->percentage,
                 'status' => 'Running'
                 ]
         );
@@ -28,11 +29,11 @@ class PromotionController extends Controller
 
 
         return response()->json([
-            'message' => 'Sucessfully'
+            'message' => 'Sucessfully created promotion.'
         ]);
     }
 
-    public function edit($id){
+    public function edit(Request $request, $id){
         $promo = Promotion::findOrFail($id);
         if ($request->has('type')) {
             $promo->update([
