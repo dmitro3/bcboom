@@ -54,7 +54,7 @@ const OverLay = ({ item, parent, visible }) => {
                 borderRadius: "10px",
                 cursor: "pointer",
                 zIndex: 500,
-                transition: "visibility 0.3s linear,opacity 0.3s linear;",
+                transition: "visibility 0.3s linear opacity 0.3s linear;",
             }}
         >
             <div

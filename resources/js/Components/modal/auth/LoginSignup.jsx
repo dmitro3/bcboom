@@ -78,8 +78,6 @@ const ResetPasswordWrapper = styled("div")(({ isMobile }) => ({
 const SignupForm = ({ isMobile }) => {
     const dispatcher = useDispatch();
     const [signupDetails, setSignupDetails] = useState({
-        phone: "",
-        // name: "",
         email: "",
         username: "",
         password: "",
@@ -91,8 +89,8 @@ const SignupForm = ({ isMobile }) => {
     const [recaptchaError, setRecaptchaError] = useState("");
     async function handleSubmit(e) {
         e.preventDefault();
-        const { username, email, password, phone } = signupDetails;
-        if (!username || !password || !email || !phone) {
+        const { username, email, password } = signupDetails;
+        if (!username || !password || !email) {
             setSignupError("Please fill all fields");
             return;
         }
@@ -104,14 +102,6 @@ const SignupForm = ({ isMobile }) => {
         if (!signupDetails.captchaValue) {
             setRecaptchaError("Please verify that you are not a robot");
             toast.error("Please verify that you are not a robot");
-            return;
-        }
-
-        const validPhone = validatePhoneNumber(signupDetails.phone);
-        if (!validPhone) {
-            setSignupError("Please enter a valid phone number");
-            toast.error("Please enter a valid phone number");
-            setSignupDetails({ ...signupDetails, phone: "" });
             return;
         }
         const response = await dispatcher(signup(signupDetails));

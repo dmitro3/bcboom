@@ -99,6 +99,7 @@ const DicePage = () => {
         const amount = status === "won" ? gameData.payout : gameData.betAmount;
         toast.info("You rolled " + rolled + ` and ${status} ` + amount, {
             position: "top-center",
+            autoClose: 5000,
         });
         dispatch(setGameData({ ...gameData, diceNumber: [0] }));
         dispatch(setSound({ field: "muted", value: true }));
