@@ -125,12 +125,22 @@ class AuthController extends Controller
                     $referring->grantBonus();
                     // $referring->makeVip();
                 }else{
+                    
                     // $token = JWTAuth::fromUser($user);
 
-                    return response()->json([
-                        'message' => 'User successfully registered',
-                        'user' => $user
-                    ], 201);
+                    // return response()->json([
+                    //     'message' => 'User successfully registered',
+                    //     'user' => $user
+                    // ], 201);
+
+            $credentials = $this->credentials($request);
+
+            if (! $token = auth()->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            //
+            return $this->createNewToken($token);
+
                 }
                 
 
