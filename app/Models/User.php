@@ -95,6 +95,7 @@ class User extends Authenticatable implements JWTSubject
         
                 // Promotion::create(array_merge($referral_promotion, ['amount' => 9]));
         
+                if($promotion){
         if($promotion->status !== 'Paused'){
         if ($refs > 0) {
                 // $walletBonus = $wallet->bonus + 9;
@@ -175,7 +176,7 @@ class User extends Authenticatable implements JWTSubject
         
         }
 
-        
+    }
     else{
         return response()->json([
             'message' => 'Promotion Paused'

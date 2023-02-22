@@ -87,14 +87,9 @@ class AuthController extends Controller
                 ]);
 
                 if($request->has('phone')){
-                   $validated = $request->validate([
-                        'phone' => 'required|max:100|unique:users'
-                    ]);
-                    if($validated){
                     $user->update([
                         'phone' => $request->get('phone')
                     ]);
-                }
                 }
 
                 Wallet::create([
@@ -132,14 +127,6 @@ class AuthController extends Controller
                 }else{
                     // $token = JWTAuth::fromUser($user);
 
-                    $wallet = Wallet::where('user_id', '=', $user->id)->first();
-
-                    if(!$wallet){
-                        Wallet::create([
-                            'user_id' => $user->id   
-                        ]);
-                    }
-
                     return response()->json([
                         'message' => 'User successfully registered',
                         'user' => $user
@@ -151,28 +138,20 @@ class AuthController extends Controller
                 
  
                 // $token = JWTAuth::fromUser($user);
-                $wallet = Wallet::where('user_id', '=', $user->id)->first();
-
-                if(!$wallet){
-                    Wallet::create([
-                        'user_id' => $user->id   
-                    ]);
-                }
-                $newRequest = ['email' => $request->email, 'password' => $request->password]; 
                 $credentials = $this->credentials($request);
 
-                if (! $token = auth()->attempt($credentials)) {
-                    return response()->json(['error' => 'Unauthorized'], 401);
-                }
-                //
-                return $this->createNewToken($token);
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        //
+        return $this->createNewToken($token);
 
         // return response()->json([
         //     'message' => 'User successfully registered',
         //     'user' => $user
         // ], 201);
+        
     }
-
     }
     /**
      * Log the user out (Invalidate the token).
