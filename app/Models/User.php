@@ -244,53 +244,55 @@ class User extends Authenticatable implements JWTSubject
     public function promoteLevel()
     {
         $wallet = Wallet::where('user_id', $this->id)->first();
+        $bet_level = Game::where('player', $this->id)->first();
+        //Pluck also be used to go further to get the specific field: bet_amount;
 
-        if ($wallet->deposit > 100) {
+        if ($wallet->deposit > 99 && $bet_level->bet_amount > 799) {
             $vip = $this->update([
                 'vip' => 1
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 499) {
+        } elseif ($wallet->deposit > 499 && $bet_level->bet_amount > 3999) {
             $vip = $this->update([
                 'vip' => 2
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 1999) {
+        } elseif ($wallet->deposit > 1999 && $bet_level->bet_amount > 15999) {
             $vip = $this->update([
                 'vip' => 3
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 9999) {
+        } elseif ($wallet->deposit > 9999 && $bet_level->bet_amount > 79999) {
             $vip = $this->update([
                 'vip' => 4
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 49999) {
+        } elseif ($wallet->deposit > 49999 && $bet_level->bet_amount > 399999) {
             $vip = $this->update([
                 'vip' => 5
             ]);
             return $vip;
-        } else if ($wallet->deposit > 199999) {
+        } else if ($wallet->deposit > 199999 && $bet_level->bet_amount > 1199999) {
             $vip = $this->update([
                 'vip' => 6
             ]);
             return $vip;
-        } else if ($wallet->deposit > 199999) {
+        } else if ($wallet->deposit > 199999 && $bet_level->bet_amount > 2999999) {
             $vip = $this->update([
                 'vip' => 6
             ]);
             return $vip;
-        } else if ($wallet->deposit > 499999) {
+        } else if ($wallet->deposit > 499999 && $bet_level->bet_amount > 5999999) {
             $vip = $this->update([
                 'vip' => 7
             ]);
             return $vip;
-        } else if ($wallet->deposit > 1499999) {
+        } else if ($wallet->deposit > 1499999 && $bet_level->bet_amount > 19999999) {
             $vip = $this->update([
                 'vip' => 8
             ]);
             return $vip;
-        } else if ($wallet->deposit > 4499999) {
+        } else if ($wallet->deposit > 4499999 && $bet_level->bet_amount > 39999999) {
             $vip = $this->update([
                 'vip' => 9
             ]);

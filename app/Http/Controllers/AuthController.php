@@ -125,7 +125,7 @@ class AuthController extends Controller
                     // $referring->grantBonus();
                     // $referring->makeVip();
                 }else{
-                    
+
                     // $token = JWTAuth::fromUser($user);
 
                     // return response()->json([

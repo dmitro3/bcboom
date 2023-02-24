@@ -57,7 +57,7 @@ class Callback
                         'percentage_amount' => $percentage_amount,
                         'final_amount' => $payment->amount + $percentage_amount,
                         'called' => 1,
-                        'status' => 'PAID'
+                        'status' => 'PAYMENT COMPLETED',
                     ]);
 
                     $wallet->update([
@@ -74,8 +74,17 @@ class Callback
 
 
             } else if ($data['trade_state'] == 'PENDING') {
+                if($payment){
+                    $payment->update([
+                        'status' => 'UNDER REVIEW'
+                    ]);
+                }
                 echo "PENDING";
             } else if (['trade_state'] == 'FAILURE') {
+                if($payment){
+                    $payment->update([
+                        'status' => 'PAYMENT FAILED'
+                    ]);
                 echo "FAILURE";
             }
 
