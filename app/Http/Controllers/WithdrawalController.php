@@ -10,7 +10,7 @@ use Auth;
 use App\Actions\Withdrawal;
 use App\Models\Deposit;
 use Carbon\Carbon;
-
+use App\Models\Game;
 
 
 class WithdrawalController extends Controller
@@ -72,7 +72,10 @@ class WithdrawalController extends Controller
             ->where('created_at', '<', $month)
             ->orderBy('created_at', 'desc')
             ->get();
-        if ($wallet->withdrawable_balance > 0) {
+
+
+
+        if ($wallet->withdrawable_balance > 0 && $wallet->bet > 0) {
             if ($user->vip == 0) {
                 if ($request->amount > $wallet->withdrawable_balance) {
                     return response()->json([
@@ -663,7 +666,7 @@ class WithdrawalController extends Controller
             }
         } else {
             return response()->json([
-                'message' => 'No money in your wallet'
+                'message' => 'You must make deposits and a bet to withdraw.'
             ], 422);
         }
 

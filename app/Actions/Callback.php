@@ -49,9 +49,10 @@ class Callback
 
                     $promotion = Promotion::where('type', 'deposit_bonus')->first();
 
-                    $percentage_amount = $promotion->percentage / 100 * $payment->amount;
 
 
+                    if(isset($promotion->amount)) {
+                        $percentage_amount = $promotion->percentage / $promotion->amount * $payment->amount;
                     $payment->update([
                         'pay_amount' => $payment->amount,
                         'percentage_amount' => $percentage_amount,
@@ -59,7 +60,16 @@ class Callback
                         'called' => 1,
                         'status' => 'PAYMENT COMPLETED',
                     ]);
-
+                }else{
+                    $percentage_amount = $promotion->percentage / 100 * $payment->amount;
+                    $payment->update([
+                        'pay_amount' => $payment->amount,
+                        'percentage_amount' => $percentage_amount,
+                        'final_amount' => $payment->amount + $percentage_amount,
+                        'called' => 1,
+                        'status' => 'PAYMENT COMPLETED',
+                    ]);
+                }
                     $wallet->update([
                         'withdrawable_balance' => $wallet->withdrawable_balance + $payment->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
