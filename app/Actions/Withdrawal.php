@@ -110,7 +110,7 @@ class Withdrawal
 
                 $withdrawal->update([
                     'approved' => 1,
-                     'status' => 'COMPLETED'
+                     'status' => 'PAYMENT COMPLETED'
                      ])
                 ;
 
@@ -118,11 +118,10 @@ class Withdrawal
 
 
             } elseif ($data['trade_state'] === 'PENDING') {
-                $withdrawal->update(['status' => 'IN PROGRESS', 'approved' => 0])
-                ;
+                $withdrawal->update(['status' => 'PAYMENT IN PROGRESS', 'approved' => 0]);
 
             } else {
-                $withdrawal->update(['status' => 'FAILED', 'approved' => 0])
+                $withdrawal->update(['status' => 'PAYMENT FAILED', 'approved' => 0])
                 ;
                 $wallet->update([
                     'withdrawable_balance' => $wallet->withdrawable_balance + $withdrawal->final_amount

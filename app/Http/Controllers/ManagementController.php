@@ -46,12 +46,12 @@ class ManagementController extends Controller
         $withdrawal = Withdraw::where('id', $id)->first();
 
         $withdrawal->update([
-            'status' => 'Rejected',
+            'status' => 'PAYMENT DECLINED',
             'rejected' => true
         ]);
 
         return response()->json([
-            'message' => 'Rejected the withdrawal',
+            'message' => 'Payout DECLINED',
             'withdrawal' => $withdrawal
         ],200);
     }
@@ -60,7 +60,7 @@ class ManagementController extends Controller
         $withdrawal = Withdraw::where('id', $id)->first();
 
         $withdrawal->update([
-            'status' => 'Ignored',
+            'status' => 'PAYMENT IGNORED',
             'rejected' => true
         ]);
 
