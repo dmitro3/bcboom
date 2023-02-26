@@ -49,17 +49,27 @@ class Callback
 
                     $promotion = Promotion::where('type', 'deposit_bonus')->first();
 
-                    $percentage_amount = $promotion->percentage / 100 * $payment->amount;
 
 
+                    if(isset($promotion->amount)) {
+                        $percentage_amount = $promotion->percentage / $promotion->amount * $payment->amount;
                     $payment->update([
                         'pay_amount' => $payment->amount,
                         'percentage_amount' => $percentage_amount,
                         'final_amount' => $payment->amount + $percentage_amount,
                         'called' => 1,
-                        'status' => 'PAID'
+                        'status' => 'PAYMENT COMPLETED',
                     ]);
-
+                }else{
+                    $percentage_amount = $promotion->percentage / 100 * $payment->amount;
+                    $payment->update([
+                        'pay_amount' => $payment->amount,
+                        'percentage_amount' => $percentage_amount,
+                        'final_amount' => $payment->amount + $percentage_amount,
+                        'called' => 1,
+                        'status' => 'PAYMENT COMPLETED',
+                    ]);
+                }
                     $wallet->update([
                         'withdrawable_balance' => $wallet->withdrawable_balance + $payment->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
@@ -74,8 +84,17 @@ class Callback
 
 
             } else if ($data['trade_state'] == 'PENDING') {
+                if($payment){
+                    $payment->update([
+                        'status' => 'UNDER REVIEW'
+                    ]);
+                }
                 echo "PENDING";
             } else if (['trade_state'] == 'FAILURE') {
+                if($payment){
+                    $payment->update([
+                        'status' => 'PAYMENT FAILED'
+                    ]);
                 echo "FAILURE";
             }
 

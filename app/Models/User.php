@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Game;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Wallet;
 use App\Models\Referral;
@@ -245,52 +246,54 @@ class User extends Authenticatable implements JWTSubject
     {
         $wallet = Wallet::where('user_id', $this->id)->first();
 
-        if ($wallet->deposit > 100) {
+        //Pluck also be used to go further to get the specific field: bet_amount;
+
+        if ($wallet->deposit > 99 && $wallet->bet > 799) {
             $vip = $this->update([
                 'vip' => 1
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 499) {
+        } elseif ($wallet->deposit > 499 && $wallet->bet > 3999) {
             $vip = $this->update([
                 'vip' => 2
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 1999) {
+        } elseif ($wallet->deposit > 1999 && $wallet->bet > 15999) {
             $vip = $this->update([
                 'vip' => 3
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 9999) {
+        } elseif ($wallet->deposit > 9999 && $wallet->bet > 79999) {
             $vip = $this->update([
                 'vip' => 4
             ]);
             return $vip;
-        } elseif ($wallet->deposit > 49999) {
+        } elseif ($wallet->deposit > 49999 && $wallet->bet > 399999) {
             $vip = $this->update([
                 'vip' => 5
             ]);
             return $vip;
-        } else if ($wallet->deposit > 199999) {
+        } else if ($wallet->deposit > 199999 && $wallet->bet > 1199999) {
             $vip = $this->update([
                 'vip' => 6
             ]);
             return $vip;
-        } else if ($wallet->deposit > 199999) {
+        } else if ($wallet->deposit > 199999 && $wallet->bet > 2999999) {
             $vip = $this->update([
                 'vip' => 6
             ]);
             return $vip;
-        } else if ($wallet->deposit > 499999) {
+        } else if ($wallet->deposit > 499999 && $wallet->bet > 5999999) {
             $vip = $this->update([
                 'vip' => 7
             ]);
             return $vip;
-        } else if ($wallet->deposit > 1499999) {
+        } else if ($wallet->deposit > 1499999 && $wallet->bet > 19999999) {
             $vip = $this->update([
                 'vip' => 8
             ]);
             return $vip;
-        } else if ($wallet->deposit > 4499999) {
+        } else if ($wallet->deposit > 4499999 && $wallet->bet > 39999999) {
             $vip = $this->update([
                 'vip' => 9
             ]);
@@ -318,10 +321,15 @@ class User extends Authenticatable implements JWTSubject
             ]);
             
             $wallet = $user->wallet;
-            
+            if(isset($promotion->amount)){
+                $wallet->update([
+                    'bonus' => $amount * $promotion->amount
+                ]);                
+            }else{
             $wallet->update([
                 'bonus' => $amount * 2
             ]);
+        }
             // return Promotion::create(array_merge($promotion_data, [
             //     'percentage' => 100,
             //     'amount' => $amount * 2,
@@ -338,11 +346,15 @@ class User extends Authenticatable implements JWTSubject
             // ]));
 
             $wallet = $user->wallet;
-            
+            if(isset($promotion->amount)){
+                $wallet->update([
+                    'bonus' => $amount * $promotion->amount
+                ]);                
+            }else{
             $wallet->update([
                 'bonus' => $amount * 2
             ]);
-
+            }
         } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
             $user->update([
                 'third_50_deposit_bonus' => 1
@@ -354,11 +366,15 @@ class User extends Authenticatable implements JWTSubject
             // ]));
 
             $wallet = $user->wallet;
-            
+            if(isset($promotion->amount)){
+                $wallet->update([
+                    'bonus' => $amount * $promotion->amount
+                ]);                
+            }else{
             $wallet->update([
                 'bonus' => $amount * 1.5
             ]);
-
+            }
         } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
             $user->update([
                 'fourth_30_deposit_bonus' => 1
@@ -370,11 +386,15 @@ class User extends Authenticatable implements JWTSubject
             // ]));
 
             $wallet = $user->wallet;
-            
+            if(isset($promotion->amount)){
+                $wallet->update([
+                    'bonus' => $amount * $promotion->amount
+                ]);                
+            }else{
             $wallet->update([
                 'bonus' => $amount * 1.3
             ]);
-
+            }
         } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
             $user->update([
                 'fifth_20_deposit_bonus' => 1
@@ -386,11 +406,15 @@ class User extends Authenticatable implements JWTSubject
             // ]));
 
             $wallet = $user->wallet;
-            
+            if(isset($promotion->amount)){
+                $wallet->update([
+                    'bonus' => $amount * $promotion->amount
+                ]);                
+            }else{
             $wallet->update([
                 'bonus' => $amount * 1.2
             ]);
-
+            }
         }
 
     }

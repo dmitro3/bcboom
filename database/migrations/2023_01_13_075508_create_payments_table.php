@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('approved')->default('0');
             $table->string('sign')->nullable();
             $table->string('link')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('UNDER REVIEW');
             $table->boolean('called')->default(0);
             $table->timestamps();
         });

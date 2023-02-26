@@ -22,7 +22,8 @@ class PromotionController extends Controller
         ],
             [
                 'percentage' => $request->percentage,
-                'status' => 'Running'
+                'status' => 'Running',
+                'amount' => $request->amount ? $request->amount : null
                 ]
         );
 

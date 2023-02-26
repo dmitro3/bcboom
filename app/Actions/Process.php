@@ -115,7 +115,7 @@ class Process
 
                 $payment->update([
                     'called' => 1,
-                    'status' => 'PAY'
+                    'status' => 'PAYMENT IN PROGRESS'
                 ]);
 
             }
