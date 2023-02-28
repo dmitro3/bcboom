@@ -94,6 +94,7 @@ class Withdrawal
 
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
+        // dd($sign, $request->sign);
         if ($sign === $request->sign) {
             // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
@@ -106,7 +107,7 @@ class Withdrawal
             if ($data['trade_state'] === 'SUCCESS') {
 
                 // $minused = $wallet->deposit - $withdrawal->amount;
-                
+                dd($data['trade_state']);
 
                 $withdrawal->update([
                     'approved' => 1,
