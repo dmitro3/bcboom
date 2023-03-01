@@ -16,22 +16,37 @@ class PromotionController extends Controller
 
     public function save(Request $request){
 
-        Promotion::updateOrCreate(
-            [
-                'type' => $request->type,
-        ],
-            [
-                'percentage' => $request->percentage,
-                'status' => 'Running',
-                'amount' => $request->amount ? $request->amount : null
-                ]
-        );
-
-
-
-        return response()->json([
-            'message' => 'Sucessfully created promotion.'
+       $promo = Promotion::create([
+        'title' => $request->title
         ]);
+    if($promo->title < 3){
+
+        if($request->type == 'withdrawal' || $request->type == 'deposit'){
+        $promo->update([
+            'type' => $request->type,
+            'percentage' => $request->percentage,
+
+        ]);
+    }else{
+        $promo->update([
+        'type' => $request->type,
+        'amount' => $request->amount
+        ]);
+    }
+
+    $promo->update([
+        'eligibility' => $request->eligibility
+    ]);
+    return response()->json([
+        'message' => 'Successfully created promotion.'
+    ]);
+}else{
+    return response()->json([
+        'message' => $promo->title . ' has been used too many times.'
+    ]);
+    }      
+
+
     }
 
     public function edit(Request $request, $id){
@@ -51,6 +66,10 @@ class PromotionController extends Controller
         }elseif($request->has('status')) {
             $promo->update([
                 'status' => $request->get('status'),
+            ]);
+        }elseif($request->has('eligibility')) {
+            $promo->update([
+                'eligibility' => $request->eligibility
             ]);
         }
         return response()->json([
@@ -96,7 +115,7 @@ class PromotionController extends Controller
         $promo = Promotion::all();
 
         return response()->json([
-            'message' => 'All promos',
+            'message' => 'All promotions',
             'promos' => $promo
         ]);
     }

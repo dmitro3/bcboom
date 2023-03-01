@@ -15,10 +15,12 @@ return new class extends Migration {
         Schema::create('promotions', function (Blueprint $table) {
             Schema::dropIfExists('promotions');
             $table->id();
+            $table->string('title');
+            $table->string('eligibility');
             $table->string('type')->nullable();
-            $table->string('status')->nullable();
-            $table->decimal('amount')->nullable();
-            $table->decimal('percentage')->nullable();
+            $table->string('status')->default('active');
+            $table->decimal('amount')->default(0);
+            $table->decimal('percentage')->default(0);
             $table->timestamps();
         });
     }
