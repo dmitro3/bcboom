@@ -285,6 +285,7 @@ class User extends Authenticatable implements JWTSubject
         // $deposit_counts = Payment::where('user_id', $user->id)->count();
         
         $promotion = Promotion::where('eligibility','new_user')->first();
+        
         if($promotion->status !== 'Paused'){
         if($user->new_user == true){
             $amount = 10;

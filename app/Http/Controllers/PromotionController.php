@@ -10,8 +10,22 @@ use Auth;
 
 class PromotionController extends Controller
 {
-    public function approve($id){
-        
+    public function activate($id){
+        $promo = Promotion::findOrFail($id);
+
+        if($promo == null){
+            return response()->json([
+                'message' => 'Not found',
+            ]);
+        }else{
+            $promo->update([
+                'status' => 'Active'
+            ]);
+
+            return response()->json([
+                'message' => 'Successfully Activated',
+            ]);
+        }
     }
 
     public function save(Request $request){
