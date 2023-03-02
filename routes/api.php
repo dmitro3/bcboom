@@ -150,9 +150,16 @@ Route::middleware(['jwt.verify'])->group(function () {
                 'save'
             ]);
 
+
+            
             Route::post('pause/{id}', [
                 PromotionController::class,
                 'pause'
+            ]);
+
+            Route::post('activate/{id}', [
+                PromotionController::class,
+                'activate'
             ]);
 
             Route::post('edit/{id}', [
