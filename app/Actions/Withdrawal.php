@@ -97,35 +97,55 @@ class Withdrawal
         if ($sign === $request->sign) {
             // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();
-            // $new_balance = $wallet->withdrawable_balance - $withdrawal->final_amount;
-            // $wallet->update([
-            //     'withdrawable_balance' => $new_balance
-            // ]);
+            
             $withdrawal = Withdraw::where('orderno', $request->orderno)
                 ->orderBy('created_at', 'desc')->first();
-            if ($data['trade_state'] === 'SUCCESS') {
 
+                if ($data['trade_state'] === 'SUCCESS') {
                 // $minused = $wallet->deposit - $withdrawal->amount;
-                
-
+                    
+                if($withdrawal && $wallet){
+                    
                 $withdrawal->update([
                     'approved' => 1,
                      'status' => 'PAYMENT COMPLETED'
-                     ])
-                ;
+                     ]);
 
+                     $promotion = Promotion::where('type', 'withdrawal')
+                     ->orderBy('created_at', 'desc')
+                     ->first();
 
+                     if($promotion && $promotion->status !== 'Paused'){
+                     
+                        $percentage = $promotion->percentage / 100 * $withdrawal->final_amount;
+                        $wallet->update([
+                            'bonus' => $wallet->bonus + $percentage,
+                            'withdrawable_balance' =>
+                             $wallet->withdrawable_balance
+                            - $withdrawal->final_amount
+                        ]);   
+                     
+                    }else{
+                     
 
-
+                     $wallet->update([
+                        'withdrawable_balance'
+                         => $wallet->withdrawable_balance
+                          - $withdrawal->final_amount
+                    ]);
+                }
+                    }
             } elseif ($data['trade_state'] === 'PENDING') {
+                if($withdrawal){
                 $withdrawal->update(['status' => 'PAYMENT IN PROGRESS', 'approved' => 0]);
+                }
+                echo 'PENDING';
 
             } else {
-                $withdrawal->update(['status' => 'PAYMENT FAILED', 'approved' => 0])
-                ;
-                $wallet->update([
-                    'withdrawable_balance' => $wallet->withdrawable_balance + $withdrawal->final_amount
-                ]);
+                
+                $withdrawal->update(['status' => 'PAYMENT FAILED', 'approved' => 0]);
+
+                echo 'FAILURE';
             }
             return "SUCCESS";
         }
