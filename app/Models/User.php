@@ -284,7 +284,9 @@ class User extends Authenticatable implements JWTSubject
         $user = $this;
         // $deposit_counts = Payment::where('user_id', $user->id)->count();
         
-        $promotion = Promotion::where('eligibility','new_user')->first();
+        $promotion = Promotion::where('eligibility', 'new_user')
+        ->orWhere('eligibility','new_user')
+        ->first();
 
         if($promotion->status !== 'Paused'){
         if($user->new_user == true){
@@ -307,6 +309,7 @@ class User extends Authenticatable implements JWTSubject
         if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
             $promotion = Promotion::where('type', 'deposit')
         ->where('eligibility', $this->eligibility)
+        ->orWhere('eligibility', 'first_100_deposit_bonus')
         ->first();
 
         if($promotion->status !== 'Paused'){
@@ -329,6 +332,7 @@ class User extends Authenticatable implements JWTSubject
         } else if ($user->second_100_deposit_bonus === 0 && $amount >= 500 && $amount <= 40000) {
             $promotion = Promotion::where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
+            ->orWhere('eligibility', 'second_100_deposit_bonus')
             ->first();
     
             if($promotion->status !== 'Paused'){
@@ -352,6 +356,7 @@ class User extends Authenticatable implements JWTSubject
         } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
             $promotion = Promotion::where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
+            ->orWhere('eligibility', 'third_50_deposit_bonus')
             ->first();
     
             if($promotion->status !== 'Paused'){
@@ -374,6 +379,7 @@ class User extends Authenticatable implements JWTSubject
         } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
             $promotion = Promotion::where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
+            ->orWhere('eligibility', 'fourth_30_deposit_bonus')
             ->first();
     
             if($promotion->status !== 'Paused'){
@@ -396,6 +402,7 @@ class User extends Authenticatable implements JWTSubject
         } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
             $promotion = Promotion::where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
+            ->orWhere('eligibility', 'fifth_20_deposit_bonus')
             ->first();
     
             if($promotion->status !== 'Paused'){
@@ -420,6 +427,7 @@ class User extends Authenticatable implements JWTSubject
         else if ($user->other_bonus === 0 && $amount >= 10000) {
             $promotion = Promotion::where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
+            ->irWhere('eligibility', 'other_bonus')
             ->first();
     
             if($promotion->status !== 'Paused'){
