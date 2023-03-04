@@ -64,11 +64,6 @@ class GameController extends Controller
                 'withdrawable_balance' => $wallet->withdrawable_balance + $request->earning,
             ]);
         }
-        // } else {
-        //     $wallet->update([
-        //         'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount,
-        //     ]);
-        // }
         return response()->json([
             'game' => $game,
             'wallet' => $wallet,

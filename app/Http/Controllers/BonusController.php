@@ -18,24 +18,48 @@ class BonusController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $bonusAmount = Wallet::where('user_id', '=', $user->id)->first();
-        // if ($bonusAmount) {
+        $wallet = Wallet::where('user_id', '=', $user->id)->first();
+        function getNextLevelDetails($currentLevel)
+        {
+            $levelDetails = array(
+
+                1 => array('nextLevel' => 2, 'minDeposit' => 100, 'minBet' => 800),
+                2 => array('nextLevel' => 3, 'minDeposit' => 500, 'minBet' => 4000),
+                3 => array('nextLevel' => 4, 'minDeposit' => 2000, 'minBet' => 16000),
+                4 => array('nextLevel' => 5, 'minDeposit' => 10000, 'minBet' => 80000),
+                5 => array('nextLevel' => 6, 'minDeposit' => 50000, 'minBet' => 400000),
+                6 => array('nextLevel' => 7, 'minDeposit' => 200000, 'minBet' => 1200000),
+                7 => array('nextLevel' => 8, 'minDeposit' => 1000000, 'minBet' => 6000000),
+                8 => array('nextLevel' => 9, 'minDeposit' => 5000000, 'minBet' => 30000000),
+                9 => array('nextLevel' => 10, 'minDeposit' => 20000000, 'minBet' => 120000000),
+            );
+
+            if ($currentLevel < 1 || $currentLevel > count($levelDetails)) {
+                // Handle invalid level numbers
+                return null;
+            }
+
+            $nextLevel = $levelDetails[$currentLevel]['nextLevel'];
+            $minDeposit = $levelDetails[$currentLevel]['minDeposit'];
+            $minBet = $levelDetails[$currentLevel]['minBet'];
+
+            return array(
+                'currentLevel' => $currentLevel,
+                'nextLevel' => $nextLevel,
+                'minimum_deposit_for_next_level' => $minDeposit,
+                'minimum_bet_for_next_level' => $minBet,
+            );
+        }
+        $levelDetails = getNextLevelDetails($user->vip);
+        // dd($levelDetails);
         return response()->json([
-            'deposit' => $bonusAmount->deposit,
-            'bet' => $bonusAmount->bet,
-            'bonus' => $bonusAmount->bonus,
-            'withdrawable_balance' => $bonusAmount->withdrawable_balance,
+            'deposit' => $wallet->deposit,
+            'bet' => $wallet->bet,
+            'bonus' => $wallet->bonus,
+            'withdrawable_balance' => $wallet->withdrawable_balance,
+            'level' => $levelDetails,
             'message' => 'success',
         ], 200);
         
-        // }
-        // return response()->json([
-        //     'deposit' => $wallet->deposit,
-        //     'bet' => $wallet->bet,
-        //     'bonus'=> $wallet->bonus,
-        //     'total' => $wallet->total,
-        //     'message' => 'wallet created for user',
-        // ], 201);
-        // }
     }
 }
