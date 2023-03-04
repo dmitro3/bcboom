@@ -2,6 +2,7 @@
 namespace App\Actions;
 
 use App\Models\Payment;
+use App\Models\Promotion;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
@@ -94,6 +95,7 @@ class Withdrawal
 
         unset($data['sign']);
         $sign = $this->sign($data, $this->merchantKey);
+        // dd($sign, $request->sign);
         if ($sign === $request->sign) {
             // if ($sign === $sign) {
             $wallet = Wallet::where('order_no', $request->orderno)->first();

@@ -57,17 +57,13 @@ class GameController extends Controller
             'loss' => $request->loss,
             'player' => $user->id,
         ]);
+        $user->makeVip;
         $wallet = Wallet::where('user_id', $user->id)->first();
         if ($request->status == 'won') {
             $wallet->update([
                 'withdrawable_balance' => $wallet->withdrawable_balance + $request->earning,
             ]);
         }
-        // } else {
-        //     $wallet->update([
-        //         'withdrawable_balance' => $wallet->withdrawable_balance - $request->amount,
-        //     ]);
-        // }
         return response()->json([
             'game' => $game,
             'wallet' => $wallet,

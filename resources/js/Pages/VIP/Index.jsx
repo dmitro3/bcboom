@@ -158,7 +158,7 @@ const VIPIndex = () => {
                                     <TextWithBg
                                         bg="#4F5DFE"
                                         primaryText="Original Games"
-                                        secondaryText={"R$ 0"}
+                                        secondaryText={"G$ 0"}
                                         primaryTextSize={isMobile && "12px"}
                                         padding={isMobile && "5px 20px"}
                                         width={isMobile && "100%"}
@@ -169,7 +169,7 @@ const VIPIndex = () => {
                                         padding={isMobile && "5px 20px"}
                                         bg={"#4F5DFE"}
                                         primaryText="Accumulated Deposit Amount"
-                                        secondaryText={"R$ 100"}
+                                        secondaryText={"G$ 100"}
                                         nowrap
                                     />
                                 </Flex>
@@ -202,7 +202,7 @@ const VIPIndex = () => {
                                     },
                                     {
                                         count: "03",
-                                        text: "The more you play, the higher your money back, for example your [VIP1] cumulative level bet of €10,000 will bring you a €20 back bonus. (The return for vip10 is R$50)",
+                                        text: "The more you play, the higher your money back, for example your [VIP1] cumulative level bet of €10,000 will bring you a €20 back bonus. (The return for vip10 is G$50)",
                                         color: "#FA3D5F",
                                         tooltip: true,
                                     },
@@ -212,7 +212,7 @@ const VIPIndex = () => {
                                         <Text type="p" text={item.text} />
                                         {item.tooltip && (
                                             <BcTooltip
-                                                title="60% of Bcboom users can easily reach a cumulative value of over R$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
+                                                title="60% of Bcboom users can easily reach a cumulative value of over G$10,000 per day. The cumulative bet amount is calculated regardless of whether the bet is a win or a loss."
                                                 placement="bottom-start"
                                                 arrow
                                                 classes={{

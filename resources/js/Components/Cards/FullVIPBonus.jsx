@@ -3,6 +3,7 @@ import { currencyFormatter } from "@/utils/util";
 import { styled } from "@mui/system";
 import React from "react";
 import { useSelector } from "react-redux";
+import VipLevelIcon from "../../../assets/icon-components/VipLevelIcon";
 import fullbg from "../../../../public/images/vip/fullbg.png";
 import level0 from "../../../../public/images/vip/levels00.svg";
 import level1 from "../../../../public/images/vip/levels01.svg";
@@ -77,7 +78,7 @@ const FullVIPBonus = () => {
                     justifyContent="space-between"
                     width="80%"
                 >
-                    {[level0, level1, level2, level3, level4].map(
+                    {/* {[level0, level1, level2, level3, level4].map(
                         (level, index) => (
                             <img
                                 src={level}
@@ -86,7 +87,10 @@ const FullVIPBonus = () => {
                                 style={{ width: "12%" }}
                             />
                         )
-                    )}
+                    )} */}
+                    {Array.from({ length: 5 }).map((_, index) => (
+                        <VipLevelIcon color="#ABB5E3" level={index} />
+                    ))}
                 </Flex>
                 <RangeInput
                     style={{ width: "80%", marginTop: "70px" }}
@@ -139,7 +143,7 @@ const FullVIPBonus = () => {
                                 />
                                 <Text
                                     type="p"
-                                    text="R$ 0"
+                                    text="G$ 0"
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                     color="#3586FF"
@@ -169,7 +173,7 @@ const FullVIPBonus = () => {
                                 />
                                 <Text
                                     type="p"
-                                    text={`R$ ${currencyFormatter
+                                    text={`G$ ${currencyFormatter
                                         .format(wallet?.deposit || 0)
                                         .replace("$", "")}`}
                                     fontSize={isMobile ? "12px" : "17px"}

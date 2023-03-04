@@ -138,14 +138,14 @@ const MyVIPLevel = () => {
                     <Flex alignItems="center" gap="3px">
                         <Text
                             type="p"
-                            text={"R$" + wallet?.deposit || 0}
+                            text={"G$" + wallet?.deposit || 0}
                             fontSize="15px"
                             fontWeight="bold"
                         />
                         <small>/</small>
                         <Text
                             type="p"
-                            text={`R$${level?.maxDeposit}`}
+                            text={`G$${level?.maxDeposit}`}
                             fontSize="15px"
                             fontWeight="bold"
                             color="#FFCD4D"
@@ -191,14 +191,14 @@ const MyVIPLevel = () => {
                     <Flex alignItems="center" gap="3px">
                         <Text
                             type="p"
-                            text={`R$ ${wallet?.bet || 0}`}
+                            text={`G$ ${wallet?.bet || 0}`}
                             fontSize="15px"
                             fontWeight="bold"
                         />
                         <small>/</small>
                         <Text
                             type="p"
-                            text={`R$${level?.maxBet}`}
+                            text={`G$${level?.maxBet}`}
                             fontSize="15px"
                             fontWeight="bold"
                             color="#43BB41"
@@ -254,7 +254,7 @@ const MyVIPLevel = () => {
                     />
                     <Text
                         type="p"
-                        text="R$ 800"
+                        text="G$ 800"
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
@@ -278,7 +278,7 @@ const MyVIPLevel = () => {
                     />
                     <Text
                         type="p"
-                        text="R$ 100"
+                        text="G$ 100"
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
