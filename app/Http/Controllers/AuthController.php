@@ -96,14 +96,16 @@ class AuthController extends Controller
                     'user_id' => $user->id,
                 ]);
                 
-                
+                //Grant signing up user 100 promotion
+                $user->run_promotions(100);
+
                 if($referrer){
                     // Grant a bonus to the referrer.
                     $referrer->update([
                         'referral_count' => $referrer->referral_count+1
                     ]);
-                    // $referrer->grantBonus();
-                    // $referrer->makeVip();
+                     $referrer->grantBonus();
+                     $referrer->makeVip();
                 }
 
                 // This works only if the request has field 'ref'
@@ -122,8 +124,8 @@ class AuthController extends Controller
                     ]);
 
                     // Grant a bonus to the referring user.
-                    // $referring->grantBonus();
-                    // $referring->makeVip();
+                     $referring->grantBonus();
+                     $referring->makeVip();
                 }else{
 
                     // $token = JWTAuth::fromUser($user);
@@ -146,7 +148,7 @@ class AuthController extends Controller
 
                 }
                 
- 
+
                 // $token = JWTAuth::fromUser($user);
                 $credentials = $this->credentials($request);
 
