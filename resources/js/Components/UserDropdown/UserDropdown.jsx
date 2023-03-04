@@ -13,7 +13,6 @@ import { Dropdown as AntDropdown } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import brazillianreal from "../../../../public/images/currencies/brazillianreal.svg";
 import chevrondown from "../../../../public/images/svg/chevrondown.svg";
 import chevronup from "../../../../public/images/svg/chevronup.svg";
 import crown from "../../../../public/images/svg/crown.svg";
@@ -302,11 +301,12 @@ const UserDropdown = ({
             style={{ fontFamily: "Montserrat, sans-serif" }}
         >
             <CurrencyWrapper isMobile={isMobile}>
-                <img
+                {/* <img
                     src={brazillianreal}
                     alt="brazillianreal"
                     style={{ height: isMobile ? "12px" : "18px" }}
-                />
+                /> */}
+                <Text type="p" text="G$" color="white" fontSize="17px" fontWeight='bolder' fontStyle='italic' />
             </CurrencyWrapper>
             <div
                 onClick={() => dispatcher(setWalletModalState({ open: true }))}

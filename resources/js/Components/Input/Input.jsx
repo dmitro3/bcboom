@@ -77,6 +77,7 @@ const Input = ({
     br,
     border,
     afterInputText,
+    afterInputFunc,
     disabled,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -103,7 +104,7 @@ const Input = ({
                 br={br}
                 disabled={disabled}
             />
-            {afterInputText && <p>{afterInputText}</p>}
+            {afterInputText && <p onClick={afterInputFunc} style={{cursor:'pointer'}}>{afterInputText}</p>}
             {type === "password" && (
                 <PasswordToggler onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? (

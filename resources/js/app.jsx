@@ -10,6 +10,7 @@ import store, { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Lines } from "react-preloaders";
 import GuestLayout from "./Layouts/GuestLayout";
+// import Preloader from "./Components/UtilComponents/Preloader";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText ||
@@ -27,6 +28,7 @@ createInertiaApp({
 
         root.render(
             <Provider store={store}>
+                {/* <Preloader /> */}
                 <PersistGate loading={null} persistor={persistor}>
                     <GuestLayout>
                         <App {...props} />

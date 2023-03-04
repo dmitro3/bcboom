@@ -87,7 +87,7 @@ const DepositButton = styled("button")(({ fontSize }) => ({
     width: "100%",
     background: "#3586FF",
     borderRadius: "10px",
-    padding: "10px",
+    padding: "20px 10px",
     fontSize: fontSize,
 
     "&:hover": {
@@ -111,7 +111,7 @@ const Deposit = () => {
     const [value, setValue] = useState(100);
     const [rate, setRate] = useState(5.209);
     const [calculatedValue, setCalculatedValue] = useState(
-        Math.floor(value * rate)
+        (value / rate).toFixed(4)
     );
     const dispatcher = useDispatch();
     useEffect(() => {
@@ -125,13 +125,14 @@ const Deposit = () => {
     }, []);
 
     useEffect(() => {
-        setCalculatedValue(Math.floor(value * rate));
+        setCalculatedValue((value / rate).toFixed(4));
     }, [value, rate]);
 
     const [submitted, setSubmitted] = useState(false);
     const [buttonHovered, setButtonHovered] = useState(false);
     const { isMobile } = useScreenResolution();
     async function handleDeposit(propValue) {
+        if (submitted) return;
         setSubmitted(true);
         if (!value || value < 20) {
             toast.error("Minimum deposit is R$20", {
@@ -167,14 +168,24 @@ const Deposit = () => {
                 <Tag text="TRC20" bg="#3A4380" />
             </Flex>
             <Input
-                addon={<img src={currency} alt="" />}
+                addon={
+                    <img
+                        src={brazillianreal}
+                        alt="brazillian real"
+                        width="25px"
+                    />
+                }
                 type="number"
                 value={value}
                 onChange={(e) => {
                     setValue(e.target.value);
-                    setCalculatedValue(Math.floor(e.target.value * rate));
+                    setCalculatedValue(Math.floor(e.target.value / rate).toFixed(4));
                 }}
-                afterInputText="Extra + G$20"
+                afterInputFunc={() => {
+                    setValue(value + 20);
+                    setCalculatedValue((value / rate).toFixed(4));
+                }}
+                afterInputText="Extra + R$20"
                 br="10px"
             />
             <AmountOptions isMobile={isMobile}>
@@ -196,7 +207,7 @@ const Deposit = () => {
                         onChange={() => {
                             console.log("item: ", item);
                             setValue(item);
-                            setCalculatedValue(item * rate);
+                            setCalculatedValue((item / rate).toFixed(4));
                         }}
                     />
                 ))}
@@ -221,19 +232,16 @@ const Deposit = () => {
                                 fontSize="22px"
                                 fontWeight="bold"
                             />
-                            <Text
+                            {/* <Text
                                 type="p"
                                 text={`( 1G$ = R$${rate.toFixed(4)})`}
                                 fontSize="13px"
-                            />
+                            /> */}
                         </div>
                         <Flex alignItems="center">
                             <Text
                                 type="p"
-                                text={`R$ ${
-                                    Math.floor(calculatedValue)
-                                    // .replace("$", "")
-                                }`}
+                                text={`G$ ${calculatedValue}`}
                                 fontSize="24px"
                                 fontWeight="bold"
                             />

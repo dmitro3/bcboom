@@ -40,6 +40,7 @@
         "framer-motion": "^8.5.2",
         "howler": "^2.2.3",
         "mui-daterange-picker": "^1.0.5",
+        "nprogress": "^0.2.0",
         "react-google-recaptcha": "^2.1.0",
         "react-preloaders": "^3.0.3",
         "react-redux": "^8.0.5",

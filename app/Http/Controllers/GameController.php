@@ -57,6 +57,7 @@ class GameController extends Controller
             'loss' => $request->loss,
             'player' => $user->id,
         ]);
+        $user->makeVip;
         $wallet = Wallet::where('user_id', $user->id)->first();
         if ($request->status == 'won') {
             $wallet->update([
