@@ -286,6 +286,7 @@ const MyVIPLevel = () => {
                         }`}
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
+                        whiteSpace="nowrap"
                         color="#3586FF"
                     />
                 </div>

@@ -56,31 +56,40 @@ export const switchLevel = (wallet) => {
 };
 
 export const getLevelStats = (wallet) => {
-    const level = wallet?.level?.currentLevel;
+    const level = +wallet?.level?.currentLevel;
     let maxDeposit = 0;
     let maxBet = 0;
     switch (level) {
-        case 0:
+        case 1:
             maxDeposit = 100;
             maxBet = 800;
             break;
-        case 1:
+        case 2:
             maxDeposit = 500;
             maxBet = 4000;
             break;
-        case 2:
+        case 3:
             maxDeposit = 2000;
             maxBet = 16000;
             break;
-        case 3:
+        case 4:
             maxDeposit = 10000;
             maxBet = 80000;
             break;
-        default:
-            maxDeposit = 100;
-            maxBet = 800;
+        case 5:
+            maxDeposit = 50000;
+            maxBet = 400000;
             break;
+        case 6:
+            maxDeposit = 100000;
+            maxBet = 800000;
+            break;
+        // default:
+        //     maxDeposit = 100;
+        //     maxBet = 800;
+        //     break;
     }
+    console.log("maxDeposit: ", maxDeposit)
     return {
         currentLevel: level,
         nextLevel: level + 1,
