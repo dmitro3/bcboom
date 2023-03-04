@@ -130,14 +130,14 @@ const TextWithIcon = ({ icon, text, width, height, onClick }) => {
 //                 <Flex alignItems="center" gap="3px">
 //                     <Text
 //                         type="p"
-//                         text="R$0"
+//                         text="G$0"
 //                         fontSize="15px"
 //                         fontWeight="bold"
 //                     />
 //                     <small>/</small>
 //                     <Text
 //                         type="p"
-//                         text="R$100"
+//                         text="G$100"
 //                         fontSize="15px"
 //                         fontWeight="bold"
 //                         color="#FFCD4D"
@@ -340,15 +340,15 @@ const PersonalCenter = () => {
                                     <Flex alignItems="center" gap="3px">
                                         <Text
                                             type="p"
-                                            text={`R$ ${wallet?.deposit}`}
+                                            text={`G$ ${wallet?.deposit}`}
                                             fontSize="15px"
                                             fontWeight="bold"
                                         />
                                         <small>/</small>
                                         <Text
                                             type="p"
-                                            // text="R$100"
-                                            text={`R$${level?.maxDeposit}`}
+                                            // text="G$100"
+                                            text={`G$${level?.maxDeposit}`}
                                             fontSize="15px"
                                             fontWeight="bold"
                                             color="#64A2FF"
@@ -391,14 +391,14 @@ const PersonalCenter = () => {
                                     <Flex alignItems="center" gap="3px">
                                         <Text
                                             type="p"
-                                            text={`R$ ${wallet?.bet || 0}`}
+                                            text={`G$ ${wallet?.bet || 0}`}
                                             fontSize="15px"
                                             fontWeight="bold"
                                         />
                                         <small>/</small>
                                         <Text
                                             type="p"
-                                            text={`R$${level?.maxBet}`}
+                                            text={`G$${level?.maxBet}`}
                                             fontSize="15px"
                                             fontWeight="bold"
                                             color="#64A2FF"
@@ -451,7 +451,7 @@ const PersonalCenter = () => {
                                 />
                                 <Text
                                     type="p"
-                                    text="R$"
+                                    text="G$"
                                     fontSize="18px"
                                     color="white"
                                     fontWeight="700"
@@ -474,7 +474,7 @@ const PersonalCenter = () => {
                                     <TextWithBg
                                         bg="#191C51"
                                         primaryText="BET"
-                                        secondaryText={`R$ ${wallet?.bet || 0}`}
+                                        secondaryText={`G$ ${wallet?.bet || 0}`}
                                         secondaryTextSize={"14px"}
                                         primaryTextSize={"12px"}
                                         whiteSpace="nowrap"
@@ -488,7 +488,7 @@ const PersonalCenter = () => {
                                         padding="10px 45px"
                                         bg="#191C51"
                                         primaryText="DEPOSIT"
-                                        secondaryText={`R$ ${
+                                        secondaryText={`G$ ${
                                             wallet?.deposit || 0
                                         }`}
                                     />
