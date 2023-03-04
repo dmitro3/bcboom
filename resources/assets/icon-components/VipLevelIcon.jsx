@@ -13,19 +13,20 @@ const VipLevelIcon = ({ color, level }) => {
 
             <Text
                 color={color}
-                text="R$ 0"
+                text={'R$ ' + [0, 10, 20, 30, 40, 100][level]}
                 type="p"
-                fontSize="1.1rem"
+                fontSize="14px"
                 fontFamily="Montserrat"
                 fontWeight="700"
                 />
             <Text
                 color={color}
-                text={level}
+                text={'LV ' + level}
                 type="p"
-                fontSize="1.1rem"
+                fontSize="14px"
                 fontFamily="Montserrat"
                 fontWeight="700"
+                paddingTop="13px"
                 />
                 </div>
         </LevelIcon>

@@ -23,15 +23,15 @@ class BonusController extends Controller
         {
             $levelDetails = array(
 
-                1 => array('nextLevel' => 2, 'minDeposit' => 100, 'minBet' => 800),
-                2 => array('nextLevel' => 3, 'minDeposit' => 500, 'minBet' => 4000),
-                3 => array('nextLevel' => 4, 'minDeposit' => 2000, 'minBet' => 16000),
-                4 => array('nextLevel' => 5, 'minDeposit' => 10000, 'minBet' => 80000),
-                5 => array('nextLevel' => 6, 'minDeposit' => 50000, 'minBet' => 400000),
-                6 => array('nextLevel' => 7, 'minDeposit' => 200000, 'minBet' => 1200000),
-                7 => array('nextLevel' => 8, 'minDeposit' => 1000000, 'minBet' => 6000000),
-                8 => array('nextLevel' => 9, 'minDeposit' => 5000000, 'minBet' => 30000000),
-                9 => array('nextLevel' => 10, 'minDeposit' => 20000000, 'minBet' => 120000000),
+                0 => array('nextLevel' => 1, 'minDeposit' => 100, 'minBet' => 800),
+                1 => array('nextLevel' => 2, 'minDeposit' => 500, 'minBet' => 4000),
+                2 => array('nextLevel' => 3, 'minDeposit' => 2000, 'minBet' => 16000),
+                3 => array('nextLevel' => 4, 'minDeposit' => 10000, 'minBet' => 80000),
+                4 => array('nextLevel' => 5, 'minDeposit' => 50000, 'minBet' => 400000),
+                5 => array('nextLevel' => 6, 'minDeposit' => 200000, 'minBet' => 1200000),
+                6 => array('nextLevel' => 7, 'minDeposit' => 1000000, 'minBet' => 6000000),
+                7 => array('nextLevel' => 8, 'minDeposit' => 5000000, 'minBet' => 30000000),
+                8 => array('nextLevel' => 9, 'minDeposit' => 20000000, 'minBet' => 120000000),
             );
 
             if ($currentLevel < 1 || $currentLevel > count($levelDetails)) {

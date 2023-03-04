@@ -334,7 +334,7 @@ const UserDropdown = ({
                         <UserDetails
                             user={profile}
                             wallet={wallet}
-                            level={level}
+                            level={wallet.level}
                             dispatcher={dispatcher}
                             opened={setMouseOver}
                         />

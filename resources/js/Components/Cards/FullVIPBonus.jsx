@@ -89,7 +89,14 @@ const FullVIPBonus = () => {
                         )
                     )} */}
                     {Array.from({ length: 5 }).map((_, index) => (
-                        <VipLevelIcon color="#ABB5E3" level={index} />
+                        <VipLevelIcon
+                            color={
+                                +wallet.level?.currentLevel == index
+                                    ? "#FFD338"
+                                    : '"#ABB5E3"'
+                            }
+                            level={index}
+                        />
                     ))}
                 </Flex>
                 <RangeInput
@@ -106,7 +113,7 @@ const FullVIPBonus = () => {
                         />
                         <Text
                             type="p"
-                            text="The BetDino VIP level system is created with 10 levels, each with a corresponding cash prize. The more you play, the higher the VIP level and the more you will receive."
+                            text="The BcBoom VIP level system is created with 10 levels, each with a corresponding cash prize. The more you play, the higher the VIP level and the more you will receive."
                             color="white"
                             fontSize="14px"
                             fontWeight="medium"
@@ -143,7 +150,9 @@ const FullVIPBonus = () => {
                                 />
                                 <Text
                                     type="p"
-                                    text="G$ 0"
+                                    text={`G$ ${currencyFormatter
+                                        .format(wallet?.bet || 0)
+                                        .replace("$", "")}`}
                                     fontSize={isMobile ? "12px" : "17px"}
                                     fontWeight="bold"
                                     color="#3586FF"

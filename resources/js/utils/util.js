@@ -56,7 +56,7 @@ export const switchLevel = (wallet) => {
 };
 
 export const getLevelStats = (wallet) => {
-    const level = switchLevel(wallet);
+    const level = wallet?.level?.currentLevel;
     let maxDeposit = 0;
     let maxBet = 0;
     switch (level) {

@@ -112,7 +112,7 @@ const MyVIPLevel = () => {
             </Flex>
             <Text
                 type="p"
-                text={`LEVEL ${level.currentLevel || 0}`}
+                text={`LEVEL ${wallet.level?.currentLevel || 0}`}
                 color="#3586FF"
                 fontSize="15px"
                 fontWeight="bolder"
@@ -165,7 +165,7 @@ const MyVIPLevel = () => {
                             style={{ width: "100%" }}
                         />
                         <Text
-                            text={`${level.depositProgress}%`}
+                            text={`${level?.depositProgress}%`}
                             type="p"
                             fontWeight="bold"
                         />
@@ -205,7 +205,8 @@ const MyVIPLevel = () => {
                         />
                     </Flex>
                 </Flex>
-                <RangeInput style={{ width: "80%", marginTop: "10px" }}
+                <RangeInput
+                    style={{ width: "80%", marginTop: "10px" }}
                     value={level?.betProgress}
                 >
                     <Flex alignItems="center" gap="6px">
@@ -217,7 +218,7 @@ const MyVIPLevel = () => {
                             style={{ width: "100%" }}
                         />
                         <Text
-                            text={`${level.betProgress}%`}
+                            text={`${level?.betProgress}%`}
                             type="p"
                             fontWeight="bold"
                         />
@@ -227,7 +228,7 @@ const MyVIPLevel = () => {
             <div style={{ marginTop: "20px" }}>
                 <Text
                     type="p"
-                    text="Upgrading to VIP 1 also requires:"
+                    text={`Upgrading to VIP ${wallet?.level?.nextLevel} also requires:`}
                     fontSize={isMobile ? "12px" : "17px"}
                     fontWeight="bold"
                 />
@@ -254,7 +255,9 @@ const MyVIPLevel = () => {
                     />
                     <Text
                         type="p"
-                        text="G$ 800"
+                        text={`G$ ${
+                            wallet.level?.minimum_bet_for_next_level || 0
+                        }`}
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
@@ -278,7 +281,9 @@ const MyVIPLevel = () => {
                     />
                     <Text
                         type="p"
-                        text="G$ 100"
+                        text={`G$ ${
+                            wallet.level?.minimum_deposit_for_next_level || 0
+                        }`}
                         fontSize={isMobile ? "12px" : "17px"}
                         fontWeight="bold"
                         color="#3586FF"
