@@ -101,7 +101,7 @@ const FullVIPBonus = () => {
                 </Flex>
                 <RangeInput
                     style={{ width: "80%", marginTop: "70px" }}
-                    value={22}
+                    value={+wallet?.level?.currentLevel * 25}
                 >
                     <div>
                         <input

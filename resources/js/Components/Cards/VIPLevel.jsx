@@ -79,6 +79,28 @@ const VipLevelCard = styled("div")(({ isMobile }) => ({
     justifyContent: "space-between",
 }));
 
+const LevelIcon = styled("div")(({ color, level }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    backgroundImage: `url(${level})`,
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    // width: "80px",
+    // height: "145px",
+    // width: "100%",
+    // height: "100%",
+    margin: "0 auto",
+
+    '& p': {
+        width: "100%",
+        height: "100%",
+        position: 'absolute',
+        top: '8%',
+    }
+}));
+
 const MyVIPLevel = () => {
     let classes = useStyles();
     const { isMobile } = useScreenResolution();
@@ -117,9 +139,21 @@ const MyVIPLevel = () => {
                 fontSize="15px"
                 fontWeight="bolder"
             />
-            <Flex justifyContent="center" padding="30px 0 20px 0">
-                <img src={level1} alt="" />
-            </Flex>
+            <LevelIcon>
+                {/* <Flex justifyContent="center" padding="30px 0 20px 0"> */}
+                    <img src={level1} alt="" />
+                    <Text
+                        // color={color}
+                        text={wallet.level?.currentLevel || 0}
+                        type="p"
+                        fontSize="44px"
+                        fontFamily="Montserrat"
+                        fontWeight="700"
+                        // paddingTop="13px"
+                    />
+                    {/* <img src={level1} alt="" /> */}
+                {/* </Flex> */}
+            </LevelIcon>
             <div
                 style={{
                     width: "100%",
