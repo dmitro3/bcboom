@@ -22,7 +22,7 @@ class SlotApiController extends Controller
     //     'currency' => 'USD',
     // ];
 
-    private string $apiurl = 'https://staging.slotegrator.com/api/index.php/v1/games?page=2';
+    private string $apiurl = 'https://staging.slotegrator.com/api/index.php/v1';
     // private  $mergedParams = array_merge($requestParams, $headers);
 
     // private object $hashString = http_build_query(ksort($mergedParams));
@@ -38,8 +38,8 @@ class SlotApiController extends Controller
     public function getGames(Request $request)
     {
         $page = $request->input('page', 1);
+        // $provider = $request->input('provider', 1);
         $merchantId = $this->merchantId;
-        $merchantKey = $this->merchantKey;
         $nonce = md5(uniqid(mt_rand(), true));
         $time = time();
         $headers = [
@@ -48,34 +48,25 @@ class SlotApiController extends Controller
             'X-Nonce' => $nonce,
         ];
         $requestParams = [
-            // 'page' => $page,
+            // 'game_uuid' => 'abcd12345',
+            // 'currency' => 'USD',
+            'page' => $page,
+            'name' => 'Crash',
+            'provider' => 'Jetgames',
         ];
-        $sign = $this->getSign($headers, $requestParams);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->apiurl);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt(
-            $ch,
-            CURLOPT_HTTPHEADER,
-            array(
-                'X-Merchant-Id: ' . $merchantId,
-                'X-Timestamp: ' . $time,
-                'X-Nonce: ' . $nonce,
-                'X-Sign: ' . $sign,
-                'Accept: application/json',
-                'Enctype: application/x-www-form-urlencoded',
-            )
-        );
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($ch);
-        var_dump($result);
+        // dd(http_build_query($requestParams));
+        $sign = $this->getSign($headers, $requestParams);
+        // dd($sign);
+        $response = Http::withHeaders(array_merge($headers, ['X-Sign' => $sign]))->get($this->apiurl . '/games/?
+        ' . http_build_query($requestParams));
+        return $response->json();
     }
 
     private function getSign($headers, $requestParams)
     {
         $merchantKey = $this->merchantKey;
-        $mergedParams = array_merge($requestParams, $headers);
+        $mergedParams = array_merge($headers, $requestParams);
         ksort($mergedParams);
         $hashString = http_build_query($mergedParams);
         $XSign = hash_hmac('sha1', $hashString, $merchantKey);
@@ -85,18 +76,13 @@ class SlotApiController extends Controller
 }
 
 
-//curl_setopt($ch, CURLOPT_POST, 1);
-// curl_setopt(
-//     $ch,
-//     CURLOPT_HTTPHEADER,
-//     array(
-//         'X-Merchant-Id: ' . $merchantId,
-//         'X-Timestamp: ' . $time,
-//         'X-Nonce: ' . $nonce,
-//         'X-Sign: ' . $XSign,
-//         'Accept: application/json',
-//         'Enctype: application/x-www-form-urlencoded',
-//     )
-// );
-
-// var_dump($result);
+// "href": "https://staging.slotegrator.com/api/index.php/v1/games/index?name=crash&page=1"
+//     },
+//     "first": {
+//         "href": "https://staging.slotegrator.com/api/index.php/v1/games/index?name=crash&page=1"
+//     },
+//     "last": {
+//         "href": "https://staging.slotegrator.com/api/index.php/v1/games/index?name=crash&page=133"
+//     },
+//     "next": {
+//         "href": "https://staging.slotegrator.com/api/index.php/v1/games/index?name=crash&page=2"
