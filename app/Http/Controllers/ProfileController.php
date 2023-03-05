@@ -180,6 +180,8 @@ else{
 
     public function updateProfile(Request $request){
         $user = Auth::user();
+        $url = route('index');
+
         if($request->has('image')){
             $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
