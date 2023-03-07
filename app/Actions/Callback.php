@@ -31,17 +31,17 @@ class Callback
         $data = $request->all();
         unset($data['sign']);
 
-        $sign = $this->getSignOpen($data, $key);
+        $sign = getSignOpen($data, $key);
 
         if ($sign == $request->sign) {
 
             // 验签成功
             //PENDING 处理中 SUCCESS完成 FAILURE失败
+            $payment = Payment::where('order_no', $data['tx_orderno'])->first();
             if (
                 $data['trade_state'] == 'SUCCESS'
             ) {
 
-                $payment = Payment::where('order_no', $data['tx_orderno'])->first();
 
                 $wallet = Wallet::where('order_no', $data['tx_orderno'])->first();
 
@@ -80,7 +80,7 @@ class Callback
                     $user->run_promotions($request->amount);
                     $user->promoteLevel();
                 }
-                //改变订单状态，及其他业务修改
+                return 'SUCCESS';
 
 
             } else if ($data['trade_state'] == 'PENDING') {
@@ -124,7 +124,7 @@ class Callback
             }
             //签名步骤一：按字典序排序参数
             ksort($Parameters);
-            $String = $this->formatQueryParaMapOpen($Parameters);
+            $String = formatQueryParaMapOpen($Parameters);
             $String = $String . '&key=' . $key;
             //dlog($String);
             //签名步骤三：MD5加密
