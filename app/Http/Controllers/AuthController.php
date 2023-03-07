@@ -87,6 +87,9 @@ class AuthController extends Controller
                 ]);
 
                 if($request->has('phone')){
+                    $request->validate([
+                        'phone' => 'numeric|max:100|unique:users'
+                    ]);
                     $user->update([
                         'phone' => $request->get('phone')
                     ]);
@@ -105,7 +108,7 @@ class AuthController extends Controller
                         'referral_count' => $referrer->referral_count+1
                     ]);
                      $referrer->grantBonus();
-                     $referrer->makeVip();
+                    //  $referrer->makeVip();
                 }
 
                 // This works only if the request has field 'ref'
@@ -125,7 +128,7 @@ class AuthController extends Controller
 
                     // Grant a bonus to the referring user.
                      $referring->grantBonus();
-                     $referring->makeVip();
+                    //  $referring->makeVip();
                 }else{
 
                     // $token = JWTAuth::fromUser($user);
