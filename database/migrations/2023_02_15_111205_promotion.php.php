@@ -16,11 +16,11 @@ return new class extends Migration {
             Schema::dropIfExists('promotions');
             $table->id();
             $table->string('title');
-            $table->string('eligibility');
+            $table->string('eligibility')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->default('active');
-            $table->decimal('amount')->default(0);
-            $table->decimal('percentage')->default(0);
+            $table->float('amount')->default(0);
+            $table->double('percentage')->default(0);
             $table->timestamps();
         });
     }

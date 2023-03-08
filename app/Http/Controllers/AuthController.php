@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Validator;
 use JWTAuth;
 use App\Models\Wallet;
+use App\Models\Promotion;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -87,28 +88,34 @@ class AuthController extends Controller
                 ]);
 
                 if($request->has('phone')){
-                    $request->validate([
-                        'phone' => 'numeric|max:100|unique:users'
+                   $validated = $request->validate([
+                        'phone' => 'required|max:100|unique:users'
                     ]);
+                    if($validated){
                     $user->update([
                         'phone' => $request->get('phone')
                     ]);
+                }
                 }
 
                 Wallet::create([
                     'user_id' => $user->id,
                 ]);
                 
-                //Grant signing up user 100 promotion
+                //Grant them 100 deposit bonus if exist
+                $promotion = promotion::where('eligibility', 'new_user')->first();
+                if ($promotion){
+                    
                 $user->run_promotions(100);
+                }
 
                 if($referrer){
                     // Grant a bonus to the referrer.
                     $referrer->update([
                         'referral_count' => $referrer->referral_count+1
                     ]);
-                     $referrer->grantBonus();
-                    //  $referrer->makeVip();
+                    $referrer->grantBonus();
+                    // $referrer->makeVip();
                 }
 
                 // This works only if the request has field 'ref'
@@ -127,45 +134,47 @@ class AuthController extends Controller
                     ]);
 
                     // Grant a bonus to the referring user.
-                     $referring->grantBonus();
-                    //  $referring->makeVip();
+                    $referring->grantBonus();
+                    // $referring->makeVip();
                 }else{
-
                     // $token = JWTAuth::fromUser($user);
 
-                    // return response()->json([
-                    //     'message' => 'User successfully registered',
-                    //     'user' => $user
-                    // ], 201);
+                    $wallet = Wallet::where('user_id', '=', $user->id)->first();
 
-            $credentials = $this->credentials($request);
+                    if(!$wallet){
+                        Wallet::create([
+                            'user_id' => $user->id   
+                        ]);
+                    }
+
+                    $credentials = $this->credentials($request);
 
             if (! $token = auth()->attempt($credentials)) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
             //
             return $this->createNewToken($token);
-
                 }
                 
 
                 }
                 
-
+ 
                 // $token = JWTAuth::fromUser($user);
+                $wallet = Wallet::where('user_id', '=', $user->id)->first();
+
+                if(!$wallet){
+                    Wallet::create([
+                        'user_id' => $user->id   
+                    ]);
+                }
                 $credentials = $this->credentials($request);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        //
-        return $this->createNewToken($token);
-
-        // return response()->json([
-        //     'message' => 'User successfully registered',
-        //     'user' => $user
-        // ], 201);
-        
+                if (! $token = auth()->attempt($credentials)) {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }
+                //
+                return $this->createNewToken($token);
     }
     }
     /**
