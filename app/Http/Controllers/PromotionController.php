@@ -41,11 +41,16 @@ class PromotionController extends Controller
             'percentage' => $request->percentage,
 
         ]);
-    }else{
+    }elseif($request->type == 'new_user'){
         $promo->update([
         'type' => $request->type,
-        'amount' => $request->amount
+        'percentage' => $request->percentage
         ]);
+    }else{
+        $promo->update([
+            'type' => $request->type,
+            'amount' => $request->amount
+            ]);
     }
 
     $promo->update([

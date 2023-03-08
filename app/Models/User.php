@@ -79,6 +79,7 @@ class User extends Authenticatable implements JWTSubject
     //     return $this->hasMany(Referral::class);
     // }
 
+    
     public function grantBonus()
     {
         // $wallet = Wallet::where('user_id', '=', $this->id)->first();
@@ -285,11 +286,9 @@ class User extends Authenticatable implements JWTSubject
         // $deposit_counts = Payment::where('user_id', $user->id)->count();
         
         $promotion = Promotion::where('eligibility', 'new_user')
-        ->orWhere('eligibility','new_user')
         ->first();
 
-        if($promotion->status !== 'Paused'){
-        if($user->new_user == true){
+        if($promotion->status == 'active'){
             
             $percentage = $promotion->percentage/100 * $amount;
             
@@ -303,7 +302,7 @@ class User extends Authenticatable implements JWTSubject
                 'new_user' => 0,
                 'eligibility' => 'first_100_deposit_bonus'
             ]);
-        }
+        
     }
         
         if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
@@ -312,7 +311,7 @@ class User extends Authenticatable implements JWTSubject
         ->orWhere('eligibility', 'first_100_deposit_bonus')
         ->first();
 
-        if($promotion->status !== 'Paused'){
+        if($promotion->status == 'active'){
             
            $percentage = $promotion->percentage / 100 * $amount;
             
@@ -335,7 +334,7 @@ class User extends Authenticatable implements JWTSubject
             ->orWhere('eligibility', 'second_100_deposit_bonus')
             ->first();
     
-            if($promotion->status !== 'Paused'){
+            if($promotion->status == 'active'){
             
                 $percentage = $promotion->percentage / 100 * $amount;
                  
@@ -359,7 +358,7 @@ class User extends Authenticatable implements JWTSubject
             ->orWhere('eligibility', 'third_50_deposit_bonus')
             ->first();
     
-            if($promotion->status !== 'Paused'){
+            if($promotion->status == 'active'){
             
                 $percentage = $promotion->percentage / 100 * $amount;
                  
@@ -382,7 +381,7 @@ class User extends Authenticatable implements JWTSubject
             ->orWhere('eligibility', 'fourth_30_deposit_bonus')
             ->first();
     
-            if($promotion->status !== 'Paused'){
+            if($promotion->status == 'active'){
             
                 $percentage = $promotion->percentage / 100 * $amount;
                  
@@ -405,7 +404,7 @@ class User extends Authenticatable implements JWTSubject
             ->orWhere('eligibility', 'fifth_20_deposit_bonus')
             ->first();
     
-            if($promotion->status !== 'Paused'){
+            if($promotion->status == 'active'){
             
                 $percentage = $promotion->percentage / 100 * $amount;
                  
@@ -430,7 +429,7 @@ class User extends Authenticatable implements JWTSubject
             ->irWhere('eligibility', 'other_bonus')
             ->first();
     
-            if($promotion->status !== 'Paused'){
+            if($promotion->status == 'active'){
             
                 $percentage = $promotion->percentage / 100 * $amount;
                  
