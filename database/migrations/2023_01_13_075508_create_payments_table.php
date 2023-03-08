@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->double('amount')->nullable();
-            $table->double('pay_amount')->nullable();
-            $table->double('percentage_amount')->nullable();
+            $table->double('amount')->default(0);
+            $table->double('pay_amount')->default(0);
+            $table->double('percentage_amount')->default(0);
             $table->string('pay_time')->nullable();
             $table->string('order_no')->nullable();
             $table->string('create_time')->nullable();
