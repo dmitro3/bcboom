@@ -55,11 +55,10 @@ class SlotApiController extends Controller
             'provider' => 'Jetgames',
         ];
 
-        // dd(http_build_query($requestParams));
+        // dd($this->apiurl . '/games/?' . http_build_query($requestParams));
         $sign = $this->getSign($headers, $requestParams);
         // dd($sign);
-        $response = Http::withHeaders(array_merge($headers, ['X-Sign' => $sign]))->get($this->apiurl . '/games/?
-        ' . http_build_query($requestParams));
+        $response = Http::withHeaders(array_merge($headers, ['X-Sign' => $sign]))->get($this->apiurl . '/games/?' . http_build_query($requestParams));
         return $response->json();
     }
 

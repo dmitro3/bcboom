@@ -154,7 +154,7 @@ const UserDetails = ({ user, dispatcher, level, opened }) => {
                     />
                     <Text
                         type="p"
-                        text={`Rank ${level.currentLevel || 0}`}
+                        text={`Rank ${level?.currentLevel || 0}`}
                         color="#FFDC62"
                         fontSize="18px"
                         fontWeight="bold"
