@@ -12,8 +12,11 @@ class GameController extends Controller
 {
     public function all_games()
     {
+        $user = Auth::user();
         $all_games = [];
-        $games = Game::orderBy('created_at', 'desc')->get();
+        $count = Game::all()->count();
+        $takes = $user->admin === 1 ? $count : 20;
+        $games = Game::orderBy('created_at', 'desc')->limit($takes)->get();
 
         foreach ($games as $game) {
             $player = User::where('id', $game->player)
