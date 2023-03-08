@@ -117,8 +117,9 @@ class Withdrawal
                      ->orderBy('created_at', 'desc')
                      ->first();
 
-                     if($promotion && $promotion->status !== 'Paused'){
-                     
+                     if($promotion){
+                        
+                     if($promotion->status == 'active'){
                         $percentage = $promotion->percentage / 100 * $withdrawal->final_amount;
                         $wallet->update([
                             'bonus' => $wallet->bonus + $percentage,
@@ -126,7 +127,8 @@ class Withdrawal
                              $wallet->withdrawable_balance
                             - $withdrawal->final_amount
                         ]);   
-                     
+                    }
+
                     }else{
                      
 
