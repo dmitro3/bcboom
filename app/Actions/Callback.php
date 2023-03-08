@@ -47,7 +47,9 @@ class Callback
 
                 if ($wallet && $payment) {
 
-                    $promotion = Promotion::where('type', 'deposit')->first();
+                    $promotion = Promotion::where('type', 'deposit')
+                    ->where('status', 'active')
+                    ->first();
 
                     $user = $wallet->user;
 
