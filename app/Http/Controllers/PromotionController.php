@@ -19,7 +19,7 @@ class PromotionController extends Controller
             ]);
         }else{
             $promo->update([
-                'status' => 'Active'
+                'status' => 'active'
             ]);
 
             return response()->json([

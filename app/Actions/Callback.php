@@ -49,7 +49,7 @@ class Callback
 
                     $promotion = Promotion::where('type', 'deposit')->first();
 
-
+                    $user = $wallet->user;
 
                     if ($promotion) {
                         $percentage_amount = $promotion->percentage / 100 * $payment->amount;
@@ -60,6 +60,7 @@ class Callback
                             'called' => 1,
                             'status' => 'PAYMENT COMPLETED',
                         ]);
+                        $user->run_promotions($request->amount);
                     } else {
                         
                         $payment->update([
@@ -75,8 +76,8 @@ class Callback
                     ]);
 
 
-                    $user = $wallet->user;
-                    $user->run_promotions($request->amount);
+
+
                     $user->promoteLevel();
                 }
                 return 'SUCCESS';
