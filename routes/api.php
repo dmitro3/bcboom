@@ -22,6 +22,8 @@ use App\Actions\Callback;
 use App\Models\Wallet;
 use App\Actions\Withdrawal;
 use App\Paym\Aggregate;
+use App\Models\Game;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,18 +83,63 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         
         $players = [];
 
+        
         $list_players = User::where('player', 1)->get();
-        
-        foreach ($list_players as $player){
-            if ($player->wallet->bet > 0){
-                array_push($players, $player);
-            }
-        } 
+        function count_players($list_players){
 
-        $players_count = $players->count();
+            foreach ($list_players as $player){
+                if ($player->wallet->bet > 0){
+                    array_push($players, $player);
+                }
+            } 
+            
+            $players_count = $players->count();
+            
+            return $players_count;
+        }
+        return response()->json([
+            "players" => balance($list_players),
+            
 
-        return $players_count;
+        ]);
+
+    });
+
+    Route::get('games/count', function(){
+        $games = [];
+        $all_games = Game::all();
         
+        foreach($all_games as $game){
+            $g = [
+                "name" => $game['name'],
+                "player" => $game['player'],
+            ];
+
+            array_push($games, $g);
+
+        }
+
+        return response()->json([
+            'games' => $games
+        ], 200);
+    });
+
+    Route::get('online-users', function(){
+        foreach(Redis::keys('laravel:online-users-*') as $key){    
+            $cacheKeyWithoutPrefix=str_replace('laravel:','', $key);
+            $user = Cache::get($cacheKeyWithoutPrefix);
+            return response()->json($user->id,$user->email,$user->name);
+         }
+    });
+
+    Route::get('won_today', function(){
+        $bets = Wallet::where('bet', '>', 0)
+        ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
+        ->get();
+
+        return response()->json([
+            'bets' => $bets,
+        ]);
     });
 
     Route::get(
