@@ -43,7 +43,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register'])->name('open');
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('registerapi');
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('doNotCacheResponse');
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
@@ -80,12 +80,18 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
     Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
 
-    Route::get('/players/count', function(){
+    Route::get('/all_data', function(){
         
         $players = [];
+        $games = [];
 
         
         $list_players = User::where('player', 1)->get();
+        $all_games = Game::all();
+        $bets = Wallet::where('bet', '>', 0)
+        ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
+        ->get();
+        
         
             foreach ($list_players as $player){
                 if ($player->wallet->bet > 0){
@@ -95,41 +101,21 @@ Route::group(['middleware' => ['jwt.verify']], function () {
                 }
             } 
             
-            
-        if(count($players) > 0){
-        return response()->json([
-            "players" => count($players),
-        ]);
-    }else{
-        return response()->json([
-            "players" => 0 . ' players',
-        ]);
-    }
-    });
+            foreach($all_games as $game){
+                $g = [
+                    "name" => $game['name'],
+                    "player" => $game['player'],
+                ];
+    
+                array_push($games, $g);
+    
+            }
 
-    Route::get('games/count', function(){
-        $games = [];
-        $all_games = Game::all();
-        
-        foreach($all_games as $game){
-            $g = [
-                "name" => $game['name'],
-                "player" => $game['player'],
-            ];
-
-            array_push($games, $g);
-
-        }
-        if(count($games) > 0){
-        return response()->json([
-            'count' => count($games),
-            'games' => $games
-        ], 200);
-    }else{
-        return response()->json([
-            "games" => 0
-        ], 200);
-    }
+            return response()->json([
+                "games" => count($games),
+                "players" => count($players),
+                "won_today"  => $bets->count(),
+            ], 200);
     });
 
     Route::get('online-users', function(){
@@ -140,21 +126,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
          }
     });
 
-    Route::get('won_today', function(){
-        $bets = Wallet::where('bet', '>', 0)
-        ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
-        ->get();
-        if($bets->count() > 0){
-
-        return response()->json([
-            'won_today' => $bets,
-        ]);
-    }else{
-        return response()->json([
-            'won_today' => 0,
-        ]);
-    }
-    });
 
     Route::get(
         '/exchange/rates',
