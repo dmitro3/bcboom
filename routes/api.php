@@ -21,6 +21,7 @@ use App\Actions\Process;
 use App\Actions\Callback;
 use App\Models\Wallet;
 use App\Actions\Withdrawal;
+use Carbon\Carbon;
 use App\Paym\Aggregate;
 use App\Models\Game;
 use App\Models\User;
@@ -85,24 +86,25 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
         
         $list_players = User::where('player', 1)->get();
-        function count_players($list_players){
-
+        
             foreach ($list_players as $player){
                 if ($player->wallet->bet > 0){
+                   
                     array_push($players, $player);
+
                 }
             } 
             
-            $players_count = $players->count();
             
-            return $players_count;
-        }
+        if(count($players) > 0){
         return response()->json([
-            "players" => balance($list_players),
-            
-
+            "players" => count($players),
         ]);
-
+    }else{
+        return response()->json([
+            "players" => 0 . ' players',
+        ]);
+    }
     });
 
     Route::get('games/count', function(){
@@ -118,10 +120,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
             array_push($games, $g);
 
         }
-
+        if(count($games) > 0){
         return response()->json([
+            'count' => count($games),
             'games' => $games
         ], 200);
+    }else{
+        return response()->json([
+            "games" => 0
+        ], 200);
+    }
     });
 
     Route::get('online-users', function(){
@@ -136,10 +144,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         $bets = Wallet::where('bet', '>', 0)
         ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
         ->get();
+        if($bets->count() > 0){
 
         return response()->json([
-            'bets' => $bets,
+            'won_today' => $bets,
         ]);
+    }else{
+        return response()->json([
+            'won_today' => 0,
+        ]);
+    }
     });
 
     Route::get(
