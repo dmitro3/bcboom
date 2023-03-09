@@ -77,6 +77,24 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
     Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
 
+    Route::get('/players/count', function(){
+        
+        $players = [];
+
+        $list_players = User::where('player', 1)->get();
+        
+        foreach ($list_players as $player){
+            if ($player->wallet->bet > 0){
+                array_push($players, $player);
+            }
+        } 
+
+        $players_count = $players->count();
+
+        return $players_count;
+        
+    });
+
     Route::get(
         '/exchange/rates',
         function () {
