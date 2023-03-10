@@ -21,7 +21,10 @@ use App\Actions\Process;
 use App\Actions\Callback;
 use App\Models\Wallet;
 use App\Actions\Withdrawal;
+use Carbon\Carbon;
 use App\Paym\Aggregate;
+use App\Models\Game;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +43,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register'])->name('open');
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('registerapi');
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('doNotCacheResponse');
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
@@ -76,6 +79,53 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/wallet/info', [BonusController::class, 'index']);
     Route::get('/all/payments', [PaymentController::class, 'transactions']);
     Route::get('/all/withdrawals', [WithdrawalController::class, 'transactions']);
+
+    Route::get('/all_data', function(){
+        
+        $players = [];
+        $games = [];
+
+        
+        $list_players = User::where('player', 1)->get();
+        $all_games = Game::all();
+        $bets = Wallet::where('bet', '>', 0)
+        ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
+        ->get();
+        
+        
+            foreach ($list_players as $player){
+                if ($player->wallet->bet > 0){
+                   
+                    array_push($players, $player);
+
+                }
+            } 
+            
+            foreach($all_games as $game){
+                $g = [
+                    "name" => $game['name'],
+                    "player" => $game['player'],
+                ];
+    
+                array_push($games, $g);
+    
+            }
+
+            return response()->json([
+                "games" => count($games),
+                "players" => count($players),
+                "won_today"  => $bets->count(),
+            ], 200);
+    });
+
+    Route::get('online-users', function(){
+        foreach(Redis::keys('laravel:online-users-*') as $key){    
+            $cacheKeyWithoutPrefix=str_replace('laravel:','', $key);
+            $user = Cache::get($cacheKeyWithoutPrefix);
+            return response()->json($user->id,$user->email,$user->name);
+         }
+    });
+
 
     Route::get(
         '/exchange/rates',

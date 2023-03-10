@@ -212,6 +212,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+    'Redis' => Illuminate\Support\Facades\Redis::class,
     'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     'Curl' => Ixudra\Curl\Facades\Curl::class,
     ])->toArray(),

@@ -31,7 +31,7 @@ class Callback
         $data = $request->all();
         unset($data['sign']);
 
-        $sign = getSignOpen($data, $key);
+        $sign = $this->getSignOpen($data, $key);
 
         if ($sign == $request->sign) {
 
@@ -126,7 +126,7 @@ class Callback
             }
             //签名步骤一：按字典序排序参数
             ksort($Parameters);
-            $String = formatQueryParaMapOpen($Parameters);
+            $String = $this->formatQueryParaMapOpen($Parameters);
             $String = $String . '&key=' . $key;
             //dlog($String);
             //签名步骤三：MD5加密
