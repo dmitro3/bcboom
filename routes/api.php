@@ -94,7 +94,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         
         
             foreach ($list_players as $player){
-                if ($player->wallet->bet > 0){
+                if ($player->wallet->bet !== null && $player->wallet->bet !== 0){
                    
                     array_push($players, $player);
 
@@ -114,7 +114,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
             return response()->json([
                 "games" => count($games),
                 "players" => count($players),
-                "won_today"  => $bets->count(),
+                "won_today"  => $bets ? $bets->count() : 0,
             ], 200);
     });
 
