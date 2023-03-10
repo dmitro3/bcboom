@@ -87,18 +87,35 @@ class SlotApiController extends Controller
             'currency' => 'EUR',
             'player_id' => strval($user->id),
             'player_name' => $user->username,
-            // 'session_id' => $sesion,
-            'session_id'  => '123456789',
-            // 'return_url' => 'https://www.google.com',
+            'session_id' => $sesion,
+            'return_url' => 'https://www.google.com',
             'email' => $user->email,
 
         ];
         $sign = $this->getSign($headers, $requestParams);
-        $headers['X-Sign'] = $sign;
+        // $headers['X-Sign'] = $sign;
         $url = $this->apiurl . '/games/init/?' . http_build_query($requestParams);
         // dd($headers, $requestParams, $sign);
-        $response = Http::withHeaders($headers)->post($url);
-        return response()->json($response->json());
+        // $response = Http::withHeaders(array_merge($headers, ['X-Sign' => $sign]))->post($url);
+        // return response()->json($response->json());
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'X-Merchant-Id: ' . $merchantId,
+            'X-Timestamp: ' . $time,
+            'X-Nonce: ' . $nonce,
+            'X-Sign: ' . $sign,
+            'Accept: application/json',
+            'Enctype: application/x-www-form-urlencoded',
+        )
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $requestParams);
+        $result = curl_exec($ch);
+        return response()->json(['result'=>$result]);
     }
 
     private function getSign($headers, $requestParams)
