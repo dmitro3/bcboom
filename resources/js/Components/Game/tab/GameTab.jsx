@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -17,7 +17,6 @@ const Input = styled("input")(({ width }) => ({
 }));
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -57,6 +56,10 @@ const GameTab = () => {
     const dispatch = useDispatch();
 
     const { gameData, playing } = useSelector((state) => state.game);
+    useEffect(() => {
+        dispatch(setGameData({ ...gameData, numberOfPlay: 1 }));
+    }, [tabValue]);
+
     const { wallet } = useSelector((state) => state.wallet);
     const payout = (gameData.payout * gameData.numberOfPlay).toFixed(4);
     return (

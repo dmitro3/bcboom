@@ -266,8 +266,6 @@ const DiceComponent = ({ setPlaying }) => {
         return diceNumber;
     }
     const { playing } = useSelector((state) => state.game);
-    const { sound } = useSelector((state) => state.app);
-    const [play, { stop, isPlaying }] = useSound(sound.currentSound);
     const [playingState, setPlayingState] = useState(false);
     useEffect(() => {
         if (
@@ -305,7 +303,6 @@ const DiceComponent = ({ setPlaying }) => {
                 });
             })();
             let intervalId = setInterval(() => {
-                console.log("got here unkowingly");
                 if (numberOfPlay > 1) {
                     diceFn().then((x) => {
                         dispatch(
@@ -325,7 +322,6 @@ const DiceComponent = ({ setPlaying }) => {
                 }
             }, 10000);
 
-            console.log("got here");
         }
     }, [playing]);
     useEffect(() => {

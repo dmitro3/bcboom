@@ -337,8 +337,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'jwt.verify',
     'prefix' => 'slot'
 ], function ($router) {
     Route::get('/games', [SlotApiController::class, 'getGames']);
+    Route::get('/games/init/{name}', [SlotApiController::class, 'initGame']);
 });

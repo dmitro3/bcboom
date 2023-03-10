@@ -101,7 +101,7 @@ Route::get('/vip', function () {
 // });
 
 Route::get('/games/crash', function () {
-    return Inertia::render('Game/Dinosaur');
+    return Inertia::render('Game/Crash');
 
 });
 
