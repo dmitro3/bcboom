@@ -86,7 +86,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         $games = [];
 
         
-        $list_players = User::all();
+        $list_players = Wallet::where('bet', '>', 0)->get();
         $all_games = Game::all();
         $bets = Wallet::where('bet', '>', 0)
         ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
@@ -94,11 +94,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         
         
             foreach ($list_players as $player){
-                if ($player->wallet->bet !== null && $player->wallet->bet !== 0){
+                $user = $player->user;
                    
-                    array_push($players, $player);
+                    array_push($players, $user);
 
-                }
+                
             } 
             
             foreach($all_games as $game){
