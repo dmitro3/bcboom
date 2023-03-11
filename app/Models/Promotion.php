@@ -13,8 +13,8 @@ class Promotion extends Model
 
     protected $fillable = ['type', 'status', 'amount', 'percentage', 'title', 'eligibility'];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'promotion_user')->withTimestamps();
     }
 }

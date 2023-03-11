@@ -47,11 +47,20 @@ class Callback
 
                 if ($wallet && $payment) {
 
-                    $promotion = Promotion::where('type', 'deposit')
-                    ->where('status', 'active')
-                    ->first();
-
+                    
                     $user = $wallet->user;
+                    
+                    // $deposit_counts = Payment::where('user_id', $user->id)->count();
+                    
+                    $user_promos = $user->promotions;
+                    
+                    $getIds = $user_promos->pluck('id');
+                    
+                    $promotion = Promotion::whereNotIn('id', $getIds)
+                    ->where('type', 'deposit')
+                    ->where('status', 'active')
+                   ->first();
+                 
 
                     if ($promotion) {
                         $percentage_amount = $promotion->percentage / 100 * $payment->amount;

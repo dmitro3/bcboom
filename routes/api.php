@@ -89,7 +89,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         $list_players = Wallet::where('bet', '>', 0)->get();
         $all_games = Game::all();
         $bets = Wallet::where('bet', '>', 0)
-        ->whereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
+        ->whereBetween('created_at', [Carbon::now()->subDay(1), Carbon::now()])
+        ->orWhereBetween('updated_at', [Carbon::now()->subDay(1), Carbon::now()])
         ->get();
         
         
