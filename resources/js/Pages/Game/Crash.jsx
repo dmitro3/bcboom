@@ -28,23 +28,23 @@ const Crash = () => {
     const [gameDetails, setGameDetails] = useState({});
     const dispatch = useDispatch();
     const { profile } = useSelector((state) => state.profile);
-    // useEffect(() => {
-    //     async function fetchGameDetails() {
-    //         let response = await dispatch(initializeGame({ name: "crash" }));
-    //         response = response?.payload?.data;
-    //         if (response) setGameDetails(response);
-    //     }
-    //     if (profile?.email) {
-    //         fetchGameDetails();
-    //     } else {
-    //         dispatch(
-    //             setAuthModalState({
-    //                 open: true,
-    //                 tab: 0,
-    //             })
-    //         );
-    //     }
-    // }, []);
+    useEffect(() => {
+        async function fetchGameDetails() {
+            let response = await dispatch(initializeGame({ name: "crash" }));
+            response = response?.payload?.data;
+            if (response) setGameDetails(response);
+        }
+        if (profile?.email) {
+            fetchGameDetails();
+        } else {
+            dispatch(
+                setAuthModalState({
+                    open: true,
+                    tab: 0,
+                })
+            );
+        }
+    }, []);
     return (
         <div>
             <Head title=" Crash " />
