@@ -234,7 +234,7 @@ const Deposit = () => {
                         <div>
                             <Text
                                 type="p"
-                                text="Deposits"
+                                text="Deposit"
                                 fontSize="22px"
                                 fontWeight="bold"
                             />
