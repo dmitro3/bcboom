@@ -84,11 +84,10 @@ class Process
             ]);
 
             return $result['data']['pay_info'];
-
-        } else {
-echo $result['msg'];
-            return $result['msg'];
         }
+        // } else {
+        return 'error';
+        // }
     }
 
     function status(Request $request): string
