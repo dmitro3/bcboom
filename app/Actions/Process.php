@@ -54,10 +54,11 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
-        dd($data);
+        var_dump($data);
         
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-
+        echo "result";
+        dd($result);
 
 
         if (isset($result['data']['pay_info'])) {
