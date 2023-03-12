@@ -3,6 +3,7 @@ import DinosaurFrame from "@/Components/Game/frames/DinosaurFrame";
 import GameLayout from "@/Components/Game/layout/GameLayout";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
+import { initializeGame } from "@/redux/game/game-slice";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
