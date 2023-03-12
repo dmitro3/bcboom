@@ -55,11 +55,18 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
-        var_dump($data);
-        
+        // dd($data);
+
         // $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-        $result = Http::post($this->gateway . '/open/index/createorder', $data);
-        dd($result->json());
+        // $result = Http::post($this->gateway . '/open/index/createorder', $data);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->gateway . '/open/index/createorder');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $result = curl_exec($ch);
+
+        dd($result);
 
 
         if (isset($result['data']['pay_info'])) {
@@ -81,7 +88,7 @@ class Process
                 "sign" => $data['sign'],
             ]);
 
-           
+
 
 
             $wallet = Wallet::where('user_id', $user->id)->first();
