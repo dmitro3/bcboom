@@ -16,14 +16,15 @@ class ActiveUserActivity
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check()) {
-            $expiresAt = \Carbon\Carbon::now()->addMinutes(5);
-            \Cache::put(
-                ‘online-users-’ . auth()->user()->id, 
-                auth()->user(), 
-                $expiresAt
-            );
-        }
         return $next($request);
+        // if(auth()->check()) {
+        //     $expiresAt = \Carbon\Carbon::now()->addMinutes(5);
+        //     \Cache::put(
+        //         ‘online-users-’ . auth()->user()->id, 
+        //         auth()->user(), 
+        //         $expiresAt
+        //     );
+        // }
+        // return $next($request);
     }
 }
