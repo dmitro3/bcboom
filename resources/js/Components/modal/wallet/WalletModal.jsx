@@ -160,7 +160,10 @@ const Deposit = () => {
             setSubmitted(false);
             dispatcher(setWalletModalState({ open: false }));
         } else {
-            toast.error("Cound'nt make deposit order, try again");
+            console.log('erorr occured')
+            toast.error("Cound'nt make deposit order, try again", {
+                autoClose: 5000,
+            });
             setSubmitted(false);
         }
     }
