@@ -29,7 +29,7 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         $process = new Process;
-        $process->execute($request);
+       $result =  $process->execute($request);
         $pay = Payment::where('customer', $user->username)->where('called', 0)->first();
         if($pay){
 

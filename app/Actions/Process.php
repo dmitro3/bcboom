@@ -6,7 +6,6 @@ use App\Models\Promotion;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
-use Http;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
@@ -55,22 +54,14 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
-        // dd($data);
 
-        // $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-        // $result = Http::post($this->gateway . '/open/index/createorder', $data);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->gateway . '/open/index/createorder');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        $result = curl_exec($ch);
+        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
 
-        dd($result);
+        // dd($result);
 
 
         if (isset($result['data']['pay_info'])) {
-            // print('success');
+            print('success');
             // dd($result['data']);
 
             $pay = Payment::create([
@@ -87,10 +78,6 @@ class Process
                 "status" => $result['data']["trade_state"],
                 "sign" => $data['sign'],
             ]);
-
-
-
-
             $wallet = Wallet::where('user_id', $user->id)->first();
             $wallet->update([
                 'order_no' => $pay->order_no
@@ -99,9 +86,8 @@ class Process
             return $result['data']['pay_info'];
 
         } else {
-
+echo $result['msg'];
             return $result['msg'];
-
         }
     }
 
@@ -174,6 +160,7 @@ class Process
 
         $json = curl_exec($ch);
         curl_close($ch);
+
         if ($text)
             $result = $json;
         else
