@@ -174,10 +174,6 @@ Route::middleware(['jwt.verify'])->group(function () {
             }
         );
 
-    Route::get('games/all', [
-        GameController::class,
-        'all_games'
-    ])->name('all_games');
 
     Route::post('game/new', [
         GameController::class,
@@ -190,6 +186,12 @@ Route::middleware(['jwt.verify'])->group(function () {
     ]);
 
 });
+
+//special case for unauthorized users
+Route::get('games/all', [
+    GameController::class,
+    'all_games'
+])->name('all_games');
 Route::middleware(['jwt.verify', 'admin'])->group(function () {
 
     Route::get('approval/withdrawals', [

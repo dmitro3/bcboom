@@ -3,9 +3,11 @@ import DinosaurFrame from "@/Components/Game/frames/DinosaurFrame";
 import GameLayout from "@/Components/Game/layout/GameLayout";
 import { useScreenResolution } from "@/hooks/useScreeResolution";
 import PageTemplate from "@/Layouts/templates/PageTemplate";
+import { initializeGame } from "@/redux/game/game-slice";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Crash = () => {
     const { isMobile } = useScreenResolution();
@@ -22,14 +24,16 @@ const Crash = () => {
         height: "80%",
         position: "relative",
     }));
-    const [gameDetails, setGameDetails] = useState({
-        id: "b30a43429d083579f525b6621e1de4a067a3764d",
-        name: "Comet Crash",
-        image: "https://stage.gis-static.com/games/b30a43429d083579f525b6621e1de4a067a3764d.jpeg",
-        provider: "Jetgames",
-    });
+    const [gameDetails, setGameDetails] = useState({});
+    const dispatch = useDispatch();
     useEffect(() => {
-        
+        async function fetchGameDetails() {
+            console.log("fetching game details");
+            let response = await dispatch(initializeGame({ name: "crash" }));
+            response = response?.payload?.data;
+            if (response) setGameDetails(response);
+        }
+        fetchGameDetails();
     }, []);
     return (
         <div>

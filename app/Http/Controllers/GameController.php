@@ -13,11 +13,27 @@ class GameController extends Controller
     public function all_games()
     {
         $user = Auth::user();
-        $all_games = [];
+        if ($user === null) {
+            $games = Game::orderBy('created_at', 'desc')->limit(20)->get();
+            $all_games = $this->getPlayerDetails($games);
+            return response()->json([
+                'games' => $all_games,
+                'message' => 'success',
+            ], 200);
+        }
         $count = Game::all()->count();
         $takes = $user->admin === 1 ? $count : 20;
         $games = Game::orderBy('created_at', 'desc')->limit($takes)->get();
 
+        $all_games = $this->getPlayerDetails($games);
+        return response()->json([
+            'games' => $all_games,
+            'message' => 'success',
+        ], 200);
+    }
+
+    function getPlayerDetails($games) {
+        $all_games = [];
         foreach ($games as $game) {
             $player = User::where('id', $game->player)
                 ->first();
@@ -33,10 +49,7 @@ class GameController extends Controller
             ];
             array_push($all_games, $p_game);
         }
-        return response()->json([
-            'games' => $all_games,
-            'message' => 'success',
-        ], 200);
+        return $all_games;
     }
 
     public function new_game(Request $request)

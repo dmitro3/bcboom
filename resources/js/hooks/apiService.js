@@ -2,8 +2,8 @@ import axios from "axios";
 
 const url =
     // process.env.MIX_APP_ENV === "production"
-    "https://bcboom.restoraweb.com/api";
-//  "http://localhost:8000/api";
+    // "https://bcboom.restoraweb.com/api";
+    "http://localhost:8000/api";
 
 export const axioInstance = axios.create({
     baseURL: url,
@@ -21,6 +21,22 @@ axioInstance.interceptors.request.use(
         return config;
     },
     (error) => {
+        return Promise.reject(error);
+    }
+);
+
+axioInstance.interceptors.response.use(
+    (response) => {
+        if (response?.data?.status === "Token is Expired") {
+            localStorage.clear();
+        }
+        return response;
+    },
+    (error) => {
+        if (error.response.status === 401) {
+            localStorage.removeItem("access_token");
+            window.location.href = "/login";
+        }
         return Promise.reject(error);
     }
 );

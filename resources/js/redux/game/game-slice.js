@@ -14,6 +14,11 @@ export const fetchAllGames = createAsyncThunk("game/all", async () => {
     return response;
 });
 
+export const initializeGame = createAsyncThunk("game/initialize", async (data) => {
+    const response = await gameApiFunctions.initializeGame(data);
+    return response;
+});
+
 const gameSlice = createSlice({
     name: "game",
     initialState: {
