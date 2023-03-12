@@ -56,13 +56,9 @@ class Process
 
 
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-
-        // dd($result);
-
+        dd($result);    
 
         if (isset($result['data']['pay_info'])) {
-            print('success');
-            // dd($result['data']);
 
             $pay = Payment::create([
                 "amount" => $result['data']['amount'],
