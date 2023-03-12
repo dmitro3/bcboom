@@ -7,7 +7,8 @@ import { initializeGame } from "@/redux/game/game-slice";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthModalState } from "@/redux/auth/auth-slice";
 
 const Crash = () => {
     const { isMobile } = useScreenResolution();
@@ -26,15 +27,24 @@ const Crash = () => {
     }));
     const [gameDetails, setGameDetails] = useState({});
     const dispatch = useDispatch();
-    useEffect(() => {
-        async function fetchGameDetails() {
-            console.log("fetching game details");
-            let response = await dispatch(initializeGame({ name: "crash" }));
-            response = response?.payload?.data;
-            if (response) setGameDetails(response);
-        }
-        fetchGameDetails();
-    }, []);
+    const { profile } = useSelector((state) => state.profile);
+    // useEffect(() => {
+    //     async function fetchGameDetails() {
+    //         let response = await dispatch(initializeGame({ name: "crash" }));
+    //         response = response?.payload?.data;
+    //         if (response) setGameDetails(response);
+    //     }
+    //     if (profile?.email) {
+    //         fetchGameDetails();
+    //     } else {
+    //         dispatch(
+    //             setAuthModalState({
+    //                 open: true,
+    //                 tab: 0,
+    //             })
+    //         );
+    //     }
+    // }, []);
     return (
         <div>
             <Head title=" Crash " />
