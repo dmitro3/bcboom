@@ -142,7 +142,7 @@ const Deposit = () => {
             return;
         }
         const response = await dispatcher(deposit(propValue));
-        // console.log("response", response);
+        console.log("response", response);
         if (!response?.payload) {
             toast.error("An error occured");
             setSubmitted(false);
