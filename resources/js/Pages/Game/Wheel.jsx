@@ -32,8 +32,8 @@ const Wheel = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Wheel"}
-                            GameFrame={WheelFrame}
-                            ButtonGrid={WheelButtonGrid}
+                            GameFrame={WheelFrame()}
+                            ButtonGrid={WheelButtonGrid()}
                             displayPanel={false}
                             customFrameHeader={true}
                         />

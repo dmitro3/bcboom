@@ -32,8 +32,8 @@ const Keno = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Keno"}
-                            GameFrame={KenoFrame}
-                            ButtonGrid={KenoButtonGrid}
+                            GameFrame={KenoFrame()}
+                            ButtonGrid={KenoButtonGrid()}
                             customFrameHeader={true}
                             customFrameBoxStyles={{
                                 height: {
