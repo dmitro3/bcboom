@@ -42,9 +42,9 @@ const Crash = () => {
             <PageTemplate innerHeader={true}>
                 <GamesPageWrapper>
                     <GameLayout
-                        ButtonGrid={DinosaurButtonGrids()}
+                        // ButtonGrid={}
                         GameFrameText={"Crash"}
-                        GameFrame={DinosaurFrame()}
+                        GameFrame={<DinosaurFrame gameDetails={gameDetails} />}
                         customFrameHeader={true}
                     />
                 </GamesPageWrapper>
