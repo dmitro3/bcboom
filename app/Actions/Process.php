@@ -59,8 +59,7 @@ class Process
         
         // $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
         $result = Http::post($this->gateway . '/open/index/createorder', $data);
-        echo "result";
-        dd($result);
+        dd($result->json());
 
 
         if (isset($result['data']['pay_info'])) {
