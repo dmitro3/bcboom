@@ -90,7 +90,7 @@ class User extends Authenticatable implements JWTSubject
 
         $refs = $this->referrals->count();
 
-                $promotion = Promotion::where('type', 'referral')
+                $promotion = Promotion::where('type', 'referral_bonus')
                 ->orderBy('created_at', 'desc')->first();
         
                 // Promotion::create(array_merge($referral_promotion, ['amount' => 9]));
