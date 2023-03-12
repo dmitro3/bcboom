@@ -166,7 +166,7 @@ class Process
 
         $json = curl_exec($ch);
         curl_close($ch);
-
+        dd($json);
         if ($text)
             $result = $json;
         else
