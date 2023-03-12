@@ -31,7 +31,7 @@ class Callback
         $data = $request->all();
         unset($data['sign']);
 
-        $sign = getSignOpen($data, $key);
+        $sign = $this->getSignOpen($data, $key);
 
         if ($sign == $request->sign) {
 
@@ -47,11 +47,20 @@ class Callback
 
                 if ($wallet && $payment) {
 
-                    $promotion = Promotion::where('type', 'deposit')
-                    ->where('status', 'active')
-                    ->first();
-
+                    
                     $user = $wallet->user;
+                    
+                    // $deposit_counts = Payment::where('user_id', $user->id)->count();
+                    
+                    $user_promos = $user->promotions;
+                    
+                    $getIds = $user_promos->pluck('id');
+                    
+                    $promotion = Promotion::whereNotIn('id', $getIds)
+                    ->where('type', 'deposit')
+                    ->where('status', 'active')
+                   ->first();
+                 
 
                     if ($promotion) {
                         $percentage_amount = $promotion->percentage / 100 * $payment->amount;
@@ -126,7 +135,7 @@ class Callback
             }
             //签名步骤一：按字典序排序参数
             ksort($Parameters);
-            $String = formatQueryParaMapOpen($Parameters);
+            $String = $this->formatQueryParaMapOpen($Parameters);
             $String = $String . '&key=' . $key;
             //dlog($String);
             //签名步骤三：MD5加密

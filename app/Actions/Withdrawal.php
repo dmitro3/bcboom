@@ -113,7 +113,17 @@ class Withdrawal
                      'status' => 'PAYMENT COMPLETED'
                      ]);
 
-                     $promotion = Promotion::where('type', 'withdrawal')
+                     $user = $wallet->user;
+                     
+                     // $deposit_counts = Payment::where('user_id', $user->id)->count();
+                     
+                     $user_promos = $this->promotions;
+             
+                     $getIds = $user_promos->pluck('id');
+                     
+                    
+                    $promotion = Promotion::whereNotIn('id', $getIds)
+                     ->where('type', 'withdrawal')
                      ->orderBy('created_at', 'desc')
                      ->first();
 

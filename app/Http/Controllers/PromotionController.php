@@ -33,7 +33,6 @@ class PromotionController extends Controller
        $promo = Promotion::create([
         'title' => $request->title
         ]);
-    if($promo->title < 3){
 
         if($request->type == 'withdrawal' || $request->type == 'deposit'){
         $promo->update([
@@ -59,11 +58,6 @@ class PromotionController extends Controller
     return response()->json([
         'message' => 'Successfully created promotion.'
     ]);
-}else{
-    return response()->json([
-        'message' => $promo->title . ' has been used too many times.'
-    ]);
-    }      
 
 
     }
