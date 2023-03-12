@@ -6,6 +6,7 @@ use App\Models\Promotion;
 use App\Models\Wallet;
 use Auth;
 use App\Models\User;
+use Http;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
@@ -56,7 +57,8 @@ class Process
 
         var_dump($data);
         
-        $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+        // $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
+        $result = Http::post($this->gateway . '/open/index/createorder', $data);
         echo "result";
         dd($result);
 
@@ -166,7 +168,6 @@ class Process
 
         $json = curl_exec($ch);
         curl_close($ch);
-        dd($json);
         if ($text)
             $result = $json;
         else
