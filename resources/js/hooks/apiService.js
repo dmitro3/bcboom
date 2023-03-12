@@ -1,9 +1,6 @@
 import axios from "axios";
 
-const url =
-    // process.env.MIX_APP_ENV === "production"
-    "https://bcboom.restoraweb.com/api";
-    // "http://localhost:8000/api";
+const url = "https://bcboom.restoraweb.com/api";
 
 export const axioInstance = axios.create({
     baseURL: url,
