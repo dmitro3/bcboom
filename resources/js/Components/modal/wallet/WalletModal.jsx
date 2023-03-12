@@ -157,9 +157,12 @@ const Deposit = () => {
             toast.info(`You made an order of R$ ${propValue}`);
             // toast.info('Redirecting to payment gateway...')
             window.location.href = response?.payload?.data?.link;
+            setSubmitted(false);
+            dispatcher(setWalletModalState({ open: false }));
+        } else {
+            toast.error("Cound'nt make deposit order, try again");
+            setSubmitted(false);
         }
-        setSubmitted(false);
-        dispatcher(setWalletModalState({ open: false }));
     }
     return (
         <TabWrapper>
