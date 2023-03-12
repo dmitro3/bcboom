@@ -32,8 +32,8 @@ const Ring = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Ring"}
-                            GameFrame={RingFrame}
-                            ButtonGrid={RingButtonGrid}
+                            GameFrame={RingFrame()}
+                            ButtonGrid={RingButtonGrid()}
                             customFrameHeader={true}
                         />
                     </GamesPageWrapper>

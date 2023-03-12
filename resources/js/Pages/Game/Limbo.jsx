@@ -32,8 +32,8 @@ const Limbo = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Limbo"}
-                            GameFrame={LimboFrame}
-                            ButtonGrid={LimboButtonGrid}
+                            GameFrame={LimboFrame()}
+                            ButtonGrid={LimboButtonGrid()}
                             customFrameHeader={true}
                         />
                     </GamesPageWrapper>

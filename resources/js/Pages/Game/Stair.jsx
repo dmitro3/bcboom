@@ -32,8 +32,8 @@ const Tower = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Stairs"}
-                            GameFrame={StairFrame}
-                            ButtonGrid={StairGrid}
+                            GameFrame={StairFrame()}
+                            ButtonGrid={StairGrid()}
                             displayPanel={false}
                             customFrameHeader={true}
                         />

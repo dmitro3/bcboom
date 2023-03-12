@@ -6,7 +6,7 @@ import PageTemplate from "@/Layouts/templates/PageTemplate";
 import { Head } from "@inertiajs/inertia-react";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 const Crash = () => {
     const { isMobile } = useScreenResolution();
     const GamesPageWrapper = styled("div")(() => ({
@@ -22,14 +22,25 @@ const Crash = () => {
         height: "80%",
         position: "relative",
     }));
-    const [gameDetails, setGameDetails] = useState({
-        id: "b30a43429d083579f525b6621e1de4a067a3764d",
-        name: "Comet Crash",
-        image: "https://stage.gis-static.com/games/b30a43429d083579f525b6621e1de4a067a3764d.jpeg",
-        provider: "Jetgames",
-    });
+    const [gameDetails, setGameDetails] = useState({});
+    const dispatch = useDispatch();
+    const { profile } = useSelector((state) => state.profile);
     useEffect(() => {
-        
+        async function fetchGameDetails() {
+            let response = await dispatch(initializeGame({ name: "crash" }));
+            response = response?.payload?.data;
+            if (response) setGameDetails(response);
+        }
+        if (profile?.email) {
+            fetchGameDetails();
+        } else {
+            dispatch(
+                setAuthModalState({
+                    open: true,
+                    tab: 0,
+                })
+            );
+        }
     }, []);
     return (
         <div>
@@ -38,9 +49,9 @@ const Crash = () => {
             <PageTemplate innerHeader={true}>
                 <GamesPageWrapper>
                     <GameLayout
-                        ButtonGrid={DinosaurButtonGrids()}
+                        // ButtonGrid={DinosaurButtonGrids()}
                         GameFrameText={"Crash"}
-                        GameFrame={DinosaurFrame()}
+                        GameFrame={<DinosaurFrame gameDetails={gameDetails} />}
                         customFrameHeader={true}
                     />
                 </GamesPageWrapper>

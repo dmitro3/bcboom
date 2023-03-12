@@ -31,8 +31,8 @@ const Plinko = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Plinko"}
-                            GameFrame={PlinkoFrame}
-                            ButtonGrid={PlinkoButtonGrid}
+                            GameFrame={PlinkoFrame()}
+                            ButtonGrid={PlinkoButtonGrid()}
                             displayPanel={true}
                             customFrameHeader={true}
                         />

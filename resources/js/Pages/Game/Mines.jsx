@@ -31,9 +31,9 @@ const Mines = () => {
                 <PageTemplate innerHeader={true}>
                     <GamesPageWrapper>
                         <GameLayout
-                            GameFrame={MinesFrame}
+                            GameFrame={MinesFrame()}
                             GameFrameText={"Mines"}
-                            ButtonGrid={MinesGrids}
+                            ButtonGrid={MinesGrids()}
                             customFrameHeader={true}
                             innerHeader={true}
                             customFrameStyles={{

@@ -32,8 +32,8 @@ const CoinFlip = () => {
                     <GamesPageWrapper>
                         <GameLayout
                             GameFrameText={"Coin Flip"}
-                            GameFrame={CoinFlipFrame}
-                            ButtonGrid={CoinFlipButtonGrid}
+                            GameFrame={CoinFlipFrame()}
+                            ButtonGrid={CoinFlipButtonGrid()}
                             displayPanel={false}
                             customFrameHeader={true}
                         />
