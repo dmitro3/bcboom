@@ -53,7 +53,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Email::class);
     }
-
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class, 'promotion_user')->withTimestamps();
+    }
     public function depos()
     {
         return $this->hasMany(Depo::class);
@@ -87,13 +90,13 @@ class User extends Authenticatable implements JWTSubject
 
         $refs = $this->referrals->count();
 
-                $promotion = Promotion::where('type', 'referral')
+                $promotion = Promotion::where('type', 'referral_bonus')
                 ->orderBy('created_at', 'desc')->first();
         
                 // Promotion::create(array_merge($referral_promotion, ['amount' => 9]));
         
                 if($promotion){
-        if($promotion->status !== 'Paused'){
+        if($promotion->status == 'active'){
         if ($refs > 0) {
                 
 
@@ -285,11 +288,16 @@ class User extends Authenticatable implements JWTSubject
         $user = $this;
         // $deposit_counts = Payment::where('user_id', $user->id)->count();
         
-        $promotion = Promotion::where('eligibility', 'new_user')
-        ->first();
+        $user_promos = $this->promotions;
 
+        $getIds = $user_promos->pluck('id');
+        
+       $promotion = Promotion::whereNotIn('id', $getIds)
+       ->where('eligibility', 'new_user')
+       ->first();
+        
         if($promotion->status == 'active'){
-            
+        
             $percentage = $promotion->percentage/100 * $amount;
             
             $wallet = $this->wallet;
@@ -298,6 +306,8 @@ class User extends Authenticatable implements JWTSubject
                 'bonus' => $wallet->bonus + $percentage,
                 'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
             ]);
+
+            $user->promotions()->attach($promotion->id);
             $user->update([
                 'new_user' => 0,
                 'eligibility' => 'first_100_deposit_bonus'
@@ -306,10 +316,11 @@ class User extends Authenticatable implements JWTSubject
     }
         
         if ($user->first_100_deposit_bonus == 0 && $amount >= 500 && $amount <= 50000) {
-            $promotion = Promotion::where('type', 'deposit')
-        ->where('eligibility', $this->eligibility)
-        ->orWhere('eligibility', 'first_100_deposit_bonus')
-        ->first();
+            
+            $promotion = Promotion::whereNotIn('id', $getIds)
+       ->where('type', 'deposit')
+       ->where('eligibility','first_100_deposit_bonus')
+       ->first();
 
         if($promotion->status == 'active'){
             
@@ -322,6 +333,8 @@ class User extends Authenticatable implements JWTSubject
                     'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
                 ]);
             
+                $user->promotions()->attach($promotion->id);
+
             $user->update([
                 'first_100_deposit_bonus' => 1,
                 'eligibility' => 'second_100_deposit_bonus'
@@ -329,9 +342,10 @@ class User extends Authenticatable implements JWTSubject
         }
 
         } else if ($user->second_100_deposit_bonus === 0 && $amount >= 500 && $amount <= 40000) {
-            $promotion = Promotion::where('type', 'deposit')
-            ->where('eligibility', $this->eligibility)
-            ->orWhere('eligibility', 'second_100_deposit_bonus')
+            
+            $promotion = Promotion::whereNotIn('id', $getIds)
+            ->where('type', 'deposit')
+            ->where('eligibility', 'second_100_deposit_bonus')
             ->first();
     
             if($promotion->status == 'active'){
@@ -344,7 +358,7 @@ class User extends Authenticatable implements JWTSubject
                          'bonus' => $wallet->bonus + $percentage,
                          'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
                      ]);
-                 
+                 $user->promotions()->attach($promotion->id);
                  $user->update([
                      'second_100_deposit_bonus' => 1,
                      'eligibility' => 'third_50_deposit_bonus'
@@ -353,7 +367,8 @@ class User extends Authenticatable implements JWTSubject
      
             
         } else if ($user->third_50_deposit_bonus === 0 && $amount >= 1000 && $amount <= 30000) {
-            $promotion = Promotion::where('type', 'deposit')
+            $promotion = Promotion::whereNotIn('id', $getIds)
+            ->where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
             ->orWhere('eligibility', 'third_50_deposit_bonus')
             ->first();
@@ -369,6 +384,8 @@ class User extends Authenticatable implements JWTSubject
                          'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
                      ]);
                  
+                     $user->promotions()->attach($promotion->id);
+
                  $user->update([
                      'third_50_deposit_bonus' => 1,
                      'eligibility' => 'fourth_30_deposit_bonus'
@@ -376,7 +393,8 @@ class User extends Authenticatable implements JWTSubject
              }
      
         } else if ($user->fourth_30_deposit_bonus === 0 && $amount >= 2000 && $amount <= 20000) {
-            $promotion = Promotion::where('type', 'deposit')
+            $promotion = Promotion::whereNotIn('id', $getIds)
+            ->where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
             ->orWhere('eligibility', 'fourth_30_deposit_bonus')
             ->first();
@@ -399,7 +417,8 @@ class User extends Authenticatable implements JWTSubject
              }
 
         } else if ($user->fifth_20_deposit_bonus === 0 && $amount >= 3000 && $amount <= 10000) {
-            $promotion = Promotion::where('type', 'deposit')
+            $promotion = Promotion::whereNotIn('id', $getIds)
+            ->where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
             ->orWhere('eligibility', 'fifth_20_deposit_bonus')
             ->first();
@@ -414,7 +433,7 @@ class User extends Authenticatable implements JWTSubject
                          'bonus' => $wallet->bonus + $percentage,
                          'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
                      ]);
-                 
+                 $user->promotions()->attach($promotion->id);
                  $user->update([
                      'fifth_20_deposit_bonus' => 1,
                      'eligibility' => 'other_bonus'
@@ -424,9 +443,10 @@ class User extends Authenticatable implements JWTSubject
         }
 
         else if ($user->other_bonus === 0 && $amount >= 10000) {
-            $promotion = Promotion::where('type', 'deposit')
+            $promotion = Promotion::whereNotIn('id', $getIds)
+            ->where('type', 'deposit')
             ->where('eligibility', $this->eligibility)
-            ->irWhere('eligibility', 'other_bonus')
+            ->orWhere('eligibility', 'other_bonus')
             ->first();
     
             if($promotion->status == 'active'){
@@ -439,7 +459,7 @@ class User extends Authenticatable implements JWTSubject
                          'bonus' => $wallet->bonus + $percentage,
                          'withdrawable_balance' => $wallet->withdrawable_balance + $percentage
                      ]);
-                 
+                 $user->promotions()->attach($promotion->id);
                  $user->update([
                      'other_bonus' => 1,
                      'eligibility' => 'other_bonus'
