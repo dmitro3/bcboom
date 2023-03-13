@@ -52,35 +52,35 @@ class Callback
 
                     // $deposit_counts = Payment::where('user_id', $user->id)->count();
 
-                    $user_promos = $user->promotions;
+                    // $user_promos = $user->promotions;
 
-                    $getIds = $user_promos->pluck('id');
+                    // $getIds = $user_promos->pluck('id');
 
-                    $promotion = Promotion::whereNotIn('id', $getIds)
-                        ->where('type', 'deposit')
-                        ->where('status', 'active')
-                        ->first();
+                    // $promotion = Promotion::whereNotIn('id', $getIds)
+                    //     ->where('type', 'deposit')
+                    //     ->where('status', 'active')
+                    //     ->first();
 
 
-                    if ($promotion) {
-                        $percentage_amount = $promotion->percentage / 100 * $payment->amount;
-                        $payment->update([
-                            'pay_amount' => $payment->amount,
-                            'percentage_amount' => $percentage_amount,
-                            'final_amount' => $payment->amount + $percentage_amount,
-                            'called' => 1,
-                            'status' => 'PAYMENT COMPLETED',
-                        ]);
-                        $user->run_promotions($request->amount);
-                    } else {
+                    // if ($promotion) {
+                    //     $percentage_amount = $promotion->percentage / 100 * $payment->amount;
+                    //     $payment->update([
+                    //         'pay_amount' => $payment->amount,
+                    //         'percentage_amount' => $percentage_amount,
+                    //         'final_amount' => $payment->amount + $percentage_amount,
+                    //         'called' => 1,
+                    //         'status' => 'PAYMENT COMPLETED',
+                    //     ]);
+                    //     $user->run_promotions($request->amount);
+                    // } else {
 
-                        $payment->update([
-                            'pay_amount' => $payment->amount,
-                            'final_amount' => $payment->amount,
-                            'called' => 1,
-                            'status' => 'PAYMENT COMPLETED',
-                        ]);
-                    }
+                    $payment->update([
+                        'pay_amount' => $payment->amount,
+                        'final_amount' => $payment->amount,
+                        'called' => 1,
+                        'status' => 'PAYMENT COMPLETED',
+                    ]);
+
                     $wallet->update([
                         'withdrawable_balance' => $wallet->withdrawable_balance + $payment->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
