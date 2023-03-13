@@ -35,6 +35,7 @@ class PaymentController extends Controller
                 'message' => 'Couldnt pay.',
             ], 400);
         }
+        dd($result);
         $pay = Payment::where('customer', $user->username)->where('called', 0)->first();
 
         return response()->json([
