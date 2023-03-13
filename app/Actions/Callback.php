@@ -85,10 +85,6 @@ class Callback
                         'withdrawable_balance' => $wallet->withdrawable_balance + $payment->final_amount,
                         'deposit' => $wallet->deposit + $payment->amount
                     ]);
-
-
-
-
                     $user->promoteLevel();
                 }
                 return 'SUCCESS';
