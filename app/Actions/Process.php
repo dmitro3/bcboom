@@ -77,7 +77,7 @@ class Process
             $wallet->update([
                 'order_no' => $pay->order_no
             ]);
-            var_dump($result['data']['pay_info']);
+            dd($result['data']);
             return $result['data']['pay_info'];
         }
         // } else {
