@@ -29,20 +29,20 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         $process = new Process;
-        $process->execute($request);
-        $pay = Payment::where('customer', $user->username)->where('called', 0)->first();
-        if($pay){
-
-            return response()->json([
-                'link' => $pay->link,
-                'user' => $user,
-                'message' => 'Payment saved',
-            ], 200);
-        }else{
+        $result = $process->execute($request);
+        if ($result === 'error') {
             return response()->json([
                 'message' => 'Couldnt pay.',
-            ], 504);
+            ], 400);
         }
+        $pay = Payment::where('customer', $user->username)->where('called', 0)->first();
+
+        return response()->json([
+            'link' => $pay->link,
+            'user' => $user,
+            'message' => 'Payment saved',
+        ], 200);
+
 
     }
 

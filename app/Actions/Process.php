@@ -54,15 +54,10 @@ class Process
         $sign = $this->sign($data, $this->merchantKey);
         $data['sign'] = $sign;
 
-        
+
         $result = $this->curl($this->gateway . '/open/index/createorder', $data, true);
-
-        // dd($result);
-
-
+        dd($result);
         if (isset($result['data']['pay_info'])) {
-            // print('success');
-            // dd($result['data']);
 
             $pay = Payment::create([
                 "amount" => $result['data']['amount'],
@@ -78,22 +73,16 @@ class Process
                 "status" => $result['data']["trade_state"],
                 "sign" => $data['sign'],
             ]);
-
-           
-
-
             $wallet = Wallet::where('user_id', $user->id)->first();
             $wallet->update([
                 'order_no' => $pay->order_no
             ]);
 
             return $result['data']['pay_info'];
-
-        } else {
-
-            return $result['msg'];
-
         }
+        // } else {
+        return 'error';
+        // }
     }
 
     function status(Request $request): string
